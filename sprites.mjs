@@ -1,3 +1,5 @@
+import {TOWN_FEATURES} from './towns.mjs';
+import {groundCell,terrainCell,connectedEdges} from './terrain.mjs';
 import {ART} from './roster.mjs';
 import {COLORS,hash,rng} from './engine.mjs';
 const cache=new Map(),images=new Map();
@@ -68,7 +70,7 @@ function paintPerson(ctx,x,y,role='player',tick=0,face='down',moving=false){
  if(role==='keeper'){q(9,3,15,4,'#ded9b4');q(7,7,5,6,'#d8d1b1');}
  ctx.restore();
 }
-export function drawTile(ctx,type,x,y,seed,biome){
+function fallbackDrawTile(ctx,type,x,y,seed,biome){
  const key='tile-'+type+'-'+biome+'-'+seed%16;let tile=cache.get(key);
  if(!tile){tile=document.createElement('canvas');tile.width=tile.height=32;const c=tile.getContext('2d'),r=rng(seed%16);const q=(a,b,w,h,col)=>{c.fillStyle=col;c.fillRect(a,b,w,h);};
  const greens=biome==='ash'?['#a3b05b','#b8c36c','#8b9d48']:biome==='fen'?['#59a476','#75b88a','#41885e']:biome==='highland'?['#83bd50','#9bce66','#6ca13e']:['#67b64b','#7fc45b','#55a13c'];
@@ -123,6 +125,32 @@ function oldDrawTownDecor(ctx,x,y){
 function oldDrawPerson(ctx,x,y,role='player',tick=0,face='down',moving=false){const frame=moving?Math.floor(tick/250)%4:0,key='person-'+role+'-'+face+'-'+frame;let p=cache.get(key);if(!p){p=document.createElement('canvas');p.width=32;p.height=36;paintPerson(p.getContext('2d'),0,0,role,[0,125,0,375][frame],face,moving);cache.set(key,p);}ctx.imageSmoothingEnabled=false;ctx.drawImage(p,Math.round(x)-5,Math.round(y)-15,42,47);}
 
 export function drawTree(ctx,x,y,seed,biome='forest'){prop(ctx,biome==='snow'?4:seed%7===0?5:3,x-16,y-48,64,80);}
-export function drawBuilding(ctx,x,y,guild=false){prop(ctx,guild?2:0,x+(guild?24:8),y-40,guild?176:144,guild?168:136);}
+export function drawBuilding(ctx,x,y,guild=false,kind='home'){prop(ctx,guild?2:kind==='inn'?1:0,x+(guild?24:8),y-40,guild?176:144,guild?168:136);}
 export function drawTownDecor(ctx,x,y){prop(ctx,8,x,y-25,96,96);}
 export function drawPerson(ctx,x,y,role='player',tick=0,face='down',moving=false){const image=readyImage(ART.sealer);if(!image)return;const row={down:0,left:1,right:2,up:3}[face]??0,frame=moving?([0,1,2,1][Math.floor(tick/160)%4]):1;ctx.save();ctx.imageSmoothingEnabled=false;if(role!=='player')ctx.filter='hue-rotate('+({keeper:130,merchant:45,rival:220,scholar:280,resident:80}[role]||90)+'deg)';ctx.drawImage(image,(row===1&&frame===2?0:frame)*64,row*80,64,80,Math.round(x),Math.round(y)-12,32,40);ctx.restore();}
+
+export function drawTile(ctx,type,x,y,seed,biome,options={}){
+ const image=readyImage(ART.terrain);if(!image){fallbackDrawTile(ctx,type,x,y,seed,biome);return;}
+ const edges=connectedEdges(type,options.neighbors||[type,type,type,type]),town=!!options.town;
+ const key='painted-'+type+'-'+biome+'-'+seed%8+'-'+edges+'-'+town;let tile=cache.get(key);
+ if(!tile){tile=document.createElement('canvas');tile.width=tile.height=32;const p=tile.getContext('2d');p.imageSmoothingEnabled=true;
+ const stamp=(c,index)=>c.drawImage(image,index%4*64,Math.floor(index/4)*64,64,64,0,0,32,32);
+ stamp(p,groundCell(biome));const index=terrainCell(type,biome,seed,town);
+ if(['path','water'].includes(type)){
+  if(type==='water'&&edges!==15)stamp(p,10);
+  const layer=document.createElement('canvas');layer.width=layer.height=32;const q=layer.getContext('2d');q.imageSmoothingEnabled=false;stamp(q,index);
+  // Irregular pixel edges expose the ground below rather than drawing a square border.
+  for(let side=0;side<4;side++){if(edges&(1<<side))continue;for(let n=0;n<32;n++){const inset=2+hash(seed,side,Math.floor(n/3))%3;for(let d=0;d<inset;d++){const xx=side===1?31-d:side===3?d:n,yy=side===0?d:side===2?31-d:n;q.clearRect(xx,yy,1,1);}}}
+  p.drawImage(layer,0,0);
+ }else{stamp(p,index);if(['lawn','flower'].includes(type)){p.fillStyle='#59784044';p.fillRect(0,0,32,32);}}
+ if(type==='cliff'&&!(edges&1)){p.drawImage(image,0,0,64,12,0,0,32,6);p.fillStyle='#28342580';p.fillRect(0,6,32,2);}
+ if(type==='grass'){const r=rng(seed);for(let n=0;n<12;n++){const xx=2+Math.floor(r()*28),yy=4+Math.floor(r()*26);p.fillStyle=biome==='ash'?'#5e6444':'#2e4932';p.fillRect(xx,yy,1,4);p.fillRect(xx-1,yy+1,3,1);p.fillStyle=biome==='ash'?'#ada371':'#a5af62';p.fillRect(xx,yy-1,1,3);}}
+ if(type==='rock'){p.fillStyle='#15251e66';p.beginPath();p.ellipse(17,25,13,4,0,0,Math.PI*2);p.fill();p.save();p.beginPath();p.moveTo(4,24);p.lineTo(6,14);p.lineTo(13,8);p.lineTo(23,10);p.lineTo(29,19);p.lineTo(26,27);p.lineTo(10,28);p.closePath();p.clip();p.drawImage(image,6%4*64,Math.floor(6/4)*64,64,64,4,8,25,21);p.restore();p.fillStyle='#c4bd9866';p.fillRect(9,9,13,2);}
+ cache.set(key,tile);
+ }ctx.imageSmoothingEnabled=false;ctx.drawImage(tile,Math.round(x),Math.round(y));
+}
+export function drawWell(ctx,x,y){prop(ctx,7,x-16,y-32,64,64);}
+
+function expandedProp(ctx,index,x,y,w,h){const image=readyImage(ART.towns);if(!image)return;ctx.imageSmoothingEnabled=false;ctx.drawImage(image,index%3*256,Math.floor(index/3)*256,256,256,Math.round(x),Math.round(y),w,h);}
+export function drawTownBuilding(ctx,b,x,y){if(['hall','inn','home'].includes(b.kind))return drawBuilding(ctx,x,y,b.kind==='hall',b.kind);const index={forge:0,herbalist:1,archive:2}[b.kind];if(b.kind==='archive')expandedProp(ctx,index,x+24,y-40,176,168);else expandedProp(ctx,index,x+8,y-16,144,144);}
+export function drawTownFeatures(ctx,cx,cy,px,py){for(const f of TOWN_FEATURES){const x=px(cx*48+f.x),y=py(cy*36+f.y);const width=f.cell===8?112:f.w===2?72:64,height=f.cell===8?104:f.cell===5?88:64;expandedProp(ctx,f.cell,x+(f.w*32-width)/2,y+f.h*32-height,width,height);}}

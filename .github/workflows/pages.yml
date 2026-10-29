@@ -24,7 +24,7 @@ jobs:
       - run: npm run build
       - run: |
           mkdir _site
-          cp index.html style.css app.mjs engine.mjs sprites.mjs roster.mjs world.mjs Spirimon.html _site/
+          cp index.html style.css app.mjs engine.mjs sprites.mjs roster.mjs world.mjs terrain.mjs moves.mjs towns.mjs audio.mjs offerings.mjs transformation.mjs Spirimon.html _site/
           cp -r assets _site/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

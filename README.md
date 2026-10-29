@@ -22,7 +22,7 @@ Begin with no Spirit. Your first encounter is random: earn its trust with intera
 ## Art direction and animations
 A bright handheld-era presentation with original feudal Japanese/Chinese-inspired pixel villages: swept tiled roofs, timber halls, lanterns, shrine gates, bamboo, cherry trees and robed sealers. Exploration fills every screen shape. The overworld uses textured forest canopies, tall-grass patches, terraced cliffs, shoreline banks, bright village tiles and smooth grid-aligned movement. Battles use compact HP/PP HUDs, a bottom dialogue window and Fight / Bag / Spirits / Run menus. Physical lunges, elemental streams, ice shards, leaf bursts, healing and wards animate across the battle stage. Reduced-motion preferences are respected. An original offline 5×7 pixel font ships with the game.
 
-The shared starter library contains 41 completed original ordered-type lineages, each with three distinct forms (123 sprites). User-uploaded images are visual references only and are not shipped. Artwork has transparent backgrounds and bounded 256×256 form cells. Local AI lineages become encounterable only when all three sprites and their validated information are complete.
+The shared starter library contains 50 original ordered-type lineages, each with three distinct forms (150 sprites). User-uploaded images are visual references only and are not shipped. Artwork has transparent backgrounds and bounded 256×256 form cells. Local AI lineages become encounterable only when all three sprites and their validated information are complete.
 
 ## Buildings
 Walk north into a doorway or interact directly below it. Sealer Halls, inns and homes have interiors, residents and a south exit. Hall keepers restore HP and shared PP; attunement is available at safe places.
@@ -95,4 +95,15 @@ The GitHub workflow is for deployment from a dedicated repository's main branch.
 ## Scope of this release
 This is the first playable alpha, not a completed FireRed-sized RPG. It has original assets and rules inspired by the agreed design. Full dungeon interiors, a broad move catalog, tournament brackets, richer NPC event chains, item/location transformation variants, full creature animation sets and production balance remain expansion work. The local model adapters are optional and need installed models; no actual AI model or generated AI artwork is bundled.
 
-The full 50-lineage design catalog is retained in roster-plan.json; nine pending artwork sets are excluded from the published encounter library.
+
+
+## Latest expansion
+All50 lineages and150 distinct sprites are included. Detailed painted ground textures and irregular paths/shorelines match the town/Spirit art. Six enterable building types include the forge, herbalist and archive; towns also have roofed stone wells, barrels, crates, guardian statues, timber fencing, stone walls and stalls. The lead Spirit no longer follows on the map.
+
+Wild encounters stay level1–5 in the starting region and6–8 in its eight immediate neighbors. After every seeded group of1–3 towns visited, newly formed farther areas gain1–3 levels. Caught Spirit levels are preserved; old wild encounters are rebalanced.
+
+The move library has eight techniques for each of13 main types and four for each rare domain. Individuals can practice alternative moves at safe places. Mobile move menus reserve a separate Back row. Cosmetic changes and permanent transformations use generic seal-ring/silhouette/particle animations.
+
+Offerings are one cooperation attempt per individual. Choose a resource plan: lavish requires one trial, careful two, humble three. Materials and a seal catalyst are consumed at commitment. Trial order is randomized perindividual; riddles allow one answer, while singing and dance use15-second original wordless synthesized melodies. Exact input timestamps are scored at±45/90/150ms with60% required. Options offers eight-tap median lag calibration. Failed Spirits remain available for battle and battle seals. Closing or reloading an active trial forfeits cooperation for that individual.
+
+Music is synthesized from original note sequences, requiring a first click/tap for browser audio permission. The map uses calm instrumental music; battles use an upbeat instrumental arrangement. Music can be muted in Options. No copyrighted recordings or external audio services are used.
