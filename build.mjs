@@ -1,0 +1,18 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+import path from 'node:path';
+import {ROSTER,ART} from './roster.mjs';
+const root=path.dirname(fileURLToPath(import.meta.url));
+const wrap=(name,src)=>{const names=[...src.matchAll(/export (?:const|function) (\w+)/g)].map(m=>m[1]);return 'const '+name+'=(()=>{'+src.replaceAll('export ','')+'\nreturn{'+names.join(',')+'};})();\n';};
+const core=wrap('E',await readFile(path.join(root,'engine.mjs'),'utf8'))+wrap('W',await readFile(path.join(root,'world.mjs'),'utf8'));
+const data=async p=>'data:image/webp;base64,'+(await readFile(path.join(root,p))).toString('base64');
+const roster=await Promise.all(ROSTER.map(async r=>({...r,atlas:await data(r.atlas)})));
+const art=Object.fromEntries(await Promise.all(Object.entries(ART).map(async([key,p])=>[key,await data(p)])));
+const defs='const ROSTER='+JSON.stringify(roster)+';const ART='+JSON.stringify(art)+';\n';
+const sprites=(await readFile(path.join(root,'sprites.mjs'),'utf8')).replace(/^import .*;\r?\n/gm,'').replaceAll('export ','');
+const app=(await readFile(path.join(root,'app.mjs'),'utf8')).replace(/^import .*;\r?\n/gm,'');
+const font=(await readFile(path.join(root,'assets','spirimon-pixel.ttf'))).toString('base64');
+const css=(await readFile(path.join(root,'style.css'),'utf8')).replace('./assets/spirimon-pixel.ttf','data:font/ttf;base64,'+font);
+const html=(await readFile(path.join(root,'index.html'),'utf8')).replace('<link rel="stylesheet" href="./style.css">','<style>'+css+'</style>').replace('<script type="module" src="./app.mjs"></script>','<script type="module">'+core+'const {COLORS,hash,rng}=E;'+defs+sprites+app+'</script>');
+await writeFile(path.join(root,'Spirimon.html'),html);
+console.log('Built standalone Spirimon.html ('+Math.round(Buffer.byteLength(html)/1024)+' KB).');

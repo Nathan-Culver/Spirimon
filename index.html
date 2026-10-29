@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#102320"><meta name="description" content="Spirimon — an endless world. A bond beneath the skin. Explore, seal, and train spirits in a locally saved fantasy RPG.">
+<title>Spirimon — The wild is calling</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23102320'/%3E%3Cpath d='M32 7 53 20v24L32 57 11 44V20Zm0 12-11 7v12l11 7 11-7V26Z' fill='none' stroke='%23d8b879' stroke-width='4'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<aside class="rail" aria-label="Main navigation">
+<button class="brand-mark" data-action="view" data-value="explore" aria-label="Spirimon exploration">S<span>◇</span></button>
+<div class="rail-divider"></div>
+<button class="nav-button active" data-action="view" data-value="explore" title="Explore (1)"><span>⌖</span><small>Explore</small></button>
+<button class="nav-button" data-action="view" data-value="spirits" title="Tattoo collection (2)"><span>♧</span><small>Spirits</small></button>
+<button class="nav-button" data-action="view" data-value="atlas" title="World atlas (3)"><span>▧</span><small>Atlas</small></button>
+<button class="nav-button" data-action="view" data-value="journal" title="Journal (4)"><span>☷</span><small>Journal</small></button>
+<div class="rail-bottom"><button class="nav-button" data-action="settings" title="Settings and local AI"><span>⚙</span><small>Settings</small></button><span class="version">v0.1</span></div>
+</aside>
+<div class="app-shell">
+<header class="topbar"><a class="wordmark" href="#" data-action="view" data-value="explore">SPIRIMON<span>THE SEALER'S FRONTIER</span></a><div class="topbar-right"><span id="save-status" class="save-status"><i></i> Saved on this device</span><button class="icon-button" data-action="export" title="Export save backup" aria-label="Export save backup">⇩</button><button class="player-avatar" data-action="profile" aria-label="Sealer profile">N</button></div></header>
+<main id="main"></main>
+<footer><span>AN ENDLESS WORLD. A BOND BENEATH THE SKIN.</span><span id="footer-seed"></span></footer>
+</div>
+<div id="modal-root"></div><div id="toast" role="status" aria-live="polite"></div>
+<script type="module" src="./app.mjs"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import http from 'node:http';
+import {makeSpecies} from '../engine.mjs';
+const requests=[];
+const png='iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8DwHwAFgAI/ScLbtAAAAABJRU5ErkJggg==';
+const models=http.createServer(async(req,res)=>{let data='';for await(const c of req)data+=c;const body=data?JSON.parse(data):null;requests.push({url:req.url,body});res.setHeader('Content-Type','application/json');if(req.url==='/api/tags')return res.end(JSON.stringify({models:[{name:'test-local-model'}]}));if(req.url==='/sdapi/v1/sd-models')return res.end('[]');if(req.url==='/api/generate')return res.end(JSON.stringify({response:JSON.stringify({forms:['Mosskit','Mossfang','Mosswarden'],description:'A moss-covered fox with thorn antlers.',visualPrompts:['small moss fox','large moss fox','elder moss fox'],moveNames:['Claw','Thorn','Pulse','Ward']})}));return res.end(JSON.stringify({images:[png]}));});
+await new Promise(r=>models.listen(0,'127.0.0.1',r));
+process.env.SPIRIMON_OLLAMA='http://127.0.0.1:'+models.address().port;
+process.env.SPIRIMON_IMAGE=process.env.SPIRIMON_OLLAMA;
+const {createServer}=await import('../companion.mjs');
+const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));
+const url='http://127.0.0.1:'+server.address().port;
+test.after(()=>{server.close();models.close();});
+test('companion serves the game without exposing arbitrary project files',async()=>{const response=await fetch(url+'/');assert.equal(response.status,200);assert((await response.text()).includes('SPIRIMON'));assert.equal((await fetch(url+'/companion.mjs')).status,404);assert.equal((await fetch(url+'/../package.json')).status,404);});
+test('companion refuses untrusted origins',async()=>{const response=await fetch(url+'/api/status',{headers:{Origin:'https://untrusted.example'}});assert.equal(response.status,403);});
+test('companion detects local text and image providers',async()=>{const response=await fetch(url+'/api/status',{headers:{Origin:'https://nathan-culver.github.io'}});assert.equal(response.headers.get('access-control-allow-origin'),'https://nathan-culver.github.io');const body=await response.json();assert.deepEqual(body.models,['test-local-model']);assert.equal(body.imageReady,true);});
+test('full local generation adapter validates text and creates three sequential reference sprites',async()=>{const original=makeSpecies(9,'Beast','Plant',[]);const response=await fetch(url+'/api/generate',{method:'POST',headers:{Origin:'https://nathan-culver.github.io','Content-Type':'application/json'},body:JSON.stringify({species:original,model:'test-local-model',existing:[]})});assert.equal(response.status,200);const data=await response.json();assert.equal(data.forms.length,3);assert.equal(data.sprites.length,3);const gen=requests.find(r=>r.url==='/api/generate');assert.equal(gen.body.keep_alive,0);assert.equal(gen.body.format.type,'object');const img=requests.filter(r=>r.url.startsWith('/sdapi/v1/')&&r.body);assert.deepEqual(img.map(r=>r.url),['/sdapi/v1/txt2img','/sdapi/v1/img2img','/sdapi/v1/img2img']);assert.equal(img[1].body.init_images[0],png);});
+
+test('original roster artwork, pixel font and world module have working static routes',async()=>{const font=await fetch(url+'/assets/spirimon-pixel.ttf');assert.equal(font.status,200);assert.equal(font.headers.get('content-type'),'font/ttf');assert((await font.arrayBuffer()).byteLength>1000);const art=await fetch(url+'/assets/roster/kilnscale.webp');assert.equal(art.status,200);assert.equal(art.headers.get('content-type'),'image/webp');assert.equal((await fetch(url+'/roster.mjs')).status,200);});
