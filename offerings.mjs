@@ -15,7 +15,7 @@ export const RIDDLES=[
 export const DANCE_KEYS=['q','w','e','a',null,'d','z','s','c'];
 const glyph={q:'↖ Q',w:'↑ W',e:'↗ E',a:'← A',d:'→ D',z:'↙ Z',s:'↓ S',c:'↘ C'};
 const keyMap={arrowup:'w',arrowleft:'a',arrowdown:'s',arrowright:'d'};
-export function offeringPlans(sp,id){const h=hash(id+'|'+sp.id),trials=['riddle','sing','dance'];for(let n=2;n>0;n--){const j=(h>>n)% (n+1);[trials[n],trials[j]]=[trials[j],trials[n]];}const material=['Plant','Beast','Fey'].includes(sp.base)?'herbs':['Construct','Giant','Elemental'].includes(sp.base)?'ore':'incense',extra=sp.domains.length+Math.min(2,sp.form||0);return[
+export function offeringPlans(sp,id){const h=hash(id+'|'+sp.id),trials=['riddle','sing','dance'];for(let n=2;n>0;n--){const j=(h>>>n)% (n+1);[trials[n],trials[j]]=[trials[j],trials[n]];}const material=['Plant','Beast','Fey'].includes(sp.base)?'herbs':['Construct','Giant','Elemental'].includes(sp.base)?'ore':'incense',extra=sp.domains.length+Math.min(2,sp.form||0);return[
 {id:'lavish',name:'Lavish offering',cost:{seals:1,offerings:5+extra,[material]:2,coins:24},trials:trials.slice(0,1)},
 {id:'balanced',name:'Careful offering',cost:{seals:1,offerings:3+extra,[material]:1,coins:12},trials:trials.slice(0,2)},
 {id:'frugal',name:'Humble offering',cost:{seals:1,offerings:2+extra,coins:6},trials}
