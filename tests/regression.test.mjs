@@ -12,7 +12,11 @@ test('wild species and individuals have valid stats',()=>{const sp=E.makeSpecies
 test('only one wild Spirit render pass',()=>{const body=app.slice(app.indexOf('function drawWorld(time)'),app.indexOf('function tick(time)'));assert.equal((body.match(/drawSpirit\(c,/g)||[]).length,1);});
 test('wild Spirit movement uses current NPC locations',()=>{const body=app.slice(app.indexOf('function wanderSpirits('),app.indexOf('function drawWorld(time)'));assert.match(body,/townNPCs\(pos.cx,pos.cy\)/);});
 test('no repeated proximity spawns',()=>{assert.doesNotMatch(app,/function ensureVisibleSpirits\(/);assert.doesNotMatch(app,/function replenish\(/);});
-test('grass encounters do not inject roaming Spirits',()=>{const body=app.slice(app.indexOf('function move(dx,dy)'),app.indexOf('function interact()'));assert.doesNotMatch(body,/s\.roamers\[reg.key\]\.push\(encounter\)/);});
+test('grass encounters create a visible roaming Spirit when the player has no lead',()=>{const body=app.slice(app.indexOf('function move(dx,dy)'),app.indexOf('function interact()'));assert.match(body,/s\.roamers\[reg.key\]\.push\(encounter\)/);});
 test('save repair precedes roaming world discovery',()=>{assert.ok(app.indexOf('normalizeWildPopulation();')<app.indexOf('discoverRegion();',app.indexOf('function boot()')));});
-test('player uses stable sprite frame',()=>{assert.match(sprites,/frame=1;ctx\.save\(\)/);});
+test('player sprite animates only while moving',()=>{assert.match(sprites,/frame=moving\?/);});
 test('no temporary Spirit debug badges',()=>{assert.doesNotMatch(html,/id="spirit-build"/);assert.doesNotMatch(app,/SPIRITS '\+'|BUILD 11/);});
+
+test('currency labels use Coin, not marks',()=>{assert.doesNotMatch(app,/guild marks|Guild marks|\bmarks\b/);assert.match(app,/<small>Coin<\/small>/);});
+test('wild battle rewards no Coin',()=>{const body=app.slice(app.indexOf('function winBattle()'),app.indexOf('function loseBattle()'));assert.match(body,/const reward=won\.trainer\?35\+s\.rank\*12:0/);assert.match(body,/if\(reward\)s\.inventory\.coins\+=reward/);});
+test('touch A is the interaction button',()=>{assert.match(app,/case'emu-a':interact\(\)/);assert.doesNotMatch(app,/Interact · E/);});
