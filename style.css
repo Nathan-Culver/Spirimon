@@ -70,3 +70,10 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 .classic-control .classic-move b{display:block;font-size:clamp(11px,1.45vw,17px);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:1;min-height:0}
 .classic-control .classic-move small{display:block;font-size:clamp(9px,1.05vw,12px);line-height:1.15;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0}
 @media(max-height:500px){.classic-control .classic-moves{height:calc(100% - 20px);gap:4px}.classic-control .classic-move{padding:2px 7px;gap:1px}.classic-control .classic-move b{font-size:clamp(11px,1.25vw,15px)}.classic-control .classic-move small{font-size:clamp(9px,.95vw,11px)}.classic-control>.battle-back{bottom:1px;line-height:1}}
+
+/* Landscape/tablet dialog viewport safety: close control stays visible while content scrolls. */
+.modal-overlay{padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));overflow-y:auto;align-items:center}
+.modal{max-height:calc(100dvh - 24px);min-height:0;overflow-y:auto;overscroll-behavior:contain}
+.modal-close{position:sticky;top:0;float:right;z-index:4;display:grid;place-items:center;width:42px;height:42px;margin:-12px -12px 0 8px;border-radius:8px;background:#263b30;color:#f2e8cb;font-size:29px;line-height:1;touch-action:manipulation}
+@media(max-height:600px){.modal-overlay{align-items:flex-start}.modal{margin:auto;max-height:calc(100dvh - 24px);padding:18px}.modal-close{margin:-6px -6px 0 8px}}
+.emulator-mode.exploring .modal{max-height:calc(100dvh - 90px)}
