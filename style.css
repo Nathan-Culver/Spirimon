@@ -54,3 +54,12 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 .trial-meter i{display:block;height:100%;width:0;background:#9bc6a4;transition:width .12s linear}
 .trial-pass-line{position:absolute;left:70%;height:100%;top:0;border-left:3px solid #f2d17b;z-index:2}
 @media(max-width:650px){.mini-map{top:74px;right:6px;padding:4px}.mini-grid{grid-template-columns:repeat(5,15px)}.mini-cell{width:15px;height:15px;font-size:10px;line-height:13px}.map-interact{right:6px;bottom:54px;min-height:46px;font-size:12px}}
+
+/* Keep translucent emulator controls visible while menus and interaction dialogs are open. */
+.emulator-mode .modal-overlay{z-index:25;padding-bottom:clamp(80px,19dvh,150px)}
+.emulator-mode.exploring .emulator-controls{z-index:30}
+.emulator-mode.exploring .emulator-controls .emu-pad,.emulator-mode.exploring .emulator-controls .emu-ab{opacity:.75}
+.emulator-mode.exploring .emulator-controls .emu-menu{opacity:.9}
+.emulator-mode.exploring .modal-overlay{pointer-events:auto}
+.emulator-mode.exploring .modal{margin-bottom:clamp(50px,12dvh,90px)}
+@media(max-height:520px){.emulator-mode.exploring .modal-overlay{padding:8px 12px 65px}.emulator-mode.exploring .modal{max-height:calc(100dvh - 82px);margin-bottom:0}.emulator-mode.exploring .emulator-controls .emu-pad{transform:scale(.78);transform-origin:bottom left}.emulator-mode.exploring .emulator-controls .emu-ab{transform:scale(.78);transform-origin:bottom right}}
