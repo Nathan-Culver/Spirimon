@@ -6,7 +6,7 @@ const root=path.dirname(fileURLToPath(import.meta.url));
 const wrap=(name,src)=>{const names=[...src.matchAll(/export (?:async )?(?:const|function|class) (\w+)/g)].map(m=>m[1]);return 'const '+name+'=(()=>{'+src.replace(/^import .*;\r?\n/gm,'').replaceAll('export ','')+'\nreturn{'+names.join(',')+'};})();\n';};
 const core=wrap('M',await readFile(path.join(root,'moves.mjs'),'utf8'))+'const {buildLearnset,startingMoves}=M;\n'+wrap('Town',await readFile(path.join(root,'towns.mjs'),'utf8'))+'const {TOWN_LAYOUT,TOWN_FEATURES,townPath}=Town;\n'+wrap('E',await readFile(path.join(root,'engine.mjs'),'utf8'))+wrap('W',await readFile(path.join(root,'world.mjs'),'utf8'))+wrap('T',await readFile(path.join(root,'terrain.mjs'),'utf8'))+wrap('Au',await readFile(path.join(root,'audio.mjs'),'utf8'))+'const {audio,eventTime}=Au;\n';
 const data=async p=>'data:image/webp;base64,'+(await readFile(path.join(root,p))).toString('base64');
-const roster=await Promise.all(ROSTER.map(async r=>({...r,atlas:await data(r.atlas)})));
+const roster=await Promise.all(ROSTER.map(async r=>({...r,atlas:r.atlas?await data(r.atlas):null})));
 const art=Object.fromEntries(await Promise.all(Object.entries(ART).map(async([key,p])=>[key,await data(p)])));
 const defs='const ROSTER='+JSON.stringify(roster)+';const ART='+JSON.stringify(art)+';\n';
 const sprites=(await readFile(path.join(root,'sprites.mjs'),'utf8')).replace(/^import .*;\r?\n/gm,'').replaceAll('export ','');
