@@ -63,3 +63,10 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 .emulator-mode.exploring .modal-overlay{pointer-events:auto}
 .emulator-mode.exploring .modal{margin-bottom:clamp(50px,12dvh,90px)}
 @media(max-height:520px){.emulator-mode.exploring .modal-overlay{padding:8px 12px 65px}.emulator-mode.exploring .modal{max-height:calc(100dvh - 82px);margin-bottom:0}.emulator-mode.exploring .emulator-controls .emu-pad{transform:scale(.78);transform-origin:bottom left}.emulator-mode.exploring .emulator-controls .emu-ab{transform:scale(.78);transform-origin:bottom right}}
+
+/* Battle move picker: contain move names and PP costs within each button on short landscape screens. */
+.classic-control .classic-moves{height:calc(100% - 24px);min-height:0;grid-template-rows:repeat(2,minmax(0,1fr));align-content:stretch;overflow:hidden}
+.classic-control .classic-move{display:flex;flex-direction:column;justify-content:center;gap:2px;min-height:0;overflow:hidden;padding:3px 8px;line-height:1.1}
+.classic-control .classic-move b{display:block;font-size:clamp(11px,1.45vw,17px);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:1;min-height:0}
+.classic-control .classic-move small{display:block;font-size:clamp(9px,1.05vw,12px);line-height:1.15;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0}
+@media(max-height:500px){.classic-control .classic-moves{height:calc(100% - 20px);gap:4px}.classic-control .classic-move{padding:2px 7px;gap:1px}.classic-control .classic-move b{font-size:clamp(11px,1.25vw,15px)}.classic-control .classic-move small{font-size:clamp(9px,.95vw,11px)}.classic-control>.battle-back{bottom:1px;line-height:1}}
