@@ -1,4 +1,4 @@
-import {TOWN_LAYOUT} from './towns.mjs';
+import {TOWN_LAYOUT,TOWN_FEATURES} from './towns.mjs';
 export const ROOM_W=15,ROOM_H=11;
 export function buildings(cx,cy){return TOWN_LAYOUT.map(b=>({...b,id:b.kind+'-'+cx+','+cy,footX:cx*48+b.x,footY:cy*36+b.y,doorX:cx*48+b.x+b.dx,doorY:cy*36+b.y+b.h-1}));}
 export function makeInterior(building){return{...building,x:7,y:9,face:'up',outside:{x:building.doorX,y:building.doorY+1}};}
@@ -8,3 +8,13 @@ if(kind==='inn'){if([9,12].includes(x)&&[2,3,5,6].includes(y))return'bed';if(y==
 if(kind==='home'){if(x>=10&&x<=12&&y>=2&&y<=3)return'bed';if(x>=3&&x<=5&&y>=6&&y<=7)return'table';if(y===2&&x>=2&&x<=5)return'shelf';if(x>=7&&x<=9&&y>=4&&y<=7)return'tatami';}
 return'floor';}
 export function roomWalkable(kind,x,y){return['exit','floor','rug','tatami','cushion'].includes(roomTile(kind,x,y));}
+
+// Physical bases of decorative props, measured in town-grid tiles. Upper artwork is canopy/height, not a walkable floor.
+export function featureFootprintBlocked(lx,ly){
+ for(const f of TOWN_FEATURES){
+  if(f.cell===5){if(lx>=f.x-1&&lx<=f.x+1&&ly>=f.y&&ly<=f.y+1)return true;continue;}
+  if(f.cell===8){if(lx>=f.x&&lx<f.x+f.w&&ly>=f.y&&ly<f.y+f.h)return true;continue;}
+  if(lx>=f.x&&lx<f.x+f.w&&ly>=f.y&&ly<f.y+f.h)return true;
+ }
+ return false;
+}
