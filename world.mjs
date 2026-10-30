@@ -10,6 +10,7 @@ return'floor';}
 export function roomWalkable(kind,x,y){return['exit','floor','rug','tatami','cushion'].includes(roomTile(kind,x,y));}
 
 // Physical bases of decorative props, measured in town-grid tiles. Upper artwork is canopy/height, not a walkable floor.
+export function townFeatures(){return TOWN_FEATURES;}
 export function featureFootprintBlocked(lx,ly){
  // Props extend above their ground anchors; collide only with their grounded bases.
  for(const f of TOWN_FEATURES){
