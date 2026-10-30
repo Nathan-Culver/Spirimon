@@ -127,7 +127,7 @@ function oldDrawPerson(ctx,x,y,role='player',tick=0,face='down',moving=false){co
 export function drawTree(ctx,x,y,seed,biome='forest'){prop(ctx,biome==='snow'?4:seed%7===0?5:3,x-16,y-48,64,80);}
 export function drawBuilding(ctx,x,y,guild=false,kind='home'){prop(ctx,guild?2:kind==='inn'?1:0,x+(guild?24:8),y-40,guild?176:144,guild?168:136);}
 export function drawTownDecor(ctx,x,y){prop(ctx,8,x,y-25,96,96);}
-export function drawPerson(ctx,x,y,role='player',tick=0,face='down',moving=false){const image=readyImage(ART.sealer);if(!image)return;const row={down:0,left:1,right:2,up:3}[face]??0,frame=1;ctx.save();ctx.imageSmoothingEnabled=false;if(role!=='player')ctx.filter='hue-rotate('+({keeper:130,merchant:45,rival:220,scholar:280,resident:80}[role]||90)+'deg)';const stride=moving?Math.sin(tick/110*Math.PI):0;ctx.drawImage(image,frame*64,row*80,64,80,Math.round(x)+(moving?Math.round(stride*.7):0),Math.round(y)-12+(moving?Math.round(Math.abs(stride)*-1):0),32,40);ctx.restore();}
+export function drawPerson(ctx,x,y,role='player',tick=0,face='down',moving=false){const image=readyImage(ART.sealer);if(!image)return;const row={down:0,left:1,right:2,up:3}[face]??0,frame=moving?(Math.floor(Math.max(0,tick)/110)%4):1;ctx.save();ctx.imageSmoothingEnabled=false;if(role!=='player')ctx.filter='hue-rotate('+({keeper:130,merchant:45,rival:220,scholar:280,resident:80}[role]||90)+'deg)';const stride=moving?Math.sin(tick/110*Math.PI):0;ctx.drawImage(image,frame*64,row*80,64,80,Math.round(x)+(moving?Math.round(stride*.7):0),Math.round(y)-12+(moving?Math.round(Math.abs(stride)*-1):0),32,40);ctx.restore();}
 
 export function drawTile(ctx,type,x,y,seed,biome,options={}){
  const image=readyImage(ART.terrain);if(!image){fallbackDrawTile(ctx,type,x,y,seed,biome);return;}
