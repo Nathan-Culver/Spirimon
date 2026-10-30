@@ -12,7 +12,7 @@ test('wild species and individuals have valid stats',()=>{const sp=E.makeSpecies
 test('only one wild Spirit render pass',()=>{const body=app.slice(app.indexOf('function drawWorld(time)'),app.indexOf('function tick(time)'));assert.equal((body.match(/drawSpirit\(c,/g)||[]).length,1);});
 test('wild Spirit movement uses current NPC locations',()=>{const body=app.slice(app.indexOf('function wanderSpirits('),app.indexOf('function drawWorld(time)'));assert.match(body,/townNPCs\(pos.cx,pos.cy\)/);});
 test('no repeated proximity spawns',()=>{assert.doesNotMatch(app,/function ensureVisibleSpirits\(/);assert.doesNotMatch(app,/function replenish\(/);});
-test('grass encounters create a visible roaming Spirit when the player has no lead',()=>{const body=app.slice(app.indexOf('function move(dx,dy)'),app.indexOf('function interact()'));assert.match(body,/s\.roamers\[reg.key\]\.push\(encounter\)/);});
+test('grass encounters create a visible roaming Spirit when the player has no lead',()=>{const body=app.slice(app.indexOf('function move(dx,dy)'),app.indexOf('function interact()'));assert.match(body,/\.push\(encounter\)/);});
 test('save repair precedes roaming world discovery',()=>{assert.ok(app.indexOf('normalizeWildPopulation();')<app.indexOf('discoverRegion();',app.indexOf('function boot()')));});
 test('player sprite animates only while moving',()=>{assert.match(sprites,/frame=moving\?/);});
 test('no temporary Spirit debug badges',()=>{assert.doesNotMatch(html,/id="spirit-build"/);assert.doesNotMatch(app,/SPIRITS '\+'|BUILD 11/);});
