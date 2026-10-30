@@ -14,7 +14,7 @@ test('wild Spirit movement uses current NPC locations',()=>{const body=app.slice
 test('no repeated proximity spawns',()=>{assert.doesNotMatch(app,/function ensureVisibleSpirits\(/);assert.doesNotMatch(app,/function replenish\(/);});
 test('grass encounters create a visible roaming Spirit when the player has no lead',()=>{const body=app.slice(app.indexOf('function move(dx,dy)'),app.indexOf('function interact()'));assert.match(body,/\.push\(encounter\)/);});
 test('save repair precedes roaming world discovery',()=>{assert.ok(app.indexOf('normalizeWildPopulation();')<app.indexOf('discoverRegion();',app.indexOf('function boot()')));});
-test('player sprite cycles only three valid atlas columns while moving',()=>{assert.match(sprites,/const frame=moving\?\[0,1,2,1\]/);assert.match(sprites,/frame\*64,row\*80,64,80/);});
+test('player sprite cycles only three valid atlas columns while moving',()=>{assert.match(sprites,/const frame=moving\?\[0,1,2,1\]/);assert.match(sprites,/frame\*64,row\*80,64,80/);assert.match(sprites,/if\(face==='left'\)/);assert.match(sprites,/ctx\.scale\(-1,1\)/);});
 test('no temporary Spirit debug badges',()=>{assert.doesNotMatch(html,/id="spirit-build"/);assert.doesNotMatch(app,/SPIRITS '\+'|BUILD 11/);});
 
 test('currency labels use Coin, not marks',()=>{assert.doesNotMatch(app,/guild marks|Guild marks|\bmarks\b/);assert.match(app,/<small>Coin<\/small>/);});
