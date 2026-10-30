@@ -11,10 +11,14 @@ export function roomWalkable(kind,x,y){return['exit','floor','rug','tatami','cus
 
 // Physical bases of decorative props, measured in town-grid tiles. Upper artwork is canopy/height, not a walkable floor.
 export function featureFootprintBlocked(lx,ly){
+ // Props extend above their ground anchors; collide only with their grounded bases.
  for(const f of TOWN_FEATURES){
-  if(f.cell===5){if(lx>=f.x-1&&lx<=f.x+1&&ly>=f.y&&ly<=f.y+1)return true;continue;}
-  if(f.cell===8){if(lx>=f.x&&lx<f.x+f.w&&ly>=f.y&&ly<f.y+f.h)return true;continue;}
-  if(lx>=f.x&&lx<f.x+f.w&&ly>=f.y&&ly<f.y+f.h)return true;
+  const left=f.x+(f.w-1)/2,centerY=f.y+f.h-1;
+  const radius=f.cell===8?1.55:f.cell===5?.85:f.w===2?.9:.65;
+  if(Math.abs(lx-left)<=radius&&ly>=centerY-(f.cell===8?1:0)&&ly<=centerY+.55)return true;
  }
+ // Central well and decorative plaza monument are rendered independently of TOWN_FEATURES.
+ if(Math.abs(lx-27)<=1&&Math.abs(ly-18)<=1)return true;
+ if(Math.abs(lx-33)<=1&&Math.abs(ly-14)<=1)return true;
  return false;
 }
