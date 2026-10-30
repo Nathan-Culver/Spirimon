@@ -115,6 +115,18 @@ function settings(){showModal('Your world. Your device.','<p>Spirimon saves loca
 function fillModels(){const select=$('#ai-model');if(!select)return;select.innerHTML=(aiStatus.models||[]).map(m=>'<option '+(m===s.settings.model?'selected':'')+'>'+esc(m)+'</option>').join('')||'<option value="">No text models installed</option>';}
 async function checkAI(){const out=$('#ai-status');if(out)out.textContent='Checking local companion…';try{const response=await fetch(COMPANION+'/api/status',{signal:AbortSignal.timeout(5000)});if(!response.ok)throw Error('Companion returned '+response.status);aiStatus=await response.json();aiStatus.message=(aiStatus.models.length?'Text models ready':'No Ollama model found')+' · '+(aiStatus.imageReady?'Image API ready':'Image API not connected');fillModels();if(out)out.textContent=aiStatus.message+' · queue '+queue.length;}catch(err){aiStatus={message:'Companion offline. Run Start-Spirimon.cmd from the downloaded game.',models:[],imageReady:false};if(out){out.textContent=aiStatus.message;out.classList.add('error');}}}
 async function processQueue(){if(busy||!s.settings.aiEnabled||!queue.length)return;busy=true;const id=queue.shift(),original=s.generationPlans?.[id];if(!original){busy=false;return;}try{const model=s.settings.model||aiStatus?.models?.[0];if(!model)throw Error('Choose an installed text model in Settings.');const existing=Object.values(library).filter(p=>p.base===original.base&&p.alter===original.alter).slice(-6).map(p=>({forms:p.forms,description:p.description}));const res=await fetch(COMPANION+'/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({species:original,model,existing}),signal:AbortSignal.timeout(900000)});const data=await res.json();if(!res.ok)throw Error(data.error||'Local generation failed');let sp=E.validateSpecies(data,original);if(!Array.isArray(data.sprites)||data.sprites.length!==3||data.sprites.some(v=>typeof v!=='string'||!v.startsWith('data:image/png;base64,')))throw Error('All three sprite images are required.');sp={...sp,id:'ai-'+original.id+'-'+E.hash(data.forms.join('')),sprites:data.sprites,atlas:null,portrait:null};register(sp);delete s.generationPlans[id];if(!s.spirits.length){const first=s.roamers['0,0']?.find(r=>r.id==='first-bond'&&r.active);if(first&&!s.seen.includes(first.ind.species))first.ind=E.heal(E.makeIndividual(sp,3),sp);}note('A new local-AI lineage is ready in the library: '+sp.forms[0]+'.');save();toast('Local AI finished a new three-form lineage.');}catch(e){toast('AI generation paused: '+e.message);s.settings.aiEnabled=false;save();}finally{busy=false;if(modal==='settings')settings();}}
+function drawTallGrass(c,x,y,seed,time,disturbance=0,foreground=false){
+ const r=E.rng(seed),wind=Math.sin(time/650+seed%19)*1.2;
+ for(let n=0;n<9;n++){
+  const bx=x+3+Math.floor(r()*27),by=y+12+Math.floor(r()*18);
+  const height=11+Math.floor(r()*11),sway=wind+Math.sin(time/190+n*2+seed%11)*disturbance*5;
+  if(foreground&&by<y+20)continue;
+  c.strokeStyle=n%3===0?'#a3c75a':n%3===1?'#568e38':'#36753b';
+  c.lineWidth=n%4===0?3:2;c.beginPath();c.moveTo(bx,by);c.quadraticCurveTo(bx+sway*.45,by-height*.6,bx+sway+(n%3-1)*3,by-height);c.stroke();
+  c.fillStyle='#b5d76b';c.fillRect(Math.round(bx+sway),Math.round(by-height),2,3);
+ }
+ c.lineWidth=1;
+}
 function drawWorld(time){
  const canvas=$('#world');if(!canvas||view!=='explore'||battle)return;
  if(s.interior){drawInterior(canvas,time);return;}
@@ -127,7 +139,7 @@ function drawWorld(time){
  const cols=width/32,rows=height/32,ox=vx-(cols-1)/2,oy=vy-(rows-1)/2;
  const px=x=>Math.round((x-ox)*32),py=y=>Math.round((y-oy)*32);
  for(let y=Math.floor(oy)-2;y<=Math.ceil(oy+rows)+1;y++)for(let x=Math.floor(ox)-2;x<=Math.ceil(ox+cols)+1;x++){
- const reg=E.region(s.seed,Math.floor(x/48),Math.floor(y/36)),terrain=E.tile(s.seed,x,y),local=E.coord(x,y);drawTile(c,terrain,px(x),py(y),E.hash(s.seed,x,y),reg.biome.kind,{neighbors:[[0,-1],[1,0],[0,1],[-1,0]].map(([dx,dy])=>E.tile(s.seed,x+dx,y+dy)),town:reg.town&&Math.abs(local.lx-24)<10&&Math.abs(local.ly-18)<8});}
+ const reg=E.region(s.seed,Math.floor(x/48),Math.floor(y/36)),terrain=E.tile(s.seed,x,y),local=E.coord(x,y);drawTile(c,terrain,px(x),py(y),E.hash(s.seed,x,y),reg.biome.kind,{neighbors:[[0,-1],[1,0],[0,1],[-1,0]].map(([dx,dy])=>E.tile(s.seed,x+dx,y+dy)),town:reg.town&&Math.abs(local.lx-24)<10&&Math.abs(local.ly-18)<8});if(terrain==='grass'){const distance=Math.hypot(x-vx,y-vy),disturbance=walkAnim&&elapsed<1?Math.max(0,1.8-distance):0;drawTallGrass(c,px(x),py(y),E.hash(s.seed,x,y),time,disturbance);}}
 
  const pc=E.coord(s.player.x,s.player.y),people=[];
  for(let cy=pc.cy-1;cy<=pc.cy+1;cy++)for(let cx=pc.cx-1;cx<=pc.cx+1;cx++){
@@ -141,7 +153,7 @@ function drawWorld(time){
  }
  for(const n of people){const x=px(n.x),y=py(n.y);drawPerson(c,x,y-5,n.role,time,n.face||'down',false);if(Math.abs(n.x-s.player.x)+Math.abs(n.y-s.player.y)<=2){c.fillStyle='#fff5bd';c.strokeStyle='#4f4430';c.font='bold 10px monospace';c.textAlign='center';c.strokeText('!',x+16,y-8);c.fillText('!',x+16,y-8);}}
  for(const d of s.drops){const x=px(d.x),y=py(d.y);c.fillStyle='#d2b17b';c.fillRect(x+9,y+9,14,15);c.fillStyle='#725b3b';c.fillRect(x+14,y+6,4,6);}
- for(let ty=Math.floor(oy)-1;ty<=Math.min(Math.floor(vy),Math.ceil(oy+rows)+2);ty++)for(let tx=Math.floor(ox)-2;tx<=Math.ceil(ox+cols)+2;tx++)if(E.tile(s.seed,tx,ty)==='tree')drawTree(c,px(tx),py(ty),E.hash(s.seed,tx,ty),E.region(s.seed,Math.floor(tx/48),Math.floor(ty/36)).biome.kind);const moving=!!walkAnim&&elapsed<1;drawPerson(c,px(vx),py(vy)-5,'player',moving?elapsed*1000:0,s.player.face,moving);
+ for(let ty=Math.floor(oy)-1;ty<=Math.min(Math.floor(vy),Math.ceil(oy+rows)+2);ty++)for(let tx=Math.floor(ox)-2;tx<=Math.ceil(ox+cols)+2;tx++)if(E.tile(s.seed,tx,ty)==='tree')drawTree(c,px(tx),py(ty),E.hash(s.seed,tx,ty),E.region(s.seed,Math.floor(tx/48),Math.floor(ty/36)).biome.kind);const moving=!!walkAnim&&elapsed<1;drawPerson(c,px(vx),py(vy)-5,'player',moving?elapsed*1000:0,s.player.face,moving);if(E.tile(s.seed,Math.round(vx),Math.round(vy))==='grass')drawTallGrass(c,px(Math.round(vx)),py(Math.round(vy))+7,E.hash(s.seed,Math.round(vx),Math.round(vy),'front'),time,moving?1.5:0,true);
  for(let ty=Math.floor(oy)-1;ty<=Math.ceil(oy+rows)+2;ty++)for(let tx=Math.floor(ox)-2;tx<=Math.ceil(ox+cols)+2;tx++)if(ty>vy&&E.tile(s.seed,tx,ty)==='tree')drawTree(c,px(tx),py(ty),E.hash(s.seed,tx,ty),E.region(s.seed,Math.floor(tx/48),Math.floor(ty/36)).biome.kind);
  for(let i=0;i<7;i++){c.globalAlpha=.22;c.fillStyle=i%2?'#ffdfd5':'#f9efb8';c.fillRect((i*137+time*.006)%width,(i*83+Math.sin(time/1400+i)*10)%height,2,1);}c.globalAlpha=1;
  const coords=$('#map-coords');if(coords)coords.textContent=s.player.x+' / '+s.player.y;
