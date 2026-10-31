@@ -251,7 +251,7 @@ function moveDetails(m){
  const formatted=effects?String(effects).replace(/([a-z])([A-Z])/g,'$1 $2').replace(/([,;])/g,'$1 '):'None';
  const affinity=m.domain||m.element||m.visual||'Neutral';
  const access=moveEligibility(m).join(', ');
- return '<span class="move-tags"><span class="move-tag affinity">'+esc(affinity)+'</span><span class="move-tag creature" title="Creature types that can learn this move">'+esc(access)+'</span><span class="move-tag category">'+esc(category)+'</span></span>'+
+ return '<span class="move-tags"><span class="move-tag affinity">'+esc(affinity)+'</span><span class="move-tag creature" title="Creature types that can learn this move">'+esc(access)+'</span><span class="move-tag category">'+esc(category)+'</span></span></span>'+
  '<span class="move-stats"><span>DMG <strong>'+(category==='Status'||power<=0?'—':power)+'</strong></span><span>ACC <strong>'+accuracy+'</strong></span><span>PP <strong>'+E.moveCost(m)+'</strong></span></span>'+
  '<span class="move-effect">Effect: '+esc(formatted)+(access==='Any type*'?' (requires domain)':'')+'</span>';
 }
