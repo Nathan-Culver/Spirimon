@@ -500,7 +500,71 @@ function ensurePlayerOnPath(){if(E.walkable(E.tile(s.seed,s.player.x,s.player.y)
 
 function enterBuilding(building){if(modal||battle)return;s.interior=W.makeInterior(building);walkAnim=null;keys.clear();save();render();toast(building.name);}
 function moveInside(dx,dy){if(modal||battle||view!=='explore')return;const room=s.interior,x=room.x+dx,y=room.y+dy;room.face=dx<0?'left':dx>0?'right':dy<0?'up':'down';const npc=W.roomNPCs(room).find(n=>n.x===x&&n.y===y);if(npc)return talk(npc);if(!W.roomWalkable(room.kind,x,y))return;if(y===10&&x===7){s.player.x=room.outside.x;s.player.y=room.outside.y;s.player.face='down';delete s.interior;keys.clear();save();render();return;}room.x=x;room.y=y;s.steps++;lastStep=performance.now();save();$('#map-hint').textContent=hint();}
-function drawInterior(canvas,time){const rect=canvas.getBoundingClientRect(),width=Math.max(320,Math.round(rect.width/2)),height=Math.max(200,Math.round(rect.height/2));if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;}const c=canvas.getContext('2d'),room=s.interior,unit=32,ox=Math.round(width/2-room.x*unit-16),oy=Math.round(height/2-room.y*unit-16);c.imageSmoothingEnabled=false;c.fillStyle='#302b25';c.fillRect(0,0,width,height);for(let y=0;y<11;y++)for(let x=0;x<15;x++){const t=W.roomTile(room.kind,x,y),px=ox+x*unit,py=oy+y*unit;c.fillStyle={wall:'#534737','wall-art':'#c8b08a',floor:'#ba986b',rug:'#985752',tatami:'#b2b36f',exit:'#e3d9ae',bed:'#e6ded0',shelf:'#66523a',counter:'#785639',table:'#8c6845',altar:'#886446',cushion:'#b36b59'}[t];c.fillRect(px,py,32,32);c.strokeStyle='#4a38284a';c.strokeRect(px,py,32,32);if(t==='floor'||t==='tatami'){c.fillStyle='#9b7b512b';c.fillRect(px,py+14,32,2);}if(t==='shelf'){for(let k=0;k<4;k++){c.fillStyle=['#914b43','#638077','#d3bb83'][k%3];c.fillRect(px+3+k*7,py+5,5,19);}}if(t==='bed'){c.fillStyle='#70938b';c.fillRect(px+3,py+12,26,18);c.fillStyle='#f4ead2';c.fillRect(px+5,py+3,22,8);}if(t==='altar'){c.fillStyle='#eacb78';c.fillRect(px+13,py+5,6,18);}}for(const n of W.roomNPCs(room))drawPerson(c,ox+n.x*unit,oy+n.y*unit,n.role,time);drawPerson(c,ox+room.x*unit,oy+room.y*unit,'player',0,room.face,false,adventureState().appearance);$('#map-location').textContent=room.name;$('#map-biome').textContent='MOS SVEIL · INTERIOR'.replace('MOS S','MOSS');}
+function drawInterior(canvas,time){
+ const rect=canvas.getBoundingClientRect(),width=Math.max(320,Math.round(rect.width/2)),height=Math.max(200,Math.round(rect.height/2));
+ if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;}
+ const c=canvas.getContext('2d'),room=s.interior,unit=32,ox=Math.round(width/2-room.x*unit-16),oy=Math.round(height/2-room.y*unit-16);
+ c.imageSmoothingEnabled=false;c.fillStyle='#211d22';c.fillRect(0,0,width,height);
+ const kind=room.kind,forge=kind==='forge',archive=kind==='archive',herbal=kind==='herbalist',hall=kind==='hall'||archive,inn=kind==='inn'||forge;
+ const pal=hall?{floor:'#bda27b',edge:'#90775e',wall:'#625b63',trim:'#c4ad83',rug:'#73536f'}:inn?{floor:'#b38a64',edge:'#846044',wall:'#6c5545',trim:'#caa176',rug:'#9a654f'}:{floor:'#c3a37a',edge:'#9c7c59',wall:'#657369',trim:'#d8bc91',rug:'#658b78'};
+ const fill=(color,x,y,w,h)=>{c.fillStyle=color;c.fillRect(x,y,w,h);};
+ for(let y=0;y<11;y++)for(let x=0;x<15;x++){
+  const t=W.roomTile(kind,x,y),px=ox+x*unit,py=oy+y*unit;
+  if(px>width||py>height||px+unit<0||py+unit<0)continue;
+  const h=(x*73+y*137+x*y*19)%11;
+  if(t==='wall'||t==='wall-art'){
+   fill('#29272b',px,py,32,32);fill(pal.wall,px+1,py+1,30,29);
+   fill(h%2?'#79716a':'#81776e',px+2,py+2,28,3);
+   fill('#453f42',px+1,py+25,30,5);fill(pal.trim,px+1,py+23,30,3);
+   fill('#403b3e',px+(h%2?14:7),py+7,2,14);
+   if(t==='wall-art'){fill('#d5b986',px+5,py+7,22,13);fill('#665b57',px+7,py+9,18,9);fill(hall?'#9f88b4':'#8aaf9a',px+10,py+11,12,5);fill('#e6ce9d',px+14,py+10,4,7);}
+   continue;
+  }
+  fill(pal.edge,px,py,32,32);fill(pal.floor,px+1,py+1,30,30);
+  fill(h%3===0?'#d0b28a':'#a68b6b',px+3,py+4,2,2);
+  fill('#8f73584d',px+1,py+15,30,1);
+  fill('#8f73584d',px+((x+y)%2?11:23),py+1,1,14);
+  if(t==='rug'||t==='tatami'){
+   const base=t==='rug'?pal.rug:'#a4b68a';fill('#5b5148',px+1,py+1,30,30);fill(base,px+3,py+3,26,26);
+   fill(t==='rug'?'#c8a678':'#e0d3a0',px+5,py+5,22,2);fill(t==='rug'?'#c8a678':'#e0d3a0',px+5,py+25,22,2);
+   fill('#d8bd94',px+15,py+8,2,16);fill('#d8bd94',px+9,py+15,14,2);
+  }
+  if(t==='shelf'){
+   fill('#4d3529',px+1,py+4,30,26);fill('#9d754c',px+3,py+4,26,3);
+   for(let k=0;k<5;k++){fill(['#8d504b','#67847c','#c3a56d','#746a9b','#c78b55'][k],px+4+k*5,py+8+(k%2)*3,4,16-(k%2)*3);}
+   fill('#d6ad72',px+2,py+25,28,4);fill('#4b342b',px+2,py+29,28,2);
+  }
+  if(t==='bed'){
+   fill('#5b4438',px+1,py+2,30,30);fill('#a07c58',px+3,py+3,26,27);fill('#f2dfb9',px+5,py+5,22,10);
+   fill('#6c9692',px+5,py+16,22,13);fill('#8fb4a5',px+5,py+17,22,3);fill('#d7c69f',px+5,py+28,22,2);
+  }
+  if(t==='counter'||t==='table'){
+   fill('#49352e',px+1,py+4,30,27);fill('#6e4a35',px+3,py+7,26,23);
+   fill('#b98d60',px+1,py+3,30,9);fill('#e0b47e',px+3,py+4,26,2);fill('#7a533a',px+2,py+12,28,2);
+   if(t==='table'){fill('#d6c49a',px+10,py+5,12,5);fill('#8d674c',px+12,py+6,8,2);}
+   if(t==='counter'&&forge){fill('#4d5357',px+9,py+15,14,7);fill('#e1a45e',px+12,py+14,8,3);}
+  }
+  if(t==='altar'){
+   fill('#655267',px+1,py+5,30,26);fill('#b9a28a',px+3,py+7,26,22);fill('#e2c17c',px+13,py+5,6,17);
+   fill('#fff2bd',px+15,py+2,2,8);fill('#9473aa',px+7,py+17,5,7);fill('#9473aa',px+20,py+17,5,7);
+  }
+  if(t==='cushion'){fill('#7c544c',px+4,py+12,24,17);fill('#bc7469',px+6,py+11,20,14);fill('#e4a08a',px+8,py+12,16,3);}
+  if(t==='exit'){fill('#6c5543',px+2,py+1,28,30);fill('#d2b88d',px+4,py+4,24,26);fill('#3c302c',px+8,py+13,16,17);fill('#e7c87e',px+13,py+17,6,8);}
+ }
+ // Decorative wall-mounted details, lamps and windows do not change collision geometry.
+ for(const x of [2,12]){const px=ox+x*unit,py=oy+unit;
+  fill('#493b35',px+10,py+4,12,19);fill('#e2c98b',px+12,py+6,8,12);fill('#fff0b1',px+14,py+7,4,8);
+  fill('#a47e54',px+8,py+22,16,3);
+ }
+ for(const x of [4,10]){const px=ox+x*unit,py=oy+unit;
+  fill('#463e44',px+3,py+4,26,17);fill('#a9c3b6',px+5,py+6,22,13);fill('#e0d1a4',px+15,py+6,2,13);fill('#e0d1a4',px+5,py+12,22,2);
+ }
+ if(herbal){for(const x of [2,6,12]){const px=ox+x*unit,py=oy+2*unit;fill('#805f43',px+8,py+10,16,13);fill('#638a60',px+11,py+3,10,13);fill('#b2c17a',px+14,py+1,4,9);}}
+ if(forge){const px=ox+11*unit,py=oy+7*unit;fill('#52433b',px+2,py+2,28,28);fill('#b36b42',px+5,py+6,22,19);fill('#edb35d',px+9,py+8,14,13);fill('#f5dc8e',px+13,py+11,6,8);}
+ for(const n of W.roomNPCs(room))drawPerson(c,ox+n.x*unit,oy+n.y*unit,n.role,time);
+ drawPerson(c,ox+room.x*unit,oy+room.y*unit,'player',0,room.face,false,adventureState().appearance);
+ const location=$('#map-location'),biome=$('#map-biome');if(location)location.textContent=room.name;if(biome)biome.textContent='MOSSVEIL · INTERIOR';
+}
 
 function queueFresh(reg,r=Math.random,force=false){s.generationPlans??={};if(queue.length>=3&&!force)return;const base=E.pick(reg.biome.types,r),alter=E.pick(E.TYPES.filter(t=>t!==base),r),plan=E.makeSpecies(E.hash(s.seed,'ai-plan',Date.now(),r()),base,alter);s.generationPlans[plan.id]=plan;queue.push(plan.id);save();}
 
