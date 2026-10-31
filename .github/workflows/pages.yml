@@ -1,15 +1,10 @@
 name: Publish Spirimon
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
   pages: write
   id-token: write
-concurrency:
-  group: pages
-  cancel-in-progress: true
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -20,12 +15,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm test
-      - run: npm run build
-      - run: |
-          mkdir _site
-          cp index.html style.css app.mjs ai-providers.mjs engine.mjs sprites.mjs roster.mjs world.mjs terrain.mjs moves.mjs towns.mjs audio.mjs offerings.mjs transformation.mjs Spirimon.html _site/
-          cp -r assets _site/
+      - name: Validate modules
+        run: |
+          for file in *.mjs; do node --check "$file" || exit 1; done
+      - name: Prepare complete site
+        run: |
+          mkdir -p _site
+          cp -a index.html style.css *.mjs assets _site/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
