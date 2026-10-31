@@ -15,3 +15,11 @@ test('published page contains current source, styles, font and core art without 
 test('bundle keeps all exported values, including multi-variable declarations',async()=>{
  const {script}=await buildPage();assert.match(script,/return \{[^}]*\bCHUNK_H\b[^}]*\bCHUNK_W\b[^}]*\}/);assert.match(script,/return \{[^}]*\bROOM_H\b[^}]*\bROOM_W\b[^}]*\}/);
 });
+
+test('downloaded game pages resolve optional artwork from the hosted game',async()=>{
+ const {script}=await buildPage(),expression=script.match(/const __moduleURL=([^;]+);/)[1];
+ for(const baseURI of ['file:///downloads/Spirimon.html','content://downloads/public/123']){
+  const moduleURL=vm.runInNewContext(expression,{URL,document:{baseURI}});assert.equal(moduleURL('asset-loader.mjs'),'https://nathan-culver.github.io/Spirimon/asset-loader.mjs');
+ }
+ const previewURL=vm.runInNewContext(expression,{URL,document:{baseURI:'http://terminal.local:4173/?playtest=qa'}});assert.equal(previewURL('asset-loader.mjs'),'http://terminal.local:4173/asset-loader.mjs');
+});

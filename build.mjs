@@ -21,7 +21,7 @@ export async function buildPage(directory=root){
   visiting.delete(id);sources.set(id,source);ordered.push(id);
  }
  await visit('app.mjs');
- const sections=['(function(){"use strict";const __modules=Object.create(null);const __moduleURL=id=>new URL(id,document.baseURI).href;'];
+ const sections=['(function(){"use strict";const __modules=Object.create(null);const __moduleURL=id=>new URL(id,/^(?:file|content):/.test(document.baseURI)?"https://nathan-culver.github.io/Spirimon/":document.baseURI).href;'];
  for(const id of ordered){
   const namespace=id==='app.mjs'?{}:await import(pathToFileURL(path.join(directory,id)).href),names=Object.keys(namespace);
   let source=sources.get(id).replace(importPattern,(_,clause,specifier)=>{
