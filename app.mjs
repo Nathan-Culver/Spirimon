@@ -126,7 +126,7 @@ function questAction(id,claim=false){const q=E.questTemplates().find(x=>x.id===i
 function challengerState(){s.challengers??={rivalMatches:0,villainMatches:0,rivalLevel:0,villainLevel:0,villainWins:0,firstTriggered:false,lastTransition:''};return s.challengers;}
 function challengeAtTransition(oldRegion,newRegion){if(!s.spirits.length||battle||s.interior||modal)return false;const state=challengerState();const oldTown=oldRegion?.town,newTown=newRegion?.town;if(!oldTown&&!newTown)return false;const transition=oldRegion.key+'>'+newRegion.key;if(state.lastTransition===transition)return false;state.lastTransition=transition;const kind=E.challengerRoll(s.seed,s.steps,transition,state.rivalMatches+state.villainMatches);if(!kind)return false;startChallenger(kind);return true;}
 function challengerTeam(kind,level,count,reg){
- const size=Math.min(6,1+Math.floor(count/2)+(level>=20?1:0)+(level>=40?1:0));
+ const size=E.challengerTeamSize(count,level);
  const team=[];
  for(let n=0;n<size;n++){
   const r=E.rng(E.hash(s.seed,'challenger-team',kind,n,Math.floor(count/2)));
