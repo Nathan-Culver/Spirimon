@@ -170,13 +170,51 @@ export const CHALLENGER_DIALOGUE={
 };
 export function challengerLevel(average,area,previous=0){return Math.max(1,Math.min(100,Math.max(Math.round(average),area||1,previous||0)));}
 export function challengerRoll(seed,steps,transition,count=0){const r=rng(hash(seed,'challenger',steps,transition,count));return r()<.05?r()<.55?'rival':'villain':null;}
+export const QUEST_DIFFICULTIES=['Novice','Skilled','Veteran','Elite','Legendary'];
+const Q=(id,title,role,difficulty,steps,reward,description,requirements={})=>({id,title,role,difficulty,steps,target:steps.length,goal:steps[0].goal,reward,description,requirements});
 export function questTemplates(){return [
-{id:'first-bond',title:'A Promise Kept',role:'keeper',goal:'capture',target:2,reward:{coins:35,seals:2},description:'Form bonds with two Spirits.'},
-{id:'field-study',title:'Living Field Notes',role:'scholar',goal:'seen',target:5,reward:{coins:60,ethers:1},description:'Record five distinct Spirit species.'},
-{id:'open-roads',title:'Beyond the Lanterns',role:'resident',goal:'regions',target:3,reward:{coins:50,offerings:2},description:'Explore three distinct regions.'},
-{id:'guild-trials',title:'The Trial of Resolve',role:'rival',goal:'wins',target:3,reward:{coins:85,tonics:2},description:'Win three battles.'},
-{id:'safe-trails',title:'Clear the Roads',role:'keeper',goal:'villains',target:1,reward:{coins:120,seals:3},description:'Defeat an enemy agent.'}
+ Q('first-bond','A Promise Kept','keeper','Novice',[{goal:'capture',count:2}],{coins:35,seals:2},'Form bonds with two Spirits.'),
+ Q('field-study','Living Field Notes','scholar','Novice',[{goal:'seen',count:5}],{coins:60,ethers:1},'Record five distinct species.'),
+ Q('open-roads','Beyond the Lanterns','resident','Novice',[{goal:'regions',count:3}],{coins:50,offerings:2},'Explore three regions.'),
+ Q('guild-trials','The Trial of Resolve','rival','Skilled',[{goal:'wins',count:3}],{coins:85,tonics:2},'Win three battles.',{rank:2}),
+ Q('safe-trails','Clear the Roads','keeper','Skilled',[{goal:'villains',count:1}],{coins:120,seals:3},'Defeat a hostile agent.',{rank:2}),
+ Q('healers-hand','A Healer’s Hands','keeper','Novice',[{goal:'heal',count:3}],{coins:65,tonics:3},'Restore your team three times.'),
+ Q('friendly-gesture','Trust Is Earned','resident','Novice',[{goal:'offerings',count:3}],{coins:55,offerings:2},'Offer gifts to Spirits three times.'),
+ Q('trail-scout','Scout the Frontier','resident','Skilled',[{goal:'regions',count:5},{goal:'wins',count:2}],{coins:150,seals:3},'Chart five regions, then win two battles.',{rank:2}),
+ Q('sealers-art','The Sealer’s Art','keeper','Skilled',[{goal:'capture',count:4},{goal:'heal',count:2}],{coins:160,seals:4,ethers:1},'Seal four Spirits, then restore your team twice.',{rank:2}),
+ Q('rival-training','Lessons in Defeat','rival','Veteran',[{goal:'wins',count:5},{goal:'rivals',count:1}],{coins:260,tonics:4},'Win five battles, then defeat Rowan.',{rank:3}),
+ Q('specimen-archive','The Grand Archive','scholar','Veteran',[{goal:'seen',count:15},{goal:'regions',count:7}],{coins:300,ethers:3},'Document fifteen species, then explore seven regions.',{rank:3}),
+ Q('supply-run','The Long Supply Road','merchant','Novice',[{goal:'steps',count:80},{goal:'regions',count:3}],{coins:90,seals:2,tonics:1},'Travel eighty steps and visit three regions.'),
+ Q('merchant-protection','Caravan Escort','merchant','Veteran',[{goal:'steps',count:180},{goal:'villains',count:1}],{coins:320,tonics:3,seals:4},'Travel the road, then defeat a hostile agent.',{rank:3}),
+ Q('shadow-trail','Shadows at the Crossing','resident','Veteran',[{goal:'villains',count:2},{goal:'regions',count:9}],{coins:380,ethers:3},'Defeat two agents, then chart nine regions.',{rank:3}),
+ Q('bond-mastery','The Unbroken Covenant','keeper','Elite',[{goal:'capture',count:8},{goal:'rivals',count:2},{goal:'villains',count:2}],{coins:650,seals:6,ethers:4},'Seal eight Spirits and overcome two rivals and two agents.',{rank:4}),
+ Q('frontier-legend','Legend of the Far Roads','scholar','Legendary',[{goal:'regions',count:20},{goal:'seen',count:35},{goal:'wins',count:20}],{coins:1200,seals:10,ethers:6,tonics:6},'Explore twenty regions, catalogue thirty-five species and win twenty battles.',{rank:5}),
+ Q('guild-champion','The Guild’s Champion','rival','Legendary',[{goal:'rivals',count:4},{goal:'villains',count:4},{goal:'wins',count:25}],{coins:1500,seals:10,tonics:8},'Defeat four rivals and four agents, then earn twenty-five victories.',{rank:5})
 ];}
-export function questProgress(s,q){switch(q.goal){case'capture':return s.captured||0;case'seen':return s.seen?.length||0;case'regions':return Object.values(s.regions||{}).filter(r=>r.visited).length;case'wins':return s.wins||0;case'villains':return s.challengers?.villainWins||0;default:return 0;}}
+export function questMetric(s,goal){switch(goal){
+ case'capture':return s.captured||0;case'seen':return s.seen?.length||0;
+ case'regions':return Object.values(s.regions||{}).filter(r=>r.visited).length;
+ case'wins':return s.wins||0;case'villains':return s.challengers?.villainWins||0;
+ case'rivals':return s.challengers?.rivalWins||0;
+ case'heal':return s.questCounters?.heal||0;case'offerings':return s.questCounters?.offerings||0;
+ case'steps':return s.steps||0;default:return 0;
+}}
+export function questEligible(s,q){return (s.rank||1)>=(q.requirements?.rank||1);}
+export function questStage(s,q,record){if(!record||record==='available')return {index:0,progress:0,complete:false};if(record==='completed')return {index:q.steps.length,progress:0,complete:true};
+ const steps=q.steps||[{goal:q.goal,count:q.target}];
+ const index=Math.min(record.stage||0,steps.length);
+ if(index===steps.length)return {index,progress:0,complete:true};
+ const step=steps[index],base=record.baseline??0;
+ return {index,progress:Math.min(step.count,Math.max(0,questMetric(s,step.goal)-base)),complete:false};
+}
+export function advanceQuest(s,q,record){if(!record||record==='completed'||record==='available')return record;
+ const steps=q.steps||[{goal:q.goal,count:q.target}];
+ let stage=record.stage||0,baseline=record.baseline??0;
+ while(stage<steps.length&&questMetric(s,steps[stage].goal)-baseline>=steps[stage].count){
+  stage++;baseline=stage<steps.length?questMetric(s,steps[stage].goal):0;
+ }
+ return {...record,stage,baseline};
+}
+export function questProgress(s,q){return questMetric(s,q.goal);}
 
 export function challengerTeamSize(matches,level){return Math.min(6,1+Math.floor(matches/2)+(level>=20?1:0)+(level>=40?1:0));}
