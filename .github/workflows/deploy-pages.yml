@@ -19,6 +19,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Validate JavaScript modules
+        run: |
+          for file in *.mjs; do node --check "$file" || exit 1; done
+          test -f app.mjs
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
