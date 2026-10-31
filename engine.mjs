@@ -60,7 +60,17 @@ export function executeAction(actor,asp,target,tsp,move,style,commit,r=Math.rand
  if(asp.ability==='Soulweave'&&actor.hp<stats(actor,asp).hp*.4){actor.conditions.focus=true;}
  if(asp.ability==='Second Wind'&&actor.hp<stats(actor,asp).hp*.2&&!actor.secondWindUsed){actor.hp=Math.min(stats(actor,asp).hp,actor.hp+Math.ceil(stats(actor,asp).hp*.2));actor.secondWindUsed=true;log.push(name+' surges back with Second Wind.');}
  const resource=moveCategory(move)==='Physical'?'pp':'willpower',resourceName=resource==='pp'?'Stamina':'Willpower';actor[resource]??=stats(actor,asp)[resource];const cost=Math.ceil(moveCost(move)*costScale);
- if(actor[resource]<cost){move={id:'struggle',name:'Desperate Strike',power:20,speed:0,kind:'physical',type:asp.base,effect:'recoil'};log.push(name+' lacks '+resourceName+' and makes a desperate strike.');}else actor[resource]-=cost;
+ const alternate=resource==='pp'?'willpower':'pp',alternateName=resource==='pp'?'Willpower':'Stamina';
+ actor[alternate]??=stats(actor,asp)[alternate];
+ // Spend the move's native pool first. Any shortfall costs twice as much from the other pool.
+ const nativeSpend=Math.min(actor[resource],cost),shortfall=cost-nativeSpend,alternateCost=shortfall*2;
+ if(actor[alternate]<alternateCost){
+  move={id:'struggle',name:'Desperate Strike',power:20,speed:0,kind:'physical',type:asp.base,effect:'recoil'};
+  log.push(name+' lacks enough '+resourceName+' and '+alternateName+' for the technique and makes a desperate strike.');
+ }else{
+  actor[resource]-=nativeSpend;actor[alternate]-=alternateCost;
+  if(shortfall)log.push(name+' converts '+alternateCost+' '+alternateName+' into '+shortfall+' '+resourceName+' for the technique.');
+ }
  const effect=move.effect,category=moveCategory(move);const field=actor.battlefield||target.battlefield||{weather:null,terrain:null,weatherTurns:0,terrainTurns:0};actor.battlefield=field;target.battlefield=field;
  if(actor.conditions.taunt&&category==='Status'){log.push(name+' cannot use a support technique while silenced.');return log;}
  if(actor.conditions.disable&&actor.disabledMove===move.id){log.push(name+' cannot use the sealed technique.');return log;}
