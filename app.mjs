@@ -335,7 +335,20 @@ function drawWorld(time){
    const dx=to.x-from.x,dy=to.y-from.y,face=s.player.face|| (dx<0?'left':dx>0?'right':dy<0?'up':'down');
    const bob=moving?Math.abs(Math.sin(elapsed*Math.PI*2))*2:0;
    const spriteSize=36;
-   c.save();if(moving){const stride=Math.sin(elapsed*Math.PI*4);c.translate(px(fx)+16,py(fy)+20);c.rotate(stride*.055);c.translate(-px(fx)-16,-py(fy)-20);}drawSpirit(c,spOf(companion),companion.appearance,px(fx)-2,py(fy)-13-bob,spriteSize,face==='left');c.restore();
+   c.save();if(moving){const stride=Math.sin(elapsed*Math.PI*4);c.translate(px(fx)+16,py(fy)+20);c.rotate(stride*.055);c.translate(-px(fx)-16,-py(fy)-20);}{
+    // The roster art has a single side view. Render distinct directional projections
+    // until dedicated four-direction companion atlases are available.
+    const sx=px(fx)-2,sy=py(fy)-13-bob;
+    c.save();
+    if(face==='up'||face==='down'){
+     c.translate(sx+spriteSize/2,sy+spriteSize/2);
+     c.scale(face==='up'?.78:.92,face==='up'?.87:1);
+     c.transform(1,0,face==='up'?.12:-.12,1,0,0);
+     if(face==='up')c.filter='brightness(.78) saturate(.85)';
+     drawSpirit(c,spOf(companion),companion.appearance,-spriteSize/2,-spriteSize/2,spriteSize,face==='up');
+    }else drawSpirit(c,spOf(companion),companion.appearance,sx,sy,spriteSize,face==='left');
+    c.restore();
+   }c.restore();
   }
  }}
  const pc=E.coord(s.player.x,s.player.y),people=[];
