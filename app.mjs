@@ -313,7 +313,7 @@ function drawWorld(time){
    const dx=to.x-from.x,dy=to.y-from.y,face=dx<0?'left':dx>0?'right':dy<0?'up':'down';
    const bob=moving?Math.abs(Math.sin(elapsed*Math.PI*2))*2:0;
    const spriteSize=36;
-   drawSpirit(c,spOf(companion),companion.appearance,px(fx)-2,py(fy)-13-bob,spriteSize,face==='left');
+   c.save();if(moving){const stride=Math.sin(elapsed*Math.PI*4);c.translate(px(fx)+16,py(fy)+20);c.rotate(stride*.055);c.translate(-px(fx)-16,-py(fy)-20);}drawSpirit(c,spOf(companion),companion.appearance,px(fx)-2,py(fy)-13-bob,spriteSize,face==='left');c.restore();
   }
  }}
  const pc=E.coord(s.player.x,s.player.y),people=[];
