@@ -598,6 +598,35 @@ function drawInterior(canvas,time){
  // Potted foliage and carved cabinets make the edges feel inhabited.
  for(const x of [2,12]){const [px,py]=at(x,3);fill('#211a17',px+5,py+15,23,17);fill('#66503a',px+8,py+17,18,12);for(let k=0;k<6;k++){fill(k%2?'#486342':'#68805a',px+7+k*3,py+5+(k%3)*3,5,13);}}
  if(hall){const [px,py]=at(7,2);fill('#281f1b',px+2,py+3,28,24);fill('#856343',px+4,py+4,24,4);fill('#3b2b29',px+5,py+9,22,15);fill('#aa916d',px+12,py+12,8,9);}
+ // Fine-grained scene dressing inspired by old-world illustrated RPG interiors.
+ // Ground inlays are visual-only and never change movement or collision.
+ const stone=(x,y)=>{const [px,py]=at(x,y);fill('#292522',px+3,py+3,26,26);fill('#5b5146',px+5,py+5,22,22);fill('#3d3530',px+8,py+8,16,16);fill('#806449',px+14,py+8,4,16);fill('#806449',px+8,py+14,16,4);fill('#b28d60',px+15,py+15,2,2);};
+ if(hall){for(const [x,y] of [[6,6],[8,6],[6,8],[8,8]])if(W.roomTile(kind,x,y)==='floor')stone(x,y);}
+ // Recessed gothic window tracery with individual colored panes.
+ const gothic=(x)=>{const [px,py]=at(x,1);fill('#141113',px+5,py-10,22,36);fill('#776452',px+7,py-8,18,32);
+  fill('#17121b',px+9,py-5,14,27);for(let k=0;k<3;k++){fill(k%2?'#58466c':'#37485f',px+10+k*4,py+1,4,15);fill('#886b84',px+11+k*4,py+3,2,5);}
+  fill('#ae8b60',px+15,py-4,2,25);fill('#ae8b60',px+9,py+10,14,2);fill('#b9a17b',px+5,py+22,22,3);
+ };
+ if(hall||archive){gothic(4);gothic(10);}
+ // Freestanding carved furniture is shaded on three faces and casts a short floor shadow.
+ const cabinet=(x,y)=>{const [px,py]=at(x,y);fill('rgba(0,0,0,.35)',px+5,py+28,27,4);fill('#211813',px+2,py+3,29,27);
+  fill('#7b5436',px+4,py+3,25,5);fill('#ad8051',px+6,py+4,21,2);fill('#4c3022',px+4,py+9,25,18);
+  for(let k=0;k<2;k++){fill('#765337',px+6+k*11,py+11,9,14);fill('#2c211b',px+7+k*11,py+12,7,12);fill('#c39c65',px+12+k*11,py+17,2,3);}
+  fill('#201714',px+4,py+27,25,3);
+ };
+ if(hall){cabinet(11,4);cabinet(3,4);}
+ else if(inn){cabinet(11,5);}
+ else if(archive){cabinet(11,6);}
+ // Maps, scrolls and enchanted objects on existing display surfaces.
+ const relic=(x,y)=>{const [px,py]=at(x,y);fill('#241b18',px+5,py+12,23,17);fill('#805a3d',px+6,py+12,21,3);fill('#b7976d',px+9,py+15,15,9);
+  fill('#775a48',px+12,py+18,9,1);fill('#775a48',px+15,py+16,1,7);fill('#d1b781',px+7,py+25,19,2);
+ };
+ if(hall){relic(6,3);relic(8,3);}
+ if(archive){relic(6,4);}
+ // Animated candle flames are intentionally subtle to preserve the pixel-art silhouette.
+ for(const x of [4,10]){const [px,py]=at(x,1),flicker=Math.sin(time*.006+x*7)>0?1:0;
+  fill('#f6bb68',px+16,py-10-flicker,2,5+flicker);fill('#fff0b6',px+16,py-8-flicker,1,3);
+ }
  // Directional light pools are painted behind actors and stay subtle at pixel scale.
  c.save();c.globalCompositeOperation='screen';
  for(const x of [2,12]){const [px,py]=at(x,2);const glow=c.createRadialGradient(px+16,py,3,px+16,py+18,104);glow.addColorStop(0,'rgba(255,181,91,.22)');glow.addColorStop(1,'rgba(255,211,127,0)');c.fillStyle=glow;c.fillRect(px-88,py-70,208,208);}
