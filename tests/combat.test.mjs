@@ -118,3 +118,17 @@ test('high-tier quests stay locked until rank threshold',()=>{
  assert.equal(E.questEligible({rank:1},q),false);
  assert.equal(E.questEligible({rank:5},q),true);
 });
+
+test('caves generate deterministic connected multi-floor mazes with exits',()=>{
+ const entry=E.caveEntrance('test-cave',1,1)||E.caveEntrance('test-cave',2,1)||E.caveEntrance('test-cave',3,1);
+ assert.ok(entry);
+ assert.ok(entry.depth>=2);
+ for(let level=0;level<entry.depth;level++){
+  const map=E.caveMap('test-cave',entry.id,level);
+  assert.deepEqual(map,E.caveMap('test-cave',entry.id,level));
+  assert.ok(map.exits.some(e=>e.kind==='up')&&map.exits.some(e=>e.kind==='down'));
+  const visited=new Set(['1,1']),queue=[[1,1]];
+  for(let n=0;n<queue.length;n++){const [x,y]=queue[n];for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy,key=nx+','+ny;if(!visited.has(key)&&E.caveWalkable(map,nx,ny)){visited.add(key);queue.push([nx,ny]);}}}
+  assert.ok(map.exits.every(e=>visited.has(e.x+','+e.y)));
+ }
+});
