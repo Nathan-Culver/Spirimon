@@ -30,7 +30,20 @@
  window.addEventListener('error',e=>{if(!main.querySelector('#world'))error(e.message||'A game resource failed to load.');});
  window.addEventListener('unhandledrejection',e=>{if(!main.querySelector('#world'))error(e.reason?.message||e.reason||'A game module failed.');});
  window.setTimeout(()=>{if(!main.querySelector('#world')&&!main.querySelector('.modal-overlay')&&!main.textContent.trim())error('The game did not initialize. Check your connection, then retry.');},10000);
- import('./app.mjs?v=20261031-51').catch(e=>error('Unable to load game code: '+(e.message||e)));
+ (async()=>{
+  const url=new URL('./app.mjs?v=20261031-52',location.href);
+  try{
+    const response=await fetch(url,{cache:'no-store'});
+    if(!response.ok)throw new Error('Game module returned HTTP '+response.status+' at '+url.pathname+'. GitHub Pages may be serving an outdated deployment.');
+    const type=response.headers.get('content-type')||'';
+    if(!/javascript|ecmascript|text\/plain|octet-stream/i.test(type))throw new Error('Game module has unexpected content type '+type+'. Check GitHub Pages publishing settings.');
+    await import(url.href);
+  }catch(e){
+    let detail=e?.message||String(e);
+    if(/Failed to fetch dynamically imported module/i.test(detail))detail+=' — A JavaScript dependency may be missing or blocked. Check that GitHub Pages deployed the latest main branch.';
+    error('Unable to load game code: '+detail);
+  }
+})();
 })();
 </script>
 </body>
