@@ -191,3 +191,6 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 
 /* Spirit experience progress: directly beneath shared PP in collection and battle HUD. */
 .xp-meter{height:4px;background:#293c39;margin-top:5px;border-radius:3px;overflow:hidden}.xp-meter>i{height:100%;display:block;background:#6cb8db;border-radius:3px;transition:width .2s ease}.xp-label{color:#94c5d7}.classic-hud .xp-meter{height:4px;margin-top:4px}.classic-hud .xp-label{font-size:8px}
+
+/* Separate Physical Stamina and Energy/Status Willpower pools. */
+.willpower-meter{height:3px;background:#2b3649;margin-top:5px;border-radius:2px;overflow:hidden}.willpower-meter i{height:100%;display:block;background:#b28ce1;border-radius:2px}.willpower-label{color:#b8a4db}
