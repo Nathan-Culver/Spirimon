@@ -20,8 +20,8 @@ test('full local generation adapter validates text and creates three sequential 
 test('original roster artwork, pixel font and world module have working static routes',async()=>{const font=await fetch(url+'/assets/spirimon-pixel.ttf');assert.equal(font.status,200);assert.equal(font.headers.get('content-type'),'font/ttf');assert((await font.arrayBuffer()).byteLength>1000);const art=await fetch(url+'/assets/roster/kilnscale.webp');assert.equal(art.status,200);assert.equal(art.headers.get('content-type'),'image/webp');assert.equal((await fetch(url+'/roster.mjs')).status,200);});
 
 
-test('every release-mapped browser module and interior asset has a working static route',async()=>{
- const html=await (await fetch(url+'/')).text(),imports=JSON.parse(html.match(/<script type="importmap">([\s\S]*?)<\/script>/)[1]).imports;
- for(const path of Object.values(imports)){const response=await fetch(new URL(path,url+'/'));assert.equal(response.status,200,path);assert.match(response.headers.get('content-type'),/javascript/);}
+test('every browser source module and interior asset has a working static route',async()=>{
+ const html=await (await fetch(url+'/')).text(),modules=html.match(/<meta name="spirimon-modules" content="([^"]+)">/)[1].split(',');
+ for(const path of modules){const response=await fetch(new URL(path,url+'/'));assert.equal(response.status,200,path);assert.match(response.headers.get('content-type'),/javascript/);}
  const interior=await fetch(url+'/assets/interiors/door.svg');assert.equal(interior.status,200);assert.equal(interior.headers.get('content-type'),'image/svg+xml');
 });

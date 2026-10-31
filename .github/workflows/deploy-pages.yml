@@ -23,6 +23,8 @@ jobs:
         run: |
           for file in *.mjs; do node --check "$file" || exit 1; done
           test -f app.mjs
+      - name: Build complete inline game
+        run: node build.mjs
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
@@ -32,3 +34,4 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+

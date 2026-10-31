@@ -1,7 +1,7 @@
 import {WORLD_ART} from './world-art.mjs';
 // One image cache for terrain, characters, buildings and creature artwork.
 // Retry transient failures rather than caching an invisible sprite forever.
-export const ASSET_VERSION=new URL(import.meta.url).searchParams.get('v')||'20261031-art-bundle-6';
+export const ASSET_VERSION=new URL(import.meta.url).searchParams.get('v')||'20261031-inline-7';
 export function createImageLoader({ImageClass=globalThis.Image,setTimer=setTimeout,clearTimer=clearTimeout,now=Date.now,notify=()=>globalThis.spirimonArtLoaded?.(),version=ASSET_VERSION,timeout=15000,maxAttempts=3,bundledSources=WORLD_ART}={}){
  const entries=new Map();
  function imageURL(source,attempt){
