@@ -573,6 +573,31 @@ function drawInterior(canvas,time){
  }
  if(herbal){for(const x of [2,6,12]){const px=ox+x*unit,py=oy+2*unit;fill('#805f43',px+8,py+10,16,13);fill('#638a60',px+11,py+3,10,13);fill('#b2c17a',px+14,py+1,4,9);}}
  if(forge){const px=ox+11*unit,py=oy+7*unit;fill('#52433b',px+2,py+2,28,28);fill('#b36b42',px+5,py+6,22,19);fill('#edb35d',px+9,py+8,14,13);fill('#f5dc8e',px+13,py+11,6,8);}
+
+ // Architectural overlays: continuous cornices, columns, thresholds and soft pools of light.
+ const at=(x,y)=>[ox+x*unit,oy+y*unit];
+ for(let x=1;x<14;x++){const [px,py]=at(x,1);fill('#382f35',px,py-3,32,4);fill(pal.trim,px,py+24,32,3);fill('#f0d5a2',px,py+27,32,1);}
+ for(const x of [1,13]){const [px,py]=at(x,2);fill('#47383c',px+(x===1?0:24),py,8,7*unit);fill('#9b826a',px+(x===1?2:26),py,3,7*unit);for(let y=2;y<9;y++){fill('#c6a67d',px+(x===1?0:24),oy+y*unit+27,8,3);}}
+ // A centered entrance with proper door jambs, a lintel and worn threshold.
+ {const [px,py]=at(7,10);fill('#403333',px-5,py-5,42,7);fill('#bd9b72',px-3,py-3,38,4);fill('#5c4437',px-4,py+3,5,29);fill('#5c4437',px+31,py+3,5,29);fill('#d3b58b',px+3,py+29,26,3);}
+ // Unique wall displays provide landmarks rather than repeated identical tiles.
+ const banner=(x,color)=>{const [px,py]=at(x,1);fill('#392f3a',px+7,py+1,18,22);fill('#d2b279',px+6,py+1,20,3);fill(color,px+9,py+4,14,15);fill('#d8bc84',px+15,py+7,2,8);fill('#d8bc84',px+12,py+10,8,2);fill('#d2b279',px+12,py+19,8,2);};
+ if(hall){banner(5,'#694b76');banner(9,'#694b76');}
+ else if(inn){banner(6,'#915b45');banner(8,'#915b45');}
+ else{banner(6,'#568077');banner(8,'#568077');}
+ // Room-specific still-life decorations are placed on existing furniture or walls.
+ const vase=(x,y,flower='#9e6c8c')=>{const [px,py]=at(x,y);fill('#4e6c65',px+10,py+18,13,11);fill('#81a99b',px+12,py+17,9,4);fill('#456b51',px+16,py+8,2,12);fill('#72955e',px+12,py+12,5,4);fill(flower,px+14,py+5,7,7);fill('#e5c9a2',px+16,py+7,2,2);};
+ const scroll=(x,y)=>{const [px,py]=at(x,y);fill('#5e493c',px+6,py+10,23,13);fill('#e7d3a4',px+8,py+11,19,10);for(let k=0;k<3;k++)fill('#987c65',px+10,py+13+k*3,12-k*2,1);};
+ if(hall){scroll(5,2);scroll(9,2);vase(2,7,'#b6a4d3');vase(12,7,'#b6a4d3');}
+ if(archive){for(const x of [2,6,10,12])scroll(x,5);}
+ if(inn&&!forge){vase(2,5,'#d9a477');scroll(6,3);vase(12,8,'#e3c37c');}
+ if(kind==='home'){vase(2,4);scroll(6,8);vase(12,7,'#e2b87c');}
+ if(herbal){for(const x of [3,8,11])vase(x,5,'#b4c47c');}
+ if(forge){const [px,py]=at(10,7);fill('#3b4148',px+4,py+14,24,9);fill('#8c969b',px+8,py+11,17,6);fill('#45464a',px+14,py+21,6,10);}
+ // Directional light pools are painted behind actors and stay subtle at pixel scale.
+ c.save();c.globalCompositeOperation='screen';
+ for(const x of [2,12]){const [px,py]=at(x,2);const glow=c.createRadialGradient(px+16,py,3,px+16,py+18,104);glow.addColorStop(0,'rgba(255,211,127,.19)');glow.addColorStop(1,'rgba(255,211,127,0)');c.fillStyle=glow;c.fillRect(px-88,py-70,208,208);}
+ c.restore();
  for(const n of W.roomNPCs(room))drawPerson(c,ox+n.x*unit,oy+n.y*unit,n.role,time);
  drawPerson(c,ox+room.x*unit,oy+room.y*unit,'player',0,room.face,false,adventureState().appearance);
  const location=$('#map-location'),biome=$('#map-biome');if(location)location.textContent=room.name;if(biome)biome.textContent='MOSSVEIL · INTERIOR';
