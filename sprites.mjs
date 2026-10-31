@@ -140,10 +140,19 @@ export function drawPerson(ctx,x,y,role='player',tick=0,face='down',moving=false
   const q=sprite.getContext('2d');q.imageSmoothingEnabled=false;
   q.drawImage(image,frame*64,row*80,64,80,0,0,32,40);
   if(role==='player'&&appearance){
-   const paint=(color,rects)=>{q.save();q.globalCompositeOperation='source-atop';q.globalAlpha=.8;q.fillStyle=color;for(const [a,b,w,h] of rects)q.fillRect(a,b,w,h);q.restore();};
-   paint(palette.outfit[Math.abs(Number(appearance.outfit)||0)%4],[[8,19,16,13]]);
-   paint(palette.skin[Math.abs(Number(appearance.skin)||0)%4],[[11,11,10,8],[6,20,3,8],[23,20,3,8]]);
-   paint(palette.hair[Math.abs(Number(appearance.hair)||0)%4],[[9,6,14,6]]);
+   // Preserve the original sprite's shading, silhouette and facial detail.
+   // Recolor only pixels whose source hue is closest to the relevant region.
+   const data=q.getImageData(0,0,32,40),p=data.data;
+   const choices={outfit:palette.outfit[Math.abs(Number(appearance.outfit)||0)%4],skin:palette.skin[Math.abs(Number(appearance.skin)||0)%4],hair:palette.hair[Math.abs(Number(appearance.hair)||0)%4]};
+   const rgb=hex=>[1,3,5].map(n=>parseInt(hex.slice(n,n+2),16));
+   for(let yy=0;yy<40;yy++)for(let xx=0;xx<32;xx++){
+    const k=(yy*32+xx)*4;if(p[k+3]<100)continue;
+    const region=yy>=19&&yy<33&&xx>=8&&xx<25?'outfit':yy>=10&&yy<19&&xx>=11&&xx<22?'skin':yy>=5&&yy<12&&xx>=9&&xx<24?'hair':null;
+    if(!region)continue;
+    const target=rgb(choices[region]),lum=(p[k]*.3+p[k+1]*.59+p[k+2]*.11)/255,shade=.56+lum*.65;
+    for(let c=0;c<3;c++)p[k+c]=Math.min(255,Math.round(p[k+c]*.3+target[c]*shade*.7));
+   }
+   q.putImageData(data,0,0);
   }
   cache.set(cacheKey,sprite);
  }
