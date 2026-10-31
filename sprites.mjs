@@ -158,8 +158,9 @@ export function drawPerson(ctx,x,y,role='player',tick=0,face='down',moving=false
  }
  ctx.save();ctx.imageSmoothingEnabled=false;
  if(role!=='player')ctx.filter='hue-rotate('+({keeper:130,merchant:45,rival:220,scholar:280,resident:80}[role]||90)+'deg)';
- if(face==='left'){ctx.translate(Math.round(x)+32,Math.round(y)-12);ctx.scale(-1,1);ctx.drawImage(sprite,0,0);}
- else ctx.drawImage(sprite,Math.round(x),Math.round(y)-12);
+ const scale=role==='player'?1.5:1,sw=Math.round(32*scale),sh=Math.round(40*scale),left=Math.round(x+(32-sw)/2),top=Math.round(y+28-sh);
+ if(face==='left'){ctx.translate(left+sw,top);ctx.scale(-1,1);ctx.drawImage(sprite,0,0,sw,sh);}
+ else ctx.drawImage(sprite,left,top,sw,sh);
  ctx.restore();
 }
 export function drawTile(ctx,type,x,y,seed,biome,options={}){
