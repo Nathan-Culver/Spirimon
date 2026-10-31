@@ -77,3 +77,13 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 .modal-close{position:sticky;top:0;float:right;z-index:4;display:grid;place-items:center;width:42px;height:42px;margin:-12px -12px 0 8px;border-radius:8px;background:#263b30;color:#f2e8cb;font-size:29px;line-height:1;touch-action:manipulation}
 @media(max-height:600px){.modal-overlay{align-items:flex-start}.modal{margin:auto;max-height:calc(100dvh - 24px);padding:18px}.modal-close{margin:-6px -6px 0 8px}}
 .emulator-mode.exploring .modal{max-height:calc(100dvh - 90px)}
+
+/* Build 41: double the directional touch-pad dimensions without enlarging A/B or menus. */
+.emulator-mode .emu-pad{width:308px;height:308px;transform:none;left:max(12px,env(safe-area-inset-left));bottom:max(12px,env(safe-area-inset-bottom))}
+.emulator-mode .emu-pad button{width:100px;height:100px;font-size:46px;border-radius:14px}
+.emulator-mode .emu-pad [data-hold="up"]{left:104px;top:0}
+.emulator-mode .emu-pad [data-hold="down"]{left:104px;top:208px}
+.emulator-mode .emu-pad [data-hold="left"]{left:0;top:104px}
+.emulator-mode .emu-pad [data-hold="right"]{left:208px;top:104px}
+.emulator-mode .emu-pad-center{left:106px;top:106px;width:96px;height:96px}
+@media(max-height:430px){.emulator-mode .emu-pad{transform:scale(.8);transform-origin:bottom left}}
