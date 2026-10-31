@@ -244,3 +244,20 @@ export function caveMap(seed,id,level){
  return {width,height,grid,exits};
 }
 export function caveWalkable(map,x,y){return !!map.grid[y]&&['floor','up','down','exit'].includes(map.grid[y][x]);}
+
+// Multi-Spirit tempo combat: each side submits an order for every active Spirit.
+// All orders are declared before resolution. Actions with equal priority resolve
+// from a shared HP snapshot, so mutual knockouts remain possible.
+export function resolveMultiSpiritRound(allies,enemies,allyChoices,enemyChoices,r=Math.random){
+ const entries=[];
+ for(const [side,units,choices,targets,targetSpecs] of [['a',allies,allyChoices,enemies,enemies],['b',enemies,enemyChoices,allies,allies]]){
+  units.forEach((unit,index)=>{if(unit.hp<=0)return;const choice=choices[index];if(!choice?.move)return;const candidates=targets.filter(x=>x.hp>0);if(!candidates.length)return;const target=candidates[Math.min(candidates.length-1,Math.max(0,choice.targetIndex||0))];entries.push({side,unit,target,choice,priority:stats(unit,unit.speciesData).speed+(choice.move.speed||0)*10,index});});
+ }
+ entries.sort((a,b)=>b.priority-a.priority||a.index-b.index);
+ const log=[],events=[];let n=0;
+ while(n<entries.length){let j=n+1;while(j<entries.length&&entries[j].priority===entries[n].priority)j++;const group=entries.slice(n,j),snap=new Map([...allies,...enemies].map(u=>[u,u.hp])),out=[];
+  for(const e of group){if((snap.get(e.unit)||0)<=0||(snap.get(e.target)||0)<=0)continue;const a=e.unit,b=e.target,asp=a.speciesData,bsp=b.speciesData;if(!asp||!bsp)continue;const hp=b.hp;b.hp=snap.get(b);const lines=executeAction(a,asp,b,bsp,e.choice.move,e.choice.style||'normal',e.choice.commit??.5,r);out.push({target:b,damage:Math.max(0,snap.get(b)-b.hp),heal:Math.max(0,b.hp-snap.get(b))});b.hp=hp;log.push(...lines);events.push({side:e.side,actor:e.index,move:e.choice.move});}
+  for(const o of out)o.target.hp=Math.max(0,o.target.hp-o.damage+o.heal);n=j;
+ }
+ return {log,events,allies,enemies};
+}
