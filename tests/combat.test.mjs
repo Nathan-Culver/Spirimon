@@ -29,3 +29,21 @@ test('charge attacks prepare then execute',()=>{
 test('baton pass requests switch and preserves intent',()=>{
  const a=spirit(),b=spirit();a.stages={might:2};E.executeAction(a,species,b,species,move('batonPass'),'normal',.5,()=>.5);assert.equal(a.switchRequested,true);assert.equal(a.passStages,true);
 });
+
+test('level progression unlocks techniques without overwriting chosen moves',()=>{
+ const sp={...species,base:'Beast',alter:'Plant',domains:['Air'],seed:12};
+ E.refreshTechniques(sp);const i=spirit();i.level=5;i.form=0;
+ const before=sp.moves.map(m=>m.id);i.moveIds=before.slice();
+ const result=E.gainXP(i,sp,5*18);
+ assert.equal(i.level,6);assert.ok(result.learned.length>0);
+ assert.deepEqual(i.moveIds,before);
+ assert.ok(i.unlockedMoves.includes(result.learned[0].id));
+ const repeat=E.learnProgression(i,sp,5,0);
+ assert.equal(repeat.length,0);
+});
+test('transformation can unlock gated techniques',()=>{
+ const sp={...species,base:'Beast',alter:'Plant',domains:['Air'],seed:12};
+ E.refreshTechniques(sp);const i=spirit();i.level=35;i.form=1;i.appearance=1;i.xp=35*18-1;
+ const result=E.gainXP(i,sp,1);
+ assert.equal(i.form,2);assert.ok(result.evolved);assert.ok(result.learned.some(m=>m));
+});
