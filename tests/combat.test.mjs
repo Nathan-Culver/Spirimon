@@ -69,3 +69,16 @@ test('existing equipped techniques remain eligible after migration',()=>{
  i.moveIds=[extra.id,...sp.moves.slice(1).map(m=>m.id)];
  assert.ok(E.availableTechniques(i,sp).some(m=>m.id===extra.id));
 });
+
+test('challenger level never falls below party, region or previous encounter',()=>{
+ assert.equal(E.challengerLevel(12.4,18,22),22);
+ assert.equal(E.challengerLevel(29.7,18,22),30);
+ assert.equal(E.challengerLevel(3,7,0),7);
+});
+test('rival and hostile dialogue and quests have complete definitions',()=>{
+ assert.ok(E.CHALLENGER_DIALOGUE.rival.length>=12);
+ assert.ok(E.CHALLENGER_DIALOGUE.villain.length>=12);
+ const quests=E.questTemplates();assert.equal(new Set(quests.map(q=>q.id)).size,quests.length);
+ for(const q of quests){assert.ok(q.title&&q.description&&q.target>0);assert.ok(Object.values(q.reward).every(v=>v>0));}
+ assert.equal(E.questProgress({captured:2},quests[0]),2);
+});
