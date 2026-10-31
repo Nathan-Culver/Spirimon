@@ -130,37 +130,11 @@ export function drawTownDecor(ctx,x,y){prop(ctx,8,x,y-25,96,96);}
 export function drawPerson(ctx,x,y,role='player',tick=0,face='down',moving=false,appearance=null){
  const image=readyImage(ART.sealer);if(!image)return;
  const row=face==='left'?2:({down:0,right:2,up:3}[face]??0);
- const frame=moving?[0,1,2,1][Math.floor(Math.max(0,tick)/55)%4]:1;
- const palette={skin:['#7f4a36','#d4a57a','#e9c8a3','#655047'],outfit:['#406e78','#954b55','#6c5b91','#477354'],hair:['#32251e','#9d7144','#e0c17e','#272b3d']};
- const key=role==='player'&&appearance?['skin','outfit','hair'].map(k=>Math.abs(Number(appearance[k])||0)%4).join('-'):'default';
- const cacheKey='sealer-'+role+'-'+row+'-'+frame+'-'+key;
- let sprite=cache.get(cacheKey);
- if(!sprite){
-  sprite=document.createElement('canvas');sprite.width=32;sprite.height=40;
-  const q=sprite.getContext('2d');q.imageSmoothingEnabled=false;
-  q.drawImage(image,frame*64,row*80,64,80,0,0,32,40);
-  if(role==='player'&&appearance){
-   // Preserve the original sprite's shading, silhouette and facial detail.
-   // Recolor only pixels whose source hue is closest to the relevant region.
-   const data=q.getImageData(0,0,32,40),p=data.data;
-   const choices={outfit:palette.outfit[Math.abs(Number(appearance.outfit)||0)%4],skin:palette.skin[Math.abs(Number(appearance.skin)||0)%4],hair:palette.hair[Math.abs(Number(appearance.hair)||0)%4]};
-   const rgb=hex=>[1,3,5].map(n=>parseInt(hex.slice(n,n+2),16));
-   for(let yy=0;yy<40;yy++)for(let xx=0;xx<32;xx++){
-    const k=(yy*32+xx)*4;if(p[k+3]<100)continue;
-    const region=yy>=19&&yy<33&&xx>=8&&xx<25?'outfit':yy>=10&&yy<19&&xx>=11&&xx<22?'skin':yy>=5&&yy<12&&xx>=9&&xx<24?'hair':null;
-    if(!region)continue;
-    const target=rgb(choices[region]),lum=(p[k]*.3+p[k+1]*.59+p[k+2]*.11)/255,shade=.56+lum*.65;
-    for(let c=0;c<3;c++)p[k+c]=Math.min(255,Math.round(p[k+c]*.3+target[c]*shade*.7));
-   }
-   q.putImageData(data,0,0);
-  }
-  cache.set(cacheKey,sprite);
- }
+ const frame=moving?[0,1,2,1][Math.floor(Math.max(0,tick)/70)%4]:1;
  ctx.save();ctx.imageSmoothingEnabled=false;
  if(role!=='player')ctx.filter='hue-rotate('+({keeper:130,merchant:45,rival:220,scholar:280,resident:80}[role]||90)+'deg)';
- const scale=role==='player'?1.5:1,sw=Math.round(32*scale),sh=Math.round(40*scale),left=Math.round(x+(32-sw)/2),top=Math.round(y+28-sh);
- if(face==='left'){ctx.translate(left+sw,top);ctx.scale(-1,1);ctx.drawImage(sprite,0,0,sw,sh);}
- else ctx.drawImage(sprite,left,top,sw,sh);
+ if(face==='left'){ctx.translate(Math.round(x)+32,Math.round(y)-12);ctx.scale(-1,1);ctx.drawImage(image,frame*64,row*80,64,80,0,0,32,40);}
+ else ctx.drawImage(image,frame*64,row*80,64,80,Math.round(x),Math.round(y)-12,32,40);
  ctx.restore();
 }
 export function drawTile(ctx,type,x,y,seed,biome,options={}){
