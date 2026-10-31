@@ -47,3 +47,25 @@ test('transformation can unlock gated techniques',()=>{
  const result=E.gainXP(i,sp,1);
  assert.equal(i.form,2);assert.ok(result.evolved);assert.ok(result.learned.some(m=>m));
 });
+
+test('practice eligibility excludes locked techniques and unlocks with progression',()=>{
+ const sp={...species,base:'Beast',alter:'Plant',domains:['Air'],seed:12};
+ E.refreshTechniques(sp);
+ const i=spirit();i.level=5;i.form=0;
+ const start=E.availableTechniques(i,sp);
+ assert.equal(start.length,4);
+ const all=sp.learnset;
+ assert.ok(all.length>start.length);
+ const locked=all.find(m=>!start.some(x=>x.id===m.id));
+ assert.ok(locked);
+ i.level=100;i.form=2;
+ const grown=E.availableTechniques(i,sp);
+ assert.ok(grown.some(m=>m.id===locked.id));
+});
+test('existing equipped techniques remain eligible after migration',()=>{
+ const sp={...species,base:'Beast',alter:'Plant',domains:['Air'],seed:12};
+ E.refreshTechniques(sp);const i=spirit();
+ const extra=sp.learnset.find(m=>!sp.moves.some(x=>x.id===m.id));
+ i.moveIds=[extra.id,...sp.moves.slice(1).map(m=>m.id)];
+ assert.ok(E.availableTechniques(i,sp).some(m=>m.id===extra.id));
+});
