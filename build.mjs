@@ -4,7 +4,7 @@ import path from 'node:path';
 import {ROSTER,ART} from './roster.mjs';
 const root=path.dirname(fileURLToPath(import.meta.url));
 const wrap=(name,src)=>{const names=[...src.matchAll(/export (?:async )?(?:const|function|class) (\w+)/g)].map(m=>m[1]);return 'const '+name+'=(()=>{'+src.replace(/^import .*;\r?\n/gm,'').replaceAll('export ','')+'\nreturn{'+names.join(',')+'};})();\n';};
-const core=wrap('M',await readFile(path.join(root,'moves.mjs'),'utf8'))+'const {buildLearnset,startingMoves}=M;\n'+wrap('Town',await readFile(path.join(root,'towns.mjs'),'utf8'))+'const {TOWN_LAYOUT,TOWN_FEATURES,townPath}=Town;\n'+wrap('E',await readFile(path.join(root,'engine.mjs'),'utf8'))+wrap('W',await readFile(path.join(root,'world.mjs'),'utf8'))+wrap('T',await readFile(path.join(root,'terrain.mjs'),'utf8'))+wrap('Au',await readFile(path.join(root,'audio.mjs'),'utf8'))+'const {audio,eventTime}=Au;\n';
+const core=wrap('M',await readFile(path.join(root,'moves.mjs'),'utf8'))+'const {buildLearnset,startingMoves,moveBaseValue:baseMoveValue}=M;\n'+wrap('Town',await readFile(path.join(root,'towns.mjs'),'utf8'))+'const {TOWN_LAYOUT,TOWN_FEATURES,townPath}=Town;\n'+wrap('E',await readFile(path.join(root,'engine.mjs'),'utf8'))+wrap('W',await readFile(path.join(root,'world.mjs'),'utf8'))+wrap('T',await readFile(path.join(root,'terrain.mjs'),'utf8'))+wrap('Au',await readFile(path.join(root,'audio.mjs'),'utf8'))+'const {audio,eventTime}=Au;\n';
 const data=async p=>'data:image/webp;base64,'+(await readFile(path.join(root,p))).toString('base64');
 const roster=await Promise.all(ROSTER.map(async r=>({...r,atlas:r.atlas?await data(r.atlas):null})));
 const art=Object.fromEntries(await Promise.all(Object.entries(ART).map(async([key,p])=>[key,await data(p)])));
@@ -17,3 +17,4 @@ const css=(await readFile(path.join(root,'style.css'),'utf8')).replace('./assets
 const html=(await readFile(path.join(root,'index.html'),'utf8')).replace('<link rel="stylesheet" href="./style.css">','<style>'+css+'</style>').replace('<script type="module" src="./app.mjs"></script>','<script type="module">'+core+'const {COLORS,hash,rng}=E;const {groundCell,terrainCell,connectedEdges}=T;'+defs+sprites+extras+app+'</script>');
 await writeFile(path.join(root,'Spirimon.html'),html);
 console.log('Built standalone Spirimon.html ('+Math.round(Buffer.byteLength(html)/1024)+' KB).');
+

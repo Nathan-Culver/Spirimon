@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#102320"><meta name="description" content="Spirimon — an endless world. A bond beneath the skin. Explore, seal, and train spirits in a locally saved fantasy RPG.">
+<meta name="theme-color" content="#102320"><meta name="description" content="Spirimon — an endless world. A bond beneath the skin. Explore, seal, and train Spirimon in a locally saved fantasy RPG.">
 <title>Spirimon — The wild is calling</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23102320'/%3E%3Cpath d='M32 7 53 20v24L32 57 11 44V20Zm0 12-11 7v12l11 7 11-7V26Z' fill='none' stroke='%23d8b879' stroke-width='4'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="./style.css?v=20261031-dual-energy-1">
@@ -12,7 +12,7 @@
 <button class="brand-mark" data-action="view" data-value="explore" aria-label="Spirimon exploration">S<span>◇</span></button>
 <div class="rail-divider"></div>
 <button class="nav-button active" data-action="view" data-value="explore" title="Explore (1)"><span>⌖</span><small>Explore</small></button>
-<button class="nav-button" data-action="view" data-value="spirits" title="Tattoo collection (2)"><span>♧</span><small>Spirits</small></button>
+<button class="nav-button" data-action="view" data-value="spirits" title="Tattoo collection (2)"><span>♧</span><small>Spirimon</small></button>
 <button class="nav-button" data-action="view" data-value="atlas" title="World atlas (3)"><span>▧</span><small>Atlas</small></button>
 <button class="nav-button" data-action="view" data-value="journal" title="Journal (4)"><span>☷</span><small>Journal</small></button>
 <div class="rail-bottom"><button class="nav-button" data-action="settings" title="Settings and local AI"><span>⚙</span><small>Settings</small></button><span class="version">Build 37 · Coin</span></div>
@@ -31,7 +31,7 @@
  window.addEventListener('unhandledrejection',e=>{if(!main.querySelector('#world'))error(e.reason?.message||e.reason||'A game module failed.');});
  window.setTimeout(()=>{if(!main.querySelector('#world')&&!main.querySelector('.modal-overlay')&&!main.textContent.trim())error('The game did not initialize. Check your connection, then retry.');},10000);
  (async()=>{
-  const url=new URL('./app.mjs?v=20261031-cross-resource-1',location.href);
+  const url=new URL('./app.mjs?v=20261031-move-resources-2',location.href);
   try{
     const response=await fetch(url,{cache:'no-store'});
     if(!response.ok)throw new Error('Game module returned HTTP '+response.status+' at '+url.pathname+'. GitHub Pages may be serving an outdated deployment.');
@@ -48,3 +48,4 @@
 </script>
 </body>
 </html>
+

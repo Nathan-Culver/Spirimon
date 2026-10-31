@@ -2,8 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as E from '../engine.mjs';
 import {ADVANCED_MOVES,ENVIRONMENT_MOVES,EXTRA_MOVES,buildLearnset} from '../moves.mjs';
-const species={id:'test',forms:['Test'],base:'Beast',alter:'Elemental',health:100,power:50,might:50,speed:50,physicalRes:1,spiritualRes:1,ability:''};
-const spirit=()=>{const x=E.makeIndividual(species,25,0,()=>.5);E.heal(x,species);x.pp=1000;return x;};
+const species={id:'test',forms:['Test'],base:'Beast',alter:'Elemental',health:100,power:50,might:50,speed:50,physicalRes:1,spiritualRes:1,ability:'',moves:E.MOVE_CATALOG,domains:[]};
+const spirit=()=>{const x=E.makeIndividual(species,25,0,()=>.5);E.heal(x,species);return x;};
 const move=(effect,category='Status',power=0)=>({id:'test-'+effect,name:effect,effect,category,power,type:'Beast',speed:0,ppCost:1});
 test('catalog move ids are unique and categories are valid',()=>{
  const all=[...ADVANCED_MOVES,...ENVIRONMENT_MOVES,...EXTRA_MOVES];
@@ -83,7 +83,7 @@ test('rival and hostile dialogue and quests have complete definitions',()=>{
  assert.equal(E.questProgress({captured:2},quests[0]),2);
 });
 
-test('challenger teams grow from one Spirit up to six',()=>{
+test('challenger teams grow from one Spirimon up to six',()=>{
  assert.equal(E.challengerTeamSize(0,5),1);
  assert.equal(E.challengerTeamSize(2,5),2);
  assert.equal(E.challengerTeamSize(4,20),4);
@@ -132,3 +132,4 @@ test('caves generate deterministic connected multi-floor mazes with exits',()=>{
   assert.ok(map.exits.every(e=>visited.has(e.x+','+e.y)));
  }
 });
+

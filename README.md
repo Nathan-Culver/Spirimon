@@ -1,5 +1,5 @@
 # Spirimon
-An original, local-first browser RPG about people who seal spirits into tattoo bonds.
+An original, local-first browser RPG about people who seal Spirimon into tattoo bonds.
 
 ## Play
 - **Hosted:** https://nathan-culver.github.io/Spirimon/ (after publication).
@@ -14,42 +14,42 @@ WASD / arrows: move. E / Enter: interact. B: bag.
 1: explore. 2: tattoos. 3: atlas. 4: journal.
 Hold Shift to run. Touch/click movement controls are on the map. Tile movement and camera scrolling are smoothly interpolated; the world fills the window without letterboxing.
 
-On phones, Spirimon automatically uses a landscape emulator layout with translucent D-pad, A/B, Menu and Bag buttons. Hold a direction to keep walking. A interacts; holding B runs. The BAG button opens supplies. MENU opens Spirits, Map, Journal, Sealer, Options and Save. Rotate the phone sideways; fullscreen and orientation locking are offered where the browser supports them. Settings can force emulator or desktop layout. Battle and collection menus remain directly touchable. Mobile saves stay on the phone; export/import moves saves between devices. AI generation targets the Windows companion, not phone hardware.
+On phones, Spirimon automatically uses a landscape emulator layout with translucent D-pad, A/B, Menu and Bag buttons. Hold a direction to keep walking. A interacts; holding B runs. The BAG button opens supplies. MENU opens Spirimon, Map, Journal, Sealer, Options and Save. Rotate the phone sideways; fullscreen and orientation locking are offered where the browser supports them. Settings can force emulator or desktop layout. Battle and collection menus remain directly touchable. Mobile saves stay on the phone; export/import moves saves between devices. AI generation targets the Windows companion, not phone hardware.
 
 ## The first journey
-Begin with no Spirit. Your first encounter is random: earn its trust with interaction or offerings, then complete the sealing challenge. A completed fresh local-AI lineage is used when available; otherwise the original shared roster provides the encounter. Keeper Iona restores spirits; Tavi sells supplies; Rowan offers rank-scaled battles and reserve-spirit trades; Scholar Elin rewards discoveries and exploration. Roaming spirits can be approached peacefully, offered food, or challenged. Hidden encounters occur in tall grass.
+Begin with no Spirimon. Your first encounter is random: earn its trust with interaction or offerings, then complete the sealing challenge. A completed fresh local-AI lineage is used when available; otherwise the original shared roster provides the encounter. Keeper Iona restores Spirimon; Tavi sells supplies; Rowan offers rank-scaled battles and reserve Spirimon trades; Scholar Elin rewards discoveries and exploration. Roaming Spirimon can be approached peacefully, offered food, or challenged. Hidden encounters occur in tall grass.
 
 ## Art direction and animations
-A bright handheld-era presentation with original feudal Japanese/Chinese-inspired pixel villages: swept tiled roofs, timber halls, lanterns, shrine gates, bamboo, cherry trees and robed sealers. Exploration fills every screen shape. The overworld uses textured forest canopies, tall-grass patches, terraced cliffs, shoreline banks, bright village tiles and smooth grid-aligned movement. Battles use compact HP/PP HUDs, a bottom dialogue window and Fight / Bag / Spirits / Run menus. Physical lunges, elemental streams, ice shards, leaf bursts, healing and wards animate across the battle stage. Reduced-motion preferences are respected. An original offline 5×7 pixel font ships with the game.
+A bright handheld-era presentation with original feudal Japanese/Chinese-inspired pixel villages: swept tiled roofs, timber halls, lanterns, shrine gates, bamboo, cherry trees and robed sealers. Exploration fills every screen shape. The overworld uses textured forest canopies, tall-grass patches, terraced cliffs, shoreline banks, bright village tiles and smooth grid-aligned movement. Battles use compact HP, Stanima, Willpower and XP HUDs, a bottom dialogue window and Fight / Bag / Spirimon / Run menus. Physical lunges, elemental streams, ice shards, leaf bursts, healing and wards animate across the battle stage. Reduced-motion preferences are respected. An original offline 5×7 pixel font ships with the game.
 
 The shared starter library contains 50 original ordered-type lineages, each with three distinct forms (150 sprites). User-uploaded images are visual references only and are not shipped. Artwork has transparent backgrounds and bounded 256×256 form cells. Local AI lineages become encounterable only when all three sprites and their validated information are complete.
 
 ## Buildings
-Walk north into a doorway or interact directly below it. Sealer Halls, inns and homes have interiors, residents and a south exit. Hall keepers restore HP and shared PP; attunement is available at safe places.
+Walk north into a doorway or interact directly below it. Sealer Halls, inns and homes have interiors, residents and a south exit. Hall keepers restore HP, Stanima and Willpower; attunement is available at safe places.
 
 ## Implemented systems## Implemented systems
 - Seeded, expanding world with five biomes, persistent regions, towns, terrain collision, trails and fixed regional danger.
 - 13 ordered, distinct base/modifier types, complete three-form lineages, and repeated independent 1% rare-domain rolls.
 - Mutually exclusive wild-form rolls: starting 94%, intermediate 5%, final 1%.
-- Habitat-weighted species selection, 90% familiar / 10% new for already discovered ordered type pairs when rolling new encounters. Already placed spirits retain their identities.
+- Habitat-weighted species selection, 90% familiar / 10% new for already discovered ordered type pairs when rolling new encounters. Already placed Spirimon retain their identities.
 - Shared local species library, with per-world discovery history.
-- Six attuned tattoo spirits; reserves remain sealed. Change attunement in towns.
+- Six attuned tattoo Spirimon; reserves remain sealed. Change attunement in towns.
 - Combined attack/defense power, unnumbered commitment slider, physical/spiritual resistance, physical/spiritual move traits, intuitive core matchups, statuses, passive abilities, speed modifiers and independent Agile/Normal/Strong styles.
 - One baseline action each round, plus action borrowing and repayment (below).
-- One shared PP pool per spirit, escalating additional-action costs, soul draught recovery, and a recoil fallback when PP is exhausted.
+- Shared Stanima for Physical moves and Willpower for Energy/Spiritual/Status moves, soul draught recovery, and Struggle with recoil when no move can be funded.
 - Battle sealing influenced by health, status, catalyst quality and form; cooperative sealing through patience/offerings and an accessible timing challenge.
 - Levels, individual potential, natures, training investment, bonds, permanent level/bond transformations, and cosmetic switching among unlocked forms.
-- Guild rank, field techniques requiring suitable spirits, support wards, simple friendships, NPC trade, optional notices and a field journal.
+- Guild rank, field techniques requiring suitable Spirimon, support wards, simple friendships, NPC trade, optional notices and a field journal.
 - Recovery cost after defeat; supplies remain recoverable at the defeat location.
 - Autosave, battle resume, export/import and previous-world recovery.
 
-## Borrowed actions and PP
+## Borrowed actions, Stanima and Willpower
 Select Normal action, Borrow +1, or Borrow +2.
-Borrowed actions repeat the selected move. Each voluntarily funded extra action gives the opposing side one bonus action next round. Bonus actions do not create debt. Debt belongs to the battle side, so switching spirits cannot erase it. Unfunded extra actions are skipped and do not create debt.
+Borrowed actions repeat the selected move. Each voluntarily funded extra action gives the opposing side one bonus action next round. Bonus actions do not create debt. Debt belongs to the battle side, so switching Spirimon cannot erase it. Unfunded extra actions are skipped and do not create debt.
 
-PP is shared across all four moves. Costs derive from the move's mechanics; within a round the cost multipliers are 1×, 1.5×, 2×, 2.5×, and so on, rounded upward. The UI previews total cost. Awarded bonus actions also use escalating PP costs. Items, switching and support consume the normal action, forfeit your unused bonus attacks, and allow all owed enemy actions. Styles alter damage and priority, not allocation or the number of actions.
+Each equipped Physical move contributes its base value to maximum Stanima; each Energy/Spiritual/Status move contributes to maximum Willpower. Base values range from 1–40, normally in multiples of five. Weak attacks contribute 35–40, moderate attacks 20–25, and strong attacks 5–10; powerful support moves have fewer uses. Multi-hit moves are valued using their combined expected power. Resource maximums depend on equipped moves, not level, form, or training specialty. Every move use, including borrowed/bonus and Omega actions, consumes 1 point from its matching pool, or 2 against a target with Pressure. Charging a two-turn move pays once when preparation begins. The UI previews base values and usage costs. Native resources are spent first; shortages can use the other pool at the existing 2-for-1 rate. When no equipped move can be funded, the only move offered is Struggle: a Physical attack that consumes no resource and recoils for one quarter of the user's maximum HP. Unfunded extra actions create no debt. Soul draughts restore both pools, and resting refills both. Existing saves migrate their remaining resource percentages and retain their collection and progress. Items, switching and support consume the normal action, forfeit your unused bonus attacks, and allow all owed enemy actions. Styles alter damage and priority, not allocation or the number of actions.
 
-A spirit's previous allocation persists until it acts. Later scheduled actions have a priority offset so fast borrowed attacks can interleave with opposing actions. Fainted spirits cannot act.
+A Spirimon's previous allocation persists until it acts. Later scheduled actions have a priority offset so fast borrowed attacks can interleave with opposing actions. Fainted Spirimon cannot act.
 
 ## Optional free local AI
 The game is immediately playable with **procedural prototype designs and pixel art**. This fallback is explicitly labeled; it is not represented as LLM generation.
@@ -66,7 +66,7 @@ Default endpoints:
 - Image: http://127.0.0.1:7860
 - Companion: http://127.0.0.1:4317
 
-Text generates a schema-checked three-form design and move names. Code preserves type rolls, stats and effects. Image generation runs sequentially after the text model is unloaded. Later forms use the first sprite as an image-to-image reference. A lineage enters the AI species library only after text and all three PNGs complete. Discovered procedural spirits are never silently replaced.
+Text generates a schema-checked three-form design and move names. Code preserves type rolls, stats and effects. Image generation runs sequentially after the text model is unloaded. Later forms use the first sprite as an image-to-image reference. A lineage enters the AI species library only after text and all three PNGs complete. Discovered procedural Spirimon are never silently replaced.
 
 Windows computers without a dedicated GPU may take a long time to generate images. Actual model quality, memory use, evolution consistency and generation latency still require hardware testing. Review the licenses of models you choose; freely downloadable does not automatically mean unrestricted redistribution.
 
@@ -98,12 +98,13 @@ This is the first playable alpha, not a completed FireRed-sized RPG. It has orig
 
 
 ## Latest expansion
-All50 lineages and150 distinct sprites are included. Detailed painted ground textures and irregular paths/shorelines match the town/Spirit art. Six enterable building types include the forge, herbalist and archive; towns also have roofed stone wells, barrels, crates, guardian statues, timber fencing, stone walls and stalls. The lead Spirit no longer follows on the map.
+All50 lineages and150 distinct sprites are included. Detailed painted ground textures and irregular paths/shorelines match the town/Spirimon art. Six enterable building types include the forge, herbalist and archive; towns also have roofed stone wells, barrels, crates, guardian statues, timber fencing, stone walls and stalls. The lead Spirimon no longer follows on the map.
 
-Wild encounters stay level1–5 in the starting region and6–8 in its eight immediate neighbors. After every seeded group of1–3 towns visited, newly formed farther areas gain1–3 levels. Caught Spirit levels are preserved; old wild encounters are rebalanced.
+Wild encounters stay level1–5 in the starting region and6–8 in its eight immediate neighbors. After every seeded group of1–3 towns visited, newly formed farther areas gain1–3 levels. Caught Spirimon levels are preserved; old wild encounters are rebalanced.
 
 The move library has eight techniques for each of13 main types and four for each rare domain. Individuals can practice alternative moves at safe places. Mobile move menus reserve a separate Back row. Cosmetic changes and permanent transformations use generic seal-ring/silhouette/particle animations.
 
-Offerings are one cooperation attempt per individual. Choose a resource plan: lavish requires one trial, careful two, humble three. Materials and a seal catalyst are consumed at commitment. Trial order is randomized perindividual; riddles allow one answer, while singing and dance use15-second original wordless synthesized melodies. Exact input timestamps are scored at±45/90/150ms with60% required. Options offers eight-tap median lag calibration. Failed Spirits remain available for battle and battle seals. Closing or reloading an active trial forfeits cooperation for that individual.
+Offerings are one cooperation attempt per individual. Choose a resource plan: lavish requires one trial, careful two, humble three. Materials and a seal catalyst are consumed at commitment. Trial order is randomized perindividual; riddles allow one answer, while singing and dance use15-second original wordless synthesized melodies. Exact input timestamps are scored at±45/90/150ms with60% required. Options offers eight-tap median lag calibration. Failed Spirimon remain available for battle and battle seals. Closing or reloading an active trial forfeits cooperation for that individual.
 
 Music is synthesized from original note sequences, requiring a first click/tap for browser audio permission. The map uses calm instrumental music; battles use an upbeat instrumental arrangement. Music can be muted in Options. No copyrighted recordings or external audio services are used.
+

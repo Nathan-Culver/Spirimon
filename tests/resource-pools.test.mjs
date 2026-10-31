@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {MOVE_CATALOG,moveCategory,moveCost,makeIndividual,heal,stats,executeAction,resolveTempoRound,resolveMultiSpiritRound} from '../engine.mjs';
 
-const species={id:'resource-test',forms:['Test Spirit','Test Spirit II','Test Spirit III'],base:'Beast',alter:'Beast',domains:[],health:100,power:55,might:55,energyPower:55,defense:55,resistance:55,speed:40,physicalRes:1,spiritualRes:1,ability:'None',moves:MOVE_CATALOG};
+const species={id:'resource-test',forms:['Test Spirimon','Test Spirimon II','Test Spirimon III'],base:'Beast',alter:'Beast',domains:[],health:100,power:55,might:55,energyPower:55,defense:55,resistance:55,speed:40,physicalRes:1,spiritualRes:1,ability:'None',moves:MOVE_CATALOG};
 const actor=()=>heal(makeIndividual(species,12,0),species);
 const foe=()=>heal(makeIndividual(species,12,0),species);
 const expectedResource=move=>moveCategory(move)==='Physical'?'pp':'willpower';
@@ -40,7 +40,7 @@ test('all catalog moves fall back if combined pools cannot cover the cost',()=>{
   const logs=executeAction(a,species,b,species,move,'normal',.5,()=>.5);
   assert.equal(a[resource],0,move.id+' does not spend exhausted native pool');
   assert.equal(a[other],0,move.id+' does not spend exhausted alternate pool');
-  assert.ok(logs.some(line=>line.includes('lacks enough')),move.id+' gives exhaustion feedback');
+  assert.ok(logs.some(line=>line.includes('forced to use Struggle')),move.id+' gives exhaustion feedback');
  }
 });
 test('legacy saves initialize Willpower on demand and healing refills both',()=>{
@@ -59,7 +59,7 @@ test('tempo battles charge Physical and Energy moves independently',()=>{
  assert.equal(a.pp,beforeA-moveCost(physical));assert.equal(a.willpower,beforeW);
  assert.equal(b.willpower,stats(b,species).willpower-moveCost(energy));
 });
-test('multi-Spirit battles charge both pools independently',()=>{
+test('multi-Spirimon battles charge both pools independently',()=>{
  const physical=MOVE_CATALOG.find(m=>moveCategory(m)==='Physical');
  const energy=MOVE_CATALOG.find(m=>moveCategory(m)==='Energy');
  const a=actor(),b=foe();a.speciesData=species;b.speciesData=species;
@@ -67,3 +67,4 @@ test('multi-Spirit battles charge both pools independently',()=>{
  resolveMultiSpiritRound([a],[b],[{move:physical,style:'normal',commit:.5,targetIndex:0}],[{move:energy,style:'normal',commit:.5,targetIndex:0}],()=>.5);
  assert.equal(a.pp,p-moveCost(physical));assert.equal(b.willpower,w-moveCost(energy));
 });
+
