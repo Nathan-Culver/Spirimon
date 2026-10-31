@@ -31,7 +31,7 @@
  window.addEventListener('unhandledrejection',e=>{if(!main.querySelector('#world'))error(e.reason?.message||e.reason||'A game module failed.');});
  window.setTimeout(()=>{if(!main.querySelector('#world')&&!main.querySelector('.modal-overlay')&&!main.textContent.trim())error('The game did not initialize. Check your connection, then retry.');},10000);
  (async()=>{
-  const url=new URL('./app.mjs?v=20261031-63',location.href);
+  const url=new URL('./app.mjs?v=20261031-64',location.href);
   try{
     const response=await fetch(url,{cache:'no-store'});
     if(!response.ok)throw new Error('Game module returned HTTP '+response.status+' at '+url.pathname+'. GitHub Pages may be serving an outdated deployment.');
