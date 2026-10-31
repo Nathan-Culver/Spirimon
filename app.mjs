@@ -305,7 +305,7 @@ function drawWorld(time){
  for(let cy=Math.floor(oy/36)-1;cy<=Math.floor((oy+rows)/36)+1;cy++)for(let cx=Math.floor(ox/48)-1;cx<=Math.floor((ox+cols)/48)+1;cx++){const e=E.caveEntrance(s.seed,cx,cy);if(!e)continue;const x=px(e.x),y=py(e.y);if(x<-40||y<-40||x>width||y>height)continue;c.fillStyle='#181b27';c.beginPath();c.ellipse(x+16,y+20,15,12,0,Math.PI,0);c.fill();c.fillStyle='#7c8188';c.fillRect(x+2,y+24,28,5);c.fillStyle='#d2bb83';c.font='bold 11px monospace';c.fillText('▼',x+11,y+14);}
  if(s.party.length&&s.spirits.length){const companion=party()[0];if(companion){
   // Follow the actual path taken, at least three full steps behind the player.
-  const delay=3,step=companionTrail.length-delay-1;
+  const delay=1.5,step=Math.max(0,Math.floor(companionTrail.length-delay-1));
   if(step>=0){
    const from=companionTrail[step],to=companionTrail[step+1]||from;
    const moving=!!walkAnim&&elapsed<1;
