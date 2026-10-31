@@ -39,8 +39,63 @@ export function effectiveness(move,defender){let m=1;for(const t of[defender.bas
 export const STYLES={normal:{damage:1,speed:0},agile:{damage:.8,speed:22},strong:{damage:1.25,speed:-22}};
 export function priority(ind,sp,move,style='normal'){return stats(ind,sp).speed+move.speed+STYLES[style].speed-(ind.status==='slow'?18:0);}
 export function damage(attacker,asp,defender,dsp,move,style,r=Math.random){const a=stats(attacker,asp),d=stats(defender,dsp),energy=moveCategory(move)==='Energy';const offense=(energy?a.power:a.might)*(.25+attacker.commit*1.5),defense=(energy?d.resistance:d.defense)*(.25+(1-defender.commit)*1.5);const resistance=energy?dsp.spiritualRes:dsp.physicalRes,same=[asp.base,asp.alter].includes(move.type)?1.15:1;return Math.max(1,Math.floor(((2*attacker.level/5+2)*move.power*(offense/Math.max(1,defense))/24+2)*STYLES[style].damage*effectiveness(move,dsp)*(resistance??1)*same*(.9+r()*.1)*(defender.ward?.55:1)*(asp.ability==='Wildheart'&&!energy?1.12:1)*(asp.ability==='Soulweave'&&energy?1.12:1)*(dsp.ability==='Steadfast'&&defender.commit<=.4?.9:1)));}
-export function executeAction(actor,asp,target,tsp,move,style,commit,r=Math.random,costScale=1){const log=[];if(actor.hp<=0||target.hp<=0)return log;actor.commit=clamp(commit,0,1);if(!actor.battleStyle)actor.battleStyle=style;if(actor.status==='sleep'){actor.status=null;log.push(asp.forms[actor.appearance]+' wakes, missing this action.');return log;}if(actor.status==='slow')actor.status=null;if(asp.ability==='Second Wind'&&!actor.secondWindUsed&&actor.hp<stats(actor,asp).hp*.3){actor.hp=Math.min(stats(actor,asp).hp,actor.hp+Math.ceil(stats(actor,asp).hp*.15));actor.secondWindUsed=true;log.push(asp.forms[actor.appearance]+' catches its Second Wind.');}actor.pp??=stats(actor,asp).pp;const cost=Math.ceil(moveCost(move)*costScale);if(actor.pp<cost){move={id:'struggle',name:'Desperate Strike',power:20,speed:0,kind:'physical',type:asp.base,effect:'recoil'};log.push(asp.forms[actor.appearance]+' lacks PP and makes a desperate strike.');}else actor.pp-=cost;if(moveCategory(move)==='Status'&&move.effect!=='heal'&&move.effect!=='ward'){if(['slow','poison','sleep'].includes(move.effect)){if(r()<clamp(.9+(style==='agile'?.15:0)-(target.battleStyle==='agile'?.15:0),.05,.99)){target.status=move.effect;log.push(tsp.forms[target.appearance]+' is affected by '+move.effect+'.');}else log.push(asp.forms[actor.appearance]+' uses '+move.name+' but misses.');}else log.push(asp.forms[actor.appearance]+' uses '+move.name+'.');return log;}if(move.effect==='heal'){const before=actor.hp;actor.hp=Math.min(stats(actor,asp).hp,actor.hp+Math.ceil(stats(actor,asp).hp*.25));return[asp.forms[actor.appearance]+' restores '+(actor.hp-before)+' health.'];}if(move.effect==='ward'){actor.ward=true;return[asp.forms[actor.appearance]+' raises a spirit ward.'];}const accuracy=clamp(.9+(style==='agile'?.15:0)-(target.battleStyle==='agile'?.15:0),.05,.99);if(r()>=accuracy){log.push(asp.forms[actor.appearance]+' uses '+move.name+' but misses.');return log;}const critical=r()<(style==='strong'?.15:.05);const amount=Math.max(1,Math.floor(damage(actor,asp,target,tsp,move,style,r)*(critical?1.5:1)));target.hp=Math.max(0,target.hp-amount);target.ward=false;log.push(asp.forms[actor.appearance]+' uses '+move.name+(style==='normal'?'':' ('+style+')')+': '+amount+' damage'+(critical?' — critical hit!':'')+'.');if(effectiveness(move,tsp)>1.1)log.push('The type matchup gives the attack an advantage.');if(target.hp>0&&['slow','poison','sleep'].includes(move.effect)&&r()<.65){target.status=move.effect;log.push(tsp.forms[target.appearance]+' is affected by '+move.effect+'.');}if(move.effect==='recoil'){actor.hp=Math.max(0,actor.hp-Math.ceil(amount*.15));log.push('The rush causes recoil.');}return log;}
-export function resolveRound(a,asp,b,bsp,aChoice,bChoice,r=Math.random){a.battleStyle=aChoice.style;b.battleStyle=bChoice.style;const first=priority(a,asp,aChoice.move,aChoice.style)>=priority(b,bsp,bChoice.move,bChoice.style);const actors=first?[[a,asp,b,bsp,aChoice],[b,bsp,a,asp,bChoice]]:[[b,bsp,a,asp,bChoice],[a,asp,b,bsp,aChoice]];const log=[];for(const[u,us,v,vs,c]of actors)log.push(...executeAction(u,us,v,vs,c.move,c.style,c.commit,r));for(const[u,s]of[[a,asp],[b,bsp]])if(u.hp>0&&u.status==='poison'){u.hp=Math.max(0,u.hp-Math.max(1,Math.floor(stats(u,s).hp*.06)));log.push(s.forms[u.appearance]+' suffers poison damage.');}return log;}
+export const STATUS_EFFECTS=['burn','freeze','paralysis','poison','toxic','sleep','confusion','infatuation','flinch','frostbite','nightmare','trap','leechSeed','curse','perish','disable','taunt'];
+const MAJOR=new Set(['burn','freeze','paralysis','poison','toxic','sleep','frostbite']);
+const STAGE_KEYS={boostMight:['might',1],boostPower:['power',1],boostDefense:['defense',1],boostResistance:['resistance',1],boostSpeed:['speed',1],boostAccuracy:['accuracy',1],boostEvasion:['evasion',1],lowerMight:['might',-1],lowerPower:['power',-1],lowerDefense:['defense',-1],lowerResistance:['resistance',-1],lowerSpeed:['speed',-1],lowerAccuracy:['accuracy',-1]};
+function stage(ind,key){return ind.stages?.[key]||0;}
+function stageFactor(n){return n>=0?(2+n)/2:2/(2-n);}
+function applyCondition(target,effect,r=Math.random){if(target.safeguard||target.ward)return false;if(MAJOR.has(effect)){if(target.status)return false;target.status=effect;target.statusTurns=effect==='sleep'?2+Math.floor(r()*2):effect==='freeze'?2:0;target.toxicTurns=0;return true;}target.conditions??={};target.conditions[effect]=effect==='confusion'?2+Math.floor(r()*3):effect==='trap'?3:effect==='perish'?3:effect==='flinch'?1:effect==='infatuation'?3:3;return true;}
+function statusTick(ind,sp,log){if(ind.hp<=0)return;const hp=stats(ind,sp).hp;let loss=0;if(ind.status==='poison'||ind.status==='burn'||ind.status==='frostbite')loss=Math.max(1,Math.floor(hp*(ind.status==='poison'?.0625:.0625)));if(ind.status==='toxic'){ind.toxicTurns=(ind.toxicTurns||0)+1;loss=Math.max(1,Math.floor(hp*Math.min(15,ind.toxicTurns)/16));}if(ind.conditions?.leechSeed){loss+=Math.max(1,Math.floor(hp/8));}if(ind.conditions?.curse)loss+=Math.max(1,Math.floor(hp/4));if(ind.conditions?.trap)loss+=Math.max(1,Math.floor(hp/16));if(ind.conditions?.nightmare&&ind.status==='sleep')loss+=Math.max(1,Math.floor(hp/8));if(loss){ind.hp=Math.max(0,ind.hp-loss);log.push(sp.forms[ind.appearance]+' suffers '+loss+' ongoing damage.');}if(ind.conditions?.perish){ind.conditions.perish--;if(ind.conditions.perish<=0){ind.hp=0;log.push(sp.forms[ind.appearance]+' falls to its doom omen.');}}for(const k of ['trap','infatuation','disable','taunt'])if(ind.conditions?.[k]>0){ind.conditions[k]--;if(!ind.conditions[k])delete ind.conditions[k];}}
+export function executeAction(actor,asp,target,tsp,move,style,commit,r=Math.random,costScale=1){
+ const log=[],name=asp.forms[actor.appearance],targetName=tsp.forms[target.appearance];if(actor.hp<=0||target.hp<=0)return log;
+ actor.commit=clamp(commit,0,1);actor.battleStyle??=style;actor.conditions??={};target.conditions??={};
+ if(actor.status==='sleep'||actor.status==='freeze'){actor.statusTurns=(actor.statusTurns||1)-1;if(actor.statusTurns>0){log.push(name+' cannot act while '+actor.status+'.');return log;}actor.status=null;log.push(name+' recovers.');}
+ if(actor.conditions.flinch){delete actor.conditions.flinch;log.push(name+' flinches.');return log;}
+ if(actor.recharging){actor.recharging=false;log.push(name+' recharges.');return log;}if(actor.status==='paralysis'&&r()<.25||actor.conditions.infatuation&&r()<.5||actor.conditions.confusion&&r()<.33){log.push(name+' is unable to act.');return log;}
+ if(actor.conditions.confusion){actor.conditions.confusion--;if(!actor.conditions.confusion)delete actor.conditions.confusion;}
+ if(actor.status==='slow')actor.status=null;
+ if(asp.ability==='Second Wind'&&!actor.secondWindUsed&&actor.hp<stats(actor,asp).hp*.3){actor.hp=Math.min(stats(actor,asp).hp,actor.hp+Math.ceil(stats(actor,asp).hp*.15));actor.secondWindUsed=true;log.push(name+' catches its Second Wind.');}
+ actor.pp??=stats(actor,asp).pp;const cost=Math.ceil(moveCost(move)*costScale);
+ if(actor.pp<cost){move={id:'struggle',name:'Desperate Strike',power:20,speed:0,kind:'physical',type:asp.base,effect:'recoil'};log.push(name+' lacks PP and makes a desperate strike.');}else actor.pp-=cost;
+ const effect=move.effect,category=moveCategory(move);
+ if(actor.conditions.taunt&&category==='Status'){log.push(name+' cannot use a support technique while silenced.');return log;}
+ if(actor.conditions.disable&&actor.disabledMove===move.id){log.push(name+' cannot use the sealed technique.');return log;}
+ const accuracy=clamp((move.accuracy??.9)+(style==='agile'?.15:0)-(target.battleStyle==='agile'?.15:0),.05,.99);
+ if(category==='Status'){
+  if(['heal','rest','fullheal'].includes(effect)){const amount=effect==='heal'?.25:1;actor.hp=Math.min(stats(actor,asp).hp,actor.hp+Math.ceil(stats(actor,asp).hp*amount));if(effect!=='heal'){actor.status=effect==='rest'?'sleep':null;actor.statusTurns=effect==='rest'?2:0;}log.push(name+' restores its vitality.');return log;}
+  if(effect==='cleanse'){actor.status=null;actor.conditions={};log.push(name+' cleanses its afflictions.');return log;}
+  if(effect==='ward'||effect==='protect'){actor.ward=true;log.push(name+' raises a protective ward.');return log;}
+  if(['reflect','lightscreen','safeguard'].includes(effect)){actor[effect]=true;log.push(name+' raises '+move.name+'.');return log;}
+  if(effect==='haze'){actor.stages={};target.stages={};log.push('All stat changes are dispelled.');return log;}
+  if(effect==='swapStats'){[actor.stages,target.stages]=[target.stages||{},actor.stages||{}];log.push('Combat modifiers are exchanged.');return log;}
+  if(effect==='invertStats'){for(const u of [actor,target])for(const k of Object.keys(u.stages||{}))u.stages[k]*=-1;log.push('Combat modifiers are inverted.');return log;}
+  if(effect==='clearHazards'){actor.hazards={};log.push(name+' clears hazards.');return log;}
+  if(['spikes','toxicSpikes','stealthRock','stickyWeb'].includes(effect)){target.hazards??={};target.hazards[effect]=true;log.push(name+' sets '+move.name+'.');return log;}
+  const change=STAGE_KEYS[effect];if(change){const recipient=change[1]>0?actor:target;if(recipient===target&&r()>=accuracy){log.push(name+' misses.');return log;}recipient.stages??={};recipient.stages[change[0]]=clamp((recipient.stages[change[0]]||0)+change[1],-6,6);log.push(name+' changes '+(recipient===actor?'its ':'the foe’s ')+change[0]+'.');return log;}
+  if(STATUS_EFFECTS.includes(effect)){if(r()<accuracy&&applyCondition(target,effect,r))log.push(targetName+' is affected by '+effect+'.');else log.push(name+' fails to inflict '+effect+'.');return log;}
+  log.push(name+' uses '+move.name+'.');return log;
+ }
+ if(effect==='recharge'&&actor.recharging){actor.recharging=false;log.push(name+' must recharge.');return log;}
+ if(r()>=accuracy&&effect!=='sureHit'){log.push(name+' uses '+move.name+' but misses.');return log;}
+ if(target.ward&&effect!=='breakWard'){target.ward=false;log.push(targetName+' blocks the attack with a ward.');return log;}
+ const critical=r()<(style==='strong'?.15:.05);
+ const hits=effect==='multiHit'?2+Math.floor(r()*4):effect==='doubleHit'?2:1;
+ let amount=0;for(let n=0;n<hits;n++)amount+=Math.max(1,Math.floor(damage(actor,asp,target,tsp,move,style,r)*(critical?1.5:1)*stageFactor(stage(actor,category==='Energy'?'power':'might'))/stageFactor(stage(target,category==='Energy'?'resistance':'defense'))));
+ if(actor.status==='burn'&&category==='Physical')amount=Math.max(1,Math.floor(amount*.5));
+ if(actor.status==='frostbite'&&category==='Energy')amount=Math.max(1,Math.floor(amount*.5));
+ if(target.reflect&&category==='Physical'||target.lightscreen&&category==='Energy')amount=Math.max(1,Math.floor(amount*.5));
+ target.hp=Math.max(0,target.hp-amount);target.ward=false;log.push(name+' uses '+move.name+': '+amount+' damage'+(critical?' — critical hit!':'')+(hits>1?' ('+hits+' hits)':'')+'.');
+ if(effect==='drain')actor.hp=Math.min(stats(actor,asp).hp,actor.hp+Math.floor(amount/2));
+ if(effect==='recoil')actor.hp=Math.max(0,actor.hp-Math.max(1,Math.ceil(amount*.15)));
+ if(effect==='recharge')actor.recharging=true;
+ if(effect==='breakWard')target.ward=false;
+ if(effect==='disable'){target.conditions.disable=3;target.disabledMove=target.lastMove;}
+ if(effect==='taunt')target.conditions.taunt=3;
+ if(STAGE_KEYS[effect]){const [key,delta]=STAGE_KEYS[effect],recipient=delta>0?actor:target;recipient.stages??={};recipient.stages[key]=clamp((recipient.stages[key]||0)+delta,-6,6);}
+ if(STATUS_EFFECTS.includes(effect)&&target.hp>0&&r()<.3&&applyCondition(target,effect,r))log.push(targetName+' is affected by '+effect+'.');
+ actor.lastMove=move.id;return log;
+}
+export function resolveRound(a,asp,b,bsp,aChoice,bChoice,r=Math.random){a.battleStyle=aChoice.style;b.battleStyle=bChoice.style;const first=priority(a,asp,aChoice.move,aChoice.style)>=priority(b,bsp,bChoice.move,bChoice.style);const actors=first?[[a,asp,b,bsp,aChoice],[b,bsp,a,asp,bChoice]]:[[b,bsp,a,asp,bChoice],[a,asp,b,bsp,aChoice]];const log=[];for(const[u,us,v,vs,c]of actors)log.push(...executeAction(u,us,v,vs,c.move,c.style,c.commit,r));for(const[u,s]of[[a,asp],[b,bsp]])statusTick(u,s,log);return log;}
 export function sealChance(ind,sp,quality=1){return clamp((ind.catchRate??sp.catchRate??150)/150*.12+(1-ind.hp/stats(ind,sp).hp)*.55+(ind.status?.15:0)+(quality-1)*.12-ind.form*.1,.05,.92);}
 export function gainXP(ind,sp,amount){ind.xp+=amount;let levels=0;while(ind.level<100&&ind.xp>=ind.level*18){ind.xp-=ind.level*18;ind.level++;levels++;}const required=ind.form===0?16:36;let evolved=false;if(ind.form<2&&ind.level>=required&&(sp.evolution!=='bond'||ind.bond>=60)){ind.form++;ind.appearance=ind.form;evolved=true;}if(levels||evolved)heal(ind,sp);return{levels,evolved};}
 export function region(seed,cx,cy){const r=rng(hash(seed,cx,cy)),biome=cx===0&&cy===0?BIOMES[0]:pick(BIOMES,r);return{cx,cy,biome,town:cx===0&&cy===0||r()<.27,name:cx===0&&cy===0?'Mossveil Crossing':pick(['Elder','Willow','Hollow','Amber','Thistle','Silver','Quiet'],r)+pick(['watch','mere','grove','rest','reach','fall'],r),danger:Math.max(Math.abs(cx),Math.abs(cy))===0?1:6,key:cx+','+cy};}
@@ -68,7 +123,7 @@ export function resolveTempoRound(a,asp,b,bsp,aChoice,bChoice,credits={a:0,b:0},
   log.push(...executeAction(e.u,e.us,e.v,e.vs,e.c.move,e.c.style,e.c.commit,r,1+e.index*.5));actions[e.who]++;events.push({side:e.who,move:{...e.c.move},style:e.c.style,aHP:a.hp,bHP:b.hp,aPP:a.pp,bPP:b.pp});
   if(e.borrowed)nextCredits[e.who==="a"?"b":"a"]++;
  }
- for(const[u,sp]of[[a,asp],[b,bsp]])if(u.hp>0&&u.status==="poison"){u.hp=Math.max(0,u.hp-Math.max(1,Math.floor(stats(u,sp).hp*.06)));log.push(sp.forms[u.appearance]+" suffers poison damage.");}
+ for(const[u,sp]of[[a,asp],[b,bsp]])statusTick(u,sp,log);
  return{log,nextCredits,actions,events};
 }
 
