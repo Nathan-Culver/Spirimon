@@ -1,8 +1,9 @@
+import {readyImage} from './asset-loader.mjs';
 import {TOWN_FEATURES} from './towns.mjs';
 import {groundCell,terrainCell,connectedEdges} from './terrain.mjs';
 import {ART} from './roster.mjs';
 import {COLORS,hash,rng} from './engine.mjs';
-const cache=new Map(),images=new Map();
+const cache=new Map();
 export function shade(hex,n){const v=parseInt(hex.slice(1),16);return'#'+[v>>16,(v>>8)&255,v&255].map(x=>Math.max(0,Math.min(255,x+n)).toString(16).padStart(2,'0')).join('');}
 function ellipse(c,x,y,rx,ry,color){c.fillStyle=color;for(let yy=-ry;yy<=ry;yy++){const w=Math.round(rx*Math.sqrt(Math.max(0,1-yy*yy/(ry*ry))));c.fillRect(Math.round(x-w),Math.round(y+yy),w*2+1,1);}}
 function poly(c,pts,color){c.fillStyle=color;c.beginPath();pts.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.closePath();c.fill();}
@@ -51,7 +52,6 @@ if(form>0){rect(30,32,5,5,'#e6d492');rect(31,33,3,3,'#fff0b9');}
 if(form===2){for(const[x,y]of[[8,20],[51,8],[54,43],[10,46]]){rect(x,y-2,1,5,accent);rect(x-2,y,5,1,accent);}}
 if(sp.domains.length){ellipse(p,51,13,5,5,'#d7bb75');rect(50,9,2,8,'#fff1c0');rect(47,12,8,2,'#fff1c0');}
 cache.set(key,c);return c;}
-function readyImage(url){if(!url)return null;if(!images.has(url)){const img=new Image();img.onload=()=>globalThis.spirimonArtLoaded?.();img.src=url;images.set(url,img);}const image=images.get(url);return image.complete&&image.naturalWidth?image:null;}
 // Companion sheets use four rows (north,south,west,east), four frames each,
 // and one sheet per evolution form. Missing sheets fall back to roster artwork.
 // Each species and evolution has its own cached 4x4 walking atlas.
@@ -214,3 +214,4 @@ export function drawWell(ctx,x,y){prop(ctx,7,x-16,y-32,64,64);}
 function expandedProp(ctx,index,x,y,w,h){const image=readyImage(ART.towns);if(!image)return;ctx.imageSmoothingEnabled=false;ctx.drawImage(image,index%3*256,Math.floor(index/3)*256,256,256,Math.round(x),Math.round(y),w,h);}
 export function drawTownBuilding(ctx,b,x,y){if(['hall','inn','home'].includes(b.kind))return drawBuilding(ctx,x,y,b.kind==='hall',b.kind);const index={forge:0,herbalist:1,archive:2}[b.kind];if(b.kind==='archive')expandedProp(ctx,index,x+24,y-40,176,168);else expandedProp(ctx,index,x+8,y-16,144,144);}
 export function drawTownFeatures(ctx,cx,cy,px,py,only=null){for(const f of (only?[only]:TOWN_FEATURES)){const x=px(cx*48+f.x),y=py(cy*36+f.y);const width=f.cell===8?112:f.w===2?72:64,height=f.cell===8?104:f.cell===5?88:64;expandedProp(ctx,f.cell,x+(f.w*32-width)/2,y+f.h*32-height,width,height);}}
+

@@ -195,3 +195,6 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 /* Separate Physical Stanima and Energy/Status Willpower pools. */
 .willpower-meter{height:3px;background:#2b3649;margin-top:5px;border-radius:2px;overflow:hidden}.willpower-meter i{height:100%;display:block;background:#b28ce1;border-radius:2px}.willpower-label{color:#b8a4db}
 
+
+/* Exploration is a fixed canvas; collection and dialogs retain their own scrolling. */
+.emulator-mode.exploring main{overflow:hidden;min-height:0;height:100dvh}
