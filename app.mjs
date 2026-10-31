@@ -6,6 +6,7 @@ import {ROSTER} from './roster.mjs';
 import * as W from './world.mjs';
 import * as E from './engine.mjs';
 import * as A from './adventure-systems.mjs';
+import {drawInteriorAsset} from './interior-assets.mjs';
 import {drawTechnique} from './move-animations.mjs';
 import {drawSpirit,drawPerson,drawTile,drawBuilding,drawTownDecor,drawTree,drawWell,drawTownBuilding,drawTownFeatures,renderSpiritCanvases} from './sprites.mjs';
 const $=q=>document.querySelector(q);
@@ -598,6 +599,22 @@ function drawInterior(canvas,time){
  // Potted foliage and carved cabinets make the edges feel inhabited.
  for(const x of [2,12]){const [px,py]=at(x,3);fill('#211a17',px+5,py+15,23,17);fill('#66503a',px+8,py+17,18,12);for(let k=0;k<6;k++){fill(k%2?'#486342':'#68805a',px+7+k*3,py+5+(k%3)*3,5,13);}}
  if(hall){const [px,py]=at(7,2);fill('#281f1b',px+2,py+3,28,24);fill('#856343',px+4,py+4,24,4);fill('#3b2b29',px+5,py+9,22,15);fill('#aa916d',px+12,py+12,8,9);}
+ // Asset pass: independently authored SVG sprites, not procedural stand-ins.
+ // Draw on the established walkability grid, before actors so player/NPCs remain visible.
+ for(let y=0;y<11;y++)for(let x=0;x<15;x++){
+  const t=W.roomTile(kind,x,y),px=ox+x*unit,py=oy+y*unit;
+  const asset={exit:'door',shelf:'bookshelf',counter:'desk',table:'desk',bed:'bed',cushion:'chair'}[t];
+  if(asset)drawInteriorAsset(c,asset,px,py);
+  if(t==='wall-art'&&x%3===0)drawInteriorAsset(c,'banner',px,py);
+  if(t==='altar'&&x===7)drawInteriorAsset(c,'orb',px,py);
+ }
+ // Small portable items sit on furniture or in architectural niches.
+ const placed=(name,x,y)=>drawInteriorAsset(c,name,ox+x*unit,oy+y*unit);
+ if(hall){placed('scroll',6,3);placed('orb',8,3);placed('candle',3,2);placed('candle',11,2);}
+ if(archive){placed('scroll',3,4);placed('scroll',11,4);}
+ if(forge){placed('forge',11,7);}
+ if(herbal){placed('plant',3,3);placed('plant',11,3);}
+ if(inn&&!forge){placed('candle',4,3);placed('plant',11,3);}
  // Fine-grained scene dressing inspired by old-world illustrated RPG interiors.
  // Ground inlays are visual-only and never change movement or collision.
  const stone=(x,y)=>{const [px,py]=at(x,y);fill('#292522',px+3,py+3,26,26);fill('#5b5146',px+5,py+5,22,22);fill('#3d3530',px+8,py+8,16,16);fill('#806449',px+14,py+8,4,16);fill('#806449',px+8,py+14,16,4);fill('#b28d60',px+15,py+15,2,2);};
