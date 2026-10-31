@@ -172,7 +172,7 @@ export function resolveTempoRound(a,asp,b,bsp,aChoice,bChoice,credits={a:0,b:0},
  for(const e of entries){if(e.u.hp<=0||e.v.hp<=0)continue;
   const pp=e.u.pp??stats(e.u,e.us).pp;
   if(e.index>0&&pp<actionCost(e.c.move,e.index)){log.push(e.us.forms[e.u.appearance]+" cannot fund another action with its remaining PP.");continue;}
-  log.push(...executeAction(e.u,e.us,e.v,e.vs,e.c.move,e.c.style,e.c.commit,r,1+e.index*.5));actions[e.who]++;events.push({side:e.who,move:{...e.c.move},style:e.c.style,aHP:a.hp,bHP:b.hp,aPP:a.pp,bPP:b.pp});
+  log.push(...executeAction(e.u,e.us,e.v,e.vs,e.c.move,e.c.style,e.c.commit,r,1+e.index*.5));actions[e.who]++;events.push({side:e.who,move:{...e.c.move},style:e.c.style,aHP:a.hp,bHP:b.hp,aPP:a.pp,bPP:b.pp,aWillpower:a.willpower??stats(a,asp).willpower,bWillpower:b.willpower??stats(b,bsp).willpower});
   if(e.borrowed)nextCredits[e.who==="a"?"b":"a"]++;
  }
  for(const[u,sp]of[[a,asp],[b,bsp]])statusTick(u,sp,log);const field=a.battlefield;if(field){if(field.weatherTurns>0&&!--field.weatherTurns)field.weather=null;if(field.terrainTurns>0&&!--field.terrainTurns)field.terrain=null;}
