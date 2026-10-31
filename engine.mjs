@@ -178,3 +178,5 @@ export function questTemplates(){return [
 {id:'safe-trails',title:'Clear the Roads',role:'keeper',goal:'villains',target:1,reward:{coins:120,seals:3},description:'Defeat an enemy agent.'}
 ];}
 export function questProgress(s,q){switch(q.goal){case'capture':return s.captured||0;case'seen':return s.seen?.length||0;case'regions':return Object.values(s.regions||{}).filter(r=>r.visited).length;case'wins':return s.wins||0;case'villains':return s.challengers?.villainWins||0;default:return 0;}}
+
+export function challengerTeamSize(matches,level){return Math.min(6,1+Math.floor(matches/2)+(level>=20?1:0)+(level>=40?1:0));}
