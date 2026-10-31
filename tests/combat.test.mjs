@@ -82,3 +82,11 @@ test('rival and hostile dialogue and quests have complete definitions',()=>{
  for(const q of quests){assert.ok(q.title&&q.description&&q.target>0);assert.ok(Object.values(q.reward).every(v=>v>0));}
  assert.equal(E.questProgress({captured:2},quests[0]),2);
 });
+
+test('challenger teams grow from one Spirit up to six',()=>{
+ assert.equal(E.challengerTeamSize(0,5),1);
+ assert.equal(E.challengerTeamSize(2,5),2);
+ assert.equal(E.challengerTeamSize(4,20),4);
+ assert.equal(E.challengerTeamSize(20,60),6);
+ for(let n=1;n<15;n++)assert.ok(E.challengerTeamSize(n,25)>=E.challengerTeamSize(n-1,25));
+});
