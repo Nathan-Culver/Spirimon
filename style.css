@@ -127,3 +127,14 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 .classic-control .classic-move .move-stats{order:2;flex:0 0 auto}
 .classic-control .classic-move .move-effect{order:3;flex:0 0 auto}
 @media(max-height:500px) and (orientation:landscape){.classic-control .classic-move{padding:3px 6px;gap:2px}.classic-control .classic-move .move-name{font-size:clamp(13px,1.55vw,19px)!important;line-height:1.2!important}.classic-control .classic-move .move-tags{gap:2px}}
+
+/* Move picker: name and three type tags share the top row, with responsive wrapping. */
+.classic-control .classic-move{display:flex!important;flex-direction:column!important;justify-content:flex-start!important;overflow-y:auto!important;overflow-x:hidden!important;gap:2px!important}
+.classic-control .classic-move .move-header{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:3px 8px;width:100%;min-width:0;flex:0 0 auto;order:0}
+.classic-control .classic-move .move-header .move-name{flex:0 1 auto;min-width:0;margin:0!important;font-size:clamp(13px,1.5vw,20px)!important;line-height:1.2!important;white-space:normal!important;overflow-wrap:anywhere}
+.classic-control .classic-move .move-header .move-tags{display:inline-flex;flex:0 1 auto;flex-wrap:wrap;align-items:center;gap:2px;min-width:0;order:0}
+.classic-control .classic-move .move-header .move-tag{font-size:clamp(8px,.8vw,10px);padding:1px 4px;white-space:normal}
+.classic-control .classic-move .move-stats{order:1;flex:0 0 auto}
+.classic-control .classic-move .move-effect{order:2;flex:0 0 auto}
+@media(max-height:500px) and (orientation:landscape){.classic-control .classic-move .move-header{gap:2px 6px}.classic-control .classic-move .move-header .move-name{font-size:clamp(12px,1.25vw,17px)!important}.classic-control .classic-move .move-header .move-tag{font-size:8px;padding:1px 3px}}
+@media(max-width:420px){.classic-control .classic-move .move-header{gap:3px}.classic-control .classic-move .move-header .move-name{font-size:clamp(12px,3vw,17px)!important}}
