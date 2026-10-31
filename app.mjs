@@ -506,42 +506,41 @@ function drawInterior(canvas,time){
  const c=canvas.getContext('2d'),room=s.interior,unit=32,ox=Math.round(width/2-room.x*unit-16),oy=Math.round(height/2-room.y*unit-16);
  c.imageSmoothingEnabled=false;c.fillStyle='#211d22';c.fillRect(0,0,width,height);
  const kind=room.kind,forge=kind==='forge',archive=kind==='archive',herbal=kind==='herbalist',hall=kind==='hall'||archive,inn=kind==='inn'||forge;
- const pal=hall?{floor:'#bda27b',edge:'#90775e',wall:'#625b63',trim:'#c4ad83',rug:'#73536f'}:inn?{floor:'#b38a64',edge:'#846044',wall:'#6c5545',trim:'#caa176',rug:'#9a654f'}:{floor:'#c3a37a',edge:'#9c7c59',wall:'#657369',trim:'#d8bc91',rug:'#658b78'};
+ const pal=hall?{floor:'#49443d',edge:'#272523',wall:'#302b29',trim:'#8d775b',rug:'#59403f'}:inn?{floor:'#504238',edge:'#292522',wall:'#382d29',trim:'#987c59',rug:'#67473d'}:{floor:'#45453e',edge:'#272a27',wall:'#2e3730',trim:'#93866b',rug:'#4b5d54'};
  const fill=(color,x,y,w,h)=>{c.fillStyle=color;c.fillRect(x,y,w,h);};
  for(let y=0;y<11;y++)for(let x=0;x<15;x++){
   const t=W.roomTile(kind,x,y),px=ox+x*unit,py=oy+y*unit;
   if(px>width||py>height||px+unit<0||py+unit<0)continue;
   const h=(x*73+y*137+x*y*19)%11;
   if(t==='wall'||t==='wall-art'){
-   fill('#29272b',px,py,32,32);fill(pal.wall,px+1,py+1,30,29);
-   fill(h%2?'#79716a':'#81776e',px+2,py+2,28,3);
-   fill('#453f42',px+1,py+25,30,5);fill(pal.trim,px+1,py+23,30,3);
-   fill('#403b3e',px+(h%2?14:7),py+7,2,14);
-   if(t==='wall-art'){fill('#d5b986',px+5,py+7,22,13);fill('#665b57',px+7,py+9,18,9);fill(hall?'#9f88b4':'#8aaf9a',px+10,py+11,12,5);fill('#e6ce9d',px+14,py+10,4,7);}
+   fill('#161412',px,py,32,32);fill(pal.wall,px+1,py+1,30,30);
+   for(let k=0;k<3;k++){const yy=py+k*10;fill('#191817',px,yy,32,2);const offset=((x+k)%2)*15;fill('#211e1d',px+offset,yy+2,2,8);fill('#403a34',px+offset+2,yy+3,12,1);}
+   fill('#171514',px,py+26,32,6);fill(pal.trim,px,py+25,32,2);
+   if(t==='wall-art'){fill('#201c1b',px+4,py+5,24,18);fill('#8e7352',px+5,py+5,22,2);fill('#655248',px+5,py+21,22,2);}
    continue;
   }
-  // Long, staggered planks read as a continuous floor instead of a checkerboard.
-  fill(pal.floor,px,py,32,32);
-  for(let p=0;p<2;p++){const yy=py+p*16;fill(pal.edge,px,yy+15,32,1);fill('#d5b891',px,yy+1,32,1);
-   const seam=((Math.floor((x+(p%2))*0.5)%2)===0?7:23);fill(pal.edge,px+seam,yy+1,1,14);
-   if((h+p)%4===0)fill('#9d7d5c',px+11,yy+8,2,1);
-  }
+  // Weathered stone slabs: broken edges, inset mortar, varied stone grains.
+  fill('#211e1c',px,py,32,32);
+  const stone=['#48443e','#4f4940','#413e39','#554d42','#47453e'][h%5];
+  fill(stone,px+1,py+1,30,30);fill('#686056',px+2,py+2,27,1);
+  fill('#302c28',px+1,py+29,29,2);fill('#39352f',px+29,py+3,2,27);
+  for(let k=0;k<5;k++){const xx=px+4+((h*7+k*11)%23),yy=py+5+((h*13+k*7)%22);fill(k%2?'#5a5146':'#3a3732',xx,yy,2+(k%2),1);}
+  if(h===2||h===7){fill('#322e2a',px+6,py+20,10,1);fill('#322e2a',px+15,py+20,1,5);}
   if(t==='rug'||t==='tatami'){
-   const carpet=t==='rug',base=carpet?pal.rug:'#a4b68a';
+   const carpet=t==='rug',base=carpet?pal.rug:'#585c47';
    const adjacent=(dx,dy)=>W.roomTile(kind,x+dx,y+dy)===t;
    fill(base,px,py,32,32);
-   // Only the outer boundary receives a border: contiguous tiles form one carpet.
-   if(!adjacent(0,-1)){fill('#4e3e48',px,py,32,3);fill('#d6b782',px,py+3,32,2);}
-   if(!adjacent(0,1)){fill('#4e3e48',px,py+29,32,3);fill('#d6b782',px,py+27,32,2);}
-   if(!adjacent(-1,0)){fill('#4e3e48',px,py,3,32);fill('#d6b782',px+3,py,2,32);}
-   if(!adjacent(1,0)){fill('#4e3e48',px+29,py,3,32);fill('#d6b782',px+27,py,2,32);}
-   if(carpet){fill('#a38a92',px+14,py+12,4,8);fill('#cbb5a0',px+11,py+15,10,2);}
-   else{fill('#829a79',px,py+15,32,1);fill('#d2cda3',px+15,py,1,32);}
+   for(let k=0;k<3;k++)fill(k%2?'#65504a':'#4b3c3b',px+((k*11+x*3)%29),py+((k*13+y*5)%29),3,2);
+   if(!adjacent(0,-1)){fill('#2b2426',px,py,32,3);fill('#a18463',px,py+3,32,2);}
+   if(!adjacent(0,1)){fill('#2b2426',px,py+29,32,3);fill('#a18463',px,py+27,32,2);}
+   if(!adjacent(-1,0)){fill('#2b2426',px,py,3,32);fill('#a18463',px+3,py,2,32);}
+   if(!adjacent(1,0)){fill('#2b2426',px+29,py,3,32);fill('#a18463',px+27,py,2,32);}
+   if(carpet&&((x+y)%3===0)){fill('#84664f',px+13,py+12,6,6);fill('#b29a70',px+15,py+14,2,2);}
   }
   if(t==='shelf'){
-   fill('#4d3529',px+1,py+4,30,26);fill('#9d754c',px+3,py+4,26,3);
+   fill('#17120f',px+1,py+3,30,28);fill('#63452e',px+3,py+4,26,25);fill('#977047',px+3,py+4,26,3);
    for(let k=0;k<5;k++){fill(['#8d504b','#67847c','#c3a56d','#746a9b','#c78b55'][k],px+4+k*5,py+8+(k%2)*3,4,16-(k%2)*3);}
-   fill('#d6ad72',px+2,py+25,28,4);fill('#4b342b',px+2,py+29,28,2);
+   fill('#8b6742',px+2,py+25,28,4);fill('#4b342b',px+2,py+29,28,2);
   }
   if(t==='bed'){
    fill('#5b4438',px+1,py+2,30,30);fill('#a07c58',px+3,py+3,26,27);fill('#f2dfb9',px+5,py+5,22,10);
@@ -555,10 +554,10 @@ function drawInterior(canvas,time){
   }
   if(t==='altar'){
    // One continuous raised shrine dais with a single focal emblem.
-   fill('#4e414e',px,py+6,32,26);fill('#877187',px,py+7,32,20);
-   fill('#c3a578',px,py+7,32,3);fill('#65536c',px,py+26,32,4);
-   if(x===7){fill('#d8bb82',px+6,py+10,20,14);fill('#6f547c',px+9,py+12,14,10);fill('#e6d49d',px+14,py+12,4,10);}
-   else if(x===5||x===9){fill('#c4a57b',px+10,py+12,12,11);fill('#e6d49d',px+14,py+11,4,9);}
+   fill('#211a1d',px,py+6,32,26);fill('#53434c',px,py+7,32,20);
+   fill('#987c58',px,py+7,32,3);fill('#302630',px,py+26,32,4);
+   if(x===7){fill('#8e795e',px+6,py+10,20,14);fill('#6f547c',px+9,py+12,14,10);fill('#c4a679',px+14,py+12,4,10);}
+   else if(x===5||x===9){fill('#8e745c',px+10,py+12,12,11);fill('#c4a679',px+14,py+11,4,9);}
   }
   if(t==='cushion'){fill('#7c544c',px+4,py+12,24,17);fill('#bc7469',px+6,py+11,20,14);fill('#e4a08a',px+8,py+12,16,3);}
   if(t==='exit'){fill('#6c5543',px+2,py+1,28,30);fill('#d2b88d',px+4,py+4,24,26);fill('#3c302c',px+8,py+13,16,17);fill('#e7c87e',px+13,py+17,6,8);}
@@ -569,7 +568,7 @@ function drawInterior(canvas,time){
   fill('#a47e54',px+8,py+22,16,3);
  }
  for(const x of [4,10]){const px=ox+x*unit,py=oy+unit;
-  fill('#463e44',px+3,py+4,26,17);fill('#a9c3b6',px+5,py+6,22,13);fill('#e0d1a4',px+15,py+6,2,13);fill('#e0d1a4',px+5,py+12,22,2);
+  fill('#463e44',px+3,py+4,26,17);fill('#342e46',px+5,py+6,22,13);fill('#6b527b',px+8,py+7,6,11);fill('#69577c',px+18,py+7,6,11);fill('#a18b9b',px+15,py+6,2,13);fill('#a18b9b',px+5,py+12,22,2);
  }
  if(herbal){for(const x of [2,6,12]){const px=ox+x*unit,py=oy+2*unit;fill('#805f43',px+8,py+10,16,13);fill('#638a60',px+11,py+3,10,13);fill('#b2c17a',px+14,py+1,4,9);}}
  if(forge){const px=ox+11*unit,py=oy+7*unit;fill('#52433b',px+2,py+2,28,28);fill('#b36b42',px+5,py+6,22,19);fill('#edb35d',px+9,py+8,14,13);fill('#f5dc8e',px+13,py+11,6,8);}
@@ -594,10 +593,17 @@ function drawInterior(canvas,time){
  if(kind==='home'){vase(2,4);scroll(6,8);vase(12,7,'#e2b87c');}
  if(herbal){for(const x of [3,8,11])vase(x,5,'#b4c47c');}
  if(forge){const [px,py]=at(10,7);fill('#3b4148',px+4,py+14,24,9);fill('#8c969b',px+8,py+11,17,6);fill('#45464a',px+14,py+21,6,10);}
+ // Warm candle sconces and deep shadows establish the moody stone-chamber atmosphere.
+ for(const x of [4,10]){const [px,py]=at(x,1);fill('#1d1714',px+12,py-6,10,25);fill('#8d6745',px+13,py+9,8,4);fill('#b48b53',px+15,py-2,4,14);fill('#ffe0a1',px+16,py-8,2,8);fill('#e2a45b',px+14,py-5,6,6);}
+ // Potted foliage and carved cabinets make the edges feel inhabited.
+ for(const x of [2,12]){const [px,py]=at(x,3);fill('#211a17',px+5,py+15,23,17);fill('#66503a',px+8,py+17,18,12);for(let k=0;k<6;k++){fill(k%2?'#486342':'#68805a',px+7+k*3,py+5+(k%3)*3,5,13);}}
+ if(hall){const [px,py]=at(7,2);fill('#281f1b',px+2,py+3,28,24);fill('#856343',px+4,py+4,24,4);fill('#3b2b29',px+5,py+9,22,15);fill('#aa916d',px+12,py+12,8,9);}
  // Directional light pools are painted behind actors and stay subtle at pixel scale.
  c.save();c.globalCompositeOperation='screen';
- for(const x of [2,12]){const [px,py]=at(x,2);const glow=c.createRadialGradient(px+16,py,3,px+16,py+18,104);glow.addColorStop(0,'rgba(255,211,127,.19)');glow.addColorStop(1,'rgba(255,211,127,0)');c.fillStyle=glow;c.fillRect(px-88,py-70,208,208);}
+ for(const x of [2,12]){const [px,py]=at(x,2);const glow=c.createRadialGradient(px+16,py,3,px+16,py+18,104);glow.addColorStop(0,'rgba(255,181,91,.22)');glow.addColorStop(1,'rgba(255,211,127,0)');c.fillStyle=glow;c.fillRect(px-88,py-70,208,208);}
  c.restore();
+ // A gentle vignette anchors the scene without hiding characters or interactable tiles.
+ const shade=c.createRadialGradient(width/2,height/2,Math.min(width,height)*.19,width/2,height/2,Math.max(width,height)*.78);shade.addColorStop(0,'rgba(8,6,8,0)');shade.addColorStop(1,'rgba(8,6,8,.35)');c.fillStyle=shade;c.fillRect(0,0,width,height);
  for(const n of W.roomNPCs(room))drawPerson(c,ox+n.x*unit,oy+n.y*unit,n.role,time);
  drawPerson(c,ox+room.x*unit,oy+room.y*unit,'player',0,room.face,false,adventureState().appearance);
  const location=$('#map-location'),biome=$('#map-biome');if(location)location.textContent=room.name;if(biome)biome.textContent='MOSSVEIL · INTERIOR';
