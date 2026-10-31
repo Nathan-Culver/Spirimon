@@ -45,23 +45,26 @@ const STAGE_KEYS={boostMight:['might',1],boostPower:['power',1],boostDefense:['d
 function stage(ind,key){return ind.stages?.[key]||0;}
 function stageFactor(n){return n>=0?(2+n)/2:2/(2-n);}
 function applyCondition(target,effect,r=Math.random){if(target.safeguard||target.ward)return false;if(MAJOR.has(effect)){if(target.status)return false;target.status=effect;target.statusTurns=effect==='sleep'?2+Math.floor(r()*2):effect==='freeze'?2:0;target.toxicTurns=0;return true;}target.conditions??={};target.conditions[effect]=effect==='confusion'?2+Math.floor(r()*3):effect==='trap'?3:effect==='perish'?3:effect==='flinch'?1:effect==='infatuation'?3:3;return true;}
-function statusTick(ind,sp,log){if(ind.hp<=0)return;const hp=stats(ind,sp).hp;let loss=0;if(ind.status==='poison'||ind.status==='burn'||ind.status==='frostbite')loss=Math.max(1,Math.floor(hp*(ind.status==='poison'?.0625:.0625)));if(ind.status==='toxic'){ind.toxicTurns=(ind.toxicTurns||0)+1;loss=Math.max(1,Math.floor(hp*Math.min(15,ind.toxicTurns)/16));}if(ind.conditions?.leechSeed){loss+=Math.max(1,Math.floor(hp/8));}if(ind.conditions?.curse)loss+=Math.max(1,Math.floor(hp/4));if(ind.conditions?.trap)loss+=Math.max(1,Math.floor(hp/16));if(ind.conditions?.nightmare&&ind.status==='sleep')loss+=Math.max(1,Math.floor(hp/8));if(loss){ind.hp=Math.max(0,ind.hp-loss);log.push(sp.forms[ind.appearance]+' suffers '+loss+' ongoing damage.');}if(ind.conditions?.perish){ind.conditions.perish--;if(ind.conditions.perish<=0){ind.hp=0;log.push(sp.forms[ind.appearance]+' falls to its doom omen.');}}for(const k of ['trap','infatuation','disable','taunt'])if(ind.conditions?.[k]>0){ind.conditions[k]--;if(!ind.conditions[k])delete ind.conditions[k];}}
+function statusTick(ind,sp,log){if(ind.hp<=0)return;if(ind.delayedDamage){ind.hp=Math.max(0,ind.hp-ind.delayedDamage);log.push(sp.forms[ind.appearance]+' is struck by delayed energy.');ind.delayedDamage=0;}const hp=stats(ind,sp).hp;let loss=0;if(ind.status==='poison'||ind.status==='burn'||ind.status==='frostbite')loss=Math.max(1,Math.floor(hp*(ind.status==='poison'?.0625:.0625)));if(ind.status==='toxic'){ind.toxicTurns=(ind.toxicTurns||0)+1;loss=Math.max(1,Math.floor(hp*Math.min(15,ind.toxicTurns)/16));}if(ind.conditions?.leechSeed){loss+=Math.max(1,Math.floor(hp/8));}if(ind.conditions?.curse)loss+=Math.max(1,Math.floor(hp/4));if(ind.conditions?.trap)loss+=Math.max(1,Math.floor(hp/16));if(ind.conditions?.nightmare&&ind.status==='sleep')loss+=Math.max(1,Math.floor(hp/8));if(loss){ind.hp=Math.max(0,ind.hp-loss);log.push(sp.forms[ind.appearance]+' suffers '+loss+' ongoing damage.');}if(ind.conditions?.perish){ind.conditions.perish--;if(ind.conditions.perish<=0){ind.hp=0;log.push(sp.forms[ind.appearance]+' falls to its doom omen.');}}for(const k of ['trap','infatuation','disable','taunt'])if(ind.conditions?.[k]>0){ind.conditions[k]--;if(!ind.conditions[k])delete ind.conditions[k];}}
 export function executeAction(actor,asp,target,tsp,move,style,commit,r=Math.random,costScale=1){
  const log=[],name=asp.forms[actor.appearance],targetName=tsp.forms[target.appearance];if(actor.hp<=0||target.hp<=0)return log;
  actor.commit=clamp(commit,0,1);actor.battleStyle??=style;actor.conditions??={};target.conditions??={};
  if(actor.status==='sleep'||actor.status==='freeze'){actor.statusTurns=(actor.statusTurns||1)-1;if(actor.statusTurns>0){log.push(name+' cannot act while '+actor.status+'.');return log;}actor.status=null;log.push(name+' recovers.');}
- if(actor.conditions.flinch){delete actor.conditions.flinch;log.push(name+' flinches.');return log;}
+ if(actor.pendingMove&&actor.pendingMove.id!==move.id){move=actor.pendingMove;}if(actor.conditions.flinch){delete actor.conditions.flinch;log.push(name+' flinches.');return log;}
  if(actor.recharging){actor.recharging=false;log.push(name+' recharges.');return log;}if((actor.status==='paralysis'&&r()<.25)||(actor.conditions.infatuation&&r()<.5)||(actor.conditions.confusion&&r()<.33)){log.push(name+' is unable to act.');return log;}
  if(actor.conditions.confusion){actor.conditions.confusion--;if(!actor.conditions.confusion)delete actor.conditions.confusion;}
  if(actor.status==='slow')actor.status=null;
  if(asp.ability==='Second Wind'&&!actor.secondWindUsed&&actor.hp<stats(actor,asp).hp*.3){actor.hp=Math.min(stats(actor,asp).hp,actor.hp+Math.ceil(stats(actor,asp).hp*.15));actor.secondWindUsed=true;log.push(name+' catches its Second Wind.');}
  actor.pp??=stats(actor,asp).pp;const cost=Math.ceil(moveCost(move)*costScale);
  if(actor.pp<cost){move={id:'struggle',name:'Desperate Strike',power:20,speed:0,kind:'physical',type:asp.base,effect:'recoil'};log.push(name+' lacks PP and makes a desperate strike.');}else actor.pp-=cost;
- const effect=move.effect,category=moveCategory(move);
+ const effect=move.effect,category=moveCategory(move);const field=actor.battlefield||target.battlefield||{weather:null,terrain:null,weatherTurns:0,terrainTurns:0};actor.battlefield=field;target.battlefield=field;
  if(actor.conditions.taunt&&category==='Status'){log.push(name+' cannot use a support technique while silenced.');return log;}
  if(actor.conditions.disable&&actor.disabledMove===move.id){log.push(name+' cannot use the sealed technique.');return log;}
  const accuracy=clamp((move.accuracy??.9)+(style==='agile'?.15:0)-(target.battleStyle==='agile'?.15:0),.05,.99);
  if(category==='Status'){
+  if(effect?.startsWith('weather')){field.weather=effect.slice(7).toLowerCase();field.weatherTurns=5;log.push(name+' summons '+field.weather+' weather.');return log;}
+  if(effect?.startsWith('terrain')){field.terrain=effect.slice(7).toLowerCase();field.terrainTurns=5;log.push(name+' creates '+field.terrain+' terrain.');return log;}
+  if(effect==='focus'){actor.focused=true;log.push(name+' gathers focus.');return log;}
   if(['heal','rest','fullheal'].includes(effect)){const amount=effect==='heal'?.25:1;actor.hp=Math.min(stats(actor,asp).hp,actor.hp+Math.ceil(stats(actor,asp).hp*amount));if(effect!=='heal'){actor.status=effect==='rest'?'sleep':null;actor.statusTurns=effect==='rest'?2:0;}log.push(name+' restores its vitality.');return log;}
   if(effect==='cleanse'){actor.status=null;actor.conditions={};log.push(name+' cleanses its afflictions.');return log;}
   if(effect==='ward'||effect==='protect'){actor.ward=true;log.push(name+' raises a protective ward.');return log;}
@@ -76,16 +79,18 @@ export function executeAction(actor,asp,target,tsp,move,style,commit,r=Math.rand
   log.push(name+' uses '+move.name+'.');return log;
  }
  
+ if(['twoTurn','chargeSun'].includes(effect)&&!actor.pendingMove&&!(effect==='chargeSun'&&field.weather==='sun')){actor.pendingMove={...move};log.push(name+' prepares '+move.name+'.');return log;}if(actor.pendingMove)actor.pendingMove=null;
  if(r()>=accuracy&&effect!=='sureHit'){log.push(name+' uses '+move.name+' but misses.');return log;}
  if(target.ward&&effect!=='breakWard'){target.ward=false;log.push(targetName+' blocks the attack with a ward.');return log;}
  const critical=r()<(style==='strong'?.15:.05);
  const hits=effect==='multiHit'?2+Math.floor(r()*4):effect==='doubleHit'?2:1;
  let amount=0;for(let n=0;n<hits;n++)amount+=Math.max(1,Math.floor(damage(actor,asp,target,tsp,move,style,r)*(critical?1.5:1)*stageFactor(stage(actor,category==='Energy'?'power':'might'))/stageFactor(stage(target,category==='Energy'?'resistance':'defense'))));
+ const weather=field.weather,terrain=field.terrain;if((weather==='rain'&&move.domain==='Water')||(weather==='sun'&&move.domain==='Fire'))amount=Math.floor(amount*1.5);if((weather==='rain'&&move.domain==='Fire')||(weather==='sun'&&move.domain==='Water'))amount=Math.max(1,Math.floor(amount*.5));if(effect==='weatherStrike'&&weather==='rain'||effect==='sunStrike'&&weather==='sun'||effect==='sandStrike'&&weather==='sand'||effect==='snowStrike'&&weather==='snow')amount=Math.floor(amount*1.5);if(effect==='terrainStrike'&&terrain==='grass'||effect==='electricStrike'&&terrain==='electric'||effect==='psychicStrike'&&terrain==='psychic'||effect==='mistStrike'&&terrain==='misty')amount=Math.floor(amount*1.5);if(effect==='venomStrike'&&['poison','toxic'].includes(target.status)||effect==='hexStrike'&&target.status)amount=Math.floor(amount*1.5);if(actor.focused){amount=Math.floor(amount*1.5);actor.focused=false;}
  if(actor.status==='burn'&&category==='Physical')amount=Math.max(1,Math.floor(amount*.5));
  if(actor.status==='frostbite'&&category==='Energy')amount=Math.max(1,Math.floor(amount*.5));
  if((target.reflect&&category==='Physical')||(target.lightscreen&&category==='Energy'))amount=Math.max(1,Math.floor(amount*.5));
  target.hp=Math.max(0,target.hp-amount);target.ward=false;log.push(name+' uses '+move.name+': '+amount+' damage'+(critical?' — critical hit!':'')+(hits>1?' ('+hits+' hits)':'')+'.');
- if(effect==='drain')actor.hp=Math.min(stats(actor,asp).hp,actor.hp+Math.floor(amount/2));
+ if(effect==='pivot'||effect==='forceSwitch'){(effect==='pivot'?actor:target).switchRequested=true;log.push((effect==='pivot'?name:targetName)+' must switch Spirits.');}if(effect==='rampage'){actor.rampage=(actor.rampage||0)+1;if(actor.rampage>=3){actor.rampage=0;applyCondition(actor,'confusion',r);}}if(effect==='delayedStrike'){target.delayedDamage=Math.max(1,Math.floor(amount/2));}if(effect==='drain')actor.hp=Math.min(stats(actor,asp).hp,actor.hp+Math.floor(amount/2));
  if(effect==='recoil')actor.hp=Math.max(0,actor.hp-Math.max(1,Math.ceil(amount*.15)));
  if(effect==='recharge')actor.recharging=true;
  if(effect==='breakWard')target.ward=false;
@@ -123,7 +128,7 @@ export function resolveTempoRound(a,asp,b,bsp,aChoice,bChoice,credits={a:0,b:0},
   log.push(...executeAction(e.u,e.us,e.v,e.vs,e.c.move,e.c.style,e.c.commit,r,1+e.index*.5));actions[e.who]++;events.push({side:e.who,move:{...e.c.move},style:e.c.style,aHP:a.hp,bHP:b.hp,aPP:a.pp,bPP:b.pp});
   if(e.borrowed)nextCredits[e.who==="a"?"b":"a"]++;
  }
- for(const[u,sp]of[[a,asp],[b,bsp]])statusTick(u,sp,log);
+ for(const[u,sp]of[[a,asp],[b,bsp]])statusTick(u,sp,log);const field=a.battlefield;if(field){if(field.weatherTurns>0&&!--field.weatherTurns)field.weather=null;if(field.terrainTurns>0&&!--field.terrainTurns)field.terrain=null;}
  return{log,nextCredits,actions,events};
 }
 
