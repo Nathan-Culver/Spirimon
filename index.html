@@ -30,7 +30,7 @@
  window.addEventListener('error',e=>{if(!main.querySelector('#world'))error(e.message||'A game resource failed to load.');});
  window.addEventListener('unhandledrejection',e=>{if(!main.querySelector('#world'))error(e.reason?.message||e.reason||'A game module failed.');});
  window.setTimeout(()=>{if(!main.querySelector('#world')&&!main.querySelector('.modal-overlay')&&!main.textContent.trim())error('The game did not initialize. Check your connection, then retry.');},10000);
- import('./app.mjs?v=20261031-50').catch(e=>error('Unable to load game code: '+(e.message||e)));
+ import('./app.mjs?v=20261031-51').catch(e=>error('Unable to load game code: '+(e.message||e)));
 })();
 </script>
 </body>
