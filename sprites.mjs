@@ -54,14 +54,50 @@ cache.set(key,c);return c;}
 function readyImage(url){if(!url)return null;if(!images.has(url)){const img=new Image();img.onload=()=>globalThis.spirimonArtLoaded?.();img.src=url;images.set(url,img);}const image=images.get(url);return image.complete&&image.naturalWidth?image:null;}
 // Companion sheets use four rows (north,south,west,east), four frames each,
 // and one sheet per evolution form. Missing sheets fall back to roster artwork.
+// Each species and evolution has its own cached 4x4 walking atlas.
+// Source art remains the authoritative creature image. Dedicated authored
+// direction sheets in assets/companions take precedence when supplied.
+const companionSheets=new Map();
+function generatedCompanionSheet(sp,form){
+ const key=sp.id+':'+form;
+ const existing=companionSheets.get(key);
+ if(existing)return existing;
+ const source=sp.proceduralArt?spiritSprite(sp,form):readyImage(sp.atlas||sp.sprites?.[form]);
+ if(!source)return null;
+ const cell=64,canvas=document.createElement('canvas');
+ canvas.width=cell*4;canvas.height=cell*4;
+ const g=canvas.getContext('2d');g.imageSmoothingEnabled=false;
+ const srcX=sp.atlas?Math.max(0,Math.min(2,form))*256:0;
+ const srcW=sp.atlas?256:source.naturalWidth||source.width;
+ const srcH=sp.atlas?256:source.naturalHeight||source.height;
+ for(let direction=0;direction<4;direction++)for(let frame=0;frame<4;frame++){
+  const cx=frame*cell+cell/2,cy=direction*cell+cell/2;
+  const step=[0,-2,0,2][frame],stride=[0,1,0,-1][frame];
+  g.save();g.translate(cx,cy+step);
+  // Preserve the original creature design; the horizontal directions
+  // use mirrored source art, while vertical directions use foreshortening.
+  if(direction===2)g.scale(-1,1);
+  if(direction===0||direction===1){
+   g.scale(direction===0?.84:.94,direction===0?.88:1);
+  }
+  g.rotate(stride*.035);
+  g.drawImage(source,srcX,0,srcW,srcH,-cell/2,-cell/2,cell,cell);
+  g.restore();
+ }
+ companionSheets.set(key,canvas);
+ return canvas;
+}
 export function drawCompanion(ctx,sp,form,x,y,size=36,face='down',moving=false,progress=0){
  if(!sp)return;
  const row={up:0,down:1,left:2,right:3}[face]??1;
- const frame=moving?[0,1,2,3][Math.floor(Math.max(0,progress)*4)%4]:0;
+ const frame=moving?Math.min(3,Math.floor(Math.max(0,progress)*4)):0;
  const path='./assets/companions/'+sp.id+'-'+form+'.webp';
- const sheet=readyImage(path);
+ // Avoid requesting hundreds of nonexistent files: explicit authored
+ // sheets are opt-in; generated sheets cover all existing roster forms.
+ const authored=sp.companionSheets?.[form];
+ const sheet=authored?readyImage(authored):generatedCompanionSheet(sp,form);
  if(sheet){
-  const sw=sheet.naturalWidth/4,sh=sheet.naturalHeight/4;
+  const sw=sheet.width/4,sh=sheet.height/4;
   ctx.save();ctx.imageSmoothingEnabled=false;
   ctx.drawImage(sheet,frame*sw,row*sh,sw,sh,x,y,size,size);
   ctx.restore();return;
