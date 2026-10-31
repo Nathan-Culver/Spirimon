@@ -104,6 +104,13 @@ export function executeAction(actor,asp,target,tsp,move,style,commit,r=Math.rand
 export function resolveRound(a,asp,b,bsp,aChoice,bChoice,r=Math.random){a.battleStyle=aChoice.style;b.battleStyle=bChoice.style;const first=priority(a,asp,aChoice.move,aChoice.style)>=priority(b,bsp,bChoice.move,bChoice.style);const actors=first?[[a,asp,b,bsp,aChoice],[b,bsp,a,asp,bChoice]]:[[b,bsp,a,asp,bChoice],[a,asp,b,bsp,aChoice]];const log=[];for(const[u,us,v,vs,c]of actors)log.push(...executeAction(u,us,v,vs,c.move,c.style,c.commit,r));for(const[u,s]of[[a,asp],[b,bsp]])statusTick(u,s,log);return log;}
 export function sealChance(ind,sp,quality=1){return clamp((ind.catchRate??sp.catchRate??150)/150*.12+(1-ind.hp/stats(ind,sp).hp)*.55+(ind.status?.15:0)+(quality-1)*.12-ind.form*.1,.05,.92);}
 export function techniqueMilestones(sp){const pool=sp.learnset||buildLearnset(sp.base,sp.alter,sp.domains||[]);const original=new Set(startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id)).map(m=>m.id));const extra=pool.filter(m=>!original.has(m.id));return extra.map((m,n)=>({id:m.id,level:6+n*2,form:n<5?0:n<12?1:2}));}
+export function availableTechniques(ind,sp){
+ const pool=sp.learnset||buildLearnset(sp.base,sp.alter,sp.domains||[]);
+ const initial=startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id)).map(m=>m.id);
+ const unlocked=new Set([...initial,...(ind.moveIds||[]),...(ind.unlockedMoves||[])]);
+ for(const milestone of techniqueMilestones(sp))if(milestone.level<=ind.level&&milestone.form<=ind.form)unlocked.add(milestone.id);
+ return pool.filter(m=>unlocked.has(m.id));
+}
 export function learnProgression(ind,sp,previousLevel=ind.level,previousForm=ind.form){
  const pool=sp.learnset||buildLearnset(sp.base,sp.alter,sp.domains||[]);
  const byId=new Map(pool.map(m=>[m.id,m]));
