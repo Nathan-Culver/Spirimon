@@ -37,7 +37,7 @@
     if(!response.ok)throw new Error('Game module returned HTTP '+response.status+' at '+url.pathname+'. GitHub Pages may be serving an outdated deployment.');
     const type=response.headers.get('content-type')||'';
     if(!/javascript|ecmascript|text\/plain|octet-stream/i.test(type))throw new Error('Game module has unexpected content type '+type+'. Check GitHub Pages publishing settings.');
-    await import(url.href);
+    const modules=['app.mjs','engine.mjs','sprites.mjs','moves.mjs','towns.mjs','world.mjs','roster.mjs','transformation.mjs','audio.mjs','offerings.mjs','ai-providers.mjs','terrain.mjs','adventure-systems.mjs','move-animations.mjs'];const failures=await Promise.all(modules.map(async file=>{try{const res=await fetch(new URL('./'+file,location.href),{cache:'no-store'});if(!res.ok)return file+' (HTTP '+res.status+')';const type=res.headers.get('content-type')||'';if(/text\/html/i.test(type))return file+' (HTML instead of JavaScript)';return null;}catch(e){return file+' ('+(e?.message||e)+')';}}));const missing=failures.filter(Boolean);if(missing.length)throw new Error('Missing or blocked game dependencies: '+missing.join('; '));await import(url.href);
   }catch(e){
     let detail=e?.message||String(e);
     if(/Failed to fetch dynamically imported module/i.test(detail))detail+=' — A JavaScript dependency may be missing or blocked. Check that GitHub Pages deployed the latest main branch.';
