@@ -4,6 +4,8 @@ on:
     paths:
       - 'engine.mjs'
       - 'moves.mjs'
+      - 'move-animations.mjs'
+      - 'app.mjs'
       - 'tests/**'
       - '.github/workflows/combat-tests.yml'
   workflow_dispatch:
@@ -15,4 +17,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --check engine.mjs && node --check moves.mjs && node --test tests/*.test.mjs
+      - run: node --check engine.mjs && node --check moves.mjs && node --check move-animations.mjs && node --check app.mjs && node --test tests/*.test.mjs
