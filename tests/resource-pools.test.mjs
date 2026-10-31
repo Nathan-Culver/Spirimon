@@ -15,14 +15,32 @@ test('all catalog moves consume only their corresponding resource',()=>{
   assert.equal(a[other],before[other],move.id+' does not consume '+other);
  }
 });
-test('all catalog moves fall back without spending the other resource',()=>{
+test('all catalog moves can use the other pool at double cost',()=>{
  for(const move of MOVE_CATALOG){
-  const a=actor(),b=foe(),resource=expectedResource(move),other=resource==='pp'?'willpower':'pp',previous=a[other];
-  a[resource]=0;
+  const a=actor(),b=foe(),resource=expectedResource(move),other=resource==='pp'?'willpower':'pp',cost=moveCost(move);
+  a[resource]=0;const otherBefore=a[other];
+  executeAction(a,species,b,species,move,'normal',.5,()=>.5);
+  assert.equal(a[resource],0,move.id+' leaves exhausted native pool empty');
+  assert.equal(a[other],otherBefore-2*cost,move.id+' spends twice the cost from alternate pool');
+ }
+});
+test('all catalog moves can split payment between pools',()=>{
+ for(const move of MOVE_CATALOG){
+  const a=actor(),b=foe(),resource=expectedResource(move),other=resource==='pp'?'willpower':'pp',cost=moveCost(move);
+  a[resource]=1;const otherBefore=a[other];
+  executeAction(a,species,b,species,move,'normal',.5,()=>.5);
+  assert.equal(a[resource],0,move.id+' spends remaining native pool');
+  assert.equal(a[other],otherBefore-2*(cost-1),move.id+' doubles only the shortfall');
+ }
+});
+test('all catalog moves fall back if combined pools cannot cover the cost',()=>{
+ for(const move of MOVE_CATALOG){
+  const a=actor(),b=foe(),resource=expectedResource(move),other=resource==='pp'?'willpower':'pp';
+  a[resource]=0;a[other]=0;
   const logs=executeAction(a,species,b,species,move,'normal',.5,()=>.5);
-  assert.equal(a[resource],0,move.id+' cannot spend exhausted '+resource);
-  assert.equal(a[other],previous,move.id+' does not spend alternate pool');
-  assert.ok(logs.some(line=>line.includes('lacks ')),move.id+' gives exhaustion feedback');
+  assert.equal(a[resource],0,move.id+' does not spend exhausted native pool');
+  assert.equal(a[other],0,move.id+' does not spend exhausted alternate pool');
+  assert.ok(logs.some(line=>line.includes('lacks enough')),move.id+' gives exhaustion feedback');
  }
 });
 test('legacy saves initialize Willpower on demand and healing refills both',()=>{
