@@ -87,3 +87,16 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 .emulator-mode .emu-pad [data-hold="right"]{left:89px;top:60px;width:88px;clip-path:polygon(32% 0,100% 0,100% 100%,32% 100%,0 50%)}
 .emulator-mode .emu-pad-center{display:none}
 @media(max-height:430px){.emulator-mode .emu-pad{transform:scale(.82);transform-origin:bottom left}}
+
+/* Battle technique details: compact, readable and resilient to narrow screens. */
+.classic-moves{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(5px,1vw,10px);width:100%;min-width:0}
+.classic-move{display:flex;flex-direction:column;align-items:stretch;gap:3px;min-width:0;min-height:0;padding:clamp(7px,1.3vw,13px);overflow-wrap:anywhere;text-align:left}
+.classic-move b{font-size:clamp(10px,1.4vw,14px);line-height:1.2}
+.classic-move small{font-size:clamp(8px,1.1vw,11px);line-height:1.25}
+.move-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin-top:3px;font-size:clamp(8px,1vw,11px);line-height:1.3}
+.move-stats>span{min-width:0;display:flex;justify-content:space-between;gap:3px;padding:3px 4px;border:1px solid currentColor;border-radius:3px;opacity:.92}
+.move-stats b{font-weight:800}
+.move-effect{font-size:clamp(8px,1vw,11px);line-height:1.3;overflow-wrap:anywhere}
+@media(max-width:440px){.classic-moves{gap:5px}.classic-move{padding:6px}.move-stats{grid-template-columns:repeat(3,minmax(0,1fr));font-size:8px}.move-stats>span{padding:2px;flex-direction:column;align-items:center;gap:0}.move-effect{font-size:9px}}
+@media(max-width:300px){.classic-moves{grid-template-columns:1fr}.move-stats>span{flex-direction:row}}
+@media(orientation:landscape) and (max-height:500px){.classic-moves{gap:4px}.classic-move{padding:5px;gap:1px}.move-stats>span{padding:1px 3px}.move-effect{font-size:9px}}
