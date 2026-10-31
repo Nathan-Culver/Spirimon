@@ -520,14 +520,23 @@ function drawInterior(canvas,time){
    if(t==='wall-art'){fill('#d5b986',px+5,py+7,22,13);fill('#665b57',px+7,py+9,18,9);fill(hall?'#9f88b4':'#8aaf9a',px+10,py+11,12,5);fill('#e6ce9d',px+14,py+10,4,7);}
    continue;
   }
-  fill(pal.edge,px,py,32,32);fill(pal.floor,px+1,py+1,30,30);
-  fill(h%3===0?'#d0b28a':'#a68b6b',px+3,py+4,2,2);
-  fill('#8f73584d',px+1,py+15,30,1);
-  fill('#8f73584d',px+((x+y)%2?11:23),py+1,1,14);
+  // Long, staggered planks read as a continuous floor instead of a checkerboard.
+  fill(pal.floor,px,py,32,32);
+  for(let p=0;p<2;p++){const yy=py+p*16;fill(pal.edge,px,yy+15,32,1);fill('#d5b891',px,yy+1,32,1);
+   const seam=((Math.floor((x+(p%2))*0.5)%2)===0?7:23);fill(pal.edge,px+seam,yy+1,1,14);
+   if((h+p)%4===0)fill('#9d7d5c',px+11,yy+8,2,1);
+  }
   if(t==='rug'||t==='tatami'){
-   const base=t==='rug'?pal.rug:'#a4b68a';fill('#5b5148',px+1,py+1,30,30);fill(base,px+3,py+3,26,26);
-   fill(t==='rug'?'#c8a678':'#e0d3a0',px+5,py+5,22,2);fill(t==='rug'?'#c8a678':'#e0d3a0',px+5,py+25,22,2);
-   fill('#d8bd94',px+15,py+8,2,16);fill('#d8bd94',px+9,py+15,14,2);
+   const carpet=t==='rug',base=carpet?pal.rug:'#a4b68a';
+   const adjacent=(dx,dy)=>W.roomTile(kind,x+dx,y+dy)===t;
+   fill(base,px,py,32,32);
+   // Only the outer boundary receives a border: contiguous tiles form one carpet.
+   if(!adjacent(0,-1)){fill('#4e3e48',px,py,32,3);fill('#d6b782',px,py+3,32,2);}
+   if(!adjacent(0,1)){fill('#4e3e48',px,py+29,32,3);fill('#d6b782',px,py+27,32,2);}
+   if(!adjacent(-1,0)){fill('#4e3e48',px,py,3,32);fill('#d6b782',px+3,py,2,32);}
+   if(!adjacent(1,0)){fill('#4e3e48',px+29,py,3,32);fill('#d6b782',px+27,py,2,32);}
+   if(carpet){fill('#a38a92',px+14,py+12,4,8);fill('#cbb5a0',px+11,py+15,10,2);}
+   else{fill('#829a79',px,py+15,32,1);fill('#d2cda3',px+15,py,1,32);}
   }
   if(t==='shelf'){
    fill('#4d3529',px+1,py+4,30,26);fill('#9d754c',px+3,py+4,26,3);
@@ -545,8 +554,11 @@ function drawInterior(canvas,time){
    if(t==='counter'&&forge){fill('#4d5357',px+9,py+15,14,7);fill('#e1a45e',px+12,py+14,8,3);}
   }
   if(t==='altar'){
-   fill('#655267',px+1,py+5,30,26);fill('#b9a28a',px+3,py+7,26,22);fill('#e2c17c',px+13,py+5,6,17);
-   fill('#fff2bd',px+15,py+2,2,8);fill('#9473aa',px+7,py+17,5,7);fill('#9473aa',px+20,py+17,5,7);
+   // One continuous raised shrine dais with a single focal emblem.
+   fill('#4e414e',px,py+6,32,26);fill('#877187',px,py+7,32,20);
+   fill('#c3a578',px,py+7,32,3);fill('#65536c',px,py+26,32,4);
+   if(x===7){fill('#d8bb82',px+6,py+10,20,14);fill('#6f547c',px+9,py+12,14,10);fill('#e6d49d',px+14,py+12,4,10);}
+   else if(x===5||x===9){fill('#c4a57b',px+10,py+12,12,11);fill('#e6d49d',px+14,py+11,4,9);}
   }
   if(t==='cushion'){fill('#7c544c',px+4,py+12,24,17);fill('#bc7469',px+6,py+11,20,14);fill('#e4a08a',px+8,py+12,16,3);}
   if(t==='exit'){fill('#6c5543',px+2,py+1,28,30);fill('#d2b88d',px+4,py+4,24,26);fill('#3c302c',px+8,py+13,16,17);fill('#e7c87e',px+13,py+17,6,8);}
