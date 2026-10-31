@@ -89,7 +89,7 @@ function generatedCompanionSheet(sp,form){
 }
 export function drawCompanion(ctx,sp,form,x,y,size=36,face='down',moving=false,progress=0){
  if(!sp)return;
- const row={up:0,down:1,left:2,right:3}[face]??1;
+ const row={up:0,down:1,left:3,right:2}[face]??1;
  const frame=moving?Math.min(3,Math.floor(Math.max(0,progress)*4)):0;
  const path='./assets/companions/'+sp.id+'-'+form+'.webp';
  // Avoid requesting hundreds of nonexistent files: explicit authored
