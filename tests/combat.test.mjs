@@ -90,3 +90,31 @@ test('challenger teams grow from one Spirit up to six',()=>{
  assert.equal(E.challengerTeamSize(20,60),6);
  for(let n=1;n<15;n++)assert.ok(E.challengerTeamSize(n,25)>=E.challengerTeamSize(n-1,25));
 });
+
+test('expanded quests have valid difficulty, stages, rank requirements and rewards',()=>{
+ const quests=E.questTemplates();
+ assert.ok(quests.length>=15);
+ assert.equal(new Set(quests.map(q=>q.id)).size,quests.length);
+ for(const q of quests){
+  assert.ok(E.QUEST_DIFFICULTIES.includes(q.difficulty));
+  assert.ok(q.steps.length>=1&&q.steps.every(step=>step.goal&&step.count>0));
+  assert.ok(Object.values(q.reward).every(value=>Number.isInteger(value)&&value>0));
+  assert.ok(E.questEligible({rank:q.requirements?.rank||1},q));
+ }
+});
+test('quest stages require sequential progress and snapshot only post-acceptance events',()=>{
+ const q=E.questTemplates().find(q=>q.id==='trail-scout');
+ const s={rank:2,regions:Object.fromEntries(Array.from({length:3},(_,i)=>[i,{visited:true}])),wins:9};
+ let record={stage:0,baseline:E.questMetric(s,q.steps[0].goal)};
+ record=E.advanceQuest(s,q,record);assert.equal(record.stage,0);
+ for(let i=3;i<8;i++)s.regions[i]={visited:true};
+ record=E.advanceQuest(s,q,record);assert.equal(record.stage,1);
+ assert.equal(record.baseline,9);
+ s.wins=10;record=E.advanceQuest(s,q,record);assert.equal(record.stage,1);
+ s.wins=11;record=E.advanceQuest(s,q,record);assert.ok(E.questStage(s,q,record).complete);
+});
+test('high-tier quests stay locked until rank threshold',()=>{
+ const q=E.questTemplates().find(q=>q.difficulty==='Legendary');
+ assert.equal(E.questEligible({rank:1},q),false);
+ assert.equal(E.questEligible({rank:5},q),true);
+});
