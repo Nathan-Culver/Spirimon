@@ -2,11 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
+import {createHash} from 'node:crypto';
 import {buildPage} from '../build.mjs';
 
 test('published page contains current source, styles, font and core art without startup downloads',async()=>{
  const built=await buildPage(),published=readFileSync(new URL('../index.html',import.meta.url),'utf8');
- assert.equal(built.html,published,'Run npm run build before publishing');
+ const hash=text=>createHash('sha256').update(text).digest('hex');assert.equal(hash(built.html),hash(published),'Run npm run build before publishing');
  assert.doesNotMatch(published,/<script[^>]+src=|<link rel="stylesheet"|type="importmap"|type="module"/);
  assert.ok(published.includes('data:font/ttf;base64,'));assert.ok(published.includes('data:image/webp;base64,'));assert.equal(built.modules.length,17);
  assert.doesNotThrow(()=>new vm.Script(built.script));assert.doesNotMatch(built.script,/(^|\n)import\s|import\.meta/);
