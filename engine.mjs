@@ -103,7 +103,25 @@ export function executeAction(actor,asp,target,tsp,move,style,commit,r=Math.rand
 }
 export function resolveRound(a,asp,b,bsp,aChoice,bChoice,r=Math.random){a.battleStyle=aChoice.style;b.battleStyle=bChoice.style;const first=priority(a,asp,aChoice.move,aChoice.style)>=priority(b,bsp,bChoice.move,bChoice.style);const actors=first?[[a,asp,b,bsp,aChoice],[b,bsp,a,asp,bChoice]]:[[b,bsp,a,asp,bChoice],[a,asp,b,bsp,aChoice]];const log=[];for(const[u,us,v,vs,c]of actors)log.push(...executeAction(u,us,v,vs,c.move,c.style,c.commit,r));for(const[u,s]of[[a,asp],[b,bsp]])statusTick(u,s,log);return log;}
 export function sealChance(ind,sp,quality=1){return clamp((ind.catchRate??sp.catchRate??150)/150*.12+(1-ind.hp/stats(ind,sp).hp)*.55+(ind.status?.15:0)+(quality-1)*.12-ind.form*.1,.05,.92);}
-export function gainXP(ind,sp,amount){ind.xp+=amount;let levels=0;while(ind.level<100&&ind.xp>=ind.level*18){ind.xp-=ind.level*18;ind.level++;levels++;}const required=ind.form===0?16:36;let evolved=false;if(ind.form<2&&ind.level>=required&&(sp.evolution!=='bond'||ind.bond>=60)){ind.form++;ind.appearance=ind.form;evolved=true;}if(levels||evolved)heal(ind,sp);return{levels,evolved};}
+export function techniqueMilestones(sp){const pool=sp.learnset||buildLearnset(sp.base,sp.alter,sp.domains||[]);const original=new Set(startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id)).map(m=>m.id));const extra=pool.filter(m=>!original.has(m.id));return extra.map((m,n)=>({id:m.id,level:6+n*2,form:n<5?0:n<12?1:2}));}
+export function learnProgression(ind,sp,previousLevel=ind.level,previousForm=ind.form){
+ const pool=sp.learnset||buildLearnset(sp.base,sp.alter,sp.domains||[]);
+ const byId=new Map(pool.map(m=>[m.id,m]));
+ const start=startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id)).map(m=>m.id);
+ ind.moveIds??=start;
+ ind.unlockedMoves??=[];
+ const owned=new Set([...ind.moveIds,...ind.unlockedMoves]);
+ const earned=[];
+ for(const m of techniqueMilestones(sp)){
+   if(m.level>ind.level||m.form>ind.form||owned.has(m.id))continue;
+   if(m.level<=previousLevel&&m.form<=previousForm)continue;
+   owned.add(m.id);ind.unlockedMoves.push(m.id);earned.push(byId.get(m.id));
+ }
+ // Unlocked moves are remembered permanently. Equip newly learned moves without erasing custom selections.
+ for(const m of earned){if(ind.moveIds.length<4)ind.moveIds.push(m.id);else {const replace=ind.moveIds.findIndex(id=>!byId.has(id));if(replace>=0)ind.moveIds[replace]=m.id;}}
+ return earned;
+}
+export function gainXP(ind,sp,amount){const previousLevel=ind.level,previousForm=ind.form;ind.xp+=amount;let levels=0;while(ind.level<100&&ind.xp>=ind.level*18){ind.xp-=ind.level*18;ind.level++;levels++;}const required=ind.form===0?16:36;let evolved=false;if(ind.form<2&&ind.level>=required&&(sp.evolution!=='bond'||ind.bond>=60)){ind.form++;ind.appearance=ind.form;evolved=true;}const learned=learnProgression(ind,sp,previousLevel,previousForm);if(levels||evolved)heal(ind,sp);return{levels,evolved,learned};}
 export function region(seed,cx,cy){const r=rng(hash(seed,cx,cy)),biome=cx===0&&cy===0?BIOMES[0]:pick(BIOMES,r);return{cx,cy,biome,town:cx===0&&cy===0||r()<.27,name:cx===0&&cy===0?'Mossveil Crossing':pick(['Elder','Willow','Hollow','Amber','Thistle','Silver','Quiet'],r)+pick(['watch','mere','grove','rest','reach','fall'],r),danger:Math.max(Math.abs(cx),Math.abs(cy))===0?1:6,key:cx+','+cy};}
 export const CHUNK_W=48,CHUNK_H=36;
 export function coord(x,y){return{cx:Math.floor(x/48),cy:Math.floor(y/36),lx:((x%48)+48)%48,ly:((y%36)+36)%36};}
