@@ -218,3 +218,29 @@ export function advanceQuest(s,q,record){if(!record||record==='completed'||recor
 export function questProgress(s,q){return questMetric(s,q.goal);}
 
 export function challengerTeamSize(matches,level){return Math.min(6,1+Math.floor(matches/2)+(level>=20?1:0)+(level>=40?1:0));}
+
+export function caveEntrance(seed,cx,cy){
+ if(cx===0&&cy===0)return null;
+ if(hash(seed,'cave',cx,cy)%3!==0)return null;
+ const x=cx*48+12,y=cy*36+19;
+ return {x,y,cx,cy,id:cx+','+cy,depth:2+hash(seed,'cave-depth',cx,cy)%4};
+}
+export function caveMap(seed,id,level){
+ const width=25,height=19,grid=Array.from({length:height},()=>Array(width).fill('wall'));
+ const random=rng(hash(seed,'cave-layout',id,level));
+ const stack=[[1,1]];grid[1][1]='floor';
+ while(stack.length){
+  const [x,y]=stack[stack.length-1],dirs=[[2,0],[-2,0],[0,2],[0,-2]].sort(()=>random()-.5);
+  const choices=dirs.filter(([dx,dy])=>x+dx>0&&y+dy>0&&x+dx<width-1&&y+dy<height-1&&grid[y+dy][x+dx]==='wall');
+  if(!choices.length){stack.pop();continue;}
+  const [dx,dy]=choices[Math.floor(random()*choices.length)];
+  grid[y+dy/2][x+dx/2]='floor';grid[y+dy][x+dx]='floor';stack.push([x+dx,y+dy]);
+ }
+ const floors=[];for(let y=1;y<height-1;y++)for(let x=1;x<width-1;x++)if(grid[y][x]==='floor')floors.push({x,y});
+ const far=floors.reduce((a,b)=>Math.abs(b.x-1)+Math.abs(b.y-1)>Math.abs(a.x-1)+Math.abs(a.y-1)?b:a,{x:1,y:1});
+ grid[1][1]='up';grid[far.y][far.x]='down';
+ const exits=[{x:1,y:1,kind:'up'},{...far,kind:'down'}];
+ if(level===0&&hash(seed,'extra-cave-exit',id)%2===0){const other=floors.find(p=>Math.abs(p.x-1)+Math.abs(p.y-1)>18&&Math.abs(p.x-far.x)+Math.abs(p.y-far.y)>10);if(other){grid[other.y][other.x]='exit';exits.push({...other,kind:'exit'});}}
+ return {width,height,grid,exits};
+}
+export function caveWalkable(map,x,y){return !!map.grid[y]&&['floor','up','down','exit'].includes(map.grid[y][x]);}
