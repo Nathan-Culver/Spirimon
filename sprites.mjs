@@ -52,6 +52,22 @@ if(form===2){for(const[x,y]of[[8,20],[51,8],[54,43],[10,46]]){rect(x,y-2,1,5,acc
 if(sp.domains.length){ellipse(p,51,13,5,5,'#d7bb75');rect(50,9,2,8,'#fff1c0');rect(47,12,8,2,'#fff1c0');}
 cache.set(key,c);return c;}
 function readyImage(url){if(!url)return null;if(!images.has(url)){const img=new Image();img.onload=()=>globalThis.spirimonArtLoaded?.();img.src=url;images.set(url,img);}const image=images.get(url);return image.complete&&image.naturalWidth?image:null;}
+// Companion sheets use four rows (north,south,west,east), four frames each,
+// and one sheet per evolution form. Missing sheets fall back to roster artwork.
+export function drawCompanion(ctx,sp,form,x,y,size=36,face='down',moving=false,progress=0){
+ if(!sp)return;
+ const row={up:0,down:1,left:2,right:3}[face]??1;
+ const frame=moving?[0,1,2,3][Math.floor(Math.max(0,progress)*4)%4]:0;
+ const path='./assets/companions/'+sp.id+'-'+form+'.webp';
+ const sheet=readyImage(path);
+ if(sheet){
+  const sw=sheet.naturalWidth/4,sh=sheet.naturalHeight/4;
+  ctx.save();ctx.imageSmoothingEnabled=false;
+  ctx.drawImage(sheet,frame*sw,row*sh,sw,sh,x,y,size,size);
+  ctx.restore();return;
+ }
+ drawSpirit(ctx,sp,form,x,y,size,face==='left');
+}
 export function drawSpirit(ctx,sp,form,x,y,size=96,flip=false){if(!sp)return;if(sp.proceduralArt){const sprite=spiritSprite(sp,form);ctx.save();ctx.imageSmoothingEnabled=false;if(flip){ctx.translate(x+size,y);ctx.scale(-1,1);ctx.drawImage(sprite,0,0,size,size);}else ctx.drawImage(sprite,x,y,size,size);ctx.restore();return;}const image=readyImage(sp.atlas||sp.sprites?.[form]);if(!image){const sprite=spiritSprite({...sp,identity:sp.identity??hash(sp.id),base:sp.base||'Beast',alter:sp.alter||'Fey',body:sp.body||''},form);ctx.save();ctx.imageSmoothingEnabled=false;if(flip){ctx.translate(x+size,y);ctx.scale(-1,1);ctx.drawImage(sprite,0,0,size,size);}else ctx.drawImage(sprite,x,y,size,size);ctx.restore();return;}ctx.save();ctx.imageSmoothingEnabled=false;if(flip){ctx.translate(x+size,y);ctx.scale(-1,1);}else ctx.translate(x,y);if(sp.atlas){ctx.drawImage(image,form*256,0,256,256,0,0,size,size);if(sp.id==='lacquertor'&&form>0){/* Replace the stone castle silhouette on the rear shoulder with irregular boulders. Draw in native 256px atlas coordinates. */ctx.save();ctx.scale(size/256,size/256);const ox=form===1?165:166,oy=form===1?79:64;ctx.translate(ox,oy);const rock=(pts,color)=>{ctx.fillStyle=color;ctx.beginPath();pts.forEach(([a,b],i)=>i?ctx.lineTo(a,b):ctx.moveTo(a,b));ctx.closePath();ctx.fill();};rock([[-36,17],[-37,-18],[-24,-39],[-4,-48],[21,-40],[36,-16],[34,21],[20,39],[-12,38]],'#302e2a');rock([[-33,12],[-32,-18],[-22,-35],[-3,-44],[19,-37],[32,-15],[29,18],[16,34],[-12,34]],'#777064');rock([[-29,-16],[-20,-33],[-3,-41],[10,-30],[-1,-12],[-19,-8]],'#aaa08a');rock([[10,-30],[23,-27],[30,-13],[27,12],[15,22],[2,12]],'#58544e');rock([[-26,14],[-14,3],[2,12],[15,26],[5,32],[-13,29]],'#696258');rock([[-13,-8],[-4,-18],[1,-9],[-5,5]],'#3e3b38');rock([[11,18],[18,9],[23,17],[17,26]],'#403c38');ctx.restore();}}else{const h=size*image.height/image.width;ctx.drawImage(image,0,size-Math.min(size,h),size,Math.min(size,h));}ctx.restore();}
 function prop(ctx,index,x,y,w,h){const image=readyImage(ART.world);if(!image)return;ctx.imageSmoothingEnabled=false;ctx.drawImage(image,(index%3)*256,Math.floor(index/3)*256,256,256,Math.round(x),Math.round(y),w,h);}
 export function renderSpiritCanvases(root=document){root.querySelectorAll('canvas[data-species]').forEach(c=>{const sp=globalThis.spirimonSpecies?.[c.dataset.species];if(!sp)return;const ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);drawSpirit(ctx,sp,Number(c.dataset.form)||0,0,0,c.width);});}
