@@ -100,3 +100,20 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 @media(max-width:440px){.classic-moves{gap:5px}.classic-move{padding:6px}.move-stats{grid-template-columns:repeat(3,minmax(0,1fr));font-size:8px}.move-stats>span{padding:2px;flex-direction:column;align-items:center;gap:0}.move-effect{font-size:9px}}
 @media(max-width:300px){.classic-moves{grid-template-columns:1fr}.move-stats>span{flex-direction:row}}
 @media(orientation:landscape) and (max-height:500px){.classic-moves{gap:4px}.classic-move{padding:5px;gap:1px}.move-stats>span{padding:1px 3px}.move-effect{font-size:9px}}
+
+/* Option B: move name dominates; affinity, eligible creatures and category are secondary. */
+.classic-control .classic-moves{min-height:0;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));overflow-y:auto;align-content:stretch}
+.classic-control .classic-move{display:flex;flex-direction:column;justify-content:center;align-items:stretch;gap:clamp(2px,.45vh,6px);min-width:0;min-height:0;padding:clamp(4px,.8vw,10px);font-family:SpirimonPixel,monospace;line-height:1.15;overflow:hidden}
+.classic-control .classic-move .move-name{display:block;color:#304b30;font:clamp(13px,1.75vw,23px)/1.2 SpirimonPixel,monospace;font-weight:bold;white-space:normal;overflow-wrap:anywhere;letter-spacing:0}
+.classic-control .classic-move .move-tags{display:flex;flex-wrap:wrap;align-items:center;gap:3px;min-width:0}
+.classic-control .classic-move .move-tag{display:inline-block;max-width:100%;padding:2px 5px;border-radius:3px;font:clamp(8px,.9vw,11px)/1.2 SpirimonPixel,monospace;white-space:normal;overflow-wrap:anywhere;border:1px solid #b5bda4}
+.classic-control .classic-move .move-tag.affinity{background:#e4e9d1;color:#53633e}
+.classic-control .classic-move .move-tag.creature{background:#e8e0d0;color:#695441}
+.classic-control .classic-move .move-tag.category{background:#e3e4e9;color:#4f5570}
+.classic-control .classic-move .move-stats{display:flex;flex-wrap:wrap;gap:3px;margin-top:0;font:clamp(8px,.85vw,11px)/1.2 SpirimonPixel,monospace}
+.classic-control .classic-move .move-stats>span{display:inline-flex;justify-content:flex-start;align-items:center;gap:4px;min-width:0;background:#f0f1e3;border:1px solid #d0d7bd;border-radius:3px;padding:2px 4px;opacity:1}
+.classic-control .classic-move .move-stats strong{display:inline;color:#344b35;font:inherit;font-weight:bold}
+.classic-control .classic-move .move-effect{display:block;font:clamp(8px,.8vw,11px)/1.2 SpirimonPixel,monospace;color:#775b47;white-space:normal;overflow-wrap:anywhere}
+@media(max-width:520px){.classic-control .classic-move{padding:4px;gap:2px}.classic-control .classic-move .move-name{font-size:clamp(11px,3vw,16px)}.classic-control .classic-move .move-tag{font-size:8px;padding:1px 3px}.classic-control .classic-move .move-stats,.classic-control .classic-move .move-effect{font-size:8px}}
+@media(max-height:430px) and (orientation:landscape){.classic-control .classic-moves{overflow-y:auto}.classic-control .classic-move{justify-content:flex-start;overflow:visible}.classic-control .classic-move .move-name{font-size:clamp(12px,1.5vw,17px)}.classic-control .classic-move .move-tag{padding:1px 3px}}
+@media(max-width:300px){.classic-control .classic-moves{grid-template-columns:1fr;grid-template-rows:none;overflow-y:auto}.classic-control .classic-move{min-height:85px}}
