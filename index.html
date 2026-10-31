@@ -19,31 +19,24 @@
 </aside>
 <div class="app-shell">
 <header class="topbar"><a class="wordmark" href="#" data-action="view" data-value="explore">SPIRIMON<span>THE SEALER'S FRONTIER</span></a><div class="topbar-right"><span id="save-status" class="save-status"><i></i> Saved on this device</span><button class="icon-button" data-action="export" title="Export save backup" aria-label="Export save backup">⇩</button><button class="player-avatar" data-action="profile" aria-label="Sealer profile">N</button></div></header>
-<main id="main"></main>
+<main id="main"><section id="startup-panel" class="panel" style="margin:24px;padding:24px" aria-labelledby="startup-title"><h1 id="startup-title">Loading Spirimon…</h1><p id="startup-status" role="status" aria-live="polite">Loading game code…</p><p id="startup-help">Your saved journey stays on this device.</p><button id="startup-retry" class="btn" onclick="location.reload()" hidden>Retry loading</button></section></main>
 <footer><span>AN ENDLESS WORLD. A BOND BENEATH THE SKIN.</span><span id="footer-seed"></span></footer>
 </div>
 <div id="modal-root"></div><div id="toast" role="status" aria-live="polite"></div>
+<script type="importmap">{"imports":{"./app.mjs":"./app.mjs?v=20261031-startup-4","./ai-providers.mjs":"./ai-providers.mjs?v=20261031-startup-4","./transformation.mjs":"./transformation.mjs?v=20261031-startup-4","./offerings.mjs":"./offerings.mjs?v=20261031-startup-4","./audio.mjs":"./audio.mjs?v=20261031-startup-4","./roster.mjs":"./roster.mjs?v=20261031-startup-4","./world.mjs":"./world.mjs?v=20261031-startup-4","./engine.mjs":"./engine.mjs?v=20261031-startup-4","./adventure-systems.mjs":"./adventure-systems.mjs?v=20261031-startup-4","./interior-assets.mjs":"./interior-assets.mjs?v=20261031-startup-4","./move-animations.mjs":"./move-animations.mjs?v=20261031-startup-4","./sprites.mjs":"./sprites.mjs?v=20261031-startup-4","./towns.mjs":"./towns.mjs?v=20261031-startup-4","./moves.mjs":"./moves.mjs?v=20261031-startup-4","./terrain.mjs":"./terrain.mjs?v=20261031-startup-4"}}</script>
 <script>
 (function(){
- const main=document.getElementById('main');
- const error=(message)=>{main.innerHTML='<section style="margin:24px;padding:20px;background:#fff5dc;color:#553c32;border:3px solid #946b54"><h2>Spirimon could not start</h2><p>'+String(message).replace(/[&<>]/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[x]))+'</p><button onclick="location.reload()" style="padding:12px">Retry loading</button></section>';};
- window.addEventListener('error',e=>{if(!main.querySelector('#world'))error(e.message||'A game resource failed to load.');});
- window.addEventListener('unhandledrejection',e=>{if(!main.querySelector('#world'))error(e.reason?.message||e.reason||'A game module failed.');});
- window.setTimeout(()=>{if(!main.querySelector('#world')&&!main.querySelector('.modal-overlay')&&!main.textContent.trim())error('The game did not initialize. Check your connection, then retry.');},10000);
- (async()=>{
-  const url=new URL('./app.mjs?v=20261031-move-resources-3',location.href);
-  try{
-    const response=await fetch(url,{cache:'no-store'});
-    if(!response.ok)throw new Error('Game module returned HTTP '+response.status+' at '+url.pathname+'. GitHub Pages may be serving an outdated deployment.');
-    const type=response.headers.get('content-type')||'';
-    if(!/javascript|ecmascript|text\/plain|octet-stream/i.test(type))throw new Error('Game module has unexpected content type '+type+'. Check GitHub Pages publishing settings.');
-    const modules=['app.mjs','engine.mjs','sprites.mjs','moves.mjs','towns.mjs','world.mjs','roster.mjs','transformation.mjs','audio.mjs','offerings.mjs','ai-providers.mjs','terrain.mjs','adventure-systems.mjs','move-animations.mjs'];const failures=await Promise.all(modules.map(async file=>{try{const res=await fetch(new URL('./'+file,location.href),{cache:'no-store'});if(!res.ok)return file+' (HTTP '+res.status+')';const type=res.headers.get('content-type')||'';if(/text\/html/i.test(type))return file+' (HTML instead of JavaScript)';return null;}catch(e){return file+' ('+(e?.message||e)+')';}}));const missing=failures.filter(Boolean);if(missing.length)throw new Error('Missing or blocked game dependencies: '+missing.join('; '));await import(url.href);
-  }catch(e){
-    let detail=e?.message||String(e);
-    if(/Failed to fetch dynamically imported module/i.test(detail))detail+=' — A JavaScript dependency may be missing or blocked. Check that GitHub Pages deployed the latest main branch.';
-    error('Unable to load game code: '+detail);
-  }
-})();
+ const main=document.getElementById('main'),status=document.getElementById('startup-status'),help=document.getElementById('startup-help'),retry=document.getElementById('startup-retry');
+ let ready=false,failed=false;
+ const error=(message)=>{if(ready||failed)return;failed=true;clearTimeout(slowTimer);main.innerHTML='<section class="panel" style="margin:24px;padding:24px"><h1>Spirimon could not start</h1><p>'+String(message).replace(/[&<>]/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[x]))+'</p><p>Your saved journey has not been erased.</p><button class="btn" onclick="location.reload()">Retry loading</button></section>';};
+ const slowTimer=window.setTimeout(()=>{if(ready||failed||!main.querySelector('#startup-panel'))return;help.textContent='Loading is taking longer than usual. You can keep this page open or retry.';retry.hidden=false;},12000);
+ window.addEventListener('spirimon-startup',event=>{if(!ready&&!failed)status.textContent=String(event.detail||'Preparing your journey…');});
+ window.addEventListener('spirimon-ready',()=>{ready=true;clearTimeout(slowTimer);});
+ window.addEventListener('spirimon-startup-error',event=>error(event.detail||'The game could not open your saved journey.'));
+ window.addEventListener('error',event=>{if(event.message)error(event.message);});
+ window.addEventListener('unhandledrejection',event=>error(event.reason?.message||event.reason||'A game module failed.'));
+ // Import once. The browser resolves and caches this release's whole module graph.
+ import('./app.mjs').catch(error);
 })();
 </script>
 </body>
