@@ -117,3 +117,13 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 @media(max-width:520px){.classic-control .classic-move{padding:4px;gap:2px}.classic-control .classic-move .move-name{font-size:clamp(11px,3vw,16px)}.classic-control .classic-move .move-tag{font-size:8px;padding:1px 3px}.classic-control .classic-move .move-stats,.classic-control .classic-move .move-effect{font-size:8px}}
 @media(max-height:430px) and (orientation:landscape){.classic-control .classic-moves{overflow-y:auto}.classic-control .classic-move{justify-content:flex-start;overflow:visible}.classic-control .classic-move .move-name{font-size:clamp(12px,1.5vw,17px)}.classic-control .classic-move .move-tag{padding:1px 3px}}
 @media(max-width:300px){.classic-control .classic-moves{grid-template-columns:1fr;grid-template-rows:none;overflow-y:auto}.classic-control .classic-move{min-height:85px}}
+
+/* Fix: battle buttons were 40px high; name and effects were clipped by overflow:hidden.
+   Make each button an internally scrollable card, keeping the title anchored at top. */
+.classic-control .classic-moves{height:calc(100% - 21px);min-height:0;grid-template-rows:repeat(2,minmax(0,1fr));overflow:visible;align-items:stretch}
+.classic-control .classic-move{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;gap:3px;min-height:0;min-width:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;padding:4px 7px;scrollbar-width:thin;scrollbar-color:#a6b28e transparent}
+.classic-control .classic-move .move-name{display:block!important;flex:0 0 auto;min-height:1.25em;order:0;overflow:visible!important;white-space:normal!important;overflow-wrap:anywhere;font:700 clamp(14px,1.8vw,22px)/1.25 SpirimonPixel,monospace!important;color:#314b32!important;text-align:left}
+.classic-control .classic-move .move-tags{order:1;flex:0 0 auto}
+.classic-control .classic-move .move-stats{order:2;flex:0 0 auto}
+.classic-control .classic-move .move-effect{order:3;flex:0 0 auto}
+@media(max-height:500px) and (orientation:landscape){.classic-control .classic-move{padding:3px 6px;gap:2px}.classic-control .classic-move .move-name{font-size:clamp(13px,1.55vw,19px)!important;line-height:1.2!important}.classic-control .classic-move .move-tags{gap:2px}}
