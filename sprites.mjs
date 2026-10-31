@@ -127,7 +127,32 @@ function oldDrawPerson(ctx,x,y,role='player',tick=0,face='down',moving=false){co
 export function drawTree(ctx,x,y,seed,biome='forest'){prop(ctx,biome==='snow'?4:seed%7===0?5:3,x-16,y-48,64,80);}
 export function drawBuilding(ctx,x,y,guild=false,kind='home'){prop(ctx,guild?2:kind==='inn'?1:0,x+(guild?24:8),y-40,guild?176:144,guild?168:136);}
 export function drawTownDecor(ctx,x,y){prop(ctx,8,x,y-25,96,96);}
-export function drawPerson(ctx,x,y,role='player',tick=0,face='down',moving=false,appearance=null){const image=readyImage(ART.sealer);if(!image)return;const row={down:0,left:1,right:2,up:3}[face]??0;/* The sealer atlas is 192x320: THREE 64px columns, four 80px direction rows. */const frame=moving?[0,1,2,1][Math.floor(Math.max(0,tick)/55)%4]:1;ctx.save();ctx.imageSmoothingEnabled=false;if(role!=='player')ctx.filter='hue-rotate('+({keeper:130,merchant:45,rival:220,scholar:280,resident:80}[role]||90)+'deg)';if(face==='left'){/* Mirror the verified right-facing animation: the left atlas row is not a usable walk cycle. */ctx.translate(Math.round(x)+32,Math.round(y)-12);ctx.scale(-1,1);ctx.drawImage(image,frame*64,2*80,64,80,0,0,32,40);}else ctx.drawImage(image,frame*64,row*80,64,80,Math.round(x),Math.round(y)-12,32,40);if(role==='player'&&appearance){const skin=['#7f4a36','#d4a57a','#e9c8a3','#655047'][Math.abs(Number(appearance.skin)||0)%4],outfit=['#406e78','#954b55','#6c5b91','#477354'][Math.abs(Number(appearance.outfit)||0)%4],hair=['#32251e','#9d7144','#e0c17e','#272b3d'][Math.abs(Number(appearance.hair)||0)%4];const px=Math.round(x),py=Math.round(y)-12;const overlay=document.createElement('canvas');overlay.width=32;overlay.height=40;const q=overlay.getContext('2d');q.imageSmoothingEnabled=false;q.drawImage(image,frame*64,(face==='left'?2:row)*80,64,80,0,0,32,40);q.globalCompositeOperation='source-atop';q.globalAlpha=.75;q.fillStyle=outfit;q.fillRect(7,18,18,16);q.fillStyle=skin;q.fillRect(11,10,11,9);q.fillStyle=hair;q.fillRect(9,6,15,6);q.globalCompositeOperation='source-over';ctx.drawImage(overlay,px,py); }ctx.restore();}
+export function drawPerson(ctx,x,y,role='player',tick=0,face='down',moving=false,appearance=null){
+ const image=readyImage(ART.sealer);if(!image)return;
+ const row=face==='left'?2:({down:0,right:2,up:3}[face]??0);
+ const frame=moving?[0,1,2,1][Math.floor(Math.max(0,tick)/55)%4]:1;
+ const palette={skin:['#7f4a36','#d4a57a','#e9c8a3','#655047'],outfit:['#406e78','#954b55','#6c5b91','#477354'],hair:['#32251e','#9d7144','#e0c17e','#272b3d']};
+ const key=role==='player'&&appearance?['skin','outfit','hair'].map(k=>Math.abs(Number(appearance[k])||0)%4).join('-'):'default';
+ const cacheKey='sealer-'+role+'-'+row+'-'+frame+'-'+key;
+ let sprite=cache.get(cacheKey);
+ if(!sprite){
+  sprite=document.createElement('canvas');sprite.width=32;sprite.height=40;
+  const q=sprite.getContext('2d');q.imageSmoothingEnabled=false;
+  q.drawImage(image,frame*64,row*80,64,80,0,0,32,40);
+  if(role==='player'&&appearance){
+   const paint=(color,rects)=>{q.save();q.globalCompositeOperation='source-atop';q.globalAlpha=.8;q.fillStyle=color;for(const [a,b,w,h] of rects)q.fillRect(a,b,w,h);q.restore();};
+   paint(palette.outfit[Math.abs(Number(appearance.outfit)||0)%4],[[8,19,16,13]]);
+   paint(palette.skin[Math.abs(Number(appearance.skin)||0)%4],[[11,11,10,8],[6,20,3,8],[23,20,3,8]]);
+   paint(palette.hair[Math.abs(Number(appearance.hair)||0)%4],[[9,6,14,6]]);
+  }
+  cache.set(cacheKey,sprite);
+ }
+ ctx.save();ctx.imageSmoothingEnabled=false;
+ if(role!=='player')ctx.filter='hue-rotate('+({keeper:130,merchant:45,rival:220,scholar:280,resident:80}[role]||90)+'deg)';
+ if(face==='left'){ctx.translate(Math.round(x)+32,Math.round(y)-12);ctx.scale(-1,1);ctx.drawImage(sprite,0,0);}
+ else ctx.drawImage(sprite,Math.round(x),Math.round(y)-12);
+ ctx.restore();
+}
 export function drawTile(ctx,type,x,y,seed,biome,options={}){
  const image=readyImage(ART.terrain);if(!image){fallbackDrawTile(ctx,type,x,y,seed,biome);return;}
  const edges=connectedEdges(type,options.neighbors||[type,type,type,type]),town=!!options.town;
