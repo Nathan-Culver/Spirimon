@@ -55,6 +55,10 @@ export function executeAction(actor,asp,target,tsp,move,style,commit,r=Math.rand
  if(actor.conditions.confusion){actor.conditions.confusion--;if(!actor.conditions.confusion)delete actor.conditions.confusion;}
  if(actor.status==='slow')actor.status=null;
  if(asp.ability==='Second Wind'&&!actor.secondWindUsed&&actor.hp<stats(actor,asp).hp*.3){actor.hp=Math.min(stats(actor,asp).hp,actor.hp+Math.ceil(stats(actor,asp).hp*.15));actor.secondWindUsed=true;log.push(name+' catches its Second Wind.');}
+ if(asp.ability==='Steadfast'&&actor.hp<stats(actor,asp).hp*.5&&!actor.ward){actor.ward=true;log.push(name+' activates Steadfast guard.');}
+ if(asp.ability==='Wildheart'&&actor.hp<stats(actor,asp).hp*.4){actor.conditions.fury=true;}
+ if(asp.ability==='Soulweave'&&actor.hp<stats(actor,asp).hp*.4){actor.conditions.focus=true;}
+ if(asp.ability==='Second Wind'&&actor.hp<stats(actor,asp).hp*.2&&!actor.secondWindUsed){actor.hp=Math.min(stats(actor,asp).hp,actor.hp+Math.ceil(stats(actor,asp).hp*.2));actor.secondWindUsed=true;log.push(name+' surges back with Second Wind.');}
  actor.pp??=stats(actor,asp).pp;const cost=Math.ceil(moveCost(move)*costScale);
  if(actor.pp<cost){move={id:'struggle',name:'Desperate Strike',power:20,speed:0,kind:'physical',type:asp.base,effect:'recoil'};log.push(name+' lacks PP and makes a desperate strike.');}else actor.pp-=cost;
  const effect=move.effect,category=moveCategory(move);const field=actor.battlefield||target.battlefield||{weather:null,terrain:null,weatherTurns:0,terrainTurns:0};actor.battlefield=field;target.battlefield=field;
