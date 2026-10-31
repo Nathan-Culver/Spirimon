@@ -7,7 +7,7 @@ function harness(outcomes=[]){
  class FakeImage{
   set src(url){this.url=url;urls.push(url);const result=outcomes.shift()||'load';queueMicrotask(()=>{if(result==='hang')return;if(result==='error')return this.onerror?.();this.naturalWidth=result==='empty'?0:768;this.naturalHeight=result==='empty'?0:768;this.onload?.();});}
  }
- const loader=createImageLoader({ImageClass:FakeImage,version:'test-release',now:()=>clock,notify:()=>notifications++,setTimer(fn,ms){const timer={fn,ms};timers.push(timer);return timer;},clearTimer(timer){if(timer)timer.cleared=true;}});
+ const loader=createImageLoader({bundledSources:{},ImageClass:FakeImage,version:'test-release',now:()=>clock,notify:()=>notifications++,setTimer(fn,ms){const timer={fn,ms};timers.push(timer);return timer;},clearTimer(timer){if(timer)timer.cleared=true;}});
  return {loader,urls,run(ms){const timer=timers.find(t=>t.ms===ms&&!t.cleared&&!t.used);assert.ok(timer,'Expected timer '+ms);timer.used=true;timer.fn();},advance(ms){clock+=ms;},notifications:()=>notifications};
 }
 test('sprites share one decoded image and use the current release URL',async()=>{
