@@ -138,3 +138,24 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 .classic-control .classic-move .move-effect{order:2;flex:0 0 auto}
 @media(max-height:500px) and (orientation:landscape){.classic-control .classic-move .move-header{gap:2px 6px}.classic-control .classic-move .move-header .move-name{font-size:clamp(12px,1.25vw,17px)!important}.classic-control .classic-move .move-header .move-tag{font-size:8px;padding:1px 3px}}
 @media(max-width:420px){.classic-control .classic-move .move-header{gap:3px}.classic-control .classic-move .move-header .move-name{font-size:clamp(12px,3vw,17px)!important}}
+
+/* Battle viewport fit: no nested scrolling in move buttons. */
+@media (orientation:landscape){
+ .classic-battle{height:100dvh;max-height:100dvh;overflow:hidden}
+ .classic-bottom:has(.classic-moves){height:clamp(174px,31dvh,245px);min-height:0;max-height:42dvh;grid-template-columns:1fr 1fr;overflow:hidden}
+ .classic-bottom:has(.classic-moves) .classic-control{min-height:0;display:flex;flex-direction:column;padding:4px 6px;gap:2px}
+ .classic-control .classic-moves{flex:1 1 auto;height:auto!important;min-height:0;overflow:hidden!important;grid-template-rows:repeat(2,minmax(0,1fr));gap:4px}
+ .classic-control .classic-move{min-height:0!important;overflow:hidden!important;padding:3px 6px!important;gap:1px!important;justify-content:center!important}
+ .classic-control .classic-move .move-header{gap:1px 5px;flex:0 0 auto}
+ .classic-control .classic-move .move-header .move-name{font-size:clamp(12px,1.3vw,18px)!important;line-height:1.1!important}
+ .classic-control .classic-move .move-header .move-tag{font-size:clamp(7px,.72vw,10px);padding:0 3px;line-height:1.15}
+ .classic-control .classic-move .move-stats{gap:2px;font-size:clamp(8px,.75vw,10px);line-height:1.1}
+ .classic-control .classic-move .move-stats>span{padding:0 3px}
+ .classic-control .classic-move .move-effect{font-size:clamp(8px,.75vw,10px);line-height:1.1}
+ .classic-control>.battle-back{flex:0 0 18px;min-height:18px;line-height:16px;padding:0 6px}
+}
+@media (orientation:landscape) and (max-height:430px){
+ .classic-bottom:has(.classic-moves){height:39dvh;max-height:43dvh;padding:3px}
+ .classic-control .classic-move .move-header .move-name{font-size:12px!important}
+ .classic-control .classic-move .move-header .move-tag{font-size:7px}
+}
