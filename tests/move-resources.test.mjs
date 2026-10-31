@@ -71,3 +71,11 @@ test('changing equipped moves preserves points already spent in each pool',()=>{
 });
 
 test('fully rested legacy Mystic saves retain full move-based capacities',()=>{const s=sp(),a=unit(s);delete a.resourceRevision;delete a.resourceCaps;a.specialty='Mystic';a.pp=Math.floor(55*1.1);a.willpower=55;E.migrateResources(a,s);assert.equal(a.pp,40);assert.equal(a.willpower,5);});
+
+test('alternating equipped moves draws from the same totaled category pool',()=>{
+ const p1={...physical,id:'p1',baseUses:20},p2={...physical,id:'p2',baseUses:35},w1={...energy,id:'w1',power:20,baseUses:10},w2={...energy,id:'w2',power:20,baseUses:25},s=sp([p1,p2,w1,w2]),a=unit(s),b=unit(s);b.hp=10000;
+ assert.equal(a.pp,55);assert.equal(a.willpower,35);
+ for(const move of [p1,p2,w1,w2])E.executeAction(a,s,b,s,move,'normal',.5,()=>.5);
+ assert.equal(a.pp,53);assert.equal(a.willpower,33);
+ const restored=JSON.parse(JSON.stringify(a));E.migrateResources(restored,s);assert.equal(restored.pp,53);assert.equal(restored.willpower,33);
+});

@@ -50,6 +50,7 @@ export function migrateResources(ind,sp){
 }
 export const STRUGGLE={id:'struggle',name:'Struggle',power:50,speed:0,kind:'physical',category:'Physical',effect:'struggle',accuracy:1,desc:'An exhausted physical attack. Recoil costs one quarter of maximum HP.'};
 export function canUseMove(ind,sp,move,targetSp){
+ if(ind.pendingMove?.id===move.id)return true;
  if(move.id==='struggle')return false;
  const key=moveCategory(move)==='Physical'?'pp':'willpower',other=key==='pp'?'willpower':'pp',max=resourceMaximums(ind,sp);
  return (ind[key]??max[key])>0||(ind[other]??max[other])>=2;
