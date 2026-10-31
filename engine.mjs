@@ -51,7 +51,7 @@ export function executeAction(actor,asp,target,tsp,move,style,commit,r=Math.rand
  actor.commit=clamp(commit,0,1);actor.battleStyle??=style;actor.conditions??={};target.conditions??={};
  if(actor.status==='sleep'||actor.status==='freeze'){actor.statusTurns=(actor.statusTurns||1)-1;if(actor.statusTurns>0){log.push(name+' cannot act while '+actor.status+'.');return log;}actor.status=null;log.push(name+' recovers.');}
  if(actor.conditions.flinch){delete actor.conditions.flinch;log.push(name+' flinches.');return log;}
- if(actor.recharging){actor.recharging=false;log.push(name+' recharges.');return log;}if(actor.status==='paralysis'&&r()<.25||actor.conditions.infatuation&&r()<.5||actor.conditions.confusion&&r()<.33){log.push(name+' is unable to act.');return log;}
+ if(actor.recharging){actor.recharging=false;log.push(name+' recharges.');return log;}if((actor.status==='paralysis'&&r()<.25)||(actor.conditions.infatuation&&r()<.5)||(actor.conditions.confusion&&r()<.33)){log.push(name+' is unable to act.');return log;}
  if(actor.conditions.confusion){actor.conditions.confusion--;if(!actor.conditions.confusion)delete actor.conditions.confusion;}
  if(actor.status==='slow')actor.status=null;
  if(asp.ability==='Second Wind'&&!actor.secondWindUsed&&actor.hp<stats(actor,asp).hp*.3){actor.hp=Math.min(stats(actor,asp).hp,actor.hp+Math.ceil(stats(actor,asp).hp*.15));actor.secondWindUsed=true;log.push(name+' catches its Second Wind.');}
@@ -75,7 +75,7 @@ export function executeAction(actor,asp,target,tsp,move,style,commit,r=Math.rand
   if(STATUS_EFFECTS.includes(effect)){if(r()<accuracy&&applyCondition(target,effect,r))log.push(targetName+' is affected by '+effect+'.');else log.push(name+' fails to inflict '+effect+'.');return log;}
   log.push(name+' uses '+move.name+'.');return log;
  }
- if(effect==='recharge'&&actor.recharging){actor.recharging=false;log.push(name+' must recharge.');return log;}
+ 
  if(r()>=accuracy&&effect!=='sureHit'){log.push(name+' uses '+move.name+' but misses.');return log;}
  if(target.ward&&effect!=='breakWard'){target.ward=false;log.push(targetName+' blocks the attack with a ward.');return log;}
  const critical=r()<(style==='strong'?.15:.05);
@@ -83,7 +83,7 @@ export function executeAction(actor,asp,target,tsp,move,style,commit,r=Math.rand
  let amount=0;for(let n=0;n<hits;n++)amount+=Math.max(1,Math.floor(damage(actor,asp,target,tsp,move,style,r)*(critical?1.5:1)*stageFactor(stage(actor,category==='Energy'?'power':'might'))/stageFactor(stage(target,category==='Energy'?'resistance':'defense'))));
  if(actor.status==='burn'&&category==='Physical')amount=Math.max(1,Math.floor(amount*.5));
  if(actor.status==='frostbite'&&category==='Energy')amount=Math.max(1,Math.floor(amount*.5));
- if(target.reflect&&category==='Physical'||target.lightscreen&&category==='Energy')amount=Math.max(1,Math.floor(amount*.5));
+ if((target.reflect&&category==='Physical')||(target.lightscreen&&category==='Energy'))amount=Math.max(1,Math.floor(amount*.5));
  target.hp=Math.max(0,target.hp-amount);target.ward=false;log.push(name+' uses '+move.name+': '+amount+' damage'+(critical?' — critical hit!':'')+(hits>1?' ('+hits+' hits)':'')+'.');
  if(effect==='drain')actor.hp=Math.min(stats(actor,asp).hp,actor.hp+Math.floor(amount/2));
  if(effect==='recoil')actor.hp=Math.max(0,actor.hp-Math.max(1,Math.ceil(amount*.15)));
