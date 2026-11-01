@@ -135,3 +135,15 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 .battle-animating .classic-control{pointer-events:none;opacity:.75}.battle-animating .classic-dialogue:after{animation:breathe .5s infinite}.battle-record-list p{padding:8px 0;border-bottom:1px solid #c0c9a0}
 @media(orientation:landscape) and (max-height:450px){.classic-bottom{height:40dvh;min-height:144px;padding:5px;gap:6px;border-top-width:4px}.classic-control{padding:12px 10px 10px;border-width:2px}.classic-dialogue{padding:10px 12px}.classic-dialogue p{font-size:clamp(14px,1.9vw,18px);line-height:1.3}.classic-moves,.classic-actions{gap:8px}.classic-move{padding:4px 5px;gap:2px}.classic-move .move-name{font-size:clamp(10px,1.4vw,13px)}.classic-move .move-tag{font-size:7px;padding:1px 2px}.classic-move .move-stats,.classic-move .move-effect,.classic-move .move-footer{font-size:9px}.classic-hud .health{margin-top:3px}.classic-hud .health-label{font-size:9px}.classic-hud .xp-label{font-size:8px}.compact-styles button,.use-move{padding:4px 6px}.compact-commit{font-size:10px}.tactic-row{gap:4px}}
 @media(orientation:portrait){.classic-bottom{height:43dvh;min-height:270px;max-height:440px;grid-template-columns:1fr;grid-template-rows:1fr 1.5fr;gap:8px}.classic-control{padding:14px 10px 10px}.classic-dialogue{padding:10px 12px}.classic-dialogue p{font-size:clamp(13px,3.4vw,17px);line-height:1.3}.classic-hud.enemy{width:45vw;min-width:150px;left:3%;top:4%}.classic-hud.ally{width:53vw;min-width:190px;right:3%;bottom:4%}.hud-name{font-size:16px}.classic-hud.enemy .hud-name{font-size:14px}.classic-moves,.classic-actions{gap:8px}.classic-move .move-name{font-size:12px}.classic-move .move-tag{font-size:7px;padding:1px 2px}.classic-move .move-stats,.classic-move .move-effect,.classic-move .move-footer{font-size:9px}}
+
+/* Preview a move in the information panel before opening its tactics. */
+.classic-move.is-selected{border-color:#4d713d;background:#edf3c7;box-shadow:inset 0 0 0 1px #4d713d}
+.classic-dialogue.move-preview{overflow:auto}
+.classic-dialogue.move-preview #battle-speech{max-height:none;overflow:visible;font-size:clamp(13px,1.25vw,19px);line-height:1.35}
+.move-preview-name{display:block;font-size:clamp(16px,1.6vw,24px);line-height:1.15;margin-bottom:7px;color:#2b422c}
+.move-preview-description,.move-preview-effects,.move-preview-hint{display:block}
+.move-preview-effects{margin-top:7px}
+.move-preview-hint{margin-top:10px;color:#596d49;font-size:clamp(11px,1vw,15px)}
+.classic-dialogue.move-preview:after{display:none}
+.classic-dialogue.move-preview .debt-indicator{position:static;margin-top:8px}
+@media(orientation:landscape) and (max-height:450px){.classic-dialogue.move-preview #battle-speech{font-size:12px;line-height:1.25}.move-preview-name{font-size:15px;margin-bottom:4px}.move-preview-effects{margin-top:4px}.move-preview-hint{font-size:10px;margin-top:6px}}
