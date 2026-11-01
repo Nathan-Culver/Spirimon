@@ -1,4 +1,5 @@
 import {readyImage} from './asset-loader.mjs';
+import {MYSTERY_STATIC,MYSTERY_WALK} from './placeholder-art.mjs';
 import {TOWN_FEATURES} from './towns.mjs';
 import {groundCell,terrainCell,connectedEdges} from './terrain.mjs';
 import {ART} from './roster.mjs';
@@ -7,51 +8,6 @@ const cache=new Map();
 export function shade(hex,n){const v=parseInt(hex.slice(1),16);return'#'+[v>>16,(v>>8)&255,v&255].map(x=>Math.max(0,Math.min(255,x+n)).toString(16).padStart(2,'0')).join('');}
 function ellipse(c,x,y,rx,ry,color){c.fillStyle=color;for(let yy=-ry;yy<=ry;yy++){const w=Math.round(rx*Math.sqrt(Math.max(0,1-yy*yy/(ry*ry))));c.fillRect(Math.round(x-w),Math.round(y+yy),w*2+1,1);}}
 function poly(c,pts,color){c.fillStyle=color;c.beginPath();pts.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.closePath();c.fill();}
-export function spiritSprite(sp,form=0){const key=sp.id+':'+form;if(cache.has(key))return cache.get(key);const c=document.createElement('canvas');c.width=c.height=64;const p=c.getContext('2d');p.imageSmoothingEnabled=false;const r=rng(sp.identity),main=COLORS[sp.base],accent=COLORS[sp.alter],dark=shade(main,-65),light=shade(main,35);const growth=form*2+(sp.identity%3);const body=(x,y,rx,ry)=>{ellipse(p,x,y,rx+1,ry+1,'#152927');ellipse(p,x,y,rx,ry,dark);ellipse(p,x-1,y-2,rx-1,ry-2,main);ellipse(p,x-3,y-4,Math.max(2,rx-5),Math.max(2,ry-5),light);};const rect=(x,y,w,h,col)=>{p.fillStyle=col;p.fillRect(x,y,w,h);};const eye=(x,y)=>{rect(x,y,4,4,'#142a29');rect(x+1,y,3,2,'#f0e9ae');rect(x+2,y,1,2,'#fffbe1');};
-ellipse(p,32,57,20+growth,3,'#162d2a');
-if(['Beast','Monstrosity'].includes(sp.base)){
-poly(p,[[39,37],[53,31],[58,16],[59,38],[51,46],[39,47]],dark);poly(p,[[45,36],[53,33],[56,23],[55,39],[48,43]],accent);
-body(31,40,16+growth,10+growth);rect(19-growth,44,7,10,dark);rect(37+growth,44,7,10,dark);rect(17-growth,52,10,3,main);rect(36+growth,52,10,3,main);body(21,28,12+growth,11+growth);
-poly(p,[[10,21],[12,7-growth],[22,19]],dark);poly(p,[[26,19],[34,10-growth],[32,28]],dark);poly(p,[[13,18],[14,12-growth],[19,19]],accent);poly(p,[[27,19],[31,15],[30,24]],accent);body(13,34,8,5);eye(17,25);rect(6,33,3,3,'#122321');rect(13,38,8,1,dark);
-if(sp.body.includes('stag')||form>0){poly(p,[[15,13],[13,3],[11,3],[13,10],[8,7],[7,9],[14,15]],accent);poly(p,[[29,14],[34,3],[36,3],[34,10],[41,7],[41,10],[31,17]],accent);}
-if(sp.base==='Monstrosity')poly(p,[[31,35],[39,12],[54,9],[45,26],[57,22],[46,38]],accent);
-}else if(['Humanoid','Giant','Construct','Fiend'].includes(sp.base)){
-const broad=sp.base==='Giant'?5:0;body(32,35,11+broad+growth,14);rect(21-broad,43,8,12,dark);rect(35+broad,43,8,12,dark);rect(18-broad,53,12,4,main);rect(34+broad,53,12,4,main);body(17-broad-growth,35,5,12);body(47+broad+growth,35,5,12);body(32,16,10+growth,10);eye(25,15);eye(35,15);
-if(sp.base==='Construct'){rect(23,12,18,3,accent);rect(25,28,14,13,dark);rect(29,31,6,7,accent);rect(26,47,2,5,accent);rect(38,47,2,5,accent);}
-if(sp.base==='Fiend'){poly(p,[[22,13],[18,1],[28,10]],accent);poly(p,[[37,9],[46,1],[43,17]],accent);poly(p,[[46,43],[57,44],[58,31],[62,35],[60,48],[46,48]],main);}
-if(sp.base==='Giant'){rect(22,7,20,6,'#d6d2b3');rect(26,23,12,7,'#d6d2b3');rect(25,26,14,1,dark);}
-}else if(sp.base==='Plant'){
-poly(p,[[26,53],[23,40],[14,35],[12,29],[21,33],[28,40],[29,25],[36,24],[35,42],[46,33],[52,32],[49,40],[35,48],[37,56]],dark);
-poly(p,[[15,48],[4,37],[17,35],[27,46]],accent);poly(p,[[38,47],[49,32],[61,34],[49,49]],main);body(32,23,17+growth,16+growth);ellipse(p,32,22,13+growth,9,dark);ellipse(p,32,22,10+growth,6,'#432e3f');for(let i=0;i<5;i++)poly(p,[[22+i*5,15],[24+i*5,21],[26+i*5,15]],'#e8dcb6');ellipse(p,24,13,4,3,light);eye(23,28);eye(37,28);rect(26,52,13,4,dark);
-}else if(sp.base==='Ooze'){
-body(32,44,23+growth,12+growth);body(30,32,17+growth,15);body(33,21,11,10);ellipse(p,23,28,6,7,light);eye(25,33);eye(38,34);rect(30,42,7,2,dark);ellipse(p,45,46,4,3,accent);ellipse(p,17,46,3,2,accent);
-}else if(sp.base==='Aberration'){
-for(let i=0;i<6;i++){const x=11+i*8;poly(p,[[x,35],[x-3,49],[x+1,55],[x+6,50],[x+4,46],[x+1,49],[x+2,35]],i%2?accent:dark);}
-body(32,28,21+growth,17+growth);eye(19,23);eye(31,19);eye(42,28);eye(28,33);ellipse(p,39,16,4,3,accent);
-}else if(sp.base==='Elemental'){
-for(let i=0;i<5;i++){const x=14+i*8;poly(p,[[x-5,44],[x-1,18-Math.floor(r()*12)],[x+4,29],[x+8,7+i*2],[x+11,43]],i%2?accent:main);}
-body(32,40,18+growth,12);ellipse(p,31,37,11,10,light);eye(23,34);eye(36,34);poly(p,[[26,51],[33,58],[40,50]],accent);
-}else{
-const isUndead=sp.base==='Undead';const wing=sp.base==='Celestial'?'#e6d8a0':accent;
-for(const side of[-1,1]){poly(p,[[32+side*5,25],[32+side*24,10],[32+side*27,25],[32+side*12,39]],shade(wing,-30));poly(p,[[32+side*7,27],[32+side*23,17],[32+side*21,29],[32+side*10,36]],wing);}
-body(32,36,12+growth,15+growth);body(32,21,11,10);eye(25,20);eye(35,20);if(isUndead){rect(27,27,10,4,dark);for(let i=0;i<3;i++)rect(28+i*3,27,1,4,light);poly(p,[[21,42],[16,55],[28,51],[32,58],[38,51],[48,54],[43,42]],main);}else{rect(27,48,4,7,dark);rect(35,48,4,7,dark);}if(sp.base==='Celestial'){ellipse(p,32,6,12+growth,3,accent);ellipse(p,32,6,9+growth,1,'#19372f');}
-}
-if(sp.alter==='Plant'){for(const[x,y]of[[19,20],[39,32],[45,42]]){poly(p,[[x,y],[x-7,y-7],[x+3,y-6],[x+5,y+2]],'#5e9b68');rect(x-2,y-5,2,4,'#a8cc80');}}
-if(sp.alter==='Construct'){rect(18,33,10,5,accent);rect(37,42,7,7,accent);rect(19,34,2,2,'#d3e0cf');}
-if(sp.alter==='Celestial'){ellipse(p,32,5,12,2,accent);}
-if(sp.alter==='Fiend'||sp.alter==='Monstrosity'){poly(p,[[18,19],[15,6],[24,17]],accent);poly(p,[[39,16],[46,4],[44,23]],accent);}
-if(sp.alter==='Undead'){rect(25,40,14,2,'#ddd9bc');rect(29,37,2,9,'#ddd9bc');}
-if(sp.alter==='Fey'){poly(p,[[41,34],[55,18],[58,31],[45,42]],accent);rect(53,14,2,2,'#f9e3a3');}
-if(sp.alter==='Elemental'){for(let i=0;i<5;i++){const x=13+Math.floor(r()*40),y=8+Math.floor(r()*36);rect(x,y,2,3,accent);}}
-if(sp.alter==='Aberration'){eye(40,38);poly(p,[[45,42],[58,44],[60,52],[55,54],[54,50],[57,48],[45,47]],accent);}
-if(sp.alter==='Ooze'){rect(18,44,3,9,accent);rect(42,42,4,10,accent);}
-if(sp.alter==='Beast'){poly(p,[[14,21],[14,12],[20,19]],accent);}
-if(sp.alter==='Humanoid'){rect(13,34,4,9,accent);rect(11,40,8,3,accent);}
-if(sp.alter==='Giant'){rect(36,45,9,7,accent);}
-if(form>0){rect(30,32,5,5,'#e6d492');rect(31,33,3,3,'#fff0b9');}
-if(form===2){for(const[x,y]of[[8,20],[51,8],[54,43],[10,46]]){rect(x,y-2,1,5,accent);rect(x-2,y,5,1,accent);}}
-if(sp.domains.length){ellipse(p,51,13,5,5,'#d7bb75');rect(50,9,2,8,'#fff1c0');rect(47,12,8,2,'#fff1c0');}
-cache.set(key,c);return c;}
 // Companion sheets use four rows (north,south,west,east), four frames each,
 // and one sheet per evolution form. Missing sheets fall back to roster artwork.
 // Each species and evolution has its own cached 4x4 walking atlas.
@@ -59,10 +15,10 @@ cache.set(key,c);return c;}
 // direction sheets in assets/companions take precedence when supplied.
 const companionSheets=new Map();
 function generatedCompanionSheet(sp,form){
- const key=sp.id+':'+form;
+ const key=sp.id+':'+form+':'+(sp.atlas||sp.sprites?.[form]||'');
  const existing=companionSheets.get(key);
  if(existing)return existing;
- const source=sp.proceduralArt?spiritSprite(sp,form):readyImage(sp.atlas||sp.sprites?.[form]);
+ const source=readyImage(sp.atlas||sp.sprites?.[form]);
  if(!source)return null;
  const cell=64,canvas=document.createElement('canvas');
  canvas.width=cell*4;canvas.height=cell*4;
@@ -91,7 +47,6 @@ export function drawCompanion(ctx,sp,form,x,y,size=36,face='down',moving=false,p
  if(!sp)return;
  const row={up:0,down:1,left:3,right:2}[face]??1;
  const frame=moving?Math.min(3,Math.floor(Math.max(0,progress)*4)):0;
- const path='./assets/companions/'+sp.id+'-'+form+'.webp';
  // Avoid requesting hundreds of nonexistent files: explicit authored
  // sheets are opt-in; generated sheets cover all existing roster forms.
  const authored=sp.companionSheets?.[form];
@@ -102,9 +57,29 @@ export function drawCompanion(ctx,sp,form,x,y,size=36,face='down',moving=false,p
   ctx.drawImage(sheet,frame*sw,row*sh,sw,sh,x,y,size,size);
   ctx.restore();return;
  }
- drawSpirit(ctx,sp,form,x,y,size,face==='left');
+ drawMysteryPlaceholder(ctx,x,y,size,{face,moving,progress});
 }
-export function drawSpirit(ctx,sp,form,x,y,size=96,flip=false){if(!sp)return;if(sp.proceduralArt){const sprite=spiritSprite(sp,form);ctx.save();ctx.imageSmoothingEnabled=false;if(flip){ctx.translate(x+size,y);ctx.scale(-1,1);ctx.drawImage(sprite,0,0,size,size);}else ctx.drawImage(sprite,x,y,size,size);ctx.restore();return;}const image=readyImage(sp.atlas||sp.sprites?.[form]);if(!image){const sprite=spiritSprite({...sp,identity:sp.identity??hash(sp.id),base:sp.base||'Beast',alter:sp.alter||'Fey',body:sp.body||''},form);ctx.save();ctx.imageSmoothingEnabled=false;if(flip){ctx.translate(x+size,y);ctx.scale(-1,1);ctx.drawImage(sprite,0,0,size,size);}else ctx.drawImage(sprite,x,y,size,size);ctx.restore();return;}ctx.save();ctx.imageSmoothingEnabled=false;if(flip){ctx.translate(x+size,y);ctx.scale(-1,1);}else ctx.translate(x,y);if(sp.atlas){ctx.drawImage(image,form*256,0,256,256,0,0,size,size);if(sp.id==='lacquertor'&&form>0){/* Replace the stone castle silhouette on the rear shoulder with irregular boulders. Draw in native 256px atlas coordinates. */ctx.save();ctx.scale(size/256,size/256);const ox=form===1?165:166,oy=form===1?79:64;ctx.translate(ox,oy);const rock=(pts,color)=>{ctx.fillStyle=color;ctx.beginPath();pts.forEach(([a,b],i)=>i?ctx.lineTo(a,b):ctx.moveTo(a,b));ctx.closePath();ctx.fill();};rock([[-36,17],[-37,-18],[-24,-39],[-4,-48],[21,-40],[36,-16],[34,21],[20,39],[-12,38]],'#302e2a');rock([[-33,12],[-32,-18],[-22,-35],[-3,-44],[19,-37],[32,-15],[29,18],[16,34],[-12,34]],'#777064');rock([[-29,-16],[-20,-33],[-3,-41],[10,-30],[-1,-12],[-19,-8]],'#aaa08a');rock([[10,-30],[23,-27],[30,-13],[27,12],[15,22],[2,12]],'#58544e');rock([[-26,14],[-14,3],[2,12],[15,26],[5,32],[-13,29]],'#696258');rock([[-13,-8],[-4,-18],[1,-9],[-5,5]],'#3e3b38');rock([[11,18],[18,9],[23,17],[17,26]],'#403c38');ctx.restore();}}else{const h=size*image.height/image.width;ctx.drawImage(image,0,size-Math.min(size,h),size,Math.min(size,h));}ctx.restore();}
+// Atlas rows are up, down, left, right; each contains one looping four-frame walk.
+export function mysteryFrame(face='down',moving=false,progress=0){
+ const row={up:0,down:1,left:2,right:3}[face]??1;
+ const value=Number(progress),phase=Number.isFinite(value)?((value%1)+1)%1:0;
+ return {row,frame:moving?Math.min(3,Math.floor(phase*4)):0};
+}
+export function drawMysteryPlaceholder(ctx,x,y,size=96,{face=null,moving=false,progress=0,flip=false}={}){
+ const walking=face!==null,sheet=walking?readyImage(MYSTERY_WALK):null,image=sheet||readyImage(MYSTERY_STATIC);
+ if(!image)return;
+ ctx.save();ctx.imageSmoothingEnabled=false;
+ if(sheet){const {row,frame}=mysteryFrame(face,moving,progress),sw=(sheet.naturalWidth||sheet.width)/4,sh=(sheet.naturalHeight||sheet.height)/4;ctx.drawImage(sheet,frame*sw,row*sh,sw,sh,x,y,size,size);}
+ else{const w=image.naturalWidth||image.width,h=image.naturalHeight||image.height,scale=size/Math.max(w,h),dw=w*scale,dh=h*scale;
+  ctx.translate(x+size/2,y+size);if(flip||face==='right')ctx.scale(-1,1);ctx.drawImage(image,-dw/2,-dh,dw,dh);
+ }
+ ctx.restore();
+}
+export function drawSpirit(ctx,sp,form,x,y,size=96,flip=false,motion=null){
+ if(!sp)return;
+ const image=readyImage(sp.atlas||sp.sprites?.[form]);
+ if(!image){drawMysteryPlaceholder(ctx,x,y,size,motion?{...motion,flip}:{flip});return;}
+ ctx.save();ctx.imageSmoothingEnabled=false;if(flip){ctx.translate(x+size,y);ctx.scale(-1,1);}else ctx.translate(x,y);if(sp.atlas){ctx.drawImage(image,form*256,0,256,256,0,0,size,size);if(sp.id==='lacquertor'&&form>0){/* Replace the stone castle silhouette on the rear shoulder with irregular boulders. Draw in native 256px atlas coordinates. */ctx.save();ctx.scale(size/256,size/256);const ox=form===1?165:166,oy=form===1?79:64;ctx.translate(ox,oy);const rock=(pts,color)=>{ctx.fillStyle=color;ctx.beginPath();pts.forEach(([a,b],i)=>i?ctx.lineTo(a,b):ctx.moveTo(a,b));ctx.closePath();ctx.fill();};rock([[-36,17],[-37,-18],[-24,-39],[-4,-48],[21,-40],[36,-16],[34,21],[20,39],[-12,38]],'#302e2a');rock([[-33,12],[-32,-18],[-22,-35],[-3,-44],[19,-37],[32,-15],[29,18],[16,34],[-12,34]],'#777064');rock([[-29,-16],[-20,-33],[-3,-41],[10,-30],[-1,-12],[-19,-8]],'#aaa08a');rock([[10,-30],[23,-27],[30,-13],[27,12],[15,22],[2,12]],'#58544e');rock([[-26,14],[-14,3],[2,12],[15,26],[5,32],[-13,29]],'#696258');rock([[-13,-8],[-4,-18],[1,-9],[-5,5]],'#3e3b38');rock([[11,18],[18,9],[23,17],[17,26]],'#403c38');ctx.restore();}}else{const h=size*image.height/image.width;ctx.drawImage(image,0,size-Math.min(size,h),size,Math.min(size,h));}ctx.restore();}
 function prop(ctx,index,x,y,w,h){const image=readyImage(ART.world);if(!image)return;ctx.imageSmoothingEnabled=false;ctx.drawImage(image,(index%3)*256,Math.floor(index/3)*256,256,256,Math.round(x),Math.round(y),w,h);}
 export function renderSpiritCanvases(root=document){root.querySelectorAll('canvas[data-species]').forEach(c=>{const sp=globalThis.spirimonSpecies?.[c.dataset.species];if(!sp)return;const ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);drawSpirit(ctx,sp,Number(c.dataset.form)||0,0,0,c.width);});}
 function paintPerson(ctx,x,y,role='player',tick=0,face='down',moving=false){

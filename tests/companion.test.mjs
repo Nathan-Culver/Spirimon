@@ -25,3 +25,8 @@ test('every browser source module and interior asset has a working static route'
  for(const path of modules){const response=await fetch(new URL(path,url+'/'));assert.equal(response.status,200,path);assert.match(response.headers.get('content-type'),/javascript/);}
  const interior=await fetch(url+'/assets/interiors/door.svg');assert.equal(interior.status,200);assert.equal(interior.headers.get('content-type'),'image/svg+xml');
 });
+
+test('local play serves both mystery assets and the animation preview',async()=>{
+ for(const name of ['mystery.webp','mystery-walk.webp']){const response=await fetch(url+'/assets/placeholder/'+name);assert.equal(response.status,200);assert.equal(response.headers.get('content-type'),'image/webp');assert.ok((await response.arrayBuffer()).byteLength>1000);}
+ const preview=await fetch(url+'/assets/placeholder/preview.html');assert.equal(preview.status,200);assert.match(await preview.text(),/Walking directions/);
+});

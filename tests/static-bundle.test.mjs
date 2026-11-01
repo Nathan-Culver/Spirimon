@@ -11,8 +11,9 @@ test('Pages entry is small and references one content-versioned classic bundle',
  assert.ok(Buffer.byteLength(published)<12000);assert.ok(Buffer.byteLength(built.pageScript)<500000);
  assert.ok(published.includes(built.bundleName));assert.ok(published.includes(built.styleName));
  assert.equal(built.bundleName,'game-'+createHash('sha256').update(built.pageScript).digest('hex').slice(0,12)+'.js');
- assert.equal(built.modules.length,17);assert.doesNotThrow(()=>new vm.Script(built.pageScript));
- assert.doesNotMatch(built.pageScript,/(^|\n)import\s|import\.meta|data:image\/webp;base64,/);
+ assert.equal(built.modules.length,18);assert.doesNotThrow(()=>new vm.Script(built.pageScript));
+ assert.doesNotMatch(built.pageScript,/(^|\n)import\s|import\.meta/);
+ assert.ok(built.pageScript.includes('data:image/webp;base64,'),'Mystery sprites must be available without extra downloads');
  assert.match(built.pageScript,/if\(window\.__spirimonStarted\)return/);
 });
 test('downloaded copy retains complete code, styles, font and exact core artwork',async()=>{

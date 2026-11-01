@@ -19,7 +19,7 @@
 </aside>
 <div class="app-shell">
 <header class="topbar"><a class="wordmark" href="#" data-action="view" data-value="explore">SPIRIMON<span>THE SEALER'S FRONTIER</span></a><div class="topbar-right"><span id="save-status" class="save-status"><i></i> Saved on this device</span><button class="icon-button" data-action="export" title="Export save backup" aria-label="Export save backup">⇩</button><button class="player-avatar" data-action="profile" aria-label="Sealer profile">N</button></div></header>
-<main id="main"><section id="startup-panel" class="panel" style="margin:24px;padding:24px" aria-labelledby="startup-title"><h1 id="startup-title">Loading Spirimon…</h1><p id="startup-status" role="status" aria-live="polite">Connecting to game code…</p><p id="startup-help">Pages build 9 · Your saved journey stays on this device.</p><button id="startup-retry" class="btn" onclick="window.spirimonRetry()" hidden>Retry loading</button></section></main>
+<main id="main"><section id="startup-panel" class="panel" style="margin:24px;padding:24px" aria-labelledby="startup-title"><h1 id="startup-title">Loading Spirimon…</h1><p id="startup-status" role="status" aria-live="polite">Connecting to game code…</p><p id="startup-help">Pages build 10 · Your saved journey stays on this device.</p><button id="startup-retry" class="btn" onclick="window.spirimonRetry()" hidden>Retry loading</button></section></main>
 <footer><span>AN ENDLESS WORLD. A BOND BENEATH THE SKIN.</span><span id="footer-seed"></span></footer>
 </div>
 <div id="modal-root"></div><div id="toast" role="status" aria-live="polite"></div>
@@ -28,8 +28,8 @@
  const main=document.getElementById('main'),status=document.getElementById('startup-status'),help=document.getElementById('startup-help'),retry=document.getElementById('startup-retry');
  let ready=false,failed=false;
  window.spirimonRetry=()=>{const url=new URL(location.href);url.searchParams.set('reload',String(Date.now()));location.replace(url.href);};
- const error=(message)=>{if(ready||failed)return;failed=true;clearTimeout(slowTimer);main.innerHTML='<section class="panel" style="margin:24px;padding:24px"><h1>Spirimon could not start</h1><p>'+String(message).replace(/[&<>]/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[x]))+'</p><p>Pages build 9 · Your saved journey has not been erased.</p><button class="btn" onclick="window.spirimonRetry()">Retry loading</button></section>';};
- const slowTimer=window.setTimeout(()=>{if(ready||failed||!main.querySelector('#startup-panel'))return;help.textContent='Pages build 9 · Loading is taking longer than usual. Stalled downloads retry automatically. You can also retry now.';retry.hidden=false;},12000);
+ const error=(message)=>{if(ready||failed)return;failed=true;clearTimeout(slowTimer);main.innerHTML='<section class="panel" style="margin:24px;padding:24px"><h1>Spirimon could not start</h1><p>'+String(message).replace(/[&<>]/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[x]))+'</p><p>Pages build 10 · Your saved journey has not been erased.</p><button class="btn" onclick="window.spirimonRetry()">Retry loading</button></section>';};
+ const slowTimer=window.setTimeout(()=>{if(ready||failed||!main.querySelector('#startup-panel'))return;help.textContent='Pages build 10 · Loading is taking longer than usual. Stalled downloads retry automatically. You can also retry now.';retry.hidden=false;},12000);
  window.addEventListener('spirimon-startup',event=>{if(!ready&&!failed)status.textContent=String(event.detail||'Preparing your journey…');});
  window.addEventListener('spirimon-ready',()=>{ready=true;clearTimeout(slowTimer);});
  window.addEventListener('spirimon-startup-error',event=>error(event.detail||'The game could not open your saved journey.'));
@@ -56,8 +56,8 @@
  };
 })();
 </script>
-<meta name="spirimon-modules" content="ai-providers.mjs,world-art.mjs,asset-loader.mjs,towns.mjs,terrain.mjs,roster.mjs,moves.mjs,engine.mjs,sprites.mjs,audio.mjs,transformation.mjs,offerings.mjs,world.mjs,adventure-systems.mjs,interior-assets.mjs,move-animations.mjs,app.mjs">
-<script>window.spirimonLoadGame("./game-bb334241de3f.js");</script>
+<meta name="spirimon-modules" content="ai-providers.mjs,world-art.mjs,placeholder-art.mjs,asset-loader.mjs,towns.mjs,terrain.mjs,roster.mjs,moves.mjs,engine.mjs,sprites.mjs,audio.mjs,transformation.mjs,offerings.mjs,world.mjs,adventure-systems.mjs,interior-assets.mjs,move-animations.mjs,app.mjs">
+<script>window.spirimonLoadGame("./game-0f67016320f3.js");</script>
 </body>
 </html>
 
