@@ -18,10 +18,11 @@ jobs:
       - name: Validate modules
         run: |
           for file in *.mjs; do node --check "$file" || exit 1; done
-      - name: Prepare complete site
+      - name: Prepare and test complete site
         run: |
-          mkdir -p _site
-          cp -a index.html style.css *.mjs assets _site/
+          node build.mjs
+          node --test tests/*.test.mjs
+          node build.mjs --out-dir _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -29,3 +30,4 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+

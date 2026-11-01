@@ -87,10 +87,10 @@ engine.mjs: deterministic generation and combat rules.
 sprites.mjs: original procedural pixel renderer.
 app.mjs: gameplay, interface, browser storage, generation queue.
 companion.mjs: static server and local-model adapters.
-build.mjs: dependency-free standalone HTML packager.
+build.mjs: dependency-free Pages bundle and standalone HTML packager.
 tests/: rule and HTTP tests.
 
-The GitHub workflow is for deployment from a dedicated repository's main branch. On the existing personal Pages repository, publish the spirimon/ folder on its already configured master branch; no hosting settings or unrelated files need changing.
+Pushes to main run .github/workflows/deploy-pages.yml: build, run regression tests, stage the runtime files in _site, and publish them with actions/deploy-pages. Run `node build.mjs --out-dir _site` to reproduce the published artifact. The entry page loads one content-versioned classic JavaScript bundle; the four original world atlases load independently with bounded retries. The generated Spirimon.html download includes code, font, styles and world atlases for offline play. `npm start` builds these files before starting the companion server. Startup failures preserve the existing browser save; Retry loading requests fresh HTML without clearing storage.
 
 ## Scope of this release
 This is the first playable alpha, not a completed FireRed-sized RPG. It has original assets and rules inspired by the agreed design. Full dungeon interiors, a broad move catalog, tournament brackets, richer NPC event chains, item/location transformation variants, full creature animation sets and production balance remain expansion work. The local model adapters are optional and need installed models; no actual AI model or generated AI artwork is bundled.

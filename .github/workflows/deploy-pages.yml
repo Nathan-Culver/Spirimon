@@ -19,18 +19,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Validate JavaScript modules
         run: |
           for file in *.mjs; do node --check "$file" || exit 1; done
           test -f app.mjs
-      - name: Build complete inline game
-        run: node build.mjs
+      - name: Build and test Pages artifact
+        run: |
+          node build.mjs
+          node --test tests/*.test.mjs
+          node build.mjs --out-dir _site
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4

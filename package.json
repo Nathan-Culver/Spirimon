@@ -5,7 +5,7 @@
   "type": "module",
   "description": "A local-first Spirimon sealing RPG",
   "scripts": {
-    "start": "node companion.mjs",
+    "start": "node build.mjs && node companion.mjs",
     "test": "node --test tests/*.test.mjs",
     "build": "node build.mjs",
     "build:font": "node tools/build-font.cjs"
