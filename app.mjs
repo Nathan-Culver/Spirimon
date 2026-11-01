@@ -273,7 +273,7 @@ function moveDetails(m,actor=null,target=null){
  const accuracy=Number.isFinite(acc)?Math.round(Math.max(0,Math.min(1,acc>1?acc/100:acc))*100)+'%':'—';
  const effects=Array.isArray(m.effect)?m.effect.filter(Boolean).join(', '):m.effect;
  const formatted=effects?String(effects).replace(/([a-z])([A-Z])/g,'$1 $2').replace(/([,;])/g,'$1 '):'None';
- const rawAffinity=m.domain||m.element||m.visual||'Neutral',affinity=rawAffinity==='spirit'?'Spirimon':rawAffinity;
+ const rawAffinity=m.domain||m.element||m.visual||'Neutral',affinity=rawAffinity==='spirit'?'':rawAffinity;
  const access=moveEligibility(m).join(', ');
  return '<span class="move-header"><span class="move-name" title="'+esc(m.name)+'">'+esc(m.name)+'</span><span class="move-tags"><span class="move-tag affinity">'+esc(affinity)+'</span><span class="move-tag creature" title="Creature types that can learn this move">'+esc(access)+'</span><span class="move-tag category">'+esc(category)+'</span></span></span>'+
  '<span class="move-stats"><span>DMG <strong>'+(category==='Status'||power<=0?'—':power)+'</strong></span><span>ACC <strong>'+accuracy+'</strong></span><span>'+(category==='Physical'?'STA':'WIL')+' <strong>'+(actor?.pendingMove?.id===m.id?0:E.moveCost(m,target||(battle?spOf(battle.enemy):null)))+'</strong></span></span>'+
