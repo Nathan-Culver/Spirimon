@@ -7,6 +7,6 @@ test('all 28 domains have offensive and defensive relationships',()=>{assert.equ
 test('creature advantage is 1.5x',()=>assert.equal(effectiveness({type:'Celestial'},defender('Fiend','Beast')),1.5));
 test('creature resistance is 0.75x',()=>assert.equal(effectiveness({type:'Beast'},defender('Construct','Construct')),0.75));
 test('duplicate base and alter do not stack',()=>assert.equal(effectiveness({type:'Celestial'},defender('Fiend','Fiend')),1.5));
-test('domain advantages and resistances apply',()=>{assert.equal(effectiveness({type:'Beast',domain:'Water'},defender('Aberration','Aberration',['Fire'])),1.25);assert.equal(effectiveness({type:'Beast',domain:'Water'},defender('Aberration','Aberration',['Air'])),.8);});
+test('domain advantages and resistances apply',()=>{assert.equal(effectiveness({type:'Beast',domain:'Water'},defender('Aberration','Aberration',['Fire'])),1.25);assert.equal(effectiveness({type:'Beast',domain:'Water'},defender('Aberration','Aberration',['Light'])),.8);});
 test('duplicate domains do not stack',()=>assert.equal(effectiveness({type:'Beast',domain:'Water'},defender('Aberration','Aberration',['Fire','Fire'])),1.25));
 test('effectiveness is capped between 0.5x and 2x and never immune',()=>{for(const t of TYPES)for(const u of TYPES)for(const d of DOMAINS){const x=effectiveness({type:t,domain:d},defender(u,u,DOMAINS));assert.ok(x>=.5&&x<=2,[t,u,d,x].join(' '));}});
