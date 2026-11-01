@@ -26,3 +26,7 @@ test('the move information panel contains narrative only',()=>{
  const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8'),a=source.indexOf('function movePreviewHTML('),b=source.indexOf('\nfunction battleHTML(',a),context=vm.createContext({E,esc:String});vm.runInContext(source.slice(a,b),context);
  const html=context.movePreviewHTML(TYPE_MOVES.Beast[2]);assert.match(html,/move-preview-description/);assert.match(html,/move-preview-context/);assert.doesNotMatch(html,/Effects:|Select this move again|style and commitment|Willpower|Stanima|HP|[0-9]/);
 });
+
+test('named special moves and their effects receive specific narrative copy',()=>{
+ for(const move of [...EXTRA_MOVES,...ADVANCED_MOVES,...ENVIRONMENT_MOVES,...E.MOVE_CATALOG])assert.doesNotMatch(moveLore(move).description,/^(The Spirimon gathers itself into a flowing|A luminous current gathers beneath)/,move.name);
+});

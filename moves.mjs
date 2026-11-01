@@ -182,6 +182,8 @@ const TYPE_NARRATIVES={
  ]
 };
 const EFFECT_NARRATIVES={
+ pivot:'The Spirimon sweeps through a bright crossing arc, then slips back into its own fading trail like a dancer leaving the circle.',
+ forceSwitch:'A rolling surge fills the space before the Spirimon, carrying dust and wavering silhouettes outward in its restless wake.',
  slow:'Clinging threads unfurl around the Spirimon, tracing a languid pattern through the air like roots feeling for a place to settle.',
  heal:'The Spirimon draws inward, gathering a soft warmth beneath its markings until its whole outline seems touched by a quiet dawn.',
  ward:'A translucent mantle folds around the Spirimon, its luminous edges overlapping like leaves sheltering a woodland hollow.',
@@ -332,6 +334,23 @@ const DOMAIN_STORIES=[
  essence=>'A deep shimmer of '+essence+' opens around the Spirimon and pours outward in a broad, sweeping tide.',
  essence=>'The Spirimon folds '+essence+' around its outline, weaving a quiet mantle whose edges move as though stirred by an unseen breeze.'
 ];
+const SPECIAL_NARRATIVES={
+ 'Prismatic Lance':'Colors gather beneath the Spirimon’s markings and draw into a gleaming lance, its edge splitting the light into delicate rainbows.',
+ 'Meteor Hammer':'A dark, star-shaped weight forms above the Spirimon and swings through a trail of molten light, echoing like thunder beyond the hills.',
+ 'Solar Lance':'A narrow spear of sunlight gathers over the Spirimon, blazing with the clear, golden brilliance of a summer noon.',
+ 'Abyssal Claw':'A great claw-shaped shadow reaches from the Spirimon’s outline, its edges flickering with the cold light of unfamiliar depths.',
+ 'Judgment Spiral':'A solemn spiral of radiance opens above the Spirimon, its interwoven rings descending like light through the dome of an ancient hall.',
+ 'Wildcat Blitz':'The Spirimon becomes a streak of tawny light, its movement carrying the sudden, fierce grace of a wildcat springing from cover.',
+ 'Ghostly Swarm':'A pale host rises from the Spirimon’s shadow, drifting together in a murmuring tide of half-remembered faces and silver mist.',
+ 'Spirimon Strike':'The Spirimon steps into a clean, instinctive motion, leaving the bright echo of its own silhouette across the air.',
+ 'Binding Lash':'A shining lash uncoils from the Spirimon, its fine threads clinging to the surrounding light like silk caught in the branches of a tree.',
+ 'Soul Surge':'A deep radiance gathers beneath the Spirimon’s markings and pours outward, carrying the resonant echo of a voice heard from far away.',
+ 'Quiet Renewal':'The Spirimon turns inward as a soft glow rises beneath its markings, warm and familiar as the first light reaching a sheltered hollow.',
+ 'Bitter Thorn':'A dark thorn glimmers beside the Spirimon, carrying the green scent of crushed leaves and the bitter sweetness of an unfamiliar blossom.',
+ 'Spirimon Ward':'A luminous veil settles around the Spirimon, its overlapping folds carrying the quiet comfort of a lantern-lit doorway.',
+ 'Drowsing Whisper':'The Spirimon releases a wandering whisper that curls through the air, soft as a lullaby heard from the far side of a dream.',
+ 'Wild Rush':'The Spirimon flings itself into a wild, sweeping motion, trailing scattered sparks and the untamed echo of its own cry.'
+};
 const NAMED_NARRATIVES=new Map();
 for(const [type,names]of Object.entries(NAMES))names.forEach((name,index)=>NAMED_NARRATIVES.set(name,TYPE_NARRATIVES[type][index]));
 const MECHANICAL_FLAVOR=/\b(?:HP|DMG|Stanima|stamina|Willpower|accuracy|damage|recoil|cooldown|stat|buff|debuff|physical|energy|status|cost|chance|percent|boost|heal|heals|healing|recover|restore|restores|reduce|increase|turns?|rounds?|maximum|quarter)\b|\d|%/i;
@@ -339,7 +358,7 @@ function customMoveNarrative(move){const text=String(move.desc||'').trim();retur
 export function moveLore(move={}){
  const name=String(move.name||'').replace(/\bspirits?\b/gi,'Spirimon'),kind=String(move.kind||move.category||'').toLowerCase();
  const theme=move.domain||(move.visual==='leaf'?'Plant':move.visual==='fire'?'Fire':move.visual==='water'?'Water':move.type),effect=Array.isArray(move.effect)?move.effect[0]:move.effect;
- let description=NAMED_NARRATIVES.get(name);
+ let description=NAMED_NARRATIVES.get(name)||SPECIAL_NARRATIVES[name];
  if(!description&&String(move.id||'').startsWith('domain-')){const index=Number(String(move.id).match(/-(\d+)$/)?.[1]||0)%4;description=DOMAIN_STORIES[index](DOMAIN_ESSENCE[move.domain]||'shimmering light');}
  description??=customMoveNarrative(move)||EFFECT_NARRATIVES[effect]||STAGE_NARRATIVES[effect];
  description??=move.id==='signature'?'An unmistakable pattern glows beneath the Spirimon\'s markings, unfolding into a fleeting shape that belongs to its lineage alone.':kind==='physical'?'The Spirimon gathers itself into a flowing, instinctive motion, leaving a bright trace across the air as its silhouette surges forward.':'A luminous current gathers beneath the Spirimon\'s markings and spills into the air, unfolding in a pattern as individual as its own voice.';
