@@ -12,7 +12,7 @@ export function moveBaseValue(move){
  const effective=power*(move.effect==='multiHit'?3:move.effect==='doubleHit'?2:1);
  return effective<=20?40:effective<=40?35:effective<=60?25:effective<=80?20:effective<=100?10:5;
 }
-const withBase=move=>({...move,baseUses:moveBaseValue(move)});
+const withBase=move=>({...move,baseUses:moveBaseValue(move),desc:moveLore(move).description});
 const NAMES={"Aberration":["Aperture Jab","Mind Knot","Folded Veil","Paradox Crush","Disquieting Gaze","Tendril Flick","Spatial Shell","Recursive Rend"],"Beast":["Raking Claw","Hamstring Bite","Den Instinct","Antler Charge","Venom Fang","Pouncing Snap","Thick Hide","Stampeding Rush"],"Celestial":["Feather Lance","Halo Bind","Dawn Benediction","Judgment Ray","Lulling Hymn","Star Dart","Radiant Aegis","Comet Descent"],"Construct":["Rivet Shot","Gear Snare","Field Repair","Iron Piledriver","Corrosive Bolt","Spring Hammer","Porcelain Guard","Furnace Impact"],"Elemental":["Spark Lash","Quicksand Grip","Renewing Current","Tempest Break","Cinder Mark","Gale Needle","Stone Mantle","Torrent Crash"],"Fey":["Briar Pin","Silken Tether","Nectar Blessing","Glamour Burst","Pollen Dream","Pixie Feint","Petal Shroud","Moonlit Prank"],"Fiend":["Barbed Hook","Chain Drag","Cinder Feast","Infernal Cleave","Malice Murmur","Ember Talon","Obsidian Hide","Hellfire Rush"],"Giant":["Knuckle Sweep","Ground Quake","Mountain Breath","Colossal Slam","Dazing Roar","Boulder Flick","Granite Guard","Avalanche Step"],"Humanoid":["Palm Arc","Joint Lock","Centered Breath","Fourfold Palm","Hypnotic Mask","Ribbon Cut","Measured Stance","Whirling Heel"],"Monstrosity":["Horn Pierce","Coiling Grasp","Mythic Renewal","Chimeric Roar","Basilisk Haze","Wing Shear","Scaled Bastion","Legendary Onrush"],"Ooze":["Gel Whip","Viscous Grasp","Reconstitute","Pressure Flood","Caustic Drip","Droplet Shot","Jelly Barrier","Amorphous Surge"],"Plant":["Thorn Prick","Strangler Vine","Root Renewal","Pitcher Crush","Sundew Toxin","Seed Needle","Bark Mantle","Bramble Rush"],"Undead":["Bone Shard","Grave Bind","Soul Reassembly","Tomb Collapse","Restless Lull","Spectral Scratch","Shroud Guard","Revenant Charge"]};
 const SPECS=[[32,16,'physical',null],[25,3,'physical','slow'],[0,-12,'spiritual','heal'],[68,-20,'physical',null],[18,-5,'spiritual','poison'],[40,9,'spiritual',null],[0,13,'spiritual','ward'],[54,18,'physical','recoil']];
 export const TYPE_MOVES=Object.fromEntries(Object.entries(NAMES).map(([type,names])=>[type,names.map((name,i)=>{const[power,speed,kind,baseEffect]=SPECS[i],effect=i===4?(['Aberration','Celestial','Fey','Humanoid','Undead'].includes(type)?'sleep':type==='Giant'?'slow':baseEffect):baseEffect;return{id:type.toLowerCase()+'-'+i,name,type,power,speed,kind,effect,visual:type==='Plant'?'leaf':type==='Ooze'?'water':type==='Elemental'?'fire':'spirit',desc:effect==='heal'?'Recover a quarter of maximum health.':effect==='ward'?'Soften the next incoming hit.':effect==='slow'?'Hinder the target’s next action.':effect==='poison'?'May leave lingering poison.':effect==='recoil'?'A swift impact with recoil.':'A '+type.toLowerCase()+' technique.'};})]));
@@ -47,3 +47,303 @@ export function startingMoves(base,alter,domains,seed){const a=TYPE_MOVES[base],
 
 
 for(const moves of [...Object.values(TYPE_MOVES),EXTRA_MOVES,ENVIRONMENT_MOVES,ADVANCED_MOVES])for(const move of moves)move.baseUses=moveBaseValue(move);
+
+// Narrative copy is kept separate from the combat rules and numerical move data.
+const TYPE_NARRATIVES={
+ "Aberration": [
+  "A narrow aperture opens beside the Spirimon, and a hooked shape flickers through before the seam closes.",
+  "A whisper folds over itself until every nearby sound seems to come from somewhere else.",
+  "The Spirimon wraps itself in a veil of impossible angles, its outline slipping between unfamiliar shapes.",
+  "Space puckers around a dark point, then opens in a sudden, breathless rush.",
+  "The Spirimon's eyes hold a question that the surrounding silence refuses to answer.",
+  "A pale tendril slips from an unseen fold and snaps back like a thought half remembered.",
+  "Overlapping rings drift around the Spirimon, showing glimpses of places that cannot quite be named.",
+  "A jagged motion repeats within its own fading shadow, leaving the air strangely out of step."
+ ],
+ "Beast": [
+  "The Spirimon sweeps a crescent of spectral claws through the air, leaving bright scratches that fade like sparks.",
+  "A low growl becomes a flashing bite, close and sudden as a predator moving through tall grass.",
+  "The Spirimon remembers the warmth of its earliest shelter, and that quiet belonging settles through its body.",
+  "A crown of spectral antlers sweeps forward, carrying the restless momentum of a creature in full flight.",
+  "A dark bead gathers along a phantom fang, trailing the bitter scent of crushed wild herbs.",
+  "A fleeting beast-shaped echo springs from the Spirimon, pouncing through a ripple of golden light.",
+  "The Spirimon hunkers beneath an ancient memory of hide and fur, steady as a creature weathering a storm.",
+  "The thunder of unseen hooves rises around the Spirimon as it throws itself into a wild, headlong rush."
+ ],
+ "Celestial": [
+  "A feather of pale light narrows into a shining lance and streaks forward through the hush.",
+  "A golden halo loosens into luminous ribbons, curving through the air like a promise that refuses to break.",
+  "The Spirimon bows beneath an imagined sunrise, bathing its markings in a gentle, returning warmth.",
+  "A brilliant seam opens across the gloom, and a solemn ray pours through like light from a high window.",
+  "A distant hymn gathers around the Spirimon, soft enough to be mistaken for a half-forgotten dream.",
+  "A tiny star kindles above the Spirimon and darts away, drawing a silver thread across the air.",
+  "Interlocking feathers of radiance gather around the Spirimon, their edges chiming like delicate glass.",
+  "The Spirimon becomes a falling streak of starlight, its bright wake scattering across the ground."
+ ],
+ "Construct": [
+  "A glowing rivet spins from the Spirimon with a crisp metallic note, leaving a trail of scattered filings.",
+  "Small spectral gears unfold in the air, their teeth meeting with a patient, unsettling click.",
+  "Fine lights travel along the Spirimon's seams, drawing loose pieces back into a familiar whole.",
+  "The Spirimon gathers its weight behind a single descending motion, and the air answers with a deep iron clang.",
+  "A gleaming bolt tears through the air, leaving an acrid haze and tiny flecks of tarnished light.",
+  "A coiled shimmer releases with a sharp ringing snap, like a hidden spring finally set free.",
+  "Pale porcelain plates bloom around the Spirimon, each settling into place with the sound of a closing bell.",
+  "A furnace glow pours through the Spirimon's markings as it surges forward amid a shower of embers."
+ ],
+ "Elemental": [
+  "A bright lash of sparks uncoils from the Spirimon, crackling like a branch in a sudden summer storm.",
+  "The ground takes on the slow, hungry motion of wet sand, curling around every disturbed footprint.",
+  "Cool currents circle the Spirimon, washing through its outline with the freshness of rain after drought.",
+  "Wind and rain seem to gather inside the Spirimon's cry before bursting outward in a sweeping torrent.",
+  "A coal-red sigil hangs in the air, shedding fine ash that glows and darkens as it falls.",
+  "A slender needle of wind races ahead of a whisper, stirring everything in its narrow wake.",
+  "Grains of stone lift around the Spirimon and knit into a rough mantle, carrying the scent of deep earth.",
+  "The Spirimon plunges into a roaring surge, its shape briefly lost beneath a crest of white spray."
+ ],
+ "Fey": [
+  "A thorn wrapped in soft green light slips free of the Spirimon, carrying the scent of rain-soaked briars.",
+  "A shining silk thread drifts through the air, winding itself into patterns too intricate to follow.",
+  "The Spirimon gathers the sweetness of an imagined blossom, and warm gold glimmers beneath its markings.",
+  "A dazzling glamour opens like a flower in moonlight, spilling impossible colors across the air.",
+  "A cloud of luminous pollen drifts from the Spirimon, bringing the hush of a woodland just before dawn.",
+  "A small, laughing echo slips sideways through the light, leaving the Spirimon's shape momentarily uncertain.",
+  "Petals unfold around the Spirimon without any visible stem, their pale surfaces turning toward an unseen moon.",
+  "The Spirimon whirls through a flash of silver laughter, scattering the playful shadows of a midnight revel."
+ ],
+ "Fiend": [
+  "A curved barb of dark radiance flashes from the Spirimon, dragging a thin ribbon of ember-red smoke.",
+  "Spectral chains scrape across the air, their links glowing with the dull heat of a buried forge.",
+  "The Spirimon drinks in a wreath of cinders, and its ember-lit markings glow with a deeper warmth.",
+  "A great arc of infernal light sweeps outward, leaving the sharp scent of scorched stone.",
+  "A low murmur coils through the air, carrying the troubling intimacy of a voice heard in a dream.",
+  "An ember-shaped talon tears across the Spirimon's shadow, scattering bright fragments into the gloom.",
+  "Black glass rises around the Spirimon in overlapping scales, each catching a tiny red reflection.",
+  "The Spirimon surges through a veil of hellfire, its outline ragged with streaming sparks and smoke."
+ ],
+ "Giant": [
+  "The Spirimon swings with the breadth of a passing hillside, pushing a low rumble through the air.",
+  "A heavy tremor ripples across the earth, shaking loose the quiet hidden between roots and stones.",
+  "The Spirimon draws a deep, mountain-still breath, and the world seems to settle around it.",
+  "The Spirimon's gathered strength descends like a cliff face breaking free, trailing a deep, rolling echo.",
+  "A cavernous roar fills the air, lingering long after its last note should have faded.",
+  "A rough stone-shaped spark snaps outward, accompanied by the dry crack of a pebble splitting.",
+  "Crags of phantom granite gather around the Spirimon, their weathered surfaces bright with lichen-colored light.",
+  "The Spirimon sweeps forward beneath a rolling mantle of frost and stone, like a mountainside awakened."
+ ],
+ "Humanoid": [
+  "The Spirimon opens its stance and draws a clean arc through the air, precise as a practiced brushstroke.",
+  "A twist of intent tightens into a fleeting lattice of pale lines, close and exact as a familiar knot.",
+  "The Spirimon stills its breathing until the noise of the world seems to recede, leaving a quiet warmth within.",
+  "Overlapping echoes of an open palm bloom around the Spirimon, meeting in a single flowing gesture.",
+  "A luminous mask hovers before the Spirimon, its calm expression shifting whenever the eye looks away.",
+  "A ribbon of pale light whips through the air, following the graceful sweep of an unseen dancer.",
+  "The Spirimon settles into a balanced pose, its shadow becoming as still and certain as ink on paper.",
+  "The Spirimon spins through a broad circle of trailing light, its motion ending with a sharp, clear snap."
+ ],
+ "Monstrosity": [
+  "A spectral horn gleams ahead of the Spirimon, parting the air with the fierce elegance of a hunting beast.",
+  "A sinuous shadow curls outward, winding through the air with the patience of something waiting in deep water.",
+  "An old, untamed presence stirs beneath the Spirimon's markings, carrying the warmth of a legend remembered.",
+  "The Spirimon's cry divides into strange, overlapping voices, swelling into a single untamed chorus.",
+  "A low haze gathers beneath the Spirimon's gaze, turning familiar outlines into unsettling silhouettes.",
+  "A phantom wing sweeps across the light, leaving a thin, wavering line in its wake.",
+  "Overlapping scales of spectral light rise around the Spirimon, curving together into a rugged shelter.",
+  "The Spirimon charges beneath the shadow of a much larger creature, its passage ringing with an ancient wildness."
+ ],
+ "Ooze": [
+  "A glistening strand of gel lashes through the air, stretching into a translucent curve before snapping away.",
+  "Clear slime spreads in slow, deliberate coils, clinging to every surface it touches.",
+  "Scattered droplets draw toward the Spirimon as though remembering where they belong, smoothing its wavering outline.",
+  "The Spirimon releases a swelling wall of glossy fluid, its surface trembling with trapped reflections.",
+  "A caustic droplet hangs beneath the Spirimon, falling through a thin curl of sharp-smelling vapor.",
+  "A bright bead of liquid slips free and shoots through the air, leaving a string of smaller, shining drops.",
+  "A rounded curtain of jelly swells around the Spirimon, bending the world into soft, wavering shapes.",
+  "The Spirimon flows into a rushing, shapeless swell, leaving the ground slick with fading iridescence."
+ ],
+ "Plant": [
+  "A slender thorn emerges from the Spirimon in a glimmer of green, sharp as a bramble catching moonlight.",
+  "A vine-shaped shadow winds through the air, trailing the damp, green scent of a forest floor.",
+  "The Spirimon reaches toward an unseen sun as a gentle warmth rises through its roots and markings.",
+  "A deep floral shadow opens like a great pitcher, closing amid a rustle of thick, waxy leaves.",
+  "Amber droplets tremble along the Spirimon's outline, carrying a sweet scent with a bitter undertone.",
+  "A shining seed darts from the Spirimon, wrapped in the green hush of new growth.",
+  "Layers of spectral bark curl around the Spirimon, threaded with moss and the quiet strength of old roots.",
+  "The Spirimon rushes within a tangle of brambles, scattering petals, thorns, and the scent of disturbed earth."
+ ],
+ "Undead": [
+  "A pale shard turns in the darkness, then flies forward with the dry whisper of old bone.",
+  "Grave-cold threads rise from the ground and curl together, carrying a breath of forgotten earth.",
+  "Loose wisps gather around the Spirimon, drawing its fading outline back into a familiar shape.",
+  "A heavy shadow descends like the closing door of an ancient tomb, stirring dust that has no earthly source.",
+  "A distant lullaby drifts from the Spirimon, soft and sorrowful as a voice remembered from long ago.",
+  "A silver scratch passes across the air, revealing a brief glimmer of the darkness behind it.",
+  "A winding cloth of spectral mist gathers around the Spirimon, its folds moving without a breeze.",
+  "The Spirimon surges from a wake of grave mist, its silhouette burning with stubborn, returning purpose."
+ ]
+};
+const EFFECT_NARRATIVES={
+ slow:'Clinging threads unfurl around the Spirimon, tracing a languid pattern through the air like roots feeling for a place to settle.',
+ heal:'The Spirimon draws inward, gathering a soft warmth beneath its markings until its whole outline seems touched by a quiet dawn.',
+ ward:'A translucent mantle folds around the Spirimon, its luminous edges overlapping like leaves sheltering a woodland hollow.',
+ protect:'A bright enclosure blossoms around the Spirimon, its surface rippling with the stillness of a pond beneath falling rain.',
+ poison:'A bitter shimmer trails through the air, leaving an acrid sweetness that lingers long after the light has faded.',
+ toxic:'A deep violet haze coils outward, carrying the unsettling sweetness of flowers blooming in a place without sunlight.',
+ sleep:'The Spirimon releases a low, wandering melody, and the air grows soft with the hush of a half-remembered dream.',
+ freeze:'Pale frost spreads through the Spirimon\'s breath, catching the light in delicate branches of silver and blue.',
+ burn:'A coal-red glow swells beneath the Spirimon\'s markings, shedding drifting sparks and the scent of summer leaves in a fire.',
+ paralysis:'Fine lightning stitches an intricate pattern across the air, each bright thread holding for a breath before it vanishes.',
+ confusion:'Reflections gather where no mirrors stand, overlapping until familiar shapes seem to wander outside their own shadows.',
+ infatuation:'A warm, rose-colored shimmer surrounds the Spirimon, carrying the strange familiarity of a face glimpsed in a cherished dream.',
+ flinch:'A sudden, fierce motion splits the surrounding stillness, followed by a sharp echo that seems too close to place.',
+ frostbite:'A breath of deep winter pours from the Spirimon, leaving tiny crystals suspended in a pale and glittering mist.',
+ nightmare:'Dark shapes stir beneath a veil of dreamlike mist, drifting near enough to suggest a story best left unfinished.',
+ drain:'Silver filaments stretch through the air and curl back toward the Spirimon, glowing like moonlit water returning to a hidden spring.',
+ recoil:'The Spirimon throws itself into a fierce, unrestrained motion, its trailing light scattering like sparks from a struck stone.',
+ struggle:'With its markings dim and its breath ragged, the Spirimon gathers what remains of its resolve and surges forward in a desperate rush.',
+ rest:'The Spirimon settles into a deep and trusting stillness, wrapped in the quiet warmth of a dream without shadows.',
+ fullheal:'A clear radiance opens beneath the Spirimon\'s markings, washing across its outline like morning light through a long-shuttered room.',
+ cleanse:'A clear breeze circles the Spirimon, lifting away dark wisps until only the clean scent of rain remains.',
+ partyCleanse:'The Spirimon releases a fragrant breeze, drawing the air into a gentle procession of petals and clear, bright droplets.',
+ regenerate:'Soft green lights kindle beneath the Spirimon\'s outline, opening and closing with the patient rhythm of new leaves.',
+ reflect:'A silver sheen spreads around the Spirimon, catching the world in curved reflections that drift like polished leaves.',
+ lightscreen:'The Spirimon draws a pale curtain through the air, filling its folds with the warm glow of a distant lantern.',
+ safeguard:'A ring of quiet light settles around the Spirimon, carrying the familiar comfort of a threshold watched by someone trusted.',
+ auroraVeil:'Ribbons of color open through the frost, draping the Spirimon in the silent wonder of a winter sky.',
+ bellyDrum:'A deep rhythm rises from the Spirimon, fierce and intimate as a heartbeat heard through the walls of a cavern.',
+ batonPass:'The Spirimon draws a shining thread from its markings and casts it outward, leaving a warm ribbon suspended between kindred presences.',
+ haze:'A colorless mist rolls through the air, softening every sharp impression until the world seems briefly unmarked and new.',
+ swapStats:'Overlapping reflections turn toward one another, their mirrored shapes exchanging places in a slow and uncanny dance.',
+ invertStats:'A delicate pattern twists inside out around the Spirimon, making familiar shadows fall in unfamiliar directions.',
+ clearHazards:'A broad, cleansing gust sweeps outward, lifting loose dust, tangled wisps, and scattered fragments into the open air.',
+ spikes:'Jagged glimmers rise from the earth, catching the light like a field of thorns newly uncovered by the wind.',
+ toxicSpikes:'Dark, shining points emerge beneath a curl of violet mist, carrying the bitter scent of a rain-soaked mire.',
+ stealthRock:'Rough fragments of spectral stone hang in the air, turning slowly as though listening for a distant footstep.',
+ stickyWeb:'Fine strands stretch across the light, weaving themselves into a glistening pattern of patient, trembling silk.',
+ leechSeed:'A tiny, luminous seed drifts outward, trailing delicate roots that search the air with a quiet, hungry persistence.',
+ trap:'Coiling shapes gather close, closing like the roots of a forest around something it has chosen to remember.',
+ curse:'A dim sigil settles into the surrounding shadow, its edges smoldering with the weight of an unspoken grievance.',
+ perish:'A distant bell sounds through the hush, each fading note carrying the solemn feeling of a story nearing its final page.',
+ destinyBond:'A dark ribbon of light stretches between the Spirimon and another presence, trembling like a promise spoken too softly to recall.',
+ disable:'A pale seal closes over a fading echo, leaving behind the curious silence of a word suddenly forgotten.',
+ taunt:'The Spirimon\'s voice rings with sharp, unsettling confidence, its challenge lingering like a spark that refuses to die.',
+ counter:'The Spirimon becomes very still, gathering the surrounding echoes into a single, tightly held breath.',
+ mirrorCoat:'An opalescent sheen travels over the Spirimon, holding borrowed reflections beneath its smooth, luminous surface.',
+ priority:'The Spirimon slips into motion before the surrounding dust has settled, leaving its old silhouette behind like a fading thought.',
+ sureHit:'A narrow line of light draws itself through the air, unwavering as a star glimpsed between moving clouds.',
+ recharge:'A great radiance pours from the Spirimon in a roaring release, leaving its markings glowing like the embers of a spent forge.',
+ multiHit:'A flurry of shining traces blossoms around the Spirimon, crossing and recrossing like swift wings in a storm.',
+ doubleHit:'Intertwined trails sweep through the air, their bright echoes following each other like the answering notes of a song.',
+ breakWard:'A keen, ringing arc cuts through the light, scattering translucent fragments like glass petals on the wind.',
+ critical:'A slender glimmer settles along the Spirimon\'s motion, bright and precise as sunlight along the edge of a blade.',
+ unburdened:'The Spirimon moves with a sudden, airy freedom, its outline barely stirring the dust beneath it.',
+ revenge:'An old echo rises beneath the Spirimon\'s cry, hardening its resolve into a fierce and unwavering presence.',
+ partyStrike:'Familiar silhouettes gather around the Spirimon like companions remembered in a dream, their paths joining in a single sweeping motion.',
+ omniBoost:'A small constellation blooms beneath the Spirimon\'s markings, each point answering the others in a quiet, radiant chorus.',
+ selfDebuff:'The Spirimon pours itself into a blazing release, leaving its outline flickering in the silence that follows.',
+ twoTurn:'The Spirimon vanishes into a gathering veil, its presence lingering at the edge of sight like a storm beyond the horizon.',
+ chargeSun:'The Spirimon turns toward the sun, gathering its warm radiance until the air around it trembles with golden light.',
+ rampage:'The Spirimon gives itself to a wild, rolling momentum, its cry swallowed by the thunder of its own passage.',
+ focus:'The Spirimon grows quiet, drawing every wandering glimmer into the steady light at the center of its markings.',
+ delayedStrike:'A bright mote is left hanging in the air, patient and almost forgotten until its hidden radiance begins to unfold.',
+ sleepStrike:'The Spirimon drifts through a gauze of dreamlight, its motion as soft and strange as footsteps heard within a dream.',
+ venomStrike:'A dark, glossy current gathers along the Spirimon\'s path, carrying a sweetness that seems to turn bitter on the breath.',
+ hexStrike:'A crooked sigil flickers within the Spirimon\'s shadow, unfolding into a wavering trail of indigo light.',
+ weatherStrike:'The Spirimon raises its voice to the clouds, drawing a rain-bright current from the darkening sky.',
+ sunStrike:'Warm sunlight gathers in the Spirimon\'s wake, spilling outward like a dawn that has arrived all at once.',
+ sandStrike:'Dust and amber light whirl around the Spirimon, rising with the dry whisper of a distant desert.',
+ snowStrike:'A glittering spiral of snow opens around the Spirimon, filling the air with the fragile hush of deep winter.',
+ terrainStrike:'The earth answers the Spirimon in a rustle of roots and green light, as though a hidden woodland were waking beneath the ground.',
+ electricStrike:'A bright current runs along the earth, joining the Spirimon\'s markings in a restless web of blue-white sparks.',
+ psychicStrike:'A quiet pulse passes through the air, turning the surrounding light into wavering rings of violet and rose.',
+ mistStrike:'The Spirimon moves within a bank of luminous mist, its outline appearing and disappearing like a lantern beyond still water.',
+ weatherRain:'The Spirimon lifts its voice beneath gathering clouds, and cool drops begin to pearl along its glowing markings.',
+ weatherSun:'A warm glow opens through the clouds above the Spirimon, spilling gold across the waiting earth.',
+ weatherSand:'A dry whisper rises around the Spirimon, drawing dust into a broad, amber-colored spiral.',
+ weatherSnow:'The air grows bright with drifting flakes, each catching the Spirimon\'s glow before settling into the hush.',
+ terrainGrass:'Green light threads through the ground, carrying the scent of rain, living roots, and leaves newly opened.',
+ terrainElectric:'Luminous veins run beneath the Spirimon\'s feet, branching across the earth with a restless, crackling glow.',
+ terrainPsychic:'A dreamlike radiance spreads beneath the Spirimon, turning nearby shadows soft and strangely distant.',
+ terrainMisty:'Pale mist spills across the ground, carrying little glimmers that drift like lanterns reflected in deep water.'
+};
+const STAGE_NARRATIVES={
+ boostMight:'The Spirimon draws itself upright, and a fierce, grounded warmth gathers beneath its markings.',
+ boostPower:'An inner radiance deepens around the Spirimon, spilling from its markings in slow, luminous waves.',
+ boostDefense:'A rough mantle of light settles over the Spirimon, steady and close as the walls of a familiar shelter.',
+ boostResistance:'The Spirimon becomes quiet within a deepening glow, like a lantern sheltered from a restless wind.',
+ boostSpeed:'A fresh current stirs beneath the Spirimon\'s feet, loosening its silhouette into a bright and flowing motion.',
+ boostAccuracy:'The Spirimon\'s gaze grows still, following a narrow glimmer through the shifting shapes of the world.',
+ boostEvasion:'The Spirimon\'s outline scatters into delicate afterimages, each drifting away like a reflection on disturbed water.',
+ lowerMight:'A heavy shadow passes through the air, carrying the weary hush of a fire sinking beneath its ashes.',
+ lowerPower:'Fine, dim threads curl through the light, drawing its bright edges into a softer, uncertain glow.',
+ lowerDefense:'A sharp note rings through the air, leaving small fractures in the reflections that linger around it.',
+ lowerResistance:'A pale mist gathers in the folds of nearby shadows, whispering like rain through an open doorway.',
+ lowerSpeed:'The ground seems to breathe a slow and patient rhythm, its shadows stretching like roots beneath deep water.',
+ lowerAccuracy:'A wavering veil crosses the light, turning familiar outlines into the uncertain shapes of a distant mirage.'
+};
+const TYPE_CONTEXT={
+ Aberration:'Its lingering patterns feel less like an image seen than a dream remembered from somewhere unfamiliar.',
+ Beast:'Even after the light fades, the gesture carries the keen, instinctive presence of the wild.',
+ Celestial:'The radiance lingers with the stillness of a clear sky just before the morning birds begin to sing.',
+ Construct:'A delicate metallic resonance hangs in the air, like the last vibration of a carefully tended bell.',
+ Elemental:'For a moment, the surrounding earth and air seem to share the same restless breath.',
+ Fey:'A trace of wildflower sweetness remains, touched by the gentle strangeness of a moonlit woodland.',
+ Fiend:'The fading glow leaves a thread of smoke and the memory of heat hidden beneath dark stone.',
+ Giant:'Its echo travels low through the earth, slow and deep as a sound remembered by a mountain.',
+ Humanoid:'There is a practiced grace in the gesture, as though it belongs to a story passed from teacher to pupil.',
+ Monstrosity:'The fading silhouette recalls a beast from an old fireside tale, magnificent and difficult to forget.',
+ Ooze:'Tiny reflections drift across the Spirimon\'s outline, never quite settling into the same shape.',
+ Plant:'The air retains the green scent of roots, rain, and sunlight resting on new leaves.',
+ Undead:'A faint chill remains, carrying the tender, unsettling weight of something that refuses to be forgotten.'
+};
+const DOMAIN_CONTEXT={
+ Air:'A whisper of wind remains, carrying the impression of wide skies and distant, open places.',
+ Earth:'The surrounding hush feels deep and old, like the stillness beneath the roots of a great tree.',
+ Fire:'The fading light carries the smell of embers and the familiar warmth of a hearth at dusk.',
+ Water:'A cool freshness lingers, like spray from a hidden stream heard somewhere beyond the trees.',
+ Light:'The last glimmers seem to hang in the air, warm and clear as sunlight through a high window.',
+ Dark:'The nearby shadows linger a little longer, holding shapes the eye cannot quite follow.',
+ Sun:'The warmth remains like a small memory of summer carried into the evening shade.',
+ Moon:'A silver hush lingers around the Spirimon, soft as a reflection on water beneath the night sky.',
+ Lightning:'The air keeps a faint, restless shimmer, like the expectant quiet before a summer storm.',
+ Ice:'Delicate glimmers drift away with the stillness of snow settling over an untraveled path.',
+ Metal:'A clear, delicate resonance remains, bright as a polished bell ringing through a quiet hall.',
+ Chaos:'The fading traces refuse to follow a familiar pattern, yet briefly seem to belong together.',
+ Law:'The lingering lines settle into a poised, intricate pattern, as orderly as frost along a window.',
+ Good:'The glow leaves the warmth of an open doorway glimpsed at the end of a long and lonely road.',
+ Evil:'A dark intimacy clings to the silence, like a secret spoken too near the ear.',
+ Creation:'Tiny glimmers open and fade like the first signs of something new taking shape.',
+ Destruction:'The last fragments scatter into silence, leaving the air strangely clear and empty.',
+ War:'The fading echo carries the solemn weight of banners stirring above an abandoned field.',
+ Peace:'The hush that follows feels sheltered and complete, like a garden after the wind has fallen still.',
+ Fear:'The shadows seem to listen, carrying the familiar unease of a sound heard just beyond the light.',
+ Wrath:'A fierce warmth remains beneath the Spirimon\'s outline, slow to settle back into silence.',
+ Love:'A gentle warmth lingers like the comfort of a familiar presence returning after a long absence.',
+ Hope:'The last glimmer holds like a distant light on a dark road, small but difficult to overlook.',
+ Despair:'The fading light carries the heavy stillness of a place waiting for a voice that never comes.',
+ Sorrow:'A soft, distant echo remains, gentle as a song remembered for someone no longer near.',
+ Fate:'The lingering traces cross like threads in an unfinished tapestry, suggesting a pattern just beyond sight.',
+ Dreams:'The glow fades slowly, leaving the pleasant uncertainty of a dream remembered upon waking.',
+ Nightmares:'A dark shape seems to remain at the edge of sight, vanishing whenever the gaze turns toward it.'
+};
+const DOMAIN_ESSENCE={Air:'wind',Earth:'earthlight',Fire:'flame',Water:'waterlight',Light:'radiance',Dark:'shadow',Sun:'sunlight',Moon:'moonlight',Lightning:'lightning',Ice:'frost',Metal:'silver light',Chaos:'shifting color',Law:'ordered light',Good:'warm radiance',Evil:'dark fire',Creation:'newborn light',Destruction:'ashen light',War:'crimson radiance',Peace:'gentle light',Fear:'deep shadow',Wrath:'fierce flame',Love:'rose-colored light',Hope:'dawnlight',Despair:'fading light',Sorrow:'pale mist',Fate:'woven light',Dreams:'dreamlight',Nightmares:'night mist'};
+const DOMAIN_STORIES=[
+ essence=>'A narrow thread of '+essence+' gathers beneath the Spirimon\'s markings and flies outward, leaving a delicate trail in the air.',
+ essence=>'The Spirimon draws '+essence+' into a winding pattern, its luminous strands drifting close like the folds of a half-remembered dream.',
+ essence=>'A deep shimmer of '+essence+' opens around the Spirimon and pours outward in a broad, sweeping tide.',
+ essence=>'The Spirimon folds '+essence+' around its outline, weaving a quiet mantle whose edges move as though stirred by an unseen breeze.'
+];
+const NAMED_NARRATIVES=new Map();
+for(const [type,names]of Object.entries(NAMES))names.forEach((name,index)=>NAMED_NARRATIVES.set(name,TYPE_NARRATIVES[type][index]));
+const MECHANICAL_FLAVOR=/\b(?:HP|DMG|Stanima|stamina|Willpower|accuracy|damage|recoil|cooldown|stat|buff|debuff|physical|energy|status|cost|chance|percent|boost|heal|heals|healing|recover|restore|restores|reduce|increase|turns?|rounds?|maximum|quarter)\b|\d|%/i;
+function customMoveNarrative(move){const text=String(move.desc||'').trim();return text.length>=80&&!MECHANICAL_FLAVOR.test(text)&&!/^A (?:powerful combat|specific expression|technique shaped|[a-z]+) technique\.|^(?:Special )?Technique:|^An advanced technique\.|^This lineage/i.test(text)?text:null;}
+export function moveLore(move={}){
+ const name=String(move.name||'').replace(/\bspirits?\b/gi,'Spirimon'),kind=String(move.kind||move.category||'').toLowerCase();
+ const theme=move.domain||(move.visual==='leaf'?'Plant':move.visual==='fire'?'Fire':move.visual==='water'?'Water':move.type),effect=Array.isArray(move.effect)?move.effect[0]:move.effect;
+ let description=NAMED_NARRATIVES.get(name);
+ if(!description&&String(move.id||'').startsWith('domain-')){const index=Number(String(move.id).match(/-(\d+)$/)?.[1]||0)%4;description=DOMAIN_STORIES[index](DOMAIN_ESSENCE[move.domain]||'shimmering light');}
+ description??=customMoveNarrative(move)||EFFECT_NARRATIVES[effect]||STAGE_NARRATIVES[effect];
+ description??=move.id==='signature'?'An unmistakable pattern glows beneath the Spirimon\'s markings, unfolding into a fleeting shape that belongs to its lineage alone.':kind==='physical'?'The Spirimon gathers itself into a flowing, instinctive motion, leaving a bright trace across the air as its silhouette surges forward.':'A luminous current gathers beneath the Spirimon\'s markings and spills into the air, unfolding in a pattern as individual as its own voice.';
+ const context=DOMAIN_CONTEXT[theme]||TYPE_CONTEXT[theme]||'The glow fades slowly, leaving the quiet impression of a presence that is difficult to mistake for any other.';
+ return {description,context};
+}
+for(const move of [...Object.values(TYPE_MOVES).flat(),...EXTRA_MOVES,...ENVIRONMENT_MOVES,...ADVANCED_MOVES])move.desc=moveLore(move).description;

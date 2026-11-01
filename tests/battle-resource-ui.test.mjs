@@ -33,12 +33,12 @@ test('enemy AI retains its paid charged move after exhausting both shared pools'
  const context=ui([a],enemy,[s,other]);assert.equal(vm.runInContext('enemyChoice().move.id',context),charge.id);
 });
 
-test('first selection previews description and effects while keeping every move visible and spending nothing',()=>{
+test('first selection previews narrative while keeping every move visible and spending nothing',()=>{
  const ward={...move(1),kind:'status',power:0,effect:'ward',desc:'Raise a protective ward.'},sp=species('preview',[move(0),ward]),foe=species('foe',[move(2)]),a=individual(sp,'actor'),enemy=individual(foe,'foe');
  const context=ui([a],enemy,[sp,foe]),before={hp:a.hp,pp:a.pp,willpower:a.willpower};
  vm.runInContext('selectBattleMove(1)',context);
  assert.equal(context.battleMode,'moves');assert.equal(context.selectedMove,1);assert.equal(context.battle.round,1);assert.deepEqual({hp:a.hp,pp:a.pp,willpower:a.willpower},before);
- const html=vm.runInContext('battleHTML()',context);assert.match(html,/Raise a protective ward/);assert.match(html,/Effects:<\/b> Ward/);assert.match(html,/aria-pressed="true"/);assert.match(html,/move-preview/);assert.match(html,/Technique 0/);assert.match(html,/Technique 1/);assert.doesNotMatch(html,/USE Technique/);
+ const html=vm.runInContext('battleHTML()',context);assert.ok(html.includes(E.moveLore(ward).description));assert.ok(html.includes(E.moveLore(ward).context));assert.doesNotMatch(html,/Effects:<\/b>/);assert.match(html,/aria-pressed="true"/);assert.match(html,/move-preview/);assert.match(html,/Technique 0/);assert.match(html,/Technique 1/);assert.doesNotMatch(html,/USE Technique/);
 });
 test('a different move replaces the preview; selecting that same move again opens its tactics',()=>{
  const sp=species('preview',[move(0),move(1)]),foe=species('foe',[move(2)]),a=individual(sp,'actor'),enemy=individual(foe,'foe'),context=ui([a],enemy,[sp,foe]);
@@ -47,7 +47,7 @@ test('a different move replaces the preview; selecting that same move again open
 });
 test('returning from tactics retains the preview but reopening Fight starts a fresh first selection',()=>{
  const sp=species('preview',[move(0)]),foe=species('foe',[move(1)]),a=individual(sp,'actor'),enemy=individual(foe,'foe'),context=ui([a],enemy,[sp,foe]);
- vm.runInContext('selectBattleMove(0);selectBattleMove(0);openBattleMoves()',context);assert.match(vm.runInContext('battleHTML()',context),/A test technique/);
+ vm.runInContext('selectBattleMove(0);selectBattleMove(0);openBattleMoves()',context);assert.ok(vm.runInContext('battleHTML()',context).includes(E.moveLore(sp.moves[0]).description));
  vm.runInContext('selectBattleMove(0)',context);assert.equal(context.battleMode,'tactics');
  vm.runInContext('openBattleMoves(true);selectBattleMove(0)',context);assert.equal(context.battleMode,'moves');
 });

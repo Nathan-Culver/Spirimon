@@ -141,9 +141,8 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 .classic-dialogue.move-preview{overflow:auto}
 .classic-dialogue.move-preview #battle-speech{max-height:none;overflow:visible;font-size:clamp(13px,1.25vw,19px);line-height:1.35}
 .move-preview-name{display:block;font-size:clamp(16px,1.6vw,24px);line-height:1.15;margin-bottom:7px;color:#2b422c}
-.move-preview-description,.move-preview-effects,.move-preview-hint{display:block}
-.move-preview-effects{margin-top:7px}
-.move-preview-hint{margin-top:10px;color:#596d49;font-size:clamp(11px,1vw,15px)}
+.move-preview-description,.move-preview-context{display:block}
+.move-preview-context{margin-top:12px;color:#596d49;font-size:clamp(12px,1.1vw,17px);font-style:italic}
 .classic-dialogue.move-preview:after{display:none}
 .classic-dialogue.move-preview .debt-indicator{position:static;margin-top:8px}
-@media(orientation:landscape) and (max-height:450px){.classic-dialogue.move-preview #battle-speech{font-size:12px;line-height:1.25}.move-preview-name{font-size:15px;margin-bottom:4px}.move-preview-effects{margin-top:4px}.move-preview-hint{font-size:10px;margin-top:6px}}
+@media(orientation:landscape) and (max-height:450px){.classic-dialogue.move-preview #battle-speech{font-size:12px;line-height:1.25}.move-preview-name{font-size:15px;margin-bottom:4px}.move-preview-context{font-size:11px;margin-top:8px}}
