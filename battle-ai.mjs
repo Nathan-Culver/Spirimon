@@ -1,3 +1,4 @@
+import {moveTiming,scaledMove} from './realtime-moves.mjs';
 import * as E from './engine.mjs';
 import {hasHook,heldEquipment,heldItemActivation,generateHeldItem} from './equipment.mjs';
 
@@ -44,6 +45,7 @@ function supportScore(actor,asp,target,tsp,move,context){
 }
 function effectScore(actor,asp,target,tsp,move,context){
  const e=move.effect,field=actor.battlefield||{},conditions=target.conditions||{},h=field.sides?.[target.battleSide]?.hazards||{};
+ if(context.realTime&&['sleep','freeze','flinch'].includes(e)&&(target.controlImmuneUntil||0)>(actor.realtimeNow||0))return -100;
  if(E.STATUS_EFFECTS.includes(e))return target.status&&['poison','toxic','burn','sleep','paralysis','freeze','frostbite'].includes(e)||conditions[e]?-60:e==='perish'&&context.reserves.length===0?-15:e==='disable'&&!target.lastMove?-80:e==='nightmare'&&target.status!=='sleep'?-80:24;
  if(e?.startsWith('lower'))return 18;
  if(['spikes','toxicSpikes','stealthRock','stickyWeb'].includes(e))return context.enemyReserves.length?18+context.enemyReserves.length*5-(h[e]||0)*20:-80;
@@ -62,11 +64,11 @@ export function chooseBattleAction(actor,context,r=Math.random){
  const {speciesOf,opponents}=context,asp=speciesOf(actor),team=context.team||[actor],allies=context.allies||[actor],reserves=context.reserves||[],enemyReserves=context.enemyReserves||[];
  context={...context,team,allies,reserves,enemyReserves};const threat=incomingThreat(actor,asp,opponents,speciesOf),hpRatio=ratio(actor,asp);
  const branch=actor.pendingMove?'release':hpRatio<.35?'survive':opponents.some(t=>ratio(t,speciesOf(t))<.3)?'finish':'develop';
- const moves=choices(actor,asp),usable=moves.length?moves:[{...E.STRUGGLE,type:asp.base}],candidates=[];
- const activation=heldItemActivation(actor,asp),sources=usable.map(move=>({move,type:'move'}));if(activation.ok&&(activation.consumable||E.canUseMove(actor,asp,activation.move)))sources.push({move:activation.move,type:'heldItem',itemId:activation.item.id});
+ const moves=choices(actor,asp).filter(m=>!context.realTime||(['self','ally','allAllies'].includes(E.moveTarget(m))?allies:opponents).some(t=>E.canUseMove(actor,asp,m,speciesOf(t)))),usable=moves.length?moves:[{...E.STRUGGLE,type:asp.base}],candidates=[];
+ const activation=heldItemActivation(actor,asp),sources=usable.filter(move=>!context.canUse||context.canUse({move,type:'move'})).map(move=>({move,type:'move'}));if(activation.ok&&(activation.consumable||E.canUseMove(actor,asp,activation.move))&&(!context.canUse||context.canUse({type:'heldItem',move:activation.move})))sources.push({move:activation.move,type:'heldItem',itemId:activation.item.id});
  for(const source of sources){const {move}=source;const kind=E.moveTarget(move),friendly=['ally','self','allAllies'].includes(kind),targets=kind==='ally'?allies:kind==='self'||kind==='allAllies'?[actor]:opponents;
-  for(const target of targets){if(target.hp<=0)continue;const tsp=speciesOf(target),targetIndex=(friendly?allies:opponents).indexOf(target);
-   for(const style of source.type==='heldItem'?['normal']:['normal','agile','strong']){const commit=branch==='survive'?.35:branch==='finish'?.7:.55,expected=expectedDamage(actor,asp,target,tsp,move,style,commit),support=friendly?supportScore(actor,asp,target,tsp,move,context):0;
+  for(const target of targets){if(target.hp<=0||context.realTime&&move.id!=='struggle'&&!source.itemId&&!E.canUseMove(actor,asp,move,speciesOf(target)))continue;const tsp=speciesOf(target),targetIndex=(friendly?allies:opponents).indexOf(target);
+   for(const style of source.type==='heldItem'?['normal']:['normal','agile','strong']){const commit=branch==='survive'?.35:branch==='finish'?.7:.55,expected=expectedDamage(actor,asp,target,tsp,context.realTime?scaledMove(move,actor,asp,style):move,style,commit),support=friendly?supportScore(actor,asp,target,tsp,move,context):0;
     let score=move.power?Math.min(expected,target.hp)/Math.max(1,E.stats(target,tsp).hp)*100:support;
     if(!friendly)score+=effectScore(actor,asp,target,tsp,move,context);
     if(expected>=target.hp&&move.power){score+=65;if(E.priority(actor,asp,move,style)>E.stats(target,tsp).speed)score+=22;}
@@ -76,12 +78,13 @@ export function chooseBattleAction(actor,context,r=Math.random){
     score-=(context.claimedDamage?.[target.id]||0)>=target.hp?70:0;
     if(style==='strong'&&threat>=actor.hp)score-=20;if(style==='agile'&&move.power===0)score-=2;
     const borrow=source.type!=='heldItem'&&!friendly&&move.power>0&&expected<target.hp&&expected*2>=target.hp&&threat<actor.hp*.7&&Math.max(actor.pp||0,actor.willpower||0)>4?1:0;
-    candidates.push({...source,move,style,commit,borrow,targetIndex:Math.max(0,targetIndex),score:score+(borrow?8:0),reason:branch});
+    if(context.realTime)score/=Math.max(1,moveTiming(move,actor,asp,style).cooldownMs/1000)**.6;
+    candidates.push({...source,move,style,commit,borrow:context.realTime?0:borrow,targetIndex:Math.max(0,targetIndex),score:score+(borrow?8:0),reason:branch});
    }
   }
  }
- if(!actor.pendingMove&&!actor.lockedMove&&!actor.conditions?.trap&&reserves.length){const incoming=chooseReplacement(reserves,opponents,speciesOf);if(incoming){const difference=replacementScore(incoming,opponents,speciesOf)-replacementScore(actor,opponents,speciesOf),score=(hpRatio<.3&&threat>=actor.hp?70:0)+difference*.7-20;candidates.push({type:'switch',switchId:incoming.id,score,reason:'preserve and counter'});}}
- candidates.sort((a,b)=>b.score-a.score);const best=candidates[0];if(!best)return {move:{...E.STRUGGLE,type:asp.base},style:'normal',commit:.5,borrow:0,targetIndex:0,reason:'exhausted'};
+ if(!actor.pendingMove&&!actor.lockedMove&&!actor.conditions?.trap&&reserves.length&&(!context.canUse||context.canUse({type:'switch'}))){const incoming=chooseReplacement(reserves,opponents,speciesOf);if(incoming){const difference=replacementScore(incoming,opponents,speciesOf)-replacementScore(actor,opponents,speciesOf),score=(hpRatio<.3&&threat>=actor.hp?70:0)+difference*.7-20;candidates.push({type:'switch',switchId:incoming.id,score,reason:'preserve and counter'});}}
+ candidates.sort((a,b)=>b.score-a.score);const best=candidates[0];if(!best&&context.realTime)return null;if(!best)return {move:{...E.STRUGGLE,type:asp.base},style:'normal',commit:.5,borrow:0,targetIndex:0,reason:'exhausted'};
  const tied=candidates.filter(c=>Math.abs(c.score-best.score)<.01);return {...tied[Math.min(tied.length-1,Math.floor(r()*tied.length))]};
 }
 export function chooseTeamOrders(allies,opponents,speciesOf,options={},r=Math.random){const claimedDamage={},reserved=new Set();return allies.map(actor=>{const choice=chooseBattleAction(actor,{speciesOf,opponents,allies,team:options.team||allies,reserves:(options.reserves||[]).filter(u=>!reserved.has(u.id)),enemyReserves:options.enemyReserves||[],claimedDamage},r);if(choice.switchId)reserved.add(choice.switchId);else if(choice.move?.power){const t=opponents[choice.targetIndex];if(t)claimedDamage[t.id]=(claimedDamage[t.id]||0)+expectedDamage(actor,speciesOf(actor),t,speciesOf(t),choice.move,choice.style,choice.commit);}return choice;});}

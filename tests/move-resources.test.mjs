@@ -23,9 +23,9 @@ test('base values and equipped category totals determine maximum resources',()=>
  a.level=10000;a.form=2;a.specialty='Mystic';assert.equal(E.stats(a,s).pp,40);assert.equal(E.stats(a,s).willpower,5);
  const equipped={...s,learnset:[physical,energy]};a.moveIds=[energy.id];assert.deepEqual(E.resourceMaximums(a,equipped),{pp:0,willpower:5});
 });
-test('Pressure drains remaining points without negative values and conversion retains 2-for-1',()=>{
+test('Pressure requires full payment and conversion retains 2-for-1',()=>{
  const s=sp(),pressure=sp(undefined,'Pressure'),a=unit(s),b=unit(pressure);a.pp=1;a.willpower=0;
- let hp=b.hp;E.executeAction(a,s,b,pressure,physical,'normal',.5,()=>.5);assert.equal(a.pp,0);assert.ok(b.hp<hp);
+ let hp=b.hp;assert.equal(E.canUseMove(a,s,physical,pressure),false);const logs=E.executeAction(a,s,b,pressure,physical,'normal',.5,()=>.5);assert.equal(a.pp,1);assert.ok(b.hp<hp);assert.ok(logs.some(line=>line.includes('Struggle')));
  E.heal(a,s);E.heal(b,pressure);a.pp=0;a.willpower=5;
  E.executeAction(a,s,b,pressure,physical,'normal',.5,()=>.5);assert.equal(a.willpower,1);assert.equal(a.pp,0);
 });

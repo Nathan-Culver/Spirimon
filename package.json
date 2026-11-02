@@ -8,10 +8,10 @@
     "start": "node build.mjs && node companion.mjs",
     "test": "node --test tests/*.test.mjs",
     "build": "node build.mjs",
-    "build:font": "node tools/build-font.cjs"
+    "build:font": "node tools/build-font.cjs",
+    "audit:moves": "node tools/audit-real-time-moves.mjs"
   },
   "engines": {
     "node": ">=20"
   }
 }
-
