@@ -1,6 +1,7 @@
 import {readyImage} from './asset-loader.mjs';
 import {MYSTERY_STATIC,MYSTERY_WALK} from './placeholder-art.mjs';
-import {TOWN_FEATURES} from './towns.mjs';
+import {townFeatures} from './towns.mjs';
+import {drawAtlasAsset,TOWN_ATLAS} from './interior-assets.mjs';
 import {groundCell,terrainCell,connectedEdges} from './terrain.mjs';
 import {ART} from './roster.mjs';
 import {COLORS,hash,rng} from './engine.mjs';
@@ -193,6 +194,6 @@ export function drawTile(ctx,type,x,y,seed,biome,options={}){
 export function drawWell(ctx,x,y){prop(ctx,7,x-16,y-32,64,64);}
 
 function expandedProp(ctx,index,x,y,w,h){const image=readyImage(ART.towns);if(!image)return;ctx.imageSmoothingEnabled=false;ctx.drawImage(image,index%3*256,Math.floor(index/3)*256,256,256,Math.round(x),Math.round(y),w,h);}
-export function drawTownBuilding(ctx,b,x,y){if(['hall','inn','home'].includes(b.kind))return drawBuilding(ctx,x,y,b.kind==='hall',b.kind);const index={forge:0,herbalist:1,archive:2}[b.kind];if(b.kind==='archive')expandedProp(ctx,index,x+24,y-40,176,168);else expandedProp(ctx,index,x+8,y-16,144,144);}
-export function drawTownFeatures(ctx,cx,cy,px,py,only=null){for(const f of (only?[only]:TOWN_FEATURES)){const x=px(cx*48+f.x),y=py(cy*36+f.y);const width=f.cell===8?112:f.w===2?72:64,height=f.cell===8?104:f.cell===5?88:64;expandedProp(ctx,f.cell,x+(f.w*32-width)/2,y+f.h*32-height,width,height);}}
+export function drawTownBuilding(ctx,b,x,y){if(b.facade!=null&&drawAtlasAsset(ctx,TOWN_ATLAS,b.facade,x+(b.dx+.5)*32-72,y+(b.h-.5)*32-136,144,144))return;if(['hall','inn','home'].includes(b.kind))return drawBuilding(ctx,x,y,b.kind==='hall',b.kind);const index={forge:0,herbalist:1,archive:2}[b.kind];if(b.kind==='archive')expandedProp(ctx,index,x+24,y-40,176,168);else expandedProp(ctx,index,x+8,y-16,144,144);}
+export function drawTownFeatures(ctx,cx,cy,px,py,only=null){for(const f of (only?[only]:townFeatures(cx,cy))){const x=px(cx*48+f.x),y=py(cy*36+f.y);if(f.asset!=null){drawAtlasAsset(ctx,TOWN_ATLAS,f.asset,x-4,y-12,f.w*32+8,f.h*32+12);continue;}const width=f.cell===8?112:f.w===2?72:64,height=f.cell===8?104:f.cell===5?88:64;expandedProp(ctx,f.cell,x+(f.w*32-width)/2,y+f.h*32-height,width,height);}}
 

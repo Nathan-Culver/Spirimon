@@ -46,7 +46,7 @@ export async function buildPage(directory=root){
  // the downloadable offline copy; on Pages the four images load independently.
  const artStart=script.indexOf('__modules["world-art.mjs"]='),artEnd=script.indexOf('\n__modules[',artStart+1);
  if(artStart<0||artEnd<0)throw Error('World artwork module is missing.');
- const pageScript=script.slice(0,artStart)+'__modules["world-art.mjs"]={WORLD_ART:{}};'+script.slice(artEnd);
+ const pageScript=script.slice(0,artStart)+'__modules["world-art.mjs"]={WORLD_ART:{},SETTLEMENT_ART:{}};'+script.slice(artEnd);
  new vm.Script(pageScript,{filename:'spirimon-pages.js'});
  const hash=value=>createHash('sha256').update(value).digest('hex').slice(0,12);
  const bundleName='game-'+hash(pageScript)+'.js',styleName='style-'+hash(css)+'.css';

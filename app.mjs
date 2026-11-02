@@ -11,7 +11,7 @@ import * as W from './world.mjs';
 import * as E from './engine.mjs';
 import * as A from './adventure-systems.mjs';
 import * as EP from './environment-puzzles.mjs';
-import {drawInteriorAsset} from './interior-assets.mjs';
+import {drawInteriorScene} from './interior-assets.mjs';
 import {drawTechnique} from './move-animations.mjs';
 import {drawSpirit,drawCompanion,drawAspectAura,drawPerson,drawTile,drawBuilding,drawTownDecor,drawTree,drawWell,drawTownBuilding,drawTownFeatures,renderSpiritCanvases} from './sprites.mjs';
 const $=q=>document.querySelector(q);
@@ -132,7 +132,7 @@ function rest(){if(!safe())return toast('Rest at a town or guild.');party().forE
 function atlasHTML(){const c=E.coord(s.player.x,s.player.y),cells=[],radius=innerWidth<560?2:3;for(let dy=-radius;dy<=radius;dy++)for(let dx=-radius;dx<=radius;dx++){const cx=c.cx+dx,cy=c.cy+dy,reg=s.regions[cx+','+cy];cells.push(reg?.visited?'<button class="atlas-cell '+(!dx&&!dy?'current':'')+'" data-action="region-info" data-value="'+reg.key+'" style="background:'+reg.biome.color+'55"><small>'+cx+', '+cy+(reg.town?' · GUILD':'')+'</small><strong>'+esc(reg.name)+'</strong><small>'+esc(reg.biome.name)+' · Lv. '+reg.danger+'+</small></button>':'<div class="atlas-cell unknown" aria-label="Unexplored region">·</div>');}return'<div class="page-heading"><div><div class="eyebrow">THERE IS ALWAYS ANOTHER TRAIL</div><h1>Your world, unfolding.</h1><p>Discovered places stay where you left them. Walk beyond the edge to find more.</p></div><span class="pill">'+Object.values(s.regions).filter(r=>r.visited).length+' regions mapped</span></div><div class="panel"><div class="atlas-grid">'+cells.join('')+'</div><p class="help-line" style="text-align:center">Your location is outlined in gold. Region danger stays fixed as your Spirimon grow.</p></div>';}
 function journalHTML(){const visited=Object.values(s.regions).filter(r=>r.visited).length,quests=[['discovery','First impressions','Discover five different Spirimon species, then report to Scholar Elin.',s.seen.length+'/5 species · Reward: 50 renown'],['rival','A friendly rivalry','Defeat Rowan in an organized guild battle.',s.wins+' victories · Reward: guild rank progress'],['explorer','Beyond the familiar','Visit three regions and share your findings with Scholar Elin.',visited+'/3 regions · Reward: 50 renown']];return'<div class="page-heading"><div><div class="eyebrow">NO DESTINY REQUIRED</div><h1>A journey of your own.</h1><p>Small promises, familiar faces, and whatever lies around the next bend.</p></div><span class="pill">Rank '+s.rank+' · '+s.rankXP+' / '+s.rank*100+' renown</span></div><div class="journal-grid"><div class="panel"><div class="section-label">GUILD NOTICES <small>ALL OPTIONAL</small></div>'+quests.map(([id,title,desc,progress])=>'<div class="quest '+(s.quests[id]?'quest-complete':'')+'"><h3>'+(s.quests[id]?'✓ ':'')+title+'</h3><p>'+desc+'</p><small>'+(s.quests[id]?'Completed':progress)+'</small></div>').join('')+'<div class="subheading">PEOPLE YOU KNOW</div>'+['Keeper Iona','Tavi','Rowan','Scholar Elin'].map((name,n)=>{const role=['keeper','merchant','rival','scholar'][n],value=Object.entries(s.friendships).filter(([k])=>k.startsWith(role)).reduce((sum,[,v])=>sum+v,0);return'<div class="friend-row"><span>'+name+'</span><span class="muted">'+(value>15?'Friend':value>3?'Acquaintance':'New face')+' · '+value+'</span></div>';}).join('')+'</div><div class="panel"><div class="section-label">FIELD JOURNAL</div>'+s.notes.slice(0,18).map(n=>'<p class="journal-entry">'+esc(n)+'</p>').join('')+'</div></div>';}
 
-function buildingSpriteBlocked(x,y){const p=E.coord(x,y);if(!E.region(s.seed,p.cx,p.cy).town)return false;const buildings=W.buildings(p.cx,p.cy);if(buildings.some(b=>{const left=b.footX,right=b.footX+b.w-1,top=b.footY,bottom=b.footY+b.h-1;if(x===b.doorX&&y===b.doorY)return false;return x>=left&&x<=right&&y>=top&&y<=bottom;}))return true;return W.featureFootprintBlocked(p.lx,p.ly);}
+function buildingSpriteBlocked(x,y){const p=E.coord(x,y);if(!E.region(s.seed,p.cx,p.cy).town)return false;const buildings=W.buildings(p.cx,p.cy);if(buildings.some(b=>{const left=b.footX,right=b.footX+b.w-1,top=b.footY,bottom=b.footY+b.h-1;if(x===b.doorX&&y===b.doorY)return false;return x>=left&&x<=right&&y>=top&&y<=bottom;}))return true;return W.featureFootprintBlocked(p.lx,p.ly,p.cx,p.cy);}
 function caveEntranceHere(x=s.player.x,y=s.player.y){const p=E.coord(x,y),e=E.caveEntrance(s.seed,p.cx,p.cy);return e&&Math.abs(e.x-x)+Math.abs(e.y-y)<=1?e:null;}
 function dungeonMap(room){return E.caveMap(s.seed,room.id,room.level);}
 function caveObjects(room,map){s.caveChanges??={};const key=room.id+'|'+room.level,changes=s.caveChanges[key]||{};const base=EP.puzzleObjects(map,s.seed,key,E.hash);return EP.resolvedObjects(base,changes);}
@@ -442,7 +442,7 @@ function battleSeal(){if(!battle||battle.trainer)return;if(s.inventory.seals<1)r
 function profile(){showModal(s.player.name+', '+rankName(),'<p>A sealer of the '+currentRegion().biome.name+'. Your story is yours to write.</p><div class="detail-stats"><div><strong>'+s.rank+'</strong><small>Guild rank</small></div><div><strong>'+s.wins+'</strong><small>Battles won</small></div><div><strong>'+s.steps+'</strong><small>Steps taken</small></div></div><p>Renown: '+s.rankXP+' / '+s.rank*100+'<br>Wade: rank 2 and an Elemental, Ooze, or Water Spirimon. Climb: rank 3 and a Beast, Giant, or Construct.<br>Once per battle, Sealer’s Ward protects your Spirimon and consumes your action.</p><label for="rename">Sealer name</label><input id="rename" value="'+esc(s.player.name)+'" maxlength="24"><div class="btn-row">'+action('rename','Save name')+'</div>');}
 
 function exportSave(){const payload=savePayload(),blob=new Blob([JSON.stringify(payload)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='spirimon-'+s.seed+'-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('Save backup exported.');}
-async function importSave(file){if(!file)return;if(file.size>150*1024*1024)return toast('Backup is too large.');try{const data=JSON.parse(await file.text());if(data.format!=='spirimon-backup'||data.version!==1||!data.save?.player||!Array.isArray(data.save.spirits)||!data.save.species||typeof data.save.seed!=='string')throw Error('Not a Spirimon backup.');const next=data.save;Q.validateHeldItems(next);if(!Number.isInteger(next.player.x)||!Number.isInteger(next.player.y)||!Array.isArray(next.party)||next.party.length>6)throw Error('Invalid player or party data.');for(const i of next.spirits){if(!next.species[i.species]||!Number.isFinite(i.hp)||!Number.isInteger(i.form)||i.form<0||i.form>2)throw Error('Invalid Spirimon data.');}for(const sp of Object.values(next.species)){if(!E.TYPES.includes(sp.base)||!E.TYPES.includes(sp.alter)||sp.base===sp.alter||sp.forms?.length!==3||sp.moves?.length!==4)throw Error('Invalid species data.');}await dbPut('saves',structuredClone(s),'before-import');s=next;heldState();installRoster();for(const sp of data.library||[])if(sp?.id&&E.TYPES.includes(sp.base)&&E.TYPES.includes(sp.alter))library[sp.id]=sp;for(const sp of Object.values(s.species))register(sp);battle=s.battle||null;closeModal();discoverRegion();await persist();render();toast('Backup restored. Your previous world was kept as a recovery save.');}catch(e){toast('Could not import: '+e.message);}}
+async function importSave(file){if(!file)return;if(file.size>150*1024*1024)return toast('Backup is too large.');try{const data=JSON.parse(await file.text());if(data.format!=='spirimon-backup'||data.version!==1||!data.save?.player||!Array.isArray(data.save.spirits)||!data.save.species||typeof data.save.seed!=='string')throw Error('Not a Spirimon backup.');const next=data.save;Q.validateHeldItems(next);if(!Number.isInteger(next.player.x)||!Number.isInteger(next.player.y)||!Array.isArray(next.party)||next.party.length>6)throw Error('Invalid player or party data.');for(const i of next.spirits){if(!next.species[i.species]||!Number.isFinite(i.hp)||!Number.isInteger(i.form)||i.form<0||i.form>2)throw Error('Invalid Spirimon data.');}for(const sp of Object.values(next.species)){if(!E.TYPES.includes(sp.base)||!E.TYPES.includes(sp.alter)||sp.base===sp.alter||sp.forms?.length!==3||sp.moves?.length!==4)throw Error('Invalid species data.');}await dbPut('saves',structuredClone(s),'before-import');s=next;heldState();if(s.interior)W.normalizeInteriorPosition(s.interior);installRoster();for(const sp of data.library||[])if(sp?.id&&E.TYPES.includes(sp.base)&&E.TYPES.includes(sp.alter))library[sp.id]=sp;for(const sp of Object.values(s.species))register(sp);battle=s.battle||null;if(!battle&&!s.interior&&!s.cave)ensurePlayerOnPath();closeModal();discoverRegion();await persist();render();toast('Backup restored. Your previous world was kept as a recovery save.');}catch(e){toast('Could not import: '+e.message);}}
 function settings(){showModal('Your world. Your device.','<p>Link a device save file for automatic file saving when supported. Chrome on Android may not support persistent file access; use Export backup to save a file manually. Browser recovery saves remain available as a safety copy.</p><label for="layout-setting">Play layout</label><select id="layout-setting"><option value="auto">Automatic · emulator controls on phones</option><option value="emulator">Emulator · landscape touch controls</option><option value="desktop">Desktop · full-window map</option></select><div class="btn-row">'+action('fullscreen','Fullscreen / landscape')+'</div><div class="btn-row">'+action('calibrate','Calibrate audio / input')+action('music-toggle',s.settings.musicEnabled===false?'Enable music':'Mute music')+'</div><p class="help-line">Saved input offset: '+(s.settings.inputOffsetMs||0)+'ms. Perfect ±45ms · Good ±90ms · Fair ±150ms.</p><div class="btn-row">'+action('choose-device-save','Link device save file')+action('export','Save file / Export backup')+'<label class="btn" style="margin:0;cursor:pointer">Import backup<input type="file" id="import-file" accept=".json" hidden></label>'+action('restore-backup','Restore previous world','','btn ghost')+'</div><div class="modal-section"><p><a class="btn ghost" href="./Spirimon.html" download="Spirimon.html">Download game page</a></p><p class="help-line">Includes game code and world artwork. Creature portraits load when online.</p><p class="help-line">For the optional local AI companion, download the full source package from the project folder.</p></div><div class="modal-section"><h3>AI Provider · automatic switching</h3><p class="help-line">Test each connection, choose a model and fallback. Text-only providers cannot create the three required sprite images; the game remains playable using existing Spirimon artwork.</p><label for="ai-provider">Primary provider</label><select id="ai-provider"><option value="auto">Automatic · first available</option><option value="companion">Spirimon companion · text + sprites</option><option value="ollama">Windows Ollama · text</option><option value="device">Android on-device · WebGPU text</option><option value="gemini">Gemini cloud · text</option><option value="procedural">Procedural · offline</option></select><label for="ai-fallback">Fallback</label><select id="ai-fallback"><option value="procedural">Procedural · offline</option><option value="companion">Spirimon companion</option><option value="ollama">Windows Ollama</option><option value="device">Android on-device</option><option value="gemini">Gemini cloud</option></select><label for="ai-ollama-url">Ollama API URL (HTTPS relay required for a remote Windows PC)</label><input id="ai-ollama-url" placeholder="https://your-private-relay.example" value="'+esc(s.settings.ollamaUrl||'http://localhost:11434')+'"><label for="ai-cloud-key">Gemini API key (session only; never saved)</label><input id="ai-cloud-key" type="password" autocomplete="off" placeholder="Enter only when using Gemini"><label for="ai-provider-model">Model for selected provider</label><select id="ai-provider-model"><option value="">Test connection to discover models</option></select><div class="btn-row">'+action('ai-test-provider','Test provider')+action('ai-test-auto','Test automatic selection')+'</div><div id="ai-provider-status" class="settings-status">Not tested. Browser-based AI needs WebGPU; Windows Ollama needs a secure reachable URL.</div></div><div class="modal-section"><h3>Free local AI</h3><p style="margin-top:8px">The optional companion connects to Ollama for Spirimon designs and a local Stable Diffusion WebUI API for sprites. Without models, the completed original roster and your saved AI lineages keep the game playable.</p><label><input type="checkbox" id="ai-enabled" '+(s.settings.aiEnabled?'checked':'')+'> Generate future discoveries with local AI</label><label for="ai-model">Installed text model</label><select id="ai-model"><option value="">Detect installed models first</option></select><div class="btn-row">'+action('check-ai','Check companion')+action('generate-now','Queue a new lineage')+'</div><div id="ai-status" class="settings-status">Companion: '+(aiStatus?esc(aiStatus.message):'not checked')+'<br>Queue: '+queue.length+' lineages'+(busy?' · generating':'')+'</div><p class="help-line">AI-created lineages enter the library only after their text and all three sprites finish. Already discovered Spirimon never change.</p></div><div class="modal-section"><h3>Begin another world</h3><p>Your species library stays. Export your current save first; a recovery copy is also retained.</p><label for="new-seed">World seed (optional)</label><input id="new-seed" maxlength="40" placeholder="A word, number, or leave blank"><div class="btn-row">'+action('new-world','Prepare a new world','','btn danger')+'</div></div>',{kind:'settings'});if(aiStatus?.models)fillModels();$('#layout-setting').value=s.settings.layout||'auto';$('#ai-provider').value=s.settings.aiProvider||'auto';$('#ai-fallback').value=s.settings.aiFallback||'procedural';}
 let aiSessionKey='';let aiProviderResult=null;
 async function testProvider(auto=false){const out=$('#ai-provider-status');if(out)out.textContent='Testing connections…';try{const selected=s.settings.aiProvider||'auto';const result=auto||selected==='auto'?await AI.choose(s.settings,aiSessionKey):{type:selected,status:await AI.probe(selected,s.settings,aiSessionKey),errors:[]};aiProviderResult=result;const models=result.status.models||[];if(out)out.textContent='Active: '+AI.LABELS[result.type]+' · '+result.status.message+(result.errors?.length?' · Unavailable: '+result.errors.join('; '):'');const select=$('#ai-provider-model');if(select){select.innerHTML=models.map(m=>'<option value="'+esc(m)+'">'+esc(m)+'</option>').join('')||'<option value="">No models found</option>';select.value=s.settings.aiModels?.[result.type]||models[0]||'';}return result;}catch(e){if(out)out.textContent='Connection failed: '+e.message;return null;}}
@@ -474,7 +474,7 @@ function drawWorld(time){
  const cols=width/32,rows=height/32,ox=vx-(cols-1)/2,oy=vy-(rows-1)/2;
  const px=x=>Math.round((x-ox)*32),py=y=>Math.round((y-oy)*32);
  for(let y=Math.floor(oy)-2;y<=Math.ceil(oy+rows)+1;y++)for(let x=Math.floor(ox)-2;x<=Math.ceil(ox+cols)+1;x++){
- const reg=E.region(s.seed,Math.floor(x/48),Math.floor(y/36)),terrain=E.tile(s.seed,x,y),local=E.coord(x,y);drawTile(c,terrain,px(x),py(y),E.hash(s.seed,x,y),reg.biome.kind,{neighbors:[[0,-1],[1,0],[0,1],[-1,0]].map(([dx,dy])=>E.tile(s.seed,x+dx,y+dy)),town:reg.town&&Math.abs(local.lx-24)<10&&Math.abs(local.ly-18)<8});if(terrain==='grass'){const distance=Math.hypot(x-vx,y-vy),disturbance=walkAnim&&elapsed<1?Math.max(0,1.8-distance):0;drawTallGrass(c,px(x),py(y),E.hash(s.seed,x,y),time,disturbance);}}
+ const reg=E.region(s.seed,Math.floor(x/48),Math.floor(y/36)),terrain=E.tile(s.seed,x,y),local=E.coord(x,y);drawTile(c,terrain,px(x),py(y),E.hash(s.seed,x,y),reg.biome.kind,{neighbors:[[0,-1],[1,0],[0,1],[-1,0]].map(([dx,dy])=>E.tile(s.seed,x+dx,y+dy)),town:reg.town&&Math.abs(local.lx-24)<22&&Math.abs(local.ly-18)<15});if(terrain==='grass'){const distance=Math.hypot(x-vx,y-vy),disturbance=walkAnim&&elapsed<1?Math.max(0,1.8-distance):0;drawTallGrass(c,px(x),py(y),E.hash(s.seed,x,y),time,disturbance);}}
 
  for(let cy=Math.floor(oy/36)-1;cy<=Math.floor((oy+rows)/36)+1;cy++)for(let cx=Math.floor(ox/48)-1;cx<=Math.floor((ox+cols)/48)+1;cx++){const e=E.caveEntrance(s.seed,cx,cy);if(!e)continue;const x=px(e.x),y=py(e.y);if(x<-40||y<-40||x>width||y>height)continue;c.fillStyle='#181b27';c.beginPath();c.ellipse(x+16,y+20,15,12,0,Math.PI,0);c.fill();c.fillStyle='#7c8188';c.fillRect(x+2,y+24,28,5);c.fillStyle='#d2bb83';c.font='bold 11px monospace';c.fillText('▼',x+11,y+14);}
  const pc=E.coord(s.player.x,s.player.y),people=[];
@@ -644,7 +644,7 @@ document.addEventListener('change',ev=>{if(ev.target.id==='held-recipient'){held
 document.addEventListener('keydown',ev=>{const k=ev.key.toLowerCase();if(['INPUT','SELECT','TEXTAREA'].includes(ev.target.tagName)&&ev.target.type!=='range')return;if(k==='escape'){if(modal==='starter'||modal==='welcome'||modal==='replacement')return;closeModal();return;}if(modal){if(ritual&&(k===' '||k==='enter')){ev.preventDefault();sealPulse();}return;}if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k))ev.preventDefault();keys.add(k);if(ev.repeat)return;const walkKeys={w:[0,-1],a:[-1,0],s:[0,1],d:[1,0],arrowup:[0,-1],arrowleft:[-1,0],arrowdown:[0,1],arrowright:[1,0]};if(walkKeys[k]){move(...walkKeys[k]);return;}if(k==='e'||k==='enter')interact();if(k==='b')bag();if(['1','2','3','4'].includes(k)&&!battle){view=['explore','spirits','atlas','journal'][Number(k)-1];render();}});
 document.addEventListener('keyup',ev=>keys.delete(ev.key.toLowerCase()));window.addEventListener('blur',()=>{keys.clear();running=false;queuedStep=null;});document.addEventListener('visibilitychange',()=>{keys.clear();persist();});window.addEventListener('pagehide',()=>persist());
 function startupStatus(message){window.dispatchEvent(new CustomEvent('spirimon-startup',{detail:message}));}
-async function boot(){try{startupStatus('Opening saved journey…');db=await openDB();startupStatus('Reading saved Spirimon…');for(const sp of await dbAll('library'))library[sp.id]=sp;s=await dbGet('saves','main')||E.newGame();s.species??={};s.spirits=Array.isArray(s.spirits)?s.spirits:[];s.roamers??={};for(const [key,group]of Object.entries(s.roamers))if(!Array.isArray(group))s.roamers[key]=[];s.regions??={};s.inventory??={};s.settings??={};const rename=value=>typeof value==='string'?value.replace(/\bspirits?\b/gi,'Spirimon'):value;s.notes=(s.notes||[]).map(rename);battle=s.battle||null;if(battle){battle.log=(battle.log||[]).map(rename);battle.message=rename(battle.message);}queue=s.generationQueue||[];s.inventory.ethers??=3;s.inventory.herbs??=3;s.inventory.incense??=2;s.inventory.ore??=2;heldState();audio.setEnabled(s.settings.musicEnabled!==false);await restoreDeviceSaveHandle();startupStatus('Preparing Spirimon and world…');installRoster();normalizeWildPopulation();for(const i of s.spirits){const sp=s.species[i.species];if(sp)i.pp??=E.stats(i,sp).pp;}upgradeWildLevels();globalThis.spirimonSpecies=s.species;discoverRegion();introduceFirstEncounter();if(!battle)ensurePlayerOnPath();startupStatus('Loading world and mystery artwork (0 / 6)…');await preloadImages([...Object.values(ART),MYSTERY_STATIC,MYSTERY_WALK],(done,total)=>startupStatus('Loading world and mystery artwork ('+done+' / '+total+')…'));loaded=true;render();if(battle?.pendingSwitch){const pending=battle.pendingSwitch;requestReplacement(s.spirits.find(i=>i.id===pending.out),pending.slot);}if(!s.starter)starters();if(s.settings.aiEnabled){queueFresh(currentRegion(),Math.random,true);checkAI().then(processQueue);}globalThis.spirimonArtLoaded=()=>{renderSpiritCanvases();if(battle)drawBattle();};requestAnimationFrame(tick);setInterval(persist,15000);setInterval(processQueue,5000);window.dispatchEvent(new Event('spirimon-ready'));}catch(err){loaded=false;window.dispatchEvent(new CustomEvent('spirimon-startup-error',{detail:err.message||String(err)}));console.error(err);}}
+async function boot(){try{startupStatus('Opening saved journey…');db=await openDB();startupStatus('Reading saved Spirimon…');for(const sp of await dbAll('library'))library[sp.id]=sp;s=await dbGet('saves','main')||E.newGame();s.species??={};s.spirits=Array.isArray(s.spirits)?s.spirits:[];s.roamers??={};for(const [key,group]of Object.entries(s.roamers))if(!Array.isArray(group))s.roamers[key]=[];s.regions??={};s.inventory??={};s.settings??={};const rename=value=>typeof value==='string'?value.replace(/\bspirits?\b/gi,'Spirimon'):value;s.notes=(s.notes||[]).map(rename);battle=s.battle||null;if(battle){battle.log=(battle.log||[]).map(rename);battle.message=rename(battle.message);}queue=s.generationQueue||[];s.inventory.ethers??=3;s.inventory.herbs??=3;s.inventory.incense??=2;s.inventory.ore??=2;heldState();audio.setEnabled(s.settings.musicEnabled!==false);await restoreDeviceSaveHandle();startupStatus('Preparing Spirimon and world…');installRoster();normalizeWildPopulation();for(const i of s.spirits){const sp=s.species[i.species];if(sp)i.pp??=E.stats(i,sp).pp;}upgradeWildLevels();globalThis.spirimonSpecies=s.species;discoverRegion();introduceFirstEncounter();if(!battle)ensurePlayerOnPath();if(s.interior)W.normalizeInteriorPosition(s.interior);startupStatus('Loading world and mystery artwork (0 / 6)…');await preloadImages([...Object.values(ART),MYSTERY_STATIC,MYSTERY_WALK],(done,total)=>startupStatus('Loading world and mystery artwork ('+done+' / '+total+')…'));loaded=true;render();if(battle?.pendingSwitch){const pending=battle.pendingSwitch;requestReplacement(s.spirits.find(i=>i.id===pending.out),pending.slot);}if(!s.starter)starters();if(s.settings.aiEnabled){queueFresh(currentRegion(),Math.random,true);checkAI().then(processQueue);}globalThis.spirimonArtLoaded=()=>{renderSpiritCanvases();if(battle)drawBattle();};requestAnimationFrame(tick);setInterval(persist,15000);setInterval(processQueue,5000);window.dispatchEvent(new Event('spirimon-ready'));}catch(err){loaded=false;window.dispatchEvent(new CustomEvent('spirimon-startup-error',{detail:err.message||String(err)}));console.error(err);}}
 boot();
 
 function tempoHTML(ind,sp){const credits=battle.credits||{a:0,b:0},move=battleMoves(ind)[selectedMove],count=1+credits.a+borrow;let cost=0;for(let n=0;n<count;n++)cost+=E.actionCost(move,n,spOf(battle.enemy));return'<div class="tempo-panel"><div class="commitment-label"><span>BORROW ACTIONS</span><span>Stanima / Willpower cost: '+cost+'</span></div><div class="style-selector">'+[0,1,2].map(n=>'<button class="'+(borrow===n?'selected':'')+'" data-action="borrow" data-value="'+n+'">'+(n===0?'Normal action':'Borrow +'+n)+'</button>').join('')+'</div><p class="tiny muted">'+(credits.a?'You have '+credits.a+' bonus action(s) owed this round. ':'')+(credits.b?'Opponent has '+credits.b+' bonus action(s) this round. ':'')+(borrow?'Repeat your selected move '+count+' times while resources allow. Opponent gains '+borrow+' extra action(s) next round.':'Every action costs 1, or 2 against Pressure. Bonus actions never create further debt.')+'</p></div>';}
@@ -688,153 +688,9 @@ function moveInside(dx,dy){if(modal||battle||view!=='explore')return;const room=
 function drawInterior(canvas,time){
  const rect=canvas.getBoundingClientRect(),width=Math.max(320,Math.round(rect.width/2)),height=Math.max(200,Math.round(rect.height/2));
  if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;}
- const c=canvas.getContext('2d'),room=s.interior,unit=32,ox=Math.round(width/2-room.x*unit-16),oy=Math.round(height/2-room.y*unit-16);
+ const c=canvas.getContext('2d'),room=s.interior,unit=32,roomWidth=W.ROOM_W*unit,roomHeight=W.ROOM_H*unit,ox=Math.round(width>=roomWidth?(width-roomWidth)/2:Math.max(width-roomWidth,Math.min(0,width/2-room.x*unit-16))),oy=Math.round(height>=roomHeight?(height-roomHeight)/2:Math.max(height-roomHeight,Math.min(0,height/2-room.y*unit-16)));
  c.imageSmoothingEnabled=false;c.fillStyle='#211d22';c.fillRect(0,0,width,height);
- const kind=room.kind,forge=kind==='forge',archive=kind==='archive',herbal=kind==='herbalist',hall=kind==='hall'||archive,inn=kind==='inn'||forge;
- const pal=hall?{floor:'#49443d',edge:'#272523',wall:'#302b29',trim:'#8d775b',rug:'#59403f'}:inn?{floor:'#504238',edge:'#292522',wall:'#382d29',trim:'#987c59',rug:'#67473d'}:{floor:'#45453e',edge:'#272a27',wall:'#2e3730',trim:'#93866b',rug:'#4b5d54'};
- const fill=(color,x,y,w,h)=>{c.fillStyle=color;c.fillRect(x,y,w,h);};
- for(let y=0;y<11;y++)for(let x=0;x<15;x++){
-  const t=W.roomTile(kind,x,y),px=ox+x*unit,py=oy+y*unit;
-  if(px>width||py>height||px+unit<0||py+unit<0)continue;
-  const h=(x*73+y*137+x*y*19)%11;
-  if(t==='wall'||t==='wall-art'){
-   fill('#161412',px,py,32,32);fill(pal.wall,px+1,py+1,30,30);
-   for(let k=0;k<3;k++){const yy=py+k*10;fill('#191817',px,yy,32,2);const offset=((x+k)%2)*15;fill('#211e1d',px+offset,yy+2,2,8);fill('#403a34',px+offset+2,yy+3,12,1);}
-   fill('#171514',px,py+26,32,6);fill(pal.trim,px,py+25,32,2);
-   if(t==='wall-art'){fill('#201c1b',px+4,py+5,24,18);fill('#8e7352',px+5,py+5,22,2);fill('#655248',px+5,py+21,22,2);}
-   continue;
-  }
-  // Weathered stone slabs: broken edges, inset mortar, varied stone grains.
-  fill('#211e1c',px,py,32,32);
-  const stone=['#48443e','#4f4940','#413e39','#554d42','#47453e'][h%5];
-  fill(stone,px+1,py+1,30,30);fill('#686056',px+2,py+2,27,1);
-  fill('#302c28',px+1,py+29,29,2);fill('#39352f',px+29,py+3,2,27);
-  for(let k=0;k<5;k++){const xx=px+4+((h*7+k*11)%23),yy=py+5+((h*13+k*7)%22);fill(k%2?'#5a5146':'#3a3732',xx,yy,2+(k%2),1);}
-  if(h===2||h===7){fill('#322e2a',px+6,py+20,10,1);fill('#322e2a',px+15,py+20,1,5);}
-  if(t==='rug'||t==='tatami'){
-   const carpet=t==='rug',base=carpet?pal.rug:'#585c47';
-   const adjacent=(dx,dy)=>W.roomTile(kind,x+dx,y+dy)===t;
-   fill(base,px,py,32,32);
-   for(let k=0;k<3;k++)fill(k%2?'#65504a':'#4b3c3b',px+((k*11+x*3)%29),py+((k*13+y*5)%29),3,2);
-   if(!adjacent(0,-1)){fill('#2b2426',px,py,32,3);fill('#a18463',px,py+3,32,2);}
-   if(!adjacent(0,1)){fill('#2b2426',px,py+29,32,3);fill('#a18463',px,py+27,32,2);}
-   if(!adjacent(-1,0)){fill('#2b2426',px,py,3,32);fill('#a18463',px+3,py,2,32);}
-   if(!adjacent(1,0)){fill('#2b2426',px+29,py,3,32);fill('#a18463',px+27,py,2,32);}
-   if(carpet&&((x+y)%3===0)){fill('#84664f',px+13,py+12,6,6);fill('#b29a70',px+15,py+14,2,2);}
-  }
-  if(t==='shelf'){
-   fill('#17120f',px+1,py+3,30,28);fill('#63452e',px+3,py+4,26,25);fill('#977047',px+3,py+4,26,3);
-   for(let k=0;k<5;k++){fill(['#8d504b','#67847c','#c3a56d','#746a9b','#c78b55'][k],px+4+k*5,py+8+(k%2)*3,4,16-(k%2)*3);}
-   fill('#8b6742',px+2,py+25,28,4);fill('#4b342b',px+2,py+29,28,2);
-  }
-  if(t==='bed'){
-   fill('#5b4438',px+1,py+2,30,30);fill('#a07c58',px+3,py+3,26,27);fill('#f2dfb9',px+5,py+5,22,10);
-   fill('#6c9692',px+5,py+16,22,13);fill('#8fb4a5',px+5,py+17,22,3);fill('#d7c69f',px+5,py+28,22,2);
-  }
-  if(t==='counter'||t==='table'){
-   fill('#49352e',px+1,py+4,30,27);fill('#6e4a35',px+3,py+7,26,23);
-   fill('#b98d60',px+1,py+3,30,9);fill('#e0b47e',px+3,py+4,26,2);fill('#7a533a',px+2,py+12,28,2);
-   if(t==='table'){fill('#d6c49a',px+10,py+5,12,5);fill('#8d674c',px+12,py+6,8,2);}
-   if(t==='counter'&&forge){fill('#4d5357',px+9,py+15,14,7);fill('#e1a45e',px+12,py+14,8,3);}
-  }
-  if(t==='altar'){
-   // One continuous raised shrine dais with a single focal emblem.
-   fill('#211a1d',px,py+6,32,26);fill('#53434c',px,py+7,32,20);
-   fill('#987c58',px,py+7,32,3);fill('#302630',px,py+26,32,4);
-   if(x===7){fill('#8e795e',px+6,py+10,20,14);fill('#6f547c',px+9,py+12,14,10);fill('#c4a679',px+14,py+12,4,10);}
-   else if(x===5||x===9){fill('#8e745c',px+10,py+12,12,11);fill('#c4a679',px+14,py+11,4,9);}
-  }
-  if(t==='cushion'){fill('#7c544c',px+4,py+12,24,17);fill('#bc7469',px+6,py+11,20,14);fill('#e4a08a',px+8,py+12,16,3);}
-  if(t==='exit'){fill('#6c5543',px+2,py+1,28,30);fill('#d2b88d',px+4,py+4,24,26);fill('#3c302c',px+8,py+13,16,17);fill('#e7c87e',px+13,py+17,6,8);}
- }
- // Decorative wall-mounted details, lamps and windows do not change collision geometry.
- for(const x of [2,12]){const px=ox+x*unit,py=oy+unit;
-  fill('#493b35',px+10,py+4,12,19);fill('#e2c98b',px+12,py+6,8,12);fill('#fff0b1',px+14,py+7,4,8);
-  fill('#a47e54',px+8,py+22,16,3);
- }
- for(const x of [4,10]){const px=ox+x*unit,py=oy+unit;
-  fill('#463e44',px+3,py+4,26,17);fill('#342e46',px+5,py+6,22,13);fill('#6b527b',px+8,py+7,6,11);fill('#69577c',px+18,py+7,6,11);fill('#a18b9b',px+15,py+6,2,13);fill('#a18b9b',px+5,py+12,22,2);
- }
- if(herbal){for(const x of [2,6,12]){const px=ox+x*unit,py=oy+2*unit;fill('#805f43',px+8,py+10,16,13);fill('#638a60',px+11,py+3,10,13);fill('#b2c17a',px+14,py+1,4,9);}}
- if(forge){const px=ox+11*unit,py=oy+7*unit;fill('#52433b',px+2,py+2,28,28);fill('#b36b42',px+5,py+6,22,19);fill('#edb35d',px+9,py+8,14,13);fill('#f5dc8e',px+13,py+11,6,8);}
-
- // Architectural overlays: continuous cornices, columns, thresholds and soft pools of light.
- const at=(x,y)=>[ox+x*unit,oy+y*unit];
- for(let x=1;x<14;x++){const [px,py]=at(x,1);fill('#382f35',px,py-3,32,4);fill(pal.trim,px,py+24,32,3);fill('#f0d5a2',px,py+27,32,1);}
- for(const x of [1,13]){const [px,py]=at(x,2);fill('#47383c',px+(x===1?0:24),py,8,7*unit);fill('#9b826a',px+(x===1?2:26),py,3,7*unit);for(let y=2;y<9;y++){fill('#c6a67d',px+(x===1?0:24),oy+y*unit+27,8,3);}}
- // A centered entrance with proper door jambs, a lintel and worn threshold.
- {const [px,py]=at(7,10);fill('#403333',px-5,py-5,42,7);fill('#bd9b72',px-3,py-3,38,4);fill('#5c4437',px-4,py+3,5,29);fill('#5c4437',px+31,py+3,5,29);fill('#d3b58b',px+3,py+29,26,3);}
- // Unique wall displays provide landmarks rather than repeated identical tiles.
- const banner=(x,color)=>{const [px,py]=at(x,1);fill('#392f3a',px+7,py+1,18,22);fill('#d2b279',px+6,py+1,20,3);fill(color,px+9,py+4,14,15);fill('#d8bc84',px+15,py+7,2,8);fill('#d8bc84',px+12,py+10,8,2);fill('#d2b279',px+12,py+19,8,2);};
- if(hall){banner(5,'#694b76');banner(9,'#694b76');}
- else if(inn){banner(6,'#915b45');banner(8,'#915b45');}
- else{banner(6,'#568077');banner(8,'#568077');}
- // Room-specific still-life decorations are placed on existing furniture or walls.
- const vase=(x,y,flower='#9e6c8c')=>{const [px,py]=at(x,y);fill('#4e6c65',px+10,py+18,13,11);fill('#81a99b',px+12,py+17,9,4);fill('#456b51',px+16,py+8,2,12);fill('#72955e',px+12,py+12,5,4);fill(flower,px+14,py+5,7,7);fill('#e5c9a2',px+16,py+7,2,2);};
- const scroll=(x,y)=>{const [px,py]=at(x,y);fill('#5e493c',px+6,py+10,23,13);fill('#e7d3a4',px+8,py+11,19,10);for(let k=0;k<3;k++)fill('#987c65',px+10,py+13+k*3,12-k*2,1);};
- if(hall){scroll(5,2);scroll(9,2);vase(2,7,'#b6a4d3');vase(12,7,'#b6a4d3');}
- if(archive){for(const x of [2,6,10,12])scroll(x,5);}
- if(inn&&!forge){vase(2,5,'#d9a477');scroll(6,3);vase(12,8,'#e3c37c');}
- if(kind==='home'){vase(2,4);scroll(6,8);vase(12,7,'#e2b87c');}
- if(herbal){for(const x of [3,8,11])vase(x,5,'#b4c47c');}
- if(forge){const [px,py]=at(10,7);fill('#3b4148',px+4,py+14,24,9);fill('#8c969b',px+8,py+11,17,6);fill('#45464a',px+14,py+21,6,10);}
- // Warm candle sconces and deep shadows establish the moody stone-chamber atmosphere.
- for(const x of [4,10]){const [px,py]=at(x,1);fill('#1d1714',px+12,py-6,10,25);fill('#8d6745',px+13,py+9,8,4);fill('#b48b53',px+15,py-2,4,14);fill('#ffe0a1',px+16,py-8,2,8);fill('#e2a45b',px+14,py-5,6,6);}
- // Potted foliage and carved cabinets make the edges feel inhabited.
- for(const x of [2,12]){const [px,py]=at(x,3);fill('#211a17',px+5,py+15,23,17);fill('#66503a',px+8,py+17,18,12);for(let k=0;k<6;k++){fill(k%2?'#486342':'#68805a',px+7+k*3,py+5+(k%3)*3,5,13);}}
- if(hall){const [px,py]=at(7,2);fill('#281f1b',px+2,py+3,28,24);fill('#856343',px+4,py+4,24,4);fill('#3b2b29',px+5,py+9,22,15);fill('#aa916d',px+12,py+12,8,9);}
- // Asset pass: independently authored SVG sprites, not procedural stand-ins.
- // Draw on the established walkability grid, before actors so player/NPCs remain visible.
- for(let y=0;y<11;y++)for(let x=0;x<15;x++){
-  const t=W.roomTile(kind,x,y),px=ox+x*unit,py=oy+y*unit;
-  const asset={exit:'door',shelf:'bookshelf',counter:'desk',table:'desk',bed:'bed',cushion:'chair'}[t];
-  if(asset)drawInteriorAsset(c,asset,px,py);
-  if(t==='wall-art'&&x%3===0)drawInteriorAsset(c,'banner',px,py);
-  if(t==='altar'&&x===7)drawInteriorAsset(c,'orb',px,py);
- }
- // Small portable items sit on furniture or in architectural niches.
- const placed=(name,x,y)=>drawInteriorAsset(c,name,ox+x*unit,oy+y*unit);
- if(hall){placed('scroll',6,3);placed('orb',8,3);placed('candle',3,2);placed('candle',11,2);}
- if(archive){placed('scroll',3,4);placed('scroll',11,4);}
- if(forge){placed('forge',11,7);}
- if(herbal){placed('plant',3,3);placed('plant',11,3);}
- if(inn&&!forge){placed('candle',4,3);placed('plant',11,3);}
- // Fine-grained scene dressing inspired by old-world illustrated RPG interiors.
- // Ground inlays are visual-only and never change movement or collision.
- const stone=(x,y)=>{const [px,py]=at(x,y);fill('#292522',px+3,py+3,26,26);fill('#5b5146',px+5,py+5,22,22);fill('#3d3530',px+8,py+8,16,16);fill('#806449',px+14,py+8,4,16);fill('#806449',px+8,py+14,16,4);fill('#b28d60',px+15,py+15,2,2);};
- if(hall){for(const [x,y] of [[6,6],[8,6],[6,8],[8,8]])if(W.roomTile(kind,x,y)==='floor')stone(x,y);}
- // Recessed gothic window tracery with individual colored panes.
- const gothic=(x)=>{const [px,py]=at(x,1);fill('#141113',px+5,py-10,22,36);fill('#776452',px+7,py-8,18,32);
-  fill('#17121b',px+9,py-5,14,27);for(let k=0;k<3;k++){fill(k%2?'#58466c':'#37485f',px+10+k*4,py+1,4,15);fill('#886b84',px+11+k*4,py+3,2,5);}
-  fill('#ae8b60',px+15,py-4,2,25);fill('#ae8b60',px+9,py+10,14,2);fill('#b9a17b',px+5,py+22,22,3);
- };
- if(hall||archive){gothic(4);gothic(10);}
- // Freestanding carved furniture is shaded on three faces and casts a short floor shadow.
- const cabinet=(x,y)=>{const [px,py]=at(x,y);fill('rgba(0,0,0,.35)',px+5,py+28,27,4);fill('#211813',px+2,py+3,29,27);
-  fill('#7b5436',px+4,py+3,25,5);fill('#ad8051',px+6,py+4,21,2);fill('#4c3022',px+4,py+9,25,18);
-  for(let k=0;k<2;k++){fill('#765337',px+6+k*11,py+11,9,14);fill('#2c211b',px+7+k*11,py+12,7,12);fill('#c39c65',px+12+k*11,py+17,2,3);}
-  fill('#201714',px+4,py+27,25,3);
- };
- if(hall){cabinet(11,4);cabinet(3,4);}
- else if(inn){cabinet(11,5);}
- else if(archive){cabinet(11,6);}
- // Maps, scrolls and enchanted objects on existing display surfaces.
- const relic=(x,y)=>{const [px,py]=at(x,y);fill('#241b18',px+5,py+12,23,17);fill('#805a3d',px+6,py+12,21,3);fill('#b7976d',px+9,py+15,15,9);
-  fill('#775a48',px+12,py+18,9,1);fill('#775a48',px+15,py+16,1,7);fill('#d1b781',px+7,py+25,19,2);
- };
- if(hall){relic(6,3);relic(8,3);}
- if(archive){relic(6,4);}
- // Animated candle flames are intentionally subtle to preserve the pixel-art silhouette.
- for(const x of [4,10]){const [px,py]=at(x,1),flicker=Math.sin(time*.006+x*7)>0?1:0;
-  fill('#f6bb68',px+16,py-10-flicker,2,5+flicker);fill('#fff0b6',px+16,py-8-flicker,1,3);
- }
- // Directional light pools are painted behind actors and stay subtle at pixel scale.
- c.save();c.globalCompositeOperation='screen';
- for(const x of [2,12]){const [px,py]=at(x,2);const glow=c.createRadialGradient(px+16,py,3,px+16,py+18,104);glow.addColorStop(0,'rgba(255,181,91,.22)');glow.addColorStop(1,'rgba(255,211,127,0)');c.fillStyle=glow;c.fillRect(px-88,py-70,208,208);}
- c.restore();
- // A gentle vignette anchors the scene without hiding characters or interactable tiles.
- const shade=c.createRadialGradient(width/2,height/2,Math.min(width,height)*.19,width/2,height/2,Math.max(width,height)*.78);shade.addColorStop(0,'rgba(8,6,8,0)');shade.addColorStop(1,'rgba(8,6,8,.35)');c.fillStyle=shade;c.fillRect(0,0,width,height);
- for(const n of W.roomNPCs(room))drawPerson(c,ox+n.x*unit,oy+n.y*unit,n.role,time);
+ const actors=W.roomNPCs(room).map(n=>({z:n.y+1,draw:()=>drawPerson(c,ox+n.x*unit,oy+n.y*unit,n.role,time)}));
  const walking=Number.isFinite(room.walkStart)&&time-room.walkStart<room.walkDuration;
  const progress=walking?Math.max(0,Math.min(1,(time-room.walkStart)/room.walkDuration)):1;
  const prev=room.trail?.at(-1),px=prev&&walking?prev.x+(room.x-prev.x)*progress:room.x,py=prev&&walking?prev.y+(room.y-prev.y)*progress:room.y;
@@ -845,11 +701,11 @@ function drawInterior(canvas,time){
   const fx=from.x+(next.x-from.x)*(walking?progress:1),fy=from.y+(next.y-from.y)*(walking?progress:1);
   const dx=next.x-from.x,dy=next.y-from.y,travelFace=dx<0?'left':dx>0?'right':dy<0?'up':dy>0?'down':room.face;
   const face=travelFace==='up'||travelFace==='down'?(Math.floor(time/500)%2?'right':'left'):travelFace;
-  drawAspectAura(c,follower,ox+fx*unit-2,oy+fy*unit-9,36);
-  drawCompanion(c,spOf(follower),follower.appearance,ox+fx*unit-2,oy+fy*unit-9,36,face,walking,progress);
+  actors.push({z:fy+1,draw:()=>{drawAspectAura(c,follower,ox+fx*unit-2,oy+fy*unit-9,36);drawCompanion(c,spOf(follower),follower.appearance,ox+fx*unit-2,oy+fy*unit-9,36,face,walking,progress);}});
  }
- drawPerson(c,ox+px*unit,oy+py*unit,'player',time,room.face,walking,adventureState().appearance);
- const location=$('#map-location'),biome=$('#map-biome');if(location)location.textContent=room.name;if(biome)biome.textContent='MOSSVEIL · INTERIOR';
+ actors.push({z:py+1,draw:()=>drawPerson(c,ox+px*unit,oy+py*unit,'player',time,room.face,walking,adventureState().appearance)});
+ drawInteriorScene(c,room,ox,oy,time,actors);
+ const location=$('#map-location'),biome=$('#map-biome');if(location)location.textContent=room.name;if(biome)biome.textContent=currentRegion().name.toUpperCase()+' · INTERIOR';
 }
 
 function queueFresh(reg,r=Math.random,force=false){s.generationPlans??={};if(queue.length>=3&&!force)return;const base=E.pick(reg.biome.types,r),alter=E.pick(E.TYPES.filter(t=>t!==base),r),plan=E.makeSpecies(E.hash(s.seed,'ai-plan',Date.now(),r()),base,alter);s.generationPlans[plan.id]=plan;queue.push(plan.id);save();}
