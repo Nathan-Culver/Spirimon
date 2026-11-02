@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import * as E from '../engine.mjs';
+import {individualSpecies} from '../anatomy.mjs';
 import * as BAI from '../battle-ai.mjs';
 import * as Q from '../equipment.mjs';
 
@@ -14,7 +15,7 @@ const move=n=>({id:'move-'+n,name:'Technique '+n,kind:'physical',power:30,speed:
 const species=(id,moves)=>({id,forms:['Test Spirimon'],base:'Beast',alter:'Elemental',domains:[],health:100,power:50,speed:40,moves,ability:'None'});
 const individual=(s,id)=>({...E.heal(E.makeIndividual(s,10,0,()=>.5),s),id});
 function ui(allies,enemy,speciesList,extra={}){
- const context=vm.createContext({E,BAI,Q,s:{spirits:allies,species:Object.fromEntries(speciesList.map(s=>[s.id,s])),party:allies.map(i=>i.id),rank:1},battle:{ally:allies[0].id,enemy,round:1,credits:{a:0,b:0}},selectedMove:0,borrow:0,style:'normal',commit:.5,battleMode:'moves',movePreviewKey:null,actionBusy:false,render:()=>{},$:()=>null,hpHTML:()=>'',esc:String,action:(name,label)=>'<button>'+label+'</button>',...extra});
+ const context=vm.createContext({E,BAI,Q,individualSpecies,s:{spirits:allies,species:Object.fromEntries(speciesList.map(s=>[s.id,s])),party:allies.map(i=>i.id),rank:1},battle:{ally:allies[0].id,enemy,round:1,credits:{a:0,b:0}},selectedMove:0,borrow:0,style:'normal',commit:.5,battleMode:'moves',movePreviewKey:null,actionBusy:false,render:()=>{},$:()=>null,hpHTML:()=>'',esc:String,action:(name,label)=>'<button>'+label+'</button>',...extra});
  vm.runInContext(functions.map(extract).join('\n'),context);return context;
 }
 test('double-battle previews use the next acting Spirimon, including its fourth move',()=>{

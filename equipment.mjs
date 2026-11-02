@@ -1,3 +1,4 @@
+import {individualSpecies} from './anatomy.mjs';
 // Shared definitions: saved equipment IDs and aspects remain compatible with older worlds.
 export const CHARMS=[
  {id:'oak-heart',name:'Oak Heart',cost:80,bonus:'hp',amount:12,desc:'Maximum HP +12%.'},
@@ -50,25 +51,25 @@ export const ITEM_TEMPLATES=[
  T('shield','Returning Shield',0,'defense','anchor','ward'),
  T('lance','Piercing Lance',0,'might','critical','pierce'),
  T('sling','Storm Sling',0,'speed','accuracy','bolt'),
- T('sabre','Duelist’s Sabre',0,'might','physicalEdge','pierce',{requires:{types:['Humanoid']}}),
- T('warfan','Court Warfan',0,'speed','firstWind','wind',{requires:{types:['Humanoid']}}),
+ T('sabre','Duelist’s Sabre',0,'might','physicalEdge','pierce',{requires:{capabilities:['equipment']}}),
+ T('warfan','Court Warfan',0,'speed','firstWind','wind',{requires:{capabilities:['equipment']}}),
  T('shell','Thorned Shell',1,'defense','thorns','ward'),
  T('robe','Mistwoven Robe',1,'resistance','energyGuard','cleanse'),
  T('mantle','Vigilant Mantle',1,'hp','survive','ward'),
  T('cloak','Traveler’s Cloak',1,'speed','regenerator','retreat'),
- T('cuirass','Articulated Cuirass',1,'defense','anchor','reflect',{requires:{types:['Humanoid']},drawback:'speed'}),
+ T('cuirass','Articulated Cuirass',1,'defense','anchor','reflect',{requires:{capabilities:['equipment']},drawback:'speed'}),
  T('lens','Prismatic Lens',2,'power','accuracy','bolt'),
  T('staff','Weather Staff',2,'power','weather','weather'),
  T('chalice','Renewing Chalice',2,'resistance','leftovers','heal'),
  T('focus','Attuned Focus',2,'power','domainBoost','bolt'),
- T('codex','Runic Codex',2,'power','energyGuard','screen',{requires:{types:['Humanoid']}}),
+ T('codex','Runic Codex',2,'power','energyGuard','screen',{requires:{capabilities:['equipment']}}),
  T('ember','Ember Reliquary',2,'power','domainBoost','flame',{requires:{domains:['Fire','Sun']},domain:'Fire'}),
  T('boots','Trailwarden Treads',3,'speed','boots','clearHazards'),
  T('anchor','Grounding Weight',3,'defense','anchor','ward'),
  T('bell','Warning Bell',3,'resistance','statusGuard','cleanse'),
  T('lantern','Surveyor’s Lantern',3,'power','resourceSustain','focus'),
  T('compass','Wayfinder Compass',3,'speed','firstWind','retreat'),
- T('device','Artificer’s Device',3,'power','resourceSustain','bolt',{requires:{types:['Humanoid']}}),
+ T('device','Artificer’s Device',3,'power','resourceSustain','bolt',{requires:{capabilities:['equipment']}}),
  T('cog','Living Gear',3,'defense','thorns','reflect',{requires:{types:['Construct']}}),
  T('fang','Siphoning Fang',4,'might','drain','strike'),
  T('orb','Vitality Orb',4,'power','lifeOrb','bolt'),
@@ -101,7 +102,7 @@ export function generateHeldItem(seed,options={}){
  const domain=template.domain||choose(['Fire','Water','Ice','Lightning','Light','Dark','Nature','Storm','Magic','Spirit'],r),stats=template.stat?{[template.stat]:potency}:{};
  if(template.hook==='choiceLock'&&template.stat)stats[template.stat]=25+tier*2;if(template.drawback)stats[template.drawback]=-5-Math.floor(tier/2);
  const hookList=[template.hook];if(!template.consumable&&(rarity==='Relic'||tier>=2&&r()<.45)){const secondary=choose(['accuracy','statusGuard','survive','regenerator','screens','resourceSustain'].filter(h=>!hookList.includes(h)),r);hookList.push(secondary);if(rarity!=='Relic'&&template.stat)stats[template.stat]=Math.max(5,stats[template.stat]-2);}
- const [abilityName,category,power,effect,target]=ACTIVE[template.active],active={id:'item-'+itemHash(seed).toString(36)+'-ability',name:abilityName,category,kind:category==='Physical'?'physical':category==='Energy'?'spiritual':'status',power:power?Math.min(95,power+tier*5):0,effect,type:'Humanoid',domain,target,accuracy:.95,speed:0,baseUses:0};
+ const [abilityName,category,power,effect,target]=ACTIVE[template.active],active={id:'item-'+itemHash(seed).toString(36)+'-ability',name:abilityName,category,kind:category==='Physical'?'physical':category==='Energy'?'spiritual':'status',power:power?Math.min(95,power+tier*5):0,effect,type:options.eligibleFor?.base||'Construct',domain,target,accuracy:.95,speed:0,baseUses:0};
  if(template.active==='weather'){active.effect=choose(['weatherRain','weatherSun','weatherSand','weatherSnow'],r);active.name={weatherRain:'Rain Rite',weatherSun:'Sun Rite',weatherSand:'Sand Rite',weatherSnow:'Snow Rite'}[active.effect];}
  const material=choose(['Amber','Jade','Moonstone','Bronze','Willow','Obsidian','Silver','Pearl','Cloudglass','Dawnsteel'],r),epithet=choose(['of the Quiet Road','of Returning Dawn','of the Last Lantern','of Wandering Stars','of the Hidden Spring','of the First Oath'],r);
  const name=rarity==='Relic'?choose(['Covenant','Inheritance','Testament','Echo'],r)+' of '+choose(['the Unfallen','the Lost Sealer','the Silver Pilgrim','the First Flame','the Sleeping Sky'],r)+' '+itemHash(seed,'name').toString(36).slice(0,3).toUpperCase():material+' '+template.name+(tier>=2?' '+epithet:'');
@@ -109,10 +110,13 @@ export function generateHeldItem(seed,options={}){
 }
 export function canEquipHeldItem(item,sp){
  if(!item)return {ok:false,reason:'Unknown Held Item.'};const req=item.requires;if(!req)return {ok:true};if(!sp)return {ok:false,reason:'Choose a Spirimon.'};
- if(req.types?.length&&!req.types.some(t=>[sp.base,sp.alter].includes(t)))return {ok:false,reason:'Requires '+req.types.join(' or ')+' as either creature type.'};
+ const typeRequirements=(req.types||[]).filter(t=>t!=='Humanoid');
+ const required=[...(req.capabilities||[]),...((req.types||[]).includes('Humanoid')?['equipment']:[])];
+ if(typeRequirements.length&&!typeRequirements.some(t=>[sp.base,sp.alter].includes(t)))return {ok:false,reason:'Requires '+typeRequirements.join(' or ')+' as either creature type.'};
+ if(required.some(key=>!sp.capabilities?.[key]?.available))return {ok:false,reason:'Requires verified grasping anatomy for this equipment.'};
  if(req.domains?.length&&!req.domains.some(d=>(sp.domains||[]).includes(d)))return {ok:false,reason:'Requires the '+req.domains.join(' or ')+' Magical Domain.'};return {ok:true};
 }
-export function heldEquipment(ind,sp=null){const item=ind?.heldItem||equipment(ind?.heldCharm);return item&&(!sp||canEquipHeldItem(item,sp).ok)?item:null;}
+export function heldEquipment(ind,sp=null){if(sp)sp=individualSpecies(sp,ind);const item=ind?.heldItem||equipment(ind?.heldCharm);return item&&(!sp||ind.legacyEquipmentIds?.includes(item.id)||canEquipHeldItem(item,sp).ok)?item:null;}
 export function itemHasHook(item,hook){return !!item&&(item.hook===hook||item.hooks?.includes(hook));}
 export function itemOnceUsed(ind,hook){return ind.heldItem?!!ind.itemFlags?.[ind.heldItem.id+':'+hook]:!!ind.itemTriggered;}
 export function markItemUsed(ind,hook){if(ind.heldItem){ind.itemFlags??={};ind.itemFlags[ind.heldItem.id+':'+hook]=true;}else ind.itemTriggered=true;}
@@ -161,7 +165,7 @@ export function validateHeldItems(save){
   const m=item.active,allowed=new Set([...Object.values(ACTIVE).map(v=>v[3]),'weatherSun','weatherSand','weatherSnow']);
   if(!m||!['Physical','Energy','Status'].includes(m.category)||!Number.isFinite(m.power)||m.power<0||m.power>95||!allowed.has(m.effect)||!Number.isFinite(m.speed)||Math.abs(m.speed)>100||!Number.isFinite(m.accuracy)||m.accuracy<0||m.accuracy>1||!['self','ally','allAllies','opponent','allOpponents','field'].includes(m.target))throw Error('Invalid Held Item ability.');
   if(typeof item.consumable!=='boolean')throw Error('Invalid Held Item consumption rule.');if(!Number.isInteger(item.cost)||item.cost<1||item.cost>10000||!Number.isInteger(item.cooldown)||item.cooldown<0||item.cooldown>8||item.recovery!=null&&(!Number.isFinite(item.recovery)||item.recovery<0||item.recovery>1)||item.resourceRecovery!=null&&(!Number.isFinite(item.resourceRecovery)||item.resourceRecovery<0||item.resourceRecovery>20))throw Error('Invalid Held Item values.');
-  for(const list of [item.requires?.types,item.requires?.domains])if(list!=null&&(!Array.isArray(list)||list.length>36||list.some(v=>typeof v!=='string')))throw Error('Invalid equipment requirement.');
+  for(const list of [item.requires?.types,item.requires?.domains,item.requires?.capabilities])if(list!=null&&(!Array.isArray(list)||list.length>36||list.some(v=>typeof v!=='string')))throw Error('Invalid equipment requirement.');
  };
  if(state){for(const [id,record]of Object.entries(state.inventory||{})){if(record.item?.id!==id)throw Error('Mismatched Held Item inventory identity.');if(!Number.isInteger(record.count)||record.count<0||record.count>999999)throw Error('Invalid Held Item inventory count.');valid(record.item);}for(const offers of Object.values(state.shops||{})){if(!Array.isArray(offers))throw Error('Invalid Held Item merchant.');for(const offer of offers){valid(offer.item);if(!Number.isInteger(offer.remaining)||offer.remaining<0||offer.remaining>99)throw Error('Invalid merchant stock.');}}}
  for(const ind of [...(save.spirits||[]),...(save.battle?.multi?.enemies||[]),...(save.battle?.multi?.reserves||[]),...(save.battle?.enemy?[save.battle.enemy]:[])])if(ind.heldItem)valid(ind.heldItem);

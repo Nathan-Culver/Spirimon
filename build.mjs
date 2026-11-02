@@ -31,7 +31,7 @@ export async function buildPage(directory=root){
    if(clause.startsWith('{'))return 'const '+clause.replace(/\bas\b/g,':')+'='+value+';';
    throw Error('Unsupported browser import: '+clause);
   });
-  source=source.replace(/\bexport\s+(?=(?:async\s+)?(?:const|let|var|function|class)\b)/g,'').replaceAll('import.meta.url','__moduleURL('+JSON.stringify(id)+')');
+  source=source.replace(/^export\s+\{[^}]+\};?\s*$/gm,'').replace(/\bexport\s+(?=(?:async\s+)?(?:const|let|var|function|class)\b)/g,'').replaceAll('import.meta.url','__moduleURL('+JSON.stringify(id)+')');
   sections.push('__modules['+JSON.stringify(id)+']=(function(){\n'+source+'\nreturn {'+names.join(',')+'};})();');
  }
  sections.push('})();');const script=sections.join('\n');

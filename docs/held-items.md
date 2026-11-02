@@ -4,7 +4,7 @@ The Held Item expansion follows the agreed rules:
 
 - Each Spirimon has one Held Item slot.
 - Most equipment is universal. A few items require a creature type or Magical Domain.
-- Humanoid as either base or modifier type qualifies for Humanoid equipment. Humanoids gain more choices, never an extra item-effect multiplier.
+- Verified grasping appendages qualify for specialized equipment. Upright posture alone is insufficient, and anatomical eligibility never adds an item-effect multiplier. Former Humanoid equipment remains active on its existing wearer during save migration.
 - Activatable abilities are accessed through **Bag → Held Item** and replace the Spirimon’s normal action. They do not occupy a fifth move slot or replace any of its four equipped moves.
 - Consumed items remain spent after wild battles, trainer matches, facilities, victory, defeat and healing.
 - Acquisition comes from regional merchants, specialist merchants, exploration caches, wild encounters, quests, Clan Masters, faction bosses, legends, championships and facility milestones.
@@ -15,7 +15,7 @@ The generator combines 37 tested archetypes across weapons/shields, armor/clothi
 
 Relics are individually seeded reusable equipment with unique identities and an additional tactical effect. Their names, effects and ownership records are stored in full with a generator version. Loading a save does not reroll discovered equipment. Claim keys prevent repeatedly collecting a cache, quest reward or boss relic. Each world has its own collection.
 
-Humanoid-exclusive examples include a Duelist’s Sabre, Court Warfan, Articulated Cuirass, Runic Codex and Artificer’s Device. Their rarity and potency use the same budgets as universal equipment. Construct, Beast/Monstrosity and Fire/Sun exceptions provide other specialized choices. The inventory explains eligibility before equipping.
+Anatomically specialized examples include a Duelist’s Sabre, Court Warfan, Articulated Cuirass, Runic Codex and Artificer’s Device. Their rarity and potency use the same budgets as universal equipment. Construct, Beast/Monstrosity and Fire/Sun exceptions provide other specialized choices. The inventory explains eligibility before equipping.
 
 ## Active and automatic behavior
 
@@ -37,6 +37,6 @@ Opponents receive compatible procedural equipment and score its active ability a
 
 ## Verification and inspiration
 
-Automated tests cover seeded generation, all categories and archetype abilities, Humanoid and Domain restrictions, shared power budgets, inventory conservation, legacy migration, transactions, permanent consumption, no-effect/interrupted activations, cooldowns, switching, double-battle targets and Pressure, save validation and AI decisions. Browser playtests cover the inventory and Bag activation.
+Automated tests cover seeded generation, all categories and archetype abilities, anatomical and Domain restrictions, shared power budgets, inventory conservation, legacy migration, transactions, permanent consumption, no-effect/interrupted activations, cooldowns, switching, double-battle targets and Pressure, save validation and AI decisions. Browser playtests cover the inventory and Bag activation.
 
 Design inspiration includes the one-item choice, conditional consumables, stat modifiers, move specialization and end-of-turn recovery described in the [official Pokémon battling guide](https://diamondpearl.pokemon.com/en-us/trainersguide/fundamentals/battling/). Spirimon adds its own procedural identities, compatibility rules and Bag-activated abilities.
