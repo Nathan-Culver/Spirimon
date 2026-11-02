@@ -1,0 +1,18 @@
+{
+  "name": "Spirimon — The Sealer's Frontier",
+  "short_name": "Spirimon",
+  "description": "Offline Spirimon adventure",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#102320",
+  "theme_color": "#102320",
+  "icons": [
+    {
+      "src": "./assets/spirimon-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
