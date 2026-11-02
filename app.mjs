@@ -375,7 +375,9 @@ function drawWorld(time){
    const from=companionTrail[step],next=companionTrail[step+1],to=next&&Number.isFinite(next.x)&&Number.isFinite(next.y)?next:from;
    const moving=!!walkAnim&&elapsed<1;
    const fx=from.x+(to.x-from.x)*(moving?elapsed:1),fy=from.y+(to.y-from.y)*(moving?elapsed:1);
-   const dx=to.x-from.x,dy=to.y-from.y,face=dx<0?'left':dx>0?'right':dy<0?'up':dy>0?'down':(from.face||s.player.face||'down');
+   const dx=to.x-from.x,dy=to.y-from.y,travelFace=dx<0?'left':dx>0?'right':dy<0?'up':dy>0?'down':(from.face||s.player.face||'down');
+   // Vertical travel alternates the companion's side-facing walk frames every 500 ms.
+   const face=(travelFace==='up'||travelFace==='down')?(Math.floor(performance.now()/500)%2===0?'left':'right'):travelFace;
    const bob=moving?Math.abs(Math.sin(elapsed*Math.PI*2))*2:0;
    const spriteSize=36;
    // Select the row for the direction the player is walking, and animate
