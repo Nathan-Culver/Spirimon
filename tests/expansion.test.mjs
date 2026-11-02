@@ -12,3 +12,7 @@ test('less expensive offerings demand more unique randomized trials and all spen
 test('terrain edge connections blend trails and stairs but keep water boundaries separate',()=>{assert.equal(connectedEdges('path',['stairs','path','lawn','water']),3);assert.equal(connectedEdges('water',['water','water','water','water']),15);assert.equal(terrainCell('path','forest',1,true),7);assert.equal(terrainCell('stairs','forest',1),15);});
 
 test('offering trial shuffles stay valid for unsigned hashes across many individuals',()=>{for(let n=0;n<300;n++){const p=offeringPlans({id:'species-'+n,base:'Beast',domains:[]},'individual-'+n);assert.deepEqual([...p[2].trials].sort(),['dance','riddle','sing']);assert(p.every(x=>x.trials.every(t=>['dance','riddle','sing'].includes(t))));}});
+
+import {templeAt,templeTrial,validateTempleTrial,FACILITY_TYPES,facilityChallenge} from '../adventure-systems.mjs';
+test('temples generate deterministic reachable trials',()=>{for(let x=-5;x<=5;x++)for(let y=-5;y<=5;y++){const t=templeAt('seed',x,y);assert.deepEqual(t,templeAt('seed',x,y));const trial=templeTrial(t);assert.ok(validateTempleTrial(trial));assert.deepEqual(trial.clues,trial.solution.map((v,i)=>['First: ','Second: ','Third: '][i]+v));}});
+test('six competitive facilities generate repeatable progressive challenges',()=>{assert.equal(FACILITY_TYPES.length,6);for(const f of FACILITY_TYPES){const a=facilityChallenge(f.id,7,'seed');assert.deepEqual(a,facilityChallenge(f.id,7,'seed'));assert.ok(a.level<=95);assert.ok(a.reward>25);}});
