@@ -573,7 +573,7 @@ function speedHint(){if(!battle)return'';const i=activeBattleAlly(),p=battleMove
 
 function ensurePlayerOnPath(){if(E.walkable(E.tile(s.seed,s.player.x,s.player.y),abilityReady('swim'),abilityReady('climb'))&&!buildingSpriteBlocked(s.player.x,s.player.y))return;for(let radius=1;radius<18;radius++)for(let dy=-radius;dy<=radius;dy++)for(let dx=-radius;dx<=radius;dx++)if(E.walkable(E.tile(s.seed,s.player.x+dx,s.player.y+dy))&&!buildingSpriteBlocked(s.player.x+dx,s.player.y+dy)){s.player.x+=dx;s.player.y+=dy;walkAnim=null;return;}}
 
-function enterBuilding(building){if(modal||battle)return;s.interior=W.makeInterior(building);s.interior.trail=[];walkAnim=null;keys.clear();save();render();toast(building.name);}
+function enterBuilding(building){if(modal||battle)return;s.interior=W.makeInterior(building);s.interior.trail=[{x:s.interior.x,y:s.interior.y,face:'down'}];walkAnim=null;keys.clear();save();render();toast(building.name);}
 function moveInside(dx,dy){if(modal||battle||view!=='explore')return;const room=s.interior,x=room.x+dx,y=room.y+dy;room.face=dx<0?'left':dx>0?'right':dy<0?'up':'down';const npc=W.roomNPCs(room).find(n=>n.x===x&&n.y===y);if(npc)return talk(npc);if(!W.roomWalkable(room.kind,x,y))return;if(y===10&&x===7){s.player.x=room.outside.x;s.player.y=room.outside.y;s.player.face='down';delete s.interior;keys.clear();save();render();return;}room.trail??=[];room.trail.push({x:room.x,y:room.y,face:room.face});if(room.trail.length>24)room.trail.shift();room.walkStart=performance.now();room.walkDuration=running||keys.has('shift')?100:170;room.x=x;room.y=y;s.steps++;lastStep=performance.now();save();$('#map-hint').textContent=hint();}
 function drawInterior(canvas,time){
  const rect=canvas.getBoundingClientRect(),width=Math.max(320,Math.round(rect.width/2)),height=Math.max(200,Math.round(rect.height/2));
@@ -729,8 +729,9 @@ function drawInterior(canvas,time){
  const progress=walking?Math.max(0,Math.min(1,(time-room.walkStart)/room.walkDuration)):1;
  const prev=room.trail?.at(-1),px=prev&&walking?prev.x+(room.x-prev.x)*progress:room.x,py=prev&&walking?prev.y+(room.y-prev.y)*progress:room.y;
  const follower=party()[0];
- if(follower&&room.trail?.length){
-  const step=Math.max(0,room.trail.length-3),from=room.trail[step],next=room.trail[step+1]||from;
+ if(follower){
+  const trail=room.trail?.length?room.trail:[{x:room.x,y:room.y+1,face:room.face}];
+  const step=Math.max(0,trail.length-3),from=trail[step],next=trail[step+1]||from;
   const fx=from.x+(next.x-from.x)*(walking?progress:1),fy=from.y+(next.y-from.y)*(walking?progress:1);
   const dx=next.x-from.x,dy=next.y-from.y,travelFace=dx<0?'left':dx>0?'right':dy<0?'up':dy>0?'down':room.face;
   const face=travelFace==='up'||travelFace==='down'?(Math.floor(time/500)%2?'right':'left'):travelFace;
