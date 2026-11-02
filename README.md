@@ -112,3 +112,7 @@ Music is synthesized from original note sequences, requiring a first click/tap f
 ## Combat expansion
 
 The battle engine now supports timed move effects, entry hazards, Baton Pass, team support, selectable targets, spread attacks and borrowed actions in double battles. Opponents use a local scored decision tree and coordinate targets and switches. Twenty held items and eight unlockable aspects provide distinct individual builds. See [Combat systems](docs/combat-systems.md) for their rules and verification.
+
+## Procedural Held Items
+
+Held Items now generate from 37 archetypes across six categories, with five rarities and individually seeded relics. Each Spirimon has one slot; most items are universal, and Humanoid in either type position grants additional choices without stronger bonuses. Activate item abilities through Bag instead of a normal move. Consumables stay spent. See [Held Items](docs/held-items.md) for generation, effects, merchants, rewards and save compatibility.

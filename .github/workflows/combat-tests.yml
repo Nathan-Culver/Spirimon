@@ -2,6 +2,8 @@ name: Combat regression tests
 on:
   push:
     paths:
+      - 'equipment.mjs'
+      - 'battle-ai.mjs'
       - 'engine.mjs'
       - 'moves.mjs'
       - 'move-animations.mjs'

@@ -1,5 +1,5 @@
 import * as E from './engine.mjs';
-import {hasHook} from './equipment.mjs';
+import {hasHook,heldEquipment,heldItemActivation,generateHeldItem} from './equipment.mjs';
 
 // Decision tree -> legal candidates -> scored outcomes. It uses current public
 // battle state, never the player's submitted action or an AI network service.
@@ -14,7 +14,7 @@ export function expectedDamage(actor,asp,target,tsp,move,style='normal',commit=.
  if(move.effect==='sleepStrike'&&target.status!=='sleep')return 0;
  if(move.effect==='counter'||move.effect==='mirrorCoat')return actor.lastHit?.source===target.id?actor.lastHit.amount*2:0;
  if(target.ward&&!['breakWard','struggle'].includes(move.effect))return 0;
- return damage*E.hitChance(actor,target,move,style);
+ return damage*E.hitChance(actor,target,move,style,asp);
 }
 function incomingThreat(actor,asp,opponents,speciesOf){return opponents.reduce((sum,u)=>sum+Math.max(0,...choices(u,speciesOf(u)).map(m=>expectedDamage(u,speciesOf(u),actor,asp,m))),0);}
 export function replacementScore(candidate,opponents,speciesOf){
@@ -25,7 +25,8 @@ export function replacementScore(candidate,opponents,speciesOf){
 export function chooseReplacement(reserves,opponents,speciesOf){return reserves.filter(u=>u.hp>0).sort((a,b)=>replacementScore(b,opponents,speciesOf)-replacementScore(a,opponents,speciesOf)||a.id.localeCompare(b.id))[0]||null;}
 function supportScore(actor,asp,target,tsp,move,context){
  const effect=move.effect,hp=E.stats(target,tsp).hp,missing=hp-target.hp,threat=incomingThreat(actor,asp,context.opponents,context.speciesOf),screens=actor.battlefield?.sides?.[actor.battleSide]?.screens||{};
- if(['heal','fullheal','rest'].includes(effect)){if(missing<=0)return -100;return Math.min(missing,hp*(effect==='heal'?.25:1))/hp*100+(ratio(target,tsp)<.4?35:0)-(effect==='rest'?18:0);}
+ if(['heal','fullheal','rest'].includes(effect)){if(missing<=0)return -100;return Math.min(missing,hp*(effect==='heal'?(move.itemRecovery||.25):1))/hp*100+(ratio(target,tsp)<.4?35:0)-(effect==='rest'?18:0);}
+ if(effect==='itemResources'){const caps=E.stats(target,tsp),missing=Math.max(0,caps.pp-(target.pp||0))+Math.max(0,caps.willpower-(target.willpower||0));return missing?Math.min(60,missing)+((target.pp||0)+(target.willpower||0)<3?40:0):-100;}
  if(effect==='cleanse')return target.status?55:Object.keys(target.conditions||{}).length?30:-80;
  if(effect==='teamHeal')return context.allies.reduce((sum,u)=>sum+(1-ratio(u,context.speciesOf(u)))*45,0);
  if(effect==='teamWard')return context.allies.filter(u=>!u.ward).length*24;
@@ -62,9 +63,10 @@ export function chooseBattleAction(actor,context,r=Math.random){
  context={...context,team,allies,reserves,enemyReserves};const threat=incomingThreat(actor,asp,opponents,speciesOf),hpRatio=ratio(actor,asp);
  const branch=actor.pendingMove?'release':hpRatio<.35?'survive':opponents.some(t=>ratio(t,speciesOf(t))<.3)?'finish':'develop';
  const moves=choices(actor,asp),usable=moves.length?moves:[{...E.STRUGGLE,type:asp.base}],candidates=[];
- for(const move of usable){const kind=E.moveTarget(move),friendly=['ally','self','allAllies'].includes(kind),targets=kind==='ally'?allies:kind==='self'||kind==='allAllies'?[actor]:opponents;
+ const activation=heldItemActivation(actor,asp),sources=usable.map(move=>({move,type:'move'}));if(activation.ok&&(activation.consumable||E.canUseMove(actor,asp,activation.move)))sources.push({move:activation.move,type:'heldItem',itemId:activation.item.id});
+ for(const source of sources){const {move}=source;const kind=E.moveTarget(move),friendly=['ally','self','allAllies'].includes(kind),targets=kind==='ally'?allies:kind==='self'||kind==='allAllies'?[actor]:opponents;
   for(const target of targets){if(target.hp<=0)continue;const tsp=speciesOf(target),targetIndex=(friendly?allies:opponents).indexOf(target);
-   for(const style of ['normal','agile','strong']){const commit=branch==='survive'?.35:branch==='finish'?.7:.55,expected=expectedDamage(actor,asp,target,tsp,move,style,commit),support=friendly?supportScore(actor,asp,target,tsp,move,context):0;
+   for(const style of source.type==='heldItem'?['normal']:['normal','agile','strong']){const commit=branch==='survive'?.35:branch==='finish'?.7:.55,expected=expectedDamage(actor,asp,target,tsp,move,style,commit),support=friendly?supportScore(actor,asp,target,tsp,move,context):0;
     let score=move.power?Math.min(expected,target.hp)/Math.max(1,E.stats(target,tsp).hp)*100:support;
     if(!friendly)score+=effectScore(actor,asp,target,tsp,move,context);
     if(expected>=target.hp&&move.power){score+=65;if(E.priority(actor,asp,move,style)>E.stats(target,tsp).speed)score+=22;}
@@ -73,8 +75,8 @@ export function chooseBattleAction(actor,context,r=Math.random){
     if(branch==='survive'&&friendly&&['heal','fullheal','ward','protect'].includes(move.effect))score+=20;
     score-=(context.claimedDamage?.[target.id]||0)>=target.hp?70:0;
     if(style==='strong'&&threat>=actor.hp)score-=20;if(style==='agile'&&move.power===0)score-=2;
-    const borrow=!friendly&&move.power>0&&expected<target.hp&&expected*2>=target.hp&&threat<actor.hp*.7&&Math.max(actor.pp||0,actor.willpower||0)>4?1:0;
-    candidates.push({move,style,commit,borrow,targetIndex:Math.max(0,targetIndex),score:score+(borrow?8:0),reason:branch});
+    const borrow=source.type!=='heldItem'&&!friendly&&move.power>0&&expected<target.hp&&expected*2>=target.hp&&threat<actor.hp*.7&&Math.max(actor.pp||0,actor.willpower||0)>4?1:0;
+    candidates.push({...source,move,style,commit,borrow,targetIndex:Math.max(0,targetIndex),score:score+(borrow?8:0),reason:branch});
    }
   }
  }
@@ -95,7 +97,7 @@ export function prepareOpponent(ind,sp,rank=1,r=Math.random){
  add(attacks.find(m=>E.moveCategory(m)!==E.moveCategory(selected[0]||{})&&m.domain!==selected[0]?.domain)||attacks[1]);
  add(support.find(m=>['poison','burn','paralysis','boostSpeed','boostMight','boostPower','spikes','weatherRain'].includes(m.effect)));
  for(const m of E.equippedMoves(ind,sp))add(m);ind.moveIds=selected.slice(0,4).map(m=>m.id);
- if(ind.level>=12&&!ind.heldCharm){const ids=rank>=4?['hazard-boots','thorn-mail','drain-fang','oracle-lens','focus-band']:['oak-heart','iron-shell','swift-feather'];ind.heldCharm=ids[Math.min(ids.length-1,Math.floor(r()*ids.length))];}
+ if(ind.level>=12&&!heldEquipment(ind)){ind.heldItem=generateHeldItem(ind.id+'|trainer-item',{level:ind.level,rarity:rank>=4?'Epic':rank>=2?'Rare':'Uncommon',eligibleFor:sp,source:'Trainer equipment'});}
  if(ind.level>=25&&!ind.aspect)ind.aspect=['Primal','Astral','Titan','Swift'][Math.min(3,Math.floor(r()*4))];
  E.heal(ind,sp);return ind;
 }
