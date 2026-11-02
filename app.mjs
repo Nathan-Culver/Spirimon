@@ -481,7 +481,7 @@ function drawWorld(time){
  for(let cy=pc.cy-1;cy<=pc.cy+1;cy++)for(let cx=pc.cx-1;cx<=pc.cx+1;cx++){
   const reg=E.region(s.seed,cx,cy);
   if(reg.town){
-   for(const b of W.buildings(cx,cy)){const x=px(b.footX),y=py(b.footY);if(x>-200&&x<width+200&&y>-180&&y<height+180)drawTownBuilding(c,b,x,y);}drawTownFeatures(c,cx,cy,px,py);
+   drawTownFeatures(c,cx,cy,px,py);
    drawTownDecor(c,px(cx*48+33),py(cy*36+14));drawWell(c,px(cx*48+27),py(cy*36+18));
    people.push(...townNPCs(cx,cy));
   }
@@ -492,6 +492,15 @@ function drawWorld(time){
  for(let ty=Math.floor(oy)-1;ty<=Math.ceil(oy+rows)+2;ty++)for(let tx=Math.floor(ox)-2;tx<=Math.ceil(ox+cols)+2;tx++)if(ty>vy&&E.tile(s.seed,tx,ty)==='tree')drawTree(c,px(tx),py(ty),E.hash(s.seed,tx,ty),E.region(s.seed,Math.floor(tx/48),Math.floor(ty/36)).biome.kind);
  // Depth-sort actors by their ground contact rather than drawing wild Spirimon last.
  const actors=[];
+ // Buildings are tall sprites anchored at their front entrance/ground contact.
+ // Drawing them in the same depth queue as characters allows walking behind roofs.
+ for(let cy=pc.cy-1;cy<=pc.cy+1;cy++)for(let cx=pc.cx-1;cx<=pc.cx+1;cx++){
+ if(!E.region(s.seed,cx,cy).town)continue;
+ for(const b of W.buildings(cx,cy)){const x=px(b.footX),y=py(b.footY);
+ if(x<=-240||x>=width+240||y<=-240||y>=height+240)continue;
+ actors.push({y:b.footY+0.25,draw:()=>drawTownBuilding(c,b,x,y)});
+ }}
+
  for(const n of people){const w=n.walk,progress=w?Math.min(1,(time-w.start)/w.duration):1,nx=w&&progress<1?w.x+(n.x-w.x)*progress:n.x,ny=w&&progress<1?w.y+(n.y-w.y)*progress:n.y;actors.push({y:ny,draw:()=>{const x=px(nx),y=py(ny);drawPerson(c,x,y-5,n.role,time,n.face||'down',progress<1);if(Math.abs(n.x-s.player.x)+Math.abs(n.y-s.player.y)<=2){c.fillStyle='#fff5bd';c.strokeStyle='#4f4430';c.font='bold 10px monospace';c.textAlign='center';c.strokeText('!',x+16,y-8);c.fillText('!',x+16,y-8);}}});}
  if(s.party.length&&s.spirits.length){const companion=party()[0],step=companionTrail.length-3;if(companion&&step>=0){const from=companionTrail[step],to=companionTrail[step+1]||from;if(from&&to){const fx=from.x+(to.x-from.x)*(moving?elapsed:1),fy=from.y+(to.y-from.y)*(moving?elapsed:1),face=to.x<from.x?'left':to.x>from.x?'right':to.y<from.y?'up':'down';actors.push({y:fy,draw:()=>{drawAspectAura(c,companion,px(fx)-2,py(fy)-13,36);drawCompanion(c,spOf(companion),companion.appearance,px(fx)-2,py(fy)-13,36,face,moving,elapsed);}});}}}
  for(let cy=pc.cy-1;cy<=pc.cy+1;cy++)for(let cx=pc.cx-1;cx<=pc.cx+1;cx++)for(const r of s.roamers[cx+','+cy]||[]){if(!r.active)continue;const a=r.wanderFrom,t=a?Math.min(1,(time-a.start)/a.duration):1,rx=a&&t<1?a.x+(r.x-a.x)*t:r.x,ry=a&&t<1?a.y+(r.y-a.y)*t:r.y,x=px(rx),y=py(ry);if(x<-70||x>width+50||y<-70||y>height+50)continue;actors.push({y:ry,draw:()=>{c.save();try{const sp=spOf(r.ind);drawSpirit(c,sp,r.ind.appearance,x-13,y-29+(t<1?-Math.abs(Math.sin(t*Math.PI))*4:0),58,r.face==='left',{face:r.face||'down',moving:t<1,progress:t});}catch(e){console.warn('Wild Spirimon drawing failed',r.id,e);}finally{c.restore();}}});}
