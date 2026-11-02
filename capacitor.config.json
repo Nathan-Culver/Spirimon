@@ -1,0 +1,8 @@
+{
+  "appId": "com.spirimon.game",
+  "appName": "Spirimon",
+  "webDir": "_site",
+  "server": {
+    "androidScheme": "https"
+  }
+}
