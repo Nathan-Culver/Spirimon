@@ -27,7 +27,7 @@ The shared starter library contains 50 original ordered-type lineages, each with
 ## Buildings
 Walk north into a doorway or interact directly below it. Sealer Halls, inns and homes have interiors, residents and a south exit. Hall keepers restore HP, Stanima and Willpower; attunement is available at safe places.
 
-## Implemented systems## Implemented systems
+## Implemented systems
 - Seeded, expanding world with five biomes, persistent regions, towns, terrain collision, trails and fixed regional danger.
 - 13 ordered, distinct base/modifier types, complete three-form lineages, and repeated independent 1% rare-domain rolls.
 - Mutually exclusive wild-form rolls: starting 94%, intermediate 5%, final 1%.
@@ -93,7 +93,7 @@ tests/: rule and HTTP tests.
 Pushes to main run .github/workflows/deploy-pages.yml: build, run regression tests, stage the runtime files in _site, and publish them with actions/deploy-pages. Run `node build.mjs --out-dir _site` to reproduce the published artifact. The entry page loads one content-versioned classic JavaScript bundle; the four original world atlases load independently with bounded retries. The generated Spirimon.html download includes code, font, styles and world atlases for offline play. `npm start` builds these files before starting the companion server. Startup failures preserve the existing browser save; Retry loading requests fresh HTML without clearing storage.
 
 ## Scope of this release
-This is the first playable alpha, not a completed FireRed-sized RPG. It has original assets and rules inspired by the agreed design. Full dungeon interiors, a broad move catalog, tournament brackets, richer NPC event chains, item/location transformation variants, full creature animation sets and production balance remain expansion work. The local model adapters are optional and need installed models; no actual AI model or generated AI artwork is bundled.
+This is the first playable alpha, not a completed FireRed-sized RPG. It has original assets and rules inspired by the agreed design. Authored dungeon adventures, tournament brackets, richer NPC event chains, additional transformation quests, full creature animation sets and production balance remain expansion work. The implemented combat rules, equipment, aspects and double-battle behavior are documented in [Combat systems](docs/combat-systems.md). The local model adapters are optional and need installed models; no actual AI model or generated AI artwork is bundled.
 
 
 
@@ -108,3 +108,7 @@ Offerings are one cooperation attempt per individual. Choose a resource plan: la
 
 Music is synthesized from original note sequences, requiring a first click/tap for browser audio permission. The map uses calm instrumental music; battles use an upbeat instrumental arrangement. Music can be muted in Options. No copyrighted recordings or external audio services are used.
 
+
+## Combat expansion
+
+The battle engine now supports timed move effects, entry hazards, Baton Pass, team support, selectable targets, spread attacks and borrowed actions in double battles. Opponents use a local scored decision tree and coordinate targets and switches. Twenty held items and eight unlockable aspects provide distinct individual builds. See [Combat systems](docs/combat-systems.md) for their rules and verification.

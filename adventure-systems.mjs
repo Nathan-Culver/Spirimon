@@ -7,14 +7,9 @@ export const FACTIONS=[
  {id:'hollow-choir',name:'The Hollow Choir',leader:'Cantor Morcant',motive:'Awaken the buried voices beneath the world',level:38},
  {id:'veil-conclave',name:'The Veil Conclave',leader:'Archon Sable',motive:'Unravel the ancient seals',level:56}
 ];
-export const CHARMS=[
- {id:'oak-heart',name:'Oak Heart',cost:80,bonus:'hp',amount:12,desc:'Increases maximum health by 12%.'},
- {id:'keen-eye',name:'Keen Eye',cost:100,bonus:'power',amount:10,desc:'Increases attack power by 10%.'},
- {id:'swift-feather',name:'Swift Feather',cost:100,bonus:'speed',amount:12,desc:'Increases speed by 12%.'},
- {id:'iron-shell',name:'Iron Shell',cost:110,bonus:'defense',amount:12,desc:'Increases defense by 12%.'},
- {id:'spirit-lens',name:'Spirimon Lens',cost:130,bonus:'resistance',amount:12,desc:'Increases resistance by 12%.'}
-];
-export function clanForRegion(cx,cy){if(cx===0&&cy===0)return CLANS[0];const d=Math.max(Math.abs(cx),Math.abs(cy));return CLANS[Math.min(CLANs.length-1,Math.max(0,d-1))];}
+import {CHARMS as ALL_CHARMS} from './equipment.mjs';
+export const CHARMS=ALL_CHARMS;
+export function clanForRegion(cx,cy){if(cx===0&&cy===0)return CLANS[0];const d=Math.max(Math.abs(cx),Math.abs(cy));return CLANS[Math.min(CLANS.length-1,Math.max(0,d-1))];}
 export function nextClan(crests=[]){return CLANS.find(c=>!crests.includes(c.id))||null;}
 export function eligibleForChampionship(crests=[]){return CLANS.every(c=>crests.includes(c.id));}
 export function equipmentMultiplier(item,stat){const charm=CHARMS.find(c=>c.id===item);return charm?.bonus===stat?1+charm.amount/100:1;}
@@ -61,3 +56,4 @@ export function facilityChallenge(type,streak=0,seed='spirimon'){
  const modifiers=['No restriction','Swift opponents','Defensive opponents','Transforming opponents','Mixed-domain opponents'];
  return {...facility,round,level:Math.min(95,12+round*3+(h>>>0)%5),modifier:modifiers[(h>>>4)%modifiers.length],reward:25+Math.min(250,round*12)};
 }
+

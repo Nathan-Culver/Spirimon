@@ -3,21 +3,23 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import * as E from '../engine.mjs';
+import * as BAI from '../battle-ai.mjs';
+import * as Q from '../equipment.mjs';
 
 const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
 // Exercise the actual battle rendering/selection functions without booting storage or canvas.
-const functions=['spOf','activeBattleAlly','battleMoves','moveEligibility','moveDetails','battleMovePreviewKey','openBattleMoves','selectBattleMove','movePreviewHTML','battleHTML','totalActionCost','speedHint','enemyChoice'];
+const functions=['battleTeams','battleTargetHTML','doubleStatusHTML','combatTagsHTML','doubleHUDsHTML','party','spOf','activeBattleAlly','battleMoves','moveEligibility','moveDetails','battleMovePreviewKey','openBattleMoves','selectBattleMove','movePreviewHTML','battleHTML','totalActionCost','battleMoveCost','speedHint','enemyChoice'];
 const extract=name=>{const start=source.indexOf('function '+name+'('),next=source.slice(start+1).search(/\n(?:async )?function /);return source.slice(start,next<0?source.length:start+1+next);};
 const move=n=>({id:'move-'+n,name:'Technique '+n,kind:'physical',power:30,speed:0,baseUses:35,desc:'A test technique.'});
 const species=(id,moves)=>({id,forms:['Test Spirimon'],base:'Beast',alter:'Elemental',domains:[],health:100,power:50,speed:40,moves,ability:'None'});
 const individual=(s,id)=>({...E.heal(E.makeIndividual(s,10,0,()=>.5),s),id});
 function ui(allies,enemy,speciesList,extra={}){
- const context=vm.createContext({E,s:{spirits:allies,species:Object.fromEntries(speciesList.map(s=>[s.id,s])),rank:1},battle:{ally:allies[0].id,enemy,round:1,credits:{a:0,b:0}},selectedMove:0,borrow:0,style:'normal',commit:.5,battleMode:'moves',movePreviewKey:null,actionBusy:false,render:()=>{},$:()=>null,hpHTML:()=>'',esc:String,action:(name,label)=>'<button>'+label+'</button>',...extra});
+ const context=vm.createContext({E,BAI,Q,s:{spirits:allies,species:Object.fromEntries(speciesList.map(s=>[s.id,s])),party:allies.map(i=>i.id),rank:1},battle:{ally:allies[0].id,enemy,round:1,credits:{a:0,b:0}},selectedMove:0,borrow:0,style:'normal',commit:.5,battleMode:'moves',movePreviewKey:null,actionBusy:false,render:()=>{},$:()=>null,hpHTML:()=>'',esc:String,action:(name,label)=>'<button>'+label+'</button>',...extra});
  vm.runInContext(functions.map(extract).join('\n'),context);return context;
 }
 test('double-battle previews use the next acting Spirimon, including its fourth move',()=>{
  const firstSp=species('first',[move(0)]),secondSp=species('second',[move(1),move(2),move(3),move(4)]),enemySp=species('enemy',[move(5)]),a=individual(firstSp,'first-unit'),b=individual(secondSp,'second-unit'),enemy=individual(enemySp,'enemy-unit');a.pp=a.willpower=0;
- const context=ui([a,b],enemy,[firstSp,secondSp,enemySp],{selectedMove:3,battleMode:'tactics'});context.battle.multi={allies:[a.id,b.id],orders:{[a.id]:{move:E.STRUGGLE}}};
+ const context=ui([a,b],enemy,[firstSp,secondSp,enemySp],{selectedMove:3,battleMode:'tactics'});context.battle.multi={allies:[a.id,b.id],enemies:[enemy],orders:{[a.id]:{move:E.STRUGGLE}}};
  assert.equal(vm.runInContext('activeBattleAlly().id',context),b.id);
  const html=vm.runInContext('battleHTML()',context);assert.match(html,/USE Technique 4/);assert.match(html,/1 STA/);
 });

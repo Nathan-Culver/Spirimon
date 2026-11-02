@@ -146,3 +146,23 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 .classic-dialogue.move-preview:after{display:none}
 .classic-dialogue.move-preview .debt-indicator{position:static;margin-top:8px}
 @media(orientation:landscape) and (max-height:450px){.classic-dialogue.move-preview #battle-speech{font-size:12px;line-height:1.25}.move-preview-name{font-size:15px;margin-bottom:4px}.move-preview-context{font-size:11px;margin-top:8px}}
+
+/* Team combat and equipment keep the existing handheld battle layout. */
+.battle-target{display:flex;align-items:center;gap:8px;font-size:clamp(10px,1.1vw,16px)}
+.battle-target select{min-width:0;flex:1;padding:4px 8px;font:inherit}
+.battle-target-note{font-size:clamp(9px,1vw,14px);margin:0}
+.double-orders{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:clamp(8px,.85vw,12px);margin:-5px 0 5px}
+.double-orders span{padding:2px 5px;border:1px solid #95a77f;border-radius:3px}.double-orders .ready{background:#d8e8b7}.double-orders .btn{padding:1px 6px;font:inherit}
+.double-battle .classic-control{display:flex;flex-direction:column}.double-battle .classic-actions,.double-battle .classic-moves,.double-battle .compact-tactics{flex:1;min-height:0}
+.combat-tags{display:flex;flex-wrap:wrap;gap:4px;font-size:clamp(7px,.65vw,10px);line-height:1.2}.combat-tags span{background:#e3e8ce;padding:1px 4px;border-radius:3px}
+.double-battle .classic-hud{width:23%;max-width:none;min-width:0;padding:6px 8px;transform:none;font-size:clamp(9px,1vw,14px)}
+.double-battle .classic-hud .hud-name{font-size:clamp(10px,1.2vw,18px)}
+.double-battle .classic-hud.enemy{top:3%;bottom:auto;left:2%;right:auto}.double-battle .classic-hud.enemy.slot-1{left:27%}
+.double-battle .classic-hud.ally{top:auto;bottom:3%;left:auto;right:27%}.double-battle .classic-hud.ally.slot-1{right:2%}
+.double-battle .classic-hud.choosing{outline:2px solid #dfad47;outline-offset:2px}
+.double-battle .classic-hud .health-label,.double-battle .classic-hud .xp-label{font-size:clamp(7px,.8vw,12px)}
+.equipment-catalog,.aspect-catalog{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:16px}
+.equipment-catalog article,.aspect-catalog article{padding:14px;border:2px solid #85926e;border-radius:5px;background:#f6f2dc;color:#283d32}
+.equipment-catalog article p,.aspect-catalog article p{margin:8px 0;line-height:1.5}.equipment-catalog small,.aspect-catalog small{display:block;margin-bottom:8px}.aspect-catalog .selected{outline:3px solid #ccab63}
+@media(orientation:landscape) and (max-height:450px){.double-orders{font-size:8px;gap:4px;margin:-6px 0 3px}.double-battle .classic-hud{padding:4px 6px}.double-battle .combat-tags{font-size:7px}.double-battle .compact-tactics{gap:2px}.double-battle .battle-target select{padding:1px 4px}}
+@media(orientation:portrait){.double-battle .classic-hud{width:42%}.double-battle .classic-hud.enemy.slot-1{left:auto;right:2%}.double-battle .classic-hud.ally{left:2%;right:auto}.double-battle .classic-hud.ally.slot-1{left:auto;right:2%}}

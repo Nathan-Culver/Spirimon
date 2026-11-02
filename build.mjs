@@ -22,7 +22,7 @@ export async function buildPage(directory=root){
   visiting.delete(id);sources.set(id,source);ordered.push(id);
  }
  await visit('app.mjs');
- const sections=['(function(){"use strict";if(window.__spirimonStarted)return;window.__spirimonStarted=true;const __modules=Object.create(null);const __moduleURL=id=>new URL(id,document.baseURI).href;'];
+ const sections=['(function(){"use strict";if(window.__spirimonStarted)return;window.__spirimonStarted=true;const __modules=Object.create(null);const __moduleURL=id=>new URL(id,/^(?:file:|content:)/.test(document.baseURI)?"https://nathan-culver.github.io/Spirimon/":document.baseURI).href;'];
  for(const id of ordered){
   const namespace=id==='app.mjs'?{}:await import(pathToFileURL(path.join(directory,id)).href),names=Object.keys(namespace);
   let source=sources.get(id).replace(importPattern,(_,clause,specifier)=>{
@@ -38,7 +38,7 @@ export async function buildPage(directory=root){
  new vm.Script(script,{filename:'spirimon-inline.js'});
  const font=await readFile(path.join(directory,'assets/spirimon-pixel.ttf'));
  const css=(await readFile(path.join(directory,'style.css'),'utf8')).replace(/\r\n/g,'\n').replace('./assets/spirimon-pixel.ttf','data:font/ttf;base64,'+font.toString('base64'));
- const template=(await readFile(path.join(directory,'index.template.html'),'utf8')).replace(/\r\n/g,'\n');
+ const template=(await readFile(path.join(directory,'index.template.html'),'utf8')).replace(/\r\n/g,'\n').trimEnd()+'\n';
  const moduleMeta='<meta name="spirimon-modules" content="'+ordered.join(',')+'">';
  const standaloneHtml=template.replace(/<link rel="stylesheet"[^>]*>/,()=>'<style>'+css+'</style>')
   .replace('<!-- SPIRIMON_GAME -->',()=>moduleMeta+'\n<script id="spirimon-game">\n'+script.replace(/<\/script/gi,'<\\/script')+'\n</script>');
