@@ -2,6 +2,13 @@ name: Build downloadable desktop and Android games
 on:
   workflow_dispatch:
   push:
+    branches: [main]
+    paths:
+      - '.github/workflows/standalone.yml'
+      - 'desktop/**'
+      - 'capacitor.config.json'
+      - 'build.mjs'
+      - 'index.template.html'
     tags: ['v*']
 permissions:
   contents: write
