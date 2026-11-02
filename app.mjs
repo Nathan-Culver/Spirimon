@@ -277,7 +277,7 @@ function moveDetails(m,actor=null,target=null){
  const access=moveEligibility(m).join(', ');
  const defender=target||(battle?.enemy?spOf(battle.enemy):null);
  const multiplier=defender&&category!=='Status'&&power>0?E.effectiveness(m,defender):null;
- const effectiveTag=multiplier===null?'':('<span class="move-tag effectiveness" title="Combined creature and domain damage effectiveness">Eff '+multiplier.toFixed(2)+'×</span>');
+ const effectiveTag=multiplier===null?'':('<span class="move-tag effectiveness" title="Creature and domain effectiveness: '+E.effectiveness({type:m.type},defender).toFixed(2)+'× creature; '+E.effectiveness({domain:m.domain}, {base:'',alter:'',domains:defender.domains||[]}).toFixed(2)+'× domain (before combined cap)">Eff '+multiplier.toFixed(2)+'×</span>');
  return '<span class="move-header"><span class="move-name" title="'+esc(m.name)+'">'+esc(m.name)+'</span><span class="move-tags"><span class="move-tag affinity">'+esc(affinity)+'</span><span class="move-tag creature" title="Creature types that can learn this move">'+esc(access)+'</span><span class="move-tag category">'+esc(category)+'</span></span></span>'+
  '<span class="move-stats"><span>DMG <strong>'+(category==='Status'||power<=0?'—':power)+'</strong></span><span>ACC <strong>'+accuracy+'</strong></span><span>'+(category==='Physical'?'STA':'WIL')+' <strong>'+(actor?.pendingMove?.id===m.id?0:E.moveCost(m,target||(battle?spOf(battle.enemy):null)))+'</strong></span></span>'+
  '<span class="move-footer"><span class="move-effect">Effect: '+esc(formatted)+(access==='Any type*'?' (requires domain)':'')+'</span><span class="move-contribution">'+(category==='Physical'?'Stanima':'Willpower')+' <strong>+'+E.moveBaseValue(m)+'</strong></span></span>';
