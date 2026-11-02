@@ -22,7 +22,7 @@ export async function buildPage(directory=root){
   visiting.delete(id);sources.set(id,source);ordered.push(id);
  }
  await visit('app.mjs');
- const sections=['(function(){"use strict";if(window.__spirimonStarted)return;window.__spirimonStarted=true;const __modules=Object.create(null);const __moduleURL=id=>new URL(id,/^(?:file|content):/.test(document.baseURI)?"https://nathan-culver.github.io/Spirimon/":document.baseURI).href;'];
+ const sections=['(function(){"use strict";if(window.__spirimonStarted)return;window.__spirimonStarted=true;const __modules=Object.create(null);const __moduleURL=id=>new URL(id,document.baseURI).href;'];
  for(const id of ordered){
   const namespace=id==='app.mjs'?{}:await import(pathToFileURL(path.join(directory,id)).href),names=Object.keys(namespace);
   let source=sources.get(id).replace(importPattern,(_,clause,specifier)=>{
@@ -62,7 +62,7 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
   const outIndex=process.argv.indexOf('--out-dir'),output=outIndex<0?root:path.resolve(root,process.argv[outIndex+1]);
   await mkdir(output,{recursive:true});
   for(const [name,value]of Object.entries({'index.html':html,'Spirimon.html':built.standaloneHtml,[built.bundleName]:built.pageScript,[built.styleName]:built.css}))await writeFile(path.join(output,name),value);
-  if(output!==root)await cp(path.join(root,'assets'),path.join(output,'assets'),{recursive:true});
+  if(output!==root){await cp(path.join(root,'assets'),path.join(output,'assets'),{recursive:true});for(const name of ['manifest.webmanifest','service-worker.js'])await cp(path.join(root,name),path.join(output,name));}
  }
  console.log('Spirimon Pages: '+Math.round(Buffer.byteLength(html)/1024)+' KB entry, '+Math.round(Buffer.byteLength(built.pageScript)/1024)+' KB game; '+modules.length+' modules.');
 }
