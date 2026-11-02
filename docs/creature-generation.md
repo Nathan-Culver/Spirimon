@@ -12,6 +12,10 @@ The public taxonomy contains twelve ordered types. Humanoid is retained only as 
 6. Build the initial four moves and broader learnset from types, assigned Domains and anatomy. Physical claw, fang, horn and wing moves require matching recorded anatomy; spiritual manifestations need not have physical appendages. Anatomical techniques add grasping, natural weapons, wings, armor, roots and psychic organs. New advanced Domain techniques require their assigned Domain; existing learned techniques remain available after migration.
 7. Complete and validate three form images before registering a newly generated lineage. Built-in generation works without AI. All providers use the same admission rules; text-only providers use original procedural artwork rather than borrowing another creature's atlas.
 
+## Combat Domains
+
+Active combat Domains are the union of the species' assigned Domains and the Domains on that individual's equipped Moves. Assigned Domains always remain active, even with no Domain-bearing Moves equipped. Replacing the last Move of an additional Domain removes only that temporary affinity. A known but unequipped Move adds no Domain, and duplicate Domains or their legacy aliases count once. The same combined set determines combat weaknesses, resistances and Domain-based weather protection. Move-granted combat affinities do not permanently alter species records or grant Domain-restricted equipment or field capabilities.
+
 ## Artwork checks and limits
 
 The renderer constructs body plans, limbs, features and shared markings directly from the anatomical record. The resulting `procedural-verified` status attests to that construction and pixel checks; it is not a claim that an independent vision model recognized a particular animal species. Offline art is a simplified illustration rather than the premium authored atlas style.
