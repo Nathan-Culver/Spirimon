@@ -573,8 +573,8 @@ function speedHint(){if(!battle)return'';const i=activeBattleAlly(),p=battleMove
 
 function ensurePlayerOnPath(){if(E.walkable(E.tile(s.seed,s.player.x,s.player.y),abilityReady('swim'),abilityReady('climb'))&&!buildingSpriteBlocked(s.player.x,s.player.y))return;for(let radius=1;radius<18;radius++)for(let dy=-radius;dy<=radius;dy++)for(let dx=-radius;dx<=radius;dx++)if(E.walkable(E.tile(s.seed,s.player.x+dx,s.player.y+dy))&&!buildingSpriteBlocked(s.player.x+dx,s.player.y+dy)){s.player.x+=dx;s.player.y+=dy;walkAnim=null;return;}}
 
-function enterBuilding(building){if(modal||battle)return;s.interior=W.makeInterior(building);walkAnim=null;keys.clear();save();render();toast(building.name);}
-function moveInside(dx,dy){if(modal||battle||view!=='explore')return;const room=s.interior,x=room.x+dx,y=room.y+dy;room.face=dx<0?'left':dx>0?'right':dy<0?'up':'down';const npc=W.roomNPCs(room).find(n=>n.x===x&&n.y===y);if(npc)return talk(npc);if(!W.roomWalkable(room.kind,x,y))return;if(y===10&&x===7){s.player.x=room.outside.x;s.player.y=room.outside.y;s.player.face='down';delete s.interior;keys.clear();save();render();return;}room.x=x;room.y=y;s.steps++;lastStep=performance.now();save();$('#map-hint').textContent=hint();}
+function enterBuilding(building){if(modal||battle)return;s.interior=W.makeInterior(building);s.interior.trail=[];walkAnim=null;keys.clear();save();render();toast(building.name);}
+function moveInside(dx,dy){if(modal||battle||view!=='explore')return;const room=s.interior,x=room.x+dx,y=room.y+dy;room.face=dx<0?'left':dx>0?'right':dy<0?'up':'down';const npc=W.roomNPCs(room).find(n=>n.x===x&&n.y===y);if(npc)return talk(npc);if(!W.roomWalkable(room.kind,x,y))return;if(y===10&&x===7){s.player.x=room.outside.x;s.player.y=room.outside.y;s.player.face='down';delete s.interior;keys.clear();save();render();return;}room.trail??=[];room.trail.push({x:room.x,y:room.y,face:room.face});if(room.trail.length>24)room.trail.shift();room.walkStart=performance.now();room.walkDuration=running||keys.has('shift')?100:170;room.x=x;room.y=y;s.steps++;lastStep=performance.now();save();$('#map-hint').textContent=hint();}
 function drawInterior(canvas,time){
  const rect=canvas.getBoundingClientRect(),width=Math.max(320,Math.round(rect.width/2)),height=Math.max(200,Math.round(rect.height/2));
  if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;}
@@ -725,7 +725,18 @@ function drawInterior(canvas,time){
  // A gentle vignette anchors the scene without hiding characters or interactable tiles.
  const shade=c.createRadialGradient(width/2,height/2,Math.min(width,height)*.19,width/2,height/2,Math.max(width,height)*.78);shade.addColorStop(0,'rgba(8,6,8,0)');shade.addColorStop(1,'rgba(8,6,8,.35)');c.fillStyle=shade;c.fillRect(0,0,width,height);
  for(const n of W.roomNPCs(room))drawPerson(c,ox+n.x*unit,oy+n.y*unit,n.role,time);
- drawPerson(c,ox+room.x*unit,oy+room.y*unit,'player',0,room.face,false,adventureState().appearance);
+ const walking=Number.isFinite(room.walkStart)&&time-room.walkStart<room.walkDuration;
+ const progress=walking?Math.max(0,Math.min(1,(time-room.walkStart)/room.walkDuration)):1;
+ const prev=room.trail?.at(-1),px=prev&&walking?prev.x+(room.x-prev.x)*progress:room.x,py=prev&&walking?prev.y+(room.y-prev.y)*progress:room.y;
+ const follower=party()[0];
+ if(follower&&room.trail?.length){
+  const step=Math.max(0,room.trail.length-3),from=room.trail[step],next=room.trail[step+1]||from;
+  const fx=from.x+(next.x-from.x)*(walking?progress:1),fy=from.y+(next.y-from.y)*(walking?progress:1);
+  const dx=next.x-from.x,dy=next.y-from.y,travelFace=dx<0?'left':dx>0?'right':dy<0?'up':dy>0?'down':room.face;
+  const face=travelFace==='up'||travelFace==='down'?(Math.floor(time/500)%2?'right':'left'):travelFace;
+  drawCompanion(c,spOf(follower),follower.appearance,ox+fx*unit-2,oy+fy*unit-9,36,face,walking,progress);
+ }
+ drawPerson(c,ox+px*unit,oy+py*unit,'player',time,room.face,walking,adventureState().appearance);
  const location=$('#map-location'),biome=$('#map-biome');if(location)location.textContent=room.name;if(biome)biome.textContent='MOSSVEIL · INTERIOR';
 }
 
