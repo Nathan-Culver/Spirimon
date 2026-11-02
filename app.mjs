@@ -377,7 +377,11 @@ function drawWorld(time){
    const fx=from.x+(to.x-from.x)*(moving?elapsed:1),fy=from.y+(to.y-from.y)*(moving?elapsed:1);
    const dx=to.x-from.x,dy=to.y-from.y,travelFace=dx<0?'left':dx>0?'right':dy<0?'up':dy>0?'down':(from.face||s.player.face||'down');
    // Vertical travel alternates the companion's side-facing walk frames every 500 ms.
-   const face=(travelFace==='up'||travelFace==='down')?(Math.floor(performance.now()/500)%2===0?'left':'right'):travelFace;
+   const verticalTravel=travelFace==='up'||travelFace==='down';
+   // Use the current direction while the follower is traversing a vertical tile,
+   // and preserve the last vertical direction between steps.
+   const followerVertical=verticalTravel||(dx===0&&dy===0&&(from.face==='up'||from.face==='down'));
+   const face=followerVertical?(Math.floor(performance.now()/500)%2===0?'left':'right'):travelFace;
    const bob=moving?Math.abs(Math.sin(elapsed*Math.PI*2))*2:0;
    const spriteSize=36;
    // Select the row for the direction the player is walking, and animate
