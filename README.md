@@ -35,7 +35,7 @@ Walk north into a doorway or interact directly below it. Sealer Halls, inns and 
 - Shared local species library, with per-world discovery history.
 - Six attuned tattoo Spirimon; reserves remain sealed. Change attunement in towns.
 - Combined attack/defense power, unnumbered commitment slider, physical/spiritual resistance, physical/spiritual move traits, intuitive core matchups, statuses, passive abilities, speed modifiers and independent Agile/Normal/Strong styles.
-- One baseline action each round, plus action borrowing and repayment (below).
+- Real-time single/double battles with per-Move cooldowns, casts, shared recovery, independent enemy AI, Pause and optional ally automation.
 - Shared Stanima for Physical moves and Willpower for Energy/Spiritual/Status moves, soul draught recovery, and Struggle with recoil when no move can be funded.
 - Battle sealing influenced by health, status, catalyst quality and form; cooperative sealing through patience/offerings and an accessible timing challenge.
 - Levels, individual potential, natures, training investment, bonds, permanent level/bond transformations, and cosmetic switching among unlocked forms.
@@ -43,13 +43,14 @@ Walk north into a doorway or interact directly below it. Sealer Halls, inns and 
 - Recovery cost after defeat; supplies remain recoverable at the defeat location.
 - Autosave, battle resume, export/import and previous-world recovery.
 
-## Borrowed actions, Stanima and Willpower
-Select Normal action, Borrow +1, or Borrow +2.
-Borrowed actions repeat the selected move. Each voluntarily funded extra action gives the opposing side one bonus action next round. Bonus actions do not create debt. Debt belongs to the battle side, so switching Spirimon cannot erase it. Unfunded extra actions are skipped and do not create debt.
+## Real-time combat, Stanima and Willpower
+Tap a ready Move to begin its cast. Both sides act on one elapsed-time clock; enemies never wait for player input. Each Spirimon has per-Move cooldowns and shared recovery, so cycling four powerful Moves or switching cannot bypass recovery. In doubles, select either ally or turn on Auto for that ally. Bag actions and switching use the same timeline. Borrowed actions and round debt are removed from live combat.
 
-Each equipped Physical move contributes its base value to maximum Stanima; each Energy/Spiritual/Status move contributes to maximum Willpower. Base values range from 1–40, normally in multiples of five. Weak attacks contribute 35–40, moderate attacks 20–25, and strong attacks 5–10; powerful support moves have fewer uses. Multi-hit moves are valued using their combined expected power. Resource maximums depend on equipped moves, not level, form, or training specialty. Every move use, including borrowed/bonus and Omega actions, consumes 1 point from its matching pool, or 2 against a target with Pressure. Charging a two-turn move pays once when preparation begins. The UI previews base values and usage costs. Native resources are spent first; shortages can use the other pool at the existing 2-for-1 rate. When no equipped move can be funded, the only move offered is Struggle: a Physical attack that consumes no resource and recoils for one quarter of the user's maximum HP. Unfunded extra actions create no debt. Soul draughts restore both pools, and resting refills both. Existing saves migrate their remaining resource percentages and retain their collection and progress. Items, switching and support consume the normal action, forfeit your unused bonus attacks, and allow all owed enemy actions. Styles alter damage and priority, not allocation or the number of actions.
+Pause stops combat explicitly. Hidden/background tabs and required replacement selection also stop it; elapsed time away is not replayed on return. Menus and the battle log otherwise leave combat running.
 
-A Spirimon's previous allocation persists until it acts. Later scheduled actions have a priority offset so fast borrowed attacks can interleave with opposing actions. Fainted Spirimon cannot act.
+Moves scale at levels 1, 16, 36, 60, 85 and 100. Quick, resource-efficient attacks, slow burst attacks, control, recovery and conditional combinations have separate roles. Cooldowns account for expected hits, accuracy, secondary effects and spread targeting. See [real-time rules](docs/real-time-combat.md) and the [complete Move audit](docs/move-balance-audit.csv).
+
+Each equipped Physical Move contributes to maximum Stanima; Energy/Status Moves contribute to Willpower. A funded execution costs one point, or two against Pressure; shortages can convert the other pool at two-for-one. Items do not replace the four equipped Moves. Struggle remains available only when no equipped Move can be funded. Resource maximums, collections, learned Moves and current encounter progress survive migration. New timed afflictions include sleep, freezing, confusion, burns, poison, toxic poison, paralysis and frostbite; HUD badges display their remaining seconds.
 
 ## Optional free local AI
 The game is immediately playable with **procedural prototype designs and pixel art**. This fallback is explicitly labeled; it is not represented as LLM generation.

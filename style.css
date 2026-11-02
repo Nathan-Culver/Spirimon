@@ -172,3 +172,20 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 .held-catalog{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.held-card{padding:14px;border:2px solid #87946e;border-left-width:6px;border-radius:5px;background:#f7f2d9;overflow-wrap:anywhere}.held-card-title{display:flex;gap:10px;align-items:center}.held-card-title b{font-size:14px;line-height:1.4}.held-card small{display:block;color:#58694b;font-size:10px;line-height:1.5;margin-top:5px}.held-icon{font-family:system-ui,sans-serif;font-size:28px;flex:none;color:#526b49}.held-card p{font-size:11px;line-height:1.6;margin:10px 0}.held-card .held-lore{font-style:italic;color:#756d51}.held-card .btn{font-size:10px;padding:7px 10px}.held-card.rarity-uncommon{border-color:#6e9259}.held-card.rarity-rare{border-color:#6489a0}.held-card.rarity-epic{border-color:#a084b5}.held-card.rarity-relic{border-color:#bd9451;background:#fbf0ca}.held-stock{font-weight:bold}
 .classic-battle.battle-mode-bag .classic-actions{grid-auto-rows:minmax(30px,1fr);gap:6px}.classic-battle.battle-mode-bag .classic-actions button{font-size:clamp(9px,1.1vw,16px);padding:5px;overflow-wrap:anywhere}
 @media(max-width:600px){.held-catalog{grid-template-columns:1fr}.held-toolbar{gap:8px}.held-card{padding:11px}.held-card-title b{font-size:13px}}
+
+/* Real-time battles: persistent controls and readable cooldowns on Android. */
+.rt-moves{min-height:0}.rt-move{position:relative;overflow:hidden;min-height:64px;gap:3px}
+.rt-move:disabled{opacity:.82;filter:saturate(.7);cursor:wait}
+.rt-move-info,.rt-cooldown{font:clamp(9px,1vw,14px) SpirimonPixel,monospace;line-height:1.2}
+.rt-cooldown{color:#3f6c43;font-weight:bold}.rt-cooldown-track{display:block;height:5px;width:100%;background:#cad1af;overflow:hidden}
+.rt-cooldown-track i{display:block;height:100%;background:#bd703e;transition:width .1s linear}
+.rt-profile{font:clamp(9px,1vw,13px) SpirimonPixel,monospace;margin:5px 0;color:#536a4a}
+.rt-utility{display:flex;gap:4px;flex-wrap:wrap;margin-top:7px}.rt-utility button,.rt-allies button{padding:5px 7px;border:1px solid #6e855b;background:#eef0cd;color:#304d35;font:clamp(9px,.95vw,13px) SpirimonPixel,monospace}
+.rt-allies{display:flex;gap:5px;margin-bottom:5px}.rt-allies .selected{border-color:#b55836;background:#e9d395}.rt-status{display:inline-block;margin:1px 3px 1px 0;padding:2px 4px;border-radius:3px;background:#b84938;color:#fff6d5;font-weight:bold}
+.status-sleep,.status-freeze,.status-flinch{background:#446f9b}.status-poison,.status-toxic,.status-confusion{background:#8c579f}
+.rt-style{display:flex;gap:8px;align-items:center;margin-top:5px;font-size:10px}.rt-style label{display:flex;align-items:center;gap:4px;min-width:0}.rt-style select{padding:2px;font-size:11px}.rt-style input{max-width:95px;padding:0;accent-color:#b55d3a}
+.realtime-battle .classic-dialogue{overflow:auto}.realtime-battle .classic-control{display:flex;flex-direction:column;gap:4px}.realtime-battle .classic-moves{flex:1;min-height:0}.rt-targets:empty{display:none}
+.rt-paused{position:absolute;inset:0;display:grid;place-items:center;background:#15261977;color:#fff6d3;font:32px SpirimonPixel;pointer-events:none}
+[data-rt-state]{display:block;color:#704924;min-height:13px;font-size:10px}
+@media(orientation:landscape) and (max-height:450px){.realtime-battle .classic-bottom{height:45dvh;min-height:160px}.rt-move{min-height:46px;padding:4px}.rt-utility button{padding:3px 5px;font-size:9px}.rt-style{margin-top:3px}.rt-profile{font-size:9px;margin:3px 0}.rt-cooldown,.rt-move-info{font-size:9px}.rt-allies{margin:0}.rt-allies button{padding:2px 4px;font-size:9px}.realtime-battle .classic-dialogue p{font-size:12px}.rt-status{font-size:8px}}
+.rt-targets{display:flex;gap:6px;font-size:10px}.rt-targets label{display:flex;align-items:center;gap:3px;min-width:0;flex:1}.rt-targets select{min-width:0;max-width:100%;padding:2px;font:inherit}
