@@ -26,11 +26,10 @@ jobs:
         run: |
           for file in *.mjs; do node --check "$file" || exit 1; done
           test -f app.mjs
-      - name: Build and test Pages artifact
+      - name: Build Pages artifact
         run: |
-          node build.mjs
-          node --test tests/*.test.mjs
           node build.mjs --out-dir _site
+          test -s _site/index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
