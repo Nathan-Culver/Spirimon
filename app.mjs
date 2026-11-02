@@ -477,28 +477,6 @@ function drawWorld(time){
  const reg=E.region(s.seed,Math.floor(x/48),Math.floor(y/36)),terrain=E.tile(s.seed,x,y),local=E.coord(x,y);drawTile(c,terrain,px(x),py(y),E.hash(s.seed,x,y),reg.biome.kind,{neighbors:[[0,-1],[1,0],[0,1],[-1,0]].map(([dx,dy])=>E.tile(s.seed,x+dx,y+dy)),town:reg.town&&Math.abs(local.lx-24)<10&&Math.abs(local.ly-18)<8});if(terrain==='grass'){const distance=Math.hypot(x-vx,y-vy),disturbance=walkAnim&&elapsed<1?Math.max(0,1.8-distance):0;drawTallGrass(c,px(x),py(y),E.hash(s.seed,x,y),time,disturbance);}}
 
  for(let cy=Math.floor(oy/36)-1;cy<=Math.floor((oy+rows)/36)+1;cy++)for(let cx=Math.floor(ox/48)-1;cx<=Math.floor((ox+cols)/48)+1;cx++){const e=E.caveEntrance(s.seed,cx,cy);if(!e)continue;const x=px(e.x),y=py(e.y);if(x<-40||y<-40||x>width||y>height)continue;c.fillStyle='#181b27';c.beginPath();c.ellipse(x+16,y+20,15,12,0,Math.PI,0);c.fill();c.fillStyle='#7c8188';c.fillRect(x+2,y+24,28,5);c.fillStyle='#d2bb83';c.font='bold 11px monospace';c.fillText('▼',x+11,y+14);}
- if(s.party.length&&s.spirits.length){const companion=party()[0];if(companion){
-  // Follow the actual path taken, approximately two tiles behind the player.
-  const delay=2,step=companionTrail.length-delay-1;
-  if(step>=0&&companionTrail[step]&&Number.isFinite(companionTrail[step].x)&&Number.isFinite(companionTrail[step].y)){
-   const from=companionTrail[step],next=companionTrail[step+1],to=next&&Number.isFinite(next.x)&&Number.isFinite(next.y)?next:from;
-   const moving=!!walkAnim&&elapsed<1;
-   const fx=from.x+(to.x-from.x)*(moving?elapsed:1),fy=from.y+(to.y-from.y)*(moving?elapsed:1);
-   const dx=to.x-from.x,dy=to.y-from.y,travelFace=dx<0?'left':dx>0?'right':dy<0?'up':dy>0?'down':(from.face||s.player.face||'down');
-   // Vertical travel alternates the companion's side-facing walk frames every 500 ms.
-   const verticalTravel=travelFace==='up'||travelFace==='down';
-   // Use the current direction while the follower is traversing a vertical tile,
-   // and preserve the last vertical direction between steps.
-   const followerVertical=verticalTravel||(dx===0&&dy===0&&(from.face==='up'||from.face==='down'));
-   const face=followerVertical?(Math.floor(performance.now()/500)%2===0?'left':'right'):travelFace;
-   const bob=moving?Math.abs(Math.sin(elapsed*Math.PI*2))*2:0;
-   const spriteSize=36;
-   // Select the row for the direction the player is walking, and animate
-   // the follower's feet on the same movement timeline.
-   drawAspectAura(c,companion,px(fx)-2,py(fy)-13-bob,spriteSize);
-   drawCompanion(c,spOf(companion),companion.appearance,px(fx)-2,py(fy)-13-bob,spriteSize,face,moving,elapsed);
-  }
- }}
  const pc=E.coord(s.player.x,s.player.y),people=[];
  for(let cy=pc.cy-1;cy<=pc.cy+1;cy++)for(let cx=pc.cx-1;cx<=pc.cx+1;cx++){
   const reg=E.region(s.seed,cx,cy);
@@ -509,16 +487,17 @@ function drawWorld(time){
   }
 
  }
- for(const n of people){const w=n.walk,progress=w?Math.min(1,(time-w.start)/w.duration):1,x=px(w&&progress<1?w.x+(n.x-w.x)*progress:n.x),y=py(w&&progress<1?w.y+(n.y-w.y)*progress:n.y);drawPerson(c,x,y-5,n.role,time,n.face||'down',progress<1);if(Math.abs(n.x-s.player.x)+Math.abs(n.y-s.player.y)<=2){c.fillStyle='#fff5bd';c.strokeStyle='#4f4430';c.font='bold 10px monospace';c.textAlign='center';c.strokeText('!',x+16,y-8);c.fillText('!',x+16,y-8);}}
  if(challengerApproach){const a=challengerApproach;drawPerson(c,px(a.x),py(a.y)-5,a.kind==='rival'?'rival':'villain',time,a.face,true);c.fillStyle='#fff5bd';c.font='bold 11px monospace';c.textAlign='center';c.fillText('!',px(a.x)+15,py(a.y)-15);}for(const d of s.drops){const x=px(d.x),y=py(d.y);c.fillStyle='#d2b17b';c.fillRect(x+9,y+9,14,15);c.fillStyle='#725b3b';c.fillRect(x+14,y+6,4,6);}
- for(let ty=Math.floor(oy)-1;ty<=Math.min(Math.floor(vy),Math.ceil(oy+rows)+2);ty++)for(let tx=Math.floor(ox)-2;tx<=Math.ceil(ox+cols)+2;tx++)if(E.tile(s.seed,tx,ty)==='tree')drawTree(c,px(tx),py(ty),E.hash(s.seed,tx,ty),E.region(s.seed,Math.floor(tx/48),Math.floor(ty/36)).biome.kind);const moving=!!walkAnim&&elapsed<1;drawPerson(c,px(vx),py(vy)-5,'player',moving?elapsed*1000:0,s.player.face,moving,adventureState().appearance);for(let cy=pc.cy-1;cy<=pc.cy+1;cy++)for(let cx=pc.cx-1;cx<=pc.cx+1;cx++)for(const b of W.buildings(cx,cy)){if(vy>=b.footY&&vy<b.footY+1&&vx>=b.footX&&vx<b.footX+b.w)drawTownBuilding(c,b,px(b.footX),py(b.footY));}if(E.tile(s.seed,Math.round(vx),Math.round(vy))==='grass')drawTallGrass(c,px(Math.round(vx)),py(Math.round(vy))+7,E.hash(s.seed,Math.round(vx),Math.round(vy),'front'),time,moving?1.5:0,true);
- for(let cy=pc.cy-1;cy<=pc.cy+1;cy++)for(let cx=pc.cx-1;cx<=pc.cx+1;cx++)if(E.region(s.seed,cx,cy).town){for(const b of W.buildings(cx,cy))if(vy>=b.footY-1&&vy<=b.footY+b.h&&vx>=b.footX-2&&vx<=b.footX+b.w+1)drawTownBuilding(c,b,px(b.footX),py(b.footY));// Only draw props over the player when the player's feet are behind the prop's base.
- for(const feature of W.townFeatures()){const fx=cx*48+feature.x,fy=cy*36+feature.y+feature.h-1;if(vy<fy&&Math.abs(vx-(fx+(feature.w-1)/2))<Math.max(2,feature.w+1))drawTownFeatures(c,cx,cy,px,py,feature);}
- if(vy<cy*36+18&&Math.abs(vx-(cx*48+27))<3)drawWell(c,px(cx*48+27),py(cy*36+18));
- if(vy<cy*36+14&&Math.abs(vx-(cx*48+33))<3)drawTownDecor(c,px(cx*48+33),py(cy*36+14));}
+ for(let ty=Math.floor(oy)-1;ty<=Math.min(Math.floor(vy),Math.ceil(oy+rows)+2);ty++)for(let tx=Math.floor(ox)-2;tx<=Math.ceil(ox+cols)+2;tx++)if(E.tile(s.seed,tx,ty)==='tree')drawTree(c,px(tx),py(ty),E.hash(s.seed,tx,ty),E.region(s.seed,Math.floor(tx/48),Math.floor(ty/36)).biome.kind);const moving=!!walkAnim&&elapsed<1;
  for(let ty=Math.floor(oy)-1;ty<=Math.ceil(oy+rows)+2;ty++)for(let tx=Math.floor(ox)-2;tx<=Math.ceil(ox+cols)+2;tx++)if(ty>vy&&E.tile(s.seed,tx,ty)==='tree')drawTree(c,px(tx),py(ty),E.hash(s.seed,tx,ty),E.region(s.seed,Math.floor(tx/48),Math.floor(ty/36)).biome.kind);
- // Render wild Spirimon in the foreground, after tree canopies, so they cannot be hidden by terrain.
- for(let cy=pc.cy-1;cy<=pc.cy+1;cy++)for(let cx=pc.cx-1;cx<=pc.cx+1;cx++)for(const r of s.roamers[cx+','+cy]||[]){if(!r.active)continue;const a=r.wanderFrom,t=a?Math.min(1,(time-a.start)/a.duration):1,rx=a&&t<1?a.x+(r.x-a.x)*t:r.x,ry=a&&t<1?a.y+(r.y-a.y)*t:r.y,x=px(rx),y=py(ry);if(x<-70||x>width+50||y<-70||y>height+50)continue;try{const sp=spOf(r.ind);c.save();drawSpirit(c,sp,r.ind.appearance,x-13,y-29+(t<1?-Math.abs(Math.sin(t*Math.PI))*4:0),58,r.face==='left',{face:r.face||'down',moving:t<1,progress:t});c.restore();}catch(e){c.restore();console.warn('Wild Spirimon drawing failed',r.id,e);}}
+ // Depth-sort actors by their ground contact rather than drawing wild Spirimon last.
+ const actors=[];
+ for(const n of people){const w=n.walk,progress=w?Math.min(1,(time-w.start)/w.duration):1,nx=w&&progress<1?w.x+(n.x-w.x)*progress:n.x,ny=w&&progress<1?w.y+(n.y-w.y)*progress:n.y;actors.push({y:ny,draw:()=>{const x=px(nx),y=py(ny);drawPerson(c,x,y-5,n.role,time,n.face||'down',progress<1);if(Math.abs(n.x-s.player.x)+Math.abs(n.y-s.player.y)<=2){c.fillStyle='#fff5bd';c.strokeStyle='#4f4430';c.font='bold 10px monospace';c.textAlign='center';c.strokeText('!',x+16,y-8);c.fillText('!',x+16,y-8);}}});}
+ if(s.party.length&&s.spirits.length){const companion=party()[0],step=companionTrail.length-3;if(companion&&step>=0){const from=companionTrail[step],to=companionTrail[step+1]||from;if(from&&to){const fx=from.x+(to.x-from.x)*(moving?elapsed:1),fy=from.y+(to.y-from.y)*(moving?elapsed:1),face=to.x<from.x?'left':to.x>from.x?'right':to.y<from.y?'up':'down';actors.push({y:fy,draw:()=>{drawAspectAura(c,companion,px(fx)-2,py(fy)-13,36);drawCompanion(c,spOf(companion),companion.appearance,px(fx)-2,py(fy)-13,36,face,moving,elapsed);}});}}}
+ for(let cy=pc.cy-1;cy<=pc.cy+1;cy++)for(let cx=pc.cx-1;cx<=pc.cx+1;cx++)for(const r of s.roamers[cx+','+cy]||[]){if(!r.active)continue;const a=r.wanderFrom,t=a?Math.min(1,(time-a.start)/a.duration):1,rx=a&&t<1?a.x+(r.x-a.x)*t:r.x,ry=a&&t<1?a.y+(r.y-a.y)*t:r.y,x=px(rx),y=py(ry);if(x<-70||x>width+50||y<-70||y>height+50)continue;actors.push({y:ry,draw:()=>{c.save();try{const sp=spOf(r.ind);drawSpirit(c,sp,r.ind.appearance,x-13,y-29+(t<1?-Math.abs(Math.sin(t*Math.PI))*4:0),58,r.face==='left',{face:r.face||'down',moving:t<1,progress:t});}catch(e){console.warn('Wild Spirimon drawing failed',r.id,e);}finally{c.restore();}}});}
+ actors.push({y:vy,draw:()=>drawPerson(c,px(vx),py(vy)-5,'player',moving?elapsed*1000:0,s.player.face,moving,adventureState().appearance)});
+ actors.sort((a,b)=>a.y-b.y);for(const actor of actors)actor.draw();
+ if(E.tile(s.seed,Math.round(vx),Math.round(vy))==='grass')drawTallGrass(c,px(Math.round(vx)),py(Math.round(vy))+7,E.hash(s.seed,Math.round(vx),Math.round(vy),'front'),time,moving?1.5:0,true);
  drawAtmosphere(c,width,height,time);
  for(let i=0;i<7;i++){c.globalAlpha=.22;c.fillStyle=i%2?'#ffdfd5':'#f9efb8';c.fillRect((i*137+time*.006)%width,(i*83+Math.sin(time/1400+i)*10)%height,2,1);}c.globalAlpha=1;
  const coords=$('#map-coords');if(coords)coords.textContent=s.player.x+' / '+s.player.y;const hintNode=$('#map-hint');if(hintNode){const nextHint=hint();if(hintNode.textContent!==nextHint)hintNode.textContent=nextHint;}
