@@ -22,14 +22,14 @@ Begin with no Spirimon. Your first encounter is random: earn its trust with inte
 ## Art direction and animations
 A bright handheld-era presentation with original feudal Japanese/Chinese-inspired pixel villages: swept tiled roofs, timber halls, lanterns, shrine gates, bamboo, cherry trees and robed sealers. Exploration fills every screen shape. The overworld uses textured forest canopies, tall-grass patches, terraced cliffs, shoreline banks, bright village tiles and smooth grid-aligned movement. Battles use compact HP, Stanima, Willpower and XP HUDs, a bottom dialogue window and Fight / Bag / Spirimon / Run menus. Physical lunges, elemental streams, ice shards, leaf bursts, healing and wards animate across the battle stage. Reduced-motion preferences are respected. An original offline 5×7 pixel font ships with the game.
 
-The shared starter library contains 50 original ordered-type lineages, each with three distinct forms (150 sprites). User-uploaded images are visual references only and are not shipped. Artwork has transparent backgrounds and bounded 256×256 form cells. Local AI lineages become encounterable only when all three sprites and their validated information are complete.
+The shared roster contains 150 lineages: 50 original artwork-backed lineages and 100 with procedural artwork. Each has three distinct forms. New discoveries can also create additional lineages from the expanded anatomical catalogs. Artwork has transparent backgrounds and bounded 256×256 form cells. Local AI lineages become encounterable only when all three sprites and their validated information are complete.
 
 ## Buildings
 Walk north into a doorway or interact directly below it. Sealer Halls, inns and homes have interiors, residents and a south exit. Hall keepers restore HP, Stanima and Willpower; attunement is available at safe places.
 
 ## Implemented systems
 - Seeded, expanding world with five biomes, persistent regions, towns, terrain collision, trails and fixed regional danger.
-- 13 ordered, distinct base/modifier types, complete three-form lineages, and repeated independent 1% rare-domain rolls.
+- 12 ordered, distinct base/modifier types, complete three-form lineages, one guaranteed appropriate Domain and repeated independent 1% additional-domain rolls.
 - Mutually exclusive wild-form rolls: starting 94%, intermediate 5%, final 1%.
 - Habitat-weighted species selection, 90% familiar / 10% new for already discovered ordered type pairs when rolling new encounters. Already placed Spirimon retain their identities.
 - Shared local species library, with per-world discovery history.
@@ -66,7 +66,7 @@ Default endpoints:
 - Image: http://127.0.0.1:7860
 - Companion: http://127.0.0.1:4317
 
-Text generates a schema-checked three-form design and move names. Code preserves type rolls, stats and effects. Image generation runs sequentially after the text model is unloaded. Later forms use the first sprite as an image-to-image reference. A lineage enters the AI species library only after text and all three PNGs complete. Discovered procedural Spirimon are never silently replaced.
+Text generates a schema-checked three-form design and can propose bounded, anatomy-compatible move mechanics. Code preserves type rolls and species statistics. External image generation runs sequentially and requires a local vision model for semantic checks. Later forms use the first sprite as an image-to-image reference. Without image verification, the procedural renderer supplies original anatomy-based sprites. A lineage enters the species library after three complete validated forms. Discovered species are never silently replaced. See [Creature generation](docs/creature-generation.md) and the [full reference catalog](docs/creature-catalog.md).
 
 Windows computers without a dedicated GPU may take a long time to generate images. Actual model quality, memory use, evolution consistency and generation latency still require hardware testing. Review the licenses of models you choose; freely downloadable does not automatically mean unrestricted redistribution.
 
@@ -115,4 +115,4 @@ The battle engine now supports timed move effects, entry hazards, Baton Pass, te
 
 ## Procedural Held Items
 
-Held Items now generate from 37 archetypes across six categories, with five rarities and individually seeded relics. Each Spirimon has one slot; most items are universal, and Humanoid in either type position grants additional choices without stronger bonuses. Activate item abilities through Bag instead of a normal move. Consumables stay spent. See [Held Items](docs/held-items.md) for generation, effects, merchants, rewards and save compatibility.
+Held Items now generate from 37 archetypes across six categories, with five rarities and individually seeded relics. Each Spirimon has one slot; most items are universal, and verified grasping anatomy grants additional choices without stronger bonuses. Activate item abilities through Bag instead of a normal move. Consumables stay spent. See [Held Items](docs/held-items.md) for generation, effects, merchants, rewards and save compatibility.

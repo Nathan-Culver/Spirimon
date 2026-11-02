@@ -8,10 +8,10 @@ import {buildPage} from '../build.mjs';
 test('Pages entry is small and references one content-versioned classic bundle',async()=>{
  const built=await buildPage(),published=readFileSync(new URL('../index.html',import.meta.url),'utf8');
  assert.equal(built.html,published,'Run npm run build before publishing');
- assert.ok(Buffer.byteLength(published)<12000);assert.ok(Buffer.byteLength(built.pageScript)<600000);
+ assert.ok(Buffer.byteLength(published)<12000);assert.ok(Buffer.byteLength(built.pageScript)<800000);
  assert.ok(published.includes(built.bundleName));assert.ok(published.includes(built.styleName));
  assert.equal(built.bundleName,'game-'+createHash('sha256').update(built.pageScript).digest('hex').slice(0,12)+'.js');
- assert.equal(built.modules.length,21);assert.doesNotThrow(()=>new vm.Script(built.pageScript));
+ assert.ok(built.modules.includes('creature-browser.mjs'));assert.ok(built.modules.includes('anatomy.mjs'));assert.doesNotThrow(()=>new vm.Script(built.pageScript));
  assert.doesNotMatch(built.pageScript,/(^|\n)import\s|import\.meta/);
  assert.ok(built.pageScript.includes('data:image/webp;base64,'),'Mystery sprites must be available without extra downloads');
  assert.match(built.pageScript,/if\(window\.__spirimonStarted\)return/);

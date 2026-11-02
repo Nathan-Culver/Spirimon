@@ -1,3 +1,4 @@
+import {CREATURE_TYPES} from './creature-catalog.mjs';
 // Each equipped move contributes its base uses to Stanima or Willpower.
 export function moveBaseValue(move){
  if(move.id==='struggle')return 0;
@@ -13,7 +14,7 @@ export function moveBaseValue(move){
  return effective<=20?40:effective<=40?35:effective<=60?25:effective<=80?20:effective<=100?10:5;
 }
 const withBase=move=>({...move,baseUses:moveBaseValue(move),desc:moveLore(move).description});
-const NAMES={"Aberration":["Aperture Jab","Mind Knot","Folded Veil","Paradox Crush","Disquieting Gaze","Tendril Flick","Spatial Shell","Recursive Rend"],"Beast":["Raking Claw","Hamstring Bite","Den Instinct","Antler Charge","Venom Fang","Pouncing Snap","Thick Hide","Stampeding Rush"],"Celestial":["Feather Lance","Halo Bind","Dawn Benediction","Judgment Ray","Lulling Hymn","Star Dart","Radiant Aegis","Comet Descent"],"Construct":["Rivet Shot","Gear Snare","Field Repair","Iron Piledriver","Corrosive Bolt","Spring Hammer","Porcelain Guard","Furnace Impact"],"Elemental":["Spark Lash","Quicksand Grip","Renewing Current","Tempest Break","Cinder Mark","Gale Needle","Stone Mantle","Torrent Crash"],"Fey":["Briar Pin","Silken Tether","Nectar Blessing","Glamour Burst","Pollen Dream","Pixie Feint","Petal Shroud","Moonlit Prank"],"Fiend":["Barbed Hook","Chain Drag","Cinder Feast","Infernal Cleave","Malice Murmur","Ember Talon","Obsidian Hide","Hellfire Rush"],"Giant":["Knuckle Sweep","Ground Quake","Mountain Breath","Colossal Slam","Dazing Roar","Boulder Flick","Granite Guard","Avalanche Step"],"Humanoid":["Palm Arc","Joint Lock","Centered Breath","Fourfold Palm","Hypnotic Mask","Ribbon Cut","Measured Stance","Whirling Heel"],"Monstrosity":["Horn Pierce","Coiling Grasp","Mythic Renewal","Chimeric Roar","Basilisk Haze","Wing Shear","Scaled Bastion","Legendary Onrush"],"Ooze":["Gel Whip","Viscous Grasp","Reconstitute","Pressure Flood","Caustic Drip","Droplet Shot","Jelly Barrier","Amorphous Surge"],"Plant":["Thorn Prick","Strangler Vine","Root Renewal","Pitcher Crush","Sundew Toxin","Seed Needle","Bark Mantle","Bramble Rush"],"Undead":["Bone Shard","Grave Bind","Soul Reassembly","Tomb Collapse","Restless Lull","Spectral Scratch","Shroud Guard","Revenant Charge"]};
+const NAMES={"Aberration":["Aperture Jab","Mind Knot","Folded Veil","Paradox Crush","Disquieting Gaze","Tendril Flick","Spatial Shell","Recursive Rend"],"Beast":["Raking Claw","Hamstring Bite","Den Instinct","Antler Charge","Venom Fang","Pouncing Snap","Thick Hide","Stampeding Rush"],"Celestial":["Feather Lance","Halo Bind","Dawn Benediction","Judgment Ray","Lulling Hymn","Star Dart","Radiant Aegis","Comet Descent"],"Construct":["Rivet Shot","Gear Snare","Field Repair","Iron Piledriver","Corrosive Bolt","Spring Hammer","Porcelain Guard","Furnace Impact"],"Elemental":["Spark Lash","Quicksand Grip","Renewing Current","Tempest Break","Cinder Mark","Gale Needle","Stone Mantle","Torrent Crash"],"Fey":["Briar Pin","Silken Tether","Nectar Blessing","Glamour Burst","Pollen Dream","Pixie Feint","Petal Shroud","Moonlit Prank"],"Fiend":["Barbed Hook","Chain Drag","Cinder Feast","Infernal Cleave","Malice Murmur","Ember Talon","Obsidian Hide","Hellfire Rush"],"Giant":["Knuckle Sweep","Ground Quake","Mountain Breath","Colossal Slam","Dazing Roar","Boulder Flick","Granite Guard","Avalanche Step"],"Monstrosity":["Horn Pierce","Coiling Grasp","Mythic Renewal","Chimeric Roar","Basilisk Haze","Wing Shear","Scaled Bastion","Legendary Onrush"],"Ooze":["Gel Whip","Viscous Grasp","Reconstitute","Pressure Flood","Caustic Drip","Droplet Shot","Jelly Barrier","Amorphous Surge"],"Plant":["Thorn Prick","Strangler Vine","Root Renewal","Pitcher Crush","Sundew Toxin","Seed Needle","Bark Mantle","Bramble Rush"],"Undead":["Bone Shard","Grave Bind","Soul Reassembly","Tomb Collapse","Restless Lull","Spectral Scratch","Shroud Guard","Revenant Charge"]};
 const SPECS=[[32,16,'physical',null],[25,3,'physical','slow'],[0,-12,'spiritual','heal'],[68,-20,'physical',null],[18,-5,'spiritual','poison'],[40,9,'spiritual',null],[0,13,'spiritual','ward'],[54,18,'physical','recoil']];
 export const TYPE_MOVES=Object.fromEntries(Object.entries(NAMES).map(([type,names])=>[type,names.map((name,i)=>{const[power,speed,kind,baseEffect]=SPECS[i],effect=i===4?(['Aberration','Celestial','Fey','Humanoid','Undead'].includes(type)?'sleep':type==='Giant'?'slow':baseEffect):baseEffect;return{id:type.toLowerCase()+'-'+i,name,type,power,speed,kind,effect,visual:type==='Plant'?'leaf':type==='Ooze'?'water':type==='Elemental'?'fire':'spirit',desc:effect==='heal'?'Recover a quarter of maximum health.':effect==='ward'?'Soften the next incoming hit.':effect==='slow'?'Hinder the target’s next action.':effect==='poison'?'May leave lingering poison.':effect==='recoil'?'A swift impact with recoil.':'A '+type.toLowerCase()+' technique.'};})]));
 const DOMAIN_VERBS={Life:['Vital Bloom','Renewing Pulse','Verdant Surge','Living Ward'],Death:['Grave Touch','Mortal Chill','Death Knell','Pall Veil'],Spirit:['Soul Whisper','Ghostly Binding','Spectral Burst','Ancestral Ward'],Psionic:['Thought Lance','Mind Snare','Psychic Crush','Mental Barrier'],Nature:['Briar Needle','Wild Entangle','Primal Roar','Forest Shelter'],Void:['Null Thread','Dimensional Snare','Abyssal Rift','Empty Shelter'],Storm:['Squall Dart','Thunder Snare','Tempest Crash','Storm Screen'],Magic:['Arcane Bolt','Spell Snare','Mystic Surge','Arcane Aegis'],Air:['Zephyr Needle','Still Air','Cyclone Crest','Wind Mantle'],Earth:['Stone Splinter','Mire Step','Fault Rupture','Clay Aegis'],Fire:['Ember Jet','Scorch Veil','Pyre Bloom','Cinder Cloak'],Water:['Tidal Dart','Undertow','Riptide Break','Mist Mantle'],Light:['Gleam Pin','Dazzling Haze','Prismatic Ray','Lucent Shell'],Dark:['Shadow Stitch','Deepening Dusk','Abyssal Bloom','Umbral Guard'],Sun:['Dawn Spear','Sun Daze','Solar Crest','Daybreak Veil'],Moon:['Crescent Cut','Lunar Lull','Moonfall','Silver Shroud'],Lightning:['Static Fang','Nerve Jolt','Thunder Crown','Charged Screen'],Ice:['Frost Needle','Numbing Rime','Glacier Crash','Hoarfrost Shell']};
@@ -55,8 +56,55 @@ const TEAM_TECHNIQUES=[
 ].map(([name,category,power,effect,domain,target],n)=>({id:'team-'+n,name,category,kind:category==='Energy'?'spiritual':category==='Status'?'status':'physical',power,effect,domain,target,type:'Celestial',accuracy:.9,speed:0}));
 ADVANCED_MOVES.push(...TEAM_TECHNIQUES);
 
-export function buildLearnset(base,alter,domains=[]){return[...TYPE_MOVES[base].map(m=>({...m})),...TYPE_MOVES[alter].map(m=>({...m})),...domains.flatMap(d=>domainMoves(d,alter)),...ADVANCED_MOVES.filter((m,i)=>i%13===['Aberration','Beast','Celestial','Construct','Elemental','Fey','Fiend','Giant','Humanoid','Monstrosity','Ooze','Plant','Undead'].indexOf(base)||i%13===['Aberration','Beast','Celestial','Construct','Elemental','Fey','Fiend','Giant','Humanoid','Monstrosity','Ooze','Plant','Undead'].indexOf(alter)).map(m=>({...m,type:alter})),...ENVIRONMENT_MOVES.filter((m,i)=>i%13===['Aberration','Beast','Celestial','Construct','Elemental','Fey','Fiend','Giant','Humanoid','Monstrosity','Ooze','Plant','Undead'].indexOf(base)||i%13===['Aberration','Beast','Celestial','Construct','Elemental','Fey','Fiend','Giant','Humanoid','Monstrosity','Ooze','Plant','Undead'].indexOf(alter)).map(m=>({...m,type:alter})),...EXTRA_MOVES.filter((m,i)=>i%13===['Aberration','Beast','Celestial','Construct','Elemental','Fey','Fiend','Giant','Humanoid','Monstrosity','Ooze','Plant','Undead'].indexOf(base)||i%13===['Aberration','Beast','Celestial','Construct','Elemental','Fey','Fiend','Giant','Humanoid','Monstrosity','Ooze','Plant','Undead'].indexOf(alter)).map(m=>({...m,type:alter}))];}
-export function startingMoves(base,alter,domains,seed){const a=TYPE_MOVES[base],b=TYPE_MOVES[alter],d=domains.length?domainMoves(domains[0],alter):null;return[{...a[seed%2===0?0:5]},{...b[3]},{...a[seed%3===0?2:6]},{...(d?d[0]:b[seed%2===0?1:4])}];}
+const ANATOMICAL_MOVES=[
+ {id:'anatomy-grasp',name:'Binding Grasp',power:30,speed:4,kind:'physical',effect:'slow',requires:['hands','tentacles','vines','grasp']},
+ {id:'anatomy-claw',name:'Hooked Rend',power:60,speed:-4,kind:'physical',effect:'critical',requires:['claws','talons','mandibles']},
+ {id:'anatomy-wing',name:'Wingbeat Screen',power:0,speed:12,kind:'spiritual',effect:'ward',requires:['wings']},
+ {id:'anatomy-shell',name:'Living Bastion',power:0,speed:-8,kind:'spiritual',effect:'boostDefense',requires:['armor','shell','scales']},
+ {id:'anatomy-fang',name:'Fanged Lunge',power:55,speed:10,kind:'physical',effect:null,requires:['fangs','tusks','beak']},
+ {id:'anatomy-root',name:'Root Snare',power:25,speed:3,kind:'physical',effect:'trap',requires:['roots','vines','traps']},
+ {id:'anatomy-pulse',name:'Neural Pulse',power:45,speed:5,kind:'spiritual',effect:'confusion',requires:['psionic','eyes']}
+];
+export function moveFitsAnatomy(move,anatomy){
+ if(!anatomy)return true;const traits=anatomy.traits||[];
+ if(move.requires?.length&&!move.requires.some(t=>traits.includes(t)))return false;
+ if(move.kind==='physical'&&move.effect!=='struggle'){
+  const name=move.name||'';if(/wing|feather/i.test(name)&&!traits.includes('wings')&&!traits.includes('feathers'))return false;
+  if(/claw|talon/i.test(name)&&!traits.some(t=>['claws','talons','mandibles'].includes(t)))return false;
+  if(/antler|horn/i.test(name)&&!traits.some(t=>['antlers','horns'].includes(t)))return false;
+  if(/fang|bite/i.test(name)&&!traits.some(t=>['fangs','mandibles','beak'].includes(t)))return false;
+ }return true;
+}
+export function buildLearnset(base,alter,domains=[],anatomy=null){
+ const typeMoves=[...(TYPE_MOVES[base]||[]),...(TYPE_MOVES[alter]||[])].filter(m=>moveFitsAnatomy(m,anatomy));
+ const extras=[...ADVANCED_MOVES,...ENVIRONMENT_MOVES,...EXTRA_MOVES].filter((m,i)=>(i%CREATURE_TYPES.length===CREATURE_TYPES.indexOf(base)||i%CREATURE_TYPES.length===CREATURE_TYPES.indexOf(alter)||m.id.startsWith('team-'))&&(!m.domain||domains.includes(m.domain))&&moveFitsAnatomy(m,anatomy)).map(m=>({...m,type:alter}));
+ const natural=anatomy?ANATOMICAL_MOVES.filter(m=>moveFitsAnatomy(m,anatomy)).map(m=>withBase({...m,type:base})):[];
+ return [...typeMoves,...domains.flatMap(d=>domainMoves(d,alter)),...natural,...extras].map(m=>({...m}));
+}
+export function startingMoves(base,alter,domains=[],seed=0,anatomy=null){
+ const a=TYPE_MOVES[base],b=TYPE_MOVES[alter];if(!a||!b)throw Error('Unsupported move type.');
+ const d=domains.length?domainMoves(domains[0],alter):null;
+ const candidates=[a[seed%2===0?0:5],b[3],a[seed%3===0?2:6],d?d[0]:b[seed%2===0?1:4]];
+ const fallback=[...a,...b].filter(m=>moveFitsAnatomy(m,anatomy));const used=new Set();
+ return candidates.map(m=>{if(!moveFitsAnatomy(m,anatomy)||used.has(m.id))m=fallback.find(x=>!used.has(x.id));used.add(m.id);return {...m};});
+}
+const GENERATED_EFFECTS=new Set([null,'slow','poison','burn','freeze','paralysis','sleep','confusion','flinch','frostbite','trap','heal','ward','boostMight','boostPower','boostDefense','boostResistance','boostSpeed','lowerMight','lowerPower','lowerDefense','lowerResistance','lowerSpeed','breakWard','doubleHit','drain','recoil','critical','priority','protect','cleanse']);
+export function generatedMoveBudget(move){const support=move.power===0?42:0,effect=move.effect?(['sleep','freeze','protect','doubleHit','drain'].includes(move.effect)?30:18):0;return (move.power||0)*(move.effect==='doubleHit'?2:1)*(move.accuracy??1)+(Math.max(0,move.speed||0)*.7)+effect+support+(move.target==='allOpponents'?25:0);}
+export function validateGeneratedMoves(proposals,sp){
+ const report=[];const moves=sp.moves.map((original,n)=>{
+  if(!Array.isArray(proposals)||!proposals[n])return {...original};
+  const p=proposals[n],bad=reason=>{report.push({slot:n,status:'fallback',reason});return {...original};};
+  if(!p||typeof p!=='object'||!Number.isFinite(p.power)||p.power<0||p.power>100||!Number.isInteger(p.power)||!Number.isFinite(p.speed)||p.speed< -30||p.speed>25||!Number.isFinite(p.accuracy)||p.accuracy<.65||p.accuracy>1||!['physical','spiritual','status'].includes(p.kind)||!GENERATED_EFFECTS.has(p.effect??null))return bad('Unsupported mechanics or numerical bounds');
+  if(!['opponent','self','ally','allOpponents'].includes(p.target||'opponent'))return bad('Unsupported targeting');
+  if(p.power===0&&!p.effect||p.kind==='status'&&p.power!==0||p.power>0&&['heal','ward','protect','cleanse'].includes(p.effect))return bad('Incompatible power and effect');
+  const m={id:original.id,name:typeof p.name==='string'?p.name.replace(/[<>\x00-\x1f]/g,'').slice(0,40):original.name,type:original.type,domain:original.domain,power:p.power,speed:p.speed,accuracy:p.accuracy,kind:p.kind,category:p.power===0?'Status':p.kind==='physical'?'Physical':'Energy',effect:p.effect??null,target:p.target||'opponent',visual:original.visual};
+  if(m.power>0&&['self','ally'].includes(m.target)||m.power===0&&['heal','ward','boostMight','boostPower','boostDefense','boostResistance','boostSpeed','protect','cleanse'].includes(m.effect)&&!['self','ally'].includes(m.target))return bad('Incompatible target and effect');
+  if(!moveFitsAnatomy(m,sp.anatomy))return bad('Anatomical requirements not met');
+  if(generatedMoveBudget(m)>120)return bad('Move exceeds balance budget');
+  m.baseUses=moveBaseValue(m);m.desc=moveLore(m).description;report.push({slot:n,status:'accepted',budget:generatedMoveBudget(m)});return m;
+ });return {moves,report};
+}
+
 
 
 for(const moves of [...Object.values(TYPE_MOVES),EXTRA_MOVES,ENVIRONMENT_MOVES,ADVANCED_MOVES])for(const move of moves)move.baseUses=moveBaseValue(move);

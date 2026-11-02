@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {TYPES,DOMAINS,DOMAIN_IDENTITY,ADVANTAGE,RESIST,DOMAIN_ADVANTAGE,DOMAIN_RESIST,effectiveness} from '../engine.mjs';
 const defender=(base='Beast',alter='Beast',domains=[])=>({base,alter,domains,moves:domains.map(domain=>({domain}))});
-test('all 13 creature types have offensive and defensive relationships',()=>{assert.equal(TYPES.length,13);for(const t of TYPES){assert.ok(ADVANTAGE[t]?.length>0,t);assert.ok(RESIST[t]?.length>0,t);}});
+test('all 12 creature types have offensive and defensive relationships',()=>{assert.equal(TYPES.length,12);for(const t of TYPES){assert.ok(ADVANTAGE[t]?.length>0,t);assert.ok(RESIST[t]?.length>0,t);}});
 test('all 36 domains have offensive and defensive relationships',()=>{assert.equal(DOMAINS.length,36);for(const d of DOMAINS){assert.ok(DOMAIN_ADVANTAGE[d]?.length>0,d);assert.equal(DOMAIN_RESIST[d]?.length,2,d);assert.equal(DOMAIN_ADVANTAGE[d]?.length,2,d);assert.ok(DOMAIN_IDENTITY[d],d);}});
 test('creature advantage is 1.5x',()=>assert.equal(effectiveness({type:'Celestial'},defender('Fiend','Beast')),1.5));
 test('creature resistance is 0.75x',()=>assert.equal(effectiveness({type:'Beast'},defender('Construct','Construct')),0.75));
