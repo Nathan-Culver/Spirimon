@@ -1,0 +1,67 @@
+name: Build downloadable desktop and Android games
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+jobs:
+  desktop:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            platform: win32
+            arch: x64
+          - os: macos-latest
+            platform: darwin
+            arch: arm64
+          - os: ubuntu-latest
+            platform: linux
+            arch: x64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build standalone game
+        run: node build.mjs --out-dir _site
+      - name: Package desktop application
+        shell: bash
+        run: |
+          mkdir -p desktop/game
+          cp _site/Spirimon.html desktop/game/Spirimon.html
+          cp -R _site/assets desktop/game/assets
+          printf '{"name":"spirimon-desktop","version":"1.0.0","main":"main.cjs"}' > desktop/package.json
+          npx --yes @electron/packager@18 desktop Spirimon --platform=${{ matrix.platform }} --arch=${{ matrix.arch }} --out=dist --overwrite --prune=false
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Spirimon-${{ matrix.platform }}-${{ matrix.arch }}
+          path: dist/
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v3
+      - name: Build offline web assets
+        run: node build.mjs --out-dir _site
+      - name: Generate Android app
+        run: |
+          npm install --no-save @capacitor/core@7 @capacitor/cli@7 @capacitor/android@7
+          npx cap add android
+          npx cap sync android
+      - name: Compile installable APK
+        working-directory: android
+        run: chmod +x gradlew && ./gradlew assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Spirimon-Android-APK
+          path: android/app/build/outputs/apk/debug/*.apk
