@@ -92,7 +92,7 @@ function drawAtmosphere(ctx,width,height,time){
  if(weather.lightning&&time%11000<110){ctx.fillStyle='#e9f5ffae';ctx.fillRect(0,0,width,height);}
  ctx.restore();
  const badge=document.querySelector('#map-atmosphere')||document.createElement('div');
- if(!badge.id){badge.id='map-atmosphere';badge.style.cssText='position:absolute;top:76px;left:18px;z-index:7;padding:5px 9px;background:#142923bb;color:#fff6d6;font:11px monospace;border-radius:5px;pointer-events:none';document.querySelector('#world')?.parentElement?.appendChild(badge);}
+ if(!badge.id){badge.id='map-atmosphere';badge.className='map-atmosphere';document.querySelector('.map-location')?.appendChild(badge);}
  const label={rain:'Rain',snow:weather.heavy?'Heavy snow':'Snow',wind:'High winds',heat:'Heat wave',fog:'Heavy fog',clear:'Clear'}[weather.kind];
  const text=(night?'🌙 Night':'☀ Day')+' · '+label+(weather.lightning?' ⚡':'')+(weather.hail?' Hail':'')+(weather.wind&&weather.kind!=='wind'?' Gusts':'');
  if(badge.textContent!==text)badge.textContent=text;
