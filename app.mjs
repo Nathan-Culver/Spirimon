@@ -829,7 +829,7 @@ function drawInterior(canvas,time){
   const fx=from.x+(next.x-from.x)*(walking?progress:1),fy=from.y+(next.y-from.y)*(walking?progress:1);
   const dx=next.x-from.x,dy=next.y-from.y,travelFace=dx<0?'left':dx>0?'right':dy<0?'up':dy>0?'down':room.face;
   const face=travelFace==='up'||travelFace==='down'?(Math.floor(time/500)%2?'right':'left'):travelFace;
-  actors.push({z:fy+1,draw:()=>{const size=companionSize(spOf(follower),follower.appearance).size;drawAspectAura(c,follower,ox+fx*unit+16-size/2,oy+fy*unit+30-size,size);const size=companionSize(spOf(follower),follower.appearance).size;drawCompanion(c,spOf(follower),follower.appearance,ox+fx*unit+16-size/2,oy+fy*unit+30-size,size,face,walking,progress);}});
+  actors.push({z:fy+1,draw:()=>{const size=companionSize(spOf(follower),follower.appearance).size;drawAspectAura(c,follower,ox+fx*unit+16-size/2,oy+fy*unit+30-size,size);drawCompanion(c,spOf(follower),follower.appearance,ox+fx*unit+16-size/2,oy+fy*unit+30-size,size,face,walking,progress);}});
  }
  actors.push({z:py+1,draw:()=>drawPerson(c,ox+px*unit,oy+py*unit,'player',time,room.face,walking,adventureState().appearance)});
  drawInteriorScene(c,room,ox,oy,time,actors);
