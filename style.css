@@ -265,3 +265,29 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
  .unified-battle.triple-battle .classic-hud.ally{bottom:2%}
  .unified-battle .battle-corner{top:38%;right:6px}
 }
+
+/* Mobile exploration HUD: Sealer meter first, compact area label below it. */
+@media (orientation:landscape) and (pointer:coarse){
+ .emulator-mode.exploring #main>.spiritual-meter{
+  position:fixed;top:max(9px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));
+  width:min(270px,42vw);min-width:0;max-width:none;
+  padding:5px 8px;box-sizing:border-box;z-index:12;
+  font-size:clamp(9px,1.15vw,11px)
+ }
+ .emulator-mode.exploring #main>.spiritual-meter>div{height:4px;margin-top:3px}
+ .emulator-mode.exploring .map-location{
+  top:57px;left:max(12px,env(safe-area-inset-left));
+  width:max-content;max-width:min(170px,28vw);
+  padding:4px 7px;box-sizing:border-box;z-index:11;
+  background:#f5f0dcdf;border:2px solid #586b4f;border-radius:4px;
+  backdrop-filter:blur(4px)
+ }
+ .emulator-mode.exploring .map-location strong{
+  font-size:clamp(10px,1.2vw,12px);line-height:1.15;
+  color:#283d2e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+ }
+ .emulator-mode.exploring .map-location small{
+  font-size:clamp(6px,.75vw,8px);line-height:1.2;color:#6b6653;
+  letter-spacing:.2px;display:block
+ }
+}
