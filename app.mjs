@@ -684,6 +684,7 @@ case'style':style=v;render();break;
 case'borrow':borrow=Number(v);render();break;
 case'ether':useEther();break;
 case'rt-pause':if(battle?.rt){battle.rt.paused=!battle.rt.paused;save();render();}break;
+case'unified-move':if(unifiedSuppressClick){unifiedSuppressClick=false;break;}useUnifiedMove(v);break;
 case'rt-actor':if(battle?.rt&&(battle.multi?.allies||[battle.ally]).includes(v)){battle.controlledAlly=v;selectedMove=0;render();}break;
 case'rt-auto':break;
 case'rt-info':if(battle?.rt){const actor=activeBattleAlly(),move=battleMoves(actor)[Number(v)||0],p=RT.moveTiming(move,actor,spOf(actor),style);showModal(move.name,'<p>'+esc(E.moveLore(move).description)+'</p><p>Power '+p.power+' · '+p.timing.toUpperCase()+' '+seconds(p.cooldownMs)+' · Local recast '+seconds(p.localCooldownMs)+' · Cast '+seconds(p.castMs)+' · Recovery '+seconds(p.recoveryMs)+'</p><p>Level threshold '+p.threshold+(p.nextThreshold?' · Next scaling threshold '+p.nextThreshold:' · Maximum scaling tier')+'.</p><p>Combat continues while this window is open. Use Pause to stop the clock.</p>');}break;
@@ -840,26 +841,93 @@ function submitRealTimeAction(choice){
 function claimRealTimeUtility(duration){
  if(battle.rt.paused)return false;if((battle.utilityReadyAt||0)>battle.rt.elapsedMs){toast('Sealer action cooldown · '+seconds(battle.utilityReadyAt-battle.rt.elapsedMs));return false;}battle.utilityReadyAt=battle.rt.elapsedMs+duration;return true;
 }
-function realTimeBattleHTML(){
- const actor=activeBattleAlly()||party()[0],sp=spOf(actor),state=battle.rt,moves=battleMoves(actor),clock=RT.unitClock(state,actor);selectedMove=Math.max(0,Math.min(selectedMove,moves.length-1));const selected=moves[selectedMove]||E.STRUGGLE,p=RT.moveTiming(selected,actor,sp,style);
- const tabs='<div class="rt-allies">'+battle.multi.allies.map(id=>{const u=s.spirits.find(i=>i.id===id);return '<button data-action="rt-actor" data-value="'+id+'" class="'+(id===actor.id?'selected':'')+'">'+esc(spOf(u).forms[u.appearance])+'<small data-ally-gcd="'+id+'">READY</small></button>';}).join('')+'</div>';
- let controls=battleMode==='deploy'?deploymentHTML():battleMode==='support'?battleSupportHTML():battleMode==='coop'?cooperativeBattleHTML():battleMode==='bag'?'<div class="spiritual-options">'+action('tonic','TONIC ×'+s.inventory.tonics)+action('ether','SOUL DRAUGHT ×'+s.inventory.ethers)+action('spiritual-draught','SPIRITUAL DRAUGHT ×'+s.inventory.spiritDraughts)+action('held-item-menu','HELD ITEM')+(!battle.trainer?'<label>Extra sealing Energy <input id="seal-investment" type="number" min="0" max="'+Math.floor(s.sealer.energy)+'" value="'+(battle.sealExtra||0)+'"></label>'+sealPreviewHTML()+action('battle-seal','ATTEMPT SEAL ×'+s.inventory.seals):'')+action('battle-main','MOVES')+'</div>':battle.multi.allies.includes(actor.id)?realTimeMoveHTML(state,actor,sp,moves,esc,style)+'<div class="rt-targets">'+realTimeTargetsHTML()+'</div>':deploymentHTML();
- const speech=clock.pending?'Casting '+esc(clock.pending.choice.move?.name||clock.pending.choice.type)+'…':battle.message?esc(battle.message):'Select ready Moves. Each creature has independent GCD/LCD timers.';
- return '<section class="classic-battle realtime-battle triple-battle double-battle"><div class="battle-sealers">'+spiritualEnergyHTML(s.sealer)+(battle.enemySealer?spiritualEnergyHTML(battle.enemySealer,'Enemy'):'')+'</div><div class="classic-stage"><canvas id="battle-canvas" width="1000" height="550" aria-label="Real-time Spirimon battle"></canvas>'+doubleHUDsHTML()+'<div class="battle-corner"><span data-rt-time></span>'+action('rt-pause',state.paused?'RESUME':'PAUSE')+action('battle-record','LOG')+'</div>'+(state.paused?'<div class="rt-paused">PAUSED</div>':'')+'</div><div class="classic-bottom"><div class="classic-dialogue"><p id="battle-speech" role="status">'+speech+'</p><p class="energy-emergency" data-emergency></p><div class="rt-profile">'+p.timing.toUpperCase()+' · GCD '+seconds(p.gcdMs)+' · LCD '+seconds(p.localCooldownMs)+' · Cast '+seconds(p.castMs)+'</div><div class="rt-utility">'+action('battle-bag','BAG')+action('battle-switch','DEPLOY')+action('support','SUPPORT')+action('cooperative-menu','COOPERATE')+action('battle-main','MOVES')+action('rt-info','DETAILS',selectedMove)+(!actor.omegaUsed&&selected.power>0&&selected.id!=='struggle'?action('omega-act','Ω OMEGA'):'')+(!battle.trainer?action('flee','RUN'):action('yield','CONCEDE'))+'</div><div class="rt-style"><label>Style <select id="rt-style">'+['normal','agile','strong'].map(t=>'<option value="'+t+'" '+(style===t?'selected':'')+'>'+t+'</option>').join('')+'</select></label><label>ATK <input id="commitment" type="range" min="0" max="100" value="'+Math.round(commit*100)+'" aria-label="Attack commitment"></label></div></div><div class="classic-control">'+tabs+controls+'</div></div></section>';
+
+function unifiedBattleActionsHTML(){
+ const ctx=realTimeContext(),now=battle.rt.elapsedMs,items=[],active=ctx.active.a.filter(u=>u?.hp>0);
+ for(const u of active){const sp=spOf(u);battleMoves(u).forEach((m,index)=>{
+  if(!RT.actionAvailability(battle.rt,u,sp,{type:'move',move:m,style:'normal'}).ok)return;
+  const p=RT.moveTiming(m,u,sp,'normal');
+  items.push('<button class="unified-action ua-move" data-action="unified-move" data-value="'+esc(u.id)+'|'+index+'" data-unified-move="'+esc(u.id)+'|'+index+'" title="'+esc(E.moveLore(m).description)+'"><span class="ua-icon">✦</span><b>'+esc(m.name)+'</b><small>'+esc(sp.forms[u.appearance])+' · '+p.timing.toUpperCase()+'</small><i class="ua-commit"></i></button>');
+ });}
+ const plans=active.length>1?CO.cooperativePlans(active,spOf,s.sealer):[];
+ for(const plan of plans){if(plan.cost>s.sealer.energy)continue;
+  const ready=plan.participants.every(p=>{const u=active.find(u=>u.id===p.id);return u&&RT.actionAvailability(battle.rt,u,spOf(u),{type:'move',move:p.move}).ok;});
+  if(ready)items.push('<button class="unified-action ua-coop" data-action="cooperative-use" data-value="'+esc(plan.id)+'"><span class="ua-icon">✧</span><b>'+esc(plan.name)+'</b><small>'+plan.cost+' SE · Cooperation</small></button>');
+ }
+ const supportSeen=new Set();
+ for(const u of ctx.teams.a){const ids=[...(s.sealer.assignments[u.id]||[]),s.sealer.floating].filter(Boolean);
+  for(const id of ids){const t=s.sealer.known[id];if(!t||supportSeen.has(id+'|'+u.id))continue;supportSeen.add(id+'|'+u.id);
+   const availability=RT.supportAvailability(battle.rt,ctx,'a',id,u.id);if(!availability.ok)continue;
+   items.push('<button class="unified-action ua-support" data-action="support-use" data-value="'+esc(id)+'|'+esc(u.id)+'" title="'+esc(ST.supportDescription(t))+'"><span class="ua-icon">✚</span><b>'+esc(t.name)+'</b><small>'+esc(spOf(u).forms[u.appearance])+' · '+(availability.cost??t.energyCost)+' SE</small></button>');
+  }
+ }
+ const utilityReady=!battle.rt.paused&&(battle.utilityReadyAt||0)<=now;
+ if(utilityReady){
+  if((s.inventory.tonics||0)>0)items.push('<button class="unified-action ua-item" data-action="tonic"><span class="ua-icon">♥</span><b>Tonic ×'+s.inventory.tonics+'</b></button>');
+  if((s.inventory.ethers||0)>0)items.push('<button class="unified-action ua-item" data-action="ether"><span class="ua-icon">◈</span><b>Soul Draught ×'+s.inventory.ethers+'</b></button>');
+  if((s.inventory.spiritDraughts||0)>0)items.push('<button class="unified-action ua-item" data-action="spiritual-draught"><span class="ua-icon">◉</span><b>Spiritual Draught ×'+s.inventory.spiritDraughts+'</b></button>');
+ }
+ const reserves=ctx.teams.a.filter(u=>u.hp>0&&!active.some(a=>a.id===u.id));
+ if(active.length<3&&reserves.some(u=>SE.manifestationCost(s.sealer,u,spOf(u))<=s.sealer.energy))
+  items.push('<button class="unified-action ua-utility" data-action="battle-switch"><span class="ua-icon">✧</span><b>Release</b></button>');
+ if(active.length&&ctx.teams.a.some(u=>u.hp>0))
+  items.push('<button class="unified-action ua-utility" data-action="battle-switch"><span class="ua-icon">↻</span><b>Switch / Recall</b></button>');
+ if(!battle.trainer&&utilityReady&&(s.inventory.seals||0)>0&&ctx.active.b.some(u=>u.hp>0))
+  items.push('<button class="unified-action ua-utility" data-action="battle-bag"><span class="ua-icon">◎</span><b>Seal</b><small>Choose Energy investment</small></button>');
+ if(!battle.trainer&&utilityReady)items.push('<button class="unified-action ua-run" data-action="flee"><span class="ua-icon">➜</span><b>Run</b></button>');
+ if(battle.trainer)items.push('<button class="unified-action ua-run" data-action="yield"><b>Concede</b></button>');
+ return items.join('')||'<p class="ua-wait">Waiting for an available action…</p>';
 }
+function realTimeBattleHTML(){
+ const state=battle.rt,ctx=realTimeContext(),emergency=!ctx.active.a.some(u=>u.hp>0);
+ const speech=battle.message?esc(battle.message):'Select an available action. Each Spirimon acts independently.';
+ const controls=battleMode==='deploy'?deploymentHTML():battleMode==='support'?battleSupportHTML():battleMode==='coop'?cooperativeBattleHTML():battleMode==='bag'?'<div class="spiritual-options">'+action('tonic','TONIC ×'+s.inventory.tonics)+action('ether','SOUL DRAUGHT ×'+s.inventory.ethers)+action('spiritual-draught','SPIRITUAL DRAUGHT ×'+s.inventory.spiritDraughts)+(!battle.trainer?'<label>Extra sealing Energy <input id="seal-investment" type="number" min="0" max="'+Math.floor(s.sealer.energy)+'" value="'+(battle.sealExtra||0)+'"></label>'+sealPreviewHTML()+action('battle-seal','ATTEMPT SEAL ×'+s.inventory.seals):'')+action('battle-main','BACK')+'</div>':'<div class="unified-action-grid" id="unified-action-grid">'+unifiedBattleActionsHTML()+'</div>';
+ return '<section class="classic-battle realtime-battle unified-battle triple-battle double-battle"><div class="battle-sealers">'+spiritualEnergyHTML(s.sealer)+(battle.enemySealer?spiritualEnergyHTML(battle.enemySealer,'Enemy'):'')+'</div><div class="classic-stage"><canvas id="battle-canvas" width="1000" height="550" aria-label="Real-time Spirimon battle"></canvas>'+doubleHUDsHTML()+'<div class="battle-corner">'+action('battle-record','LOG')+'</div>'+(state.paused?'<div class="rt-paused">PAUSED</div>':'')+'</div><div class="classic-bottom"><div class="classic-dialogue"><p id="battle-speech" role="status">'+speech+'</p><p class="energy-emergency" data-emergency>'+(emergency?'Emergency recovery · '+seconds(6000-(state.undefendeda||0)):'')+'</p></div><div class="classic-control"><h3 class="unified-title">Available Actions</h3>'+controls+'</div></div></section>';
+}
+
 let lastRealTimeUi=0,lastRealTimeDraw=0;
 function refreshRealTimeUI(){
- if(!battle?.rt)return;const state=battle.rt,actor=activeBattleAlly(),sp=spOf(actor),moves=battleMoves(actor);
- for(const button of document.querySelectorAll('[data-rt-move]')){
- const m=moves.find(m=>m.id===button.dataset.rtMove);if(!m)continue;
- const ready=RT.actionAvailability(state,actor,sp,{type:'move',move:m}),profile=RT.moveTiming(m,actor,sp,style),cd=Math.max(0,(RT.unitClock(state,actor).cooldowns[m.id]||0)-state.elapsedMs);
- button.disabled=!ready.ok;const label=button.querySelector('[data-rt-label]'),bar=button.querySelector('[data-rt-bar]');
- if(label)label.textContent=ready.ok?'READY':ready.reason+(ready.remainingMs?' '+seconds(ready.remainingMs):'');if(bar)bar.style.width=Math.min(100,cd/Math.max(profile.localCooldownMs,profile.cooldownMs)*100)+'%';
+ if(!battle?.rt)return;
+ const grid=document.querySelector('#unified-action-grid');
+ if(grid&&!unifiedGesture){
+  const next=unifiedBattleActionsHTML(),signature=next.replace(/data-action="[^"]*"/g,'');
+  if(grid.dataset.signature!==signature){grid.innerHTML=next;grid.dataset.signature=signature;}
  }
- for(const box of document.querySelectorAll('[data-rt-status-container]')){const context=realTimeContext(),u=[...context.teams.a,...context.teams.b].find(u=>u.id===box.dataset.rtStatusContainer);if(u)box.innerHTML=realTimeStatusHTML(state,u,esc);}
- for(const box of document.querySelectorAll('[data-rt-state]')){const context=realTimeContext(),u=[...context.active.a,...context.active.b].find(u=>u.id===box.dataset.rtState);if(!u)continue;const c=RT.unitClock(state,u);box.textContent=c.pending?'Casting '+(c.pending.choice.move?.name||c.pending.choice.type)+' '+seconds(c.pending.resolveAt-state.elapsedMs):c.gcdReadyAt>state.elapsedMs?'GCD '+seconds(c.gcdReadyAt-state.elapsedMs):c.readyAt>state.elapsedMs?'LOCK '+seconds(c.readyAt-state.elapsedMs):'Ready';}
- const timer=$('[data-rt-time]');if(timer)timer.textContent=seconds(state.elapsedMs);
+ for(const box of document.querySelectorAll('[data-rt-status-container]')){const ctx=realTimeContext(),u=[...ctx.teams.a,...ctx.teams.b].find(u=>u.id===box.dataset.rtStatusContainer);if(u)box.innerHTML=realTimeStatusHTML(battle.rt,u,esc);}
 }
+let unifiedGesture=null,unifiedSuppressClick=false;
+function useUnifiedMove(value,gestureStyle='normal',gestureCommit=0){
+ if(!battle?.rt||battle.rt.paused)return;
+ const [id,index]=value.split('|'),actor=s.spirits.find(u=>u.id===id);
+ if(!actor||!battle.multi.allies.includes(id))return;
+ const move=battleMoves(actor)[Number(index)];if(!move)return;
+ const previous=battle.controlledAlly;battle.controlledAlly=id;selectedMove=Number(index);
+ const result=submitRealTimeAction({type:'move',move,style:gestureStyle,commit:gestureCommit,targetIndex:realTimeTargetIndex(move,actor)});
+ if(!result?.ok)battle.controlledAlly=previous;
+}
+document.addEventListener('pointerdown',ev=>{
+ const button=ev.target.closest?.('[data-unified-move]');if(!button||button.disabled)return;
+ unifiedGesture={button,x:ev.clientX,y:ev.clientY,value:button.dataset.unifiedMove,executed:false};
+ button.setPointerCapture?.(ev.pointerId);
+});
+document.addEventListener('pointermove',ev=>{
+ const g=unifiedGesture;if(!g)return;
+ const dx=ev.clientX-g.x,dy=ev.clientY-g.y;
+ g.button.style.setProperty('--commit-progress',Math.round(Math.min(1,Math.abs(dx)/110)*100)+'%');
+ if(Math.abs(dx)>=110&&Math.abs(dx)>Math.abs(dy)&&!g.executed){
+  g.executed=true;unifiedSuppressClick=true;unifiedGesture=null;
+  useUnifiedMove(g.value,dx<0?'agile':'strong',1);
+ }
+});
+document.addEventListener('pointerup',ev=>{
+ const g=unifiedGesture;if(!g)return;unifiedGesture=null;
+ const dx=ev.clientX-g.x,dy=ev.clientY-g.y;
+ if(Math.hypot(dx,dy)<18)return;
+ unifiedSuppressClick=true;
+ useUnifiedMove(g.value,Math.abs(dx)>Math.abs(dy)?dx<0?'agile':'strong':dy<0?'strong':'agile',Math.abs(dx)>Math.abs(dy)?Math.min(1,Math.abs(dx)/110):0);
+});
+document.addEventListener('pointercancel',()=>{unifiedGesture=null;});
+
 function advanceRealTimeBattle(delta,time){
  if(!battle?.rt||document.hidden||battle.rt.paused)return;
  const original=battle,rosterBefore=battle.multi.allies.join('|')+';'+battle.multi.enemies.map(u=>u.id).join('|'),state=battle.rt,ctx=realTimeContext(),previous=state.elapsedMs,result=RT.advanceRealTime(state,delta,ctx);
