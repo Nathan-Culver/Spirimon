@@ -558,7 +558,7 @@ function drawWorld(time){
  for(const {cx,cy} of nearRegions){
  for(const shrine of SW.shrinesForRegion(s.seed,cx,cy)){
  if(!visible(px(shrine.x)-96,py(shrine.y)-128,192,192))continue;
- actors.push({y:shrine.y+0.85,draw:()=>SW.drawShrine(c,px(shrine.x),py(shrine.y),!SE.recoveryAvailable(s,'commune',shrine.id).ok)});
+ actors.push({y:shrine.y+0.85,draw:()=>SW.drawShrine(c,px(shrine.x),py(shrine.y),!SE.recoveryAvailable(s,'commune',shrine.id).ok,shrine.kind||0)});
  }
  if(!E.region(s.seed,cx,cy).town)continue;
  for(const f of W.townFeatures(cx,cy)){
