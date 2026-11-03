@@ -28,8 +28,8 @@ export function drawInteriorScene(c,room,ox,oy,time,actors=[]){const unit=32,p=r
  // Worn door threshold reads as an opening, rather than a door lying on the floor.
  fill('#1b1614',ox+7*32-3,oy+10*32-3,38,35);drawMaterial(c,0,ox+7*32,oy+10*32,32,0,0);fill('#ceae75',ox+7*32-3,oy+10*32,3,32);fill('#ceae75',ox+8*32,oy+10*32,3,32);
  const queue=roomFurnishings(room.kind).map(f=>({z:f.y+f.h-.08,draw:()=>{const px=ox+f.x*32,py=oy+f.y*32;c.fillStyle='#17120f44';c.beginPath();c.ellipse(px+f.w*16,py+f.h*32-5,f.w*13,5,0,0,Math.PI*2);c.fill();
-   // SVG fallback remains available while the new atlas is downloading.
-   if(!drawInteriorAsset(c,f.asset,px,py,f.w*32,f.h*32)){const old={counter:'desk','tea-table':'desk',altar:'orb',anvil:'forge',apothecary:'bookshelf','writing-desk':'desk',crates:'desk',vase:'plant',hearth:'forge'}[f.asset]||f.asset,img=readyImage('./assets/interiors/'+old+'.svg');if(img)c.drawImage(img,px,py,f.w*32,f.h*32);}
+   // Preserve full-detail artwork; the caller waits for the atlas to load.
+   drawInteriorAsset(c,f.asset,px,py,f.w*32,f.h*32);
   }}));
  // Draw every character at the same ground-depth boundary as the furniture.
  queue.push(...actors);queue.sort((a,b)=>a.z-b.z);for(const item of queue)item.draw();
