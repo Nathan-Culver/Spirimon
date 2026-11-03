@@ -531,21 +531,36 @@ function drawWorld(time){
  const reg=E.region(s.seed,Math.floor(x/48),Math.floor(y/36)),terrain=E.tile(s.seed,x,y),local=E.coord(x,y);drawTile(c,terrain,px(x),py(y),E.hash(s.seed,x,y),reg.biome.kind,{neighbors:[[0,-1],[1,0],[0,1],[-1,0]].map(([dx,dy])=>E.tile(s.seed,x+dx,y+dy)),town:reg.town&&Math.abs(local.lx-24)<22&&Math.abs(local.ly-18)<15});if(terrain==='grass'){const distance=Math.hypot(x-vx,y-vy),disturbance=walkAnim&&elapsed<1?Math.max(0,1.8-distance):0;drawTallGrass(c,px(x),py(y),E.hash(s.seed,x,y),time,disturbance);}}
 
  for(let cy=Math.floor(oy/36)-1;cy<=Math.floor((oy+rows)/36)+1;cy++)for(let cx=Math.floor(ox/48)-1;cx<=Math.floor((ox+cols)/48)+1;cx++){const e=E.caveEntrance(s.seed,cx,cy);if(!e)continue;const x=px(e.x),y=py(e.y);if(x<-40||y<-40||x>width||y>height)continue;c.fillStyle='#181b27';c.beginPath();c.ellipse(x+16,y+20,15,12,0,Math.PI,0);c.fill();c.fillStyle='#7c8188';c.fillRect(x+2,y+24,28,5);c.fillStyle='#d2bb83';c.font='bold 11px monospace';c.fillText('▼',x+11,y+14);}
- const pc=E.coord(s.player.x,s.player.y),people=[];for(let cy=pc.cy-1;cy<=pc.cy+1;cy++)for(let cx=pc.cx-1;cx<=pc.cx+1;cx++)for(const shrine of SW.shrinesForRegion(s.seed,cx,cy)){SW.drawShrine(c,px(shrine.x),py(shrine.y),!SE.recoveryAvailable(s,'commune',shrine.id).ok);}
+ const pc=E.coord(s.player.x,s.player.y),people=[];
  for(let cy=pc.cy-1;cy<=pc.cy+1;cy++)for(let cx=pc.cx-1;cx<=pc.cx+1;cx++){
   const reg=E.region(s.seed,cx,cy);
   if(reg.town){
-   drawTownFeatures(c,cx,cy,px,py);
-   drawTownDecor(c,px(cx*48+33),py(cy*36+14));drawWell(c,px(cx*48+27),py(cy*36+18));
    people.push(...townNPCs(cx,cy));
   }
 
  }
- if(challengerApproach){const a=challengerApproach;drawPerson(c,px(a.x),py(a.y)-5,a.kind==='rival'?'rival':'villain',time,a.face,true);c.fillStyle='#fff5bd';c.font='bold 11px monospace';c.textAlign='center';c.fillText('!',px(a.x)+15,py(a.y)-15);}for(const d of s.drops){const x=px(d.x),y=py(d.y);c.fillStyle='#d2b17b';c.fillRect(x+9,y+9,14,15);c.fillStyle='#725b3b';c.fillRect(x+14,y+6,4,6);}
- for(let ty=Math.floor(oy)-1;ty<=Math.min(Math.floor(vy),Math.ceil(oy+rows)+2);ty++)for(let tx=Math.floor(ox)-2;tx<=Math.ceil(ox+cols)+2;tx++)if(E.tile(s.seed,tx,ty)==='tree')drawTree(c,px(tx),py(ty),E.hash(s.seed,tx,ty),E.region(s.seed,Math.floor(tx/48),Math.floor(ty/36)).biome.kind);const moving=!!walkAnim&&elapsed<1;
- for(let ty=Math.floor(oy)-1;ty<=Math.ceil(oy+rows)+2;ty++)for(let tx=Math.floor(ox)-2;tx<=Math.ceil(ox+cols)+2;tx++)if(ty>vy&&E.tile(s.seed,tx,ty)==='tree')drawTree(c,px(tx),py(ty),E.hash(s.seed,tx,ty),E.region(s.seed,Math.floor(tx/48),Math.floor(ty/36)).biome.kind);
- // Depth-sort actors by their ground contact rather than drawing wild Spirimon last.
+ const moving=!!walkAnim&&elapsed<1;
  const actors=[];
+ // All elevated scenery shares the actors' ground-contact depth ordering.
+ // This lets characters pass behind crowns, roofs and monuments but in front of their bases.
+ for(let ty=Math.floor(oy)-3;ty<=Math.ceil(oy+rows)+3;ty++)for(let tx=Math.floor(ox)-3;tx<=Math.ceil(ox+cols)+3;tx++){
+ if(E.tile(s.seed,tx,ty)!=='tree')continue;
+ const x=px(tx),y=py(ty),seed=E.hash(s.seed,tx,ty),biome=E.region(s.seed,Math.floor(tx/48),Math.floor(ty/36)).biome.kind;
+ actors.push({y:ty+0.85,draw:()=>drawTree(c,x,y,seed,biome)});
+ }
+ for(let cy=pc.cy-1;cy<=pc.cy+1;cy++)for(let cx=pc.cx-1;cx<=pc.cx+1;cx++){
+ for(const shrine of SW.shrinesForRegion(s.seed,cx,cy)){
+ actors.push({y:shrine.y+0.85,draw:()=>SW.drawShrine(c,px(shrine.x),py(shrine.y),!SE.recoveryAvailable(s,'commune',shrine.id).ok)});
+ }
+ if(!E.region(s.seed,cx,cy).town)continue;
+ for(const f of W.townFeatures(cx,cy)){
+ const fy=cy*36+f.y+f.h-1;
+ actors.push({y:fy+0.6,draw:()=>drawTownFeatures(c,cx,cy,px,py,f)});
+ }
+ actors.push({y:cy*36+18+0.6,draw:()=>drawWell(c,px(cx*48+27),py(cy*36+18))});
+ actors.push({y:cy*36+14+0.6,draw:()=>drawTownDecor(c,px(cx*48+33),py(cy*36+14))});
+ }
+
  // Buildings are tall sprites anchored at their front entrance/ground contact.
  // Drawing them in the same depth queue as characters allows walking behind roofs.
  for(let cy=pc.cy-1;cy<=pc.cy+1;cy++)for(let cx=pc.cx-1;cx<=pc.cx+1;cx++){
@@ -558,6 +573,7 @@ function drawWorld(time){
  for(const n of people){const w=n.walk,progress=w?Math.min(1,(time-w.start)/w.duration):1,nx=w&&progress<1?w.x+(n.x-w.x)*progress:n.x,ny=w&&progress<1?w.y+(n.y-w.y)*progress:n.y;actors.push({y:ny,draw:()=>{const x=px(nx),y=py(ny);drawPerson(c,x,y-5,n.role,time,n.face||'down',progress<1);if(Math.abs(n.x-s.player.x)+Math.abs(n.y-s.player.y)<=2){c.fillStyle='#fff5bd';c.strokeStyle='#4f4430';c.font='bold 10px monospace';c.textAlign='center';c.strokeText('!',x+16,y-8);c.fillText('!',x+16,y-8);}}});}
  if(s.party.length&&s.spirits.length){const companion=party().find(u=>u.id===s.sealer?.leadId),step=companionTrail.length-3;if(companion&&step>=0){const from=companionTrail[step],to=companionTrail[step+1]||from;if(from&&to){const fx=from.x+(to.x-from.x)*(moving?elapsed:1),fy=from.y+(to.y-from.y)*(moving?elapsed:1),face=to.x<from.x?'left':to.x>from.x?'right':to.y<from.y?'up':'down';actors.push({y:fy,draw:()=>{drawAspectAura(c,companion,px(fx)-2,py(fy)-13,36);drawCompanion(c,spOf(companion),companion.appearance,px(fx)-2,py(fy)-13,36,face,moving,elapsed);}});}}}
  for(let cy=pc.cy-1;cy<=pc.cy+1;cy++)for(let cx=pc.cx-1;cx<=pc.cx+1;cx++)for(const r of s.roamers[cx+','+cy]||[]){if(!r.active)continue;const a=r.wanderFrom,t=a?Math.min(1,(time-a.start)/a.duration):1,rx=a&&t<1?a.x+(r.x-a.x)*t:r.x,ry=a&&t<1?a.y+(r.y-a.y)*t:r.y,x=px(rx),y=py(ry);if(x<-70||x>width+50||y<-70||y>height+50)continue;actors.push({y:ry,draw:()=>{c.save();try{const sp=spOf(r.ind);drawSpirit(c,sp,r.ind.appearance,x-13,y-29+(t<1?-Math.abs(Math.sin(t*Math.PI))*4:0),58,r.face==='left',{face:r.face||'down',moving:t<1,progress:t});}catch(e){console.warn('Wild Spirimon drawing failed',r.id,e);}finally{c.restore();}}});}
+ if(challengerApproach){const a=challengerApproach;actors.push({y:a.y,draw:()=>{drawPerson(c,px(a.x),py(a.y)-5,a.kind==='rival'?'rival':'villain',time,a.face,true);c.fillStyle='#fff5bd';c.font='bold 11px monospace';c.textAlign='center';c.fillText('!',px(a.x)+15,py(a.y)-15);}});}
  actors.push({y:vy,draw:()=>drawPerson(c,px(vx),py(vy)-5,'player',moving?elapsed*1000:0,s.player.face,moving,adventureState().appearance)});
  actors.sort((a,b)=>a.y-b.y);for(const actor of actors)actor.draw();
  if(E.tile(s.seed,Math.round(vx),Math.round(vy))==='grass')drawTallGrass(c,px(Math.round(vx)),py(Math.round(vy))+7,E.hash(s.seed,Math.round(vx),Math.round(vy),'front'),time,moving?1.5:0,true);
