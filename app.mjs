@@ -907,6 +907,7 @@ function useUnifiedMove(value,gestureStyle='normal',gestureCommit=0){
 }
 document.addEventListener('pointerdown',ev=>{
  const button=ev.target.closest?.('[data-unified-move]');if(!button||button.disabled)return;
+ unifiedSuppressClick=false;
  unifiedGesture={button,x:ev.clientX,y:ev.clientY,value:button.dataset.unifiedMove,executed:false};
  button.setPointerCapture?.(ev.pointerId);
 });
