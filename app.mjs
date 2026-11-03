@@ -703,7 +703,7 @@ case'style':style=v;render();break;
 case'borrow':borrow=Number(v);render();break;
 case'ether':useEther();break;
 case'rt-pause':if(battle?.rt){battle.rt.paused=!battle.rt.paused;save();render();}break;
-case'unified-move':if(unifiedSuppressClick){unifiedSuppressClick=false;break;}useUnifiedMove(v);break;
+case'unified-move':{if(unifiedSuppressClick){unifiedSuppressClick=false;break;}const now=performance.now();if(unifiedTap&&unifiedTap.value===v&&now-unifiedTap.at<330){unifiedTap=null;const preset=s.settings?.movePresets?.[v]||{};useUnifiedMove(v,preset.style||'normal',preset.commit||0,preset.extraMoves||0);}else{unifiedTap={value:v,at:now};useUnifiedMove(v,'normal',0,0);}break;}
 case'rt-actor':if(battle?.rt&&(battle.multi?.allies||[battle.ally]).includes(v)){battle.controlledAlly=v;selectedMove=0;render();}break;
 case'rt-auto':break;
 case'rt-info':if(battle?.rt){const actor=activeBattleAlly(),move=battleMoves(actor)[Number(v)||0],p=RT.moveTiming(move,actor,spOf(actor),style);showModal(move.name,'<p>'+esc(E.moveLore(move).description)+'</p><p>Power '+p.power+' · '+p.timing.toUpperCase()+' '+seconds(p.cooldownMs)+' · Local recast '+seconds(p.localCooldownMs)+' · Cast '+seconds(p.castMs)+' · Recovery '+seconds(p.recoveryMs)+'</p><p>Level threshold '+p.threshold+(p.nextThreshold?' · Next scaling threshold '+p.nextThreshold:' · Maximum scaling tier')+'.</p><p>Combat continues while this window is open. Use Pause to stop the clock.</p>');}break;
@@ -916,37 +916,43 @@ function refreshRealTimeUI(){
  }
  for(const box of document.querySelectorAll('[data-rt-status-container]')){const ctx=realTimeContext(),u=[...ctx.teams.a,...ctx.teams.b].find(u=>u.id===box.dataset.rtStatusContainer);if(u)box.innerHTML=realTimeStatusHTML(battle.rt,u,esc);}
 }
-let unifiedGesture=null,unifiedSuppressClick=false;
-function useUnifiedMove(value,gestureStyle='normal',gestureCommit=0){
+let unifiedGesture=null,unifiedSuppressClick=false,unifiedTap=null;
+function useUnifiedMove(value,gestureStyle='normal',gestureCommit=0,extraMoves=0){
  if(!battle?.rt||battle.rt.paused)return;
  const [id,index]=value.split('|'),actor=s.spirits.find(u=>u.id===id);
  if(!actor||!battle.multi.allies.includes(id))return;
  const move=battleMoves(actor)[Number(index)];if(!move)return;
  const previous=battle.controlledAlly;battle.controlledAlly=id;selectedMove=Number(index);
- const result=submitRealTimeAction({type:'move',move,style:gestureStyle,commit:gestureCommit,targetIndex:realTimeTargetIndex(move,actor)});
+ const result=submitRealTimeAction({type:'move',move,style:gestureStyle,commit:gestureCommit,extraMoves:Math.max(0,Math.min(2,Math.floor(extraMoves))),targetIndex:realTimeTargetIndex(move,actor)});
  if(!result?.ok)battle.controlledAlly=previous;
+}
+function unifiedGestureChoice(dx,dy){
+ const ax=Math.abs(dx),ay=Math.abs(dy),diagonal=ax>22&&ay>22&&Math.min(ax,ay)/Math.max(ax,ay)>.42;
+ const moveCount=diagonal?Math.min(2,Math.max(1,Math.floor(Math.hypot(dx,dy)/85))):0;
+ const style=diagonal?(dx<0?'agile':'strong'):ax>ay?(dx<0?'agile':'strong'):(dy<0?'strong':'agile');
+ const commit=diagonal?(dy<0?Math.min(1,ax/110):0):ax>ay?Math.min(1,ax/110):0;
+ return {style,commit,moveCount,diagonal};
 }
 document.addEventListener('pointerdown',ev=>{
  const button=ev.target.closest?.('[data-unified-move]');if(!button||button.disabled)return;
  unifiedSuppressClick=false;
- unifiedGesture={button,x:ev.clientX,y:ev.clientY,value:button.dataset.unifiedMove,executed:false};
+ unifiedGesture={button,x:ev.clientX,y:ev.clientY,value:button.dataset.unifiedMove,pointerId:ev.pointerId};
  button.setPointerCapture?.(ev.pointerId);
 });
 document.addEventListener('pointermove',ev=>{
- const g=unifiedGesture;if(!g)return;
- const dx=ev.clientX-g.x,dy=ev.clientY-g.y;
- g.button.style.setProperty('--commit-progress',Math.round(Math.min(1,Math.abs(dx)/110)*100)+'%');
- if(Math.abs(dx)>=110&&Math.abs(dx)>Math.abs(dy)&&!g.executed){
-  g.executed=true;unifiedSuppressClick=true;unifiedGesture=null;
-  useUnifiedMove(g.value,dx<0?'agile':'strong',1);
- }
+ const g=unifiedGesture;if(!g||g.pointerId!==ev.pointerId)return;
+ const choice=unifiedGestureChoice(ev.clientX-g.x,ev.clientY-g.y);
+ g.button.style.setProperty('--commit-progress',Math.round(choice.commit*100)+'%');
+ g.button.dataset.gesturePreview=(choice.moveCount?'+'+choice.moveCount+' Moves · ':'')+choice.style.toUpperCase()+(choice.commit?' · ATK '+Math.round(choice.commit*100)+'%':'');
 });
 document.addEventListener('pointerup',ev=>{
- const g=unifiedGesture;if(!g)return;unifiedGesture=null;
+ const g=unifiedGesture;if(!g||g.pointerId!==ev.pointerId)return;unifiedGesture=null;
  const dx=ev.clientX-g.x,dy=ev.clientY-g.y;
+ delete g.button.dataset.gesturePreview;
  if(Math.hypot(dx,dy)<18)return;
  unifiedSuppressClick=true;
- useUnifiedMove(g.value,Math.abs(dx)>Math.abs(dy)?dx<0?'agile':'strong':dy<0?'strong':'agile',Math.abs(dx)>Math.abs(dy)?Math.min(1,Math.abs(dx)/110):0);
+ const choice=unifiedGestureChoice(dx,dy);
+ useUnifiedMove(g.value,choice.style,choice.commit,choice.moveCount);
 });
 document.addEventListener('pointercancel',()=>{unifiedGesture=null;});
 
