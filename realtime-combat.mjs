@@ -79,6 +79,7 @@ export function scheduleAction(state,context,actor,choice){
  const targetSp=target?context.speciesOf(target):null,spreadPressure=move&&E.moveTarget(move)==='allOpponents'&&context.active[targetSide].some(u=>u.hp>0&&context.speciesOf(u).ability==='Pressure');
  const fundedCheck=actionAvailability(state,actor,sp,{...choice,move},spreadPressure?{ability:'Pressure'}:targetSp);if(!fundedCheck.ok)return fundedCheck;
 
+ choice={...choice,extraMoves:choice.type==='move'?Math.max(0,Math.min(2,Math.floor(Number(choice.extraMoves)||0))):0};
  clock.pending={choice:{...choice,move},resolveAt:state.elapsedMs+profile.castMs,side,targetId:target?.id,targetSide,sequence:state.sequence++};
  if(profile.localCooldownMs)clock.cooldowns[key]=state.elapsedMs+profile.localCooldownMs;if(profile.timing==='gcd')clock.gcdReadyAt=state.elapsedMs+profile.gcdMs;clock.readyAt=state.elapsedMs+profile.animationLockMs;actor.gcdReadyAt=clock.gcdReadyAt;actor.animationReadyAt=clock.readyAt;
  return {ok:true,profile};
@@ -133,6 +134,42 @@ function resolvePending(state,context,actor,clock,log,events,r){
   else{
    const targets=E.moveTarget(move)==='allOpponents'?opponents.filter(u=>u.hp>0):[target];ctx.pressure=targets.some(u=>context.speciesOf(u).ability==='Pressure');
    for(let n=0;n<targets.length;n++){const victim=targets[n],hp=victim.hp;log.push(...E.executeAction(actor,sp,victim,context.speciesOf(victim),move,choice.style||'normal',choice.commit??.5,r,1,n?{...ctx,prepaid:true}:ctx));if(victim.lastHit&&victim.hp<hp)victim.lastHit.at=state.elapsedMs;if(n===0&&!ctx.funded)break;}
+  }
+  // Repeat the selected Move immediately; each additional use pays its normal resource cost.
+  // The existing Move cooldown and GCD are charged once for the entire committed sequence.
+  const repeats=Math.max(0,Math.min(2,choice.extraMoves||0));
+  if(choice.type==='move'&&ctx.funded&&repeats){
+   for(let repeat=0;repeat<repeats;repeat++){
+    if(actor.hp<=0||!context.active[side].includes(actor))break;
+    const victims=E.moveTarget(move)==='allOpponents'?opponents.filter(u=>u.hp>0):[target].filter(u=>u.hp>0);
+    if(!victims.length)break;
+    if(move.id!=='struggle'&&!E.canUseMove(actor,sp,move,context.speciesOf(victims[0])))break;
+    for(let n=0;n<victims.length;n++){
+     const victim=victims[n],hp=victim.hp,repeatCtx={...ctx,funded:false,prepaid:n>0,pressure:ctx.pressure};
+     log.push(...E.executeAction(actor,sp,victim,context.speciesOf(victim),move,choice.style||'normal',choice.commit??0,r,1,repeatCtx));
+     if(victim.lastHit&&victim.hp<hp)victim.lastHit.at=state.elapsedMs;
+     if(n===0&&!repeatCtx.funded)break;
+    }
+    events.push({actor:actor.id,target:target.id,side,move,at:state.elapsedMs+repeat*55+55});
+   }
+   // Retaliation is free and ignores the ordinary GCD/LCD, but cannot act while incapacitated.
+   // In multi-ally encounters only enemies currently targeting this Spirimon qualify.
+   for(const enemy of opponents.filter(u=>u.hp>0)){
+    const enemyClock=unitClock(state,enemy);
+    const designated=enemyClock.pending?.targetId||enemy.targetId||enemy.preferredTargetId;
+    if(designated&&designated!==actor.id)continue;
+    if(!designated&&allies.filter(u=>u.hp>0).length!==1)continue;
+    if(statusBadges(state,enemy).some(s=>STATUS_RULES[s.effect]?.control))continue;
+    const enemySp=context.speciesOf(enemy),moves=E.equippedMoves(enemy,enemySp);
+    const retaliate=moves.find(m=>m.id===enemy.lastMove)||moves.find(m=>E.canUseMove(enemy,enemySp,m,sp));
+    if(!retaliate)continue;
+    const freeMove=scaledMove(retaliate,enemy,enemySp,enemy.battleStyle||'normal');
+    for(let counter=0;counter<2&&enemy.hp>0&&actor.hp>0;counter++){
+     const counterCtx={...ctx,actorTeam:context.teams[other],alliedActive:opponents,targetActive:allies,targetTeam:context.teams[side],prepaid:true,funded:false,friendly:false,pressure:false};
+     log.push(...E.executeAction(enemy,enemySp,actor,sp,freeMove,enemy.battleStyle||'normal',0,r,1,counterCtx));
+     events.push({actor:enemy.id,target:actor.id,side:other,move:freeMove,at:state.elapsedMs+counter*55+120});
+    }
+   }
   }
   if(actor.recharging){clock.readyAt+=2000;delete actor.recharging;}
   if(choice.move?.omega&&ctx.funded)actor.omegaUsed=true;
