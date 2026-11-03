@@ -43,3 +43,11 @@ export function drawMounted(ctx,drawCompanion,drawPerson,sp,form,x,y,face,moving
  drawCompanion(ctx,sp,form,mx,my,mountSize,face,moving,progress);
  ctx.restore();
 }
+
+export function canWaterMount(sp,form=0){
+ if(!sp)return false;
+ const a=sp.anatomy||{},d=companionSize(sp,form),traits=new Set(a.traits||[]);
+ const solid=!['amorphous','rooted','radial'].includes(a.bodyPlan)&&!/spectral|incorporeal|intangible/.test([sp.description,a.description].join(' ').toLowerCase());
+ const aquatic=['aquatic','serpentine','quadruped','winged','many-legged'].includes(a.bodyPlan)||traits.has('swim')||traits.has('rideable');
+ return solid&&aquatic&&(d.height>=1.2||d.length>=2||d.size>=48||a.scale==='colossal'||traits.has('rideable'));
+}
