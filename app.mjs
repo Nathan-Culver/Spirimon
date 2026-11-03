@@ -15,7 +15,7 @@ import {transformSpirit} from './transformation.mjs';
 import * as O from './offerings.mjs';
 import {audio} from './audio.mjs';
 import {ROSTER,ART} from './roster.mjs';
-import {preloadImages} from './asset-loader.mjs';
+import {preloadImages,readyImage} from './asset-loader.mjs';
 import {MYSTERY_STATIC,MYSTERY_WALK} from './placeholder-art.mjs';
 import * as W from './world.mjs';
 import * as E from './engine.mjs';
@@ -520,6 +520,9 @@ function wanderSpirits(now){if(s.interior||modal||battle||view!=='explore')retur
 function drawWorld(time){
  const canvas=$('#world');if(!canvas||view!=='explore'||battle)return;
  if(s.cave){drawCave(canvas,time);return;}if(s.interior){drawInterior(canvas,time);return;}
+ // Keep the last fully painted frame rather than flashing the low-detail fallback
+ // while the authored terrain atlas is temporarily unavailable.
+ if(!readyImage(ART.terrain)||!readyImage(ART.world)||!readyImage(ART.sealer))return;
  const rect=canvas.getBoundingClientRect(),scale=document.body.classList.contains('emulator-mode')?1.5:2;
  const width=Math.max(240,Math.round(rect.width/scale)),height=Math.max(160,Math.round(rect.height/scale));
  if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;}
