@@ -1,3 +1,4 @@
+import {drawDungeonAtlasTile} from './dungeon-atlas.mjs';
 import {updateMapCamera,movementProgress} from './map-camera.mjs';
 import * as SE from './spiritual-energy.mjs';
 import * as ST from './support-techniques.mjs';
@@ -182,45 +183,20 @@ function drawCave(canvas,time){
  const ox=-mapCamera.left,oy=-mapCamera.top;
  ctx.imageSmoothingEnabled=false;ctx.fillStyle='#080b13';ctx.fillRect(0,0,width,height);
  const palette=[['#403c43','#625b61','#292c37','#a8a0a0'],['#41423b','#656555','#303b38','#b6ac89'],['#353d46','#576574','#252e3d','#9baec2'],['#453d37','#6b594a','#382d31','#c3a18b']][E.hash(s.seed,room.id,room.level)%4];
- const hashAt=(x,y,salt='floor')=>E.hash(s.seed,room.id,room.level,salt,x,y);
- const floorColors=[['#403d3c','#55514d','#77736b','#242827'],['#41453e','#5d6153','#898977','#252d29'],['#353e45','#4d5d63','#798d93','#202b31'],['#4a4038','#66564a','#99816d','#2d2827']][E.hash(s.seed,room.id,room.level)%4];
- const walk=(x,y)=>x>=0&&y>=0&&x<map.width&&y<map.height&&map.grid[y][x]!=='wall';
- // Irregular contiguous stone slabs, broken seams, mineral flecks and natural debris.
+ const atlasBiome=E.hash(s.seed,room.id,room.level)%4;
  for(let y=0;y<map.height;y++)for(let x=0;x<map.width;x++){
   const t=map.grid[y][x],px=Math.round(ox+x*size),py=Math.round(oy+y*size);
   if(px<-size||py<-size||px>width||py>height)continue;
-  const h=hashAt(x,y),wall=t==='wall',r=E.rng(h);
-  ctx.fillStyle=floorColors[0];ctx.fillRect(px,py,32,32);
-  if(wall){
-   // Rock faces are irregular and visually continuous across adjacent tiles.
-   ctx.fillStyle=floorColors[3];ctx.fillRect(px,py,32,32);
-   for(let k=0;k<12;k++){const xx=Math.floor(r()*30),yy=Math.floor(r()*30),w=5+Math.floor(r()*15),ht=3+Math.floor(r()*10);
-    ctx.fillStyle=k%4===0?floorColors[2]:k%3===0?'#272c2b':floorColors[1];ctx.fillRect(px+xx,py+yy,Math.min(w,32-xx),Math.min(ht,32-yy));
-    ctx.fillStyle='#161b1c88';ctx.fillRect(px+xx,py+Math.min(31,yy+ht),Math.min(w,32-xx),1);
-   }
-   if(walk(x,y+1)){ctx.fillStyle='#111a1b';ctx.fillRect(px,py+25,32,7);ctx.fillStyle=floorColors[2];ctx.fillRect(px+2,py+19,25,2);}
-   if(walk(x-1,y)){ctx.fillStyle='#171d1e';ctx.fillRect(px,py+2,5,28);}
-   if(walk(x+1,y)){ctx.fillStyle='#171d1e';ctx.fillRect(px+27,py+2,5,28);}
-   if(h%9===0){ctx.fillStyle='#4b674a';for(let k=0;k<7;k++)ctx.fillRect(px+Math.floor(r()*30),py+Math.floor(r()*29),2,2);}
-  }else{
-   // Broad, offset natural flagstones rather than identical 4-square grids.
-   for(let k=0;k<5;k++){const xx=Math.floor(r()*29),yy=Math.floor(r()*29),w=5+Math.floor(r()*15),ht=3+Math.floor(r()*10);
-    ctx.fillStyle=k%3===0?floorColors[1]:k%3===1?floorColors[2]:floorColors[0];
-    ctx.fillRect(px+xx,py+yy,Math.min(w,32-xx),Math.min(ht,32-yy));
-   }
-   for(let k=0;k<20;k++){const xx=Math.floor(r()*32),yy=Math.floor(r()*32);ctx.fillStyle=k%4===0?'#9a9480':k%3===0?'#252b29':'#343936';ctx.fillRect(px+xx,py+yy,1+(k%11===0?2:0),1);}
-   if(h%7===0){ctx.fillStyle='#4b6248';for(let k=0;k<13;k++)ctx.fillRect(px+Math.floor(r()*30),py+Math.floor(r()*30),2+Math.floor(r()*3),1+Math.floor(r()*3));}
-   if(h%13===0){ctx.fillStyle='#9c8d70';for(let k=0;k<7;k++)ctx.fillRect(px+Math.floor(r()*28),py+Math.floor(r()*28),2+Math.floor(r()*3),2);}
-   if(h%17===0){ctx.strokeStyle='#1d2223';ctx.lineWidth=1;ctx.beginPath();const cx=px+6+Math.floor(r()*18),cy=py+5+Math.floor(r()*18);ctx.moveTo(cx,cy);ctx.lineTo(cx+5,cy+3);ctx.lineTo(cx+3,cy+9);ctx.stroke();}
-   if(h%23===0){ctx.fillStyle='#2e5145';ctx.fillRect(px+7,py+14,15,9);ctx.fillStyle='#3b7160';ctx.fillRect(px+9,py+15,9,3);}
-  }
-  if(t==='up'||t==='down'||t==='exit'){
-   // Stone staircases with side rails and directional lighting, no UI arrows.
-   ctx.fillStyle='#181d20';ctx.fillRect(px+3,py+3,26,27);
-   ctx.fillStyle=floorColors[2];ctx.fillRect(px+3,py+3,4,25);ctx.fillRect(px+25,py+3,4,25);
-   for(let k=0;k<6;k++){const yy=py+5+k*4;ctx.fillStyle=k%2?floorColors[1]:floorColors[2];ctx.fillRect(px+7,yy,18,3);ctx.fillStyle='#1b2022';ctx.fillRect(px+7,yy+3,18,1);}
-   ctx.fillStyle=t==='exit'?'#7ba98d':t==='up'?'#b2a77f':'#8c7ba2';ctx.fillRect(px+12,py+2,8,2);
-  }
+  const h=E.hash(s.seed,room.id,room.level,x,y),wall=t==='wall';
+  let kind;
+  if(t==='up'||t==='down'||t==='exit')kind=t==='exit'?15:14;
+  else if(wall){
+   const below=y+1<map.height&&map.grid[y+1][x]!=='wall';
+   const left=x>0&&map.grid[y][x-1]!=='wall';
+   const right=x+1<map.width&&map.grid[y][x+1]!=='wall';
+   kind=below?(left?8:right?9:6):(left||right?7:10+h%2);
+  }else kind=h%37===0?12:h%29===0?13:h%13===0?5:h%11===0?4:h%7===0?3:h%5===0?2:h%3===0?1:0;
+  drawDungeonAtlasTile(ctx,atlasBiome,kind,px,py);
  }
  for(const obj of caveObjects(room,map)){
   const px=ox+obj.x*size,py=oy+obj.y*size;if(px<-32||py<-32||px>width||py>height)continue;
