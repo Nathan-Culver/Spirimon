@@ -1,5 +1,6 @@
 import {heldEquipment,itemHasHook} from './equipment.mjs';
 import {stats} from './engine.mjs';
+import {exhaustion,spiritualMultiplier} from './spiritual-core.mjs';
 // Balance is expressed as work/time, not a progression from obsolete to stronger moves.
 export const MOVE_LEVEL_THRESHOLDS=[1,16,36,60,85,100];
 export const STATUS_RULES={
@@ -17,25 +18,33 @@ export function moveLevelTier(level=1){return Math.max(0,MOVE_LEVEL_THRESHOLDS.f
 export function effectWork(effect){if(!effect)return 0;if(effect in EFFECT_WORK)return EFFECT_WORK[effect];if(/^(boost|lower)/.test(effect))return 70;if(/^weather|^terrain/.test(effect))return 140;return 0;}
 export function moveTiming(move,actor={},sp={},style='normal'){
  const tier=moveLevelTier(actor.level),rawPower=Math.max(0,Number(move.realTimeBasePower??move.power)||0),hits=move.effect==='multiHit'?3.5:move.effect==='doubleHit'?2:1;
- const accuracy=clamp(Number(move.accuracy??.9),.05,1),effect=move.effect||null,scale=1+tier*.05;
- const statusOnly=rawPower===0,utility=effectWork(effect)*(statusOnly?1:.30);
- let work=20+rawPower*hits*accuracy+utility;
- if(move.target==='allOpponents'||move.target==='allAllies')work*=1.45;
+ const accuracy=clamp(Number(move.accuracy??.9),.05,1),effect=move.effect||null,scale=1+tier*.05,statusOnly=rawPower===0;
+ let work=20+rawPower*hits*accuracy+effectWork(effect)*(statusOnly?1:.30);
+ if(move.target==='allOpponents'||move.target==='allAllies')work*=1.8;
  if(effect==='unburdened')work+=rawPower*.35;if(effect==='struggle')work=70;
- // Both individual and species speed matter, with diminishing returns and a hard cap.
  const actual=stats({...actor,level:actor.level||1,form:actor.form||0},{...sp,health:sp.health||50,power:sp.power||50,speed:sp.speed||40,moves:sp.moves||[]});
  const speed=Math.max(1,actual.speed),equipment=heldEquipment(actor,sp);
- let haste=clamp(1+Math.log2(speed/80)*.08,.8,1.2);
+ let haste=clamp(1+Math.log2(speed/80)*.17,.7,1.8);
  if(itemHasHook(equipment,'firstWind')&&actor.hp>=actual.hp)haste*=1.1;if(actor.aspect==='Swift'&&actor.entryAction)haste*=1.1;
- const speedStage=clamp(actor.stages?.speed||0,-6,6);haste*=clamp(1+speedStage*.055,.7,1.3);
+ const speedStage=clamp(actor.stages?.speed||0,-6,6);haste*=clamp(1+speedStage*.08,.6,1.5);
  if(actor.status==='paralysis')haste*=.75;if(actor.conditions?.slow)haste*=.8;
- haste*=clamp(1+(move.speed||0)/150,.8,1.2);if(effect==='priority')haste*=1.18;
- const styleTime=style==='agile'?.83:style==='strong'?1.30:1;
- const cooldownMs=Math.round(clamp(work/22,1.4,28)*1000/haste*styleTime);
+ haste*=spiritualMultiplier(actor,'haste');
+ const styleTime=style==='agile'?.9:style==='strong'?1.15:1,penalty=1+exhaustion(actor);
+ const gcdMs=Math.max(1500,Math.round(3500/haste*styleTime*penalty));
+ // Baseline attacks remain repeatable GCDs. Reactions, utility, spread bursts,
+ // and large finishers are independent actions that can be woven between them.
+ const reactions=['priority','protect','ward','cleanse','clearHazards','safeguard','counter','mirrorCoat','focus'];
+ const timing=move.timing==='lcd'||move.timing==='gcd'?move.timing:reactions.includes(effect)||rawPower>=100&&!['twoTurn','chargeSun'].includes(effect)||move.target==='allOpponents'&&rawPower>=50?'lcd':'gcd';
+ const burstWeight=rawPower>=140?4:rawPower>=110?2:1;
+ const budgetSeconds=timing==='lcd'?clamp(work*.20*burstWeight,8,180):clamp(work/24,1.5,25);
+ const localBase=move.cooldownMs??Math.round(budgetSeconds*1000);
+ const cooldownMs=timing==='lcd'?Math.max(2000,Math.round(localBase/haste*styleTime*penalty)):gcdMs;
  const charge=['twoTurn','chargeSun'].includes(effect)?1700:0;
- const castMs=Math.round(clamp(180+rawPower*5+charge+Math.max(0,-(move.speed||0))*8,120,3000)/haste*styleTime);
- const recoveryMs=Math.round(Math.max(800,cooldownMs*.82));
- const power=Math.round(rawPower*scale),healingFraction=effect==='teamHeal'?.18+tier*.01:effect==='heal'?.22+tier*.012:effect==='fullheal'?.65+tier*.01:effect==='rest'?.8+tier*.01:1;
- return {tier,threshold:MOVE_LEVEL_THRESHOLDS[tier],nextThreshold:MOVE_LEVEL_THRESHOLDS[tier+1]||null,power,basePower:rawPower,cooldownMs,castMs,recoveryMs,work:Math.round(work*10)/10,accuracy,effect,healingFraction,durationScale:1+tier*.035};
+ const baseCast=move.castMs??(timing==='lcd'?0:Math.round(clamp((rawPower-35)*17+charge,0,3000)));
+ const castMs=Math.round(baseCast/haste*styleTime*penalty),animationLockMs=move.animationLockMs??(timing==='lcd'?550:450);
+ const recoveryMs=animationLockMs,power=Math.round(rawPower*scale),healingFraction=effect==='teamHeal'?.18+tier*.01:effect==='heal'?.22+tier*.012:effect==='fullheal'?.65+tier*.01:effect==='rest'?.8+tier*.01:1;
+ // Heavy GCDs need longer casts and/or their own recast to pay for burst strength.
+ const localCooldownMs=timing==='gcd'&&work>65?Math.round(work*125/haste*styleTime*penalty):timing==='lcd'?cooldownMs:0;
+ return {tier,threshold:MOVE_LEVEL_THRESHOLDS[tier],nextThreshold:MOVE_LEVEL_THRESHOLDS[tier+1]||null,timing,power,basePower:rawPower,gcdMs,cooldownMs,localCooldownMs,castMs,animationLockMs,recoveryMs,work:Math.round(work*10)/10,accuracy,effect,healingFraction,durationScale:(1+tier*.035)*(1-exhaustion(actor))};
 }
 export function scaledMove(move,actor,sp,style='normal'){const profile=moveTiming(move,actor,sp,style);return {...move,power:profile.power,realTimeBasePower:profile.basePower,realTimeProfile:profile};}

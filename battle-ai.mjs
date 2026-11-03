@@ -14,7 +14,7 @@ export function expectedDamage(actor,asp,target,tsp,move,style='normal',commit=.
  if(move.effect==='hexStrike'&&target.status||move.effect==='venomStrike'&&['poison','toxic'].includes(target.status))damage*=1.5;
  if(move.effect==='sleepStrike'&&target.status!=='sleep')return 0;
  if(move.effect==='counter'||move.effect==='mirrorCoat')return actor.lastHit?.source===target.id?actor.lastHit.amount*2:0;
- if(target.ward&&!['breakWard','struggle'].includes(move.effect))return 0;
+ if(target.ward&&!['breakWard','struggle'].includes(move.effect)){if((target.wardStrength??1)>=1)return 0;damage*=1-(target.wardStrength??1);}
  return damage*E.hitChance(actor,target,move,style,asp);
 }
 function incomingThreat(actor,asp,opponents,speciesOf){return opponents.reduce((sum,u)=>sum+Math.max(0,...choices(u,speciesOf(u)).map(m=>expectedDamage(u,speciesOf(u),actor,asp,m))),0);}

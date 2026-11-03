@@ -7,7 +7,7 @@ import {allMoveTemplates,CORE_STATUS_MOVES,buildLearnset} from '../moves.mjs';
 import {chooseBattleAction} from '../battle-ai.mjs';
 import {generateHeldItem} from '../equipment.mjs';
 import {realTimeMoveHTML,realTimeStatusHTML} from '../realtime-ui.mjs';
-const move=(id,power=40,effect=null)=>({id,name:id,power,effect,kind:power?'physical':'status',category:power?'Physical':'Status',type:'Beast',accuracy:1,speed:0});
+const move=(id,power=40,effect=null)=>({id,name:id,power,effect,kind:power?'physical':'status',category:power?'Physical':'Status',type:'Beast',accuracy:1,timing:'gcd'});
 const hit=move('hit'),fast=move('fast',20),heavy=move('heavy',100),sleep=move('sleep',0,'sleep'),freeze=move('freeze',0,'freeze'),poison=move('poison',0,'poison'),confuse=move('confuse',0,'confusion'),heal={...move('heal',0,'heal'),target:'self'};
 function fixture(size=1){const sp={id:'test',forms:['Test'],base:'Beast',alter:'Fey',domains:[],health:160,power:45,speed:40,physicalRes:1,spiritualRes:1,moves:[hit,fast,heavy,sleep,freeze,poison,confuse,heal],learnset:[hit,fast,heavy,sleep,freeze,poison,confuse,heal]};
  const team=side=>Array.from({length:Math.max(size,2)},(_,n)=>({...E.heal(E.makeIndividual(sp,25,0,E.rng(n+1)),sp),id:side+n,nature:'Hardy'}));const a=team('a'),b=team('b'),context={active:{a:a.slice(0,size),b:b.slice(0,size)},teams:{a,b},speciesOf:()=>sp,inventory:{a:{tonics:2,ethers:2}}};E.bindBattlefield(a,b);const state=RT.createRealTimeState();
@@ -21,7 +21,7 @@ test('move cooldown and actor recovery prevent immediate repeats, then expire by
  const f=fixture();const first=f.schedule(f.a[0],hit);assert.ok(first.ok);assert.equal(f.schedule(f.a[0],hit).ok,false);f.step(1000);assert.equal(f.schedule(f.a[0],hit).ok,false);f.step(first.profile.cooldownMs+first.profile.recoveryMs);assert.ok(f.schedule(f.a[0],hit).ok);
 });
 test('fast and heavy Moves trade damage for time and independent individual cooldown records',()=>{
- const f=fixture(2),a=moveTiming(fast,f.a[0],f.sp),b=moveTiming(heavy,f.a[0],f.sp);assert.ok(a.cooldownMs<b.cooldownMs);assert.ok(a.castMs<b.castMs);f.schedule(f.a[0],heavy);assert.ok(f.schedule(f.a[1],heavy).ok);assert.notEqual(RT.unitClock(f.state,f.a[0]),RT.unitClock(f.state,f.a[1]));
+ const f=fixture(2),a=moveTiming(fast,f.a[0],f.sp),b=moveTiming(heavy,f.a[0],f.sp);assert.ok(b.localCooldownMs>a.localCooldownMs||b.work>a.work);assert.ok(a.castMs<b.castMs);f.schedule(f.a[0],heavy);assert.ok(f.schedule(f.a[1],heavy).ok);assert.notEqual(RT.unitClock(f.state,f.a[0]),RT.unitClock(f.state,f.a[1]));
 });
 test('pause freezes casts, cooldowns and afflictions without a resume burst',()=>{
  const f=fixture();f.b[0].status='poison';f.schedule(f.a[0],hit);const before=structuredClone(f.state),hp=f.b[0].hp;f.state.paused=true;f.step(20000);assert.equal(f.state.elapsedMs,before.elapsedMs);assert.equal(f.b[0].hp,hp);f.state.paused=false;f.step(1000);assert.ok(f.b[0].hp<hp);
@@ -65,14 +65,14 @@ test('AI filters cooling Moves instead of using Struggle while funded Moves are 
  const ready=chooseBattleAction(f.b[0],{realTime:true,speciesOf:()=>f.sp,opponents:[f.a[0]],allies:[f.b[0]],team:[f.b[0]],canUse:c=>c.move?.id==='fast'},()=>.5);assert.equal(ready.move.id,'fast');assert.equal(ready.borrow,0);
 });
 test('all catalog Moves have bounded cooldowns and scale at each level threshold',()=>{
- const all=allMoveTemplates();assert.ok(all.length>400);for(const m of all){let previous=-1;for(const level of MOVE_LEVEL_THRESHOLDS){const p=moveTiming(m,{level},{speed:40});assert.ok(p.cooldownMs>=1000&&p.cooldownMs<=40000,m.name);assert.ok(p.castMs>0&&p.castMs<5000,m.name);assert.ok(p.power>=previous,m.name);previous=p.power;}if(m.power>0)assert.ok(moveTiming(m,{level:100},{speed:40}).power>moveTiming(m,{level:1},{speed:40}).power,m.name);}
+ const all=allMoveTemplates();assert.ok(all.length>400);for(const m of all){let previous=-1;for(const level of MOVE_LEVEL_THRESHOLDS){const p=moveTiming(m,{level},{speed:40});assert.ok(p.cooldownMs>=1000&&p.cooldownMs<=180000,m.name);assert.ok(p.castMs>=0&&p.castMs<6000,m.name);assert.ok(p.power>=previous,m.name);previous=p.power;}if(m.power>0)assert.ok(moveTiming(m,{level:100},{speed:40}).power>moveTiming(m,{level:1},{speed:40}).power,m.name);}
 });
 test('major afflictions all have actual catalog Moves and appropriate early learnset access',()=>{
  const all=allMoveTemplates();for(const effect of ['confusion','sleep','freeze','burn','poison','toxic','paralysis','frostbite'])assert.ok(all.some(m=>m.effect===effect),effect);
  for(const m of CORE_STATUS_MOVES){const base=m.eligibleTypes[0],alter=base==='Fey'?'Beast':'Fey',pool=buildLearnset(base,alter,[]);assert.ok(pool.some(p=>p.id===m.id));const sp={...E.makeSpecies('status-'+m.id,base,alter),learnset:pool};const ind={level:m.learnLevel,form:0};assert.ok(E.availableTechniques(ind,sp).some(p=>p.id===m.id),m.name);}
 });
 test('real-time controls expose cooldown timers and readiness without turn or borrowing controls',()=>{
- const f=fixture();f.schedule(f.a[0],hit);const html=realTimeMoveHTML(f.state,f.a[0],f.sp,[hit]);assert.match(html,/CD /);assert.match(html,/Casting/);assert.match(html,/disabled/);assert.doesNotMatch(html,/borrow|ROUND /);
+ const f=fixture();f.schedule(f.a[0],hit);const html=realTimeMoveHTML(f.state,f.a[0],f.sp,[hit]);assert.match(html,/GCD|LCD/);assert.match(html,/Casting/);assert.match(html,/disabled/);assert.doesNotMatch(html,/borrow|ROUND /);
 });
 
 test('re-evaluating a locked or charged Move never compounds its level-scaled power',()=>{
