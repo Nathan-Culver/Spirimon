@@ -21,7 +21,7 @@ import * as W from './world.mjs';
 import * as E from './engine.mjs';
 import * as A from './adventure-systems.mjs';
 import * as EP from './environment-puzzles.mjs';
-import {drawInteriorScene} from './interior-assets.mjs';
+import {drawInteriorScene,INTERIOR_ATLAS,MATERIAL_ATLAS,TOWN_ATLAS} from './interior-assets.mjs';
 import {drawTechnique} from './move-animations.mjs';
 import {drawSpirit,drawCompanion,drawAspectAura,drawPerson,drawTile,drawBuilding,drawTownDecor,drawTree,drawWell,drawTownBuilding,drawTownFeatures,renderSpiritCanvases} from './sprites.mjs';
 const $=q=>document.querySelector(q);
@@ -522,7 +522,7 @@ function drawWorld(time){
  if(s.cave){drawCave(canvas,time);return;}if(s.interior){drawInterior(canvas,time);return;}
  // Keep the last fully painted frame rather than flashing the low-detail fallback
  // while the authored terrain atlas is temporarily unavailable.
- if(!readyImage(ART.terrain)||!readyImage(ART.world)||!readyImage(ART.sealer))return;
+ if(!readyImage(ART.terrain)||!readyImage(ART.world)||!readyImage(ART.sealer)||!readyImage(TOWN_ATLAS))return;
  const rect=canvas.getBoundingClientRect(),scale=document.body.classList.contains('emulator-mode')?1.5:2;
  const width=Math.max(240,Math.round(rect.width/scale)),height=Math.max(160,Math.round(rect.height/scale));
  if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;}
@@ -801,6 +801,7 @@ function ensurePlayerOnPath(){if(E.walkable(E.tile(s.seed,s.player.x,s.player.y)
 function enterBuilding(building){if(modal||battle)return;s.interior=W.makeInterior(building);s.interior.trail=[{x:s.interior.x,y:s.interior.y,face:'down'}];walkAnim=null;keys.clear();save();render();toast(building.name);}
 function moveInside(dx,dy){if(modal||battle||view!=='explore')return;const room=s.interior,x=room.x+dx,y=room.y+dy;room.face=dx<0?'left':dx>0?'right':dy<0?'up':'down';const npc=W.roomNPCs(room).find(n=>n.x===x&&n.y===y);if(npc)return;if(!W.roomWalkable(room.kind,x,y))return;if(y===10&&x===7){s.player.x=room.outside.x;s.player.y=room.outside.y;s.player.face='down';delete s.interior;keys.clear();save();render();return;}room.trail??=[];room.trail.push({x:room.x,y:room.y,face:room.face});if(room.trail.length>24)room.trail.shift();room.walkStart=performance.now();room.walkDuration=running||keys.has('shift')?100:170;room.x=x;room.y=y;s.steps++;lastStep=performance.now();save();$('#map-hint').textContent=hint();}
 function drawInterior(canvas,time){
+ if(!readyImage(INTERIOR_ATLAS)||!readyImage(MATERIAL_ATLAS)||!readyImage(ART.sealer))return;
  const rect=canvas.getBoundingClientRect(),width=Math.max(320,Math.round(rect.width/2)),height=Math.max(200,Math.round(rect.height/2));
  if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;}
  const c=canvas.getContext('2d'),room=s.interior,unit=32,roomWidth=W.ROOM_W*unit,roomHeight=W.ROOM_H*unit;
