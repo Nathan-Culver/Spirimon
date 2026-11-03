@@ -202,6 +202,16 @@ export function drawTile(ctx,type,x,y,seed,biome,options={}){
 export function drawWell(ctx,x,y){prop(ctx,7,x-16,y-32,64,64);}
 
 function expandedProp(ctx,index,x,y,w,h){const image=readyImage(ART.towns);if(!image)return;ctx.imageSmoothingEnabled=false;ctx.drawImage(image,index%3*256,Math.floor(index/3)*256,256,256,Math.round(x),Math.round(y),w,h);}
-export function drawTownBuilding(ctx,b,x,y){if(b.facade!=null&&drawAtlasAsset(ctx,TOWN_ATLAS,b.facade,x+(b.dx+.5)*32-72,y+(b.h-.5)*32-136,144,144))return;if(['hall','inn','home'].includes(b.kind))return drawBuilding(ctx,x,y,b.kind==='hall',b.kind);const index={forge:0,herbalist:1,archive:2}[b.kind];if(b.kind==='archive')expandedProp(ctx,index,x+24,y-40,176,168);else expandedProp(ctx,index,x+8,y-16,144,144);}
-export function drawTownFeatures(ctx,cx,cy,px,py,only=null){for(const f of (only?[only]:townFeatures(cx,cy))){const x=px(cx*48+f.x),y=py(cy*36+f.y);if(f.asset!=null){drawAtlasAsset(ctx,TOWN_ATLAS,f.asset,x-4,y-12,f.w*32+8,f.h*32+12);continue;}const width=f.cell===8?112:f.w===2?72:64,height=f.cell===8?104:f.cell===5?88:64;expandedProp(ctx,f.cell,x+(f.w*32-width)/2,y+f.h*32-height,width,height);}}
+export function drawTownBuilding(ctx,b,x,y){
+ // The original service-specific ART.towns atlas contains visibly blocky,
+ // prototype-quality facades. All service buildings now use the detailed
+ // settlement facade atlas or the authored world-building sprites instead.
+ const facade=b.facade!=null?b.facade:({forge:1,herbalist:2,archive:3}[b.kind]);
+ if(facade!=null){
+  const width=b.kind==='archive'?176:144,height=b.kind==='archive'?168:144;
+  if(drawAtlasAsset(ctx,TOWN_ATLAS,facade,x+(b.dx+.5)*32-width/2,y+(b.h-.5)*32-height,width,height))return;
+ }
+ drawBuilding(ctx,x,y,b.kind==='hall',b.kind);
+}
+export function drawTownFeatures(ctx,cx,cy,px,py,only=null){for(const f of (only?[only]:townFeatures(cx,cy))){const x=px(cx*48+f.x),y=py(cy*36+f.y);if(f.asset!=null){drawAtlasAsset(ctx,TOWN_ATLAS,f.asset,x-4,y-12,f.w*32+8,f.h*32+12);continue;}const width=f.cell===8?112:f.w===2?72:64,height=f.cell===8?104:f.cell===5?88:64;drawAtlasAsset(ctx,TOWN_ATLAS,({3:9,4:10,5:7,6:11,7:12,8:14}[f.cell]??7),x+(f.w*32-width)/2,y+f.h*32-height,width,height);}}
 
