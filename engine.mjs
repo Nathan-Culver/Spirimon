@@ -369,7 +369,31 @@ export function region(seed,cx,cy){
 }
 export const CHUNK_W=48,CHUNK_H=36;
 export function coord(x,y){return{cx:Math.floor(x/48),cy:Math.floor(y/36),lx:((x%48)+48)%48,ly:((y%36)+36)%36};}
-function rawTile(seed,x,y){const{cx,cy,lx,ly}=coord(x,y),reg=region(seed,cx,cy),h=hash(seed,x,y)%100,inTown=reg.town&&Math.abs(lx-24)<10&&Math.abs(ly-18)<8,path=ly===18||ly===19||lx===24||lx===25;if(reg.town){for(const b of townLayout(cx,cy))if(lx>=b.x&&lx<b.x+b.w&&ly>=b.y&&ly<b.y+b.h)return ly===b.y?'path':b.kind==='hall'?'guild':'house';if(townFeatures(cx,cy).some(f=>lx>=f.x&&lx<f.x+f.w&&ly>=f.y&&ly<f.y+f.h))return'feature';if(lx===27&&ly===18)return'well';if(townPath(lx,ly,cx,cy))return'path';}if(path)return'path';if(reg.town&&townGround(lx,ly,cx,cy))return h<9?'flower':'lawn';if(inTown)return h<12?'flower':'lawn';const rx=5+(hash(seed,cx,cy,'terrace')%2)*27,ry=4;if(lx>=rx&&lx<=rx+10&&ly>=ry&&ly<=ry+8){if(ly===ry+8&&lx===rx+5)return'stairs';if(lx===rx||lx===rx+10||ly===ry+8)return'cliff';if(h<22)return'grass';return'lawn';}const coarse=hash(seed,Math.floor(x/5),Math.floor(y/5));if(coarse%13===0&&lx%5>0&&ly%5>0)return'water';if(hash(seed,Math.floor(x/4),Math.floor(y/4),'woods')%100<38)return(x%2===0&&y%2===0)?'tree':'forest';if(h<5)return'rock';if(hash(seed,Math.floor(x/3),Math.floor(y/3),'grass')%100<33)return'grass';if(h<50)return'flower';return'lawn';}
+// Continuous, seed-stable geography: neighboring chunks sample the same world-space fields.
+function terrainNoise(seed,x,y,scale,salt){
+ const gx=Math.floor(x/scale),gy=Math.floor(y/scale),fx=x/scale-gx,fy=y/scale-gy;
+ const smooth=t=>t*t*(3-2*t),u=smooth(fx),v=smooth(fy);
+ const n=(a,b)=>hash(seed,'landscape',salt,a,b)/4294967295;
+ const a=n(gx,gy)*(1-u)+n(gx+1,gy)*u,b=n(gx,gy+1)*(1-u)+n(gx+1,gy+1)*u;
+ return a*(1-v)+b*v;
+}
+export function geography(seed,x,y){
+ // Broad seas with bays and peninsulas, plus offshore islands and inland lakes.
+ const continental=terrainNoise(seed,x,y,260,'continent')*.72+terrainNoise(seed,x,y,92,'coast')*.28;
+ const coastDetail=(terrainNoise(seed,x,y,29,'shore')-.5)*.12;
+ const offshore=terrainNoise(seed,x,y,53,'archipelago')*.68+terrainNoise(seed,x,y,18,'islets')*.32;
+ const ocean=continental+coastDetail<.405;
+ const island=ocean&&continental>.26&&offshore>.69;
+ const lakeField=terrainNoise(seed,x,y,58,'lake')*.7+terrainNoise(seed,x,y,19,'lake-edge')*.3;
+ const lake=!ocean&&lakeField>.735&&continental<.72;
+ // Keep the starter village and its immediate approaches reliably accessible.
+ const start=Math.max(Math.abs(x-24)/45,Math.abs(y-19)/35);
+ const protectedStart=start<1;
+ const water=!protectedStart&&((ocean&&!island)||lake);
+ const forestField=terrainNoise(seed,x,y,47,'forest')*.7+terrainNoise(seed,x,y,13,'grove')*.3;
+ return {water,ocean:water&&ocean,lake:water&&lake,island:island&&!water,forest:forestField>.51,forestDensity:forestField};
+}
+function rawTile(seed,x,y){const{cx,cy,lx,ly}=coord(x,y),reg=region(seed,cx,cy),h=hash(seed,x,y)%100,inTown=reg.town&&Math.abs(lx-24)<10&&Math.abs(ly-18)<8,path=ly===18||ly===19||lx===24||lx===25;if(reg.town){for(const b of townLayout(cx,cy))if(lx>=b.x&&lx<b.x+b.w&&ly>=b.y&&ly<b.y+b.h)return ly===b.y?'path':b.kind==='hall'?'guild':'house';if(townFeatures(cx,cy).some(f=>lx>=f.x&&lx<f.x+f.w&&ly>=f.y&&ly<f.y+f.h))return'feature';if(lx===27&&ly===18)return'well';if(townPath(lx,ly,cx,cy))return'path';}if(!reg.town&&geography(seed,x,y).water)return'water';if(path)return'path';if(reg.town&&townGround(lx,ly,cx,cy))return h<9?'flower':'lawn';if(inTown)return h<12?'flower':'lawn';const rx=5+(hash(seed,cx,cy,'terrace')%2)*27,ry=4;if(lx>=rx&&lx<=rx+10&&ly>=ry&&ly<=ry+8){if(ly===ry+8&&lx===rx+5)return'stairs';if(lx===rx||lx===rx+10||ly===ry+8)return'cliff';if(h<22)return'grass';return'lawn';}const landscape=geography(seed,x,y);if(landscape.water)return'water';if(landscape.forest){const density=landscape.forestDensity;return hash(seed,'tree',x,y)%100<(density>.65?53:32)?'tree':'forest';}if(h<5)return'rock';if(hash(seed,Math.floor(x/3),Math.floor(y/3),'grass')%100<33)return'grass';if(h<50)return'flower';return'lawn';}
 export function walkable(t,canSwim=false,canClimb=false){return!['guild','house','well','tree','cliff'].includes(t)&&(t!=='water'||canSwim)&&(t!=='rock'||canClimb);}
 export function npcs(seed,cx,cy){if(!region(seed,cx,cy).town)return[];return[{id:'keeper-'+cx+','+cy,name:'Keeper Iona',role:'keeper',x:cx*48+22,y:cy*36+16},{id:'merchant-'+cx+','+cy,name:'Tavi',role:'merchant',x:cx*48+29,y:cy*36+17},{id:'rival-'+cx+','+cy,name:'Rowan',role:'rival',x:cx*48+19,y:cy*36+20},{id:'scholar-'+cx+','+cy,name:'Scholar Elin',role:'scholar',x:cx*48+26,y:cy*36+23}];}
 export function newGame(seed='SP-'+Math.floor(Math.random()*999999)){return{version:VERSION,seed,player:{name:'Sealer',x:24,y:19,face:'down'},safe:{x:24,y:19},spirits:[],party:[],species:{},regions:{},roamers:{},seen:[],history:{},inventory:{seals:8,offerings:5,tonics:5,ethers:3,coins:120,quality:1},rank:1,rankXP:0,steps:0,wins:0,captured:0,friendships:{},quests:{discovery:false,rival:false,explorer:false},drops:[],lastSave:Date.now(),playTime:0,settings:{timing:'normal'},starter:false,notes:['Arrived at Mossveil Crossing. Keeper Iona is waiting beside the guild.']};}
