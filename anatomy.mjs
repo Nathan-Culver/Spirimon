@@ -59,6 +59,7 @@ export function capabilitiesFromAnatomy(anatomy,domains=[]){
   push:entry(strength>=2||psychic||has('vines'),psychic?'telekinesis':has('vines')?'vine leverage':'body strength','Strength '+strength+'; detailed anatomical record'),
   crush:entry(strength>=2||psychic,psychic?'telekinesis':'impact','Strength '+strength+'; jaws, limbs or telekinetic force'),
   cleave:entry(['claws','talons','thorns','mandibles','fangs'].some(has)||psychic,psychic?'telekinetic edge':'natural cutting edge','Recorded cutting appendages'),
+  steed:entry(['quadruped','serpentine','many-legged','winged'].includes(anatomy.bodyPlan)&&anatomy.scale==='colossal'||has('rideable'),'riding','Stable mount-capable body with sufficient size'),
   swim:entry(has('swim')||has('water')||domains.includes('Water'),'aquatic propulsion','Fins, swimming body or Water Domain'),
   fly:entry(has('fly')&&anatomy.limbs?.wings>=2||has('levitate')||domains.includes('Air'),has('levitate')?'levitation':'aerial lift','Wings, levitation or Air Domain'),
   dig:entry(has('dig')||domains.includes('Earth'),'excavation','Burrowing anatomy or Earth Domain'),
