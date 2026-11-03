@@ -1,3 +1,4 @@
+import {exhaustion,spiritualMultiplier,spiritualDefense,spiritualBonus,shieldDamage} from './spiritual-core.mjs';
 import {buildDesign,assignDomains,migrateSpecies,migrateSaveCreatures,syncCapabilities} from './anatomy.mjs';
 import {CREATURE_TYPES,CREATURE_DOMAINS} from './creature-catalog.mjs';
 import {equipment,hasHook,ASPECTS,heldEquipment,itemHasHook,itemOnceUsed,markItemUsed,consumeHeldItem,heldItemActivation} from './equipment.mjs';
@@ -19,14 +20,14 @@ export const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export function rollDomains(r=Math.random){const out=[];while(out.length<DOMAINS.length&&r()<.01)out.push(pick(DOMAINS.filter(d=>!out.includes(d)),r));return out;}
 export function rollForm(r=Math.random){const v=r();return v<.01?2:v<.06?1:0;}
 export const MOVE_CATALOG=[
-{id:'strike',name:'Spirit Strike',power:38,speed:8,kind:'physical',effect:null,desc:'A quick, reliable strike.'},
-{id:'lash',name:'Binding Lash',power:29,speed:4,kind:'spiritual',effect:'slow',desc:'Spirimon threads hinder the foe’s next action.'},
-{id:'surge',name:'Soul Surge',power:64,speed:-18,kind:'spiritual',effect:null,desc:'Gather power for a heavy spiritual hit.'},
-{id:'mend',name:'Quiet Renewal',power:0,speed:-8,kind:'spiritual',effect:'heal',desc:'Recover a quarter of maximum health.'},
-{id:'venom',name:'Bitter Thorn',power:24,speed:2,kind:'physical',effect:'poison',desc:'A barbed strike that leaves lingering poison.'},
-{id:'ward',name:'Spirit Ward',power:0,speed:12,kind:'spiritual',effect:'ward',desc:'Raise a ward that softens the next hit.'},
-{id:'sleep',name:'Drowsing Whisper',power:15,speed:-5,kind:'spiritual',effect:'sleep',desc:'A hypnotic whisper may briefly lull the foe.'},
-{id:'rush',name:'Wild Rush',power:45,speed:15,kind:'physical',effect:'recoil',desc:'Rush forward; the impact also hurts the user.'}];
+{id:'strike',name:'Spirit Strike',power:38,kind:'physical',effect:null,desc:'A quick, reliable strike.'},
+{id:'lash',name:'Binding Lash',power:29,kind:'spiritual',effect:'slow',desc:'Spirimon threads hinder the foe’s next action.'},
+{id:'surge',name:'Soul Surge',power:64,kind:'spiritual',effect:null,desc:'Gather power for a heavy spiritual hit.'},
+{id:'mend',name:'Quiet Renewal',power:0,kind:'spiritual',effect:'heal',desc:'Recover a quarter of maximum health.'},
+{id:'venom',name:'Bitter Thorn',power:24,kind:'physical',effect:'poison',desc:'A barbed strike that leaves lingering poison.'},
+{id:'ward',name:'Spirit Ward',power:0,kind:'spiritual',effect:'ward',desc:'Raise a ward that softens the next hit.'},
+{id:'sleep',name:'Drowsing Whisper',power:15,kind:'spiritual',effect:'sleep',desc:'A hypnotic whisper may briefly lull the foe.'},
+{id:'rush',name:'Wild Rush',power:45,kind:'physical',effect:'recoil',desc:'Rush forward; the impact also hurts the user.'}];
 export function makeSpecies(seed,base,alter,domains){
  const r=rng(seed);base??=pick(TYPES,r);alter??=pick(TYPES.filter(t=>t!==base),r);
  if(!TYPES.includes(base)||!TYPES.includes(alter)||base===alter)throw Error('Two distinct valid types required.');
@@ -58,7 +59,7 @@ export function migrateResources(ind,sp){
  }
  return normalizeResources(ind,sp);
 }
-export const STRUGGLE={id:'struggle',name:'Struggle',power:50,speed:0,kind:'physical',category:'Physical',effect:'struggle',accuracy:1,desc:'An exhausted physical attack. Recoil costs one quarter of maximum HP.'};
+export const STRUGGLE={id:'struggle',name:'Struggle',power:50,kind:'physical',category:'Physical',effect:'struggle',accuracy:1,desc:'An exhausted physical attack. Recoil costs one quarter of maximum HP.'};
 export function canUseMove(ind,sp,move,targetSp){
  if(ind.pendingMove?.id===move.id)return true;
  if(ind.itemMoveLock&&hasHook(ind,'choiceLock',sp)&&ind.itemMoveLock!==move.id)return false;
@@ -113,7 +114,7 @@ export const STATUS_EFFECTS=['burn','freeze','paralysis','poison','toxic','sleep
 const MAJOR=new Set(['burn','freeze','paralysis','poison','toxic','sleep','frostbite']);
 const STAGE_KEYS={boostMight:['might',1],boostPower:['power',1],boostDefense:['defense',1],boostResistance:['resistance',1],boostSpeed:['speed',1],boostAccuracy:['accuracy',1],boostEvasion:['evasion',1],lowerMight:['might',-1],lowerPower:['power',-1],lowerDefense:['defense',-1],lowerResistance:['resistance',-1],lowerSpeed:['speed',-1],lowerAccuracy:['accuracy',-1]};
 const SUPPORT=new Set(['heal','rest','fullheal','cleanse','protect','ward','reflect','lightscreen','safeguard','regenerate','auroraVeil','focus','batonPass','bellyDrum','destinyBond','teamHeal','teamWard']);
-const VOLATILES=['itemMoveLock','conditions','conditionSources','stages','ward','wardTurns','reflect','lightscreen','safeguard','screens','hazards','realtimeNow','controlImmuneUntil','pendingMove','lockedMove','rampageTurns','recharging','focused','disabledMove','lastMove','lastHit','switchRequested','passStages','tookDamageThisRound','forcedDisplacement','delayedDamage','battleStyle','battlefield','battleSide','entryAction','protect','destinyBond','toxicTurns'];
+const VOLATILES=['itemMoveLock','conditions','conditionSources','stages','ward','wardTurns','wardStrength','reflect','lightscreen','safeguard','screens','hazards','realtimeNow','controlImmuneUntil','pendingMove','lockedMove','rampageTurns','recharging','focused','disabledMove','lastMove','lastHit','switchRequested','passStages','tookDamageThisRound','forcedDisplacement','delayedDamage','battleStyle','battlefield','battleSide','entryAction','protect','destinyBond','toxicTurns','spiritualBuffs','spiritualShields','spiritualLinks','spiritualEnergyEmpty'];
 export const SUPPORTED_EFFECTS=[null,...STATUS_EFFECTS,...Object.keys(STAGE_KEYS),...SUPPORT,'partyCleanse','haze','swapStats','invertStats','clearHazards','spikes','toxicSpikes','stealthRock','stickyWeb','counter','mirrorCoat','priority','sureHit','breakWard','multiHit','doubleHit','drain','recoil','struggle','recharge','unburdened','critical','omniBoost','selfDebuff','revenge','partyStrike','twoTurn','chargeSun','rampage','pivot','forceSwitch','sunStrike','weatherStrike','sandStrike','snowStrike','weatherRain','weatherSun','weatherSand','weatherSnow','terrainGrass','terrainElectric','terrainPsychic','terrainMisty','terrainStrike','electricStrike','psychicStrike','mistStrike','delayedStrike','sleepStrike','hexStrike','venomStrike'];
 function stage(ind,key){return ind.stages?.[key]||0;}
 export function stageFactor(n){return n>=0?(2+n)/2:2/(2-n);}
@@ -153,7 +154,7 @@ export function switchUnits(out,incoming,sp,options={}){
 }
 export function priority(ind,sp,move,style='normal'){
  const slowed=ind.status==='slow'||ind.conditions?.slow;
- return Math.floor(stats(ind,sp).speed*stageFactor(stage(ind,'speed'))*(ind.status==='paralysis'?.5:1))+(move.speed||0)+(STYLES[style]||STYLES.normal).speed-(slowed?18:0)+(hasHook(ind,'firstWind',sp)&&ind.hp>=stats(ind,sp).hp?12:0)+(ind.aspect==='Swift'&&ind.entryAction?12:0)+(move.effect==='priority'?100000:['counter','mirrorCoat'].includes(move.effect)?-100000:0);
+ return Math.floor(stats(ind,sp).speed*stageFactor(stage(ind,'speed'))*(ind.status==='paralysis'?.5:1))+(STYLES[style]||STYLES.normal).speed-(slowed?18:0)+(hasHook(ind,'firstWind',sp)&&ind.hp>=stats(ind,sp).hp?12:0)+(ind.aspect==='Swift'&&ind.entryAction?12:0)+(move.effect==='priority'?100000:['counter','mirrorCoat'].includes(move.effect)?-100000:0);
 }
 export function hitChance(actor,target,move,style='normal',asp=null){
  if(['sureHit','struggle'].includes(move.effect))return 1;
@@ -165,7 +166,7 @@ export function damage(attacker,asp,defender,dsp,move,style='normal',r=Math.rand
  const offense=(energy?a.power:a.might)*(.25+(attacker.commit??.5)*1.5)*stageFactor(stage(attacker,energy?'power':'might'));
  const defense=(energy?d.resistance:d.defense)*(.25+(1-(defender.commit??.5))*1.5)*stageFactor(stage(defender,energy?'resistance':'defense'));
  const same=[asp.base,asp.alter].includes(move.type)?1.15:1;
- let amount=((2*attacker.level/5+2)*move.power*(offense/Math.max(1,defense))/24+2)*(STYLES[style]||STYLES.normal).damage*effectiveness(move,{...dsp,activeMoveDomains:activeDomains(dsp,defender),moves:equippedMoves(defender,dsp)})*(energy?dsp.spiritualRes??1:dsp.physicalRes??1)*same*(.9+r()*.1)*(defender.ward?.55:1);
+ let amount=((2*attacker.level/5+2)*move.power*(offense/Math.max(1,defense))/24+2)*(STYLES[style]||STYLES.normal).damage*effectiveness(move,{...dsp,activeMoveDomains:activeDomains(dsp,defender),moves:equippedMoves(defender,dsp)})*(energy?dsp.spiritualRes??1:dsp.physicalRes??1)*same*(.9+r()*.1)*(defender.ward?1-.45*(defender.wardStrength??1):1);
  if(asp.ability==='Wildheart'&&!energy||asp.ability==='Soulweave'&&energy)amount*=1.12;
  if(dsp.ability==='Steadfast'&&(defender.commit??.5)<=.4)amount*=.9;
  if(attacker.status==='burn'&&!energy||attacker.status==='frostbite'&&energy)amount*=.5;
@@ -175,9 +176,11 @@ export function damage(attacker,asp,defender,dsp,move,style='normal',r=Math.rand
  if(attacker.aspect==='Umbral'&&(defender.status||Object.keys(defender.conditions||{}).length))amount*=1.15;
  const field=attacker.battlefield||{};
  if(attacker.aspect==='Stormbound'&&['rain','snow'].includes(field.weather)&&['Water','Storm','Lightning','Ice'].includes(move.domain))amount*=1.15;
+ amount*=(1-exhaustion(attacker))*(1+exhaustion(defender))*spiritualMultiplier(attacker,'empower')/spiritualMultiplier(defender,'empower')*spiritualDefense(defender,move,energy?'Energy':'Physical');
  return Math.max(1,Math.floor(amount));
 }
 function applyCondition(target,effect,r=Math.random,sp=null,log=[],source=null){
+ if(spiritualBonus(target,'immunity').length){log.push('Spiritual sanctuary prevents '+effect+'.');return false;}
  if(source?.realtimeNow!=null&&['sleep','freeze','flinch'].includes(effect)&&(target.controlImmuneUntil||0)>source.realtimeNow)return false;
  const field=target.battlefield||{},screens=screenState(target);if(effect==='nightmare'&&target.status!=='sleep'||effect==='disable'&&!target.lastMove)return false;
  if(target.safeguard||screens.safeguard||target.ward||field.terrain==='misty'||effect==='sleep'&&field.terrain==='electric')return false;
@@ -226,12 +229,12 @@ export function executeAction(actor,asp,target,tsp,move,style='normal',commit=.5
  const support=friendly?target:actor,supportSp=friendly?tsp:asp;
  if(category==='Status'){
   if(effect==='itemResources'){const caps=stats(support,supportSp),amount=context.heldItem?.resourceRecovery||10;support.pp=Math.min(caps.pp,(support.pp||0)+amount);support.willpower=Math.min(caps.willpower,(support.willpower||0)+amount);log.push(name+' restores '+nameOf(support,supportSp)+'’s Stanima and Willpower.');return log;}
-  if(effect==='teamHeal'||effect==='teamWard'){for(const u of living(context.alliedActive||[actor])){if(effect==='teamHeal')healHP(u,context.speciesOf?context.speciesOf(u):asp,stats(u,context.speciesOf?context.speciesOf(u):asp).hp*(context.healingFraction||.2));else{u.ward=true;u.wardTurns=1;}}log.push(name+' surrounds its allies with '+(effect==='teamHeal'?'renewing light.':'a shared ward.'));return log;}
+  if(effect==='teamHeal'||effect==='teamWard'){for(const u of living(context.alliedActive||[actor])){if(effect==='teamHeal')healHP(u,context.speciesOf?context.speciesOf(u):asp,stats(u,context.speciesOf?context.speciesOf(u):asp).hp*(context.healingFraction||.2)*(1-exhaustion(actor)));else{u.ward=true;u.wardTurns=1;u.wardStrength=1-exhaustion(actor);}}log.push(name+' surrounds its allies with '+(effect==='teamHeal'?'renewing light.':'a shared ward.'));return log;}
   if(effect?.startsWith('weather')){field.weather=effect.slice(7).toLowerCase();field.weatherTurns=hasHook(actor,'weather',asp)?8:5;log.push(name+' summons '+field.weather+' weather.');return log;}
   if(effect?.startsWith('terrain')){field.terrain=effect.slice(7).toLowerCase();field.terrainTurns=hasHook(actor,'weather',asp)?8:5;log.push(name+' creates '+field.terrain+' terrain.');return log;}
-  if(['heal','rest','fullheal'].includes(effect)){healHP(support,supportSp,stats(support,supportSp).hp*(effect==='heal'?(context.heldItem?.recovery||context.healingFraction||.25):context.realTime?(context.healingFraction||1):1));if(effect!=='heal'){support.status=effect==='rest'?'sleep':null;support.statusTurns=effect==='rest'?2:0;}log.push(name+' restores '+nameOf(support,supportSp)+'’s vitality.');return log;}
+  if(['heal','rest','fullheal'].includes(effect)){healHP(support,supportSp,stats(support,supportSp).hp*(1-exhaustion(actor))*(effect==='heal'?(context.heldItem?.recovery||context.healingFraction||.25):context.realTime?(context.healingFraction||1):1));if(effect!=='heal'){support.status=effect==='rest'?'sleep':null;support.statusTurns=effect==='rest'?2:0;}log.push(name+' restores '+nameOf(support,supportSp)+'’s vitality.');return log;}
   if(effect==='cleanse'||effect==='partyCleanse'){for(const u of effect==='partyCleanse'?(context.actorTeam||[actor]):[support]){u.status=null;u.statusTurns=0;u.conditions={};u.conditionSources={};}log.push(name+' cleanses '+(effect==='partyCleanse'?'the whole team':'its ally')+'.');return log;}
-  if(effect==='ward'||effect==='protect'){support.ward=true;support.wardTurns=effect==='protect'?1:3;log.push(name+' raises a protective ward.');return log;}
+  if(effect==='ward'||effect==='protect'){support.ward=true;support.wardTurns=effect==='protect'?1:3;support.wardStrength=1-exhaustion(actor);log.push(name+' raises a protective ward.');return log;}
   if(['reflect','lightscreen','safeguard','auroraVeil'].includes(effect)){
    if(effect==='auroraVeil'&&field.weather!=='snow'){log.push('A snowstorm is required.');return log;}
    const screens=field.sides?.[actor.battleSide]?.screens||(actor.screens??={}),duration=hasHook(actor,'screens',asp)?8:5;
@@ -257,7 +260,7 @@ export function executeAction(actor,asp,target,tsp,move,style='normal',commit=.5
  if(!context.realTime&&['twoTurn','chargeSun'].includes(effect)&&!actor.pendingMove&&!(effect==='chargeSun'&&field.weather==='sun')){actor.pendingMove={...move};log.push(name+' prepares '+move.name+'.');return log;}
  if(actor.pendingMove)actor.pendingMove=null;
  if(r()>=accuracy&&effect!=='sureHit'&&effect!=='struggle'){log.push(name+' uses '+move.name+' but misses.');return log;}
- if(target.ward&&!['breakWard','struggle'].includes(effect)){target.ward=false;log.push(targetName+' blocks the attack with a ward.');return log;}
+ let partialWard=1;if(target.ward&&!['breakWard','struggle'].includes(effect)){const strength=target.wardStrength??1;target.ward=false;if(strength>=1){log.push(targetName+' blocks the attack with a ward.');return log;}partialWard=Math.max(0,1-strength);log.push(targetName+' softens the attack with an exhausted ward.');}
  if(effect==='breakWard'){target.ward=false;const screens=screenState(target);delete screens.reflect;delete screens.lightscreen;target.reflect=target.lightscreen=false;}
  const critical=r()<Math.min(1,(effect==='critical'?.25:style==='strong'?.15:.05)+(style==='agile'?.10:0)+(hasHook(actor,'critical',asp)?.125:0)),hits=effect==='multiHit'?2+Math.floor(r()*4):effect==='doubleHit'?2:1;
  let amount=0;for(let n=0;n<hits;n++)amount+=Math.max(1,Math.floor(damage(actor,asp,target,tsp,move,style,r)*(critical?1.5:1)));
@@ -271,10 +274,13 @@ export function executeAction(actor,asp,target,tsp,move,style='normal',commit=.5
  if(effect==='counter'||effect==='mirrorCoat'){const hit=actor.lastHit;if(!hit||hit.source!==target.id||hit.category!==(effect==='counter'?'Physical':'Energy')){log.push(name+' has nothing to retaliate against.');return log;}amount=hit.amount*2;}
  if(actor.focused){amount=Math.floor(amount*1.5);actor.focused=false;}
  if(effect==='delayedStrike'){target.delayedDamage={amount,turns:2};log.push(name+' sets a delayed thunder omen.');return log;}
- const before=target.hp;if(hasHook(target,'survive',tsp)&&!itemOnceUsed(target,'survive')&&before>=stats(target,tsp).hp&&amount>=before){amount=before-1;markItemUsed(target,'survive');log.push('Last-light Band holds '+targetName+' at 1 HP.');}
+ amount=Math.max(1,Math.floor(amount*partialWard));const before=target.hp;if(hasHook(target,'survive',tsp)&&!itemOnceUsed(target,'survive')&&before>=stats(target,tsp).hp&&amount>=before){amount=before-1;markItemUsed(target,'survive');log.push('Last-light Band holds '+targetName+' at 1 HP.');}
+ amount=shieldDamage(target,amount);
+ const link=(target.spiritualLinks||[]).find(l=>l.until>(target.realtimeNow||0));
+ if(link&&context.activeUnits){const partner=context.activeUnits.find(u=>u.id===link.partner&&u.hp>0&&u!==target);if(partner){const shared=Math.min(Math.floor(amount*link.amount),Math.max(0,partner.hp-1));partner.hp-=shared;amount-=shared;}}
  target.hp=Math.max(0,target.hp-amount);const dealt=before-target.hp;target.tookDamageThisRound=true;target.lastHit={amount:dealt,category,source:actor.id};target.ward=false;
  log.push(name+' uses '+move.name+': '+dealt+' damage'+(critical?' — critical hit!':'')+(hits>1?' ('+hits+' hits)':'')+'.');
- if(effect==='drain'||hasHook(actor,'drain',asp))healHP(actor,asp,dealt*(effect==='drain'?.5:.125));
+ if(effect==='drain'||hasHook(actor,'drain',asp))healHP(actor,asp,dealt*(effect==='drain'?.5:.125)*(1-exhaustion(actor)));
  if(hasHook(target,'thorns',tsp)&&category==='Physical')actor.hp=Math.max(0,actor.hp-Math.max(1,Math.floor(stats(actor,asp).hp/10)));
  if(hasHook(actor,'lifeOrb',asp))actor.hp=Math.max(0,actor.hp-Math.max(1,Math.floor(stats(actor,asp).hp/10)));
  if(effect==='recoil'||effect==='struggle'){const loss=Math.max(1,Math.ceil(effect==='struggle'?stats(actor,asp).hp/4:dealt*.15));actor.hp=Math.max(0,actor.hp-loss);log.push(name+' takes '+loss+' recoil damage.');}
@@ -430,7 +436,7 @@ export function resolveBattleRound(allies,enemies,allyChoices,enemyChoices,optio
     if(!amount){log.push('No '+key+' remaining.');continue;}const recipient=active[side][choice.targetIndex??slot]||u,caps=stats(recipient,speciesOf(recipient));
     if(item==='tonic')healHP(recipient,speciesOf(recipient),Math.ceil(caps.hp/2));else{recipient.pp=Math.min(caps.pp,(recipient.pp||0)+Math.ceil(caps.pp*.6));recipient.willpower=Math.min(caps.willpower,(recipient.willpower||0)+Math.ceil(caps.willpower*.6));}
     inventory[key]--;actual={name:item==='tonic'?'Tonic':'Soul Draught',effect:'heal',power:0};log.push(nameOf(u,sp)+' uses '+actual.name+'.');
-   }else if(choice.type==='support'){target=u;u.ward=true;u.wardTurns=1;actual={name:'Sealer’s Ward',effect:'ward',power:0};log.push('The Sealer raises a protective ward.');}
+   }else if(choice.type==='support'){target=u;u.ward=true;u.wardTurns=1;u.wardStrength=1-exhaustion(actor);actual={name:'Sealer’s Ward',effect:'ward',power:0};log.push('The Sealer raises a protective ward.');}
    else{
     actual=battleMove(u,sp,choice.move,speciesOf(target));if(!actual||e.index>0&&actual.id==='struggle')continue;
     const targets=targetKind==='allOpponents'?active[foe].filter(t=>snapshot.get(t)>0):[target];ctx.pressure=targets.some(t=>speciesOf(t).ability==='Pressure');for(let ti=0;ti<targets.length;ti++){const victim=targets[ti];log.push(...executeAction(u,sp,victim,speciesOf(victim),actual,choice.style||'normal',choice.commit??.5,r,1,ti>0?{...ctx,prepaid:true}:ctx));}
@@ -466,7 +472,7 @@ export function refreshTechniques(sp){
  for(const key of ['name','description','body'])sp[key]=rename(sp[key]);if(sp.forms)sp.forms=sp.forms.map(rename);
  if(![2,3,4,5].includes(sp.moveRevision))sp.moves=startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id),sp.anatomy);
  if(sp.moveRevision!==5){const current=buildLearnset(sp.base,sp.alter,sp.domains||[],sp.anatomy),old=[...(sp.learnset||[]),...(sp.moves||[]).filter(m=>!(sp.learnset||[]).some(known=>known.id===m.id))],seen=new Set(old.map(m=>m.id));sp.learnset=[...old,...current.filter(m=>!seen.has(m.id))];sp.moves??=startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id),sp.anatomy);sp.moveRevision=5;}
- for(const move of [...(sp.moves||[]),...(sp.learnset||[])]){move.name=rename(move.name);if(move.domain)move.domain=canonicalDomain(move.domain);move.desc=moveLore(move).description;move.baseUses=moveBaseValue(move);}return sp;
+ for(const move of [...(sp.moves||[]),...(sp.learnset||[])]){delete move.speed;move.name=rename(move.name);if(move.domain)move.domain=canonicalDomain(move.domain);move.desc=moveLore(move).description;move.baseUses=moveBaseValue(move);}return sp;
 }
 
 export const CHALLENGER_DIALOGUE={

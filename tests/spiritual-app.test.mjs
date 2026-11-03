@@ -1,0 +1,32 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import vm from 'node:vm';
+import {readFileSync} from 'node:fs';
+import * as E from '../engine.mjs';
+import * as SE from '../spiritual-energy.mjs';
+import * as RT from '../realtime-combat.mjs';
+import * as BAI from '../battle-ai.mjs';
+import * as CO from '../cooperative-techniques.mjs';
+import {individualSpecies} from '../anatomy.mjs';
+const app=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
+function extract(name){const start=app.indexOf('function '+name+'('),next=app.slice(start+1).search(/\n(?:async )?function /);assert.ok(start>=0,name);return app.slice(start,next<0?app.length:start+1+next);}
+function harness(){
+ const state=E.newGame('integration');for(let n=0;n<6;n++){const sp=E.makeSpecies('integrated-'+n,E.TYPES[n],E.TYPES[(n+4)%12]);state.species[sp.id]=sp;const u=E.heal(E.makeIndividual(sp,20,0,E.rng(n)),sp);u.id='party'+n;state.spirits.push(u);state.party.push(u.id);}SE.ensureSealer(state);
+ const h=vm.createContext({E,SE,RT,BAI,CO,individualSpecies,structuredClone,s:state,battle:null,closeModal(){},save(){},render(){},toast(){},discover(){},equipWildItem:u=>u,commit:.5,style:'normal',selectedMove:0,movePreviewKey:null,battleMode:'main',view:'explore'});
+ vm.runInContext(['party','lead','spOf','battleTeams','realTimeContext','applyRealTimeContext','ensureRealTimeBattle','persistentEnemySealer','configureEnemyRoster','startBattle','runEnemySealer','finishRealTimeEncounter'].map(extract).join('\n'),h);return h;
+}
+test('actual encounter entry gives only the designated lead a free release and creates manual three-creature combat',()=>{
+ const h=harness(),sp=Object.values(h.s.species)[0],enemy=E.heal(E.makeIndividual(sp,10,0,E.rng('foe')),sp);h.enemy=enemy;vm.runInContext('startBattle(enemy)',h);assert.equal(h.battle.multi.allies.length,1);assert.equal(h.battle.multi.allies[0],h.s.sealer.leadId);assert.equal(h.s.sealer.energy,h.s.sealer.maxEnergy);assert.equal(h.battle.rt.version,2);assert.deepEqual(Object.keys(h.battle.autoAllies),[]);
+});
+test('changing an NPC roster keeps active objects in that roster and pays for additional manifestations',()=>{
+ const h=harness(),sp=Object.values(h.s.species)[0],team=Array.from({length:6},(_,n)=>E.heal(E.makeIndividual(sp,12,0,E.rng('npc'+n)),sp));h.team=team;
+ vm.runInContext("startBattle(team[0],null,true,{sealerId:'test-opponent'});configureEnemyRoster(team)",h);assert.ok(h.battle.enemyRoster.includes(h.battle.multi.enemies[0]));const q=h.battle.enemySealer,before=q.energy;
+ vm.runInContext('runEnemySealer(realTimeContext())',h);const ctx=vm.runInContext('realTimeContext()',h);assert.ok(q.energy<before);assert.ok(ctx.active.b.length<=3);assert.ok(ctx.active.b.every(u=>ctx.teams.b.includes(u)));
+});
+test('named opponent rematches preserve Energy, shared support timers, and creature Move timers',()=>{
+ const h=harness(),sp=Object.values(h.s.species)[0];h.team=[E.heal(E.makeIndividual(sp,10),sp)];const q=vm.runInContext("persistentEnemySealer('rowan',team)",h);q.energy=25;q.supportCooldowns.example=60000;h.team[0].moveCooldowns.example=70000;h.s.sealer.clockMs=1000;h.next=[E.heal(E.makeIndividual(sp,10),sp)];const again=vm.runInContext("persistentEnemySealer('rowan',next)",h);assert.equal(again,q);assert.equal(again.energy,25);assert.equal(again.supportCooldowns.example,60000);assert.equal(h.next[0].moveCooldowns.example,70000);assert.equal(h.next[0].id,h.team[0].id);
+});
+test('offering plan commits Energy and supplies exactly once, with no payment when unaffordable',async()=>{
+ const text=readFileSync(new URL('../offerings.mjs',import.meta.url),'utf8'),start=text.indexOf('async function choosePlan('),end=text.indexOf('\nfunction ',start),code=text.slice(start,end);let energy=0,paid=0,trials=0;
+ const session={stage:'prepare',config:{sp:{},roamer:{id:'one'},inventory:{offerings:5},notice(){},commitEnergy(){if(energy<3)return false;energy-=3;paid++;return true;},async persist(){}}};const h=vm.createContext({session,offeringPlans:()=>[{id:'one',cost:{offerings:2}}],showTrial(){trials++;}});vm.runInContext(code,h);await vm.runInContext("choosePlan('one')",h);assert.equal(session.config.inventory.offerings,5);assert.equal(paid,0);energy=10;await vm.runInContext("choosePlan('one')",h);assert.equal(energy,7);assert.equal(paid,1);assert.equal(session.config.inventory.offerings,3);await vm.runInContext("choosePlan('one')",h);assert.equal(paid,1);assert.equal(trials,1);
+});

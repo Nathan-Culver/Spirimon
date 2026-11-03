@@ -1,3 +1,5 @@
+> Current live rules: [Spiritual Energy and GCD/LCD combat](spiritual-energy.md). The historical round/borrowing descriptions below document the legacy resolver retained for regression tests; live combat uses manual three-creature GCD/LCD scheduling and Sealer support.
+
 # Combat systems
 
 This release uses one elapsed-time simulation for single and double battles. See [real-time combat](real-time-combat.md) for cooldowns, level thresholds, timers and pause behavior. Existing saves, creature IDs, learned moves, shared resource pools, and the original five charm IDs are retained.

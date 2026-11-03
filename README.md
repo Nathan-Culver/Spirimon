@@ -112,8 +112,18 @@ Music is synthesized from original note sequences, requiring a first click/tap f
 
 ## Combat expansion
 
-The battle engine now supports timed move effects, entry hazards, Baton Pass, team support, selectable targets, spread attacks and borrowed actions in double battles. Opponents use a local scored decision tree and coordinate targets and switches. Twenty held items and eight unlockable aspects provide distinct individual builds. See [Combat systems](docs/combat-systems.md) for their rules and verification.
+The battle engine now supports timed move effects, entry hazards, Baton Pass, team support, selectable targets, spread attacks and up to three manually controlled Spirimon per side. Opponents use a local scored decision tree and coordinate targets and switches. Twenty held items and eight unlockable aspects provide distinct individual builds. See [Combat systems](docs/combat-systems.md) for their rules and verification.
 
 ## Procedural Held Items
 
 Held Items now generate from 37 archetypes across six categories, with five rarities and individually seeded relics. Each Spirimon has one slot; most items are universal, and verified grasping anatomy grants additional choices without stronger bonuses. Activate item abilities through Bag instead of a normal move. Consumables stay spent. See [Held Items](docs/held-items.md) for generation, effects, merchants, rewards and save compatibility.
+
+## Spiritual Energy and GCD/LCD combat
+
+Sealers now spend Energy to release non-lead Spirimon, use generated support, seal new creatures, and perform cooperative rituals. The designated lead is free even at zero Energy. Prepare six assigned techniques across the traveling party plus one distinct floating technique; learn the procedural catalog through instruction and discoveries. Communing at individually tracked shrines restores 50%, meditation 25%, and passive recovery takes two hours of active exploration.
+
+Battles use a 3.5-second base GCD (1.5-second haste floor), independent LCDs, casting/animation locks and no action queue or allied automation. Creature Speed affects GCD/LCD timers; Move Speed is retired. Cooldowns survive battles, healing, recall, revival, preparation changes, and saved journeys.
+
+Read [the complete Spiritual Energy rules](docs/spiritual-energy.md), [Move audit](docs/move-balance-audit.csv), [Energy economy audit](docs/spiritual-economy-audit.csv), and [example procedural support audit](docs/support-generation-audit.csv). Run `npm test`, `npm run audit:moves`, and `npm run audit:energy` to reproduce validation.
+
+![Three-creature Spiritual Energy battle preview](assets/spiritual-battle-preview.jpg)

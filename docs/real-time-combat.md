@@ -1,43 +1,21 @@
-# Real-time combat
+# Real-time GCD/LCD combat
 
-All live single, trainer, boss, facility and double battles use one saved elapsed-time simulation clock. The legacy round resolver remains for compatibility tests; live battles initialize real-time state and do not call it. Existing encounters migrate with their creatures, health, resources and progression intact. Unspent turn orders and borrowed-action debt are retired.
+The current live system is specified in [Spiritual Energy and GCD/LCD combat](spiritual-energy.md). All wild, trainer, boss, arena and facility encounters use its saved elapsed-gameplay scheduler. The older round resolver remains solely for compatibility/regression tests.
 
-## Commands and time
+## Timing and controls
 
-Tap a ready Move to cast it. Casting has a visible delay, after which the Move resolves, spends its resources and applies its effects. Every individual has per-Move cooldown deadlines and a shared recovery deadline. A Move can be ready while its user is still recovering. Cycling between four attacks does not evade recovery, and withdrawing/re-entering preserves the individual's cooldown record. Interrupted or missed casts still occupy their scheduled time. Sleep, freeze and stagger interrupt casting immediately; these afflictions prevent new commands until recovery.
+Each side can manifest up to three Spirimon. Player creatures are manually controlled, with separate GCD/LCD timers and no input queue. The base GCD is 3.5 seconds, reducible by Creature Speed and buffs to a minimum of 1.5 seconds. Cast and GCD start together and overlap. LCD Moves do not trigger the GCD; their animation locks allow weaving and can cause clipping. Powerful GCD Moves can have an additional local recast. Move Speed has been removed from generated and migrated Move data.
 
-Both enemy slots make independent tactical decisions. Each active ally can be controlled directly or individually set to Auto; automation uses the same public-state AI and cooldown rules. There is no requirement to declare both allied actions. Menus, targeting and the log do not stop the enemy. Pause explicitly freezes the clock; hidden/background tabs and mandatory replacement selection also freeze it. Returning from another app does not replay missed attacks or damage.
+All long timers persist across encounters, healing, recall, revival and save/load. Only elapsed unpaused gameplay advances them. Pausing/backgrounding freezes the simulation; selection menus and deployment panels during battle do not. No recovery method resets timers.
 
-Bag supplies, Held Item abilities, switching and Sealer's Ward use the same recovery system. Sealing and escape attempts require readiness and commit recovery, preventing repeated immediate attempts. Paid charged Moves from older saved battles remain paid; new charge Moves use their cast time instead of a second turn. Omega techniques have longer timing budgets and remain once per battle.
+Player support uses Spiritual Energy and separately assigned techniques. It never cancels ongoing casts. GCD support restarts the recipient GCD; team-wide GCD support requires and restarts every affected GCD. Exact copies share a team-wide technique cooldown; distinct procedural variants do not.
 
-## Level scaling and viability
+## Scaling and effects
 
-All damaging Moves gain 5% base power per threshold at levels **1, 16, 36, 60, 85, 100**, reaching 125% at level 100. Existing offensive/defensive level statistics continue to apply. Healing percentages and positive/negative duration benefits also improve at the thresholds; stage buffs naturally benefit the user's larger statistics. A learned Move is not replaced by a stronger numerical version merely because a level threshold is reached.
+Power scales at levels 1, 16, 36, 60, 85 and 100. All catalogue Move timings are audited in [move-balance-audit.csv](move-balance-audit.csv), including accuracy, multi-hit/spread workload, effects, resource contribution, GCD/LCD classification and local recasts.
 
-The timing budget evaluates each Move's expected hit count (3.5 for a multi-hit Move, 2 for a double hit), accuracy, secondary-effect likelihood, effects, recoil/recharge tradeoffs, conditional bonuses and multi-target coverage. Heavier attacks occupy longer cooldowns/recovery. Quick attacks offer short commitments and more resource contribution; slow attacks offer burst and fewer uses. Support and control trade damage opportunities for other outcomes. Haste from Speed has diminishing returns and a cap; paralysis and slowing increase action times. Agile/Strong styles change both their existing damage behavior and their timing budgets.
+Sleep, freeze and stagger stop creature commands and interrupt creature casts. Hard-control protection prevents immediate repeated immobilization. Confusion, burns, poison, toxic poison, paralysis, frostbite, infatuation, binding, leeching, curses, nightmares, disable, silence, regeneration and doom have timed simulation effects and visible badges. Afflictions and damage-over-time progress without player input. Shields, buffs, healing, screens, hazards, weather and terrain use the same timeline.
 
-The [audit CSV](move-balance-audit.csv) lists every catalog template, role, effect, timing, resource contribution and six level-scaled powers. It is a deterministic design audit rather than proof that every matchup is competitively balanced. Contextual Moves such as counters, hazard removal, weather setup, anti-status attacks and ally healing require their stated situation. AI-generated and legacy custom Moves are evaluated by the same runtime timing formula.
+Zero Sealer Energy weakens creature damage, durability, casting/cooldowns and creature support. The free designated lead remains usable. See the main rules for bond mitigation, restoration, sealing, cooperation, NPC parity, persistence and verification.
 
-## Afflictions
-
-| Effect | Baseline duration | Behavior |
-|---|---:|---|
-| Sleep | 4 s | Interrupts casting and prevents acting. |
-| Frozen | 4.5 s | Interrupts casting and prevents acting. |
-| Stagger/flinch | 0.9 s | Brief interrupt and action lock. |
-| Confusion | 8 s | Actions have a 33% self-damage interruption chance. |
-| Burn | 16 s | Damage pulses; Physical damage is reduced. |
-| Poison | 18 s | Damage pulses independently of commands. |
-| Toxic poison | 16 s | Damage pulses escalate to a bounded maximum. |
-| Paralysis | 12 s | Slower cooldowns plus a 25% interruption chance. |
-| Frostbite | 16 s | Damage pulses; Energy damage is reduced. |
-| Bound/trapped | 8 s | Prevents ordinary switching and deals periodic damage. |
-| Silenced/Move sealed | 8 s | Restricts support or the sealed Move. |
-
-Durations can improve with the caster's level threshold. Hard control grants a four-second recovery-protection window after its duration to prevent chaining permanent locks across multiple attackers. Afflictions, their expiry and recovery are shown on both teams' HUDs. Confusion and other volatile effects can coexist with a major affliction. Major afflictions remain mutually exclusive, as before. Cleansing, restoration and status-protection equipment work on these records.
-
-Damage-over-time and regeneration pulse every two simulated seconds. Duration deadlines, casts and cooldowns progress continuously rather than consuming turns. Timed wards, screens, weather, terrain, delayed strikes, doom, drain sources, rampage, passing and forced displacement retain their mechanics on that clock. Assigned Domains plus equipped-Move Domains determine combat affinities and weather protection.
-
-## Verification
-
-Tests cover autonomous enemy attacks, timing gates, per-individual cooldowns, level thresholds across the complete catalog, status application/expiry/overlap, cast interruption, anti-lock protection, healing/items, switching, charged actions, saving/resuming and legacy migration. Application-loop tests exercise idle-player damage, independent double-battle slots, optional allied automation and background/replacement pause. Physical mobile play and extended balance playtesting remain separate from deterministic engine verification.
+Automated audits provide reproducible budgets and regression coverage; they do not establish perfect competitive balance across all generated matchups.
