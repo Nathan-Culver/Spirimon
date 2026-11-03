@@ -19,8 +19,10 @@ export function drawFieldAnimation(ctx,kind,x,y,elapsed,duration=620){
 }
 export function drawSwimming(ctx,drawPerson,x,y,face,moving,time,appearance){
  const bob=moving?Math.sin(time/115)*2:0;
- ctx.save();ctx.beginPath();ctx.rect(x-7,y+5,48,27);ctx.clip();
- drawPerson(ctx,x,y+5+bob,'player',time,face,moving,appearance);
+ // The waterline cuts across the swimmer's waist: only the upper half
+ // of the existing player sprite is rendered, with no legs visible underwater.
+ ctx.save();ctx.beginPath();ctx.rect(x-7,y-8,48,24);ctx.clip();
+ drawPerson(ctx,x,y+bob,'player',time,face,moving,appearance);
  ctx.restore();
  ctx.save();ctx.strokeStyle='#b8eeff';ctx.lineWidth=2;
  for(let n=0;n<2;n++){const offset=(time/240+n*12)%22;ctx.beginPath();ctx.ellipse(x+16,y+23,9+offset,3+offset*.27,0,0,Math.PI);ctx.stroke();}
