@@ -323,3 +323,29 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
   box-shadow:inset 0 1px #fff8
  }
 }
+
+/* The weather belongs to the location plaque, not a separately positioned
+   overlay that can cover the region name on short landscape screens. */
+.map-location{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.map-location .map-atmosphere{
+ position:static;display:block;max-width:100%;padding:0;margin-top:2px;
+ border:0;background:transparent;box-shadow:none;white-space:nowrap;
+ color:#b7cbb6;font:10px/1.3 SpirimonPixel,monospace;
+ letter-spacing:0;pointer-events:none
+}
+@media (orientation:landscape) and (pointer:coarse){
+ .emulator-mode.exploring #main>.spiritual-meter{
+  width:min(230px,35vw);padding:4px 7px;
+  box-shadow:0 2px 7px #0005
+ }
+ .emulator-mode.exploring .map-location{
+  top:52px;left:max(12px,env(safe-area-inset-left));
+  width:max-content;max-width:min(160px,27vw);min-height:0;
+  padding:4px 7px;gap:1px;
+  box-shadow:0 2px 7px #0004
+ }
+ .emulator-mode.exploring .map-location .map-atmosphere{
+  font-size:clamp(7px,.85vw,9px);line-height:1.2;
+  margin-top:2px;color:#536b59
+ }
+}
