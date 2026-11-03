@@ -193,6 +193,34 @@ export function drawTile(ctx,type,x,y,seed,biome,options={}){
   for(let side=0;side<4;side++){if(edges&(1<<side))continue;for(let n=0;n<32;n++){const inset=2+hash(seed,side,Math.floor(n/3))%3;for(let d=0;d<inset;d++){const xx=side===1?31-d:side===3?d:n,yy=side===0?d:side===2?31-d:n;q.clearRect(xx,yy,1,1);}}}
   p.drawImage(layer,0,0);
  }else{stamp(p,index);if(['lawn','flower'].includes(type)){p.fillStyle='#59784044';p.fillRect(0,0,32,32);}}
+ // Seeded top-down coastal artwork matches the existing 32px terrain atlas.
+ if(type==='beach'||type==='coast-cliff'){
+  p.fillStyle='#c3ae82';p.fillRect(0,0,32,32);
+  const r=rng(seed);for(let n=0;n<105;n++){const xx=Math.floor(r()*32),yy=Math.floor(r()*32);p.fillStyle=n%4===0?'#e3d3a5':n%4===1?'#887b64':'#ae9977';p.fillRect(xx,yy,1+(n%7===0?2:0),1);}
+  if(type==='coast-cliff'){
+   p.fillStyle='#373a36';p.fillRect(2,5,29,25);p.fillStyle='#67675c';p.fillRect(2,3,27,18);p.fillStyle='#a3a18b';p.fillRect(3,3,24,4);
+   for(let n=0;n<16;n++){const xx=Math.floor(r()*26)+3,yy=Math.floor(r()*18)+7;p.fillStyle=n%2?'#4b4c43':'#868574';p.fillRect(xx,yy,2,2+Math.floor(r()*5));}
+   p.fillStyle='#536c41';p.fillRect(3,1,24,3);p.fillStyle='#91a06a';p.fillRect(4,1,16,1);
+  }else{
+   for(let n=0;n<8;n++){const xx=Math.floor(r()*30),yy=Math.floor(r()*30);p.fillStyle=n%3===0?'#f0e3c2':'#756e60';p.fillRect(xx,yy,1+n%3,1);}
+  }
+  // Edge overlays are drawn from real adjacent water tiles, not square pools.
+  const ns=options.neighbors||[];
+  for(let side=0;side<4;side++)if(ns[side]==='water'){
+   for(let i=0;i<32;i++){const jitter=hash(seed,'surf',side,Math.floor(i/4))%3,depth=3+jitter;
+    for(let d=0;d<depth;d++){const xx=side===1?31-d:side===3?d:i,yy=side===0?d:side===2?31-d:i;
+     p.fillStyle=d<2?'#d9e5d4':d<4?'#76b4af':'#367f8d';p.fillRect(xx,yy,1,1);
+    }
+   }
+  }
+ }
+ if(type==='water'){
+  const ns=options.neighbors||[];
+  const nearLand=ns.some(t=>t&&t!=='water');
+  if(!nearLand){p.fillStyle='#143f6466';p.fillRect(0,0,32,32);}
+  const r=rng(seed);for(let n=0;n<(nearLand?8:4);n++){const xx=Math.floor(r()*29),yy=Math.floor(r()*30);p.fillStyle=nearLand?'#a8e1d4':'#5798b0';p.fillRect(xx,yy,2+n%3,1);}
+  if(seed%23===0){p.fillStyle='#668d75';p.fillRect(9,19,4,3);p.fillRect(16,22,3,2);}
+ }
  if(type==='cliff'&&!(edges&1)){p.drawImage(image,0,0,64,12,0,0,32,6);p.fillStyle='#28342580';p.fillRect(0,6,32,2);}
  if(type==='grass'){const r=rng(seed);for(let n=0;n<12;n++){const xx=2+Math.floor(r()*28),yy=4+Math.floor(r()*26);p.fillStyle=biome==='ash'?'#5e6444':'#2e4932';p.fillRect(xx,yy,1,4);p.fillRect(xx-1,yy+1,3,1);p.fillStyle=biome==='ash'?'#ada371':'#a5af62';p.fillRect(xx,yy-1,1,3);}}
  if(type==='rock'){p.fillStyle='#15251e66';p.beginPath();p.ellipse(17,25,13,4,0,0,Math.PI*2);p.fill();p.save();p.beginPath();p.moveTo(4,24);p.lineTo(6,14);p.lineTo(13,8);p.lineTo(23,10);p.lineTo(29,19);p.lineTo(26,27);p.lineTo(10,28);p.closePath();p.clip();p.drawImage(image,6%4*64,Math.floor(6/4)*64,64,64,4,8,25,21);p.restore();p.fillStyle='#c4bd9866';p.fillRect(9,9,13,2);}
