@@ -203,3 +203,25 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 
 .triple-battle .battle-corner{z-index:10;top:43%;right:8px;gap:6px}.triple-battle .battle-corner button{min-height:32px;padding:5px 10px}.triple-battle .classic-hud .xp-meter,.triple-battle .classic-hud .xp-label{display:none}.compact-resources{font:10px/1.4 SpirimonPixel,monospace;margin-top:3px}.triple-battle .classic-hud .health-label{font-size:10px}.triple-battle .classic-hud .combat-tags{max-height:24px}.triple-battle .classic-hud>small{font-size:9px}
 @media(orientation:landscape) and (max-height:500px){.compact-resources{font-size:8px}.triple-battle .classic-hud .health-label{font-size:8px}.triple-battle .classic-hud .combat-tags{max-height:18px;font-size:7px}.triple-battle .classic-hud>small{font-size:8px}.triple-battle .battle-corner button{font-size:9px;min-height:26px;padding:3px 7px}}
+
+/* Unified real-time command dock */
+.unified-battle .classic-bottom{background:#f5f0dc;border:3px solid #244d3c;border-radius:16px;padding:10px;box-shadow:0 5px 0 #17392c}
+.unified-battle .classic-control{width:100%;max-width:none}
+.unified-battle .classic-dialogue{min-height:0;padding:0 8px}
+.unified-battle .classic-dialogue p{margin:3px 0}
+.unified-title{text-align:center;margin:2px 0 10px;font-size:clamp(18px,2.3vw,28px);color:#1e4938}
+.unified-action-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:8px;max-height:min(36vh,270px);overflow-y:auto;overscroll-behavior:contain;padding:4px;align-items:stretch}
+.unified-action{position:relative;min-height:76px;border:3px solid #173d31;border-radius:12px;background:#43765e;color:#fff;box-shadow:inset 0 2px 0 #ffffff60,0 3px 0 #173d31;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:8px 6px;cursor:pointer;touch-action:none;text-align:center;user-select:none}
+.unified-action b{font-size:clamp(12px,1.4vw,17px);line-height:1.1;text-shadow:0 1px 2px #172a24}
+.unified-action small{font-size:10px;opacity:.94}
+.unified-action .ua-icon{font-size:22px;line-height:1}
+.ua-move{background:linear-gradient(155deg,#8556a8,#49366c)}
+.ua-coop{background:linear-gradient(155deg,#8768b3,#4f3b85)}
+.ua-support{background:linear-gradient(155deg,#58a66c,#2c7147)}
+.ua-item{background:linear-gradient(155deg,#bd9439,#85601d)}
+.ua-utility{background:linear-gradient(155deg,#78a888,#3c775b)}
+.ua-run{background:linear-gradient(155deg,#e8a99b,#b75c55)}
+.ua-commit{position:absolute;bottom:2px;left:4px;width:var(--commit-progress,0%);height:4px;border-radius:4px;background:#ffdb7b;pointer-events:none}
+.unified-action:active{filter:brightness(1.16)}
+.ua-wait{grid-column:1/-1;text-align:center;padding:15px;color:#244d3c}
+@media(max-width:750px){.unified-action-grid{grid-template-columns:repeat(auto-fit,minmax(105px,1fr));max-height:34vh;gap:5px}.unified-action{min-height:64px;padding:5px}.unified-action small{font-size:9px}}
