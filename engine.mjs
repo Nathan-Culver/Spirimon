@@ -2,6 +2,7 @@ import {exhaustion,spiritualMultiplier,spiritualDefense,spiritualBonus,shieldDam
 import {buildDesign,assignDomains,migrateSpecies,migrateSaveCreatures,syncCapabilities} from './anatomy.mjs';
 import {CREATURE_TYPES,CREATURE_DOMAINS} from './creature-catalog.mjs';
 import {ensurePassives,passiveEffects} from './classification-passives.mjs';
+import {statusChance} from './classification-status.mjs';
 import {equipment,hasHook,ASPECTS,heldEquipment,itemHasHook,itemOnceUsed,markItemUsed,consumeHeldItem,heldItemActivation} from './equipment.mjs';
 import {townLayout,townFeatures,townPath,townGround} from './towns.mjs';
 import {buildLearnset,startingMoves,validateGeneratedMoves,moveBaseValue as baseMoveValue,moveLore as narrativeLore} from './moves.mjs';
@@ -199,9 +200,10 @@ function applyCondition(target,effect,r=Math.random,sp=null,log=[],source=null){
  const field=target.battlefield||{},screens=screenState(target);if(effect==='nightmare'&&target.status!=='sleep'||effect==='disable'&&!target.lastMove)return false;
  if(target.safeguard||screens.safeguard||target.ward||field.terrain==='misty'||effect==='sleep'&&field.terrain==='electric')return false;
  if(hasHook(target,'statusGuard',sp)&&!itemOnceUsed(target,'statusGuard')){markItemUsed(target,'statusGuard');log.push('Warding Bell turns aside the affliction.');return false;}
+ if(r()>statusChance(1,effect,sp||{},target))return false;
  if(effect==='slow'){target.conditions??={};target.conditions.slow=2;return true;}
- if(MAJOR.has(effect)){if(target.status)return false;target.status=effect;target.statusTurns=effect==='sleep'?2+Math.floor(r()*2):effect==='freeze'?3:0;target.toxicTurns=0;}
- else{target.conditions??={};if(target.conditions[effect])return false;target.conditions[effect]=effect==='confusion'?2+Math.floor(r()*3):effect==='trap'?4:effect==='perish'?3:effect==='flinch'?1:effect==='leechSeed'||effect==='curse'?99:3;target.conditionSources??={};if(source)target.conditionSources[effect]=source.id;}
+ if(MAJOR.has(effect)){if(target.status&&target.status!==effect)return false;target.status=effect;target.statusTurns=effect==='sleep'?2+Math.floor(r()*2):effect==='freeze'?3:0;target.toxicTurns=0;}
+ else{target.conditions??={};target.conditions[effect]=effect==='confusion'?2+Math.floor(r()*3):effect==='trap'?4:effect==='perish'?3:effect==='flinch'?1:effect==='leechSeed'||effect==='curse'?99:3;target.conditionSources??={};if(source)target.conditionSources[effect]=source.id;}
  if(sp)triggerEquipment(target,sp,log);return true;
 }
 export function refreshCombatEquipment(ind,sp,log=[]){triggerEquipment(ind,sp,log);}
