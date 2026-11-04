@@ -1,3 +1,4 @@
+import {passiveEffects} from './classification-passives.mjs';
 // Shared classification-based status rules. Values are relative modifiers.
 export const STATUS_GROUPS={
  burn:'heat',frostbite:'cold',freeze:'cold',poison:'toxin',toxic:'toxin',
@@ -42,6 +43,9 @@ export function statusModifier(effect,sp={},ind={},mode='application'){
  for(const t of new Set([sp.base,sp.alter]))if(t&&!(ind.suppressedTypes||[]).includes(t))amount+=(PROFILE[t]?.[group]||0);
  for(const d of innate)amount+=(PROFILE[d]?.[group]||0);
  if(mode!=='periodic')for(const d of acquired)amount+=(PROFILE[d]?.[group]||0)*.5;
+ const passives=passiveEffects(sp,ind,{maxHp:ind.maxHp});
+ if(mode==='periodic')amount-=passives.periodicResistance||0;
+ else amount-=passives.statusResistance||0;
  for(const key of ['statusModifiers','passiveStatusModifiers','heldStatusModifiers','temporaryStatusModifiers']){
   const v=ind[key]?.[effect]??ind[key]?.[group]??0;
   if(typeof v==='number')amount+=v;
