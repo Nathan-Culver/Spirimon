@@ -15,6 +15,7 @@ permissions:
 jobs:
   desktop:
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: windows-latest
@@ -40,14 +41,13 @@ jobs:
           mkdir -p desktop/game
           cp _site/Spirimon.html desktop/game/Spirimon.html
           cp -R _site/assets desktop/game/assets
-          printf '{"name":"spirimon-desktop","version":"1.0.0","main":"main.cjs"}' > desktop/package.json
-          npx --yes @electron/packager@18 desktop Spirimon --platform=${{ matrix.platform }} --arch=${{ matrix.arch }} --out=dist --overwrite --prune=false
+          npx --yes @electron/packager@20.3.0 desktop Spirimon --electron-version=45.2.2 --platform=${{ matrix.platform }} --arch=${{ matrix.arch }} --out=dist --overwrite --prune=false
       - uses: actions/upload-artifact@v4
         with:
           name: Spirimon-${{ matrix.platform }}-${{ matrix.arch }}
           path: dist/
   android:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -57,7 +57,10 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - uses: android-actions/setup-android@v3
+      - name: Verify preinstalled Android SDK
+        run: |
+          test -d "$ANDROID_HOME/platforms/android-35"
+          test -d "$ANDROID_HOME/build-tools/35.0.0"
       - name: Build offline web assets
         run: node build.mjs --out-dir _site
       - name: Generate Android app

@@ -1,0 +1,9 @@
+{
+  "name": "spirimon-desktop",
+  "productName": "Spirimon",
+  "version": "0.1.0",
+  "description": "Spirimon standalone offline game",
+  "author": "Nathan Culver",
+  "private": true,
+  "main": "main.cjs"
+}
