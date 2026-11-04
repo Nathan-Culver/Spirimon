@@ -368,7 +368,15 @@ export function learnProgression(ind,sp,previousLevel=ind.level,previousForm=ind
  for(const m of earned){if(ind.moveIds.length<4)ind.moveIds.push(m.id);else {const replace=ind.moveIds.findIndex(id=>!byId.has(id));if(replace>=0)ind.moveIds[replace]=m.id;}}
  return earned;
 }
-export function gainXP(ind,sp,amount){const previousLevel=ind.level,previousForm=ind.form;ind.xp+=amount;let levels=0;while(ind.xp>=ind.level*18){ind.xp-=ind.level*18;ind.level++;levels++;}const required=ind.form===0?16:36;let evolved=false;if(ind.form<2&&ind.level>=required&&(sp.evolution!=='bond'||ind.bond>=60)){ind.form++;ind.appearance=ind.form;evolved=true;}const learned=learnProgression(ind,sp,previousLevel,previousForm);if(levels||evolved)heal(ind,sp);return{levels,evolved,learned};}
+export function gainXP(ind,sp,amount){const previousLevel=ind.level,previousForm=ind.form;ind.xp+=amount;let levels=0;while(ind.xp>=ind.level*18){ind.xp-=ind.level*18;ind.level++;levels++;}const required=ind.form===0?16:36;let evolved=false;if(ind.form<2&&ind.level>=required&&(sp.evolution!=='bond'||ind.bond>=60)){ind.form++;ind.appearance=ind.form;evolved=true;}const learned=learnProgression(ind,sp,previousLevel,previousForm);if(levels||evolved){
+ const newMax=stats(ind,sp).hp;
+ const oldMax=Math.max(1,ind.lastMaxHp||newMax);
+ ind.hp=clamp(Math.round(newMax*(ind.hp/oldMax)),0,newMax);
+ ind.lastMaxHp=newMax;
+ // Do not clear status, equipped Moves, resource pools, or cooldowns on advancement.
+ normalizeResources(ind,sp);
+}
+return{levels,evolved,learned};}
 export function region(seed,cx,cy){
  const r=rng(hash(seed,cx,cy)),biome=cx===0&&cy===0?BIOMES[0]:pick(BIOMES,r);
  // A seeded 5% of settlement anchors become multi-chunk cities (2-4 by 2-4).
