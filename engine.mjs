@@ -94,20 +94,31 @@ export function activeDomains(sp,ind=null){
  return [...new Set([...(sp.domains||[]),...moves.map(m=>m?.domain)].map(canonicalDomain).filter(d=>DOMAINS.includes(d)))];
 }
 export function effectiveness(move,defender){
- let m=1;
- const attackType=move.type;
- for(const t of new Set([defender.base,defender.alter].filter(Boolean))){
-  if(ADVANTAGE[attackType]?.includes(t))m*=1.5;
-  if(RESIST[t]?.includes(attackType))m*=.75;
+ // Independent classifications contribute additively, with one global cap.
+ let modifier=0;
+ const attackTypes=new Set([move.type,...(move.types||[])].filter(t=>TYPES.includes(t)));
+ const attackDomains=new Set([move.domain,...(move.domains||[])].filter(Boolean).map(canonicalDomain));
+ const defenseTypes=new Set([defender.base,defender.alter].filter(Boolean));
+ const defenseDomains=new Set([...activeDomains(defender),...(defender.activeMoveDomains||[])]);
+ for(const attackType of attackTypes)for(const t of defenseTypes){
+  if(ADVANTAGE[attackType]?.includes(t))modifier+=.5;
+  if(RESIST[t]?.includes(attackType))modifier-=.25;
  }
- const domain=canonicalDomain(move.domain)||'';
- for(const d of new Set(activeDomains(defender).concat(defender.activeMoveDomains||[]))){
-  if(DOMAIN_ADVANTAGE[domain]?.includes(d))m*=1.25;
-  if(DOMAIN_RESIST[d]?.includes(domain))m*=.8;
+ for(const domain of attackDomains)for(const d of defenseDomains){
+  if(DOMAIN_ADVANTAGE[domain]?.includes(d))modifier+=.5;
+  if(DOMAIN_RESIST[d]?.includes(domain))modifier-=.25;
  }
- // Fire remains effective against Plant as a creature type, independent of domain typing.
- if(domain==='Fire'&&[defender.base,defender.alter].includes('Plant'))m*=1.25;
- return clamp(m,.5,2);
+ if(attackDomains.has('Fire')&&defenseTypes.has('Plant'))modifier+=.5;
+ return clamp(1+modifier,.5,2);
+}
+export function matchingClassificationBonus(move,attacker,sp){
+ const types=new Set([move.type,...(move.types||[])].filter(Boolean));
+ const domains=new Set([move.domain,...(move.domains||[])].filter(Boolean).map(canonicalDomain));
+ const matchedTypes=[sp.base,sp.alter].filter((t,i,a)=>t&&a.indexOf(t)===i&&types.has(t)).length;
+ const matchedDomains=[...domains].filter(d=>activeDomains(sp,attacker).includes(d)).length;
+ let bonus=(matchedTypes>=1?.10:0)+(matchedTypes>=2?.05:0);
+ for(let i=0;i<matchedDomains;i++)bonus+=.10/(2**i);
+ return 1+Math.min(.25,bonus);
 }
 export const STYLES={normal:{damage:1,speed:0},agile:{damage:.8,speed:22},strong:{damage:1.25,speed:-22}};
 export const STATUS_EFFECTS=['burn','freeze','paralysis','poison','toxic','sleep','confusion','infatuation','flinch','frostbite','nightmare','trap','leechSeed','curse','perish','disable','taunt','slow'];
@@ -165,7 +176,7 @@ export function damage(attacker,asp,defender,dsp,move,style='normal',r=Math.rand
  const a=stats(attacker,asp),d=stats(defender,dsp),energy=moveCategory(move)==='Energy';
  const offense=(energy?a.power:a.might)*(.25+(attacker.commit??.5)*1.5)*stageFactor(stage(attacker,energy?'power':'might'));
  const defense=(energy?d.resistance:d.defense)*(.25+(1-(defender.commit??.5))*1.5)*stageFactor(stage(defender,energy?'resistance':'defense'));
- const same=[asp.base,asp.alter].includes(move.type)?1.15:1;
+ const same=matchingClassificationBonus(move,attacker,asp);
  let amount=((2*attacker.level/5+2)*move.power*(offense/Math.max(1,defense))/24+2)*(STYLES[style]||STYLES.normal).damage*effectiveness(move,{...dsp,activeMoveDomains:activeDomains(dsp,defender),moves:equippedMoves(defender,dsp)})*(energy?dsp.spiritualRes??1:dsp.physicalRes??1)*same*(.9+r()*.1)*(defender.ward?1-.45*(defender.wardStrength??1):1);
  if(asp.ability==='Wildheart'&&!energy||asp.ability==='Soulweave'&&energy)amount*=1.12;
  if(dsp.ability==='Steadfast'&&(defender.commit??.5)<=.4)amount*=.9;
