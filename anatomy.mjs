@@ -88,7 +88,8 @@ export function fieldCapabilityAvailable(sp,capability,ind=null){
  const anatomy=sp.formAnatomy?.[ind?.form]||sp.anatomy;
  const result=capabilitiesFromAnatomy(anatomy,effectiveFieldDomains(sp,ind));
  const suppressed=new Set([...(sp?.suppressedCapabilities||[]),...(ind?.suppressedCapabilities||[])]);
- const blocked=new Set([...(ind?.fieldStatusRestrictions||[])]);
+ const restrictions={freeze:['fly','swim','steed','push','cleave','crush','dig'],paralysis:['fly','swim','steed','push','cleave','crush'],sleep:['fly','swim','steed','push','cleave','crush','dig','teleport'],trap:['fly','steed','dig','teleport']};
+ const blocked=new Set([...(ind?.fieldStatusRestrictions||[]),...(restrictions[ind?.status]||[]),...Object.keys(ind?.conditions||{}).filter(k=>ind.conditions[k]).flatMap(k=>restrictions[k]||[])]);
  return !!result[capability]?.available&&!suppressed.has(capability)&&!blocked.has(capability);
 }
 // Interpret independent image observations, never the requested prompt, as visual evidence.
