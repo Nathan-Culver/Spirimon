@@ -27,7 +27,7 @@ function generatedCompanionSheet(sp,form){
  const key=sp.id+':'+form+':'+(sp.atlas||sp.sprites?.[form]||'');
  const existing=companionSheets.get(key);
  if(existing)return existing;
- const source=readyImage(sp.atlas||sp.sprites?.[form])||proceduralSprite(sp,form);
+ const source=(sp.proceduralArt?proceduralSprite(sp,form):null)||readyImage(sp.atlas||sp.sprites?.[form])||proceduralSprite(sp,form);
  if(!source)return null;
  const cell=64,canvas=document.createElement('canvas');
  canvas.width=cell*4;canvas.height=cell*4;
@@ -86,7 +86,7 @@ export function drawMysteryPlaceholder(ctx,x,y,size=96,{face=null,moving=false,p
 }
 export function drawSpirit(ctx,sp,form,x,y,size=96,flip=false,motion=null){
  if(!sp)return;
- const image=readyImage(sp.atlas||sp.sprites?.[form])||proceduralSprite(sp,form);
+ const image=(sp.proceduralArt?proceduralSprite(sp,form):null)||readyImage(sp.atlas||sp.sprites?.[form])||proceduralSprite(sp,form);
  if(!image){drawMysteryPlaceholder(ctx,x,y,size,motion?{...motion,flip}:{flip});return;}
  ctx.save();ctx.imageSmoothingEnabled=false;if(flip){ctx.translate(x+size,y);ctx.scale(-1,1);}else ctx.translate(x,y);if(sp.atlas){ctx.drawImage(image,form*256,0,256,256,0,0,size,size);if(sp.id==='lacquertor'&&form>0){/* Replace the stone castle silhouette on the rear shoulder with irregular boulders. Draw in native 256px atlas coordinates. */ctx.save();ctx.scale(size/256,size/256);const ox=form===1?165:166,oy=form===1?79:64;ctx.translate(ox,oy);const rock=(pts,color)=>{ctx.fillStyle=color;ctx.beginPath();pts.forEach(([a,b],i)=>i?ctx.lineTo(a,b):ctx.moveTo(a,b));ctx.closePath();ctx.fill();};rock([[-36,17],[-37,-18],[-24,-39],[-4,-48],[21,-40],[36,-16],[34,21],[20,39],[-12,38]],'#302e2a');rock([[-33,12],[-32,-18],[-22,-35],[-3,-44],[19,-37],[32,-15],[29,18],[16,34],[-12,34]],'#777064');rock([[-29,-16],[-20,-33],[-3,-41],[10,-30],[-1,-12],[-19,-8]],'#aaa08a');rock([[10,-30],[23,-27],[30,-13],[27,12],[15,22],[2,12]],'#58544e');rock([[-26,14],[-14,3],[2,12],[15,26],[5,32],[-13,29]],'#696258');rock([[-13,-8],[-4,-18],[1,-9],[-5,5]],'#3e3b38');rock([[11,18],[18,9],[23,17],[17,26]],'#403c38');ctx.restore();}}else{const h=size*image.height/image.width;ctx.drawImage(image,0,size-Math.min(size,h),size,Math.min(size,h));}ctx.restore();}
 function prop(ctx,index,x,y,w,h){const image=readyImage(ART.world);if(!image)return;ctx.imageSmoothingEnabled=false;ctx.drawImage(image,(index%3)*256,Math.floor(index/3)*256,256,256,Math.round(x),Math.round(y),w,h);}
