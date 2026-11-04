@@ -41,7 +41,10 @@ export {migrateSpecies,migrateSaveCreatures};
 export const NATURES={Hardy:[null,null],Lonely:['might','defense'],Brave:['might','speed'],Adamant:['might','power'],Naughty:['might','resistance'],Bold:['defense','might'],Docile:[null,null],Relaxed:['defense','speed'],Impish:['defense','power'],Lax:['defense','resistance'],Timid:['speed','might'],Hasty:['speed','defense'],Serious:[null,null],Jolly:['speed','power'],Naive:['speed','resistance'],Modest:['power','might'],Mild:['power','defense'],Quiet:['power','speed'],Bashful:[null,null],Rash:['power','resistance'],Calm:['resistance','might'],Gentle:['resistance','defense'],Sassy:['resistance','speed'],Careful:['resistance','power'],Quirky:[null,null]};
 export const moveCategory=move=>move.effect==='heal'||move.effect==='ward'||move.power===0||move.category==='Status'||move.kind==='status'?'Status':move.category==='Energy'||move.kind==='spiritual'||move.kind==='energy'?'Energy':'Physical';
 
-export function equippedMoves(ind,sp){return ind.moveIds?ind.moveIds.map((id,n)=>sp.learnset?.find(m=>m.id===id)||sp.moves?.find(m=>m.id===id)||sp.moves?.[n]).filter(Boolean):(sp.moves||[]);}
+export function equippedMoves(ind,sp){
+ if(!Array.isArray(ind?.moveIds))return sp.moves||[];
+ return ind.moveIds.map(id=>sp.learnset?.find(m=>m.id===id)||sp.moves?.find(m=>m.id===id)).filter(Boolean);
+}
 export function resourceMaximums(ind,sp){const max={pp:0,willpower:0};for(const move of equippedMoves(ind,sp))max[moveCategory(move)==='Physical'?'pp':'willpower']+=moveBaseValue(move);return max;}
 export function normalizeResources(ind,sp){
  const max=resourceMaximums(ind,sp);
