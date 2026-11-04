@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {ROSTER} from '../roster.mjs';
 import {TYPES,makeSpecies} from '../engine.mjs';
 test('expanded roster has 150 unique Spirimon and three named forms each',()=>{assert.equal(ROSTER.length,150);assert.equal(new Set(ROSTER.map(r=>r.id)).size,150);assert(new Set(ROSTER.map(r=>r.base+'>'+r.alter)).size>=50);for(const r of ROSTER){assert(TYPES.includes(r.base));assert(TYPES.includes(r.alter));assert.notEqual(r.base,r.alter);assert.equal(new Set(r.forms).size,3);assert.equal(makeSpecies(r.id,r.base,r.alter,[]).moves.length,4);}});
-test('all 88 completed roster sprite strips are present with transparent 256px form cells',async()=>{assert.equal(ROSTER.filter(r=>r.atlas).length,88);for(const r of ROSTER.filter(r=>r.atlas)){const b=await readFile(new URL('../'+r.atlas,import.meta.url));assert.equal(b.toString('ascii',0,4),'RIFF',r.id);assert.equal(b.toString('ascii',8,12),'WEBP',r.id);assert.equal(b.toString('ascii',12,16),'VP8X',r.id);assert.ok(b[20]&16,'alpha channel: '+r.id);assert.equal(b.readUIntLE(24,3)+1,768,r.id);assert.equal(b.readUIntLE(27,3)+1,256,r.id);}});
+test('all 95 completed roster sprite strips are present with transparent 256px form cells',async()=>{assert.equal(ROSTER.filter(r=>r.atlas).length,95);for(const r of ROSTER.filter(r=>r.atlas)){const b=await readFile(new URL('../'+r.atlas,import.meta.url));assert.equal(b.toString('ascii',0,4),'RIFF',r.id);assert.equal(b.toString('ascii',8,12),'WEBP',r.id);assert.equal(b.toString('ascii',12,16),'VP8X',r.id);assert.ok(b[20]&16,'alpha channel: '+r.id);assert.equal(b.readUIntLE(24,3)+1,768,r.id);assert.equal(b.readUIntLE(27,3)+1,256,r.id);}});
 
 
 import vm from 'node:vm';
@@ -23,4 +23,9 @@ test('existing journeys receive completed roster artwork without replacing indiv
  assert.deepEqual(state.spirits,before);assert.deepEqual(state.species['roster-aetherling'].moves,moves);
  for(const row of rows){const sp=state.species['roster-'+row.id];assert.equal(sp.atlas,row.atlas);assert.equal(sp.artRevision,2);assert.equal(sp.proceduralArt,false);assert.equal(sp.sprites,undefined);for(let form=0;form<3;form++)assert.equal(creatureArtworkSource(sp,form),row.atlas);}
  vm.runInContext('installRoster();',context);assert.deepEqual(state.spirits,before);
+});
+
+test('finished artwork descriptions preserve the planned canonical creature Types',async()=>{
+ const production=JSON.parse(await readFile(new URL('../docs/roster-art-prompts.json',import.meta.url),'utf8'));
+ for(const art of production.lineages.filter(a=>a.runtimeReady)){const row=ROSTER.find(r=>r.id===art.id);assert.equal(row.base,art.base,art.id);assert.equal(row.alter,art.alter,art.id);}
 });

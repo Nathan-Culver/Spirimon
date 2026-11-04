@@ -92,7 +92,7 @@
       "brief": "A four-legged frost faerie dragon with snow-gecko features, fernlike ice ears, opaline scale tufts and delicate golden celestial halo arcs. Nonhuman, long-bodied, four paws.",
       "generatedSource": true,
       "runtimeReady": true,
-      "sourceFilename": "exec-10a7a55c-20fb-409d-a67d-dfcf544df8a4.png"
+      "sourceFilename": "artwork/roster-source/056-frostwyrm.png"
     },
     {
       "number": 57,
@@ -1411,7 +1411,7 @@
       ],
       "brief": "A four-legged elemental turtle-like creature made of flowing turquoise water, with a white foam shell, gold gill fronds and a delicate radiant celestial halo.",
       "generatedSource": true,
-      "runtimeReady": false,
+      "runtimeReady": true,
       "sourceFilename": "artwork/roster-source/144-ripplejaw.png"
     },
     {
@@ -1426,7 +1426,7 @@
       ],
       "brief": "A rooted undead carnivorous starflower with black petals, bone-white pitcher traps shaped like tiny beaks, skeletal root fingers and pale violet soul light.",
       "generatedSource": true,
-      "runtimeReady": false,
+      "runtimeReady": true,
       "sourceFilename": "artwork/roster-source/145-starlingflare.png"
     },
     {
@@ -1441,7 +1441,7 @@
       ],
       "brief": "A towering nonhuman bipedal woodland faerie giant with a truffle-like textured crown, a broad piglike muzzle, mushroom ears, enormous strong limbs and mossy fur.",
       "generatedSource": true,
-      "runtimeReady": false,
+      "runtimeReady": true,
       "sourceFilename": "artwork/roster-source/146-truffleroot.png"
     },
     {
@@ -1456,7 +1456,7 @@
       ],
       "brief": "A reanimated four-legged bighorn skeleton with rugged natural stone armor plates, brass ankle hinges, ivory horns and faint ghostly upland mist.",
       "generatedSource": true,
-      "runtimeReady": false,
+      "runtimeReady": true,
       "sourceFilename": "artwork/roster-source/147-uplandshard.png"
     },
     {
@@ -1471,7 +1471,7 @@
       ],
       "brief": "A four-legged undead fiend panther with dark violet hide remnants, exposed pale ribs, curved black brow horns and several luminous violet eye-like markings.",
       "generatedSource": true,
-      "runtimeReady": false,
+      "runtimeReady": true,
       "sourceFilename": "artwork/roster-source/148-violetgaze.png"
     },
     {
@@ -1486,7 +1486,7 @@
       ],
       "brief": "A horrific nonhuman bipedal faerie guardian aberration with an eye-stacked mask, mismatched fanged jaws, very long twisted arms and dark emerald silk fronds.",
       "generatedSource": true,
-      "runtimeReady": false,
+      "runtimeReady": true,
       "sourceFilename": "artwork/roster-source/149-wardenfang.png"
     },
     {
@@ -1501,7 +1501,7 @@
       ],
       "brief": "A colossal nonhuman bipedal storm giant with dark blue craggy skin, huge hands, feather-like flame and cloud plumes, and glowing gold circular star motifs without lettering.",
       "generatedSource": true,
-      "runtimeReady": false,
+      "runtimeReady": true,
       "sourceFilename": "artwork/roster-source/150-zodiacplume.png"
     }
   ]

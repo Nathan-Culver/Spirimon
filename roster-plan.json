@@ -669,7 +669,7 @@
     "index": 51,
     "id": "bramblehorn",
     "base": "Beast",
-    "alter": "Humanoid",
+    "alter": "Fey",
     "forms": [
       "Bramblelet",
       "Bramblehorn",
@@ -678,7 +678,11 @@
     "description": "A recognizable massively muscular takin with thick fur, curling horns grown into flowering thorn branches, tiny faerie lantern seedpods and moss-gold markings. Four sturdy hooved legs.",
     "proceduralArt": false,
     "atlas": "./assets/roster/bramblehorn.webp",
-    "artRevision": 2
+    "artRevision": 2,
+    "legacyTypes": {
+      "base": "Beast",
+      "alter": "Humanoid"
+    }
   },
   {
     "index": 52,
@@ -773,7 +777,7 @@
   {
     "index": 58,
     "id": "ivoryspire",
-    "base": "Humanoid",
+    "base": "Fey",
     "alter": "Elemental",
     "forms": [
       "Ivorylet",
@@ -783,7 +787,11 @@
     "description": "A visibly nonhuman bipedal ivory faerie with an antelope-like porcelain face, branching ears, slender elongated limbs and ribbons of pale wind and gold dust. No human face.",
     "proceduralArt": false,
     "atlas": "./assets/roster/ivoryspire.webp",
-    "artRevision": 2
+    "artRevision": 2,
+    "legacyTypes": {
+      "base": "Humanoid",
+      "alter": "Elemental"
+    }
   },
   {
     "index": 59,
@@ -864,7 +872,7 @@
     "index": 64,
     "id": "obsidhorn",
     "base": "Beast",
-    "alter": "Humanoid",
+    "alter": "Fey",
     "forms": [
       "Obsidlet",
       "Obsidhorn",
@@ -873,7 +881,11 @@
     "description": "A recognizable powerfully built black-furred kangaroo standing on two heavy hind legs, broad muscular forearms, glossy dark curling horns and faint faerie leaf runes. No human face.",
     "proceduralArt": false,
     "atlas": "./assets/roster/obsidhorn.webp",
-    "artRevision": 2
+    "artRevision": 2,
+    "legacyTypes": {
+      "base": "Beast",
+      "alter": "Humanoid"
+    }
   },
   {
     "index": 65,
@@ -968,7 +980,7 @@
   {
     "index": 71,
     "id": "vesperspire",
-    "base": "Humanoid",
+    "base": "Fey",
     "alter": "Elemental",
     "forms": [
       "Vesperlet",
@@ -978,7 +990,11 @@
     "description": "A visibly nonhuman tall bipedal bat-eared twilight faerie with a long muzzle, amber eyes, flowing dusk-blue fur and thin ribbons of moving wind. No ordinary human anatomy.",
     "proceduralArt": false,
     "atlas": "./assets/roster/vesperspire.webp",
-    "artRevision": 2
+    "artRevision": 2,
+    "legacyTypes": {
+      "base": "Humanoid",
+      "alter": "Elemental"
+    }
   },
   {
     "index": 72,
@@ -1059,7 +1075,7 @@
     "index": 77,
     "id": "berylhorn",
     "base": "Beast",
-    "alter": "Humanoid",
+    "alter": "Fey",
     "forms": [
       "Beryllet",
       "Berylhorn",
@@ -1068,7 +1084,11 @@
     "description": "A thickly muscled wallaby standing on two strong hind legs, warm gray fur, beryl-green branching horns, soft faerie ear fins and sparkling leaf-shaped markings. Clearly an animal.",
     "proceduralArt": false,
     "atlas": "./assets/roster/berylhorn.webp",
-    "artRevision": 2
+    "artRevision": 2,
+    "legacyTypes": {
+      "base": "Beast",
+      "alter": "Humanoid"
+    }
   },
   {
     "index": 78,
@@ -1163,7 +1183,7 @@
   {
     "index": 84,
     "id": "indigospire",
-    "base": "Humanoid",
+    "base": "Fey",
     "alter": "Elemental",
     "forms": [
       "Indigolet",
@@ -1173,7 +1193,11 @@
     "description": "A visibly nonhuman indigo bipedal faerie with an axolotl-like face, frilled ears, long webbed fingers and flowing cobalt water ribbons. No ordinary human face.",
     "proceduralArt": false,
     "atlas": "./assets/roster/indigospire.webp",
-    "artRevision": 2
+    "artRevision": 2,
+    "legacyTypes": {
+      "base": "Humanoid",
+      "alter": "Elemental"
+    }
   },
   {
     "index": 85,
@@ -1945,8 +1969,10 @@
       "Ripplejaw",
       "Ripple Exarch"
     ],
-    "description": "A elemental lineage transformed by celestial traits. Its first form is small and simple; the second develops distinctive ripple markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A four-legged elemental turtle-like creature made of flowing turquoise water, with a white foam shell, gold gill fronds and a delicate radiant celestial halo.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/ripplejaw.webp",
+    "artRevision": 2
   },
   {
     "index": 144,
@@ -1958,8 +1984,10 @@
       "Starlingflare",
       "Starling Exarch"
     ],
-    "description": "A plant lineage transformed by undead traits. Its first form is small and simple; the second develops distinctive starling markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A rooted undead carnivorous starflower with black petals, bone-white pitcher traps shaped like tiny beaks, skeletal root fingers and pale violet soul light.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/starlingflare.webp",
+    "artRevision": 2
   },
   {
     "index": 145,
@@ -1971,8 +1999,10 @@
       "Truffleroot",
       "Truffle Exarch"
     ],
-    "description": "A fey lineage transformed by giant traits. Its first form is small and simple; the second develops distinctive truffle markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A towering nonhuman bipedal woodland faerie giant with a truffle-like textured crown, a broad piglike muzzle, mushroom ears, enormous strong limbs and mossy fur.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/truffleroot.webp",
+    "artRevision": 2
   },
   {
     "index": 146,
@@ -1984,8 +2014,10 @@
       "Uplandshard",
       "Upland Exarch"
     ],
-    "description": "A undead lineage transformed by construct traits. Its first form is small and simple; the second develops distinctive upland markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A reanimated four-legged bighorn skeleton with rugged natural stone armor plates, brass ankle hinges, ivory horns and faint ghostly upland mist.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/uplandshard.webp",
+    "artRevision": 2
   },
   {
     "index": 147,
@@ -1997,21 +2029,29 @@
       "Violetgaze",
       "Violet Exarch"
     ],
-    "description": "A fiend lineage transformed by undead traits. Its first form is small and simple; the second develops distinctive violet markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A four-legged undead fiend panther with dark violet hide remnants, exposed pale ribs, curved black brow horns and several luminous violet eye-like markings.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/violetgaze.webp",
+    "artRevision": 2
   },
   {
     "index": 148,
     "id": "wardenfang",
     "base": "Aberration",
-    "alter": "Humanoid",
+    "alter": "Fey",
     "forms": [
       "Wardenling",
       "Wardenfang",
       "Warden Exarch"
     ],
-    "description": "A aberration lineage transformed by humanoid traits. Its first form is small and simple; the second develops distinctive warden markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A horrific nonhuman bipedal faerie guardian aberration with an eye-stacked mask, mismatched fanged jaws, very long twisted arms and dark emerald silk fronds.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/wardenfang.webp",
+    "artRevision": 2,
+    "legacyTypes": {
+      "base": "Aberration",
+      "alter": "Humanoid"
+    }
   },
   {
     "index": 149,
@@ -2023,7 +2063,9 @@
       "Zodiacplume",
       "Zodiac Exarch"
     ],
-    "description": "A giant lineage transformed by elemental traits. Its first form is small and simple; the second develops distinctive zodiac markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A colossal nonhuman bipedal storm giant with dark blue craggy skin, huge hands, feather-like flame and cloud plumes, and glowing gold circular star motifs without lettering.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/zodiacplume.webp",
+    "artRevision": 2
   }
 ]
