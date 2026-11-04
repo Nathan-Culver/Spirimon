@@ -59,7 +59,7 @@ export function statusChance(base,effect,sp,ind,options={}){
 export function statusDuration(base,effect,sp,ind){
  // Duration uses the agreed larger relative magnitudes: 25%, 50%, 75%.
  const modifier=statusModifier(effect,sp,ind,'duration');
- const adjusted=modifier===0?0:Math.sign(modifier)*Math.min(.75,Math.abs(modifier)*2.5);
+ const adjusted=modifier*2.5;
  return Math.max(0,base*(1+adjusted));
 }
 export function periodicDamage(base,effect,sp,ind){
@@ -68,5 +68,5 @@ export function periodicDamage(base,effect,sp,ind){
 export function rebaseStatusTimer(timer,now,effect,sp,ind){
  const original=timer.baseDuration??Math.max(0,timer.until-(timer.appliedAt??now));
  const elapsed=Math.max(0,now-(timer.appliedAt??now));
- return {...timer,baseDuration:original,until:now+Math.max(0,statusDuration(original,effect,sp,ind)-elapsed)};
+ return {...timer,baseDuration:original,until:(timer.appliedAt??now)+Math.max(0,statusDuration(original,effect,sp,ind))};
 }
