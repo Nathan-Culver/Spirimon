@@ -7,7 +7,7 @@ import * as CO from './cooperative-techniques.mjs';
 import * as RT from './realtime-combat.mjs';
 import {realTimeMoveHTML,realTimeStatusHTML,seconds} from './realtime-ui.mjs';
 import {completeProceduralSpecies,acceptGeneratedArtwork,atlasSprites} from './creature-browser.mjs';
-import {syncCapabilities,applyVisualObservation,applyLineageObservations,individualSpecies} from './anatomy.mjs';
+import {syncCapabilities,applyVisualObservation,applyLineageObservations,individualSpecies,fieldCapabilityAvailable} from './anatomy.mjs';
 import {certifyRenderedAnatomy} from './creature-visuals.mjs';
 import * as BAI from './battle-ai.mjs';
 import {companionSize,canSteed,canWaterMount,drawMounted} from './steed.mjs';
@@ -109,7 +109,7 @@ function lead(){const q=SE.ensureSealer(s);return party().find(i=>i.id===q.leadI
 function spOf(i){const sp=individualSpecies(s.species[i.species],i),equipped=i.moveIds?{...sp,moves:E.equippedMoves(i,sp)}:sp;E.migrateResources(i,equipped);return equipped;}
 function activeBattleAlly(){if(battle?.rt){const ids=battle.multi?.allies||[battle.ally];return s.spirits.find(i=>i.id===(battle.controlledAlly||battle.ally)&&i.hp>0&&ids.includes(i.id))||s.spirits.find(i=>ids.includes(i.id)&&i.hp>0)||s.spirits.find(i=>i.id===battle.ally);}const next=battle?.multi?.allies.find(id=>s.spirits.find(i=>i.id===id)?.hp>0&&!battle.multi.orders[id]);return s.spirits.find(i=>i.id===(next||battle?.ally));}
 function battleMoves(i){const sp=spOf(i);if(i.pendingMove)return [i.pendingMove];if(i.lockedMove&&E.canUseMove(i,sp,i.lockedMove))return [i.lockedMove];const moves=E.equippedMoves(i,sp);return moves.some(m=>E.canUseMove(i,sp,m,battle?(['self','ally','allAllies'].includes(E.moveTarget(m))?sp:spOf(battle.multi?.enemies?.[battle.enemyTargetSelection||0]||battle.enemy)):null))?moves:[{...E.STRUGGLE,type:sp.base}];}
-function leadSwimmer(){const unit=party().find(i=>i.id===s.sealer?.leadId&&i.hp>0);return unit&&spOf(unit).capabilities?.swim?.available&&canWaterMount(spOf(unit),unit.appearance)?unit:null;}
+function leadSwimmer(){const unit=party().find(i=>i.id===s.sealer?.leadId&&i.hp>0);return unit&&fieldCapabilityAvailable(spOf(unit),'swim',unit)&&canWaterMount(spOf(unit),unit.appearance)?unit:null;}
 function swimmingAt(x,y){return !s.cave&&!s.interior&&E.tile(s.seed,Math.round(x),Math.round(y))==='water';}
 function leadSteed(){const id=s.sealer?.leadId;const unit=party().find(i=>i.id===id&&i.hp>0);return unit&&canSteed(spOf(unit),unit.appearance)?unit:null;}
 function toggleSteed(){if(battle||modal||s.cave||s.interior||view!=='explore'||swimmingAt(s.player.x,s.player.y))return;
@@ -118,7 +118,7 @@ function toggleSteed(){if(battle||modal||s.cave||s.interior||view!=='explore'||s
  s.mountedSteed=unit.id;animateField('steed',s.player.x,s.player.y);companionTrail.length=0;walkAnim=null;queuedStep=null;save();render();
 }
 function validSteed(){const unit=leadSteed();if(!unit||s.mountedSteed!==unit.id){s.mountedSteed=null;return null;}return unit;}
-function fieldCapability(kind){if(kind==='steed')return !!leadSteed();return party().filter(i=>i.hp>0).some(i=>spOf(i).capabilities?.[kind]?.available);}
+function fieldCapability(kind){if(kind==='steed')return !!leadSteed();return party().filter(i=>i.hp>0).some(i=>fieldCapabilityAvailable(spOf(i),kind,i));}
 function fieldSkill(kind){return fieldCapability(kind);}
 function abilityReady(kind){return fieldCapability(kind);}
 function fieldTravel(kind,key){if(battle||s.interior)return toast('Field travel is unavailable here.');if(!fieldSkill(kind))return toast('No attuned Spirimon can use '+kind+'.');if(!fieldRelease(kind,'travel:'+kind))return toast('Not enough Energy to release a capable Spirimon.');animateField(kind,s.player.x,s.player.y,850);if(kind==='fly'||kind==='teleport'){const reg=s.regions[key];if(!reg?.visited||!reg.town)return toast('Choose a previously visited town.');s.player.x=reg.cx*48+24;s.player.y=reg.cy*36+18;}else if(kind==='dig'){const towns=Object.values(s.regions).filter(x=>x.town&&x.visited);const reg=towns.find(x=>x.key===s.lastTown)||towns[0];if(!reg)return toast('No discovered town to return to.');s.player.x=reg.cx*48+24;s.player.y=reg.cy*36+18;}walkAnim=null;queuedStep=null;animateField(kind,s.player.x,s.player.y,850);discoverRegion();save();render();toast(kind==='dig'?'Returned to a familiar town.':'Your Spirimon carried you to the destination.');}
@@ -1100,7 +1100,7 @@ function useSpiritualDraught(){
  s.inventory.spiritDraughts--;const amount=SE.restoreEnergy(q,q.maxEnergy*.35);if(battle)RT.synchronizeTimers(battle.rt,realTimeContext());closeModal();save();render();toast('Recovered '+Math.floor(amount)+' Spiritual Energy. Move cooldowns are unchanged.');
 }
 function fieldRelease(kind,key='field:'+kind){
- const q=SE.ensureSealer(s),candidates=party().filter(u=>u.hp>0&&spOf(u).capabilities?.[kind]?.available).sort((a,b)=>SE.manifestationCost(q,a,spOf(a))-SE.manifestationCost(q,b,spOf(b)));
+ const q=SE.ensureSealer(s),candidates=party().filter(u=>u.hp>0&&fieldCapabilityAvailable(spOf(u),kind,u)).sort((a,b)=>SE.manifestationCost(q,a,spOf(a))-SE.manifestationCost(q,b,spOf(b)));
  const u=candidates.find(u=>q.energy>=SE.manifestationCost(q,u,spOf(u)));if(!u)return false;
  if(q.fieldTask?.memberId===u.id&&q.fieldTask?.key===key)return true;
  const cost=SE.manifestationCost(q,u,spOf(u));if(!SE.spendEnergy(q,cost))return false;q.fieldTask={memberId:u.id,key};if(cost)toast(spOf(u).forms[u.appearance]+' released · '+cost+' Spiritual Energy.');return true;
