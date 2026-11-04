@@ -29,6 +29,8 @@ export function synchronizeTimers(state,context){
  E.bindBattlefield(context.teams.a,context.teams.b);
  for(const u of allUnits(context)){
   const clock=unitClock(state,u);const side=context.teams.a.includes(u)?'a':'b';SE.setExhaustion(u,context.sealers?.[side]);u.realtimeNow=now;u.controlImmuneUntil=clock.controlImmuneUntil;
+  const species=context.speciesOf(u);u.acquiredDomains=E.activeDomains(species,u).filter(d=>!species.domains?.includes(d));
+  if(clock.status?.effect===u.status&&clock.status?.appliedAt!=null)clock.status=rebaseStatusTimer(clock.status,now,u.status,species,u);
   if(u.status){if(clock.status?.effect!==u.status){const rule=STATUS_RULES[u.status];clock.status={effect:u.status,appliedAt:now,baseDuration:(rule?.duration||12000)*(context.durationScale||1),until:now+statusDuration((rule?.duration||12000)*(context.durationScale||1),u.status,context.speciesOf(u),u)};if(rule?.control){clock.controlImmuneUntil=clock.status.until+4000;if(clock.pending){clock.interrupted=clock.pending.choice.move?.name||'action';clock.pending=null;}}}}
   else clock.status=null;
   for(const [effect,rule]of Object.entries(STATUS_RULES)){if(u.conditions?.[effect]){if(!clock.conditions[effect]){clock.conditions[effect]=now+statusDuration(rule.duration*(context.durationScale||1),effect,context.speciesOf(u),u);if(rule.control){clock.controlImmuneUntil=Math.max(clock.controlImmuneUntil,clock.conditions[effect]+4000);if(clock.pending){clock.interrupted=clock.pending.choice.move?.name||'action';clock.pending=null;}}}}else delete clock.conditions[effect];}
