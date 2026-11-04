@@ -183,6 +183,15 @@ function explorationStatusPulse(){
   if(rate)damage+=periodicDamage(max*rate,effect,sp,unit);
  }
  if(damage){unit.hp=Math.max(0,unit.hp-damage);if(!unit.hp){s.mountedSteed=null;toast('Your following Spirimon collapses from its affliction. Choose another companion or use a recovery item.');}}
+ // Only the following companion advances exploration status timers; sealed members pause.
+ if(unit.status&&Number.isFinite(unit.statusTurns)&&unit.statusTurns>0){
+  unit.statusTurns--;if(unit.statusTurns===0){unit.status=null;unit.toxicTurns=0;}
+ }
+ for(const [effect,turns]of Object.entries(unit.conditions||{})){
+  if(Number.isFinite(turns)&&turns>0&&turns<99){
+   unit.conditions[effect]=turns-1;if(!unit.conditions[effect])delete unit.conditions[effect];
+  }
+ }
 }
 function caveMove(dx,dy){if(modal||battle||view!=='explore')return;const room=s.cave,map=dungeonMap(room),x=room.x+dx,y=room.y+dy;if(walkAnim&&performance.now()-walkAnim.start<walkAnim.duration){queuedStep=[dx,dy];return;}if(!E.caveWalkable(map,x,y))return;if(caveObstacle(x,y,dx,dy))return;s.player.face=dx<0?'left':dx>0?'right':dy<0?'up':'down';companionTrail.push({x:room.x,y:room.y,face:s.player.face});if(companionTrail.length>24)companionTrail.shift();walkAnim={x:room.x,y:room.y,start:performance.now(),duration:running||keys.has('shift')?100:170};lastStep=performance.now();room.x=x;room.y=y;s.steps++;if(s.steps%8===0)explorationStatusPulse();const tile=map.grid[y][x];if(tile==='up'){if(room.level===0)return caveLeave();room.level--;walkAnim=null;companionTrail.length=0;const above=E.caveMap(s.seed,room.id,room.level),entry=above.exits.find(e=>e.kind==='down');room.x=entry.x;room.y=entry.y;toast('You ascend to cave level '+(room.level+1));}else if(tile==='down'){if(room.temple&&room.level>=3){const e=encounterState(),progressKey='temple-progress-'+room.temple,step=room.level;if((e[progressKey]||0)<=step){if(step===5){clanChallenge();return;}adventureBattle('temple-trainer',room.temple+'|'+step,Math.max(3,currentTemple().level-3));return;}}if(room.level+1>=room.depth)return caveLeave();room.level++;walkAnim=null;companionTrail.length=0;room.x=1;room.y=1;toast('You descend to cave level '+(room.level+1));}else if(tile==='exit')return caveLeave();else if(s.steps>(s.sanctuaryUntilStep||0)&&party().length&&s.steps>8&&Math.random()<.13){const reg=currentRegion(),sp=speciesFor(reg,Math.random),ind=E.heal(E.makeIndividual(sp,Math.min(100,E.encounterLevel(reg)+room.level*3),E.rollForm()),sp);startBattle(ind);}save();render();}
 function drawCave(canvas,time){
