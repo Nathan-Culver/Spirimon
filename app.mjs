@@ -1,4 +1,4 @@
-import {drawDungeonAtlasTile} from './dungeon-atlas.mjs';
+import {drawDungeonAtlasTile,drawDungeonProp,dungeonArtworkReady,dungeonFeatureSprite,dungeonDecoration,drawDungeonLight} from './dungeon-atlas.mjs';
 import {updateMapCamera,movementProgress} from './map-camera.mjs';
 import * as SE from './spiritual-energy.mjs';
 import * as ST from './support-techniques.mjs';
@@ -201,8 +201,12 @@ function drawCave(canvas,time){
  mapCamera=updateMapCamera(mapCamera,{x:vx*size+16,y:vy*size+16,width,height,scene:'cave:'+room.id+':'+room.level,bounds:{width:map.width*size,height:map.height*size}});
  const ox=-mapCamera.left,oy=-mapCamera.top;
  ctx.imageSmoothingEnabled=false;ctx.fillStyle='#080b13';ctx.fillRect(0,0,width,height);
- const palette=[['#403c43','#625b61','#292c37','#a8a0a0'],['#41423b','#656555','#303b38','#b6ac89'],['#353d46','#576574','#252e3d','#9baec2'],['#453d37','#6b594a','#382d31','#c3a18b']][E.hash(s.seed,room.id,room.level)%4];
+ if(!dungeonArtworkReady()){ctx.fillStyle='#d5ccb1';ctx.font='10px monospace';ctx.fillText('Preparing dungeon artwork…',12,24);return;}
  const atlasBiome=E.hash(s.seed,room.id,room.level)%4;
+ const objects=caveObjects(room,map),features=currentDungeonFeatures(room),state=dungeonState(room),queue=[],lights=[];
+ const occupied=new Set([...objects,...features,...map.exits].map(o=>o.x+','+o.y));
+ const wallAt=(x,y)=>map.grid[y]?.[x]==='wall';
+ const place=(name,px,py,w=32,h=w,z=py+31)=>queue.push({z,draw:()=>drawDungeonProp(ctx,name,px+(32-w)/2,py+32-h,w,h)});
  for(let y=0;y<map.height;y++)for(let x=0;x<map.width;x++){
   const t=map.grid[y][x],px=Math.round(ox+x*size),py=Math.round(oy+y*size);
   if(px<-size||py<-size||px>width||py>height)continue;
@@ -215,19 +219,24 @@ function drawCave(canvas,time){
    const right=x+1<map.width&&map.grid[y][x+1]!=='wall';
    kind=below?(left?8:right?9:6):(left||right?7:10+h%2);
   }else kind=h%37===0?12:h%29===0?13:h%13===0?5:h%11===0?4:h%7===0?3:h%5===0?2:h%3===0?1:0;
-  drawDungeonAtlasTile(ctx,atlasBiome,kind,px,py);
+  const neighbors={north:wall?map.grid[y-1]?.[x]&&!wallAt(x,y-1):wallAt(x,y-1),south:map.grid[y+1]?.[x]&&!wallAt(x,y+1),west:wall?map.grid[y]?.[x-1]&&!wallAt(x-1,y):wallAt(x-1,y),east:map.grid[y]?.[x+1]&&!wallAt(x+1,y)};
+  drawDungeonAtlasTile(ctx,atlasBiome,kind,px,py,{tileX:x,tileY:y,temple:!!room.temple,neighbors});
+  if(t==='up'||t==='down'||t==='exit')drawDungeonProp(ctx,t==='down'?'stairs-down':t==='exit'?'exit':'stairs-up',px,py,32,32);
+  const nearWall=wall?!!neighbors.south:wallAt(x,y-1)||wallAt(x-1,y)||wallAt(x+1,y);
+  const decor=dungeonDecoration(h,{wall,nearWall,temple:!!room.temple,occupied:occupied.has(x+','+y)||t!=='floor'&&!wall});
+  if(decor){const small=['bones','rubble','mushrooms'].includes(decor),w=small?20:decor==='torch'?22:28;place(decor,px,py,w,decor==='stalagmites'?34:w);if(decor==='torch'||decor==='mushrooms')lights.push({x:px+16,y:py+20,cool:decor==='mushrooms',radius:decor==='torch'?40:24});}
  }
- for(const obj of caveObjects(room,map)){
+ for(const obj of objects){
   const px=ox+obj.x*size,py=oy+obj.y*size;if(px<-32||py<-32||px>width||py>height)continue;
-  if(obj.kind==='push'){ctx.fillStyle='#4d4946';ctx.fillRect(px+5,py+12,23,16);ctx.fillStyle='#b3a69a';ctx.fillRect(px+8,py+6,16,17);ctx.fillStyle='#817a77';ctx.fillRect(px+17,py+10,7,11);}
-  else if(obj.kind==='cleave'){ctx.fillStyle='#4a3628';ctx.fillRect(px+13,py+7,6,24);ctx.fillStyle='#45784b';for(let i=0;i<4;i++)ctx.fillRect(px+4+i*6,py+5+(i%2)*5,10,9);}
-  else{ctx.fillStyle='#786879';ctx.fillRect(px+5,py+9,23,20);ctx.fillStyle='#b49ec6';ctx.fillRect(px+11,py+3,10,21);ctx.fillStyle='#d8c3e5';ctx.fillRect(px+15,py+7,3,11);}
+  place(obj.kind==='push'?'boulder':obj.kind==='cleave'?'roots':'crystal',px,py,34,obj.kind==='crush'?40:34);
  }
- for(const f of currentDungeonFeatures(room)){
+ for(const f of features){
   const px=ox+f.x*size,py=oy+f.y*size;if(px<-32||py<-32||px>width||py>height)continue;
-  const state=dungeonState(room);ctx.fillStyle=f.kind==='hazard'?(state.hazard?'#789c68':'#be6e51'):f.kind==='treasure'?(state.treasure?'#6d6b66':'#dbb35a'):f.kind==='rune'?['#e9ac57','#91b9df','#c2a4e8'][f.order]:'#a8c4bd';
-  ctx.fillRect(px+8,py+18,16,10);ctx.strokeStyle='#292d30';ctx.lineWidth=2;ctx.strokeRect(px+8,py+18,16,10);
-  ctx.fillStyle='#f9e9bc';ctx.font='10px monospace';ctx.fillText(f.kind==='rune'?String(f.order+1):f.kind==='lever'?'L':f.kind==='treasure'?'◆':f.kind==='hazard'?'!':'?',px+12,py+26);
+  const asset=dungeonFeatureSprite(f,state);
+  if(f.kind==='rune'||f.kind==='hazard'){
+   drawDungeonProp(ctx,asset,px,py,32,32);
+   if(f.kind==='rune'&&(state.solved||f.order<state.runeStep))lights.push({x:px+16,y:py+16,cool:f.order!==0,radius:23});
+  }else place(asset,px,py,32,f.kind==='inscription'||f.kind==='secret'?40:32);
  }
  const lead=party().find(u=>u.id===s.sealer?.leadId);
  if(lead&&companionTrail.length>=2){
@@ -235,11 +244,12 @@ function drawCave(canvas,time){
   if(from&&to){const fx=from.x+(to.x-from.x)*(moving?progress:1),fy=from.y+(to.y-from.y)*(moving?progress:1);
    const face=to.x<from.x?'left':to.x>from.x?'right':to.y<from.y?'up':'down';
    const sp=spOf(lead),sz=companionSize(sp,lead.appearance).size;
-   drawAspectAura(ctx,lead,ox+fx*size+16-sz/2,oy+fy*size+30-sz,sz);
-   drawCompanion(ctx,sp,lead.appearance,ox+fx*size+16-sz/2,oy+fy*size+30-sz,sz,face,moving,progress);
+   queue.push({z:oy+fy*size+30,draw:()=>{drawAspectAura(ctx,lead,ox+fx*size+16-sz/2,oy+fy*size+30-sz,sz);drawCompanion(ctx,sp,lead.appearance,ox+fx*size+16-sz/2,oy+fy*size+30-sz,sz,face,moving,progress);}});
   }
  }
- drawPerson(ctx,ox+vx*size,oy+vy*size-5,'player',time,s.player.face,moving,adventureState().appearance);
+ queue.push({z:oy+vy*size+30,draw:()=>drawPerson(ctx,ox+vx*size,oy+vy*size-5,'player',time,s.player.face,moving,adventureState().appearance)});
+ queue.sort((a,b)=>a.z-b.z);for(const item of queue)item.draw();
+ for(const light of lights)drawDungeonLight(ctx,light.x,light.y,time,light);
  if(fieldAnimation){const a=fieldAnimation,elapsed=time-a.start;if(elapsed<a.duration)drawFieldAnimation(ctx,a.kind,ox+a.x*size,oy+a.y*size,elapsed,a.duration);else fieldAnimation=null;}
  const label=$('#map-location'),biome=$('#map-biome'),hint=$('#map-hint');
  if(label)label.textContent='Cave · Floor '+(room.level+1)+' / '+room.depth;
@@ -1303,7 +1313,7 @@ function startTempleRematch(id){const a=adventureState(),clan=A.CLANS.find(c=>c.
 
 function dungeonState(room=s.cave){s.dungeonState??={};return s.dungeonState[room.id+'|'+room.level]??={runeStep:0,solved:false,lever:false,treasure:false,hazard:false};}
 function currentDungeonFeatures(room=s.cave){const layout=dungeonLayout(room),features=[...layout.features];if(dungeonState(room).secretRevealed&&layout.secret)features.push({...layout.secret,id:'secret',kind:'secret',name:'Hidden chamber'});return features;}
-function dungeonClue(room=s.cave){return currentDungeonFeatures(room).filter(f=>f.kind==='rune').sort((a,b)=>a.order-b.order).map(f=>f.name).join(' → ');}
+function dungeonClue(room=s.cave){return currentDungeonFeatures(room).filter(f=>f.kind==='rune').sort((a,b)=>a.order-b.order).map(f=>f.name+' ('+['amber triangle','blue crescent','violet diamond'][f.order]+')').join(' → ');}
 function dungeonTileEvent(){
  const room=s.cave,state=dungeonState(),feature=currentDungeonFeatures().find(f=>f.x===room.x&&f.y===room.y);if(!feature)return;
  if(feature.kind==='rune'&&room.temple&&room.level===2&&!state.solved){const correct=EP.visitDungeonRune(state,feature);toast(correct?(state.solved?'The rune sequence opens the stairway.':'The rune answers · '+state.runeStep+'/3'):'The sequence fades. Tablet: '+dungeonClue());}
