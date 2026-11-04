@@ -11,9 +11,9 @@ export function renderCreaturePixels(sp,form=0,size=128){
  const ellipse=(cx,cy,rx,ry,c)=>{if(!shades.has(c))shades.set(c,[c.map(v=>Math.min(255,v+20)),c.map(v=>Math.max(0,v-24))]);const [bright,dark]=shades.get(c);for(let y=Math.floor(cy-ry);y<=cy+ry;y++)for(let x=Math.floor(cx-rx);x<=cx+rx;x++)if(((x-cx)/rx)**2+((y-cy)/ry)**2<=1){const n=(x-cx)/rx+(y-cy)/ry;pixel(x,y,c===outline?c:n<-.3?bright:n>.6?dark:c);}};
  const line=(x1,y1,x2,y2,r,c)=>{const n=Math.ceil(Math.hypot(x2-x1,y2-y1)*2);for(let i=0;i<=n;i++)ellipse(x1+(x2-x1)*i/n,y1+(y2-y1)*i/n,r,r,c);};
  const blob=(x,y,rx,ry,c=main)=>{ellipse(x,y,rx+1,ry+1,outline);ellipse(x,y,rx,ry,c);};
- const biped=a.bodyPlan==='biped',m=a.morphology||{},nonAnimal=['rooted','amorphous','radial','tentacled'].includes(a.bodyPlan),headX=biped?47:31,headY=biped?29:39-(m.neck||0),growth=1+form*.11,rx=(biped?13:a.bodyPlan==='serpentine'?15:22)*(m.bulk||1)*growth,ry=(biped?19:a.bodyPlan==='aquatic'?10:a.bodyPlan==='serpentine'?9:15)*growth;
- if(traits.has('wings'))for(const sign of [-1,1]){line(49,43,49+sign*(27+form*3),22,7,outline);line(49,43,49+sign*(27+form*3),22,5,accent);for(let n=0;n<4;n++)line(49+sign*(12+n*4),30-n*2,49+sign*(17+n*4),47-n,2,accent);}
- const legs=a.limbs?.legs||0;for(let n=0;n<legs;n++){const x=legs===2?40+n*15:30+n*(35/Math.max(1,legs-1)),bottom=Math.min(84,58+(m.legLength||18));line(x,58,x+(n%2?4:-3),bottom,3+form,outline);line(x,58,x+(n%2?4:-3),bottom-2,2+form,main);}
+ const biped=a.bodyPlan==='biped',m=a.morphology||{},beast=sp.base==='Beast'||sp.alter==='Beast',celestial=sp.base==='Celestial'||sp.alter==='Celestial',nonAnimal=['rooted','amorphous','radial','tentacled'].includes(a.bodyPlan),headX=biped?47:31,headY=biped?29:39-(m.neck||0),growth=1+form*.11,rx=(biped?13:a.bodyPlan==='serpentine'?15:beast?24:22)*(m.bulk||1)*growth,ry=(biped?19:a.bodyPlan==='aquatic'?10:a.bodyPlan==='serpentine'?9:beast?17:15)*growth;
+ if(traits.has('wings'))for(const sign of [-1,1]){const rootX=biped?48:54,rootY=biped?40:43,tipX=rootX+sign*(25+form*3),tipY=17-form*2;line(rootX,rootY,tipX,tipY,4,outline);line(rootX,rootY,tipX,tipY,3,accent);for(let n=0;n<4;n++){const t=(n+1)/5,x=rootX+(tipX-rootX)*t,y=rootY+(tipY-rootY)*t;line(x,y,x+sign*(5+n*2),y+11-n,2,accent);}}
+ const legs=a.limbs?.legs||0;for(let n=0;n<legs;n++){const x=legs===2?40+n*15:30+n*(35/Math.max(1,legs-1)),bottom=Math.min(87,60+Math.max(beast?19:14,m.legLength||18)),thickness=(beast?4:3)+form;line(x,57,x+(n%2?4:-3),bottom,thickness+1,outline);line(x,57,x+(n%2?4:-3),bottom-2,thickness,main);line(x+(n%2?4:-3),bottom-2,x+(n%2?7:-6),bottom-1,2,outline);}
  if(m.tail||a.bodyPlan==='aquatic'){const endX=Math.min(86,67+(m.tail||12)*.6);line(65,55,endX,41,4,outline);line(65,55,endX,41,3,main);}
  if(a.bodyPlan==='serpentine'){for(let n=0;n<6;n++)blob(34+n*7,55+Math.sin(n)*9,7+form,6+form);blob(31,46,9+form,6+form);}
  else if(a.bodyPlan==='rooted'){
@@ -27,7 +27,7 @@ export function renderCreaturePixels(sp,form=0,size=128){
   for(let n=0;n<6;n++){const angle=n*1.047+.3;line(48,52,48+Math.cos(angle)*30,53+Math.sin(angle)*28,3,outline);line(48,52,48+Math.cos(angle)*30,53+Math.sin(angle)*28,2,accent);}
   blob(48,49,16*growth,17*growth);
  }else{
-  blob(50,52,rx,ry);if(m.neck){line(37,48,headX,headY,5,outline);line(37,48,headX,headY,4,main);}
+  blob(50,52,rx,ry);if(beast){blob(38,47,Math.max(8,rx*.48),Math.max(9,ry*.8));}if(m.neck){line(37,48,headX,headY,5,outline);line(37,48,headX,headY,4,main);}
   blob(headX,headY,9+form*2,9+form*2);if(m.snout)blob(headX-Math.min(10,m.snout),headY+3,Math.max(3,m.snout*.6),4,main);
   if(m.ears)for(const sign of [-1,1])line(headX+sign*6,headY-5,headX+sign*7,Math.max(8,headY-5-m.ears),2,main);
   if(m.trunk){line(headX-9,headY+5,headX-13,headY+18,3,main);line(headX-13,headY+18,headX-18,headY+20,2,main);}
@@ -41,7 +41,7 @@ export function renderCreaturePixels(sp,form=0,size=128){
  if(traits.has('roots')||traits.has('traps')){for(let n=0;n<3;n++)blob(39+n*10,32-(n%2)*8,5,8,accent);}
  if(traits.has('armor')||traits.has('bone'))for(let n=0;n<4+form;n++)blob(40+n*5,50+n%2*5,3,5,accent);
  if(traits.has('gel'))for(let n=0;n<4;n++)blob(42+n*5,59,3,5,accent);
- if(traits.has('light')||traits.has('glamour'))for(let x=31;x<65;x++)if((x+seed)%3)pixel(x,15+(x%5===0?1:0),accent);
+ if(celestial){const gold=[251,229,141],halo=[255,242,183];for(let x=24;x<=69;x++){const t=(x-46.5)/23,y=12+Math.round(3*Math.sqrt(Math.max(0,1-t*t)));if((x+seed)%2===0){pixel(x,y,gold);pixel(x,y+1,halo);}}for(let n=0;n<5;n++){const x=29+n*9;pixel(x,8+(n%2)*3,halo);pixel(x-1,9+(n%2)*3,gold);}}else if(traits.has('light')||traits.has('glamour'))for(let x=31;x<65;x++)if((x+seed)%3)pixel(x,15+(x%5===0?1:0),accent);
  if(traits.has('elemental')||traits.has('fire')||traits.has('water')||traits.has('air'))for(let n=0;n<5;n++)line(61+n*2,52,65+n*2,31+n%2*7,2,accent);
  if(traits.has('eyes'))for(let n=0;n<4;n++){blob(39+n*7,47+(n%2)*7,2,2,[238,218,138]);pixel(39+n*7,47+(n%2)*7,outline);}
  // Shared family markings vary with seed, not with evolution stage.
