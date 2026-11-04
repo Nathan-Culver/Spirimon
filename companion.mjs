@@ -16,6 +16,7 @@ const FILES={'/dungeon-atlas.mjs':'dungeon-atlas.mjs','/map-camera.mjs':'map-cam
 let generating=false;
 FILES['/classification-passives.mjs']='classification-passives.mjs';
 FILES['/classification-status.mjs']='classification-status.mjs';
+FILES['/classifications.mjs']='classifications.mjs';
 function respond(res,status,data){res.writeHead(status,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify(data));}
 async function jsonRequest(url,body,timeout=3000){const response=await fetch(url,{...(body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(timeout)});if(!response.ok)throw Error('Local model returned HTTP '+response.status);return response.json();}
 async function readJSON(req){let raw='';for await(const chunk of req){raw+=chunk;if(raw.length>24000000)throw Error('Request is too large.');}return JSON.parse(raw);}

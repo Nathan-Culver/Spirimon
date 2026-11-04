@@ -1,4 +1,4 @@
-import {readFile,writeFile,mkdir,cp} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,cp,readdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import path from 'node:path';
@@ -40,8 +40,17 @@ export async function buildPage(directory=root){
  const css=(await readFile(path.join(directory,'style.css'),'utf8')).replace(/\r\n/g,'\n').replace('./assets/spirimon-pixel.ttf','data:font/ttf;base64,'+font.toString('base64'));
  const template=(await readFile(path.join(directory,'index.template.html'),'utf8')).replace(/\r\n/g,'\n').trimEnd()+'\n';
  const moduleMeta='<meta name="spirimon-modules" content="'+ordered.join(',')+'">';
+ const offlineArt={};
+ const world=await import(pathToFileURL(path.join(directory,'world-art.mjs')).href),placeholder=await import(pathToFileURL(path.join(directory,'placeholder-art.mjs')).href);
+ const alreadyEmbedded={...world.WORLD_ART,...world.SETTLEMENT_ART,...placeholder.PLACEHOLDER_ART};
+ const assetPaths=new Set([...script.matchAll(/['"](\.\/assets\/[a-zA-Z0-9_/-]+\.(?:webp|svg|png))['"]/g)].map(m=>m[1]));
+ async function collectAssets(folder){for(const entry of await readdir(path.join(directory,folder),{withFileTypes:true})){const file=path.posix.join(folder,entry.name);if(entry.isDirectory())await collectAssets(file);else if(/\.(?:webp|svg|png)$/.test(file))assetPaths.add('./'+file);}}
+ await collectAssets('assets');
+ for(const asset of assetPaths){if(alreadyEmbedded[asset])continue;const bytes=await readFile(path.join(directory,asset));const mime=asset.endsWith('.svg')?'image/svg+xml':asset.endsWith('.png')?'image/png':'image/webp';offlineArt[asset]='data:'+mime+';base64,'+bytes.toString('base64');}
+ const standaloneScript='window.__spirimonOfflineArt='+JSON.stringify(offlineArt)+';\n'+script;
+ new vm.Script(standaloneScript,{filename:'spirimon-offline.js'});
  const standaloneHtml=template.replace(/<link rel="stylesheet"[^>]*>/,()=>'<style>'+css+'</style>')
-  .replace('<!-- SPIRIMON_GAME -->',()=>moduleMeta+'\n<script id="spirimon-game">\n'+script.replace(/<\/script/gi,'<\\/script')+'\n</script>');
+  .replace('<!-- SPIRIMON_GAME -->',()=>moduleMeta+'\n<script id="spirimon-game">\n'+standaloneScript.replace(/<\/script/gi,'<\\/script')+'\n</script>');
  // Pages starts with one small classic bundle. Large atlas data belongs only in
  // the downloadable offline copy; on Pages the four images load independently.
  const artStart=script.indexOf('__modules["world-art.mjs"]='),artEnd=script.indexOf('\n__modules[',artStart+1);
@@ -53,7 +62,7 @@ export async function buildPage(directory=root){
  const html=template.replace(/<link rel="stylesheet"[^>]*>/,()=>'<link rel="stylesheet" href="./'+styleName+'">')
   .replace('<!-- SPIRIMON_GAME -->',()=>moduleMeta+'\n<script>window.spirimonLoadGame("./'+bundleName+'");</script>');
  if(html.includes('<!-- SPIRIMON_GAME -->'))throw Error('Game template placeholder is missing.');
- return {html,script,pageScript,standaloneHtml,css,bundleName,styleName,modules:ordered};
+ return {html,script,pageScript,standaloneHtml,css,bundleName,styleName,offlineArt,modules:ordered};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const built=await buildPage(),{html,modules}=built;

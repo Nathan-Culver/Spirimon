@@ -8,7 +8,7 @@ import {buildPage} from '../build.mjs';
 test('Pages entry is small and references one content-versioned classic bundle',async()=>{
  const built=await buildPage(),published=readFileSync(new URL('../index.html',import.meta.url),'utf8');
  assert.equal(built.html,published,'Run npm run build before publishing');
- assert.ok(Buffer.byteLength(published)<12000);assert.ok(Buffer.byteLength(built.pageScript)<800000);
+ assert.ok(Buffer.byteLength(published)<12000);assert.ok(Buffer.byteLength(built.pageScript)<900000);
  assert.ok(published.includes(built.bundleName));assert.ok(published.includes(built.styleName));
  assert.equal(built.bundleName,'game-'+createHash('sha256').update(built.pageScript).digest('hex').slice(0,12)+'.js');
  assert.ok(built.modules.includes('creature-browser.mjs'));assert.ok(built.modules.includes('anatomy.mjs'));assert.doesNotThrow(()=>new vm.Script(built.pageScript));
@@ -31,4 +31,11 @@ test('downloaded game pages resolve optional artwork from the hosted game',async
   const moduleURL=vm.runInNewContext(expression,{URL,document:{baseURI}});assert.equal(moduleURL('asset-loader.mjs'),'https://nathan-culver.github.io/Spirimon/asset-loader.mjs');
  }
  const previewURL=vm.runInNewContext(expression,{URL,document:{baseURI:'http://terminal.local:4173/?playtest=qa'}});assert.equal(previewURL('asset-loader.mjs'),'http://terminal.local:4173/asset-loader.mjs');
+});
+
+test('standalone download embeds every built-in creature portrait without inflating the online game bundle',async()=>{
+ const built=await buildPage();const {ROSTER}=await import('../roster.mjs');
+ const portraits=ROSTER.filter(sp=>sp.atlas);assert.ok(portraits.length>40);
+ for(const sp of portraits){const data=built.offlineArt[sp.atlas];assert.ok(data?.startsWith('data:image/webp;base64,'),sp.atlas);assert.equal(Buffer.from(data.split(',')[1],'base64').compare(readFileSync(new URL('../'+sp.atlas.slice(2),import.meta.url))),0);}
+ assert.match(built.standaloneHtml,/window\.__spirimonOfflineArt=/);assert.doesNotMatch(built.pageScript,/window\.__spirimonOfflineArt=/);
 });

@@ -1,7 +1,9 @@
 import {exhaustion,spiritualMultiplier,spiritualDefense,spiritualBonus,shieldDamage} from './spiritual-core.mjs';
 import {buildDesign,assignDomains,migrateSpecies,migrateSaveCreatures,syncCapabilities} from './anatomy.mjs';
 import {CREATURE_TYPES,CREATURE_DOMAINS} from './creature-catalog.mjs';
-import {ensurePassives,passiveEffects} from './classification-passives.mjs';
+import {ensurePassives,ensureIndividualPassives,passiveEffects} from './classification-passives.mjs';
+import {DOMAIN_ALIASES,canonicalDomain,activeTypes,domainSources} from './classifications.mjs';
+export {DOMAIN_ALIASES,canonicalDomain,activeTypes,ensureIndividualPassives};
 import {statusChance} from './classification-status.mjs';
 import {equipment,hasHook,ASPECTS,heldEquipment,itemHasHook,itemOnceUsed,markItemUsed,consumeHeldItem,heldItemActivation} from './equipment.mjs';
 import {townLayout,townFeatures,townPath,townGround} from './towns.mjs';
@@ -11,8 +13,7 @@ export function moveLore(move){return narrativeLore(move);}
 export const VERSION=1;
 export const TYPES=CREATURE_TYPES;
 export const DOMAINS=CREATURE_DOMAINS;
-export const DOMAIN_ALIASES={Time:'Fate',Space:'Void',Mind:'Psionic',Plant:'Nature'};
-export const canonicalDomain=d=>DOMAIN_ALIASES[d]||d;
+
 export const COLORS={Aberration:'#ac82d5',Beast:'#d0a267',Celestial:'#f0d889',Construct:'#87a3ae',Elemental:'#f48b63',Fey:'#b4a0e6',Fiend:'#d97570',Giant:'#b2a48c',Monstrosity:'#b2c588',Ooze:'#a1ca73',Plant:'#7abd8d',Undead:'#8ebbb4'};
 export const BIOMES=[{name:'Briarwild',kind:'forest',types:['Beast','Plant','Fey'],color:'#376f51',desc:'Old roots. New footprints.'},{name:'Ashen Reach',kind:'ash',types:['Elemental','Fiend','Construct'],color:'#84644c',desc:'Something stirs beneath the cinders.'},{name:'Moonfen',kind:'fen',types:['Undead','Ooze','Aberration'],color:'#466c79',desc:'Follow the lights. Not their whispers.'},{name:'Sunfall Highlands',kind:'highland',types:['Celestial','Giant','Monstrosity'],color:'#7e875b',desc:'Where the sky comes down to earth.'},{name:'Wanderer’s Vale',kind:'vale',types:['Construct','Beast','Fey'],color:'#597d61',desc:'Every trail has a story.'}];
 export function hash(...args){let h=2166136261;for(const c of args.join('|')){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}return h>>>0;}
@@ -85,8 +86,8 @@ function genetics(ind,key){return Math.max(0,Math.min(31,ind.ivs?.[key]??ind.pot
 function effort(ind,key){return Math.max(0,Math.min(252,ind.evs?.[key]??0));}
 function natureFactor(ind,key){const pair=NATURES[ind.nature]||NATURES.Hardy;return pair[0]===key?1.1:pair[1]===key?.9:1;}
 export function makeIndividual(species,level=5,form=0,r=Math.random){const ivs=Object.fromEntries(['hp','might','defense','power','resistance','speed'].map(k=>[k,Math.floor(r()*32)]));return{id:'i-'+Math.floor(r()*1e12).toString(36),species:species.id,level,form,appearance:form,xp:0,bond:10,potential:ivs.might,nature:pick(Object.keys(NATURES),r),trained:0,ivs,evs:{hp:0,might:0,defense:0,power:0,resistance:0,speed:0},personalityValue:Math.floor(r()*4294967296),rareVariant:r()<1/128,catchRate:species.catchRate??Math.max(35,Math.min(245,210-Math.floor((species.power||50)/2))),hp:0,status:null,commit:.5,ward:false,omegaUsed:false};}
-export function stats(ind,sp){const f=1+ind.form*.25,lv=ind.level;const baseMight=sp.might??sp.power??50,basePower=sp.energyPower??sp.power??50;const calc=(base,key,growth)=>Math.floor((base+lv*growth+genetics(ind,key)+Math.floor(effort(ind,key)/4)+(key==='might'?(ind.trained||0):0))*f*natureFactor(ind,key));const might=calc(baseMight,'might',3);const item=heldEquipment(ind,sp),bonus=item?.bonus?[item.bonus,1+item.amount/100]:null;const result={hp:Math.floor((sp.health+lv*5+genetics(ind,'hp')+Math.floor(effort(ind,'hp')/4))*f),might,defense:calc(sp.defense??baseMight,'defense',3),power:calc(basePower,'power',3),resistance:calc(sp.resistance??basePower,'resistance',3),...resourceMaximums(ind,sp),speed:Math.floor((sp.speed+lv*2+genetics(ind,'speed')+Math.floor(effort(ind,'speed')/4))*natureFactor(ind,'speed'))};if(bonus)result[bonus[0]]=Math.floor(result[bonus[0]]*bonus[1]);for(const [stat,percent]of Object.entries(item?.stats||{}))if(Number.isFinite(percent)&&stat in result&&stat!=='pp'&&stat!=='willpower')result[stat]=Math.floor(result[stat]*(1+clamp(percent,-30,35)/100));const focus={Guardian:['defense','resistance'],Striker:['might','power'],Mystic:['power'],Sprinter:['speed','speed']}[ind.specialty];if(focus)for(const stat of new Set(focus))result[stat]=Math.floor(result[stat]*1.1);if(ind.rareVariant)result.hp=Math.floor(result.hp*1.04);for(const [stat,multiplier]of ASPECTS[ind.aspect]?.stats||[])result[stat]=Math.floor(result[stat]*multiplier);return result;}
-export function heal(ind,sp){resetCombat(ind);ind.hp=stats(ind,sp).hp;ind.pp=stats(ind,sp).pp;ind.willpower=stats(ind,sp).willpower;ind.status=null;ind.statusTurns=0;ind.resourceRevision=1;ind.resourceCaps=resourceMaximums(ind,sp);return ind;}
+export function stats(ind,sp){const f=1+ind.form*.25,lv=ind.level;const baseMight=sp.might??sp.power??50,basePower=sp.energyPower??sp.power??50;const calc=(base,key,growth)=>Math.floor((base+lv*growth+genetics(ind,key)+Math.floor(effort(ind,key)/4)+(key==='might'?(ind.trained||0):0))*f*natureFactor(ind,key));const might=calc(baseMight,'might',3);const item=heldEquipment(ind,sp),bonus=item?.bonus?[item.bonus,1+item.amount/100]:null;const result={hp:Math.floor((sp.health+lv*5+genetics(ind,'hp')+Math.floor(effort(ind,'hp')/4))*f),might,defense:calc(sp.defense??baseMight,'defense',3),power:calc(basePower,'power',3),resistance:calc(sp.resistance??basePower,'resistance',3),...resourceMaximums(ind,sp),speed:Math.floor((sp.speed+lv*2+genetics(ind,'speed')+Math.floor(effort(ind,'speed')/4))*natureFactor(ind,'speed'))};if(bonus)result[bonus[0]]=Math.floor(result[bonus[0]]*bonus[1]);for(const [stat,percent]of Object.entries(item?.stats||{}))if(Number.isFinite(percent)&&stat in result&&stat!=='pp'&&stat!=='willpower')result[stat]=Math.floor(result[stat]*(1+clamp(percent,-30,35)/100));const focus={Guardian:['defense','resistance'],Striker:['might','power'],Mystic:['power'],Sprinter:['speed','speed']}[ind.specialty];if(focus)for(const stat of new Set(focus))result[stat]=Math.floor(result[stat]*1.1);if(ind.rareVariant)result.hp=Math.floor(result.hp*1.04);for(const [stat,multiplier]of ASPECTS[ind.aspect]?.stats||[])result[stat]=Math.floor(result[stat]*multiplier);const vitality=passiveEffects(sp,ind,{maxHp:result.hp,weather:ind.battlefield?.weather});result.hp=Math.floor(result.hp*(1+Math.min(.5,vitality.maxHp||0)));const mobility=passiveEffects(sp,ind,{maxHp:result.hp,weather:ind.battlefield?.weather});result.speed=Math.max(1,Math.floor(result.speed*(1+Math.min(.5,mobility.speed||0))));return result;}
+export function heal(ind,sp){ensureIndividualPassives(sp,ind);delete ind.afflictions;resetCombat(ind);ind.hp=stats(ind,sp).hp;ind.pp=stats(ind,sp).pp;ind.willpower=stats(ind,sp).willpower;ind.status=null;ind.statusTurns=0;ind.resourceRevision=1;ind.resourceCaps=resourceMaximums(ind,sp);return ind;}
 // Unlisted matchups stay neutral. No moral alignment is inferred from a type.
 export const ADVANTAGE={"Aberration":["Celestial"],"Beast":["Fey"],"Celestial":["Fiend","Undead"],"Construct":["Beast","Undead"],"Elemental":["Plant","Construct"],"Fey":["Giant","Aberration"],"Fiend":["Fey","Celestial"],"Giant":["Construct","Monstrosity"],"Monstrosity":["Beast"],"Ooze":["Construct","Giant"],"Plant":["Ooze","Elemental"],"Undead":["Plant"]};
 export const RESIST={"Aberration":["Fey"],"Beast":["Plant","Ooze"],"Celestial":["Celestial","Undead"],"Construct":["Beast","Plant"],"Elemental":["Elemental","Construct"],"Fey":["Beast","Giant"],"Fiend":["Undead","Aberration"],"Giant":["Beast","Ooze"],"Monstrosity":["Giant","Fiend"],"Ooze":["Plant","Fiend"],"Plant":["Ooze","Elemental"],"Undead":["Undead"]};
@@ -94,21 +95,14 @@ export const RESIST={"Aberration":["Fey"],"Beast":["Plant","Ooze"],"Celestial":[
 export const DOMAIN_ADVANTAGE={"Air":["Earth","Sorrow"],"Earth":["Lightning","Metal"],"Fire":["Ice","Despair"],"Water":["Fire","Earth"],"Light":["Dark","Nightmares"],"Dark":["Hope","Dreams"],"Sun":["Dark","Nightmares"],"Moon":["Sun","Fear"],"Lightning":["Water","Metal"],"Ice":["Air","Water"],"Metal":["Ice","War"],"Chaos":["Law","Fate"],"Law":["Chaos","Wrath"],"Good":["Evil","Fear"],"Evil":["Love","Hope"],"Creation":["Destruction","Despair"],"Destruction":["Metal","Creation"],"War":["Peace","Creation"],"Peace":["Wrath","Fear"],"Fear":["Hope","Love"],"Wrath":["Peace","Sorrow"],"Love":["Sorrow","Evil"],"Hope":["Despair","Nightmares"],"Despair":["Dreams","Love"],"Sorrow":["Wrath","Hope"],"Fate":["Chaos","Dreams"],"Dreams":["Nightmares","Law"],"Nightmares":["Peace","Fear"],"Life":["Death","Despair"],"Death":["Life","Hope"],"Spirit":["Nightmares","Evil"],"Psionic":["Fear","Chaos"],"Nature":["Earth","Water"],"Void":["Creation","Magic"],"Storm":["Air","Water"],"Magic":["Law","Void"]};
 export const DOMAIN_RESIST={"Air":["Earth","Sorrow"],"Earth":["Lightning","Metal"],"Fire":["Ice","Despair"],"Water":["Earth","Fire"],"Light":["Dark","Nightmares"],"Dark":["Hope","Dreams"],"Sun":["Dark","Nightmares"],"Moon":["Sun","Fear"],"Lightning":["Water","Metal"],"Ice":["Air","Water"],"Metal":["Ice","War"],"Chaos":["Air","Earth"],"Law":["Wrath","Air"],"Good":["Evil","Fear"],"Evil":["Hope","Air"],"Creation":["Despair","Air"],"Destruction":["Metal","Air"],"War":["Creation","Peace"],"Peace":["Fear","Air"],"Fear":["Love","Hope"],"Wrath":["Air","Earth"],"Love":["Sorrow","Air"],"Hope":["Despair","Nightmares"],"Despair":["Love","Dreams"],"Sorrow":["Hope","Earth"],"Fate":["Dreams","Air"],"Dreams":["Law","Nightmares"],"Nightmares":["Peace","Fear"],"Life":["Earth","Sorrow"],"Death":["Earth","Love"],"Spirit":["Fear","Nightmares"],"Psionic":["Fear","Dreams"],"Nature":["Water","Earth"],"Void":["Creation","Law"],"Storm":["Air","Lightning"],"Magic":["Chaos","Law"]};
 export const DOMAIN_IDENTITY={"Air":"Mobility and evasion","Earth":"Defense and stability","Fire":"Burning and sustained damage","Water":"Cleansing and recovery","Light":"Revelation and protection","Dark":"Concealment and weakening","Sun":"Empowerment and purification","Moon":"Illusion and transformation","Lightning":"Speed and interruption","Ice":"Slowing and freezing","Metal":"Armor and resilience","Chaos":"Unpredictable transformations","Law":"Restriction and suppression","Good":"Protection and restoration","Evil":"Corruption and draining","Creation":"Summoning and regeneration","Destruction":"Breaking defenses","War":"Offensive momentum","Peace":"Prevention and pacification","Fear":"Intimidation and disruption","Wrath":"Escalating aggression","Love":"Bonding and support","Hope":"Recovery and perseverance","Despair":"Weakening and attrition","Sorrow":"Exhaustion and lingering effects","Fate":"Destiny and temporal control","Dreams":"Sleep and altered perception","Nightmares":"Terror and confusion","Life":"Regeneration and vitality","Death":"Decay and mortality","Spirit":"Soul attunement and exorcism","Psionic":"Psychic influence and telekinesis","Nature":"Primal adaptation","Void":"Nullification and dimensional control","Storm":"Weather escalation","Magic":"Arcane manipulation and spell disruption"};
-export function activeDomains(sp,ind=null){
- const moves=ind?equippedMoves(ind,sp):(sp.moves||[]);
- const suppressed=new Set([...(sp.suppressedDomains||[]),...(ind?.suppressedDomains||[])].map(canonicalDomain));
- const innate=(sp.domains||[]).filter(d=>!suppressed.has(canonicalDomain(d)));
- const acquired=moves.flatMap(m=>[m?.domain,...(m?.domains||[])]);
- const temporary=[...(sp.temporaryDomains||[]),...(ind?.temporaryDomains||[])];
- return [...new Set([...innate,...acquired,...temporary].map(canonicalDomain).filter(d=>DOMAINS.includes(d)&&!suppressed.has(d)))];
-}
-export function effectiveness(move,defender){
+export function activeDomains(sp,ind=null){return domainSources(sp,ind).all;}
+export function effectiveness(move,defender,ind=null){
  // Independent classifications contribute additively, with one global cap.
  let modifier=0;
  const attackTypes=new Set([move.type,...(move.types||[])].filter(t=>TYPES.includes(t)));
  const attackDomains=new Set([move.domain,...(move.domains||[])].filter(Boolean).map(canonicalDomain));
- const defenseTypes=new Set([defender.base,defender.alter].filter(Boolean));
- const defenseDomains=new Set([...activeDomains(defender),...(defender.activeMoveDomains||[])]);
+ const defenseTypes=new Set(activeTypes(defender,ind));
+ const defenseDomains=new Set(activeDomains(defender,ind));
  for(const attackType of attackTypes)for(const t of defenseTypes){
   if(ADVANTAGE[attackType]?.includes(t))modifier+=.5;
   if(RESIST[t]?.includes(attackType))modifier-=.25;
@@ -123,7 +117,7 @@ export function effectiveness(move,defender){
 export function matchingClassificationBonus(move,attacker,sp){
  const types=new Set([move.type,...(move.types||[])].filter(Boolean));
  const domains=new Set([move.domain,...(move.domains||[])].filter(Boolean).map(canonicalDomain));
- const matchedTypes=[sp.base,sp.alter].filter((t,i,a)=>t&&a.indexOf(t)===i&&types.has(t)).length;
+ const matchedTypes=activeTypes(sp,attacker).filter(t=>types.has(t)).length;
  const matchedDomains=[...domains].filter(d=>activeDomains(sp,attacker).includes(d)).length;
  let bonus=(matchedTypes>=1?.10:0)+(matchedTypes>=2?.05:0);
  for(let i=0;i<matchedDomains;i++)bonus+=.10/(2**i);
@@ -143,7 +137,7 @@ const screenState=(u)=>u.battlefield?.sides?.[u.battleSide]?.screens||u.screens|
 const hazardState=(u)=>u.battlefield?.sides?.[u.battleSide]?.hazards||u.hazards||{};
 const living=team=>(team||[]).filter(u=>u.hp>0);
 function healHP(u,sp,amount){const before=u.hp;u.hp=Math.min(stats(u,sp).hp,u.hp+Math.max(0,Math.floor(amount)));return u.hp-before;}
-export function resetCombat(ind){for(const key of VOLATILES)delete ind[key];ind.secondWindUsed=false;ind.omegaUsed=false;ind.itemTriggered=false;ind.aspectEntryUsed=false;delete ind.itemCooldowns;delete ind.itemFlags;ind.itemRounds=0;return ind;}
+export function resetCombat(ind){for(const key of VOLATILES)delete ind[key];for(const effect of Object.keys(ind.afflictions?.conditions||{})){ind.conditions??={};ind.conditions[effect]=1;}ind.secondWindUsed=false;ind.omegaUsed=false;ind.itemTriggered=false;ind.aspectEntryUsed=false;delete ind.itemCooldowns;delete ind.itemFlags;ind.itemRounds=0;return ind;}
 export function bindBattlefield(allies,enemies,field=null){
  field??=allies.find(u=>u.battlefield)?.battlefield||enemies.find(u=>u.battlefield)?.battlefield||{};
  field.sides??={};for(const [side,team] of [['a',allies],['b',enemies]]){field.sides[side]??={hazards:{},screens:{}};for(const u of team){u.battleSide=side;u.battlefield=field;for(const key of ['reflect','lightscreen','safeguard'])if(u[key]){field.sides[side].screens[key]??=5;delete u[key];}for(const [key,value]of Object.entries(u.hazards||{}))field.sides[side].hazards[key]=Math.max(field.sides[side].hazards[key]||0,Number(value)||0);delete u.hazards;}}
@@ -179,16 +173,16 @@ export function priority(ind,sp,move,style='normal'){
 export function hitChance(actor,target,move,style='normal',asp=null){
  if(['sureHit','struggle'].includes(move.effect))return 1;
  const accuracy=move.accuracy??.9,net=stage(actor,'accuracy')-stage(target,'evasion');
- return clamp(accuracy*(net>=0?(3+net)/3:3/(3-net))+(style==='agile'?.15:0)-(target.battleStyle==='agile'?.15:0)+(hasHook(actor,'accuracy',asp)?.1:0)+(asp?passiveEffects(asp,actor,{maxHp:stats(actor,asp).hp}).accuracy||0:0),.05,1);
+ return clamp(accuracy*(net>=0?(3+net)/3:3/(3-net))+(style==='agile'?.15:0)-(target.battleStyle==='agile'?.15:0)+(hasHook(actor,'accuracy',asp)?.1:0)+(asp?passiveEffects(asp,actor,{maxHp:stats(actor,asp).hp,move,weather:actor.battlefield?.weather}).accuracy||0:0),.05,1);
 }
 export function damage(attacker,asp,defender,dsp,move,style='normal',r=Math.random){
  const a=stats(attacker,asp),d=stats(defender,dsp),energy=moveCategory(move)==='Energy';
  const offense=(energy?a.power:a.might)*(.25+(attacker.commit??.5)*1.5)*stageFactor(stage(attacker,energy?'power':'might'));
  const defense=(energy?d.resistance:d.defense)*(.25+(1-(defender.commit??.5))*1.5)*stageFactor(stage(defender,energy?'resistance':'defense'));
  const same=matchingClassificationBonus(move,attacker,asp);
- const attackPassives=passiveEffects(asp,attacker,{maxHp:a.hp}),defensePassives=passiveEffects(dsp,defender,{maxHp:d.hp});
- const passiveDamage=(1+(attackPassives[energy?'energyDamage':'physicalDamage']||0))*(1-(defensePassives.damageReduction||0));
- let amount=((2*attacker.level/5+2)*move.power*(offense/Math.max(1,defense))/24+2)*(STYLES[style]||STYLES.normal).damage*effectiveness(move,{...dsp,activeMoveDomains:activeDomains(dsp,defender),moves:equippedMoves(defender,dsp)})*(energy?dsp.spiritualRes??1:dsp.physicalRes??1)*same*passiveDamage*(.9+r()*.1)*(defender.ward?1-.45*(defender.wardStrength??1):1);
+ const attackPassives=passiveEffects(asp,attacker,{maxHp:a.hp,move,target:defender,targetMaxHp:d.hp,weather:attacker.battlefield?.weather}),defensePassives=passiveEffects(dsp,defender,{maxHp:d.hp,incomingMove:move,weather:defender.battlefield?.weather});
+ const passiveDamage=(1+(attackPassives[energy?'energyDamage':'physicalDamage']||0))*(1-Math.min(.5,defensePassives.damageReduction||0));
+ let amount=((2*attacker.level/5+2)*move.power*(offense/Math.max(1,defense))/24+2)*(STYLES[style]||STYLES.normal).damage*effectiveness(move,dsp,defender)*(energy?dsp.spiritualRes??1:dsp.physicalRes??1)*same*passiveDamage*(.9+r()*.1)*(defender.ward?1-.45*(defender.wardStrength??1):1);
  if(asp.ability==='Wildheart'&&!energy||asp.ability==='Soulweave'&&energy)amount*=1.12;
  if(dsp.ability==='Steadfast'&&(defender.commit??.5)<=.4)amount*=.9;
  if(attacker.status==='burn'&&!energy||attacker.status==='frostbite'&&energy)amount*=.5;
@@ -207,7 +201,7 @@ function applyCondition(target,effect,r=Math.random,sp=null,log=[],source=null){
  const field=target.battlefield||{},screens=screenState(target);if(effect==='nightmare'&&target.status!=='sleep'||effect==='disable'&&!target.lastMove)return false;
  if(target.safeguard||screens.safeguard||target.ward||field.terrain==='misty'||effect==='sleep'&&field.terrain==='electric')return false;
  if(hasHook(target,'statusGuard',sp)&&!itemOnceUsed(target,'statusGuard')){markItemUsed(target,'statusGuard');log.push('Warding Bell turns aside the affliction.');return false;}
- if(r()>statusChance(1,effect,sp||{},target))return false;
+ if(r()>=statusChance(1,effect,sp||{},{...target,maxHp:sp?stats(target,sp).hp:target.maxHp}))return false;
  if(effect==='slow'){target.conditions??={};target.conditions.slow=2;return true;}
  if(MAJOR.has(effect)){if(target.status&&target.status!==effect)return false;target.status=effect;target.statusTurns=effect==='sleep'?2+Math.floor(r()*2):effect==='freeze'?3:0;target.toxicTurns=0;}
  else{target.conditions??={};target.conditions[effect]=effect==='confusion'?2+Math.floor(r()*3):effect==='trap'?4:effect==='perish'?3:effect==='flinch'?1:effect==='leechSeed'||effect==='curse'?99:3;target.conditionSources??={};if(source)target.conditionSources[effect]=source.id;}
@@ -612,3 +606,9 @@ export function caveMap(seed,id,level){
 export function caveWalkable(map,x,y){return !!map.grid[y]&&['floor','up','down','exit'].includes(map.grid[y][x]);}
 
 for(const move of MOVE_CATALOG)move.baseUses=moveBaseValue(move);
+
+export function encounterChance(tile,night=false,water=false){
+ if(tile==='cave')return .13;
+ const base=tile==='grass'?.055:tile==='water'?.0175:night?.0175:0;
+ return Math.min(1,base*(night?2:1)*(water?2:1));
+}

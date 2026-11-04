@@ -1,5 +1,7 @@
 import {ANATOMY_CATALOG,MODIFIER_CATALOG,NAME_FRAGMENTS,CREATURE_TYPES,CREATURE_DOMAINS} from './creature-catalog.mjs';
-import {ensurePassives} from './classification-passives.mjs';
+import {canSteed} from './steed.mjs';
+import {domainSources} from './classifications.mjs';
+import {ensureIndividualPassives,ensurePassives} from './classification-passives.mjs';
 export function designHash(...parts){let h=2166136261;for(const c of parts.join('|')){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}return h>>>0;}
 const choose=(xs,seed)=>xs[designHash(seed)%xs.length];
 const cleanTypes=(base,alter)=>CREATURE_TYPES.includes(base)&&CREATURE_TYPES.includes(alter)&&base!==alter;
@@ -68,17 +70,7 @@ export function capabilitiesFromAnatomy(anatomy,domains=[]){
   climb:entry(has('climb')||has('claws')||hands,'grip','Grasping appendages, claws or climbing anatomy')};
 }
 // Field eligibility is binary: extra qualifying classifications do not increase effectiveness.
-export function effectiveFieldDomains(sp,ind=null){
- const aliases={Time:'Fate',Space:'Void',Mind:'Psionic'};
- const domains=[...(sp?.domains||[])];
- const moves=ind?.moveIds
-  ?ind.moveIds.map(id=>(sp.learnset||[]).find(m=>m.id===id)||(sp.moves||[]).find(m=>m.id===id)).filter(Boolean)
-  :(sp?.moves||[]);
- for(const move of moves)for(const d of [move.domain,...(move.domains||[])].filter(Boolean))domains.push(aliases[d]||d);
- const suppressed=new Set([...(sp?.suppressedDomains||[]),...(ind?.suppressedDomains||[])]);
- const granted=[...(sp?.temporaryDomains||[]),...(ind?.temporaryDomains||[])];
- return [...new Set([...domains,...granted].map(d=>aliases[d]||d))].filter(d=>!suppressed.has(d));
-}
+export function effectiveFieldDomains(sp,ind=null){return domainSources(sp,ind).all;}
 export function syncCapabilities(sp,ind=null){
  const anatomy=sp.formAnatomy?.[ind?.form]||sp.anatomy;
  sp.capabilities=capabilitiesFromAnatomy(anatomy,effectiveFieldDomains(sp,ind));
@@ -90,7 +82,7 @@ export function fieldCapabilityAvailable(sp,capability,ind=null){
  const suppressed=new Set([...(sp?.suppressedCapabilities||[]),...(ind?.suppressedCapabilities||[])]);
  const restrictions={freeze:['fly','swim','steed','push','cleave','crush','dig'],paralysis:['fly','swim','steed','push','cleave','crush'],sleep:['fly','swim','steed','push','cleave','crush','dig','teleport'],trap:['fly','steed','dig','teleport']};
  const blocked=new Set([...(ind?.fieldStatusRestrictions||[]),...(restrictions[ind?.status]||[]),...Object.keys(ind?.conditions||{}).filter(k=>ind.conditions[k]).flatMap(k=>restrictions[k]||[])]);
- return !!result[capability]?.available&&!suppressed.has(capability)&&!blocked.has(capability);
+ const eligible=capability==='steed'?canSteed({...sp,anatomy},ind?.form||0):result[capability]?.available;return !!eligible&&!suppressed.has(capability)&&!blocked.has(capability);
 }
 // Interpret independent image observations, never the requested prompt, as visual evidence.
 export function applyVisualObservation(sp,observation){
@@ -139,7 +131,7 @@ export function migrateSpecies(sp){
 export function migrateSaveCreatures(save){
  for(const sp of Object.values(save.species||{}))migrateSpecies(sp);
  const all=[...(save.spirits||[]),...Object.values(save.roamers||{}).flat().map(r=>r.ind),...(save.battle?.enemy?[save.battle.enemy]:[]),...(save.battle?.multi?.enemies||[]),...(save.battle?.multi?.reserves||[]),...(save.trade?.incoming?[save.trade.incoming]:[])];
- for(const ind of all){const sp=save.species?.[ind?.species];if(!sp)continue;const item=ind.heldItem;if(item?.requires?.types?.includes('Humanoid')){ind.legacyEquipmentIds=[...new Set([...(ind.legacyEquipmentIds||[]),item.id])];item.requires={...item.requires,types:item.requires.types.filter(t=>t!=='Humanoid'),capabilities:['equipment']};}if(item?.active?.type==='Humanoid')item.active.type=sp.base;}
+ for(const ind of all){const sp=save.species?.[ind?.species];if(!sp)continue;ensureIndividualPassives(sp,ind);delete ind.acquiredDomains;const item=ind.heldItem;if(item?.requires?.types?.includes('Humanoid')){ind.legacyEquipmentIds=[...new Set([...(ind.legacyEquipmentIds||[]),item.id])];item.requires={...item.requires,types:item.requires.types.filter(t=>t!=='Humanoid'),capabilities:['equipment']};}if(item?.active?.type==='Humanoid')item.active.type=sp.base;}
  for(const plan of Object.values(save.generationPlans||{}))migrateSpecies(plan);
  save.taxonomyRevision=2;return save;
 }

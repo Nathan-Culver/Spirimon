@@ -8,7 +8,7 @@ test('inherent resistance changes status chance and duration',()=>{
 });
 test('acquired Domains grant half chance resistance, no periodic resistance',()=>{
  const sp={base:'Beast',alter:'Giant',domains:[]};
- const acquired={acquiredDomains:['Life']};
+ const acquired={temporaryDomains:['Life']};
  assert.ok(statusChance(.8,'poison',sp,acquired)<.701);
  assert.ok(periodicDamage(100,'poison',sp,acquired)<=100);
 });

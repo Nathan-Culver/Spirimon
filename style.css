@@ -349,3 +349,23 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
   margin-top:2px;color:#536b59
  }
 }
+
+/* Keep available Moves visible together; density follows the responsive dock width. */
+.unified-battle .classic-control{position:relative}
+.unified-battle .unified-action-grid{max-height:none;overflow:visible;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));grid-auto-rows:minmax(48px,auto);touch-action:manipulation}
+.ua-move.ua-actor-0{background:linear-gradient(155deg,#8556a8,#49366c)}
+.ua-move.ua-actor-1{background:linear-gradient(155deg,#427f9b,#254c6e)}
+.ua-move.ua-actor-2{background:linear-gradient(155deg,#a16d3d,#6c452c)}
+.battle-dock-back{position:absolute;right:4px;top:0;z-index:2;min-height:26px;padding:3px 9px;font-size:11px}
+.unified-battle .ua-move .ua-icon{display:none}
+@media(orientation:landscape) and (max-height:600px){
+ .unified-battle.triple-battle .classic-bottom{flex:0 0 auto;max-height:none;overflow:visible}
+ .unified-battle .unified-action-grid{grid-template-columns:repeat(auto-fit,minmax(94px,1fr));grid-auto-rows:minmax(34px,auto);gap:3px;overflow:visible}
+ .unified-battle .unified-action{min-height:34px;padding:2px 3px;gap:1px}
+ .unified-battle .unified-action b{font-size:10px}
+ .unified-battle .unified-action small{font-size:8px;line-height:1.1}
+ .unified-battle .unified-action .ua-icon{display:none}
+ .unified-battle .classic-stage{min-height:90px}
+}
+.realtime-battle .classic-hud{cursor:pointer;text-align:left;font-family:inherit}
+.realtime-battle .classic-hud[aria-pressed="true"]{outline:2px solid #d79b3c;outline-offset:2px}

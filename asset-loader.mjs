@@ -3,7 +3,7 @@ import {PLACEHOLDER_ART} from './placeholder-art.mjs';
 // One image cache for terrain, characters, buildings and creature artwork.
 // Retry transient failures rather than caching an invisible sprite forever.
 export const ASSET_VERSION=new URL(import.meta.url).searchParams.get('v')||'settlements-11';
-export function createImageLoader({ImageClass=globalThis.Image,setTimer=setTimeout,clearTimer=clearTimeout,now=Date.now,notify=()=>globalThis.spirimonArtLoaded?.(),version=ASSET_VERSION,timeout=15000,maxAttempts=3,bundledSources={...WORLD_ART,...SETTLEMENT_ART,...PLACEHOLDER_ART}}={}){
+export function createImageLoader({ImageClass=globalThis.Image,setTimer=setTimeout,clearTimer=clearTimeout,now=Date.now,notify=()=>globalThis.spirimonArtLoaded?.(),version=ASSET_VERSION,timeout=15000,maxAttempts=3,bundledSources={...WORLD_ART,...SETTLEMENT_ART,...PLACEHOLDER_ART,...globalThis.__spirimonOfflineArt}}={}){
  const entries=new Map();
  function imageURL(source,attempt){
   if(bundledSources[source])return bundledSources[source];

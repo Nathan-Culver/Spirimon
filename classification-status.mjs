@@ -1,3 +1,5 @@
+import {activeTypes,domainSources,canonicalDomain} from './classifications.mjs';
+import {heldEquipment} from './equipment.mjs';
 import {passiveEffects} from './classification-passives.mjs';
 // Shared classification-based status rules. Values are relative modifiers.
 export const STATUS_GROUPS={
@@ -37,15 +39,17 @@ export const STATUS_PROFILE=PROFILE;
 export const PERIODIC_RATES={burn:1/32,poison:1/32,toxic:1/96,frostbite:1/32,leechSeed:1/32,curse:1/48,trap:1/48,nightmare:1/24};
 export function statusModifier(effect,sp={},ind={},mode='application'){
  const group=STATUS_GROUPS[effect]||effect;
- const innate=new Set((sp.domains||[]).filter(d=>!(ind.suppressedDomains||[]).includes(d)));
- const acquired=new Set([...(ind.acquiredDomains||[]),...(ind.temporaryDomains||[])].filter(d=>!innate.has(d)&&!(ind.suppressedDomains||[]).includes(d)));
+ const sources=domainSources(sp,ind),innate=new Set(sources.innate);
+ const suppressed=new Set([...(sp.suppressedDomains||[]),...(ind.suppressedDomains||[])].map(canonicalDomain));
+ const acquired=new Set([...sources.equipped,...sources.temporary].filter(d=>!innate.has(d)&&!suppressed.has(d)));
  let amount=0;
- for(const t of new Set([sp.base,sp.alter]))if(t&&!(ind.suppressedTypes||[]).includes(t))amount+=(PROFILE[t]?.[group]||0);
+ for(const t of activeTypes(sp,ind))amount+=(PROFILE[t]?.[group]||0);
  for(const d of innate)amount+=(PROFILE[d]?.[group]||0);
  if(mode!=='periodic')for(const d of acquired)amount+=(PROFILE[d]?.[group]||0)*.5;
- const passives=passiveEffects(sp,ind,{maxHp:ind.maxHp});
+ const passives=passiveEffects(sp,ind,{maxHp:ind.maxHp,statusGroup:group,weather:ind.battlefield?.weather});
  if(mode==='periodic')amount-=passives.periodicResistance||0;
  else amount-=passives.statusResistance||0;
+ const held=heldEquipment(ind,sp),heldModifier=held?.statusModifiers?.[effect]??held?.statusModifiers?.[group]??0;if(Number.isFinite(heldModifier))amount+=heldModifier;
  for(const key of ['statusModifiers','passiveStatusModifiers','heldStatusModifiers','temporaryStatusModifiers']){
   const v=ind[key]?.[effect]??ind[key]?.[group]??0;
   if(typeof v==='number')amount+=v;
@@ -59,10 +63,8 @@ export function statusChance(base,effect,sp,ind,options={}){
  return Math.min(1,Math.max(minimum,chance*(1+statusModifier(effect,sp,ind,'application'))));
 }
 export function statusDuration(base,effect,sp,ind){
- // Duration uses the agreed larger relative magnitudes: 25%, 50%, 75%.
- const modifier=statusModifier(effect,sp,ind,'duration');
- const adjusted=modifier*2.5;
- return Math.max(0,base*(1+adjusted));
+ // Apply relative resistance once; elapsed time is anchored separately.
+ return Math.max(0,base*(1+statusModifier(effect,sp,ind,'duration')));
 }
 export function periodicDamage(base,effect,sp,ind){
  return Math.max(0,Math.round(base*(1+statusModifier(effect,sp,ind,'periodic'))));
@@ -70,5 +72,5 @@ export function periodicDamage(base,effect,sp,ind){
 export function rebaseStatusTimer(timer,now,effect,sp,ind){
  const original=timer.baseDuration??Math.max(0,timer.until-(timer.appliedAt??now));
  const appliedAt=timer.appliedAt??now;
- return {...timer,appliedAt,baseDuration:original,until:appliedAt+Math.max(0,statusDuration(original,effect,sp,ind))};
+ return {...timer,appliedAt,baseDuration:original,until:appliedAt+Math.max(0,statusDuration(original,effect,sp,ind))*(timer.durationFactor??1)};
 }

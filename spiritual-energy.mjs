@@ -11,8 +11,8 @@ export function maximumEnergy(sealer,spirits=[]){
 export function ensureSealer(save){
  const first=!save.sealer,base=newSealer(save.party?.[0]||null);if(first)save.sealer=base;else for(const [key,value]of Object.entries(base))if(save.sealer[key]===undefined)save.sealer[key]=value;const q=save.sealer;
  for(const key of ['known','assignments','supportCooldowns','cooperativeCooldowns','recoveryUses','bondRewards','discoveries'])if(!q[key]||typeof q[key]!=='object'||Array.isArray(q[key]))q[key]={};
- if(first&&(save.wins||0)>0){q.xp=Math.min(100000,(save.wins||0)*42);while(q.level<100&&q.xp>=80+q.level*20){q.xp-=80+q.level*20;q.level++;}}
- q.level=clamp(Math.floor(Number(q.level)||1),1,100);q.clockMs=Number.isFinite(q.clockMs)?Math.max(0,q.clockMs):0;q.xp=Number.isFinite(q.xp)?Math.max(0,q.xp):0;q.training=clamp(Number(q.training)||0,0,20);
+ if(first&&(save.wins||0)>0){q.xp=Math.min(100000,(save.wins||0)*42);while(q.xp>=80+q.level*20){q.xp-=80+q.level*20;q.level++;}}
+ q.level=Math.max(1,Math.floor(Number(q.level)||1));q.clockMs=Number.isFinite(q.clockMs)?Math.max(0,q.clockMs):0;q.xp=Number.isFinite(q.xp)?Math.max(0,q.xp):0;q.training=clamp(Number(q.training)||0,0,20);
  q.advanced=Array.isArray(q.advanced)?q.advanced:[];q.rituals=Array.isArray(q.rituals)?q.rituals:[];
  if(!save.party?.includes(q.leadId))q.leadId=save.party?.[0]||null;
  q.maxEnergy=maximumEnergy(q,save.spirits||[]);q.energy=first?q.maxEnergy:clamp(Math.round(Number(q.energy)||0),0,q.maxEnergy);
@@ -26,7 +26,7 @@ export function restoreEnergy(sealer,amount){const before=sealer.energy;sealer.e
 export function spendEnergy(sealer,amount){if(!Number.isFinite(amount)||amount<0||sealer.energy+1e-6<amount)return false;sealer.energy=Math.max(0,sealer.energy-amount);return true;}
 export function advanceSpiritualClock(save,ms,{exploring=false,paused=false}={}){const q=save.sealer||ensureSealer(save);if(paused||!Number.isFinite(ms)||ms<=0)return 0;const delta=Math.min(ms,1000);q.clockMs+=delta;if(exploring)passiveRecovery(q,delta);return delta;}
 export function passiveRecovery(q,ms){if(q.energy>=q.maxEnergy){q.passiveEnergy=0;return 0;}q.passiveEnergy=(q.passiveEnergy||0)+q.maxEnergy*Math.max(0,ms)/PASSIVE_RECOVERY_MS;const whole=Math.floor(q.passiveEnergy+1e-9);q.passiveEnergy-=whole;return whole?restoreEnergy(q,whole):0;}
-export function gainSealerXP(save,amount,eventId=null){const q=save.sealer||ensureSealer(save);if(eventId&&q.discoveries['xp:'+eventId])return 0;if(eventId)q.discoveries['xp:'+eventId]=true;q.xp+=Math.max(0,amount);let gained=0;while(q.level<100&&q.xp>=80+q.level*20){q.xp-=80+q.level*20;q.level++;gained++;}q.maxEnergy=maximumEnergy(q,save.spirits||[]);return gained;}
+export function gainSealerXP(save,amount,eventId=null){const q=save.sealer||ensureSealer(save);if(eventId&&q.discoveries['xp:'+eventId])return 0;if(eventId)q.discoveries['xp:'+eventId]=true;q.xp+=Math.max(0,amount);let gained=0;while(q.xp>=80+q.level*20){q.xp-=80+q.level*20;q.level++;gained++;}q.maxEnergy=maximumEnergy(q,save.spirits||[]);return gained;}
 export function trainSealer(save,eventId,{ritual=false}={}){const q=save.sealer||ensureSealer(save);const key='training:'+eventId;if(q.discoveries[key])return false;q.discoveries[key]=true;if(ritual)q.rituals.push(eventId);else q.training=Math.min(20,q.training+1);gainSealerXP(save,30);q.maxEnergy=maximumEnergy(q,save.spirits||[]);return true;}
 export function bondRecovery(save,ind){const q=save.sealer||ensureSealer(save),key=ind.id+':'+calendarPhase(save.playTime).key;if(q.bondRewards[key])return 0;q.bondRewards[key]=true;gainSealerXP(save,5);return restoreEnergy(q,q.maxEnergy*.04);}
 export function combatStrength(ind,sp){
