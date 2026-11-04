@@ -1,4 +1,5 @@
 import {ANATOMY_CATALOG,MODIFIER_CATALOG,NAME_FRAGMENTS,CREATURE_TYPES,CREATURE_DOMAINS} from './creature-catalog.mjs';
+import {ensurePassives} from './classification-passives.mjs';
 export function designHash(...parts){let h=2166136261;for(const c of parts.join('|')){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}return h>>>0;}
 const choose=(xs,seed)=>xs[designHash(seed)%xs.length];
 const cleanTypes=(base,alter)=>CREATURE_TYPES.includes(base)&&CREATURE_TYPES.includes(alter)&&base!==alter;
@@ -130,7 +131,7 @@ export function migrateSpecies(sp){
   if(sp.base==='Humanoid')sp.base=candidates.find(t=>t!==sp.alter);if(sp.alter==='Humanoid')sp.alter=candidates.find(t=>t!==sp.base);
  }
  if(!cleanTypes(sp.base,sp.alter))throw Error('Invalid saved creature types.');
- sp.anatomy??=legacyAnatomy(sp);assignDomains(sp,()=>.5,false);
+ sp.anatomy??=legacyAnatomy(sp);assignDomains(sp,()=>.5,false);ensurePassives(sp);
  for(const move of [...(sp.moves||[]),...(sp.learnset||[])])if(move.type==='Humanoid')move.type=sp.base;
  if(sp.capabilities?.revision!==1)syncCapabilities(sp);sp.taxonomyRevision=2;return sp;
 }
