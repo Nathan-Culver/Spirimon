@@ -70,7 +70,7 @@ export function capabilitiesFromAnatomy(anatomy,domains=[]){
 export function effectiveFieldDomains(sp,ind=null){
  const aliases={Time:'Fate',Space:'Void',Mind:'Psionic'};
  const domains=[...(sp?.domains||[])];
- const moves=ind?.moveIds?.length
+ const moves=ind?.moveIds
   ?ind.moveIds.map(id=>(sp.learnset||[]).find(m=>m.id===id)||(sp.moves||[]).find(m=>m.id===id)).filter(Boolean)
   :(sp?.moves||[]);
  for(const move of moves)for(const d of [move.domain,...(move.domains||[])].filter(Boolean))domains.push(aliases[d]||d);
