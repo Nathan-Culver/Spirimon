@@ -93,7 +93,11 @@ export const DOMAIN_RESIST={"Air":["Earth","Sorrow"],"Earth":["Lightning","Metal
 export const DOMAIN_IDENTITY={"Air":"Mobility and evasion","Earth":"Defense and stability","Fire":"Burning and sustained damage","Water":"Cleansing and recovery","Light":"Revelation and protection","Dark":"Concealment and weakening","Sun":"Empowerment and purification","Moon":"Illusion and transformation","Lightning":"Speed and interruption","Ice":"Slowing and freezing","Metal":"Armor and resilience","Chaos":"Unpredictable transformations","Law":"Restriction and suppression","Good":"Protection and restoration","Evil":"Corruption and draining","Creation":"Summoning and regeneration","Destruction":"Breaking defenses","War":"Offensive momentum","Peace":"Prevention and pacification","Fear":"Intimidation and disruption","Wrath":"Escalating aggression","Love":"Bonding and support","Hope":"Recovery and perseverance","Despair":"Weakening and attrition","Sorrow":"Exhaustion and lingering effects","Fate":"Destiny and temporal control","Dreams":"Sleep and altered perception","Nightmares":"Terror and confusion","Life":"Regeneration and vitality","Death":"Decay and mortality","Spirit":"Soul attunement and exorcism","Psionic":"Psychic influence and telekinesis","Nature":"Primal adaptation","Void":"Nullification and dimensional control","Storm":"Weather escalation","Magic":"Arcane manipulation and spell disruption"};
 export function activeDomains(sp,ind=null){
  const moves=ind?equippedMoves(ind,sp):(sp.moves||[]);
- return [...new Set([...(sp.domains||[]),...moves.map(m=>m?.domain)].map(canonicalDomain).filter(d=>DOMAINS.includes(d)))];
+ const suppressed=new Set([...(sp.suppressedDomains||[]),...(ind?.suppressedDomains||[])].map(canonicalDomain));
+ const innate=(sp.domains||[]).filter(d=>!suppressed.has(canonicalDomain(d)));
+ const acquired=moves.flatMap(m=>[m?.domain,...(m?.domains||[])]);
+ const temporary=[...(sp.temporaryDomains||[]),...(ind?.temporaryDomains||[])];
+ return [...new Set([...innate,...acquired,...temporary].map(canonicalDomain).filter(d=>DOMAINS.includes(d)&&!suppressed.has(d)))];
 }
 export function effectiveness(move,defender){
  // Independent classifications contribute additively, with one global cap.
