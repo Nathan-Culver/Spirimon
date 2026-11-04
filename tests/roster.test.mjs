@@ -1,10 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 import {ROSTER} from '../roster.mjs';
 import {TYPES,makeSpecies} from '../engine.mjs';
 test('expanded roster has 150 unique Spirimon and three named forms each',()=>{assert.equal(ROSTER.length,150);assert.equal(new Set(ROSTER.map(r=>r.id)).size,150);assert(new Set(ROSTER.map(r=>r.base+'>'+r.alter)).size>=50);for(const r of ROSTER){assert(TYPES.includes(r.base));assert(TYPES.includes(r.alter));assert.notEqual(r.base,r.alter);assert.equal(new Set(r.forms).size,3);assert.equal(makeSpecies(r.id,r.base,r.alter,[]).moves.length,4);}});
-test('all 95 completed roster sprite strips are present with transparent 256px form cells',async()=>{assert.equal(ROSTER.filter(r=>r.atlas).length,95);for(const r of ROSTER.filter(r=>r.atlas)){const b=await readFile(new URL('../'+r.atlas,import.meta.url));assert.equal(b.toString('ascii',0,4),'RIFF',r.id);assert.equal(b.toString('ascii',8,12),'WEBP',r.id);assert.equal(b.toString('ascii',12,16),'VP8X',r.id);assert.ok(b[20]&16,'alpha channel: '+r.id);assert.equal(b.readUIntLE(24,3)+1,768,r.id);assert.equal(b.readUIntLE(27,3)+1,256,r.id);}});
+test('all 150 roster lineages have distinct transparent strips with three 256px form cells',async()=>{
+ assert.equal(ROSTER.length,150);const digests=new Set();
+ for(const r of ROSTER){
+  assert.ok(r.atlas,'dedicated atlas: '+r.id);assert.notEqual(r.proceduralArt,true,r.id);
+  const b=await readFile(new URL('../'+r.atlas,import.meta.url));assert.equal(b.toString('ascii',0,4),'RIFF',r.id);assert.equal(b.toString('ascii',8,12),'WEBP',r.id);assert.equal(b.toString('ascii',12,16),'VP8X',r.id);assert.ok(b[20]&16,'alpha channel: '+r.id);assert.equal(b.readUIntLE(24,3)+1,768,r.id);assert.equal(b.readUIntLE(27,3)+1,256,r.id);
+  const digest=createHash('sha256').update(b).digest('hex');assert.ok(!digests.has(digest),'borrowed lineage artwork: '+r.id);digests.add(digest);
+ }
+});
 
 
 import vm from 'node:vm';

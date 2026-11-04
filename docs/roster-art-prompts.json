@@ -586,8 +586,8 @@
       ],
       "brief": "A rooted undead carnivorous plant formed from tangled pale marrow roots and black sap, with a long wolf-skull trap, bone fangs and tiny dried funeral flowers.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": "exec-d9a47b27-0da8-4689-9a97-fe96c49f0827.png"
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/089-marrowfang.png"
     },
     {
       "number": 90,
@@ -601,8 +601,8 @@
       ],
       "brief": "A horrific four-legged storm-gray construct with bronze rib hoops, a cloudlike fleshy mantle, several staring eyes, exposed gear joints and impossible dangling feelers.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": "exec-d29ef3af-fc17-40dc-8f58-28f721701dbe.png"
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/090-nimbusling.png"
     },
     {
       "number": 91,
@@ -616,8 +616,8 @@
       ],
       "brief": "A recognizable massively muscled cape hare upright on two powerful hind legs, creamy gray fur, opal branching horns and pink-violet faerie ear membranes. No human face.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": "exec-4d92fe87-9d1e-4f19-9821-ba2cb2aba4f7.png"
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/091-opalhorn.png"
     },
     {
       "number": 92,
@@ -631,8 +631,8 @@
       ],
       "brief": "A celestial four-legged lion-like creature of charcoal feathers and pearl-gold fire, a small radiant halo, and disturbing extra eyes and a second mouth in its chest.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": "exec-bd07ce7a-5fff-48ae-a19b-c614c8792316.png"
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/092-pyreshade.png"
     },
     {
       "number": 93,
@@ -646,8 +646,8 @@
       ],
       "brief": "A quadrupedal quartz-and-bronze lynx automaton with segmented translucent claws, warm gray plates, faerie ear tassels and tiny copper leaf charms.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": "exec-6ec9f236-e376-48fd-9a8b-fff8a1eb02a7.png"
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/093-quartzclaw.png"
     },
     {
       "number": 94,
@@ -661,8 +661,8 @@
       ],
       "brief": "An amorphous pale-blue frost elemental mixed with translucent gel, forming delicate moth-wing lobes, suspended icy droplets and softly glowing silver veins.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": "exec-fc830579-df72-4c00-ad51-2cdb41fbe82d.png"
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/094-rimemoth.png"
     },
     {
       "number": 95,
@@ -676,8 +676,8 @@
       ],
       "brief": "A long-bodied four-legged faerie creature with an otterlike face, saffron-striped cream fur, fine whiskers, luminous golden celestial tail ribbons and leaf-shaped ears.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": "exec-1a814fa9-6c27-4376-8da1-d04dbd6d1e86.png"
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/095-saffronwyrm.png"
     },
     {
       "number": 96,
@@ -691,8 +691,8 @@
       ],
       "brief": "A gigantic bipedal horned fiend of black tundra fur and slate hide, with ice-gray tusks, huge clawed hands and weathered iron-like horn ridges.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": "exec-d0f09c0a-7208-4423-a3c8-6ea820060bee.png"
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/096-tundraglen.png"
     },
     {
       "number": 97,
@@ -706,8 +706,8 @@
       ],
       "brief": "A bipedal undead bog giant with moss-covered burial wrappings, dark exposed ribs, fern-fringed shoulders, huge stone-bone fists and cold green soul light.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": "exec-5c048057-9aee-423d-8b23-ead725420f44.png"
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/097-verdantbloom.png"
     },
     {
       "number": 98,
@@ -721,8 +721,8 @@
       ],
       "brief": "A visibly nonhuman tall bipedal wind faerie with a hollow carved-looking moth mask, pale vapor hair, long translucent limbs and violet storm ribbons; not an undead human.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": "exec-3a0a942c-9878-4f95-97ac-869770d23cc2.png"
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/098-wraithspire.png"
     },
     {
       "number": 99,
@@ -736,8 +736,8 @@
       ],
       "brief": "A rooted carnivorous yew monstrosity with a hollow trunk filled with huge hook teeth, poisonous red berry-like eyes, drooping dark green fronds and amber gel sap.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": "exec-c3d19200-c0dd-4e54-85e9-6c7d308e80a1.png"
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/099-yewmaw.png"
     },
     {
       "number": 100,
@@ -751,8 +751,8 @@
       ],
       "brief": "A heavy lynx-shaped translucent zircon-blue ooze with broad muscular animal-like mass, gel ear tufts, embedded pale mineral flecks and flowing soft paws.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": "exec-7c130189-24fa-4882-bf3c-ae91e7045b4c.png"
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/100-zirconveil.png"
     },
     {
       "number": 101,
@@ -766,8 +766,8 @@
       ],
       "brief": "A four-legged celestial woodland creature with a deerlike face, luminous ivory fur, flowering arbor antlers, faerie leaf wings and delicate golden halo arcs.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": "exec-bf12a165-657a-44df-813a-dea48053cb98.png"
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/101-arborkin.png"
     },
     {
       "number": 102,
@@ -781,8 +781,8 @@
       ],
       "brief": "A recognizable enormous muscular monitor lizard transformed into a basilisk-like monstrosity, with exaggerated saber fangs, oversized claws, basil-green ridges and thick heavy limbs.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": "exec-6630d265-fe14-4412-8019-544ccd05b550.png"
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/102-basilgore.png"
     },
     {
       "number": 103,
@@ -796,8 +796,8 @@
       ],
       "brief": "An amorphous cobalt-blue gel construct containing articulated silver cogwheels, floating porcelain joint pieces, a soft metal-mask core and fluid pseudopods.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": "exec-c41e4f4b-00fc-4dfd-8a11-e9705c85b893.png"
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/103-cobaltwisp.png"
     },
     {
       "number": 104,
@@ -811,8 +811,8 @@
       ],
       "brief": "An amorphous dappled burgundy-and-gold fiend ooze with curved dark horns, tooth-lined gel maws, oily highlights and floating thorn-like shards.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": "exec-c2a59479-b73a-4b56-8026-a1e66b76b27c.png"
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/104-dapplejaw.png"
     },
     {
       "number": 105,
@@ -826,8 +826,8 @@
       ],
       "brief": "A four-legged elemental panther made of living black fire and luminous ivory embers, with fine gold celestial halo arcs and flowing plume-like flame tails.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/105-ebonflare.png"
     },
     {
       "number": 106,
@@ -841,8 +841,8 @@
       ],
       "brief": "A rooted undead carnivorous willow with scroll-like peeling bark, dead flower traps, bone twigs, hollow eye knots and pale parchment-colored spirit sap.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/106-fableroot.png"
     },
     {
       "number": 107,
@@ -856,8 +856,8 @@
       ],
       "brief": "A towering visibly nonhuman bipedal glacier faerie giant with pale blue fur, enormous feathered ears, broad powerful hands and a crown of natural icy antlers.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/107-glaciershard.png"
     },
     {
       "number": 108,
@@ -871,8 +871,8 @@
       ],
       "brief": "A reanimated four-legged harbor mastiff skeleton with tarnished bronze rib braces, sea-worn armor joints, porthole-like eyes and dark salt-stained burial cloth.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/108-harborgaze.png"
     },
     {
       "number": 109,
@@ -886,8 +886,8 @@
       ],
       "brief": "A four-legged skeletal fiend hound with dark blood-red hide remnants, exposed luminous marrow ribs, curled black horns and long ivory fangs. Eerie, without gore.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/109-ichorfang.png"
     },
     {
       "number": 110,
@@ -901,8 +901,8 @@
       ],
       "brief": "A horrific nonhuman bipedal faerie aberration with jasper-red feather filaments, a split mothlike mask, multiple small mouths in the torso and long asymmetrical grasping arms.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/110-jasperplume.png"
     },
     {
       "number": 111,
@@ -916,8 +916,8 @@
       ],
       "brief": "A colossal bipedal ember giant with brick-gray craggy skin, a living coal beard, massive broad hands and volcanic orange seams; unmistakably a nonhuman giant.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/111-kindlekin.png"
     },
     {
       "number": 112,
@@ -931,8 +931,8 @@
       ],
       "brief": "A recognizable enormously muscular hippopotamus aberration with horrific extra eyes, multiple impossible jaws and lotus-petal eye stalks emerging from its broad back.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/112-lotusgore.png"
     },
     {
       "number": 113,
@@ -946,8 +946,8 @@
       ],
       "brief": "A visibly nonhuman bipedal raptor-like faerie with a long narrow insect mask, enormous hooked talons, elongated predatory fangs and silver wind-fringed plumage.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/113-mistralwisp.png"
     },
     {
       "number": 114,
@@ -961,8 +961,8 @@
       ],
       "brief": "A four-legged celestial faerie weasel with ivory fur, delicate gold nettle-shaped antlers, tiny leaf wings and warm turquoise nectar-like light markings.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/114-nettlejaw.png"
     },
     {
       "number": 115,
@@ -976,8 +976,8 @@
       ],
       "brief": "A massively muscular black lion-crocodile monstrosity with oversized saber teeth, heavy reptilian shoulder plates, huge claws and pale gold spine ridges. Four sturdy legs.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/115-onyxflare.png"
     },
     {
       "number": 116,
@@ -991,8 +991,8 @@
       ],
       "brief": "An amorphous pale-pink ooze construct with floating white porcelain petal plates, small bronze joint rings and a soft glowing seed-shaped core.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/116-petalroot.png"
     },
     {
       "number": 117,
@@ -1006,8 +1006,8 @@
       ],
       "brief": "An amorphous deep-violet fiend ooze with dark obsidian horns, star-like glowing inner gel, serrated floating fragments and a low predatory mouth.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/117-quasarshard.png"
     },
     {
       "number": 118,
@@ -1021,8 +1021,8 @@
       ],
       "brief": "A recognizable raven whose body and one pair of wings are made of living storm wind and dark feathered plasma, with a white-gold celestial halo and two taloned feet.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/118-ravengaze.png"
     },
     {
       "number": 119,
@@ -1036,8 +1036,8 @@
       ],
       "brief": "A rooted undead carnivorous white funeral plant with large bone-fanged flytraps, bleached leaves, skeletal root fingers and gentle pale blue spirit light.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/119-solacefang.png"
     },
     {
       "number": 120,
@@ -1051,8 +1051,8 @@
       ],
       "brief": "A towering nonhuman bipedal faerie giant with an avian head, huge feather-fringed forearms, hooked talons and a long cream-and-amber plumage mantle.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/120-talonplume.png"
     },
     {
       "number": 121,
@@ -1066,8 +1066,8 @@
       ],
       "brief": "A reanimated four-legged armadillo skeleton with articulated dark steel shell bands, bronze spinal hinges, visible pale ribs and ghostly green eyes.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/121-ulmarkin.png"
     },
     {
       "number": 122,
@@ -1081,8 +1081,8 @@
       ],
       "brief": "A four-legged fiend deer with deep crimson velvet hide, curved black antlers, exposed ivory skeletal ribs, a long predatory muzzle and cold violet eyes.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/122-velvetgore.png"
     },
     {
       "number": 123,
@@ -1096,8 +1096,8 @@
       ],
       "brief": "A horrific nonhuman bipedal whispering faerie aberration with an eyeless split mask, many tiny mouths along its torso, long ear-like appendages and tattered lavender silk.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/123-whisperwisp.png"
     },
     {
       "number": 124,
@@ -1111,8 +1111,8 @@
       ],
       "brief": "A colossal bipedal citrine-yellow elemental giant with lightning-filled jaws, angular stone brows, massive gold-gray limbs and branching electric fractures.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/124-xanthjaw.png"
     },
     {
       "number": 125,
@@ -1126,8 +1126,8 @@
       ],
       "brief": "A recognizable enormously muscular saber-toothed cat aberration with eye stalks along its back, extra impossible jaws, and a long tentacle-like tail.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/125-yonderflare.png"
     },
     {
       "number": 126,
@@ -1141,8 +1141,8 @@
       ],
       "brief": "A visibly nonhuman bipedal flower faerie monstrosity with a zinnia-petal mask, hooked mantis-like forearms, sharp taloned feet and exaggerated predatory fangs.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/126-zinniaroot.png"
     },
     {
       "number": 127,
@@ -1156,8 +1156,8 @@
       ],
       "brief": "A four-legged radiant celestial ibex with creamy opaline fur, golden shard antlers, faerie leaflike ear fins and small floating sun rings.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/127-aurumshard.png"
     },
     {
       "number": 128,
@@ -1171,8 +1171,8 @@
       ],
       "brief": "A heavily muscled boar-tiger monstrosity with massive forward tusks, huge claws, dark bracken-colored fur, armored ridges and a predatory low quadruped stance.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/128-brackengaze.png"
     },
     {
       "number": 129,
@@ -1186,8 +1186,8 @@
       ],
       "brief": "An amorphous coral-pink ooze construct with floating carved coral-like porcelain jaws, small bronze gears, teal gel joints and fluid soft tentacles.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/129-coralfang.png"
     },
     {
       "number": 130,
@@ -1201,8 +1201,8 @@
       ],
       "brief": "An amorphous burgundy fiend ooze with dagger-shaped horn fins, tooth-edged liquid wing lobes and a charcoal core, no rigid skeleton.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/130-daggerplume.png"
     },
     {
       "number": 131,
@@ -1216,8 +1216,8 @@
       ],
       "brief": "A four-legged celestial elemental stag made of black-and-white luminous plasma, with a fine eclipsed sun halo and flowing silver-gold flame antlers.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/131-eclipsekin.png"
     },
     {
       "number": 132,
@@ -1231,8 +1231,8 @@
       ],
       "brief": "A rooted undead carnivorous fennel plant with bone-white hollow stems, toothed seedpod traps, dead feathery fronds and black ghostly sap.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/132-fennelgore.png"
     },
     {
       "number": 133,
@@ -1246,8 +1246,8 @@
       ],
       "brief": "A towering visibly nonhuman bipedal moth faerie giant with silver antennae, pale fur, broad powerful limbs and a billowing gossamer wing mantle.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/133-gossamerwisp.png"
     },
     {
       "number": 134,
@@ -1261,8 +1261,8 @@
       ],
       "brief": "A reanimated four-legged badger skeleton with dark red brick-and-bronze joint armor, exposed ash-white ribs and a faint coal glow behind its skull jaw.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/134-hearthjaw.png"
     },
     {
       "number": 135,
@@ -1276,8 +1276,8 @@
       ],
       "brief": "A four-legged skeletal devil crocodile with algae-dark hide, pale driftbone armor, hooked fiend horns and spectral sea-green light, without a living animal appearance.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/135-isletflare.png"
     },
     {
       "number": 136,
@@ -1291,8 +1291,8 @@
       ],
       "brief": "A horrific nonhuman bipedal root-and-faerie aberration with a split laughing mask, multiple small mouths, too many staring eyes and twisted vine-like arms.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/136-jubilroot.png"
     },
     {
       "number": 137,
@@ -1306,8 +1306,8 @@
       ],
       "brief": "A colossal bipedal green elemental stone giant with natural luminescent mineral shards, enormous craggy fists and dark charcoal skin fractured by emerald light.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/137-kryptonshard.png"
     },
     {
       "number": 138,
@@ -1321,8 +1321,8 @@
       ],
       "brief": "A recognizable massively muscled elk aberration with horrific staring eyes embedded in bark-textured antlers, extra tentacle jaws and thick shaggy fur.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/138-larchgaze.png"
     },
     {
       "number": 139,
@@ -1336,8 +1336,8 @@
       ],
       "brief": "A visibly nonhuman bipedal jackal-headed faerie monstrosity with oversized fangs, long hooked claws and a silver-violet mirage-shard mantle.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/139-miragefang.png"
     },
     {
       "number": 140,
@@ -1351,8 +1351,8 @@
       ],
       "brief": "A four-legged celestial faerie creature with an anteater-like long muzzle, cream feathers, gold nectar filaments, tiny flower-shaped lights and delicate halo rings.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/140-nectarplume.png"
     },
     {
       "number": 141,
@@ -1366,8 +1366,8 @@
       ],
       "brief": "A huge muscular owl-bear monstrosity with oversized hooked beak fangs, massive bear claws, ochre feather ridges and a solid powerful quadrupedal body.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/141-oraclekin.png"
     },
     {
       "number": 142,
@@ -1381,8 +1381,8 @@
       ],
       "brief": "An amorphous smoke-gray ooze construct with floating ornate pewter armor pieces, articulated bronze cogs, black gel joints and a broad tusked mask core.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/142-pewtergore.png"
     },
     {
       "number": 143,
@@ -1396,8 +1396,8 @@
       ],
       "brief": "An amorphous purple fiend ooze with curved obsidian horns, suspended arrowlike barbs, quivering liquid tendrils and a dark toothed mouth.",
       "generatedSource": true,
-      "runtimeReady": false,
-      "sourceFilename": null
+      "runtimeReady": true,
+      "sourceFilename": "artwork/roster-source/143-quiverwisp.png"
     },
     {
       "number": 144,

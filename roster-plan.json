@@ -1254,8 +1254,10 @@
       "Marrowfang",
       "Marrow Sovereign"
     ],
-    "description": "A undead-born Spirimon whose plant influence shapes its body into a distinct marrow-themed creature; its three stages grow progressively more elaborate.",
-    "proceduralArt": true
+    "description": "A rooted undead carnivorous plant formed from tangled pale marrow roots and black sap, with a long wolf-skull trap, bone fangs and tiny dried funeral flowers.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/marrowfang.webp",
+    "artRevision": 2
   },
   {
     "index": 89,
@@ -1267,21 +1269,29 @@
       "Nimbusling",
       "Nimbus Sovereign"
     ],
-    "description": "A aberration-born Spirimon whose construct influence shapes its body into a distinct nimbus-themed creature; its three stages grow progressively more elaborate.",
-    "proceduralArt": true
+    "description": "A horrific four-legged storm-gray construct with bronze rib hoops, a cloudlike fleshy mantle, several staring eyes, exposed gear joints and impossible dangling feelers.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/nimbusling.webp",
+    "artRevision": 2
   },
   {
     "index": 90,
     "id": "opalhorn",
     "base": "Beast",
-    "alter": "Humanoid",
+    "alter": "Fey",
     "forms": [
       "Opallet",
       "Opalhorn",
       "Opal Sovereign"
     ],
-    "description": "A beast-born Spirimon whose humanoid influence shapes its body into a distinct opal-themed creature; its three stages grow progressively more elaborate.",
-    "proceduralArt": true
+    "description": "A recognizable massively muscled cape hare upright on two powerful hind legs, creamy gray fur, opal branching horns and pink-violet faerie ear membranes. No human face.",
+    "proceduralArt": false,
+    "legacyTypes": {
+      "base": "Beast",
+      "alter": "Humanoid"
+    },
+    "atlas": "./assets/roster/opalhorn.webp",
+    "artRevision": 2
   },
   {
     "index": 91,
@@ -1293,8 +1303,10 @@
       "Pyreshade",
       "Pyre Sovereign"
     ],
-    "description": "A celestial-born Spirimon whose aberration influence shapes its body into a distinct pyre-themed creature; its three stages grow progressively more elaborate.",
-    "proceduralArt": true
+    "description": "A celestial four-legged lion-like creature of charcoal feathers and pearl-gold fire, a small radiant halo, and disturbing extra eyes and a second mouth in its chest.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/pyreshade.webp",
+    "artRevision": 2
   },
   {
     "index": 92,
@@ -1306,8 +1318,10 @@
       "Quartzclaw",
       "Quartz Sovereign"
     ],
-    "description": "A construct-born Spirimon whose fey influence shapes its body into a distinct quartz-themed creature; its three stages grow progressively more elaborate.",
-    "proceduralArt": true
+    "description": "A quadrupedal quartz-and-bronze lynx automaton with segmented translucent claws, warm gray plates, faerie ear tassels and tiny copper leaf charms.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/quartzclaw.webp",
+    "artRevision": 2
   },
   {
     "index": 93,
@@ -1319,8 +1333,10 @@
       "Rimemoth",
       "Rime Sovereign"
     ],
-    "description": "A elemental-born Spirimon whose ooze influence shapes its body into a distinct rime-themed creature; its three stages grow progressively more elaborate.",
-    "proceduralArt": true
+    "description": "An amorphous pale-blue frost elemental mixed with translucent gel, forming delicate moth-wing lobes, suspended icy droplets and softly glowing silver veins.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/rimemoth.webp",
+    "artRevision": 2
   },
   {
     "index": 94,
@@ -1332,8 +1348,10 @@
       "Saffronwyrm",
       "Saffron Sovereign"
     ],
-    "description": "A fey-born Spirimon whose celestial influence shapes its body into a distinct saffron-themed creature; its three stages grow progressively more elaborate.",
-    "proceduralArt": true
+    "description": "A long-bodied four-legged faerie creature with an otterlike face, saffron-striped cream fur, fine whiskers, luminous golden celestial tail ribbons and leaf-shaped ears.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/saffronwyrm.webp",
+    "artRevision": 2
   },
   {
     "index": 95,
@@ -1345,8 +1363,10 @@
       "Tundraglen",
       "Tundra Sovereign"
     ],
-    "description": "A fiend-born Spirimon whose giant influence shapes its body into a distinct tundra-themed creature; its three stages grow progressively more elaborate.",
-    "proceduralArt": true
+    "description": "A gigantic bipedal horned fiend of black tundra fur and slate hide, with ice-gray tusks, huge clawed hands and weathered iron-like horn ridges.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/tundraglen.webp",
+    "artRevision": 2
   },
   {
     "index": 96,
@@ -1358,21 +1378,29 @@
       "Verdantbloom",
       "Verdant Sovereign"
     ],
-    "description": "A giant-born Spirimon whose undead influence shapes its body into a distinct verdant-themed creature; its three stages grow progressively more elaborate.",
-    "proceduralArt": true
+    "description": "A bipedal undead bog giant with moss-covered burial wrappings, dark exposed ribs, fern-fringed shoulders, huge stone-bone fists and cold green soul light.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/verdantbloom.webp",
+    "artRevision": 2
   },
   {
     "index": 97,
     "id": "wraithspire",
-    "base": "Humanoid",
+    "base": "Fey",
     "alter": "Elemental",
     "forms": [
       "Wraithlet",
       "Wraithspire",
       "Wraith Sovereign"
     ],
-    "description": "A humanoid-born Spirimon whose elemental influence shapes its body into a distinct wraith-themed creature; its three stages grow progressively more elaborate.",
-    "proceduralArt": true
+    "description": "A visibly nonhuman tall bipedal wind faerie with a hollow carved-looking moth mask, pale vapor hair, long translucent limbs and violet storm ribbons; not an undead human.",
+    "proceduralArt": false,
+    "legacyTypes": {
+      "base": "Humanoid",
+      "alter": "Elemental"
+    },
+    "atlas": "./assets/roster/wraithspire.webp",
+    "artRevision": 2
   },
   {
     "index": 98,
@@ -1384,8 +1412,10 @@
       "Yewmaw",
       "Yew Sovereign"
     ],
-    "description": "A monstrosity-born Spirimon whose ooze influence shapes its body into a distinct yew-themed creature; its three stages grow progressively more elaborate.",
-    "proceduralArt": true
+    "description": "A rooted carnivorous yew monstrosity with a hollow trunk filled with huge hook teeth, poisonous red berry-like eyes, drooping dark green fronds and amber gel sap.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/yewmaw.webp",
+    "artRevision": 2
   },
   {
     "index": 99,
@@ -1397,8 +1427,10 @@
       "Zirconveil",
       "Zircon Sovereign"
     ],
-    "description": "A ooze-born Spirimon whose beast influence shapes its body into a distinct zircon-themed creature; its three stages grow progressively more elaborate.",
-    "proceduralArt": true
+    "description": "A heavy lynx-shaped translucent zircon-blue ooze with broad muscular animal-like mass, gel ear tufts, embedded pale mineral flecks and flowing soft paws.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/zirconveil.webp",
+    "artRevision": 2
   },
   {
     "index": 100,
@@ -1410,8 +1442,10 @@
       "Arborkin",
       "Arbor Exarch"
     ],
-    "description": "A celestial lineage transformed by fey traits. Its first form is small and simple; the second develops distinctive arbor markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A four-legged celestial woodland creature with a deerlike face, luminous ivory fur, flowering arbor antlers, faerie leaf wings and delicate golden halo arcs.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/arborkin.webp",
+    "artRevision": 2
   },
   {
     "index": 101,
@@ -1423,8 +1457,10 @@
       "Basilgore",
       "Basil Exarch"
     ],
-    "description": "A monstrosity lineage transformed by beast traits. Its first form is small and simple; the second develops distinctive basil markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A recognizable enormous muscular monitor lizard transformed into a basilisk-like monstrosity, with exaggerated saber fangs, oversized claws, basil-green ridges and thick heavy limbs.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/basilgore.webp",
+    "artRevision": 2
   },
   {
     "index": 102,
@@ -1436,8 +1472,10 @@
       "Cobaltwisp",
       "Cobalt Exarch"
     ],
-    "description": "A construct lineage transformed by ooze traits. Its first form is small and simple; the second develops distinctive cobalt markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "An amorphous cobalt-blue gel construct containing articulated silver cogwheels, floating porcelain joint pieces, a soft metal-mask core and fluid pseudopods.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/cobaltwisp.webp",
+    "artRevision": 2
   },
   {
     "index": 103,
@@ -1449,8 +1487,10 @@
       "Dapplejaw",
       "Dapple Exarch"
     ],
-    "description": "A ooze lineage transformed by fiend traits. Its first form is small and simple; the second develops distinctive dapple markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "An amorphous dappled burgundy-and-gold fiend ooze with curved dark horns, tooth-lined gel maws, oily highlights and floating thorn-like shards.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/dapplejaw.webp",
+    "artRevision": 2
   },
   {
     "index": 104,
@@ -1462,8 +1502,10 @@
       "Ebonflare",
       "Ebon Exarch"
     ],
-    "description": "A elemental lineage transformed by celestial traits. Its first form is small and simple; the second develops distinctive ebon markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A four-legged elemental panther made of living black fire and luminous ivory embers, with fine gold celestial halo arcs and flowing plume-like flame tails.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/ebonflare.webp",
+    "artRevision": 2
   },
   {
     "index": 105,
@@ -1475,8 +1517,10 @@
       "Fableroot",
       "Fable Exarch"
     ],
-    "description": "A plant lineage transformed by undead traits. Its first form is small and simple; the second develops distinctive fable markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A rooted undead carnivorous willow with scroll-like peeling bark, dead flower traps, bone twigs, hollow eye knots and pale parchment-colored spirit sap.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/fableroot.webp",
+    "artRevision": 2
   },
   {
     "index": 106,
@@ -1488,8 +1532,10 @@
       "Glaciershard",
       "Glacier Exarch"
     ],
-    "description": "A fey lineage transformed by giant traits. Its first form is small and simple; the second develops distinctive glacier markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A towering visibly nonhuman bipedal glacier faerie giant with pale blue fur, enormous feathered ears, broad powerful hands and a crown of natural icy antlers.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/glaciershard.webp",
+    "artRevision": 2
   },
   {
     "index": 107,
@@ -1501,8 +1547,10 @@
       "Harborgaze",
       "Harbor Exarch"
     ],
-    "description": "A undead lineage transformed by construct traits. Its first form is small and simple; the second develops distinctive harbor markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A reanimated four-legged harbor mastiff skeleton with tarnished bronze rib braces, sea-worn armor joints, porthole-like eyes and dark salt-stained burial cloth.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/harborgaze.webp",
+    "artRevision": 2
   },
   {
     "index": 108,
@@ -1514,21 +1562,29 @@
       "Ichorfang",
       "Ichor Exarch"
     ],
-    "description": "A fiend lineage transformed by undead traits. Its first form is small and simple; the second develops distinctive ichor markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A four-legged skeletal fiend hound with dark blood-red hide remnants, exposed luminous marrow ribs, curled black horns and long ivory fangs. Eerie, without gore.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/ichorfang.webp",
+    "artRevision": 2
   },
   {
     "index": 109,
     "id": "jasperplume",
     "base": "Aberration",
-    "alter": "Humanoid",
+    "alter": "Fey",
     "forms": [
       "Jasperling",
       "Jasperplume",
       "Jasper Exarch"
     ],
-    "description": "A aberration lineage transformed by humanoid traits. Its first form is small and simple; the second develops distinctive jasper markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A horrific nonhuman bipedal faerie aberration with jasper-red feather filaments, a split mothlike mask, multiple small mouths in the torso and long asymmetrical grasping arms.",
+    "proceduralArt": false,
+    "legacyTypes": {
+      "base": "Aberration",
+      "alter": "Humanoid"
+    },
+    "atlas": "./assets/roster/jasperplume.webp",
+    "artRevision": 2
   },
   {
     "index": 110,
@@ -1540,8 +1596,10 @@
       "Kindlekin",
       "Kindle Exarch"
     ],
-    "description": "A giant lineage transformed by elemental traits. Its first form is small and simple; the second develops distinctive kindle markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A colossal bipedal ember giant with brick-gray craggy skin, a living coal beard, massive broad hands and volcanic orange seams; unmistakably a nonhuman giant.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/kindlekin.webp",
+    "artRevision": 2
   },
   {
     "index": 111,
@@ -1553,21 +1611,29 @@
       "Lotusgore",
       "Lotus Exarch"
     ],
-    "description": "A beast lineage transformed by aberration traits. Its first form is small and simple; the second develops distinctive lotus markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A recognizable enormously muscular hippopotamus aberration with horrific extra eyes, multiple impossible jaws and lotus-petal eye stalks emerging from its broad back.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/lotusgore.webp",
+    "artRevision": 2
   },
   {
     "index": 112,
     "id": "mistralwisp",
-    "base": "Humanoid",
+    "base": "Fey",
     "alter": "Monstrosity",
     "forms": [
       "Mistralling",
       "Mistralwisp",
       "Mistral Exarch"
     ],
-    "description": "A humanoid lineage transformed by monstrosity traits. Its first form is small and simple; the second develops distinctive mistral markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A visibly nonhuman bipedal raptor-like faerie with a long narrow insect mask, enormous hooked talons, elongated predatory fangs and silver wind-fringed plumage.",
+    "proceduralArt": false,
+    "legacyTypes": {
+      "base": "Humanoid",
+      "alter": "Monstrosity"
+    },
+    "atlas": "./assets/roster/mistralwisp.webp",
+    "artRevision": 2
   },
   {
     "index": 113,
@@ -1579,8 +1645,10 @@
       "Nettlejaw",
       "Nettle Exarch"
     ],
-    "description": "A celestial lineage transformed by fey traits. Its first form is small and simple; the second develops distinctive nettle markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A four-legged celestial faerie weasel with ivory fur, delicate gold nettle-shaped antlers, tiny leaf wings and warm turquoise nectar-like light markings.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/nettlejaw.webp",
+    "artRevision": 2
   },
   {
     "index": 114,
@@ -1592,8 +1660,10 @@
       "Onyxflare",
       "Onyx Exarch"
     ],
-    "description": "A monstrosity lineage transformed by beast traits. Its first form is small and simple; the second develops distinctive onyx markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A massively muscular black lion-crocodile monstrosity with oversized saber teeth, heavy reptilian shoulder plates, huge claws and pale gold spine ridges. Four sturdy legs.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/onyxflare.webp",
+    "artRevision": 2
   },
   {
     "index": 115,
@@ -1605,8 +1675,10 @@
       "Petalroot",
       "Petal Exarch"
     ],
-    "description": "A construct lineage transformed by ooze traits. Its first form is small and simple; the second develops distinctive petal markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "An amorphous pale-pink ooze construct with floating white porcelain petal plates, small bronze joint rings and a soft glowing seed-shaped core.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/petalroot.webp",
+    "artRevision": 2
   },
   {
     "index": 116,
@@ -1618,8 +1690,10 @@
       "Quasarshard",
       "Quasar Exarch"
     ],
-    "description": "A ooze lineage transformed by fiend traits. Its first form is small and simple; the second develops distinctive quasar markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "An amorphous deep-violet fiend ooze with dark obsidian horns, star-like glowing inner gel, serrated floating fragments and a low predatory mouth.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/quasarshard.webp",
+    "artRevision": 2
   },
   {
     "index": 117,
@@ -1631,8 +1705,10 @@
       "Ravengaze",
       "Raven Exarch"
     ],
-    "description": "A elemental lineage transformed by celestial traits. Its first form is small and simple; the second develops distinctive raven markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A recognizable raven whose body and one pair of wings are made of living storm wind and dark feathered plasma, with a white-gold celestial halo and two taloned feet.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/ravengaze.webp",
+    "artRevision": 2
   },
   {
     "index": 118,
@@ -1644,8 +1720,10 @@
       "Solacefang",
       "Solace Exarch"
     ],
-    "description": "A plant lineage transformed by undead traits. Its first form is small and simple; the second develops distinctive solace markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A rooted undead carnivorous white funeral plant with large bone-fanged flytraps, bleached leaves, skeletal root fingers and gentle pale blue spirit light.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/solacefang.webp",
+    "artRevision": 2
   },
   {
     "index": 119,
@@ -1657,8 +1735,10 @@
       "Talonplume",
       "Talon Exarch"
     ],
-    "description": "A fey lineage transformed by giant traits. Its first form is small and simple; the second develops distinctive talon markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A towering nonhuman bipedal faerie giant with an avian head, huge feather-fringed forearms, hooked talons and a long cream-and-amber plumage mantle.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/talonplume.webp",
+    "artRevision": 2
   },
   {
     "index": 120,
@@ -1670,8 +1750,10 @@
       "Ulmarkin",
       "Ulmar Exarch"
     ],
-    "description": "A undead lineage transformed by construct traits. Its first form is small and simple; the second develops distinctive ulmar markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A reanimated four-legged armadillo skeleton with articulated dark steel shell bands, bronze spinal hinges, visible pale ribs and ghostly green eyes.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/ulmarkin.webp",
+    "artRevision": 2
   },
   {
     "index": 121,
@@ -1683,21 +1765,29 @@
       "Velvetgore",
       "Velvet Exarch"
     ],
-    "description": "A fiend lineage transformed by undead traits. Its first form is small and simple; the second develops distinctive velvet markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A four-legged fiend deer with deep crimson velvet hide, curved black antlers, exposed ivory skeletal ribs, a long predatory muzzle and cold violet eyes.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/velvetgore.webp",
+    "artRevision": 2
   },
   {
     "index": 122,
     "id": "whisperwisp",
     "base": "Aberration",
-    "alter": "Humanoid",
+    "alter": "Fey",
     "forms": [
       "Whisperling",
       "Whisperwisp",
       "Whisper Exarch"
     ],
-    "description": "A aberration lineage transformed by humanoid traits. Its first form is small and simple; the second develops distinctive whisper markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A horrific nonhuman bipedal whispering faerie aberration with an eyeless split mask, many tiny mouths along its torso, long ear-like appendages and tattered lavender silk.",
+    "proceduralArt": false,
+    "legacyTypes": {
+      "base": "Aberration",
+      "alter": "Humanoid"
+    },
+    "atlas": "./assets/roster/whisperwisp.webp",
+    "artRevision": 2
   },
   {
     "index": 123,
@@ -1709,8 +1799,10 @@
       "Xanthjaw",
       "Xanth Exarch"
     ],
-    "description": "A giant lineage transformed by elemental traits. Its first form is small and simple; the second develops distinctive xanth markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A colossal bipedal citrine-yellow elemental giant with lightning-filled jaws, angular stone brows, massive gold-gray limbs and branching electric fractures.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/xanthjaw.webp",
+    "artRevision": 2
   },
   {
     "index": 124,
@@ -1722,21 +1814,29 @@
       "Yonderflare",
       "Yonder Exarch"
     ],
-    "description": "A beast lineage transformed by aberration traits. Its first form is small and simple; the second develops distinctive yonder markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A recognizable enormously muscular saber-toothed cat aberration with eye stalks along its back, extra impossible jaws, and a long tentacle-like tail.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/yonderflare.webp",
+    "artRevision": 2
   },
   {
     "index": 125,
     "id": "zinniaroot",
-    "base": "Humanoid",
+    "base": "Fey",
     "alter": "Monstrosity",
     "forms": [
       "Zinnialing",
       "Zinniaroot",
       "Zinnia Exarch"
     ],
-    "description": "A humanoid lineage transformed by monstrosity traits. Its first form is small and simple; the second develops distinctive zinnia markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A visibly nonhuman bipedal flower faerie monstrosity with a zinnia-petal mask, hooked mantis-like forearms, sharp taloned feet and exaggerated predatory fangs.",
+    "proceduralArt": false,
+    "legacyTypes": {
+      "base": "Humanoid",
+      "alter": "Monstrosity"
+    },
+    "atlas": "./assets/roster/zinniaroot.webp",
+    "artRevision": 2
   },
   {
     "index": 126,
@@ -1748,8 +1848,10 @@
       "Aurumshard",
       "Aurum Exarch"
     ],
-    "description": "A celestial lineage transformed by fey traits. Its first form is small and simple; the second develops distinctive aurum markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A four-legged radiant celestial ibex with creamy opaline fur, golden shard antlers, faerie leaflike ear fins and small floating sun rings.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/aurumshard.webp",
+    "artRevision": 2
   },
   {
     "index": 127,
@@ -1761,8 +1863,10 @@
       "Brackengaze",
       "Bracken Exarch"
     ],
-    "description": "A monstrosity lineage transformed by beast traits. Its first form is small and simple; the second develops distinctive bracken markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A heavily muscled boar-tiger monstrosity with massive forward tusks, huge claws, dark bracken-colored fur, armored ridges and a predatory low quadruped stance.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/brackengaze.webp",
+    "artRevision": 2
   },
   {
     "index": 128,
@@ -1774,8 +1878,10 @@
       "Coralfang",
       "Coral Exarch"
     ],
-    "description": "A construct lineage transformed by ooze traits. Its first form is small and simple; the second develops distinctive coral markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "An amorphous coral-pink ooze construct with floating carved coral-like porcelain jaws, small bronze gears, teal gel joints and fluid soft tentacles.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/coralfang.webp",
+    "artRevision": 2
   },
   {
     "index": 129,
@@ -1787,8 +1893,10 @@
       "Daggerplume",
       "Dagger Exarch"
     ],
-    "description": "A ooze lineage transformed by fiend traits. Its first form is small and simple; the second develops distinctive dagger markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "An amorphous burgundy fiend ooze with dagger-shaped horn fins, tooth-edged liquid wing lobes and a charcoal core, no rigid skeleton.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/daggerplume.webp",
+    "artRevision": 2
   },
   {
     "index": 130,
@@ -1800,8 +1908,10 @@
       "Eclipsekin",
       "Eclipse Exarch"
     ],
-    "description": "A elemental lineage transformed by celestial traits. Its first form is small and simple; the second develops distinctive eclipse markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A four-legged celestial elemental stag made of black-and-white luminous plasma, with a fine eclipsed sun halo and flowing silver-gold flame antlers.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/eclipsekin.webp",
+    "artRevision": 2
   },
   {
     "index": 131,
@@ -1813,8 +1923,10 @@
       "Fennelgore",
       "Fennel Exarch"
     ],
-    "description": "A plant lineage transformed by undead traits. Its first form is small and simple; the second develops distinctive fennel markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A rooted undead carnivorous fennel plant with bone-white hollow stems, toothed seedpod traps, dead feathery fronds and black ghostly sap.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/fennelgore.webp",
+    "artRevision": 2
   },
   {
     "index": 132,
@@ -1826,8 +1938,10 @@
       "Gossamerwisp",
       "Gossamer Exarch"
     ],
-    "description": "A fey lineage transformed by giant traits. Its first form is small and simple; the second develops distinctive gossamer markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A towering visibly nonhuman bipedal moth faerie giant with silver antennae, pale fur, broad powerful limbs and a billowing gossamer wing mantle.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/gossamerwisp.webp",
+    "artRevision": 2
   },
   {
     "index": 133,
@@ -1839,8 +1953,10 @@
       "Hearthjaw",
       "Hearth Exarch"
     ],
-    "description": "A undead lineage transformed by construct traits. Its first form is small and simple; the second develops distinctive hearth markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A reanimated four-legged badger skeleton with dark red brick-and-bronze joint armor, exposed ash-white ribs and a faint coal glow behind its skull jaw.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/hearthjaw.webp",
+    "artRevision": 2
   },
   {
     "index": 134,
@@ -1852,21 +1968,29 @@
       "Isletflare",
       "Islet Exarch"
     ],
-    "description": "A fiend lineage transformed by undead traits. Its first form is small and simple; the second develops distinctive islet markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A four-legged skeletal devil crocodile with algae-dark hide, pale driftbone armor, hooked fiend horns and spectral sea-green light, without a living animal appearance.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/isletflare.webp",
+    "artRevision": 2
   },
   {
     "index": 135,
     "id": "jubilroot",
     "base": "Aberration",
-    "alter": "Humanoid",
+    "alter": "Fey",
     "forms": [
       "Jubilling",
       "Jubilroot",
       "Jubil Exarch"
     ],
-    "description": "A aberration lineage transformed by humanoid traits. Its first form is small and simple; the second develops distinctive jubil markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A horrific nonhuman bipedal root-and-faerie aberration with a split laughing mask, multiple small mouths, too many staring eyes and twisted vine-like arms.",
+    "proceduralArt": false,
+    "legacyTypes": {
+      "base": "Aberration",
+      "alter": "Humanoid"
+    },
+    "atlas": "./assets/roster/jubilroot.webp",
+    "artRevision": 2
   },
   {
     "index": 136,
@@ -1878,8 +2002,10 @@
       "Kryptonshard",
       "Krypton Exarch"
     ],
-    "description": "A giant lineage transformed by elemental traits. Its first form is small and simple; the second develops distinctive krypton markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A colossal bipedal green elemental stone giant with natural luminescent mineral shards, enormous craggy fists and dark charcoal skin fractured by emerald light.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/kryptonshard.webp",
+    "artRevision": 2
   },
   {
     "index": 137,
@@ -1891,21 +2017,29 @@
       "Larchgaze",
       "Larch Exarch"
     ],
-    "description": "A beast lineage transformed by aberration traits. Its first form is small and simple; the second develops distinctive larch markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A recognizable massively muscled elk aberration with horrific staring eyes embedded in bark-textured antlers, extra tentacle jaws and thick shaggy fur.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/larchgaze.webp",
+    "artRevision": 2
   },
   {
     "index": 138,
     "id": "miragefang",
-    "base": "Humanoid",
+    "base": "Fey",
     "alter": "Monstrosity",
     "forms": [
       "Mirageling",
       "Miragefang",
       "Mirage Exarch"
     ],
-    "description": "A humanoid lineage transformed by monstrosity traits. Its first form is small and simple; the second develops distinctive mirage markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A visibly nonhuman bipedal jackal-headed faerie monstrosity with oversized fangs, long hooked claws and a silver-violet mirage-shard mantle.",
+    "proceduralArt": false,
+    "legacyTypes": {
+      "base": "Humanoid",
+      "alter": "Monstrosity"
+    },
+    "atlas": "./assets/roster/miragefang.webp",
+    "artRevision": 2
   },
   {
     "index": 139,
@@ -1917,8 +2051,10 @@
       "Nectarplume",
       "Nectar Exarch"
     ],
-    "description": "A celestial lineage transformed by fey traits. Its first form is small and simple; the second develops distinctive nectar markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A four-legged celestial faerie creature with an anteater-like long muzzle, cream feathers, gold nectar filaments, tiny flower-shaped lights and delicate halo rings.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/nectarplume.webp",
+    "artRevision": 2
   },
   {
     "index": 140,
@@ -1930,8 +2066,10 @@
       "Oraclekin",
       "Oracle Exarch"
     ],
-    "description": "A monstrosity lineage transformed by beast traits. Its first form is small and simple; the second develops distinctive oracle markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "A huge muscular owl-bear monstrosity with oversized hooked beak fangs, massive bear claws, ochre feather ridges and a solid powerful quadrupedal body.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/oraclekin.webp",
+    "artRevision": 2
   },
   {
     "index": 141,
@@ -1943,8 +2081,10 @@
       "Pewtergore",
       "Pewter Exarch"
     ],
-    "description": "A construct lineage transformed by ooze traits. Its first form is small and simple; the second develops distinctive pewter markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "An amorphous smoke-gray ooze construct with floating ornate pewter armor pieces, articulated bronze cogs, black gel joints and a broad tusked mask core.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/pewtergore.webp",
+    "artRevision": 2
   },
   {
     "index": 142,
@@ -1956,8 +2096,10 @@
       "Quiverwisp",
       "Quiver Exarch"
     ],
-    "description": "A ooze lineage transformed by fiend traits. Its first form is small and simple; the second develops distinctive quiver markings; the final form becomes a towering, ornate embodiment of both creature types.",
-    "proceduralArt": true
+    "description": "An amorphous purple fiend ooze with curved obsidian horns, suspended arrowlike barbs, quivering liquid tendrils and a dark toothed mouth.",
+    "proceduralArt": false,
+    "atlas": "./assets/roster/quiverwisp.webp",
+    "artRevision": 2
   },
   {
     "index": 143,

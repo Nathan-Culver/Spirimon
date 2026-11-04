@@ -2,8 +2,12 @@
 from pathlib import Path
 from PIL import Image
 import numpy as np
-import json,re,os
+import json,re,os,argparse
 root=Path(__file__).resolve().parents[1]
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--first',type=int,default=1)
+parser.add_argument('--last',type=int,default=150)
+args=parser.parse_args()
 report=[]
 def gap_runs(projection,lo,hi):
  runs=[];start=None
@@ -16,6 +20,8 @@ def gap_runs(projection,lo,hi):
  if start is not None and hi-start>=3:runs.append((start,hi))
  return runs
 for source in sorted((root/'artwork/roster-source').glob('*.png')):
+ number=int(source.stem.split('-',1)[0])
+ if not args.first<=number<=args.last:continue
  lineage=re.sub(r'^\d+-','',source.stem)
  im=Image.open(source).convert('RGBA');alpha=np.asarray(im)[:,:,3];h,w=alpha.shape
  border=np.concatenate((alpha[0,:],alpha[-1,:],alpha[:,0],alpha[:,-1]))
