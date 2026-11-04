@@ -176,7 +176,7 @@ export function priority(ind,sp,move,style='normal'){
 export function hitChance(actor,target,move,style='normal',asp=null){
  if(['sureHit','struggle'].includes(move.effect))return 1;
  const accuracy=move.accuracy??.9,net=stage(actor,'accuracy')-stage(target,'evasion');
- return clamp(accuracy*(net>=0?(3+net)/3:3/(3-net))+(style==='agile'?.15:0)-(target.battleStyle==='agile'?.15:0)+(hasHook(actor,'accuracy',asp)?.1:0),.05,1);
+ return clamp(accuracy*(net>=0?(3+net)/3:3/(3-net))+(style==='agile'?.15:0)-(target.battleStyle==='agile'?.15:0)+(hasHook(actor,'accuracy',asp)?.1:0)+(asp?passiveEffects(asp,actor,{maxHp:stats(actor,asp).hp}).accuracy||0:0),.05,1);
 }
 export function damage(attacker,asp,defender,dsp,move,style='normal',r=Math.random){
  const a=stats(attacker,asp),d=stats(defender,dsp),energy=moveCategory(move)==='Energy';
