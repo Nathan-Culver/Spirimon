@@ -1000,10 +1000,12 @@ function useUnifiedMove(value,gestureStyle='normal',gestureCommit=0,extraMoves=0
 }
 function unifiedGestureChoice(dx,dy){
  const ax=Math.abs(dx),ay=Math.abs(dy),diagonal=ax>22&&ay>22&&Math.min(ax,ay)/Math.max(ax,ay)>.42;
- const moveCount=diagonal?Math.min(2,Math.max(1,Math.floor(Math.hypot(dx,dy)/85))):0;
  const style=diagonal?(dx<0?'agile':'strong'):ax>ay?(dx<0?'agile':'strong'):(dy<0?'strong':'agile');
- const commit=diagonal?(dy<0?Math.min(1,ax/110):0):ax>ay?Math.min(1,ax/110):0;
- return {style,commit,moveCount,diagonal};
+ // Only upward diagonals request additional repetitions. Downward diagonals
+ // deliberately have neither repetitions nor attack commitment.
+ const extraMoves=diagonal&&dy<0?Math.min(2,Math.max(1,Math.floor(Math.hypot(dx,dy)/85))):0;
+ const commit=diagonal?0:ax>ay?Math.min(1,ax/110):0;
+ return {style,commit,moveCount:extraMoves,diagonal};
 }
 document.addEventListener('pointerdown',ev=>{
  const button=ev.target.closest?.('[data-unified-move]');if(!button||button.disabled)return;
