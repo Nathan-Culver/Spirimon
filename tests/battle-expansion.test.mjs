@@ -27,7 +27,29 @@ test('taunt and disable remove affected moves from legal choices',()=>{const {sp
 test('counter and mirror coat retaliate only against the matching incoming category',()=>{for(const [attack,effect]of [[physical,'counter'],[energy,'mirrorCoat']]){const {sp,units:[a,b]}=setup();execute(b,a,sp,attack);const dealt=a.lastHit.amount,hp=b.hp;execute(a,b,sp,makeMove(effect,effect==='counter'?'Physical':'Energy',60));assert.equal(hp-b.hp,dealt*2);}});
 test('sleep-only attacks require sleeping targets and destiny bond causes mutual knockout',()=>{const {sp,units:[a,b]}=setup();const hp=b.hp;execute(a,b,sp,makeMove('sleepStrike','Energy',40));assert.equal(b.hp,hp);execute(b,a,sp,makeMove('destinyBond'));b.hp=1;execute(a,b,sp,physical);assert.equal(a.hp,0);assert.equal(b.hp,0);});
 test('screens and weather expire once per round, including rounds spent on an item or switch',()=>{const {sp,units:[a,b],speciesOf}=setup();E.bindBattlefield([a],[b]);execute(a,b,sp,makeMove('reflect'));execute(a,b,sp,makeMove('weatherRain'));for(let n=0;n<5;n++)E.endBattleRound([a,b],speciesOf);assert.equal(a.battlefield.weather,null);assert.equal(a.battlefield.sides.a.screens.reflect,undefined);});
-test('leech seed heals its living source and delayed attacks wait for their countdown',()=>{const {sp,units:[a,b],speciesOf}=setup();E.bindBattlefield([a],[b]);a.hp-=50;execute(a,b,sp,makeMove('leechSeed'));const hp=a.hp;E.endBattleRound([a,b],speciesOf);assert.ok(a.hp>hp);const targetHP=b.hp;execute(a,b,sp,makeMove('delayedStrike','Energy',50));assert.equal(b.hp,targetHP);E.endBattleRound([a,b],speciesOf);const first=b.hp;E.endBattleRound([a,b],speciesOf);assert.ok(first-b.hp>Math.floor(E.stats(b,sp).hp/8));});
+test('leech seed heals its living source after overcoming classification resistance',()=>{
+ const {sp,units:[a,b],speciesOf}=setup();E.bindBattlefield([a],[b]);a.hp-=50;
+ // Plant resists Leech Seed, so explicitly roll a successful application.
+ E.executeAction(a,sp,b,sp,makeMove('leechSeed'),'normal',.5,()=>.1);
+ assert.ok(b.conditions.leechSeed);assert.equal(b.conditionSources.leechSeed,a.id);
+ const hp=a.hp,targetHP=b.hp;E.endBattleRound([a,b],speciesOf);
+ assert.ok(a.hp>hp);assert.ok(b.hp<targetHP);
+ a.hp=0;const livingTargetHP=b.hp;E.endBattleRound([a,b],speciesOf);
+ assert.equal(a.hp,0,'Leech Seed must not revive its source');assert.ok(b.hp<livingTargetHP);
+});
+test('leech seed can be resisted by Plant classification',()=>{
+ const {sp,units:[a,b],speciesOf}=setup();a.hp-=50;
+ execute(a,b,sp,makeMove('leechSeed'));assert.equal(b.conditions.leechSeed,undefined);
+ const hp=a.hp,targetHP=b.hp;E.endBattleRound([a,b],speciesOf);
+ assert.equal(a.hp,hp);assert.equal(b.hp,targetHP);
+});
+test('delayed attacks wait for their countdown',()=>{
+ const {sp,units:[a,b],speciesOf}=setup();E.bindBattlefield([a],[b]);
+ const hp=b.hp;execute(a,b,sp,makeMove('delayedStrike','Energy',50));
+ assert.equal(b.hp,hp);const amount=b.delayedDamage.amount;
+ E.endBattleRound([a,b],speciesOf);assert.equal(b.hp,hp);
+ E.endBattleRound([a,b],speciesOf);assert.equal(b.hp,hp-amount);assert.equal(b.delayedDamage,undefined);
+});
 test('healing removes stale battle-only state and leaves individual build choices intact',()=>{const {sp,units:[a]}=setup();Object.assign(a,{heldCharm:'thorn-mail',aspect:'Primal',conditions:{trap:3},stages:{might:6},reflect:true,pendingMove:physical,battlefield:{sides:{}},switchRequested:true});E.heal(a,sp);assert.equal(a.conditions,undefined);assert.equal(a.stages,undefined);assert.equal(a.reflect,undefined);assert.equal(a.pendingMove,undefined);assert.equal(a.battlefield,undefined);assert.equal(a.heldCharm,'thorn-mail');assert.equal(a.aspect,'Primal');});
 test('hazards belong to a side, stack to their cap and affect each new entrant',()=>{const {sp,units:[a,b,c,d]}=setup();E.bindBattlefield([a,c,d],[b]);for(let n=0;n<5;n++)execute(b,a,sp,makeMove('spikes'));assert.equal(a.battlefield.sides.a.hazards.spikes,3);const before=c.hp;assert.ok(E.switchUnits(a,c,sp,{outSpecies:sp}).ok);assert.equal(before-c.hp,Math.floor(E.stats(c,sp).hp/4));const other=d.hp;E.switchUnits(c,d,sp,{outSpecies:sp});assert.equal(other-d.hp,Math.floor(E.stats(d,sp).hp/4));});
 test('boots prevent entry hazards, traps prevent voluntary switching, and anchors stop forced displacement',()=>{const {sp,units:[a,b,c]}=setup();const field=E.bindBattlefield([a,c],[b]);field.sides.a.hazards={spikes:3,toxicSpikes:2,stickyWeb:1};a.conditions={trap:3};assert.equal(E.switchUnits(a,c,sp).ok,false);a.conditions={};c.heldCharm='hazard-boots';const hp=c.hp;assert.equal(E.switchUnits(a,c,sp).ok,true);assert.equal(c.hp,hp);assert.equal(c.status,null);assert.equal(c.stages,undefined);c.aspect='Titan';assert.equal(E.switchUnits(c,a,sp,{forced:true}).ok,false);});

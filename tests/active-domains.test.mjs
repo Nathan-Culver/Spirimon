@@ -13,8 +13,8 @@ test('assigned Domains remain active with Domain-free Moves or no Moves',()=>{
  const sp=species(['Water']);assert.deepEqual(activeDomains(sp),['Water']);
  assert.deepEqual(activeDomains(sp,{moveIds:['plain']}),['Water']);
  assert.deepEqual(activeDomains({...sp,moves:[]}),['Water']);
- assert.equal(effectiveness({domain:'Lightning'},sp),1.25);
- assert.equal(effectiveness({domain:'Fire'},sp),.8);
+ assert.equal(effectiveness({domain:'Lightning'},sp),1.5);
+ assert.equal(effectiveness({domain:'Fire'},sp),.75);
 });
 
 test('equipped Moves add temporary Domains and replacement removes only the temporary affinity',()=>{
@@ -28,7 +28,7 @@ test('equipped Moves add temporary Domains and replacement removes only the temp
 test('assigned, Move and legacy-alias Domains are canonicalized and counted once',()=>{
  const sp=species(['Water','Time','Fate','Mind','invalid']);sp.moves=[water,water,{...plain,domain:'Fate'},{...plain,domain:'Psionic'},plain];
  assert.deepEqual(activeDomains(sp),['Water','Fate','Psionic']);
- assert.equal(effectiveness({domain:'Lightning'},{...sp,domains:['Water','Water'],moves:[water,water]}),1.25);
+ assert.equal(effectiveness({domain:'Lightning'},{...sp,domains:['Water','Water'],moves:[water,water]}),1.5);
 });
 
 test('unequipped known Moves and other individuals do not supply combat Domains',()=>{
