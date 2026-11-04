@@ -66,7 +66,30 @@ export function capabilitiesFromAnatomy(anatomy,domains=[]){
   teleport:entry(domains.some(d=>['Void','Psionic'].includes(d)),'spatial passage','Void or Psionic Domain'),
   climb:entry(has('climb')||has('claws')||hands,'grip','Grasping appendages, claws or climbing anatomy')};
 }
-export function syncCapabilities(sp){sp.capabilities=capabilitiesFromAnatomy(sp.anatomy,sp.domains);return sp;}
+// Field eligibility is binary: extra qualifying classifications do not increase effectiveness.
+export function effectiveFieldDomains(sp,ind=null){
+ const aliases={Time:'Fate',Space:'Void',Mind:'Psionic'};
+ const domains=[...(sp?.domains||[])];
+ const moves=ind?.moveIds?.length
+  ?ind.moveIds.map(id=>(sp.learnset||[]).find(m=>m.id===id)||(sp.moves||[]).find(m=>m.id===id)).filter(Boolean)
+  :(sp?.moves||[]);
+ for(const move of moves)for(const d of [move.domain,...(move.domains||[])].filter(Boolean))domains.push(aliases[d]||d);
+ const suppressed=new Set([...(sp?.suppressedDomains||[]),...(ind?.suppressedDomains||[])]);
+ const granted=[...(sp?.temporaryDomains||[]),...(ind?.temporaryDomains||[])];
+ return [...new Set([...domains,...granted].map(d=>aliases[d]||d))].filter(d=>!suppressed.has(d));
+}
+export function syncCapabilities(sp,ind=null){
+ const anatomy=sp.formAnatomy?.[ind?.form]||sp.anatomy;
+ sp.capabilities=capabilitiesFromAnatomy(anatomy,effectiveFieldDomains(sp,ind));
+ return sp;
+}
+export function fieldCapabilityAvailable(sp,capability,ind=null){
+ const anatomy=sp.formAnatomy?.[ind?.form]||sp.anatomy;
+ const result=capabilitiesFromAnatomy(anatomy,effectiveFieldDomains(sp,ind));
+ const suppressed=new Set([...(sp?.suppressedCapabilities||[]),...(ind?.suppressedCapabilities||[])]);
+ const blocked=new Set([...(ind?.fieldStatusRestrictions||[])]);
+ return !!result[capability]?.available&&!suppressed.has(capability)&&!blocked.has(capability);
+}
 // Interpret independent image observations, never the requested prompt, as visual evidence.
 export function applyVisualObservation(sp,observation){
  if(!observation||!Number.isFinite(observation.confidence)||observation.confidence<.8||!CREATURE_TYPES.includes(observation.base)||!CREATURE_TYPES.includes(observation.alter)||observation.base!==sp.base||observation.alter!==sp.alter)throw Error('Image anatomy or ordered type accuracy is unverified.');
@@ -91,7 +114,7 @@ export function applyLineageObservations(sp,observations){
 }
 export function individualSpecies(sp,ind){
  const anatomy=sp.formAnatomy?.[ind?.form||0]||sp.anatomy;
- return anatomy===sp.anatomy?sp:{...sp,anatomy,capabilities:capabilitiesFromAnatomy(anatomy,sp.domains)};
+ return anatomy===sp.anatomy?sp:{...sp,anatomy,capabilities:capabilitiesFromAnatomy(anatomy,effectiveFieldDomains(sp,ind))};
 }
 export function legacyAnatomy(sp){
  const text=(sp.description||'').toLowerCase();let reference=Object.values(ANATOMY_CATALOG).flat().filter(r=>text.includes(r.name.toLowerCase())).sort((a,b)=>b.name.length-a.name.length)[0];
