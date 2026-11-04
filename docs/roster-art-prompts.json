@@ -1,0 +1,1508 @@
+{
+  "date": "2026-11-04",
+  "generator": "OpenAI image_gen",
+  "commonPrompt": "Use case: stylized-concept. Asset type: ONE production three-form creature sprite strip for Spirimon, a richly detailed fantasy pixel-art RPG. Output a wide 3:1 horizontal canvas, ideally 1536x512, with EXACTLY THREE equal square invisible cells across ONE ROW. Each cell contains one complete full-body creature on a TRUE TRANSPARENT background, no labels, grid, letters, floor, shadow platform, scenery or UI. All three belong to the SAME distinct lineage, facing three-quarter left, consistent colors and anatomical identity. Left: small juvenile, simpler features, about 60% of cell height. Middle: mature second form, about 78% height. Right: elaborate powerful final form, about 90% height. Shared ground baseline at 92% of image height. Keep at least 8% empty transparent margin inside EACH cell, including horns, tails, wings and feet. Later forms add anatomical details, ornaments and complexity, NOT merely bigger copies. Shared key materials and markings persist through all forms. Style: fine handcrafted richly shaded 16-bit-inspired pixel sprites, small visible pixels, dithered material texture, restrained dark outlines, directional upper-left light, dimensional fur/stone/metal/gel detail, matching high-quality fantasy creature atlases. Not crude geometric shapes, not flat cartoons, not smooth vector or 3D renders. No human faces. Preserve recognizability of the stated reference and both Types. Absolutely empty transparent pixels surrounding the sprites, no opaque white background. ",
+  "suffixTemplate": "Lineage {id}, Types {base} and {alter}. Design: {brief} Three named forms, left to right: {forms joined by comma}. Names are metadata only; render NO TEXT.",
+  "lineages": [
+    {
+      "number": 51,
+      "id": "aetherling",
+      "base": "Aberration",
+      "alter": "Construct",
+      "forms": [
+        "Aetherlet",
+        "Aetherling",
+        "Aether Sovereign"
+      ],
+      "brief": "A horrific four-legged aether hound built from pale ceramic ribs and bronze clockwork, with six asymmetrical eyes, jointed tentacles instead of a tail, and impossible floating jaw plates.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-45b18292-d375-42d6-a8c3-fbe3eec1d2be.png"
+    },
+    {
+      "number": 52,
+      "id": "bramblehorn",
+      "base": "Beast",
+      "alter": "Fey",
+      "forms": [
+        "Bramblelet",
+        "Bramblehorn",
+        "Bramble Sovereign"
+      ],
+      "brief": "A recognizable massively muscular takin with thick fur, curling horns grown into flowering thorn branches, tiny faerie lantern seedpods and moss-gold markings. Four sturdy hooved legs.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-9237f244-d445-4b93-a1f0-90b23c464989.png"
+    },
+    {
+      "number": 53,
+      "id": "cindershade",
+      "base": "Celestial",
+      "alter": "Aberration",
+      "forms": [
+        "Cinderlet",
+        "Cindershade",
+        "Cinder Sovereign"
+      ],
+      "brief": "A radiant four-hoofed kirin with charcoal feathers, molten pearl halo rings and a hollow chest containing misplaced watchful eyes. Beautiful celestial light disturbed by horrific asymmetry.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-ef30331c-8485-49bd-9c0d-784afe793b6f.png"
+    },
+    {
+      "number": 54,
+      "id": "duskclaw",
+      "base": "Construct",
+      "alter": "Fey",
+      "forms": [
+        "Dusklet",
+        "Duskclaw",
+        "Dusk Sovereign"
+      ],
+      "brief": "A four-legged automaton civet made of dark cedar, articulated brass claws and violet glass eyes, with dusk-colored faerie silk tails and tiny luminous leaf charms.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-c8566916-2555-4ac8-b6a7-904ee6a90def.png"
+    },
+    {
+      "number": 55,
+      "id": "embermoth",
+      "base": "Elemental",
+      "alter": "Ooze",
+      "forms": [
+        "Emberlet",
+        "Embermoth",
+        "Ember Sovereign"
+      ],
+      "brief": "An amorphous molten-amber ooze elemental whose flowing lobes suggest moth wings; ember veins and drifting liquid droplets, a soft translucent body with no rigid animal skeleton.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-72dfe8c1-78ca-4b35-9380-6e8b1953fac5.png"
+    },
+    {
+      "number": 56,
+      "id": "frostwyrm",
+      "base": "Fey",
+      "alter": "Celestial",
+      "forms": [
+        "Frostlet",
+        "Frostwyrm",
+        "Frost Sovereign"
+      ],
+      "brief": "A four-legged frost faerie dragon with snow-gecko features, fernlike ice ears, opaline scale tufts and delicate golden celestial halo arcs. Nonhuman, long-bodied, four paws.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-10a7a55c-20fb-409d-a67d-dfcf544df8a4.png"
+    },
+    {
+      "number": 57,
+      "id": "gloomglen",
+      "base": "Fiend",
+      "alter": "Giant",
+      "forms": [
+        "Gloomlet",
+        "Gloomglen",
+        "Gloom Sovereign"
+      ],
+      "brief": "A colossal horned fiend giant with a nonhuman basalt face, heavy moss-dark limbs, olive lichen beard, enormous clawed hands and dim green cracks; biped, never an ordinary human.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-bef48dd4-6f9a-4ad0-a705-aa5d0cd19672.png"
+    },
+    {
+      "number": 58,
+      "id": "hollowbloom",
+      "base": "Giant",
+      "alter": "Undead",
+      "forms": [
+        "Hollowlet",
+        "Hollowbloom",
+        "Hollow Sovereign"
+      ],
+      "brief": "A hollow-bodied undead giant with weathered bone ribs, gray stone flesh, fungal funeral blossoms and torn burial wrappings. Bipedal, immensely broad shoulders and massive hands.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-e4766fcf-ef78-4d55-b28b-9d9c815f90c8.png"
+    },
+    {
+      "number": 59,
+      "id": "ivoryspire",
+      "base": "Fey",
+      "alter": "Elemental",
+      "forms": [
+        "Ivorylet",
+        "Ivoryspire",
+        "Ivory Sovereign"
+      ],
+      "brief": "A visibly nonhuman bipedal ivory faerie with an antelope-like porcelain face, branching ears, slender elongated limbs and ribbons of pale wind and gold dust. No human face.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-fc59f7be-a4d0-4ff4-9bd6-4ebd767e0f3c.png"
+    },
+    {
+      "number": 60,
+      "id": "jademaw",
+      "base": "Monstrosity",
+      "alter": "Ooze",
+      "forms": [
+        "Jadelet",
+        "Jademaw",
+        "Jade Sovereign"
+      ],
+      "brief": "An amorphous jade gel monstrosity with a huge split predatory maw, oversized curved fangs, floating jade scutes and several flowing rootlike pseudopods. No rigid legs.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-6f9c93b9-238d-4d10-96b8-09638f557f91.png"
+    },
+    {
+      "number": 61,
+      "id": "kelpveil",
+      "base": "Ooze",
+      "alter": "Beast",
+      "forms": [
+        "Kelplet",
+        "Kelpveil",
+        "Kelp Sovereign"
+      ],
+      "brief": "A translucent sea-green ooze with the recognizable broad muzzle and muscular mass of a river otter, flowing kelp-shaped gel fringes, suspended river stones and soft pseudopod feet.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-0f48c970-0648-4a33-83ea-321905266f4a.png"
+    },
+    {
+      "number": 62,
+      "id": "lumenwing",
+      "base": "Plant",
+      "alter": "Fiend",
+      "forms": [
+        "Lumenlet",
+        "Lumenwing",
+        "Lumen Sovereign"
+      ],
+      "brief": "A rooted carnivorous plant with luminous pitcher-cup wings, black thorn roots, hooked infernal leaf tips and orange nectar lures. Remains unmistakably a plant.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-7ae2baf0-c9d2-411d-bca1-547567d051ec.png"
+    },
+    {
+      "number": 63,
+      "id": "morrowfang",
+      "base": "Undead",
+      "alter": "Plant",
+      "forms": [
+        "Morrowlet",
+        "Morrowfang",
+        "Morrow Sovereign"
+      ],
+      "brief": "A reanimated carnivorous grave-root plant with a cracked jackal skull caught in its trunk, skeletal root fingers, dead lavender petals and pale soul light.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-3dd30f2d-7cff-4314-8cc9-23328e20bc16.png"
+    },
+    {
+      "number": 64,
+      "id": "nacreling",
+      "base": "Aberration",
+      "alter": "Construct",
+      "forms": [
+        "Nacrelet",
+        "Nacreling",
+        "Nacre Sovereign"
+      ],
+      "brief": "A horrific four-legged pearlescent construct with a mollusk-like layered body, articulated nacre plates, aperture mouths, extra mismatched eyes and twitching bronze feelers.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-a151a7e8-30e9-4152-863e-d228db37b8d8.png"
+    },
+    {
+      "number": 65,
+      "id": "obsidhorn",
+      "base": "Beast",
+      "alter": "Fey",
+      "forms": [
+        "Obsidlet",
+        "Obsidhorn",
+        "Obsid Sovereign"
+      ],
+      "brief": "A recognizable powerfully built black-furred kangaroo standing on two heavy hind legs, broad muscular forearms, glossy dark curling horns and faint faerie leaf runes. No human face.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-738c37d5-4680-4991-ab73-9cd256f9e304.png"
+    },
+    {
+      "number": 66,
+      "id": "pollenshade",
+      "base": "Celestial",
+      "alter": "Aberration",
+      "forms": [
+        "Pollenlet",
+        "Pollenshade",
+        "Pollen Sovereign"
+      ],
+      "brief": "A celestial deer-like quadruped with layered ivory pollen plumes, gold halo motes and multiple mismatched eye-bearing tendrils branching from its mane, eerie and anatomically unnatural.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-3932cac4-1106-4fdd-8689-73824392cc05.png"
+    },
+    {
+      "number": 67,
+      "id": "quillclaw",
+      "base": "Construct",
+      "alter": "Fey",
+      "forms": [
+        "Quilllet",
+        "Quillclaw",
+        "Quill Sovereign"
+      ],
+      "brief": "A quadruped clockwork porcupine made of bronze and pale wood, articulated quill plates, small faerie bellflowers and precise amethyst claws. Fine brass joint details.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-5db03cec-1ce6-4f35-a6ef-3f5e6458e801.png"
+    },
+    {
+      "number": 68,
+      "id": "runemoth",
+      "base": "Elemental",
+      "alter": "Ooze",
+      "forms": [
+        "Runelet",
+        "Runemoth",
+        "Rune Sovereign"
+      ],
+      "brief": "An amorphous violet magic-and-ooze creature with fluid mothlike wing lobes, unreadable luminous rune-shaped marks beneath its gel skin, silver droplets and a soft core.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-ac154ce5-15ff-4c95-bcaf-7fe2c11ba7ad.png"
+    },
+    {
+      "number": 69,
+      "id": "sablewyrm",
+      "base": "Fey",
+      "alter": "Celestial",
+      "forms": [
+        "Sablelet",
+        "Sablewyrm",
+        "Sable Sovereign"
+      ],
+      "brief": "A recognizable long-bodied sable marten with four paws, silver velvet fur, faerie whisker filaments and small gold celestial rings woven around its flowing tail.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-f6b6d387-f5c1-46f6-8ec3-5df9686af339.png"
+    },
+    {
+      "number": 70,
+      "id": "thornglen",
+      "base": "Fiend",
+      "alter": "Giant",
+      "forms": [
+        "Thornlet",
+        "Thornglen",
+        "Thorn Sovereign"
+      ],
+      "brief": "A hulking bipedal fiend giant with a thorn-crowned nonhuman face, heavy black-red limbs, a hooked tail and a dense crown of burgundy spines and moss-dark brambles.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-a5ed5627-0ecd-4924-af1f-a754daebfb93.png"
+    },
+    {
+      "number": 71,
+      "id": "umberbloom",
+      "base": "Giant",
+      "alter": "Undead",
+      "forms": [
+        "Umberlet",
+        "Umberbloom",
+        "Umber Sovereign"
+      ],
+      "brief": "An undead bipedal earth giant with umber mummified skin, open stone-and-bone ribs, burial linen, dried lily blooms and a pale turquoise spirit glow.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-6936c4e0-e9fe-4c6d-822c-0c0a439a2fb8.png"
+    },
+    {
+      "number": 72,
+      "id": "vesperspire",
+      "base": "Fey",
+      "alter": "Elemental",
+      "forms": [
+        "Vesperlet",
+        "Vesperspire",
+        "Vesper Sovereign"
+      ],
+      "brief": "A visibly nonhuman tall bipedal bat-eared twilight faerie with a long muzzle, amber eyes, flowing dusk-blue fur and thin ribbons of moving wind. No ordinary human anatomy.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-57744f7f-5f70-4df3-ba0f-fea52d87d1fc.png"
+    },
+    {
+      "number": 73,
+      "id": "willowmaw",
+      "base": "Monstrosity",
+      "alter": "Ooze",
+      "forms": [
+        "Willowlet",
+        "Willowmaw",
+        "Willow Sovereign"
+      ],
+      "brief": "An amorphous willow-green ooze monstrosity whose drooping liquid fronds conceal rows of long needle teeth, translucent sap lobes and an enormous hinged predatory mouth.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-fe070ae1-d7a6-492b-9681-61d2c70b5609.png"
+    },
+    {
+      "number": 74,
+      "id": "xyloveil",
+      "base": "Ooze",
+      "alter": "Beast",
+      "forms": [
+        "Xylolet",
+        "Xyloveil",
+        "Xylo Sovereign"
+      ],
+      "brief": "A broad-shouldered salamander-shaped living ooze, with amber wood-grain suspended in its translucent body, muscular animal-like mass, bright bead eyes and flexible gel pseudopods.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-beb5f5fc-33c2-4c83-839f-891f8fe0168c.png"
+    },
+    {
+      "number": 75,
+      "id": "yarrowwing",
+      "base": "Plant",
+      "alter": "Fiend",
+      "forms": [
+        "Yarrowlet",
+        "Yarrowwing",
+        "Yarrow Sovereign"
+      ],
+      "brief": "A rooted carnivorous yarrow plant with white clustered lures, red tooth-lined flower cups, barbed hornlike stems and dark infernal roots; botanically textured and predatory.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-9e40834b-8f2c-4551-b5de-8bbd97c1006d.png"
+    },
+    {
+      "number": 76,
+      "id": "zephyrfang",
+      "base": "Undead",
+      "alter": "Plant",
+      "forms": [
+        "Zephyrlet",
+        "Zephyrfang",
+        "Zephyr Sovereign"
+      ],
+      "brief": "A rooted undead plant with a wind-worn wolf skull, bleached thorn fangs, dead reed fronds, skeletal root legs and pale green spectral sap.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-22a8428e-5f0a-4a03-85d8-5bb33288e9ad.png"
+    },
+    {
+      "number": 77,
+      "id": "ashenling",
+      "base": "Aberration",
+      "alter": "Construct",
+      "forms": [
+        "Ashenlet",
+        "Ashenling",
+        "Ashen Sovereign"
+      ],
+      "brief": "A horrific four-legged ash-gray construct with burnt cedar plates, exposed brass ribs, many coal-like eyes, an asymmetrical split jaw and long cable-like tentacles.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-2fd082a3-cf4f-4671-9f75-4c13bedac212.png"
+    },
+    {
+      "number": 78,
+      "id": "berylhorn",
+      "base": "Beast",
+      "alter": "Fey",
+      "forms": [
+        "Beryllet",
+        "Berylhorn",
+        "Beryl Sovereign"
+      ],
+      "brief": "A thickly muscled wallaby standing on two strong hind legs, warm gray fur, beryl-green branching horns, soft faerie ear fins and sparkling leaf-shaped markings. Clearly an animal.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-fb325561-7334-42a5-8d23-6815e2d8d2ea.png"
+    },
+    {
+      "number": 79,
+      "id": "coppershade",
+      "base": "Celestial",
+      "alter": "Aberration",
+      "forms": [
+        "Copperlet",
+        "Coppershade",
+        "Copper Sovereign"
+      ],
+      "brief": "A four-legged copper-plumed celestial griffin with small gold halo rings, an unnaturally split beak, misplaced eyes in its feather mantle and an eerie asymmetric silhouette.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-b8d14682-1528-4b0c-a18c-eefd463654bc.png"
+    },
+    {
+      "number": 80,
+      "id": "driftclaw",
+      "base": "Construct",
+      "alter": "Fey",
+      "forms": [
+        "Driftlet",
+        "Driftclaw",
+        "Drift Sovereign"
+      ],
+      "brief": "A four-legged driftwood otter automaton with bronze claw joints, pale weathered grain, sea-glass eyes and faerie silk seaweed streamers. Small shell-shaped mechanical accents.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-a2637075-fee9-4766-b4d6-51717ea7e95c.png"
+    },
+    {
+      "number": 81,
+      "id": "eldermoth",
+      "base": "Elemental",
+      "alter": "Ooze",
+      "forms": [
+        "Elderlet",
+        "Eldermoth",
+        "Elder Sovereign"
+      ],
+      "brief": "An amorphous old-gold resin ooze elemental with flowing moth-wing lobes, soft molten light, suspended ancient leaf patterns and tiny slow droplets. No hard limbs.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-c33c5ff6-2c56-475a-bfe7-3b213988d921.png"
+    },
+    {
+      "number": 82,
+      "id": "flintwyrm",
+      "base": "Fey",
+      "alter": "Celestial",
+      "forms": [
+        "Flintlet",
+        "Flintwyrm",
+        "Flint Sovereign"
+      ],
+      "brief": "A four-legged flint-gray faerie drake with a gecko-like face, chipped opaline scales, fanlike leaf ears and a thin radiant gold celestial crown, clearly nonhuman.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-22b84a23-5cf0-4a86-a693-00548bf0a64b.png"
+    },
+    {
+      "number": 83,
+      "id": "garnetglen",
+      "base": "Fiend",
+      "alter": "Giant",
+      "forms": [
+        "Garnetlet",
+        "Garnetglen",
+        "Garnet Sovereign"
+      ],
+      "brief": "A colossal bipedal obsidian-skinned fiend giant with garnet-studded horn plates, massive clawed fists, a hooked lower jaw and deep burgundy ritual-like skin markings.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-bc82a580-828a-4cdd-8d96-3fd69527627f.png"
+    },
+    {
+      "number": 84,
+      "id": "hazelbloom",
+      "base": "Giant",
+      "alter": "Undead",
+      "forms": [
+        "Hazellet",
+        "Hazelbloom",
+        "Hazel Sovereign"
+      ],
+      "brief": "A hulking undead giant with hollow hazel-wood-colored stone flesh, skeletal hands, a crown of dead hazel branches, old burial fabric and pale amber ghostlight.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-e18ed130-7ba3-42f9-8681-c848fcbf1d90.png"
+    },
+    {
+      "number": 85,
+      "id": "indigospire",
+      "base": "Fey",
+      "alter": "Elemental",
+      "forms": [
+        "Indigolet",
+        "Indigospire",
+        "Indigo Sovereign"
+      ],
+      "brief": "A visibly nonhuman indigo bipedal faerie with an axolotl-like face, frilled ears, long webbed fingers and flowing cobalt water ribbons. No ordinary human face.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-3e0f1c2e-b0ae-4f08-a31e-a8c3bc687012.png"
+    },
+    {
+      "number": 86,
+      "id": "junipermaw",
+      "base": "Monstrosity",
+      "alter": "Ooze",
+      "forms": [
+        "Juniperlet",
+        "Junipermaw",
+        "Juniper Sovereign"
+      ],
+      "brief": "An amorphous juniper-blue sap ooze monstrosity with floating berry-like nodules, jagged evergreen-colored fangs, several soft jaws and needle-frond gel tentacles.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-fa6106b6-f874-4452-b804-f9897550c4d6.png"
+    },
+    {
+      "number": 87,
+      "id": "kestrelveil",
+      "base": "Ooze",
+      "alter": "Beast",
+      "forms": [
+        "Kestrellet",
+        "Kestrelveil",
+        "Kestrel Sovereign"
+      ],
+      "brief": "An amorphous tawny-and-slate ooze with recognizable kestrel beak and feather-patterned gel fans, muscular beastlike core and flowing winglike pseudopods; no rigid skeleton.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-6ab55d09-2d83-45f4-8097-524b482deafd.png"
+    },
+    {
+      "number": 88,
+      "id": "lichenwing",
+      "base": "Plant",
+      "alter": "Fiend",
+      "forms": [
+        "Lichenlet",
+        "Lichenwing",
+        "Lichen Sovereign"
+      ],
+      "brief": "A rooted carnivorous lichen colony with tooth-edged trumpet traps, ember-red fruiting cups, leathery black leaf wings and hooked fiend-like thorn horns.",
+      "generatedSource": true,
+      "runtimeReady": true,
+      "sourceFilename": "exec-f6f6821f-93ce-4549-9d1f-5418351f5ff0.png"
+    },
+    {
+      "number": 89,
+      "id": "marrowfang",
+      "base": "Undead",
+      "alter": "Plant",
+      "forms": [
+        "Marrowlet",
+        "Marrowfang",
+        "Marrow Sovereign"
+      ],
+      "brief": "A rooted undead carnivorous plant formed from tangled pale marrow roots and black sap, with a long wolf-skull trap, bone fangs and tiny dried funeral flowers.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "exec-d9a47b27-0da8-4689-9a97-fe96c49f0827.png"
+    },
+    {
+      "number": 90,
+      "id": "nimbusling",
+      "base": "Aberration",
+      "alter": "Construct",
+      "forms": [
+        "Nimbuslet",
+        "Nimbusling",
+        "Nimbus Sovereign"
+      ],
+      "brief": "A horrific four-legged storm-gray construct with bronze rib hoops, a cloudlike fleshy mantle, several staring eyes, exposed gear joints and impossible dangling feelers.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "exec-d29ef3af-fc17-40dc-8f58-28f721701dbe.png"
+    },
+    {
+      "number": 91,
+      "id": "opalhorn",
+      "base": "Beast",
+      "alter": "Fey",
+      "forms": [
+        "Opallet",
+        "Opalhorn",
+        "Opal Sovereign"
+      ],
+      "brief": "A recognizable massively muscled cape hare upright on two powerful hind legs, creamy gray fur, opal branching horns and pink-violet faerie ear membranes. No human face.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "exec-4d92fe87-9d1e-4f19-9821-ba2cb2aba4f7.png"
+    },
+    {
+      "number": 92,
+      "id": "pyreshade",
+      "base": "Celestial",
+      "alter": "Aberration",
+      "forms": [
+        "Pyrelet",
+        "Pyreshade",
+        "Pyre Sovereign"
+      ],
+      "brief": "A celestial four-legged lion-like creature of charcoal feathers and pearl-gold fire, a small radiant halo, and disturbing extra eyes and a second mouth in its chest.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "exec-bd07ce7a-5fff-48ae-a19b-c614c8792316.png"
+    },
+    {
+      "number": 93,
+      "id": "quartzclaw",
+      "base": "Construct",
+      "alter": "Fey",
+      "forms": [
+        "Quartzlet",
+        "Quartzclaw",
+        "Quartz Sovereign"
+      ],
+      "brief": "A quadrupedal quartz-and-bronze lynx automaton with segmented translucent claws, warm gray plates, faerie ear tassels and tiny copper leaf charms.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "exec-6ec9f236-e376-48fd-9a8b-fff8a1eb02a7.png"
+    },
+    {
+      "number": 94,
+      "id": "rimemoth",
+      "base": "Elemental",
+      "alter": "Ooze",
+      "forms": [
+        "Rimelet",
+        "Rimemoth",
+        "Rime Sovereign"
+      ],
+      "brief": "An amorphous pale-blue frost elemental mixed with translucent gel, forming delicate moth-wing lobes, suspended icy droplets and softly glowing silver veins.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "exec-fc830579-df72-4c00-ad51-2cdb41fbe82d.png"
+    },
+    {
+      "number": 95,
+      "id": "saffronwyrm",
+      "base": "Fey",
+      "alter": "Celestial",
+      "forms": [
+        "Saffronlet",
+        "Saffronwyrm",
+        "Saffron Sovereign"
+      ],
+      "brief": "A long-bodied four-legged faerie creature with an otterlike face, saffron-striped cream fur, fine whiskers, luminous golden celestial tail ribbons and leaf-shaped ears.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "exec-1a814fa9-6c27-4376-8da1-d04dbd6d1e86.png"
+    },
+    {
+      "number": 96,
+      "id": "tundraglen",
+      "base": "Fiend",
+      "alter": "Giant",
+      "forms": [
+        "Tundralet",
+        "Tundraglen",
+        "Tundra Sovereign"
+      ],
+      "brief": "A gigantic bipedal horned fiend of black tundra fur and slate hide, with ice-gray tusks, huge clawed hands and weathered iron-like horn ridges.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "exec-d0f09c0a-7208-4423-a3c8-6ea820060bee.png"
+    },
+    {
+      "number": 97,
+      "id": "verdantbloom",
+      "base": "Giant",
+      "alter": "Undead",
+      "forms": [
+        "Verdantlet",
+        "Verdantbloom",
+        "Verdant Sovereign"
+      ],
+      "brief": "A bipedal undead bog giant with moss-covered burial wrappings, dark exposed ribs, fern-fringed shoulders, huge stone-bone fists and cold green soul light.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "exec-5c048057-9aee-423d-8b23-ead725420f44.png"
+    },
+    {
+      "number": 98,
+      "id": "wraithspire",
+      "base": "Fey",
+      "alter": "Elemental",
+      "forms": [
+        "Wraithlet",
+        "Wraithspire",
+        "Wraith Sovereign"
+      ],
+      "brief": "A visibly nonhuman tall bipedal wind faerie with a hollow carved-looking moth mask, pale vapor hair, long translucent limbs and violet storm ribbons; not an undead human.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "exec-3a0a942c-9878-4f95-97ac-869770d23cc2.png"
+    },
+    {
+      "number": 99,
+      "id": "yewmaw",
+      "base": "Monstrosity",
+      "alter": "Ooze",
+      "forms": [
+        "Yewlet",
+        "Yewmaw",
+        "Yew Sovereign"
+      ],
+      "brief": "A rooted carnivorous yew monstrosity with a hollow trunk filled with huge hook teeth, poisonous red berry-like eyes, drooping dark green fronds and amber gel sap.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "exec-c3d19200-c0dd-4e54-85e9-6c7d308e80a1.png"
+    },
+    {
+      "number": 100,
+      "id": "zirconveil",
+      "base": "Ooze",
+      "alter": "Beast",
+      "forms": [
+        "Zirconlet",
+        "Zirconveil",
+        "Zircon Sovereign"
+      ],
+      "brief": "A heavy lynx-shaped translucent zircon-blue ooze with broad muscular animal-like mass, gel ear tufts, embedded pale mineral flecks and flowing soft paws.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "exec-7c130189-24fa-4882-bf3c-ae91e7045b4c.png"
+    },
+    {
+      "number": 101,
+      "id": "arborkin",
+      "base": "Celestial",
+      "alter": "Fey",
+      "forms": [
+        "Arborling",
+        "Arborkin",
+        "Arbor Exarch"
+      ],
+      "brief": "A four-legged celestial woodland creature with a deerlike face, luminous ivory fur, flowering arbor antlers, faerie leaf wings and delicate golden halo arcs.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "exec-bf12a165-657a-44df-813a-dea48053cb98.png"
+    },
+    {
+      "number": 102,
+      "id": "basilgore",
+      "base": "Monstrosity",
+      "alter": "Beast",
+      "forms": [
+        "Basilling",
+        "Basilgore",
+        "Basil Exarch"
+      ],
+      "brief": "A recognizable enormous muscular monitor lizard transformed into a basilisk-like monstrosity, with exaggerated saber fangs, oversized claws, basil-green ridges and thick heavy limbs.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "exec-6630d265-fe14-4412-8019-544ccd05b550.png"
+    },
+    {
+      "number": 103,
+      "id": "cobaltwisp",
+      "base": "Construct",
+      "alter": "Ooze",
+      "forms": [
+        "Cobaltling",
+        "Cobaltwisp",
+        "Cobalt Exarch"
+      ],
+      "brief": "An amorphous cobalt-blue gel construct containing articulated silver cogwheels, floating porcelain joint pieces, a soft metal-mask core and fluid pseudopods.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "exec-c41e4f4b-00fc-4dfd-8a11-e9705c85b893.png"
+    },
+    {
+      "number": 104,
+      "id": "dapplejaw",
+      "base": "Ooze",
+      "alter": "Fiend",
+      "forms": [
+        "Dappleling",
+        "Dapplejaw",
+        "Dapple Exarch"
+      ],
+      "brief": "An amorphous dappled burgundy-and-gold fiend ooze with curved dark horns, tooth-lined gel maws, oily highlights and floating thorn-like shards.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "exec-c2a59479-b73a-4b56-8026-a1e66b76b27c.png"
+    },
+    {
+      "number": 105,
+      "id": "ebonflare",
+      "base": "Elemental",
+      "alter": "Celestial",
+      "forms": [
+        "Ebonling",
+        "Ebonflare",
+        "Ebon Exarch"
+      ],
+      "brief": "A four-legged elemental panther made of living black fire and luminous ivory embers, with fine gold celestial halo arcs and flowing plume-like flame tails.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 106,
+      "id": "fableroot",
+      "base": "Plant",
+      "alter": "Undead",
+      "forms": [
+        "Fableling",
+        "Fableroot",
+        "Fable Exarch"
+      ],
+      "brief": "A rooted undead carnivorous willow with scroll-like peeling bark, dead flower traps, bone twigs, hollow eye knots and pale parchment-colored spirit sap.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 107,
+      "id": "glaciershard",
+      "base": "Fey",
+      "alter": "Giant",
+      "forms": [
+        "Glacierling",
+        "Glaciershard",
+        "Glacier Exarch"
+      ],
+      "brief": "A towering visibly nonhuman bipedal glacier faerie giant with pale blue fur, enormous feathered ears, broad powerful hands and a crown of natural icy antlers.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 108,
+      "id": "harborgaze",
+      "base": "Undead",
+      "alter": "Construct",
+      "forms": [
+        "Harborling",
+        "Harborgaze",
+        "Harbor Exarch"
+      ],
+      "brief": "A reanimated four-legged harbor mastiff skeleton with tarnished bronze rib braces, sea-worn armor joints, porthole-like eyes and dark salt-stained burial cloth.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 109,
+      "id": "ichorfang",
+      "base": "Fiend",
+      "alter": "Undead",
+      "forms": [
+        "Ichorling",
+        "Ichorfang",
+        "Ichor Exarch"
+      ],
+      "brief": "A four-legged skeletal fiend hound with dark blood-red hide remnants, exposed luminous marrow ribs, curled black horns and long ivory fangs. Eerie, without gore.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 110,
+      "id": "jasperplume",
+      "base": "Aberration",
+      "alter": "Fey",
+      "forms": [
+        "Jasperling",
+        "Jasperplume",
+        "Jasper Exarch"
+      ],
+      "brief": "A horrific nonhuman bipedal faerie aberration with jasper-red feather filaments, a split mothlike mask, multiple small mouths in the torso and long asymmetrical grasping arms.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 111,
+      "id": "kindlekin",
+      "base": "Giant",
+      "alter": "Elemental",
+      "forms": [
+        "Kindleling",
+        "Kindlekin",
+        "Kindle Exarch"
+      ],
+      "brief": "A colossal bipedal ember giant with brick-gray craggy skin, a living coal beard, massive broad hands and volcanic orange seams; unmistakably a nonhuman giant.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 112,
+      "id": "lotusgore",
+      "base": "Beast",
+      "alter": "Aberration",
+      "forms": [
+        "Lotusling",
+        "Lotusgore",
+        "Lotus Exarch"
+      ],
+      "brief": "A recognizable enormously muscular hippopotamus aberration with horrific extra eyes, multiple impossible jaws and lotus-petal eye stalks emerging from its broad back.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 113,
+      "id": "mistralwisp",
+      "base": "Fey",
+      "alter": "Monstrosity",
+      "forms": [
+        "Mistralling",
+        "Mistralwisp",
+        "Mistral Exarch"
+      ],
+      "brief": "A visibly nonhuman bipedal raptor-like faerie with a long narrow insect mask, enormous hooked talons, elongated predatory fangs and silver wind-fringed plumage.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 114,
+      "id": "nettlejaw",
+      "base": "Celestial",
+      "alter": "Fey",
+      "forms": [
+        "Nettleling",
+        "Nettlejaw",
+        "Nettle Exarch"
+      ],
+      "brief": "A four-legged celestial faerie weasel with ivory fur, delicate gold nettle-shaped antlers, tiny leaf wings and warm turquoise nectar-like light markings.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 115,
+      "id": "onyxflare",
+      "base": "Monstrosity",
+      "alter": "Beast",
+      "forms": [
+        "Onyxling",
+        "Onyxflare",
+        "Onyx Exarch"
+      ],
+      "brief": "A massively muscular black lion-crocodile monstrosity with oversized saber teeth, heavy reptilian shoulder plates, huge claws and pale gold spine ridges. Four sturdy legs.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 116,
+      "id": "petalroot",
+      "base": "Construct",
+      "alter": "Ooze",
+      "forms": [
+        "Petalling",
+        "Petalroot",
+        "Petal Exarch"
+      ],
+      "brief": "An amorphous pale-pink ooze construct with floating white porcelain petal plates, small bronze joint rings and a soft glowing seed-shaped core.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 117,
+      "id": "quasarshard",
+      "base": "Ooze",
+      "alter": "Fiend",
+      "forms": [
+        "Quasarling",
+        "Quasarshard",
+        "Quasar Exarch"
+      ],
+      "brief": "An amorphous deep-violet fiend ooze with dark obsidian horns, star-like glowing inner gel, serrated floating fragments and a low predatory mouth.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 118,
+      "id": "ravengaze",
+      "base": "Elemental",
+      "alter": "Celestial",
+      "forms": [
+        "Ravenling",
+        "Ravengaze",
+        "Raven Exarch"
+      ],
+      "brief": "A recognizable raven whose body and one pair of wings are made of living storm wind and dark feathered plasma, with a white-gold celestial halo and two taloned feet.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 119,
+      "id": "solacefang",
+      "base": "Plant",
+      "alter": "Undead",
+      "forms": [
+        "Solaceling",
+        "Solacefang",
+        "Solace Exarch"
+      ],
+      "brief": "A rooted undead carnivorous white funeral plant with large bone-fanged flytraps, bleached leaves, skeletal root fingers and gentle pale blue spirit light.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 120,
+      "id": "talonplume",
+      "base": "Fey",
+      "alter": "Giant",
+      "forms": [
+        "Talonling",
+        "Talonplume",
+        "Talon Exarch"
+      ],
+      "brief": "A towering nonhuman bipedal faerie giant with an avian head, huge feather-fringed forearms, hooked talons and a long cream-and-amber plumage mantle.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 121,
+      "id": "ulmarkin",
+      "base": "Undead",
+      "alter": "Construct",
+      "forms": [
+        "Ulmarling",
+        "Ulmarkin",
+        "Ulmar Exarch"
+      ],
+      "brief": "A reanimated four-legged armadillo skeleton with articulated dark steel shell bands, bronze spinal hinges, visible pale ribs and ghostly green eyes.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 122,
+      "id": "velvetgore",
+      "base": "Fiend",
+      "alter": "Undead",
+      "forms": [
+        "Velvetling",
+        "Velvetgore",
+        "Velvet Exarch"
+      ],
+      "brief": "A four-legged fiend deer with deep crimson velvet hide, curved black antlers, exposed ivory skeletal ribs, a long predatory muzzle and cold violet eyes.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 123,
+      "id": "whisperwisp",
+      "base": "Aberration",
+      "alter": "Fey",
+      "forms": [
+        "Whisperling",
+        "Whisperwisp",
+        "Whisper Exarch"
+      ],
+      "brief": "A horrific nonhuman bipedal whispering faerie aberration with an eyeless split mask, many tiny mouths along its torso, long ear-like appendages and tattered lavender silk.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 124,
+      "id": "xanthjaw",
+      "base": "Giant",
+      "alter": "Elemental",
+      "forms": [
+        "Xanthling",
+        "Xanthjaw",
+        "Xanth Exarch"
+      ],
+      "brief": "A colossal bipedal citrine-yellow elemental giant with lightning-filled jaws, angular stone brows, massive gold-gray limbs and branching electric fractures.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 125,
+      "id": "yonderflare",
+      "base": "Beast",
+      "alter": "Aberration",
+      "forms": [
+        "Yonderling",
+        "Yonderflare",
+        "Yonder Exarch"
+      ],
+      "brief": "A recognizable enormously muscular saber-toothed cat aberration with eye stalks along its back, extra impossible jaws, and a long tentacle-like tail.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 126,
+      "id": "zinniaroot",
+      "base": "Fey",
+      "alter": "Monstrosity",
+      "forms": [
+        "Zinnialing",
+        "Zinniaroot",
+        "Zinnia Exarch"
+      ],
+      "brief": "A visibly nonhuman bipedal flower faerie monstrosity with a zinnia-petal mask, hooked mantis-like forearms, sharp taloned feet and exaggerated predatory fangs.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 127,
+      "id": "aurumshard",
+      "base": "Celestial",
+      "alter": "Fey",
+      "forms": [
+        "Aurumling",
+        "Aurumshard",
+        "Aurum Exarch"
+      ],
+      "brief": "A four-legged radiant celestial ibex with creamy opaline fur, golden shard antlers, faerie leaflike ear fins and small floating sun rings.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 128,
+      "id": "brackengaze",
+      "base": "Monstrosity",
+      "alter": "Beast",
+      "forms": [
+        "Brackenling",
+        "Brackengaze",
+        "Bracken Exarch"
+      ],
+      "brief": "A heavily muscled boar-tiger monstrosity with massive forward tusks, huge claws, dark bracken-colored fur, armored ridges and a predatory low quadruped stance.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 129,
+      "id": "coralfang",
+      "base": "Construct",
+      "alter": "Ooze",
+      "forms": [
+        "Coralling",
+        "Coralfang",
+        "Coral Exarch"
+      ],
+      "brief": "An amorphous coral-pink ooze construct with floating carved coral-like porcelain jaws, small bronze gears, teal gel joints and fluid soft tentacles.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 130,
+      "id": "daggerplume",
+      "base": "Ooze",
+      "alter": "Fiend",
+      "forms": [
+        "Daggerling",
+        "Daggerplume",
+        "Dagger Exarch"
+      ],
+      "brief": "An amorphous burgundy fiend ooze with dagger-shaped horn fins, tooth-edged liquid wing lobes and a charcoal core, no rigid skeleton.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 131,
+      "id": "eclipsekin",
+      "base": "Elemental",
+      "alter": "Celestial",
+      "forms": [
+        "Eclipseling",
+        "Eclipsekin",
+        "Eclipse Exarch"
+      ],
+      "brief": "A four-legged celestial elemental stag made of black-and-white luminous plasma, with a fine eclipsed sun halo and flowing silver-gold flame antlers.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 132,
+      "id": "fennelgore",
+      "base": "Plant",
+      "alter": "Undead",
+      "forms": [
+        "Fennelling",
+        "Fennelgore",
+        "Fennel Exarch"
+      ],
+      "brief": "A rooted undead carnivorous fennel plant with bone-white hollow stems, toothed seedpod traps, dead feathery fronds and black ghostly sap.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 133,
+      "id": "gossamerwisp",
+      "base": "Fey",
+      "alter": "Giant",
+      "forms": [
+        "Gossamerling",
+        "Gossamerwisp",
+        "Gossamer Exarch"
+      ],
+      "brief": "A towering visibly nonhuman bipedal moth faerie giant with silver antennae, pale fur, broad powerful limbs and a billowing gossamer wing mantle.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 134,
+      "id": "hearthjaw",
+      "base": "Undead",
+      "alter": "Construct",
+      "forms": [
+        "Hearthling",
+        "Hearthjaw",
+        "Hearth Exarch"
+      ],
+      "brief": "A reanimated four-legged badger skeleton with dark red brick-and-bronze joint armor, exposed ash-white ribs and a faint coal glow behind its skull jaw.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 135,
+      "id": "isletflare",
+      "base": "Fiend",
+      "alter": "Undead",
+      "forms": [
+        "Isletling",
+        "Isletflare",
+        "Islet Exarch"
+      ],
+      "brief": "A four-legged skeletal devil crocodile with algae-dark hide, pale driftbone armor, hooked fiend horns and spectral sea-green light, without a living animal appearance.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 136,
+      "id": "jubilroot",
+      "base": "Aberration",
+      "alter": "Fey",
+      "forms": [
+        "Jubilling",
+        "Jubilroot",
+        "Jubil Exarch"
+      ],
+      "brief": "A horrific nonhuman bipedal root-and-faerie aberration with a split laughing mask, multiple small mouths, too many staring eyes and twisted vine-like arms.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 137,
+      "id": "kryptonshard",
+      "base": "Giant",
+      "alter": "Elemental",
+      "forms": [
+        "Kryptonling",
+        "Kryptonshard",
+        "Krypton Exarch"
+      ],
+      "brief": "A colossal bipedal green elemental stone giant with natural luminescent mineral shards, enormous craggy fists and dark charcoal skin fractured by emerald light.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 138,
+      "id": "larchgaze",
+      "base": "Beast",
+      "alter": "Aberration",
+      "forms": [
+        "Larchling",
+        "Larchgaze",
+        "Larch Exarch"
+      ],
+      "brief": "A recognizable massively muscled elk aberration with horrific staring eyes embedded in bark-textured antlers, extra tentacle jaws and thick shaggy fur.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 139,
+      "id": "miragefang",
+      "base": "Fey",
+      "alter": "Monstrosity",
+      "forms": [
+        "Mirageling",
+        "Miragefang",
+        "Mirage Exarch"
+      ],
+      "brief": "A visibly nonhuman bipedal jackal-headed faerie monstrosity with oversized fangs, long hooked claws and a silver-violet mirage-shard mantle.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 140,
+      "id": "nectarplume",
+      "base": "Celestial",
+      "alter": "Fey",
+      "forms": [
+        "Nectarling",
+        "Nectarplume",
+        "Nectar Exarch"
+      ],
+      "brief": "A four-legged celestial faerie creature with an anteater-like long muzzle, cream feathers, gold nectar filaments, tiny flower-shaped lights and delicate halo rings.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 141,
+      "id": "oraclekin",
+      "base": "Monstrosity",
+      "alter": "Beast",
+      "forms": [
+        "Oracleling",
+        "Oraclekin",
+        "Oracle Exarch"
+      ],
+      "brief": "A huge muscular owl-bear monstrosity with oversized hooked beak fangs, massive bear claws, ochre feather ridges and a solid powerful quadrupedal body.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 142,
+      "id": "pewtergore",
+      "base": "Construct",
+      "alter": "Ooze",
+      "forms": [
+        "Pewterling",
+        "Pewtergore",
+        "Pewter Exarch"
+      ],
+      "brief": "An amorphous smoke-gray ooze construct with floating ornate pewter armor pieces, articulated bronze cogs, black gel joints and a broad tusked mask core.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 143,
+      "id": "quiverwisp",
+      "base": "Ooze",
+      "alter": "Fiend",
+      "forms": [
+        "Quiverling",
+        "Quiverwisp",
+        "Quiver Exarch"
+      ],
+      "brief": "An amorphous purple fiend ooze with curved obsidian horns, suspended arrowlike barbs, quivering liquid tendrils and a dark toothed mouth.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": null
+    },
+    {
+      "number": 144,
+      "id": "ripplejaw",
+      "base": "Elemental",
+      "alter": "Celestial",
+      "forms": [
+        "Rippleling",
+        "Ripplejaw",
+        "Ripple Exarch"
+      ],
+      "brief": "A four-legged elemental turtle-like creature made of flowing turquoise water, with a white foam shell, gold gill fronds and a delicate radiant celestial halo.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "artwork/roster-source/144-ripplejaw.png"
+    },
+    {
+      "number": 145,
+      "id": "starlingflare",
+      "base": "Plant",
+      "alter": "Undead",
+      "forms": [
+        "Starlingling",
+        "Starlingflare",
+        "Starling Exarch"
+      ],
+      "brief": "A rooted undead carnivorous starflower with black petals, bone-white pitcher traps shaped like tiny beaks, skeletal root fingers and pale violet soul light.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "artwork/roster-source/145-starlingflare.png"
+    },
+    {
+      "number": 146,
+      "id": "truffleroot",
+      "base": "Fey",
+      "alter": "Giant",
+      "forms": [
+        "Truffleling",
+        "Truffleroot",
+        "Truffle Exarch"
+      ],
+      "brief": "A towering nonhuman bipedal woodland faerie giant with a truffle-like textured crown, a broad piglike muzzle, mushroom ears, enormous strong limbs and mossy fur.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "artwork/roster-source/146-truffleroot.png"
+    },
+    {
+      "number": 147,
+      "id": "uplandshard",
+      "base": "Undead",
+      "alter": "Construct",
+      "forms": [
+        "Uplandling",
+        "Uplandshard",
+        "Upland Exarch"
+      ],
+      "brief": "A reanimated four-legged bighorn skeleton with rugged natural stone armor plates, brass ankle hinges, ivory horns and faint ghostly upland mist.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "artwork/roster-source/147-uplandshard.png"
+    },
+    {
+      "number": 148,
+      "id": "violetgaze",
+      "base": "Fiend",
+      "alter": "Undead",
+      "forms": [
+        "Violetling",
+        "Violetgaze",
+        "Violet Exarch"
+      ],
+      "brief": "A four-legged undead fiend panther with dark violet hide remnants, exposed pale ribs, curved black brow horns and several luminous violet eye-like markings.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "artwork/roster-source/148-violetgaze.png"
+    },
+    {
+      "number": 149,
+      "id": "wardenfang",
+      "base": "Aberration",
+      "alter": "Fey",
+      "forms": [
+        "Wardenling",
+        "Wardenfang",
+        "Warden Exarch"
+      ],
+      "brief": "A horrific nonhuman bipedal faerie guardian aberration with an eye-stacked mask, mismatched fanged jaws, very long twisted arms and dark emerald silk fronds.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "artwork/roster-source/149-wardenfang.png"
+    },
+    {
+      "number": 150,
+      "id": "zodiacplume",
+      "base": "Giant",
+      "alter": "Elemental",
+      "forms": [
+        "Zodiacling",
+        "Zodiacplume",
+        "Zodiac Exarch"
+      ],
+      "brief": "A colossal nonhuman bipedal storm giant with dark blue craggy skin, huge hands, feather-like flame and cloud plumes, and glowing gold circular star motifs without lettering.",
+      "generatedSource": true,
+      "runtimeReady": false,
+      "sourceFilename": "artwork/roster-source/150-zodiacplume.png"
+    }
+  ]
+}
