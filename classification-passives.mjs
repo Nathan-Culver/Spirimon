@@ -37,7 +37,7 @@ export function passiveEffects(sp,ind={},context={}){
  for(const id of Object.values(sp.passives)){
   const classification=id.split('-')[0],passive=passivePool([sp.base,sp.alter,...(sp.domains||[])].find(x=>x.toLowerCase()===classification)||classification).find(p=>p.id===id);
   if(!passive)continue;
-  if(passive.condition==='belowHalfHp'&&!(ind.hp>0&&ind.hp<(context.maxHp||Infinity)/2))continue;
+  if(passive.condition==='belowHalfHp'&&!(ind.hp>0&&Number.isFinite(context.maxHp)&&ind.hp<context.maxHp/2))continue;
   out[passive.kind]=(out[passive.kind]||0)+passive.amount;
  }
  return out;
