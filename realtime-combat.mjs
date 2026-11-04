@@ -4,6 +4,7 @@ import {bondEfficiency,clamp,spiritualBonus} from './spiritual-core.mjs';
 import {supportFits,supportDescription} from './support-techniques.mjs';
 import {heldEquipment,heldItemActivation,hasHook} from './equipment.mjs';
 import {moveTiming,scaledMove,STATUS_RULES} from './realtime-moves.mjs';
+import {statusDuration,periodicDamage,rebaseStatusTimer} from './classification-status.mjs';
 export {moveTiming,STATUS_RULES};
 export const EFFECT_PULSE_MS=2000;
 const timedFields={ward:6000,reflect:10000,lightscreen:10000,safeguard:10000,focused:8000};
@@ -28,9 +29,9 @@ export function synchronizeTimers(state,context){
  E.bindBattlefield(context.teams.a,context.teams.b);
  for(const u of allUnits(context)){
   const clock=unitClock(state,u);const side=context.teams.a.includes(u)?'a':'b';SE.setExhaustion(u,context.sealers?.[side]);u.realtimeNow=now;u.controlImmuneUntil=clock.controlImmuneUntil;
-  if(u.status){if(clock.status?.effect!==u.status){const rule=STATUS_RULES[u.status];clock.status={effect:u.status,until:now+(rule?.duration||12000)*(context.durationScale||1)};if(rule?.control){clock.controlImmuneUntil=clock.status.until+4000;if(clock.pending){clock.interrupted=clock.pending.choice.move?.name||'action';clock.pending=null;}}}}
+  if(u.status){if(clock.status?.effect!==u.status){const rule=STATUS_RULES[u.status];clock.status={effect:u.status,appliedAt:now,baseDuration:(rule?.duration||12000)*(context.durationScale||1),until:now+statusDuration((rule?.duration||12000)*(context.durationScale||1),u.status,context.speciesOf(u),u)};if(rule?.control){clock.controlImmuneUntil=clock.status.until+4000;if(clock.pending){clock.interrupted=clock.pending.choice.move?.name||'action';clock.pending=null;}}}}
   else clock.status=null;
-  for(const [effect,rule]of Object.entries(STATUS_RULES)){if(u.conditions?.[effect]){if(!clock.conditions[effect]){clock.conditions[effect]=now+rule.duration*(context.durationScale||1);if(rule.control){clock.controlImmuneUntil=Math.max(clock.controlImmuneUntil,clock.conditions[effect]+4000);if(clock.pending){clock.interrupted=clock.pending.choice.move?.name||'action';clock.pending=null;}}}}else delete clock.conditions[effect];}
+  for(const [effect,rule]of Object.entries(STATUS_RULES)){if(u.conditions?.[effect]){if(!clock.conditions[effect]){clock.conditions[effect]=now+statusDuration(rule.duration*(context.durationScale||1),effect,context.speciesOf(u),u);if(rule.control){clock.controlImmuneUntil=Math.max(clock.controlImmuneUntil,clock.conditions[effect]+4000);if(clock.pending){clock.interrupted=clock.pending.choice.move?.name||'action';clock.pending=null;}}}}else delete clock.conditions[effect];}
   for(const [field,duration]of Object.entries(timedFields)){if(u[field])clock.buffs[field]??=now+duration;else delete clock.buffs[field];}
   if(u.delayedDamage&&!clock.delayedAt)clock.delayedAt=now+4000;if(!u.delayedDamage)delete clock.delayedAt;
   if(u.itemCooldowns&&Object.keys(u.itemCooldowns).length&&clock.itemReadyAt<=now)clock.itemReadyAt=now+Math.max(...Object.values(u.itemCooldowns))*EFFECT_PULSE_MS;
@@ -97,10 +98,10 @@ function expireTimers(state,context,log){
 function pulseEffects(state,context,log){
  const live=activeUnits(context);
  for(const u of live){const sp=context.speciesOf(u),max=E.stats(u,sp).hp,c=u.conditions||{},field=u.battlefield||{};let loss=0;
- if(['poison','burn','frostbite'].includes(u.status))loss+=Math.max(1,Math.floor(max/32));
- if(u.status==='toxic'){u.toxicTurns=(u.toxicTurns||0)+1;loss+=Math.max(1,Math.floor(max*Math.min(6,u.toxicTurns)/96));}
- if(c.leechSeed){const amount=Math.max(1,Math.floor(max/32));loss+=amount;const source=live.find(a=>a.id===u.conditionSources?.leechSeed);if(source)source.hp=Math.min(E.stats(source,context.speciesOf(source)).hp,source.hp+Math.min(amount,u.hp));}
- if(c.curse||c.trap)loss+=Math.max(1,Math.floor(max/48));if(c.nightmare&&u.status==='sleep')loss+=Math.max(1,Math.floor(max/24));
+ if(['poison','burn','frostbite'].includes(u.status))loss+=periodicDamage(max/32,u.status,sp,u);
+ if(u.status==='toxic'){u.toxicTurns=(u.toxicTurns||0)+1;loss+=periodicDamage(max*Math.min(6,u.toxicTurns)/96,'toxic',sp,u);}
+ if(c.leechSeed){const amount=periodicDamage(max/32,'leechSeed',sp,u);loss+=amount;const source=live.find(a=>a.id===u.conditionSources?.leechSeed);if(source)source.hp=Math.min(E.stats(source,context.speciesOf(source)).hp,source.hp+Math.min(amount,u.hp));}
+ if(c.curse)loss+=periodicDamage(max/48,'curse',sp,u);if(c.trap)loss+=periodicDamage(max/48,'trap',sp,u);if(c.nightmare&&u.status==='sleep')loss+=periodicDamage(max/24,'nightmare',sp,u);
  const domains=E.activeDomains(sp,u);if(u.aspect!=='Stormbound'&&(field.weather==='snow'&&!domains.includes('Ice')||field.weather==='sand'&&![sp.base,sp.alter].some(t=>['Construct','Giant','Elemental'].includes(t))&&!domains.some(d=>['Earth','Metal'].includes(d))))loss+=Math.max(1,Math.floor(max/32));
  if(loss){u.hp=Math.max(0,u.hp-loss);log.push(name(u,sp)+' suffers '+loss+' ongoing damage.');}
  if(u.hp>0){const healing=(c.regenerate?(1-(u.spiritualEnergyEmpty?.value||0))/20:0)+(field.terrain==='grass'?1/48:0)+(u.aspect==='Verdant'&&field.terrain==='grass'?1/32:0)+(hasHook(u,'leftovers',sp)?1/32:0);if(healing)u.hp=Math.min(max,u.hp+Math.max(1,Math.floor(max*healing)));
