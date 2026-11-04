@@ -18,7 +18,7 @@ Active combat Domains are the union of the species' assigned Domains and the Dom
 
 ## Artwork checks and limits
 
-The renderer constructs body plans, limbs, features and shared markings directly from the anatomical record. The resulting `procedural-verified` status attests to that construction and pixel checks; it is not a claim that an independent vision model recognized a particular animal species. Offline art is a simplified illustration rather than the premium authored atlas style.
+The anatomy renderer constructs body plans, limbs, features and shared markings directly from the anatomical record. The resulting `procedural-verified` status attests to that construction and pixel checks; it is not a claim that an independent vision model recognized a particular animal species. These simplified diagrams remain internal design data. In the game, unfinished lineages use the supplied question-mark mystery creature and its walking animation until finished artwork is available. Legacy cached procedural PNGs follow the same rule.
 
 External image-model artwork must pass both pixel checks and a vision-capable local Ollama model. Without a vision model, the companion uses the offline renderer. Image checking never silently converts an unknown image into a successful semantic classification.
 

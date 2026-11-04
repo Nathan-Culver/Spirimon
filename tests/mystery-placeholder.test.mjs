@@ -16,8 +16,26 @@ function harness(){
 }
 test('every missing species and evolution uses the same supplied mystery creature',()=>{
  const h=harness();
- for(const sp of [{id:'one',atlas:'one.webp'},{id:'two',sprites:['a.png','b.png','c.png']},{id:'procedural',proceduralArt:true}])for(let form=0;form<3;form++)h.context.drawSpirit(h.ctx,sp,form,10,20,100);
+ for(const sp of [{id:'one',atlas:'one.webp'},{id:'two',sprites:['a.png','b.png','c.png']},{id:'procedural',proceduralArt:true,anatomy:{bodyPlan:'quadruped',traits:['fur']}}])for(let form=0;form<3;form++)h.context.drawSpirit(h.ctx,sp,form,10,20,100);
  assert.equal(h.draws.length,9);assert.ok(h.draws.every(args=>args[0]===still));assert.equal(h.created(),0,'Do not generate basic-shape creature substitutes');
+});
+test('old saved procedural PNGs cannot bypass mystery art in menus, combat or walking',()=>{
+ const h=harness(),png='data:image/png;base64,old-geometric-sprite';h.images.set(png,{width:128,height:128});
+ for(const flags of [{proceduralArt:true},{visualValidation:{status:'procedural-verified'}},{visualValidation:{semanticSource:'renderer-geometry'}}]){
+  const sp={id:'saved',...flags,anatomy:{bodyPlan:'quadruped',traits:['fur']},sprites:[png,png,png]};
+  for(let form=0;form<3;form++){
+   h.context.drawSpirit(h.ctx,sp,form,0,0,96);assert.equal(h.draws.at(-1)[0],still);
+   h.context.drawSpirit(h.ctx,sp,form,0,0,58,false,{face:'down',moving:true,progress:.5});assert.equal(h.draws.at(-1)[0],walk);
+   h.context.drawCompanion(h.ctx,sp,form,0,0,36,'left',true,.25);assert.equal(h.draws.at(-1)[0],walk);
+  }
+ }
+ assert(!h.requests.includes(png));assert.equal(h.created(),0);
+});
+test('finished artwork replaces mystery after generation without changing the species identity',()=>{
+ const h=harness(),sp={id:'saved',proceduralArt:true,sprites:['old.png']};h.context.drawCompanion(h.ctx,sp,0,0,0);assert.equal(h.draws.at(-1)[0],walk);
+ sp.proceduralArt=false;sp.visualValidation={status:'vision-verified'};sp.sprites=['finished.png'];const real={width:256,height:256};h.images.set('finished.png',real);
+ h.context.drawSpirit(h.ctx,sp,0,0,0);assert.equal(h.draws.at(-1)[0],real);
+ h.context.drawCompanion(h.ctx,sp,0,0,0);assert(h.draws.some(args=>args[0]===real));assert.equal(h.created(),1);
 });
 test('real art replaces the placeholder on the next draw without a stale placeholder cache',()=>{
  const h=harness(),sp={id:'roster-test',atlas:'actual.webp'};

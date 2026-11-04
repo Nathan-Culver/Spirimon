@@ -7,6 +7,12 @@
 
 The shared fallback covers battle images, collection/detail canvases, roaming creatures, and following companions. Missing or failed species images keep the mystery form; successful image decoding automatically replaces it. A placeholder is never cached as a species-specific companion atlas. Creature names, stats, saves and battle rules remain intact.
 
+Procedural anatomy diagrams are not finished artwork. This includes their
+cached three-form PNGs in existing saves (`proceduralArt`,
+`procedural-verified`, or `renderer-geometry` provenance). All of these use
+the supplied mystery art until a real atlas or completed image generation
+is available. Rendering never recreates a basic geometric substitute.
+
 ## Generation provenance
 
 The static image was supplied by the user as `1000015399.png`; the second supplied image illustrated its intended in-game use. The four-direction walking atlas was made with the built-in image-generation tool, using the supplied transparent creature as the identity reference. Assets were then resized and encoded as WebP for game delivery.

@@ -22,7 +22,7 @@ Begin with no Spirimon. Your first encounter is random: earn its trust with inte
 ## Art direction and animations
 A bright handheld-era presentation with original feudal Japanese/Chinese-inspired pixel villages: swept tiled roofs, timber halls, lanterns, shrine gates, bamboo, cherry trees and robed sealers. Exploration fills every screen shape. The overworld uses textured forest canopies, tall-grass patches, terraced cliffs, shoreline banks, bright village tiles and smooth grid-aligned movement. Battles use compact HP, Stanima, Willpower and XP HUDs, a bottom dialogue window and Fight / Bag / Spirimon / Run menus. Physical lunges, elemental streams, ice shards, leaf bursts, healing and wards animate across the battle stage. Reduced-motion preferences are respected. An original offline 5×7 pixel font ships with the game.
 
-The shared roster contains 150 lineages: 50 original artwork-backed lineages and 100 with procedural artwork. Each has three distinct forms. New discoveries can also create additional lineages from the expanded anatomical catalogs. Artwork has transparent backgrounds and bounded 256×256 form cells. Local AI lineages become encounterable only when all three sprites and their validated information are complete.
+The shared roster contains 150 lineages: 50 original artwork-backed lineages and 100 awaiting finished artwork. Those unfinished lineages display the supplied question-mark mystery creature, including its walking animation. Each has three distinct forms. New discoveries can also create additional lineages from the expanded anatomical catalogs. Artwork has transparent backgrounds and bounded 256×256 form cells. Local AI lineages become encounterable only when all three sprites and their validated information are complete.
 
 ## Buildings
 Walk north into a doorway or interact directly below it. Sealer Halls, inns and homes have interiors, residents and a south exit. Hall keepers restore HP, Stanima and Willpower; attunement is available at safe places.
@@ -53,7 +53,7 @@ Moves scale at levels 1, 16, 36, 60, 85 and 100. Quick, resource-efficient attac
 Each equipped Physical Move contributes to maximum Stanima; Energy/Status Moves contribute to Willpower. A funded execution costs one point, or two against Pressure; shortages can convert the other pool at two-for-one. Items do not replace the four equipped Moves. Struggle remains available only when no equipped Move can be funded. Resource maximums, collections, learned Moves and current encounter progress survive migration. New timed afflictions include sleep, freezing, confusion, burns, poison, toxic poison, paralysis and frostbite; HUD badges display their remaining seconds.
 
 ## Optional free local AI
-The game is immediately playable with **procedural prototype designs and pixel art**. This fallback is explicitly labeled; it is not represented as LLM generation.
+The game is immediately playable with **authored roster artwork and procedurally generated creature designs**. Unfinished creature artwork uses the supplied mystery creature; basic geometric anatomy diagrams are never displayed as finished sprites.
 
 For actual AI generation:
 1. Install Ollama from its official site and download a text model suitable for your RAM. No model is bundled, and Spirimon does not download models automatically.
@@ -67,7 +67,7 @@ Default endpoints:
 - Image: http://127.0.0.1:7860
 - Companion: http://127.0.0.1:4317
 
-Text generates a schema-checked three-form design and can propose bounded, anatomy-compatible move mechanics. Code preserves type rolls and species statistics. External image generation runs sequentially and requires a local vision model for semantic checks. Later forms use the first sprite as an image-to-image reference. Without image verification, the procedural renderer supplies original anatomy-based sprites. A lineage enters the species library after three complete validated forms. Discovered species are never silently replaced. See [Creature generation](docs/creature-generation.md) and the [full reference catalog](docs/creature-catalog.md).
+Text generates a schema-checked three-form design and can propose bounded, anatomy-compatible move mechanics. Code preserves type rolls and species statistics. External image generation runs sequentially and requires a local vision model for semantic checks. Later forms use the first sprite as an image-to-image reference. Without image verification, procedural anatomy diagrams remain internal design data and the supplied mystery creature remains visible in the game. A lineage enters the species library after three complete validated forms. Discovered species are never silently replaced. See [Creature generation](docs/creature-generation.md) and the [full reference catalog](docs/creature-catalog.md).
 
 Windows computers without a dedicated GPU may take a long time to generate images. Actual model quality, memory use, evolution consistency and generation latency still require hardware testing. Review the licenses of models you choose; freely downloadable does not automatically mean unrestricted redistribution.
 
