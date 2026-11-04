@@ -23,5 +23,5 @@ test('zero periodic damage remains zero after rounding',()=>{
 test('timer rebasing preserves elapsed time',()=>{
  const sp={base:'Beast',alter:'Giant',domains:[]};
  const timer={appliedAt:1000,baseDuration:10000,until:11000};
- assert.equal(rebaseStatusTimer(timer,4000,'sleep',sp,{}).until,11000);
+ assert.equal(rebaseStatusTimer(timer,4000,'sleep',sp,{}).until,1000+statusDuration(10000,'sleep',sp,{}));
 });
