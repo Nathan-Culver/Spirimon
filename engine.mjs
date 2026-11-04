@@ -1,6 +1,7 @@
 import {exhaustion,spiritualMultiplier,spiritualDefense,spiritualBonus,shieldDamage} from './spiritual-core.mjs';
 import {buildDesign,assignDomains,migrateSpecies,migrateSaveCreatures,syncCapabilities} from './anatomy.mjs';
 import {CREATURE_TYPES,CREATURE_DOMAINS} from './creature-catalog.mjs';
+import {ensurePassives,passiveEffects} from './classification-passives.mjs';
 import {equipment,hasHook,ASPECTS,heldEquipment,itemHasHook,itemOnceUsed,markItemUsed,consumeHeldItem,heldItemActivation} from './equipment.mjs';
 import {townLayout,townFeatures,townPath,townGround} from './towns.mjs';
 import {buildLearnset,startingMoves,validateGeneratedMoves,moveBaseValue as baseMoveValue,moveLore as narrativeLore} from './moves.mjs';
@@ -33,7 +34,7 @@ export function makeSpecies(seed,base,alter,domains){
  if(!TYPES.includes(base)||!TYPES.includes(alter)||base===alter)throw Error('Two distinct valid types required.');
  const design=buildDesign(seed,base,alter),anatomy=design.anatomy;
  const sp={id:'sp-'+hash(seed,base,alter).toString(36),seed,base,alter,domains:domains||[],name:design.name,forms:design.forms,description:design.description,body:design.reference.name,identity:hash(seed,'identity'),design,anatomy,power:45+Math.floor(r()*18)+anatomy.strength*3,health:43+Math.floor(r()*18)+(anatomy.strength-1)*5,speed:30+Math.floor(r()*35)-(anatomy.strength-1)*3,physicalRes:r()<.4?.85:1,spiritualRes:r()<.4?.85:1,ability:pick(['Steadfast','Wildheart','Second Wind','Soulweave','Pressure'],r),temperament:pick(['Watchful','Curious','Proud','Gentle','Restless'],r),evolution:r()<.18?'bond':'level',moveRevision:3,source:'procedural',proceduralArt:true,sprites:[],taxonomyRevision:2};
- assignDomains(sp,r);syncCapabilities(sp);sp.learnset=buildLearnset(base,alter,sp.domains,anatomy);sp.moves=startingMoves(base,alter,sp.domains,hash(seed),anatomy);return sp;
+ assignDomains(sp,r);ensurePassives(sp);syncCapabilities(sp);sp.learnset=buildLearnset(base,alter,sp.domains,anatomy);sp.moves=startingMoves(base,alter,sp.domains,hash(seed),anatomy);return sp;
 }
 export {migrateSpecies,migrateSaveCreatures};
 export const NATURES={Hardy:[null,null],Lonely:['might','defense'],Brave:['might','speed'],Adamant:['might','power'],Naughty:['might','resistance'],Bold:['defense','might'],Docile:[null,null],Relaxed:['defense','speed'],Impish:['defense','power'],Lax:['defense','resistance'],Timid:['speed','might'],Hasty:['speed','defense'],Serious:[null,null],Jolly:['speed','power'],Naive:['speed','resistance'],Modest:['power','might'],Mild:['power','defense'],Quiet:['power','speed'],Bashful:[null,null],Rash:['power','resistance'],Calm:['resistance','might'],Gentle:['resistance','defense'],Sassy:['resistance','speed'],Careful:['resistance','power'],Quirky:[null,null]};
@@ -177,7 +178,9 @@ export function damage(attacker,asp,defender,dsp,move,style='normal',r=Math.rand
  const offense=(energy?a.power:a.might)*(.25+(attacker.commit??.5)*1.5)*stageFactor(stage(attacker,energy?'power':'might'));
  const defense=(energy?d.resistance:d.defense)*(.25+(1-(defender.commit??.5))*1.5)*stageFactor(stage(defender,energy?'resistance':'defense'));
  const same=matchingClassificationBonus(move,attacker,asp);
- let amount=((2*attacker.level/5+2)*move.power*(offense/Math.max(1,defense))/24+2)*(STYLES[style]||STYLES.normal).damage*effectiveness(move,{...dsp,activeMoveDomains:activeDomains(dsp,defender),moves:equippedMoves(defender,dsp)})*(energy?dsp.spiritualRes??1:dsp.physicalRes??1)*same*(.9+r()*.1)*(defender.ward?1-.45*(defender.wardStrength??1):1);
+ const attackPassives=passiveEffects(asp,attacker,{maxHp:a.hp}),defensePassives=passiveEffects(dsp,defender,{maxHp:d.hp});
+ const passiveDamage=(1+(attackPassives[energy?'energyDamage':'physicalDamage']||0))*(1-(defensePassives.damageReduction||0));
+ let amount=((2*attacker.level/5+2)*move.power*(offense/Math.max(1,defense))/24+2)*(STYLES[style]||STYLES.normal).damage*effectiveness(move,{...dsp,activeMoveDomains:activeDomains(dsp,defender),moves:equippedMoves(defender,dsp)})*(energy?dsp.spiritualRes??1:dsp.physicalRes??1)*same*passiveDamage*(.9+r()*.1)*(defender.ward?1-.45*(defender.wardStrength??1):1);
  if(asp.ability==='Wildheart'&&!energy||asp.ability==='Soulweave'&&energy)amount*=1.12;
  if(dsp.ability==='Steadfast'&&(defender.commit??.5)<=.4)amount*=.9;
  if(attacker.status==='burn'&&!energy||attacker.status==='frostbite'&&energy)amount*=.5;
