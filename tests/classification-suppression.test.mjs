@@ -8,14 +8,14 @@ test('suppressed innate classifications do not grant passive effects',()=>{
  ensurePassives(sp);
  sp.passives.Beast=passivePool('Beast').find(p=>p.kind==='accuracy'&&!p.condition).id;
  sp.passives.Fey=passivePool('Fey').find(p=>p.kind==='damageReduction'&&!p.condition).id;
- sp.passives.Life=passivePool('Life').find(p=>p.kind==='energyDamage'&&!p.condition).id;
+ sp.passives.Life=passivePool('Life').find(p=>p.kind==='speed'&&!p.condition).id;
  const all=passiveEffects(sp,{hp:100},{maxHp:100});
  assert.equal(all.accuracy,.05);
  assert.equal(all.damageReduction,.05);
- assert.equal(all.energyDamage,.05);
+ assert.equal(all.speed,.05);
  const limited=passiveEffects(sp,{hp:100,suppressedTypes:['Beast'],suppressedDomains:['Life']},{maxHp:100});
  assert.equal(limited.accuracy||0,0);
- assert.equal(limited.energyDamage||0,0);
+ assert.equal(limited.speed||0,0);
  assert.equal(limited.damageReduction,.05);
 });
 
