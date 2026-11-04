@@ -38,7 +38,7 @@ export const PERIODIC_RATES={burn:1/32,poison:1/32,toxic:1/96,frostbite:1/32,lee
 export function statusModifier(effect,sp={},ind={},mode='application'){
  const group=STATUS_GROUPS[effect]||effect;
  const innate=new Set((sp.domains||[]).filter(d=>!(ind.suppressedDomains||[]).includes(d)));
- const acquired=new Set((ind.acquiredDomains||[]).filter(d=>!innate.has(d)&&!(ind.suppressedDomains||[]).includes(d)));
+ const acquired=new Set([...(ind.acquiredDomains||[]),...(ind.temporaryDomains||[])].filter(d=>!innate.has(d)&&!(ind.suppressedDomains||[]).includes(d)));
  let amount=0;
  for(const t of new Set([sp.base,sp.alter]))if(t&&!(ind.suppressedTypes||[]).includes(t))amount+=(PROFILE[t]?.[group]||0);
  for(const d of innate)amount+=(PROFILE[d]?.[group]||0);
@@ -53,8 +53,10 @@ export function statusModifier(effect,sp={},ind={},mode='application'){
  return amount;
 }
 export function statusChance(base,effect,sp,ind,options={}){
- if(options.ignoreResistance)return Math.max(0,Math.min(1,base));
- return Math.max(options.minimumChance||0,Math.min(1,Math.max(0,base*(1+statusModifier(effect,sp,ind,'application')))));
+ const chance=Math.max(0,Math.min(1,Number(base)||0));
+ if(options.ignoreResistance)return chance;
+ const minimum=Math.max(0,Math.min(1,Number(options.minimumChance)||0));
+ return Math.min(1,Math.max(minimum,chance*(1+statusModifier(effect,sp,ind,'application'))));
 }
 export function statusDuration(base,effect,sp,ind){
  // Duration uses the agreed larger relative magnitudes: 25%, 50%, 75%.
@@ -67,6 +69,6 @@ export function periodicDamage(base,effect,sp,ind){
 }
 export function rebaseStatusTimer(timer,now,effect,sp,ind){
  const original=timer.baseDuration??Math.max(0,timer.until-(timer.appliedAt??now));
- const elapsed=Math.max(0,now-(timer.appliedAt??now));
- return {...timer,baseDuration:original,until:(timer.appliedAt??now)+Math.max(0,statusDuration(original,effect,sp,ind))};
+ const appliedAt=timer.appliedAt??now;
+ return {...timer,appliedAt,baseDuration:original,until:appliedAt+Math.max(0,statusDuration(original,effect,sp,ind))};
 }
