@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {battleStageLayout} from '../battle-layout.mjs';
+import {damageDelayLabels} from '../realtime-ui.mjs';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 const team=count=>Array.from({length:count},(_,slot)=>({id:'unit-'+slot,hp:100}));
@@ -45,9 +46,9 @@ test('desktop formations keep the existing platform positions',()=>{
 
 test('app animations target the displayed slots after fainting compacts a phone formation',()=>{
  const allies=team(3),enemies=team(3).map(u=>({...u,id:'foe-'+u.id}));allies[0].hp=0;enemies[1].hp=0;
- const canvas={width:1000,height:240,getContext:()=>({save(){},restore(){}})},calls=[];
- const battle={multi:{allies:allies.map(u=>u.id),enemies},rt:{elapsedMs:100},rtAnimations:[{at:0,side:'a',actor:allies[1].id,target:enemies[2].id,move:{}}]};
- const h=vm.createContext({battleStageLayout,battle,s:{spirits:allies},$:()=>canvas,matchMedia:()=>({matches:true}),E:{moveTarget:m=>m.target||'opponent'},realTimeContext:()=>({active:{a:allies,b:enemies}}),drawTechnique:(c,m,p,from,to)=>calls.push({from,to})});
+ const canvas={width:1000,height:240,getContext:()=>({save(){},restore(){},measureText:text=>({width:text.length*7}),strokeText(){},fillText:(text,x,y)=>notices.push({text,x,y})})},calls=[],notices=[];
+ const battle={multi:{allies:allies.map(u=>u.id),enemies},rt:{elapsedMs:100,units:{[allies[1].id]:{delayNotice:{at:0,until:1200,castMs:250,timers:{gcd:100}}}}},rtAnimations:[{at:0,side:'a',actor:allies[1].id,target:enemies[2].id,move:{}}]};
+ const h=vm.createContext({battleStageLayout,damageDelayLabels,battle,s:{spirits:allies},$:()=>canvas,matchMedia:()=>({matches:true}),E:{moveTarget:m=>m.target||'opponent'},realTimeContext:()=>({active:{a:allies,b:enemies}}),drawTechnique:(c,m,p,from,to)=>calls.push({from,to})});
  const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
  for(const name of ['currentBattleLayout','animationPositions','drawRealTimeEffects']){
   const start=source.indexOf('function '+name+'('),next=source.slice(start+1).search(/\n(?:async )?function /);
@@ -57,4 +58,6 @@ test('app animations target the displayed slots after fainting compacts a phone 
  const animation=vm.runInContext("animationPositions('a',1,2,{})",h);vm.runInContext('drawRealTimeEffects()',h);
  assert.deepEqual(animation.from,expected.a[0].effect);assert.deepEqual(animation.to,expected.b[1].effect);
  assert.deepEqual(calls[0].from,animation.from);assert.deepEqual(calls[0].to,animation.to);
+ assert.deepEqual(notices.map(n=>n.text),['Cast delayed +0.25s','GCD delayed +0.1s']);
+ assert.equal(notices[0].x,expected.a[0].effect.x);
 });

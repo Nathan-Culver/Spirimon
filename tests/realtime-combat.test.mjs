@@ -94,3 +94,125 @@ test('Pressure funding is checked before a cast starts and exhaustion permits St
  assert.equal(f.schedule(f.a[0],hit).ok,false);assert.equal(RT.unitClock(f.state,f.a[0]).pending,null);assert.equal(f.a[0].pp,1);
  assert.ok(f.schedule(f.a[0],{...E.STRUGGLE,type:'Beast'}).ok);f.step(1000);assert.ok(f.a[0].hp<E.stats(f.a[0],f.sp).hp);assert.equal(f.a[0].pp,1);
 });
+
+test('damage delays each active GCD and LCD with independent direct and periodic caps',()=>{
+ const f=fixture(),u=f.a[0],c=RT.unitClock(f.state,u);c.gcdReadyAt=10000;c.cooldowns={one:12000,two:14000,ready:0};u.moveCooldowns=c.cooldowns;
+ for(let n=0;n<12;n++)RT.applyDamageDelay(f.state,u);
+ assert.equal(c.gcdReadyAt,10500);assert.equal(c.cooldowns.one,12500);assert.equal(c.cooldowns.two,14500);assert.equal(c.cooldowns.ready,0);
+ for(let n=0;n<12;n++)RT.applyDamageDelay(f.state,u,{periodic:true});
+ assert.equal(c.gcdReadyAt,10750);assert.equal(c.cooldowns.one,12750);assert.equal(u.gcdReadyAt,10750);
+ assert.equal(RT.unitClock(f.state,f.b[0]).gcdReadyAt,0);
+});
+test('cast pushback is throttled, capped per cast, and excludes ongoing damage',()=>{
+ const f=fixture(),u=f.a[0],c=RT.unitClock(f.state,u);c.pending={choice:{move:heavy},resolveAt:10000};
+ RT.applyDamageDelay(f.state,u);assert.equal(c.pending.resolveAt,10250);
+ RT.applyDamageDelay(f.state,u);assert.equal(c.pending.resolveAt,10250);
+ f.state.elapsedMs=500;RT.applyDamageDelay(f.state,u,{periodic:true});assert.equal(c.pending.resolveAt,10250);
+ RT.applyDamageDelay(f.state,u);f.state.elapsedMs=1000;RT.applyDamageDelay(f.state,u);f.state.elapsedMs=1500;RT.applyDamageDelay(f.state,u);
+ assert.equal(c.pending.resolveAt,10500);
+});
+test('concentration halves pushback and sanctuary prevents cast and explicit disruption',()=>{
+ const f=fixture(),u=f.a[0],c=RT.unitClock(f.state,u);c.pending={choice:{move:heavy},resolveAt:10000};c.gcdReadyAt=5000;
+ u.spiritualBuffs=[{kind:'concentration',amount:.5,until:5000}];RT.applyDamageDelay(f.state,u);assert.equal(c.pending.resolveAt,10125);
+ f.state.elapsedMs=500;u.spiritualBuffs=[{kind:'immunity',amount:.2,until:5000}];RT.applyDamageDelay(f.state,u,{disruption:{gcdMs:500}});
+ assert.equal(c.pending.resolveAt,10125);assert.equal(c.gcdReadyAt,5200);
+});
+test('explicit cooldown disruption cannot lock ready actions and has a shared resistance window',()=>{
+ const f=fixture(),u=f.a[0],c=RT.unitClock(f.state,u);c.gcdReadyAt=10000;c.cooldowns.hit=10000;
+ const disruption={gcdMs:400,moveId:'hit',lcdMs:500};RT.applyDamageDelay(f.state,u,{disruption});assert.equal(c.gcdReadyAt,10500);assert.equal(c.cooldowns.hit,10500);
+ RT.applyDamageDelay(f.state,u,{disruption});assert.equal(c.gcdReadyAt,10500);assert.equal(c.cooldowns.hit,10500);
+ c.gcdReadyAt=0;c.cooldowns.hit=0;f.state.elapsedMs=2500;RT.applyDamageDelay(f.state,u,{disruption});assert.equal(c.gcdReadyAt,0);assert.equal(c.cooldowns.hit,0);
+});
+test('actual attacks push casts and cooldowns but fully absorbed hits do neither',()=>{
+ const f=fixture();f.schedule(f.b[0],heavy);const c=RT.unitClock(f.state,f.b[0]),at=c.pending.resolveAt,gcd=c.gcdReadyAt;
+ f.schedule(f.a[0],fast);f.step(50);assert.equal(c.pending.resolveAt,at+250);assert.equal(c.gcdReadyAt,gcd+100);
+ const g=fixture();g.b[0].spiritualShields=[{hp:99999,until:10000}];g.schedule(g.b[0],heavy);const shielded=RT.unitClock(g.state,g.b[0]),before=shielded.pending.resolveAt;
+ g.schedule(g.a[0],fast);g.step(50);assert.equal(shielded.pending.resolveAt,before);
+});
+test('a new GCD gets a fresh damage budget and periodic pulses use the smaller delay',()=>{
+ const f=fixture(),u=f.a[0],c=RT.unitClock(f.state,u);c.gcdReadyAt=500;for(let n=0;n<5;n++)RT.applyDamageDelay(f.state,u);
+ f.step(1100);assert.ok(f.schedule(u,heavy).ok);const at=c.gcdReadyAt;RT.applyDamageDelay(f.state,u);assert.equal(c.gcdReadyAt,at+100);
+ u.status='poison';c.pending=null;const old=c.gcdReadyAt;f.step(950);assert.equal(c.gcdReadyAt,old+50);
+});
+
+test('each simultaneous ongoing damage source adds its own delay',()=>{
+ const f=fixture(),u=f.a[0],c=RT.unitClock(f.state,u);c.gcdReadyAt=20000;c.cooldowns.heavy=20000;u.status='poison';u.conditions={curse:1};
+ f.step(2000);assert.equal(c.gcdReadyAt,20100);assert.equal(c.cooldowns.heavy,20100);assert.equal(c.pending,null);
+ f.step(4000);assert.equal(c.gcdReadyAt,20250);
+});
+test('delay allowances survive battle end and independent state/save restoration',()=>{
+ const f=fixture(),u=f.a[0],c=RT.unitClock(f.state,u);c.gcdReadyAt=20000;c.cooldowns.heavy=20000;
+ for(let i=0;i<5;i++)RT.applyDamageDelay(f.state,u);
+ RT.preserveAfflictions(f.state,u);const saved=JSON.parse(JSON.stringify(u)),state=RT.createRealTimeState(1000),restored=RT.unitClock(state,saved);
+ assert.equal(restored.gcdReadyAt,20500);RT.applyDamageDelay(state,saved);assert.equal(restored.gcdReadyAt,20500);assert.equal(restored.cooldowns.heavy,20500);
+ RT.applyDamageDelay(state,saved,{periodic:true});assert.equal(restored.gcdReadyAt,20550);
+});
+test('multi-hit damage counts each impact but only pushes a cast once in the throttle window',()=>{
+ const f=fixture(),u=f.b[0],c=RT.unitClock(f.state,u);c.gcdReadyAt=10000;c.pending={choice:{move:heavy},resolveAt:10000};
+ RT.applyDamageDelay(f.state,u,{hits:3});assert.equal(c.gcdReadyAt,10300);assert.equal(c.pending.resolveAt,10250);
+ RT.applyDamageDelay(f.state,u,{hits:3});assert.equal(c.gcdReadyAt,10500);assert.equal(c.pending.resolveAt,10250);
+});
+test('selected existing Moves expose their disruption rules and affect actual timers',()=>{
+ const templates=allMoveTemplates();for(const name of ['Spirit Break','Fatebreaker']){
+  const f=fixture(),attack=templates.find(m=>m.name===name);assert.ok(attack.cooldownDisruption);assert.match(E.moveLore(attack).disruptionText,/2 seconds/);
+  f.sp.moves=[attack];f.sp.learnset=[attack];f.a[0].equippedMoves=[attack.id];f.a[0].learnedMoves=[attack.id];
+  const c=RT.unitClock(f.state,f.b[0]);c.gcdReadyAt=10000;c.cooldowns.heavy=12000;f.b[0].lastMove='heavy';
+  assert.ok(f.schedule(f.a[0],attack).ok);f.step(1500);assert.equal(c.gcdReadyAt,10100+attack.cooldownDisruption.gcdMs);assert.equal(c.cooldowns.heavy,name==='Fatebreaker'?12500:12100);
+ }
+});
+
+test('cast pushback and damage-induced GCD delay share a 750ms cap during each cast',()=>{
+ const f=fixture(),u=f.a[0],c=RT.unitClock(f.state,u);c.gcdReadyAt=10000;c.cooldowns.heavy=10000;c.pending={choice:{move:heavy},resolveAt:10000};
+ RT.applyDamageDelay(f.state,u);f.state.elapsedMs=500;RT.applyDamageDelay(f.state,u);
+ for(let n=0;n<8;n++)RT.applyDamageDelay(f.state,u,{periodic:true});
+ for(let n=0;n<8;n++)RT.applyDamageDelay(f.state,u);
+ assert.equal(c.pending.pushbackMs+c.pending.damageGcdDelayMs,750);assert.equal(c.pending.resolveAt,10500);assert.equal(c.gcdReadyAt,10250);
+ assert.equal(c.cooldowns.heavy,10750,'LCD budgets remain independent');
+ c.pending=null;RT.applyDamageDelay(f.state,u);assert.equal(c.gcdReadyAt,10350,'cooldown allowance is still usable after casting');
+});
+test('explicit disruption uses the ordinary allowance and preserves the separate periodic allowance',()=>{
+ const f=fixture(),u=f.a[0],c=RT.unitClock(f.state,u);c.gcdReadyAt=10000;c.cooldowns.heavy=10000;
+ RT.applyDamageDelay(f.state,u,{disruption:{gcdMs:500,moveId:'heavy',lcdMs:500}});
+ assert.equal(c.gcdReadyAt,10500);assert.equal(c.cooldowns.heavy,10500);
+ f.state.elapsedMs=2500;RT.applyDamageDelay(f.state,u,{disruption:{gcdMs:500,moveId:'heavy',lcdMs:500}});assert.equal(c.gcdReadyAt,10500);
+ for(let n=0;n<5;n++)RT.applyDamageDelay(f.state,u,{periodic:true});assert.equal(c.gcdReadyAt,10750);assert.equal(c.cooldowns.heavy,10750);
+});
+test('simultaneous delay notices aggregate applied amounts and do not refresh when caps block damage delays',async()=>{
+ const {damageDelayLabels}=await import('../realtime-ui.mjs');
+ const f=fixture(),u=f.a[0],c=RT.unitClock(f.state,u);c.gcdReadyAt=10000;c.cooldowns.heavy=10000;
+ RT.applyDamageDelay(f.state,u,{periodic:true});RT.applyDamageDelay(f.state,u,{periodic:true});
+ assert.deepEqual(damageDelayLabels(c,0),['Cooldowns delayed +0.1s']);
+ for(let n=0;n<10;n++)RT.applyDamageDelay(f.state,u,{periodic:true});assert.deepEqual(damageDelayLabels(c,0),['Cooldowns delayed +0.25s']);
+ const until=c.delayNotice.until;f.state.elapsedMs=500;RT.applyDamageDelay(f.state,u,{periodic:true});assert.equal(c.delayNotice.until,until);assert.deepEqual(damageDelayLabels(c,until),[]);
+});
+test('combined cast allowance survives save/load without resurrecting ready GCDs',()=>{
+ const f=fixture(),u=f.a[0],c=RT.unitClock(f.state,u);c.pending={choice:{move:heavy},resolveAt:10000};c.gcdReadyAt=10000;
+ RT.applyDamageDelay(f.state,u,{hits:5});const restored=JSON.parse(JSON.stringify(f.state));restored.elapsedMs=500;
+ RT.applyDamageDelay(restored,u);assert.equal(restored.units[u.id].pending.pushbackMs+restored.units[u.id].pending.damageGcdDelayMs,750);
+ restored.units[u.id].gcdReadyAt=0;RT.applyDamageDelay(restored,u,{periodic:true});assert.equal(restored.units[u.id].gcdReadyAt,0);
+});
+
+test('short cooldown damage caps scale from their recorded starting duration',()=>{
+ for(const [duration,direct,periodic]of [[1500,225,112.5],[2000,300,150],[3500,500,250],[10000,500,250]]){
+  const f=fixture(),u=f.a[0],c=RT.unitClock(f.state,u);c.gcdReadyAt=duration;c.cooldowns.hit=duration;
+  c.damageDelays.gcd={durationMs:duration,direct:0,periodic:0};c.damageDelays['move:hit']={durationMs:duration,direct:0,periodic:0};
+  for(let n=0;n<10;n++)RT.applyDamageDelay(f.state,u);
+  assert.equal(c.gcdReadyAt,duration+direct);assert.equal(c.cooldowns.hit,duration+direct);
+  for(let n=0;n<10;n++)RT.applyDamageDelay(f.state,u,{periodic:true});
+  assert.equal(c.gcdReadyAt,duration+direct+periodic);assert.equal(c.cooldowns.hit,duration+direct+periodic);
+ }
+});
+test('scheduling records modified cooldown durations and later haste or timer reduction cannot change caps',()=>{
+ const f=fixture(),u=f.a[0];const result=f.schedule(u,heavy,{style:'agile'}),c=RT.unitClock(f.state,u);
+ assert.ok(result.ok);assert.equal(c.damageDelays.gcd.durationMs,result.profile.gcdMs);assert.equal(c.damageDelays['move:heavy'].durationMs,result.profile.localCooldownMs);
+ const duration=c.damageDelays.gcd.durationMs;c.pending=null;f.state.elapsedMs=1000;c.gcdReadyAt=1500;u.stages={speed:6};
+ for(let n=0;n<10;n++)RT.applyDamageDelay(f.state,u);
+ assert.equal(c.gcdReadyAt,1500+Math.min(500,duration*.15));assert.equal(c.damageDelays.gcd.durationMs,duration);
+});
+test('proportional allowances persist across save/load and also bound explicit disruption',()=>{
+ const f=fixture(),u=f.a[0],c=RT.unitClock(f.state,u);c.gcdReadyAt=2000;c.damageDelays.gcd={durationMs:2000,direct:0,periodic:0};
+ RT.applyDamageDelay(f.state,u,{disruption:{gcdMs:500}});assert.equal(c.gcdReadyAt,2300);
+ RT.preserveAfflictions(f.state,u);const saved=JSON.parse(JSON.stringify(u)),state=RT.createRealTimeState(1000),restored=RT.unitClock(state,saved);
+ assert.equal(restored.damageDelays.gcd.durationMs,2000);RT.applyDamageDelay(state,saved);assert.equal(restored.gcdReadyAt,2300);
+ for(let n=0;n<10;n++)RT.applyDamageDelay(state,saved,{periodic:true});assert.equal(restored.gcdReadyAt,2450);
+});

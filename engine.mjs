@@ -7,7 +7,7 @@ export {DOMAIN_ALIASES,canonicalDomain,activeTypes,ensureIndividualPassives};
 import {statusChance} from './classification-status.mjs';
 import {equipment,hasHook,ASPECTS,heldEquipment,itemHasHook,itemOnceUsed,markItemUsed,consumeHeldItem,heldItemActivation} from './equipment.mjs';
 import {townLayout,townFeatures,townPath,townGround} from './towns.mjs';
-import {buildLearnset,startingMoves,validateGeneratedMoves,moveBaseValue as baseMoveValue,moveLore as narrativeLore} from './moves.mjs';
+import {buildLearnset,startingMoves,validateGeneratedMoves,moveBaseValue as baseMoveValue,moveLore as narrativeLore,moveCooldownDisruption} from './moves.mjs';
 export function moveBaseValue(move){return baseMoveValue(move);}
 export function moveLore(move){return narrativeLore(move);}
 export const VERSION=1;
@@ -160,7 +160,7 @@ export function switchUnits(out,incoming,sp,options={}){
  const h=hazardState(incoming),max=stats(incoming,sp).hp;
  if(!hasHook(incoming,'boots',sp)){
   let loss=0;if(h.spikes)loss+=Math.floor(max*[0,1/8,1/6,1/4][Math.min(3,h.spikes)]);if(h.stealthRock)loss+=Math.floor(max/8);
-  if(loss){incoming.hp=Math.max(0,incoming.hp-Math.max(1,loss));log.push('Entry hazards deal '+loss+' damage.');}
+  if(loss){incoming.hp=Math.max(0,incoming.hp-Math.max(1,loss));options.onDamage?.(incoming,{periodic:true,hits:(h.spikes?1:0)+(h.stealthRock?1:0)});log.push('Entry hazards deal '+loss+' damage.');}
   if(incoming.hp>0&&h.toxicSpikes)applyCondition(incoming,h.toxicSpikes>=2?'toxic':'poison',()=>0,sp,log);
   if(h.stickyWeb&&incoming.aspect!=='Swift'){incoming.stages??={};incoming.stages.speed=clamp(stage(incoming,'speed')-1,-6,6);log.push('The sticky web slows '+nameOf(incoming,sp)+'.');}
  }
@@ -233,7 +233,7 @@ export function executeAction(actor,asp,target,tsp,move,style='normal',commit=.5
  if(actor.conditions.flinch){delete actor.conditions.flinch;log.push(name+' flinches.');return log;}
  if(actor.recharging){actor.recharging=false;log.push(name+' recharges.');return log;}
  if(actor.status==='paralysis'&&r()<.25||actor.conditions.infatuation&&r()<.5){log.push(name+' cannot act.');return log;}
- if(actor.conditions.confusion&&r()<.33){const loss=Math.max(1,Math.floor(stats(actor,asp).hp/12));actor.hp=Math.max(0,actor.hp-loss);log.push(name+' hurts itself in confusion for '+loss+'.');return log;}
+ if(actor.conditions.confusion&&r()<.33){const loss=Math.max(1,Math.floor(stats(actor,asp).hp/12));actor.hp=Math.max(0,actor.hp-loss);context.onDamage?.(actor,{periodic:true});log.push(name+' hurts itself in confusion for '+loss+'.');return log;}
  const releasing=!!actor.pendingMove;move=context.realTime||context.prepaid||context.heldAction?move:battleMove(actor,asp,move,tsp);
  if(!move){log.push(name+' cannot use that exhausted technique. Choose another move.');return log;}
  const effect=move.effect,category=moveCategory(move),field=actor.battlefield||target.battlefield||{};actor.battlefield=target.battlefield=field;
@@ -294,13 +294,14 @@ export function executeAction(actor,asp,target,tsp,move,style='normal',commit=.5
  amount=Math.max(1,Math.floor(amount*partialWard));const before=target.hp;if(hasHook(target,'survive',tsp)&&!itemOnceUsed(target,'survive')&&before>=stats(target,tsp).hp&&amount>=before){amount=before-1;markItemUsed(target,'survive');log.push('Last-light Band holds '+targetName+' at 1 HP.');}
  amount=shieldDamage(target,amount);
  const link=(target.spiritualLinks||[]).find(l=>l.until>(target.realtimeNow||0));
- if(link&&context.activeUnits){const partner=context.activeUnits.find(u=>u.id===link.partner&&u.hp>0&&u!==target);if(partner){const shared=Math.min(Math.floor(amount*link.amount),Math.max(0,partner.hp-1));partner.hp-=shared;amount-=shared;}}
+ if(link&&context.activeUnits){const partner=context.activeUnits.find(u=>u.id===link.partner&&u.hp>0&&u!==target);if(partner){const shared=Math.min(Math.floor(amount*link.amount),Math.max(0,partner.hp-1));partner.hp-=shared;amount-=shared;if(shared>0)context.onDamage?.(partner,{hits});}}
  target.hp=Math.max(0,target.hp-amount);const dealt=before-target.hp;target.tookDamageThisRound=true;target.lastHit={amount:dealt,category,source:actor.id};target.ward=false;
+ if(dealt>0)context.onDamage?.(target,{hits,disruption:moveCooldownDisruption(move)});
  log.push(name+' uses '+move.name+': '+dealt+' damage'+(critical?' — critical hit!':'')+(hits>1?' ('+hits+' hits)':'')+'.');
  if(effect==='drain'||hasHook(actor,'drain',asp))healHP(actor,asp,dealt*(effect==='drain'?.5:.125)*(1-exhaustion(actor)));
- if(hasHook(target,'thorns',tsp)&&category==='Physical')actor.hp=Math.max(0,actor.hp-Math.max(1,Math.floor(stats(actor,asp).hp/10)));
- if(hasHook(actor,'lifeOrb',asp))actor.hp=Math.max(0,actor.hp-Math.max(1,Math.floor(stats(actor,asp).hp/10)));
- if(effect==='recoil'||effect==='struggle'){const loss=Math.max(1,Math.ceil(effect==='struggle'?stats(actor,asp).hp/4:dealt*.15));actor.hp=Math.max(0,actor.hp-loss);log.push(name+' takes '+loss+' recoil damage.');}
+ if(hasHook(target,'thorns',tsp)&&category==='Physical'){actor.hp=Math.max(0,actor.hp-Math.max(1,Math.floor(stats(actor,asp).hp/10)));context.onDamage?.(actor,{periodic:true});}
+ if(hasHook(actor,'lifeOrb',asp)){actor.hp=Math.max(0,actor.hp-Math.max(1,Math.floor(stats(actor,asp).hp/10)));context.onDamage?.(actor,{periodic:true});}
+ if(effect==='recoil'||effect==='struggle'){const loss=Math.max(1,Math.ceil(effect==='struggle'?stats(actor,asp).hp/4:dealt*.15));actor.hp=Math.max(0,actor.hp-loss);context.onDamage?.(actor,{periodic:true});log.push(name+' takes '+loss+' recoil damage.');}
  if(effect==='recharge')actor.recharging=true;
  if(effect==='pivot')actor.switchRequested=true;
  if(effect==='forceSwitch'&&target.hp>0){target.switchRequested=true;target.forcedDisplacement=true;}
@@ -521,7 +522,7 @@ export function refreshTechniques(sp){
  for(const key of ['name','description','body'])sp[key]=rename(sp[key]);if(sp.forms)sp.forms=sp.forms.map(rename);
  if(![2,3,4,5].includes(sp.moveRevision))sp.moves=startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id),sp.anatomy);
  if(sp.moveRevision!==5){const current=buildLearnset(sp.base,sp.alter,sp.domains||[],sp.anatomy),old=[...(sp.learnset||[]),...(sp.moves||[]).filter(m=>!(sp.learnset||[]).some(known=>known.id===m.id))],seen=new Set(old.map(m=>m.id));sp.learnset=[...old,...current.filter(m=>!seen.has(m.id))];sp.moves??=startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id),sp.anatomy);sp.moveRevision=5;}
- for(const move of [...(sp.moves||[]),...(sp.learnset||[])]){delete move.speed;move.name=rename(move.name);if(move.domain)move.domain=canonicalDomain(move.domain);move.desc=moveLore(move).description;move.baseUses=moveBaseValue(move);}return sp;
+ for(const move of [...(sp.moves||[]),...(sp.learnset||[])]){delete move.speed;move.name=rename(move.name);if(move.domain)move.domain=canonicalDomain(move.domain);if(moveCooldownDisruption(move))move.cooldownDisruption=moveCooldownDisruption(move);move.desc=moveLore(move).description;move.baseUses=moveBaseValue(move);}return sp;
 }
 
 export const CHALLENGER_DIALOGUE={

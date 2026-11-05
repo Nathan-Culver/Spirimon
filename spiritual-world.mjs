@@ -1,5 +1,6 @@
 import * as E from './engine.mjs';
 import * as W from './world.mjs';
+import {drawShrineArtwork} from './sacred-art.mjs';
 const cache=new Map();
 export function shrinesForRegion(seed,cx,cy){
  const key=seed+'|'+cx+'|'+cy;if(cache.has(key))return cache.get(key);
@@ -86,6 +87,7 @@ function shrineSprite(kind,used){
  shrineSprites.set(key,canvas);return canvas;
 }
 export function drawShrine(c,x,y,used=false,kind=0){
+ if(drawShrineArtwork(c,x,y,kind,used))return;
  const sprite=shrineSprite(kind,used);
  c.save();c.imageSmoothingEnabled=false;
  // Shrine's ground contact remains at its original 32px interaction tile.

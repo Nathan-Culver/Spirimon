@@ -21,7 +21,50 @@ export function migrateRealTimeState(legacy,now,units=[]){
  }
  state.fieldTimers=Object.fromEntries(Object.entries(legacy.fieldTimers||{}).map(([k,v])=>[k,{...v,until:shift(v.until)}]));return state;
 }
-export function unitClock(state,ind){const c=state.units[ind.id]??={readyAt:ind.animationReadyAt||0,gcdReadyAt:ind.gcdReadyAt||0,cooldowns:{},pending:null,conditions:{},buffs:{},status:null,itemReadyAt:ind.itemReadyAt||0,controlImmuneUntil:0,aiAt:state.elapsedMs+400};c.gcdReadyAt??=0;ind.moveCooldowns??={};if(c.cooldowns!==ind.moveCooldowns){for(const [id,at]of Object.entries(c.cooldowns))ind.moveCooldowns[id]=Math.max(ind.moveCooldowns[id]||0,at);c.cooldowns=ind.moveCooldowns;}return c;}
+export function unitClock(state,ind){const c=state.units[ind.id]??={readyAt:ind.animationReadyAt||0,gcdReadyAt:ind.gcdReadyAt||0,cooldowns:{},pending:null,conditions:{},buffs:{},status:null,itemReadyAt:ind.itemReadyAt||0,controlImmuneUntil:0,aiAt:state.elapsedMs+400};c.gcdReadyAt??=0;ind.moveCooldowns??={};if(c.cooldowns!==ind.moveCooldowns){for(const [id,at]of Object.entries(c.cooldowns))ind.moveCooldowns[id]=Math.max(ind.moveCooldowns[id]||0,at);c.cooldowns=ind.moveCooldowns;}c.damageDelays??=ind.cooldownDelayBudgets||{};ind.cooldownDelayBudgets=c.damageDelays;return c;}
+// Delay budgets belong to each running timer; direct and ongoing damage have separate caps.
+export function applyDamageDelay(state,ind,{periodic=false,hits=1,disruption=null}={}){
+ const c=unitClock(state,ind),now=state.elapsedMs;if(ind.hp<=0)return;
+ const kind=periodic?'periodic':'direct',step=periodic?50:100;
+ const pending=c.pending?.choice?.move&&c.pending.resolveAt>now?c.pending:null;
+ const castRoom=()=>pending?Math.max(0,750-(pending.pushbackMs||0)-(pending.damageGcdDelayMs||0)):Infinity;
+ const changes={castMs:0,timers:{}};c.damageDelays??={};
+ const delay=(key,at,requested,source=kind)=>{
+  if(!(at>now)){delete c.damageDelays[key];return at;}
+  const budget=c.damageDelays[key]??={direct:0,periodic:0};
+  // Older saves without a recorded starting duration keep their existing absolute caps
+  // until this timer starts again; never infer a duration from remaining time.
+  const duration=Number.isFinite(budget.durationMs)?Math.max(0,budget.durationMs):Infinity;
+  const cap=source==='periodic'?Math.min(250,duration*.075):Math.min(500,duration*.15);
+  const added=Math.min(Math.max(0,cap-(budget[source]||0)),requested,key==='gcd'?castRoom():Infinity);
+  budget[source]=(budget[source]||0)+added;
+  if(key==='gcd'&&pending)pending.damageGcdDelayMs=(pending.damageGcdDelayMs||0)+added;
+  if(added>0)changes.timers[key]=(changes.timers[key]||0)+added;
+  return at+added;
+ };
+ c.gcdReadyAt=delay('gcd',c.gcdReadyAt,step*Math.max(1,hits));
+ for(const key of Object.keys(c.cooldowns))c.cooldowns[key]=delay('move:'+key,c.cooldowns[key],step*Math.max(1,hits));
+ const protection=Math.max(0,...spiritualBonus(ind,'concentration',now).map(b=>b.amount));
+ const immune=spiritualBonus(ind,'immunity',now).length>0;
+ if(!periodic&&pending&&now>=(c.nextPushbackAt||0)&&!immune){
+  const added=Math.min(Math.max(0,500-(pending.pushbackMs||0)),250*(1-clamp(protection,0,1)),castRoom());
+  if(added>0){pending.resolveAt+=added;pending.pushbackMs=(pending.pushbackMs||0)+added;c.nextPushbackAt=now+500;changes.castMs=added;}
+ }
+ // Explicit disruption spends the same per-timer allowance as ordinary hits.
+ if(disruption&&!periodic&&!immune&&now>=(c.disruptionImmuneUntil||0)){
+  c.gcdReadyAt=delay('gcd',c.gcdReadyAt,clamp(Number(disruption.gcdMs)||0,0,500),'direct');
+  const moveId=disruption.moveId==='lastUsed'?ind.lastMove:disruption.moveId;
+  if(moveId)c.cooldowns[moveId]=delay('move:'+moveId,c.cooldowns[moveId]||0,clamp(Number(disruption.lcdMs)||0,0,500),'direct');
+  c.disruptionImmuneUntil=now+2000;
+ }
+ if(changes.castMs||Object.keys(changes.timers).length){
+  if(!c.delayNotice||now-c.delayNotice.at>150)c.delayNotice={at:now,until:now+1200,castMs:0,timers:{}};
+  const notice=c.delayNotice;notice.castMs+=changes.castMs;notice.until=now+1200;
+  for(const [key,added]of Object.entries(changes.timers))notice.timers[key]=(notice.timers[key]||0)+added;
+ }
+ ind.gcdReadyAt=c.gcdReadyAt;
+}
+function resetDamageBudget(clock,key,durationMs){clock.damageDelays??={};clock.damageDelays[key]={direct:0,periodic:0,durationMs};}
 function allUnits(context){return [...new Map([...context.teams.a,...context.teams.b].map(u=>[u.id,u])).values()];}
 function activeUnits(context){return [...context.active.a,...context.active.b].filter(u=>u?.hp>0);}
 function sideOf(context,ind){return context.active.a.some(u=>u.id===ind.id)?'a':context.active.b.some(u=>u.id===ind.id)?'b':null;}
@@ -93,7 +136,7 @@ export function scheduleAction(state,context,actor,choice){
 
  choice={...choice,extraMoves:choice.type==='move'?Math.max(0,Math.min(2,Math.floor(Number(choice.extraMoves)||0))):0};
  clock.pending={choice:{...choice,move},resolveAt:state.elapsedMs+profile.castMs,side,targetId:target?.id,targetSide,sequence:state.sequence++};
- if(profile.localCooldownMs)clock.cooldowns[key]=state.elapsedMs+profile.localCooldownMs;if(profile.timing==='gcd')clock.gcdReadyAt=state.elapsedMs+profile.gcdMs;clock.readyAt=state.elapsedMs+profile.animationLockMs;actor.gcdReadyAt=clock.gcdReadyAt;actor.animationReadyAt=clock.readyAt;
+ if(profile.localCooldownMs){clock.cooldowns[key]=state.elapsedMs+profile.localCooldownMs;resetDamageBudget(clock,'move:'+key,profile.localCooldownMs);}if(profile.timing==='gcd'){clock.gcdReadyAt=state.elapsedMs+profile.gcdMs;resetDamageBudget(clock,'gcd',profile.gcdMs);}clock.readyAt=state.elapsedMs+profile.animationLockMs;actor.gcdReadyAt=clock.gcdReadyAt;actor.animationReadyAt=clock.readyAt;
  return {ok:true,profile};
 }
 function expireTimers(state,context,log){
@@ -101,7 +144,7 @@ function expireTimers(state,context,log){
  for(const u of allUnits(context)){const c=unitClock(state,u);if(c.status&&c.status.until<=now){if(u.status===c.status.effect){log.push(name(u,context.speciesOf(u))+' recovers from '+c.status.effect+'.');u.status=null;u.statusTurns=0;}c.status=null;}
  for(const [effect,until]of Object.entries(c.conditions))if(until<=now){if(effect==='perish'&&u.conditions?.perish){u.hp=0;log.push(name(u,context.speciesOf(u))+' falls to the doom omen.');}else if(u.conditions?.[effect])log.push(name(u,context.speciesOf(u))+' recovers from '+effect+'.');delete u.conditions?.[effect];delete c.conditions[effect];delete c.conditionMeta?.[effect];}
  for(const [key,until]of Object.entries(c.buffs))if(until<=now){u[key]=false;delete c.buffs[key];}
- if(c.delayedAt&&c.delayedAt<=now){u.hp=Math.max(0,u.hp-(u.delayedDamage?.amount||0));delete u.delayedDamage;delete c.delayedAt;log.push(name(u,context.speciesOf(u))+' is struck by delayed energy.');}
+ if(c.delayedAt&&c.delayedAt<=now){const hp=u.hp;u.hp=Math.max(0,u.hp-(u.delayedDamage?.amount||0));if(u.hp<hp)applyDamageDelay(state,u);delete u.delayedDamage;delete c.delayedAt;log.push(name(u,context.speciesOf(u))+' is struck by delayed energy.');}
  if(c.itemReadyAt<=now)u.itemCooldowns={};u.controlImmuneUntil=c.controlImmuneUntil;
  }
  for(const [key,timer]of Object.entries(state.fieldTimers))if(timer.until<=now){if(key==='weather'||key==='terrain'){if(field?.[key]===timer.value){field[key]=key==='weather'?field.ambientWeather||null:null;if(key==='weather')delete field.weatherTurns;}}else{const [side,effect]=key.split('-');if(field?.sides?.[side])delete field.sides[side].screens[effect];}delete state.fieldTimers[key];}
@@ -109,12 +152,13 @@ function expireTimers(state,context,log){
 function pulseEffects(state,context,log){
  const live=activeUnits(context);
  for(const u of live){const sp=context.speciesOf(u),max=E.stats(u,sp).hp,c=u.conditions||{},field=u.battlefield||{};let loss=0;
- if(['poison','burn','frostbite'].includes(u.status))loss+=periodicDamage(max/32,u.status,sp,u);
- if(u.status==='toxic'){u.toxicTurns=(u.toxicTurns||0)+1;loss+=periodicDamage(max*Math.min(6,u.toxicTurns)/96,'toxic',sp,u);}
- if(c.leechSeed){const amount=periodicDamage(max/32,'leechSeed',sp,u);loss+=amount;const source=live.find(a=>a.id===u.conditionSources?.leechSeed);if(source)source.hp=Math.min(E.stats(source,context.speciesOf(source)).hp,source.hp+Math.min(amount,u.hp));}
- if(c.curse)loss+=periodicDamage(max/48,'curse',sp,u);if(c.trap)loss+=periodicDamage(max/48,'trap',sp,u);if(c.nightmare&&u.status==='sleep')loss+=periodicDamage(max/24,'nightmare',sp,u);
- const domains=E.activeDomains(sp,u);if(u.aspect!=='Stormbound'&&(field.weather==='snow'&&!domains.includes('Ice')||field.weather==='sand'&&![sp.base,sp.alter].some(t=>['Construct','Giant','Elemental'].includes(t))&&!domains.some(d=>['Earth','Metal'].includes(d))))loss+=Math.max(1,Math.floor(max/32));
- if(loss){u.hp=Math.max(0,u.hp-loss);log.push(name(u,sp)+' suffers '+loss+' ongoing damage.');}
+ const suffer=amount=>{if(amount<=0||u.hp<=0)return;const hp=u.hp;u.hp=Math.max(0,u.hp-amount);loss+=hp-u.hp;applyDamageDelay(state,u,{periodic:true});};
+ if(['poison','burn','frostbite'].includes(u.status))suffer(periodicDamage(max/32,u.status,sp,u));
+ if(u.status==='toxic'){u.toxicTurns=(u.toxicTurns||0)+1;suffer(periodicDamage(max*Math.min(6,u.toxicTurns)/96,'toxic',sp,u));}
+ if(c.leechSeed){const amount=periodicDamage(max/32,'leechSeed',sp,u),hp=u.hp;suffer(amount);const source=live.find(a=>a.id===u.conditionSources?.leechSeed);if(source)source.hp=Math.min(E.stats(source,context.speciesOf(source)).hp,source.hp+Math.min(amount,hp));}
+ if(c.curse)suffer(periodicDamage(max/48,'curse',sp,u));if(c.trap)suffer(periodicDamage(max/48,'trap',sp,u));if(c.nightmare&&u.status==='sleep')suffer(periodicDamage(max/24,'nightmare',sp,u));
+ const domains=E.activeDomains(sp,u);if(u.aspect!=='Stormbound'&&(field.weather==='snow'&&!domains.includes('Ice')||field.weather==='sand'&&![sp.base,sp.alter].some(t=>['Construct','Giant','Elemental'].includes(t))&&!domains.some(d=>['Earth','Metal'].includes(d))))suffer(Math.max(1,Math.floor(max/32)));
+ if(loss)log.push(name(u,sp)+' suffers '+loss+' ongoing damage.');
  if(u.hp>0){const healing=(passiveEffects(sp,u,{maxHp:max,weather:field.weather}).regeneration||0)+(c.regenerate?(1-(u.spiritualEnergyEmpty?.value||0))/20:0)+(field.terrain==='grass'?1/48:0)+(u.aspect==='Verdant'&&field.terrain==='grass'?1/32:0)+(hasHook(u,'leftovers',sp)?1/32:0);if(healing)u.hp=Math.min(max,u.hp+Math.max(1,Math.floor(max*healing)));
  u.itemRounds=(u.itemRounds||0)+1;if(hasHook(u,'resourceSustain',sp)&&u.itemRounds%3===0){const caps=E.resourceMaximums(u,sp);u.pp=Math.min(caps.pp,(u.pp||0)+1);u.willpower=Math.min(caps.willpower,(u.willpower||0)+1);}
  if(sp.ability==='Second Wind'&&!u.secondWindUsed&&u.hp<max*.3){u.hp=Math.min(max,u.hp+Math.floor(max*.15));u.secondWindUsed=true;}
@@ -129,11 +173,11 @@ function resolvePending(state,context,actor,clock,log,events,r){
  const other=side==='a'?'b':'a',allies=context.active[side],opponents=context.active[other];
  let target=[...allies,...opponents].find(u=>u.id===pending.targetId&&u.hp>0);
  if(!target)target=(pending.targetSide===side?allies:opponents).find(u=>u.hp>0);if(!target)return;
- const ctx={realTime:true,speciesOf:context.speciesOf,actorTeam:context.teams[side],alliedActive:allies,targetActive:opponents,activeUnits:activeUnits(context),targetTeam:context.teams[other],funded:false};
+ const ctx={onDamage:(unit,options)=>applyDamageDelay(state,unit,options),realTime:true,speciesOf:context.speciesOf,actorTeam:context.teams[side],alliedActive:allies,targetActive:opponents,activeUnits:activeUnits(context),targetTeam:context.teams[other],funded:false};
  if(actor.lastHit&&state.elapsedMs-(actor.lastHit.at??state.elapsedMs)>8000)actor.lastHit=null;
  if(choice.type==='switch'){
   const incoming=context.teams[side].find(u=>u.id===choice.switchId&&u.hp>0),index=allies.findIndex(u=>u.id===actor.id);if(!incoming||allies.includes(incoming))return;
-  const q=context.sealers?.[side],cost=q?SE.manifestationCost(q,incoming,context.speciesOf(incoming)):0;if(q&&q.energy<cost){log.push('Insufficient Spiritual Energy to complete the release.');return;}const result=E.switchUnits(actor,incoming,context.speciesOf(incoming),{outSpecies:sp,forced:choice.forced});if(result.ok&&q)SE.spendEnergy(q,cost);log.push(...result.log);if(result.ok){allies[index]=incoming;const entry=unitClock(state,incoming);entry.readyAt=Math.max(entry.readyAt,state.elapsedMs+1800);entry.pending=null;}
+  const q=context.sealers?.[side],cost=q?SE.manifestationCost(q,incoming,context.speciesOf(incoming)):0;if(q&&q.energy<cost){log.push('Insufficient Spiritual Energy to complete the release.');return;}const result=E.switchUnits(actor,incoming,context.speciesOf(incoming),{outSpecies:sp,forced:choice.forced,onDamage:ctx.onDamage});if(result.ok&&q)SE.spendEnergy(q,cost);log.push(...result.log);if(result.ok){allies[index]=incoming;const entry=unitClock(state,incoming);entry.readyAt=Math.max(entry.readyAt,state.elapsedMs+1800);entry.pending=null;}
  }else if(choice.type==='item'){
   const key=choice.item==='tonic'?'tonics':'ethers',inventory=context.inventory?.[side];if(!inventory?.[key]){log.push('No supplies remaining.');return;}
   const caps=E.stats(target,context.speciesOf(target));if(choice.item==='tonic'){if(target.hp>=caps.hp)return;target.hp=Math.min(caps.hp,target.hp+Math.ceil(caps.hp/2));}else{if(target.pp>=caps.pp&&target.willpower>=caps.willpower)return;target.pp=Math.min(caps.pp,(target.pp||0)+Math.ceil(caps.pp*.6));target.willpower=Math.min(caps.willpower,(target.willpower||0)+Math.ceil(caps.willpower*.6));}
@@ -205,7 +249,7 @@ export function advanceRealTime(state,deltaMs,context,r=Math.random){
  synchronizeTimers(state,context);for(const u of allUnits(context)){const clock=unitClock(state,u);if(clock.interrupted){log.push(name(u,context.speciesOf(u))+' is interrupted while casting '+clock.interrupted+'.');delete clock.interrupted;}}let remaining=Math.min(5000,deltaMs);
  while(remaining>0){const step=Math.min(50,remaining);state.elapsedMs+=step;remaining-=step;pauseSealedAfflictions(state,context,step);for(const side of ['a','b'])for(const u of [...context.active[side]])if(u.recallAfterCast&&!unitClock(state,u).pending){delete u.recallAfterCast;context.active[side]=context.active[side].filter(v=>v!==u);}expireTimers(state,context,log);
  const due=activeUnits(context).map(actor=>({actor,clock:unitClock(state,actor)})).filter(x=>x.clock.pending&&x.clock.pending.resolveAt<=state.elapsedMs).sort((a,b)=>a.clock.pending.resolveAt-b.clock.pending.resolveAt||a.clock.pending.sequence-b.clock.pending.sequence);
- for(const {actor,clock}of due)if(clock.pending)resolvePending(state,context,actor,clock,log,events,r);
+ for(const {actor,clock}of due)if(clock.pending&&clock.pending.resolveAt<=state.elapsedMs)resolvePending(state,context,actor,clock,log,events,r);
  if(state.elapsedMs>=state.nextPulseAt){pulseEffects(state,context,log);state.nextPulseAt+=EFFECT_PULSE_MS;synchronizeTimers(state,context);}
  for(const side of ['a','b'])if(!context.active[side].some(u=>u.hp>0))state['undefended'+side]=(state['undefended'+side]||0)+step;else state['undefended'+side]=0;
  }
@@ -225,7 +269,7 @@ export function deploySpirimon(state,context,side,ind){
  const check=deploymentAvailability(state,context,side,ind);if(!check.ok)return check;
  const q=context.sealers?.[side],field=context.active[side][0]?.battlefield||context.active[side==='a'?'b':'a'][0]?.battlefield;
  if(q&&!SE.spendEnergy(q,check.cost))return {ok:false,reason:'Not enough Spiritual Energy'};
- const from={id:'sealed-'+ind.id,hp:0,battlefield:field,battleSide:side},result=E.switchUnits(from,ind,context.speciesOf(ind),{forced:true});
+ const from={id:'sealed-'+ind.id,hp:0,battlefield:field,battleSide:side},result=E.switchUnits(from,ind,context.speciesOf(ind),{forced:true,onDamage:(unit,options)=>applyDamageDelay(state,unit,options)});
  if(!result.ok){if(q)SE.restoreEnergy(q,check.cost);return {ok:false,reason:result.log.join(' ')};}
  context.active[side]=context.active[side].filter(u=>u.hp>0);context.active[side].push(ind);
  const clock=unitClock(state,ind);clock.pending=null;clock.readyAt=state.elapsedMs+650;SE.setExhaustion(ind,q);
@@ -253,7 +297,7 @@ export function usePlayerSupport(state,context,side,techniqueId,recipientId){
  if(!SE.spendEnergy(q,result.cost))return {ok:false,reason:'Not enough Spiritual Energy'};
  q.supportCooldowns[t.id]=now+t.cooldownMs;const log=[];
  for(const u of targets){const sp=context.speciesOf(u),max=E.stats(u,sp),clock=unitClock(state,u),efficiency=(1+Math.min(.1,(u.bond||0)/1000))*(1-SE.setExhaustion(u,q)),until=now+t.durationMs;
-  if(t.timing==='gcd')clock.gcdReadyAt=now+moveTiming({id:'support-gcd',timing:'gcd',power:0},u,sp).gcdMs;u.gcdReadyAt=clock.gcdReadyAt;
+  if(t.timing==='gcd'){clock.gcdReadyAt=now+moveTiming({id:'support-gcd',timing:'gcd',power:0},u,sp).gcdMs;resetDamageBudget(clock,'gcd',clock.gcdReadyAt-now);}u.gcdReadyAt=clock.gcdReadyAt;
   if(t.sacrifice?.kind==='hp')u.hp-=Math.ceil(max.hp*t.sacrifice.amount);
   if(t.sacrifice?.kind==='defense'){u.spiritualBuffs??=[];u.spiritualBuffs.push({kind:'guard',amount:-t.sacrifice.amount,until});}
   for(const effect of t.effects){const amount=effect.amount*efficiency;
@@ -262,6 +306,7 @@ export function usePlayerSupport(state,context,side,techniqueId,recipientId){
    if(effect.kind==='shield'){u.spiritualShields??=[];const existing=u.spiritualShields.filter(s=>s.until>now).reduce((n,s)=>n+s.hp,0);u.spiritualShields.push({hp:Math.max(0,Math.min(Math.ceil(max.hp*amount),Math.ceil(max.hp*.45)-existing)),until});}
    if(effect.kind==='cleanse'&&['poison','toxic','burn','freeze','frostbite','paralysis'].includes(u.status)){u.status=null;u.statusTurns=0;clock.status=null;}
    if(effect.kind==='calm'){
+    u.spiritualBuffs??=[];u.spiritualBuffs.push({kind:'concentration',amount:.5,until});
     if(clock.status?.effect==='sleep')shortenAffliction(clock.status,now,.4);
     for(const key of ['confusion','infatuation','nightmare','taunt','disable','flinch'])if(clock.conditions[key]){const timer=clock.conditionMeta[key];if(timer){shortenAffliction(timer,now,.4);clock.conditions[key]=timer.until;}else clock.conditions[key]=now+(clock.conditions[key]-now)*.4;}
    }
