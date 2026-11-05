@@ -368,7 +368,7 @@
         "Bramblehorn",
         "Bramble Sovereign"
       ],
-      "prompt": "Distinct compact calf, long-legged mountain scrambler and low broad takin with living thorn bower; retain four hooves and recognizable takin identity.",
+      "prompt": "Use case: precise-object-edit. Create a production replacement THREE FORM evolution strip for Spirimon #52 Bramblehorn. Input is the existing lineage identity/style reference, not a composition to copy. Preserve recognizable massive takin anatomy, brown shaggy fur, moss-gold markings, thorn horns, faerie seedpod lanterns, detailed painterly pixel-art-inspired JRPG finish. Show exactly THREE complete isolated creatures, one in each equal third of a wide 3:1 transparent canvas, generous clear margins; no text or scenery. Left Bramblelet: round stocky calf in a playful low tucked pose, short pale face, tiny horn buds bearing one flower, four short legs, fuzzy compact torso, no mantle. Center Bramblehorn: a leaner long-legged mountain scrambler with a steep sloping back, hooked thorn horns pointing backwards and a distinct shaggy chest bib, raised front hoof and visible narrow waist. Right Bramble Sovereign: mature low broad muscular takin, powerful hunched bisonlike shoulder mass and short heavy neck, wide face and deep split dewlap, horns now sweeping laterally into a living arched thorn bower carrying hanging lantern pods; low heavy planted stance. Distinct head-to-body ratios, spine contours and leg proportions in all stages. Do not draw three scaled copies with extra ornaments. All remain recognizable takins with FOUR hooved legs. No wings, human bodies or architectural objects.",
       "sourceFilename": "exec-ca7da013-35b9-40cd-8961-76ec9450f4db.png"
     },
     "cindershade": {
@@ -450,6 +450,997 @@
       ],
       "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon #60 jademaw. Input image is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference. Rebuild ALL THREE forms with visibly distinct silhouettes and anatomy, not simply scale or ornament changes. Wide 3:1 genuinely transparent canvas, EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and padding, no text, scenery, frames or platforms. Preserve Types Monstrosity/Ooze. Identity: An amorphous jade gel monstrosity with a huge split predatory maw, oversized curved fangs, floating jade scutes and several flowing rootlike pseudopods. No rigid legs.. Left Jadelet: Low jade droplet with one large tooth-lined mouth and few floating scutes. Center Jademaw: Raised arched gel predator with a deep central split maw and thick flowing support lobes. Right Jade Sovereign: Broad overhanging jade maw canopy with long curved fangs, suspended scute jaws and a wide low gel base; no rigid legs. Strongly differentiate compact juvenile versus elongated transitional body versus reorganized mature body, head/torso/limb ratios and posture. Add structure only where this identity supports it. Avoid duplicating the same pose three times; the transition must remain obvious when all forms are viewed at the same height. Retain recognizable family motifs and stated number/type of limbs. Every tip and effect fully inside its own third.",
       "sourceFilename": "exec-df5365f8-8118-46d2-8fcc-56eb6a5dd71a.png"
+    },
+    "dewveil": {
+      "number": 2,
+      "forms": [
+        "Dewbud",
+        "Dewveil",
+        "Sundew Regent"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #2 dewveil; Types Plant/Fey. Identity: A carnivorous sundew with luminous amber nectar beads, delicate fan leaves, fine root feet, and faerie blossoms.. LEFT Dewbud: A squat sundew seedling with two cupped sticky leaves folded around a central bud and a compact knot of fine root feet. CENTER Dewveil: A long coiling vine hunter rising from a small root base, three hinged sundew fans held like snapping jaws and one pale blossom. RIGHT Sundew Regent: An anchored umbrella-like sundew regent with a low spread of buttress roots, a tall swan-neck flower stalk and a wide radial crown of drooping nectar traps.",
+      "sourceFilename": "exec-15fca5ee-b9b3-4977-8626-70203fc3b48d.png"
+    },
+    "aurelattice": {
+      "number": 10,
+      "forms": [
+        "Sparkwrit",
+        "Aurelattice",
+        "Solar Mechanarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #10 aurelattice; Types Celestial/Construct. Identity: A luminous many-winged celestial guardian with ivory feathers, articulated golden wing frames, rotating crystal joints, and warm cyan light.. LEFT Sparkwrit: A small crouched ivory-and-gold celestial hatchling with folded mechanical wing plates and one turquoise chest lens. CENTER Aurelattice: A tall long-necked gryphonlike guardian on four slender articulated legs with two open golden wing frames and a narrow flowing feather tail. RIGHT Solar Mechanarch: A levitating celestial gyroscope with a luminous core surrounded by six radial ivory feather wings on golden articulated frames, a turquoise central lens and dangling feather tail; the quadruped body has unfolded into the wing mechanism.",
+      "sourceFilename": "exec-e5a12ceb-5074-4b46-8acc-6b827b64d1f0.png"
+    },
+    "kelpveil": {
+      "number": 61,
+      "forms": [
+        "Kelplet",
+        "Kelpveil",
+        "Kelp Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #61 kelpveil; Types Ooze/Beast. Identity: A translucent sea-green ooze with the recognizable broad muzzle and muscular mass of a river otter, flowing kelp-shaped gel fringes, suspended river stones and soft pseudopod feet.. LEFT Kelplet: Small round otter-faced sea-green jelly with short soft paddle lobes. CENTER Kelpveil: Long swimming otter-ooze with muscular central core and flowing kelp fringes. RIGHT Kelp Sovereign: Broad river-otter jelly colossus with high liquid shoulders, long tapering gel tail and wide paddling pseudopods; not a rigid furred animal.",
+      "sourceFilename": "exec-0d8eec54-dd93-4c81-820f-0afeef54c96c.png"
+    },
+    "lumenwing": {
+      "number": 62,
+      "forms": [
+        "Lumenlet",
+        "Lumenwing",
+        "Lumen Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #62 lumenwing; Types Plant/Fiend. Identity: A rooted carnivorous plant with luminous pitcher-cup wings, black thorn roots, hooked infernal leaf tips and orange nectar lures. Remains unmistakably a plant.. LEFT Lumenlet: Small rooted lantern pitcher with two short luminous leaf lobes. CENTER Lumenwing: Branching pitcher plant with paired large cup-wing leaves and hooked black support roots. RIGHT Lumen Sovereign: Wide arching carnivorous lantern plant with a central deep trap, cascading luminous pitcher wings and a rooted thorn cage.",
+      "sourceFilename": "exec-5a0c736b-120d-46fe-b303-cb53084e8188.png"
+    },
+    "morrowfang": {
+      "number": 63,
+      "forms": [
+        "Morrowlet",
+        "Morrowfang",
+        "Morrow Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #63 morrowfang; Types Undead/Plant. Identity: A reanimated carnivorous grave-root plant with a cracked jackal skull caught in its trunk, skeletal root fingers, dead lavender petals and pale soul light.. LEFT Morrowlet: Low grave-root seedling carrying a small jackal skull trap. CENTER Morrowfang: Tall bowed skeletal root plant with an open jackal-skull trap and hanging dead petals. RIGHT Morrow Sovereign: Arched grave-root predator with a large low jackal skull, dense bone-root scaffold and several secondary leaf traps; plant, not skeletal animal.",
+      "sourceFilename": "exec-e74e67fe-4063-4a73-a89d-0ffe48756c03.png"
+    },
+    "nacreling": {
+      "number": 64,
+      "forms": [
+        "Nacrelet",
+        "Nacreling",
+        "Nacre Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #64 nacreling; Types Aberration/Construct. Identity: A horrific four-legged pearlescent construct with a mollusk-like layered body, articulated nacre plates, aperture mouths, extra mismatched eyes and twitching bronze feelers.. LEFT Nacrelet: Small rounded nacre construct with short four legs and one exposed aperture mouth. CENTER Nacreling: Elongated layered shell automaton with offset eyes, segmented bronze legs and twitching feelers. RIGHT Nacre Sovereign: Low broad spiral-shelled nacre aberration with overlapping shell mantle, a recessed multi-aperture core and widely planted four legs.",
+      "sourceFilename": "exec-82edf949-c719-44bf-acaa-74b54b9a96ae.png"
+    },
+    "obsidhorn": {
+      "number": 65,
+      "forms": [
+        "Obsidlet",
+        "Obsidhorn",
+        "Obsid Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #65 obsidhorn; Types Beast/Fey. Identity: A recognizable powerfully built black-furred kangaroo standing on two heavy hind legs, broad muscular forearms, glossy dark curling horns and faint faerie leaf runes. No human face.. LEFT Obsidlet: Compact kangaroo joey with a short heavy tail and little dark horn buds. CENTER Obsidhorn: Long-legged black kangaroo with muscular forearms, curled horns and an upright ready stance. RIGHT Obsid Sovereign: Broad-chested hunched kangaroo with immense hindquarters, long balancing tail and a thick glossy horn crown; animal face, two arms and two hindlegs.",
+      "sourceFilename": "exec-f86694d2-2a34-4f2c-9f6b-897fb5bb914f.png"
+    },
+    "runemoth": {
+      "number": 68,
+      "forms": [
+        "Runelet",
+        "Runemoth",
+        "Rune Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #68 runemoth; Types Elemental/Ooze. Identity: An amorphous violet magic-and-ooze creature with fluid mothlike wing lobes, unreadable luminous rune-shaped marks beneath its gel skin, silver droplets and a soft core.. LEFT Runelet: Small round violet gel mote with two little winglike lobes. CENTER Runemoth: Tall soft winged ooze with translucent veined wing fans and an elongated floating abdomen. RIGHT Rune Sovereign: Wide flowing violet rune-ooze mantle with several distinct cascading liquid wing panels and suspended silver droplets; amorphous, no hard limbs.",
+      "sourceFilename": "exec-452284ea-265d-4679-a078-977415456b50.png"
+    },
+    "sablewyrm": {
+      "number": 69,
+      "forms": [
+        "Sablelet",
+        "Sablewyrm",
+        "Sable Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #69 sablewyrm; Types Fey/Celestial. Identity: A recognizable long-bodied sable marten with four paws, silver velvet fur, faerie whisker filaments and small gold celestial rings woven around its flowing tail.. LEFT Sablelet: Small rounded silver sable kit with short tail and one small gold ring. CENTER Sablewyrm: Long slender four-pawed sable with an arched back, large faerie whiskers and a curling ringed tail. RIGHT Sable Sovereign: Flowing low sable guardian with broad shoulder fur, an exceptionally long ribbonlike tail and suspended celestial rings framing its body.",
+      "sourceFilename": "exec-4020d554-5b18-4a6b-87d5-e8e9c7a7c1a3.png"
+    },
+    "umberbloom": {
+      "number": 71,
+      "forms": [
+        "Umberlet",
+        "Umberbloom",
+        "Umber Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #71 umberbloom; Types Giant/Undead. Identity: An undead bipedal earth giant with umber mummified skin, open stone-and-bone ribs, burial linen, dried lily blooms and a pale turquoise spirit glow.. LEFT Umberlet: Small wrapped umber undead giant with narrow rib seams and a dried lily bud. CENTER Umberbloom: Tall skeletal earth revenant with open ribs, a long shroud skirt and drooping lily shoulders. RIGHT Umber Sovereign: Broad bowed ancestral giant with a hollow stone-bone chest, heavy hanging arms and an immense dried lily mantle.",
+      "sourceFilename": "exec-d45db855-0c22-43a2-b95b-4aa491921098.png"
+    },
+    "willowmaw": {
+      "number": 73,
+      "forms": [
+        "Willowlet",
+        "Willowmaw",
+        "Willow Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #73 willowmaw; Types Monstrosity/Ooze. Identity: An amorphous willow-green ooze monstrosity whose drooping liquid fronds conceal rows of long needle teeth, translucent sap lobes and an enormous hinged predatory mouth.. LEFT Willowlet: Low green sap blob with one small drooping tooth-lined frond. CENTER Willowmaw: Tall arching willow ooze whose flexible fronds frame a large open central mouth. RIGHT Willow Sovereign: Wide hanging willow-maw canopy with long needle-toothed fronds over a recessed hollow sap core and a low spreading base.",
+      "sourceFilename": "exec-44969d52-4e97-4e3c-b769-a2ba935904e4.png"
+    },
+    "coppershade": {
+      "number": 79,
+      "forms": [
+        "Copperlet",
+        "Coppershade",
+        "Copper Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #79 coppershade; Types Celestial/Aberration. Identity: A four-legged copper-plumed celestial griffin with small gold halo rings, an unnaturally split beak, misplaced eyes in its feather mantle and an eerie asymmetric silhouette.. LEFT Copperlet: Small copper-feathered griffin chick with folded wing buds and one misplaced eye. CENTER Coppershade: Long-bodied celestial griffin with a split beak, developing halo and partially spread copper wings. RIGHT Copper Sovereign: Proud arch-backed griffin with a broad eye-bearing feather mantle and long outstretched copper wings; four legs and existing two wings.",
+      "sourceFilename": "exec-4fc0cc8b-dfd6-4e58-9e91-cec98b5afd9a.png"
+    },
+    "driftclaw": {
+      "number": 80,
+      "forms": [
+        "Driftlet",
+        "Driftclaw",
+        "Drift Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #80 driftclaw; Types Construct/Fey. Identity: A four-legged driftwood otter automaton with bronze claw joints, pale weathered grain, sea-glass eyes and faerie silk seaweed streamers. Small shell-shaped mechanical accents.. LEFT Driftlet: Round driftwood otter kit with short mechanical paws and a small silk seaweed tail. CENTER Driftclaw: Flexible long-spined otter automaton with exposed bronze joints and broad paddle tail. RIGHT Drift Sovereign: Low broad-chested driftwood otter with reinforced foreclaws, a sweeping articulated paddle tail and long faerie seaweed streamers; four legs.",
+      "sourceFilename": "exec-2215dab9-a26a-47d5-89bc-db636b92d476.png"
+    },
+    "flintwyrm": {
+      "number": 82,
+      "forms": [
+        "Flintlet",
+        "Flintwyrm",
+        "Flint Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #82 flintwyrm; Types Fey/Celestial. Identity: A four-legged flint-gray faerie drake with a gecko-like face, chipped opaline scales, fanlike leaf ears and a thin radiant gold celestial crown, clearly nonhuman.. LEFT Flintlet: Compact chipped-flint gecko faerie with tiny fan ears and short tail. CENTER Flintwyrm: Long four-pawed flint drake with a low opaline back ridge and wide leaf ears. RIGHT Flint Sovereign: Broad-shouldered crouching flint guardian drake with tall chipped shoulder scales, long curling tail and a radiant thin gold crown; no arbitrary wings.",
+      "sourceFilename": "exec-dbde5454-29dc-4a6b-b533-60f6a738a460.png"
+    },
+    "hazelbloom": {
+      "number": 84,
+      "forms": [
+        "Hazellet",
+        "Hazelbloom",
+        "Hazel Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #84 hazelbloom; Types Giant/Undead. Identity: A hulking undead giant with hollow hazel-wood-colored stone flesh, skeletal hands, a crown of dead hazel branches, old burial fabric and pale amber ghostlight.. LEFT Hazellet: Small hollow hazelwood undead figure with short skeletal hands and a few dead twigs. CENTER Hazelbloom: Tall bowed wooden-bone giant with long arms, hollow chest and branching dead crown. RIGHT Hazel Sovereign: Broad stooped ancient hazel titan with exposed skeletal shoulder arches, hanging burial shroud and an extensive dead-branch mantle.",
+      "sourceFilename": "exec-0fedb53a-0496-4ed2-9edf-e3a46b486d4e.png"
+    },
+    "junipermaw": {
+      "number": 86,
+      "forms": [
+        "Juniperlet",
+        "Junipermaw",
+        "Juniper Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #86 junipermaw; Types Monstrosity/Ooze. Identity: An amorphous juniper-blue sap ooze monstrosity with floating berry-like nodules, jagged evergreen-colored fangs, several soft jaws and needle-frond gel tentacles.. LEFT Juniperlet: Round juniper sap droplet with one small jagged maw and a berry nodule. CENTER Junipermaw: Arched gel predator with separated soft jaws and long needle-frond feelers. RIGHT Juniper Sovereign: Wide low juniper ooze canopy with a deep multi-jaw opening, tall floating berry scutes and long pooling evergreen gel fronds.",
+      "sourceFilename": "exec-db88774c-6efb-445a-a45f-f504e7ba77cc.png"
+    },
+    "nimbusling": {
+      "number": 90,
+      "forms": [
+        "Nimbuslet",
+        "Nimbusling",
+        "Nimbus Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #90 nimbusling; Types Aberration/Construct. Identity: A horrific four-legged storm-gray construct with bronze rib hoops, a cloudlike fleshy mantle, several staring eyes, exposed gear joints and impossible dangling feelers.. LEFT Nimbuslet: Small storm-gray gear quadruped with round cloud mantle and short bronze rib hoops. CENTER Nimbusling: Long-backed uncanny construct with suspended rib hoops, exposed joints and dangling eye feelers. RIGHT Nimbus Sovereign: Broad low thunderhead construct with a deeply overhanging fleshy cloud hump, open bronze rib cage and long asymmetrical feelers; four legs.",
+      "sourceFilename": "exec-4ccd5ad6-10d4-41a1-8732-eee156707a0f.png"
+    },
+    "quartzclaw": {
+      "number": 93,
+      "forms": [
+        "Quartzlet",
+        "Quartzclaw",
+        "Quartz Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #93 quartzclaw; Types Construct/Fey. Identity: A quadrupedal quartz-and-bronze lynx automaton with segmented translucent claws, warm gray plates, faerie ear tassels and tiny copper leaf charms.. LEFT Quartzlet: Compact quartz lynx kit with large mechanical paws and short ear tassels. CENTER Quartzclaw: Long-legged segmented lynx automaton with a flexible bronze waist and extended quartz claws. RIGHT Quartz Sovereign: Broad shoulder-armored lynx engine with high tufted ears, deep translucent quartz chest and powerful articulated foreclaws; four legs.",
+      "sourceFilename": "exec-2cee0dac-b847-481d-acbc-793e44a601ae.png"
+    },
+    "rimemoth": {
+      "number": 94,
+      "forms": [
+        "Rimelet",
+        "Rimemoth",
+        "Rime Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #94 rimemoth; Types Elemental/Ooze. Identity: An amorphous pale-blue frost elemental mixed with translucent gel, forming delicate moth-wing lobes, suspended icy droplets and softly glowing silver veins.. LEFT Rimelet: Small round icy gel droplet with two short silver-veined lobes. CENTER Rimemoth: Elongated frost ooze with wide delicate winglike fans and a hanging frozen core. RIGHT Rime Sovereign: Large arched frost-gel mantle with layered translucent liquid ice panels and separated suspended icy droplets; no rigid butterfly anatomy.",
+      "sourceFilename": "exec-cf81cf94-6399-4460-859d-e959b7a1a221.png"
+    },
+    "verdantbloom": {
+      "number": 97,
+      "forms": [
+        "Verdantlet",
+        "Verdantbloom",
+        "Verdant Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #97 verdantbloom; Types Giant/Undead. Identity: A bipedal undead bog giant with moss-covered burial wrappings, dark exposed ribs, fern-fringed shoulders, huge stone-bone fists and cold green soul light.. LEFT Verdantlet: Small moss-wrapped bog revenant with narrow open ribs and compact stone-bone fists. CENTER Verdantbloom: Tall stooped bog giant with extended forearms, exposed dark ribs and drooping fern shoulders. RIGHT Verdant Sovereign: Ancient broad-backed bog titan with a hollow rib chamber, heavily draped moss shroud and immense low stone-bone fists.",
+      "sourceFilename": "exec-ff5d3803-f9c0-4fff-a5cb-fe05dbcb629d.png"
+    },
+    "ebonflare": {
+      "number": 105,
+      "forms": [
+        "Ebonling",
+        "Ebonflare",
+        "Ebon Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #105 ebonflare; Types Elemental/Celestial. Identity: A four-legged elemental panther made of living black fire and luminous ivory embers, with fine gold celestial halo arcs and flowing plume-like flame tails.. LEFT Ebonling: Small compact black-fire panther cub with short ember tail. CENTER Ebonflare: Lean stalking plasma panther with a narrow waist, high shoulder flames and separated gold halo arcs. RIGHT Ebon Exarch: Deep-chested flowing celestial panther with a large ivory-ember mantle and a long sweeping black-flame tail; four legs, no wings.",
+      "sourceFilename": "exec-2f42a755-6181-4f12-9bd0-c18cf39993b3.png"
+    },
+    "fableroot": {
+      "number": 106,
+      "forms": [
+        "Fableling",
+        "Fableroot",
+        "Fable Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #106 fableroot; Types Plant/Undead. Identity: A rooted undead carnivorous willow with scroll-like peeling bark, dead flower traps, bone twigs, hollow eye knots and pale parchment-colored spirit sap.. LEFT Fableling: Small peeling-bark carnivorous willow seedling with one dead flower trap. CENTER Fableroot: Tall bowed skeletal willow with scroll-like bark panels and hanging flower traps. RIGHT Fable Exarch: Broad ancient funeral willow with a high parchment-bark canopy, long bone-twig trap branches and a dense pale root base; no book props or written text.",
+      "sourceFilename": "exec-aadb8188-27b3-4e6c-a755-ba68f844d67f.png"
+    },
+    "jasperplume": {
+      "number": 110,
+      "forms": [
+        "Jasperling",
+        "Jasperplume",
+        "Jasper Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #110 jasperplume; Types Aberration/Fey. Identity: A horrific nonhuman bipedal faerie aberration with jasper-red feather filaments, a split mothlike mask, multiple small mouths in the torso and long asymmetrical grasping arms.. LEFT Jasperling: Small jasper moth-mask aberration with a round hunched torso and short asymmetric arms. CENTER Jasperplume: Tall narrow uncanny faerie with long mismatched arms, split mask and visible small torso mouths. RIGHT Jasper Exarch: Broad bowed jasper aberration with an overhanging feather-filament mantle, deeply split moth mask and low sweeping grasping hands; two arms, two legs.",
+      "sourceFilename": "exec-44a7053f-fe97-4f5b-a95f-2e29d9485332.png"
+    },
+    "mycogaze": {
+      "number": 5,
+      "forms": [
+        "Sporblink",
+        "Mycogaze",
+        "Verdant Witness"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #5 mycogaze; Types Aberration/Plant. Identity: A walking ring of watchful eyes and branching mycelial tendrils, modified by predatory moss and tiny violet spore cups.. LEFT Sporblink: A small closed fungal spore capsule with one large eye, three thin root feet and two violet cup buds. CENTER Mycogaze: A walking incomplete ring of fused eye-bearing mushrooms on four crooked mycelial struts, open space clearly visible through its body. RIGHT Verdant Witness: A spreading many-arched mycelial organism with a recessed central eye, dangling root curtain, broad fungal crown and several off-axis eye clusters; organic, no literal buildings.",
+      "sourceFilename": "exec-1196b43c-1b8d-4616-ab78-32c0f960c3b7.png"
+    },
+    "lanterglide": {
+      "number": 7,
+      "forms": [
+        "Liltuft",
+        "Lanterglide",
+        "Gossamer Courier"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #7 lanterglide; Types Beast/Fey. Identity: A real sugar glider with a cream-and-chestnut body, faerie membrane patterns, tiny lantern-like nectar lights, and long silk ear tufts.. LEFT Liltuft: A compact perched sugar-glider joey with oversized round head, folded gliding skin, short silk ear tufts and a tightly curled lantern tail. CENTER Lanterglide: A lean sugar glider in horizontal flight, fully extended hand-to-foot membranes with chestnut faerie patterns and a long rudder tail. RIGHT Gossamer Courier: A tall upright perched sugar-glider courier with long spread membrane fingers forming a fan-shaped cloak, exceptionally long tufted ears and its prehensile tail looped overhead carrying nectar lights; animal face, no human anatomy.",
+      "sourceFilename": "exec-21c89a71-9169-41ff-b08d-05fed75b49a0.png"
+    },
+    "seralotus": {
+      "number": 11,
+      "forms": [
+        "Lotulume",
+        "Seralotus",
+        "Blossom Seraph"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #11 seralotus; Types Celestial/Plant. Identity: A six-winged celestial guardian whose feather fans become layered white lotus petals and living green tendrils around a radiant core.. LEFT Lotulume: A compact four-legged ivory celestial lotus cub with tightly cupped green-tipped petal wings and a bud-shaped tail. CENTER Seralotus: A slender long-necked striding lotus guardian with four long legs, swept-back opened petal wings and a trailing vine tail. RIGHT Blossom Seraph: A floating open lotus entity whose layered ivory-and-green petals surround the recognizable guardian head, gold heart light and coiled vine center; legs fully withdrawn into the bloom, broad radial silhouette.",
+      "sourceFilename": "exec-8df5252c-becf-4718-acd8-98c5669105b8.png"
+    },
+    "auroriel": {
+      "number": 13,
+      "forms": [
+        "Flarecho",
+        "Auroriel",
+        "Crown of Dawn"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #13 auroriel; Types Celestial/Elemental. Identity: A wing-ring celestial composed of soft aurora ribbons, opaline feathers, and a brilliant coral-and-gold elemental heart.. LEFT Flarecho: A small curled sun-spark creature with an ivory head, short paired flame fins and one peach-gold halo fragment. CENTER Auroriel: A long airborne solar serpent with an arched ivory neck, broad paired pastel flame wings and a narrow streaming ribbon tail. RIGHT Crown of Dawn: An upright sun-phoenix elemental with an open radiant chest, six layered dawn-flame fans arranged around its central body, two ivory talons and an enormous circular solar corona.",
+      "sourceFilename": "exec-cea31348-7cf6-4262-ab52-d3043fef15a8.png"
+    },
+    "pollenshade": {
+      "number": 66,
+      "forms": [
+        "Pollenlet",
+        "Pollenshade",
+        "Pollen Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #66 pollenshade; Types Celestial/Aberration. Identity: A celestial deer-like quadruped with layered ivory pollen plumes, gold halo motes and multiple mismatched eye-bearing tendrils branching from its mane, eerie and anatomically unnatural.. LEFT Pollenlet: Small celestial fawn with soft pollen tufts and tiny eye tendrils. CENTER Pollenshade: Slender long-necked deer with a branching eye-bearing mane and small gold halo motes. RIGHT Pollen Sovereign: Deep-chested pollen stag with a wide layered mane, long anatomically impossible eye tendrils and elevated feather shoulders; four legs.",
+      "sourceFilename": "exec-a4c52bc5-d0df-4f4e-b353-28f0e614d643.png"
+    },
+    "quillclaw": {
+      "number": 67,
+      "forms": [
+        "Quilllet",
+        "Quillclaw",
+        "Quill Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #67 quillclaw; Types Construct/Fey. Identity: A quadruped clockwork porcupine made of bronze and pale wood, articulated quill plates, small faerie bellflowers and precise amethyst claws. Fine brass joint details.. LEFT Quilllet: Round wooden porcupine automaton with short brass feet and a few flat quill plates. CENTER Quillclaw: Low elongated clockwork porcupine with articulated raised quill fans and strong front claws. RIGHT Quill Sovereign: Broad armored porcupine engine with a high radial quill shield, deep wooden chest and heavy brass digging foreclaws; four legs.",
+      "sourceFilename": "exec-f12d8ab9-41d1-4700-ba8d-56298bd0d701.png"
+    },
+    "thornglen": {
+      "number": 70,
+      "forms": [
+        "Thornlet",
+        "Thornglen",
+        "Thorn Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #70 thornglen; Types Fiend/Giant. Identity: A hulking bipedal fiend giant with a thorn-crowned nonhuman face, heavy black-red limbs, a hooked tail and a dense crown of burgundy spines and moss-dark brambles.. LEFT Thornlet: Squat thorn-faced fiend juvenile with short hooked tail and small bramble collar. CENTER Thornglen: Lean forward-stooping fiend giant with long clawed arms and thorn-covered shoulders. RIGHT Thorn Sovereign: Massive low thorn titan with an overhanging bramble hump, huge grasping hands and a sweeping hooked tail; two arms, two legs.",
+      "sourceFilename": "exec-118bc065-14f8-4c95-921a-b6f019380f5b.png"
+    },
+    "eldermoth": {
+      "number": 81,
+      "forms": [
+        "Elderlet",
+        "Eldermoth",
+        "Elder Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #81 eldermoth; Types Elemental/Ooze. Identity: An amorphous old-gold resin ooze elemental with flowing moth-wing lobes, soft molten light, suspended ancient leaf patterns and tiny slow droplets. No hard limbs.. LEFT Elderlet: Small suspended old-gold resin droplet with tiny leaf-patterned lobes. CENTER Eldermoth: Soft elongated resin moth shape with broad flowing wing fans and a narrow hanging core. RIGHT Elder Sovereign: Ancient amber-resin elemental with a wide layered liquid wing mantle, suspended leaf fossils and long trailing droplet lobes; no hard moth skeleton.",
+      "sourceFilename": "exec-3d5ee530-93ec-4d20-8bd9-99357e0195f1.png"
+    },
+    "garnetglen": {
+      "number": 83,
+      "forms": [
+        "Garnetlet",
+        "Garnetglen",
+        "Garnet Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #83 garnetglen; Types Fiend/Giant. Identity: A colossal bipedal obsidian-skinned fiend giant with garnet-studded horn plates, massive clawed fists, a hooked lower jaw and deep burgundy ritual-like skin markings.. LEFT Garnetlet: Squat obsidian fiend with small garnet horn plates and round heavy hands. CENTER Garnetglen: Muscular forward-leaning fiend giant with distinct long forearms and layered garnet shoulder horns. RIGHT Garnet Sovereign: Low immense obsidian titan with a deep hooked jaw, broad angular horn mantle and oversized ground-level clawed fists; two arms, two legs.",
+      "sourceFilename": "exec-14d93497-fc3f-467d-b672-4dc70669206e.png"
+    },
+    "indigospire": {
+      "number": 85,
+      "forms": [
+        "Indigolet",
+        "Indigospire",
+        "Indigo Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #85 indigospire; Types Fey/Elemental. Identity: A visibly nonhuman indigo bipedal faerie with an axolotl-like face, frilled ears, long webbed fingers and flowing cobalt water ribbons. No ordinary human face.. LEFT Indigolet: Small indigo axolotl-faced faerie with short gill frills and tiny webbed hands. CENTER Indigospire: Slender swimming-posture faerie with long gill fans, elongated webbed arms and flowing water ribbons. RIGHT Indigo Sovereign: Hunched regal water faerie with a wide frilled head crown, heavy liquid shoulder mantle and long splayed webbed fingers; two legs, two arms.",
+      "sourceFilename": "exec-fcded75e-f313-42dc-8a02-68cdf57efa05.png"
+    },
+    "lichenwing": {
+      "number": 88,
+      "forms": [
+        "Lichenlet",
+        "Lichenwing",
+        "Lichen Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #88 lichenwing; Types Plant/Fiend. Identity: A rooted carnivorous lichen colony with tooth-edged trumpet traps, ember-red fruiting cups, leathery black leaf wings and hooked fiend-like thorn horns.. LEFT Lichenlet: Small tooth-edged lichen trumpet rooted on a dark stone-like fungal base. CENTER Lichenwing: Creeping clustered lichen predator with wide leathery winglike leaves and ember cups. RIGHT Lichen Sovereign: Tall arched lichen colony with a broad funnel-trap canopy, hanging black leaf wings and dense hooked thorn roots; remains botanical.",
+      "sourceFilename": "exec-6ee0631a-350b-48cb-ae78-6a6870b1fea1.png"
+    },
+    "wraithspire": {
+      "number": 98,
+      "forms": [
+        "Wraithlet",
+        "Wraithspire",
+        "Wraith Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #98 wraithspire; Types Fey/Elemental. Identity: A visibly nonhuman tall bipedal wind faerie with a hollow carved-looking moth mask, pale vapor hair, long translucent limbs and violet storm ribbons; not an undead human.. LEFT Wraithlet: Small two-headed hollow-masked wind faerie with compact shared torso and short vapor hair. CENTER Wraithspire: Tall narrow shared faerie body with two distinct moth-mask heads, longer translucent arms and separated wind streamers. RIGHT Wraith Sovereign: Arch-backed twin-headed wind faerie with a broad unified vapor mantle, two clearly separated hollow moth masks and sweeping violet storm ribbons; exactly two heads throughout.",
+      "sourceFilename": "exec-0f06c964-69b1-42bc-b9cf-d30370cd67ba.png"
+    },
+    "yewmaw": {
+      "number": 99,
+      "forms": [
+        "Yewlet",
+        "Yewmaw",
+        "Yew Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #99 yewmaw; Types Monstrosity/Ooze. Identity: A rooted carnivorous yew monstrosity with a hollow trunk filled with huge hook teeth, poisonous red berry-like eyes, drooping dark green fronds and amber gel sap.. LEFT Yewlet: Small yew sap sprout with a tiny hollow tooth cup and red berry eyes. CENTER Yewmaw: Bowed yew predator with a large hook-toothed trunk mouth and thick drooping fronds. RIGHT Yew Sovereign: Wide overhanging yew canopy with a deep hollow central maw, heavy hooked teeth and translucent amber sap root lobes; botanical monstrosity.",
+      "sourceFilename": "exec-2d095f33-5b58-48b5-8056-327df33639ab.png"
+    },
+    "glaciershard": {
+      "number": 107,
+      "forms": [
+        "Glacierling",
+        "Glaciershard",
+        "Glacier Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #107 glaciershard; Types Fey/Giant. Identity: A towering visibly nonhuman bipedal glacier faerie giant with pale blue fur, enormous feathered ears, broad powerful hands and a crown of natural icy antlers.. LEFT Glacierling: Compact pale-furred faerie giant with short icy antler nubs and thick hands. CENTER Glaciershard: Tall broad-shouldered glacier guardian with elongated feathered ears and developed ice antlers. RIGHT Glacier Exarch: Hunched wide-backed glacier faerie titan with a heavy fur mantle, broad ice-antler crown and immense long hands; two arms, two legs.",
+      "sourceFilename": "exec-7c2f35cf-79f7-4d95-b435-3b8f6f440d39.png",
+      "finishingPrompt": "Use case: background-extraction. Edit this exact three-form Spirimon Glaciershard evolution strip ONLY to remove the opaque white/very pale blue backdrop, its floor shadows and any matte haze between/outside the three creatures. Return a genuinely transparent RGBA PNG, with alpha zero in the surrounding canvas and all gaps. Preserve all THREE full creatures, their poses, anatomy, ice-blue antlers, fur, feather ears, proportions, colors, fine detail and left-center-right arrangement. Do not redraw them or remove white fur. Keep all tips, fingers, tails and ice crystals intact, no text or new objects."
+    },
+    "kindlekin": {
+      "number": 111,
+      "forms": [
+        "Kindleling",
+        "Kindlekin",
+        "Kindle Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #111 kindlekin; Types Giant/Elemental. Identity: A colossal bipedal ember giant with brick-gray craggy skin, a living coal beard, massive broad hands and volcanic orange seams; unmistakably a nonhuman giant.. LEFT Kindleling: Compact coal giant with rounded stone torso and short chunky hands. CENTER Kindlekin: Tall ember giant with an angular chest, long muscular arms and a developing living-coal beard. RIGHT Kindle Exarch: Low broad volcanic titan with an overhanging broken-rock shoulder ridge, deep coal beard and massive fissured forearms; two arms and legs.",
+      "sourceFilename": "exec-44024e97-0ea3-4b8c-958a-7d42b31c4009.png"
+    },
+    "lotusgore": {
+      "number": 112,
+      "forms": [
+        "Lotusling",
+        "Lotusgore",
+        "Lotus Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #112 lotusgore; Types Beast/Aberration. Identity: A recognizable enormously muscular hippopotamus aberration with horrific extra eyes, multiple impossible jaws and lotus-petal eye stalks emerging from its broad back.. LEFT Lotusling: Small muscular hippo calf with one extra eye stalk and a short impossible cheek jaw. CENTER Lotusgore: Longer broad-backed hippo aberration with multiple eyes and a separated lateral jaw structure. RIGHT Lotus Exarch: Deep hulking hippo with a high lotus-shaped eye-stalk mantle and a large disturbing multi-jaw head; four legs, recognizable hippo anatomy.",
+      "sourceFilename": "exec-2681225e-1e71-4364-8d49-5a5ff673886f.png"
+    },
+    "mistralwisp": {
+      "number": 113,
+      "forms": [
+        "Mistralling",
+        "Mistralwisp",
+        "Mistral Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #113 mistralwisp; Types Fey/Monstrosity. Identity: A visibly nonhuman bipedal raptor-like faerie with a long narrow insect mask, enormous hooked talons, elongated predatory fangs and silver wind-fringed plumage.. LEFT Mistralling: Small four-armed raptor faerie with compact insect mask, short silver feather tufts and small hooked hand talons. CENTER Mistralwisp: Lean long-legged four-armed predator faerie with a narrow mask and elongated two pairs of grasping forearms. RIGHT Mistral Exarch: Hunched broad-mantled four-armed faerie raptor with long hooked talons, sweeping silver wind plumage and deep predatory mask; exactly four arms, two legs.",
+      "sourceFilename": "exec-d07cdfd6-e7e8-413e-b793-df3fe74afb56.png"
+    },
+    "nettlejaw": {
+      "number": 114,
+      "forms": [
+        "Nettleling",
+        "Nettlejaw",
+        "Nettle Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #114 nettlejaw; Types Celestial/Fey. Identity: A four-legged celestial faerie weasel with ivory fur, delicate gold nettle-shaped antlers, tiny leaf wings and warm turquoise nectar-like light markings.. LEFT Nettleling: Small long-faced ivory weasel kit with tiny nettle antler buds and small leaf wings. CENTER Nettlejaw: Long-bodied sleek celestial weasel with branchlike nettle antlers and a wide leaf-wing fan. RIGHT Nettle Exarch: Arched-neck woodland weasel guardian with a long streaming ivory tail, broad floral shoulder mantle and intricate golden nettle antlers; four legs.",
+      "sourceFilename": "exec-b56af229-1bda-415d-b98f-7c108ebc2164.png"
+    },
+    "onyxflare": {
+      "number": 115,
+      "forms": [
+        "Onyxling",
+        "Onyxflare",
+        "Onyx Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #115 onyxflare; Types Monstrosity/Beast. Identity: A massively muscular black lion-crocodile monstrosity with oversized saber teeth, heavy reptilian shoulder plates, huge claws and pale gold spine ridges. Four sturdy legs.. LEFT Onyxling: Small stocky lion-crocodile cub with short saber teeth and a low plated back. CENTER Onyxflare: Long stalking lion-crocodile predator with heavy shoulder plates, extended fangs and strong foreclaws. RIGHT Onyx Exarch: Massive low broad-chested lion-crocodile monstrosity with a high armored shoulder ridge, deep long skull and enormous claws; four legs.",
+      "sourceFilename": "exec-2a925c5f-ec01-4119-9474-e021a496a5ee.png"
+    },
+    "petalroot": {
+      "number": 116,
+      "forms": [
+        "Petalling",
+        "Petalroot",
+        "Petal Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #116 petalroot; Types Construct/Ooze. Identity: An amorphous pale-pink ooze construct with floating white porcelain petal plates, small bronze joint rings and a soft glowing seed-shaped core.. LEFT Petalling: Low pink gel seed with a few disconnected porcelain petal plates. CENTER Petalroot: Raised lotuslike gel construct with articulated floating porcelain petals and a long soft central column. RIGHT Petal Exarch: Wide blooming ooze automaton with an overhanging petal canopy, suspended bronze joint rings and several broad fluid support lobes; no humanoid limbs.",
+      "sourceFilename": "exec-6809914f-5e34-4efd-a9f2-5f2845c86912.png"
+    },
+    "quasarshard": {
+      "number": 117,
+      "forms": [
+        "Quasarling",
+        "Quasarshard",
+        "Quasar Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #117 quasarshard; Types Ooze/Fiend. Identity: An amorphous deep-violet fiend ooze with dark obsidian horns, star-like glowing inner gel, serrated floating fragments and a low predatory mouth.. LEFT Quasarling: Small violet star-speckled gel droplet with short obsidian horn fins. CENTER Quasarshard: Tall arched fiend ooze with a recessed toothed core, longer horn fins and orbiting dark fragments. RIGHT Quasar Exarch: Wide low cosmic-gel predator with a deep overhanging horned mouth and many long trailing soft lobes; no hard quadruped skeleton.",
+      "sourceFilename": "exec-14d510e9-750d-488c-9be0-d3c3141a462d.png"
+    },
+    "ravengaze": {
+      "number": 118,
+      "forms": [
+        "Ravenling",
+        "Ravengaze",
+        "Raven Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #118 ravengaze; Types Elemental/Celestial. Identity: A recognizable raven whose body and one pair of wings are made of living storm wind and dark feathered plasma, with a white-gold celestial halo and two taloned feet.. LEFT Ravenling: Round raven chick made of dark plasma with tiny wings and a small halo arc. CENTER Ravengaze: Lean wind raven with long taloned legs, partially spread layered storm wings and extended tail. RIGHT Raven Exarch: Deep-chested celestial storm raven with high feathered neck mantle, broad fully layered wings and long forked plasma tail; exactly two wings and two feet.",
+      "sourceFilename": "exec-67fbb123-a0b0-48c4-8b54-ba293f523b95.png"
+    },
+    "solacefang": {
+      "number": 119,
+      "forms": [
+        "Solaceling",
+        "Solacefang",
+        "Solace Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #119 solacefang; Types Plant/Undead. Identity: A rooted undead carnivorous white funeral plant with large bone-fanged flytraps, bleached leaves, skeletal root fingers and gentle pale blue spirit light.. LEFT Solaceling: Small white funeral sprout with one bone-fanged flytrap and short root fingers. CENTER Solacefang: Bowed branching funeral plant with several long-stalked flytraps and a low bleached leaf mantle. RIGHT Solace Exarch: Broad arching funeral trap canopy with a dominant skull-like flytrap, layered white leaves and a thick cage of skeletal roots; clearly botanical.",
+      "sourceFilename": "exec-24622138-19a4-4182-8008-ba7f1cafa8e2.png"
+    },
+    "talonplume": {
+      "number": 120,
+      "forms": [
+        "Talonling",
+        "Talonplume",
+        "Talon Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #120 talonplume; Types Fey/Giant. Identity: A towering nonhuman bipedal faerie giant with an avian head, huge feather-fringed forearms, hooked talons and a long cream-and-amber plumage mantle.. LEFT Talonling: Small avian-headed faerie giant with short cream feathers and compact hands. CENTER Talonplume: Tall slender talon guardian with long feather-fringed arms, hooked hand talons and amber chest plumes. RIGHT Talon Exarch: Hunched broad-shouldered avian titan with an enormous layered cream-and-amber mantle, rugged beak and low-reaching feathered hands; two arms, two legs.",
+      "sourceFilename": "exec-67e5ada9-3e4a-4638-a078-c84191a41a56.png"
+    },
+    "ulmarkin": {
+      "number": 121,
+      "forms": [
+        "Ulmarling",
+        "Ulmarkin",
+        "Ulmar Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #121 ulmarkin; Types Undead/Construct. Identity: A reanimated four-legged armadillo skeleton with articulated dark steel shell bands, bronze spinal hinges, visible pale ribs and ghostly green eyes.. LEFT Ulmarling: Small curled armadillo skeleton with a few steel shell bands and short bronze feet. CENTER Ulmarkin: Long-backed walking armadillo skeleton with separated steel shell plates and a fully exposed articulated spine. RIGHT Ulmar Exarch: Low heavily armored undead armadillo with a high arched segmented steel shell, robust mechanical digging foreclaws and a long bony tail; four legs.",
+      "sourceFilename": "exec-ae9587ec-b73d-4f02-9f83-a6d8995e116e.png"
+    },
+    "zinniaroot": {
+      "number": 126,
+      "forms": [
+        "Zinnialing",
+        "Zinniaroot",
+        "Zinnia Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #126 zinniaroot; Types Fey/Monstrosity. Identity: A visibly nonhuman bipedal flower faerie monstrosity with a zinnia-petal mask, hooked mantis-like forearms, sharp taloned feet and exaggerated predatory fangs.. LEFT Zinnialing: Small compact flower-masked faerie with closed zinnia petals and short mantis forearms. CENTER Zinniaroot: Long-legged predatory faerie with an open narrow petal mask, long hooked mantis arms and a thin waist. RIGHT Zinnia Exarch: Hunched broad-petalled zinnia monstrosity with long jointed mantis forearms, deep fanged mask and widely braced taloned legs; two arms, two legs.",
+      "sourceFilename": "exec-058f5adb-7db5-4663-901c-58e0f750c7e6.png"
+    },
+    "aurumshard": {
+      "number": 127,
+      "forms": [
+        "Aurumling",
+        "Aurumshard",
+        "Aurum Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #127 aurumshard; Types Celestial/Fey. Identity: A four-legged radiant celestial ibex with creamy opaline fur, golden shard antlers, faerie leaflike ear fins and small floating sun rings.. LEFT Aurumling: Small luminous ibex kid with little golden shard horns and short leaf ear fins. CENTER Aurumshard: Lean mountain ibex with long curved shard horns, high shoulder fur and floating sun rings. RIGHT Aurum Exarch: Deep-chested celestial ibex with broad angular gold horn crown, long ivory beard and raised mineral-like shoulder mantle; four hooves.",
+      "sourceFilename": "exec-f4088c11-900f-408b-958f-b63a5369a182.png"
+    },
+    "brackengaze": {
+      "number": 128,
+      "forms": [
+        "Brackenling",
+        "Brackengaze",
+        "Bracken Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #128 brackengaze; Types Monstrosity/Beast. Identity: A heavily muscled boar-tiger monstrosity with massive forward tusks, huge claws, dark bracken-colored fur, armored ridges and a predatory low quadruped stance.. LEFT Brackenling: Stocky boar-tiger cub with small forward tusks and a short bristled back. CENTER Brackengaze: Long low stalking boar-tiger with developed tusks, narrow waist and raised armored shoulder plates. RIGHT Bracken Exarch: Broad immensely muscled boar-tiger with a deep tusked head, huge foreclaws and a high bracken-colored armored hump; four legs.",
+      "sourceFilename": "exec-9cfdd61a-84a7-4252-b230-2f2559a3147c.png"
+    },
+    "coralfang": {
+      "number": 129,
+      "forms": [
+        "Coralling",
+        "Coralfang",
+        "Coral Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #129 coralfang; Types Construct/Ooze. Identity: An amorphous coral-pink ooze construct with floating carved coral-like porcelain jaws, small bronze gears, teal gel joints and fluid soft tentacles.. LEFT Coralling: Small coral jelly with one floating porcelain jaw and short bronze joint fragments. CENTER Coralfang: Arched coral ooze construct with separated paired jaw plates and long flowing gel support limbs. RIGHT Coral Exarch: Wide overhanging coral automaton with a deep segmented porcelain maw, floating carved coral plates and broad teal tentacle supports; no rigid humanoid skeleton.",
+      "sourceFilename": "exec-4fba2567-890a-4606-9e65-fc8644c1c10b.png"
+    },
+    "daggerplume": {
+      "number": 130,
+      "forms": [
+        "Daggerling",
+        "Daggerplume",
+        "Dagger Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #130 daggerplume; Types Ooze/Fiend. Identity: An amorphous burgundy fiend ooze with dagger-shaped horn fins, tooth-edged liquid wing lobes and a charcoal core, no rigid skeleton.. LEFT Daggerling: Low burgundy ooze with tiny dagger horn fins and a short soft charcoal core. CENTER Daggerplume: Raised flowing fiend jelly with broad tooth-edged winglike lobes and long dagger fins. RIGHT Dagger Exarch: Tall sweeping liquid-wing fiend mantle with a recessed charcoal core, deep tooth fringes and long dripping burgundy blades; no hard animal skeleton.",
+      "sourceFilename": "exec-d46c6f1f-4834-4a53-a4a4-58346e84cb07.png"
+    },
+    "eclipsekin": {
+      "number": 131,
+      "forms": [
+        "Eclipseling",
+        "Eclipsekin",
+        "Eclipse Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #131 eclipsekin; Types Elemental/Celestial. Identity: A four-legged celestial elemental stag made of black-and-white luminous plasma, with a fine eclipsed sun halo and flowing silver-gold flame antlers.. LEFT Eclipseling: Small luminous eclipse fawn with short silver-gold flame antler buds. CENTER Eclipsekin: Lean long-legged plasma stag with divided black-white body currents and developed flame antlers. RIGHT Eclipse Exarch: Deep-chested arched-neck elemental stag with a high silver-gold mane, broad branching flame antlers and a distinct eclipsed-sun halo; four legs.",
+      "sourceFilename": "exec-de5b6117-c355-44d5-ae55-5492d3c3277a.png"
+    },
+    "fennelgore": {
+      "number": 132,
+      "forms": [
+        "Fennelling",
+        "Fennelgore",
+        "Fennel Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #132 fennelgore; Types Plant/Undead. Identity: A rooted undead carnivorous fennel plant with bone-white hollow stems, toothed seedpod traps, dead feathery fronds and black ghostly sap.. LEFT Fennelling: Small dead fennel shoot with one toothed seedpod and short bone-white roots. CENTER Fennelgore: Tall branching funeral fennel with hollow bone stems and separated hanging seedpod traps. RIGHT Fennel Exarch: Broad umbrella-like fennel predator with a hollow skeletal trunk, many mature seedpod traps and drooping dead feathery fronds; botanical anatomy.",
+      "sourceFilename": "exec-b04248c4-0b1d-4c4f-b8cc-77f337da49c1.png"
+    },
+    "vesperspire": {
+      "number": 72,
+      "forms": [
+        "Vesperlet",
+        "Vesperspire",
+        "Vesper Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #72 vesperspire; Types Fey/Elemental. Identity: A visibly nonhuman tall bipedal bat-eared twilight faerie with a long muzzle, amber eyes, flowing dusk-blue fur and thin ribbons of moving wind. No ordinary human anatomy.. LEFT Vesperlet: Small bat-eared dusk faerie with short muzzle and compact fuzzy body. CENTER Vesperspire: Slender long-legged twilight faerie with a narrow chest, long ears and flowing wind ribbons. RIGHT Vesper Sovereign: Hunched mature twilight faerie with a deep batlike muzzle, broad fur-and-wind shoulder mantle and long low-reaching hands; two arms and legs.",
+      "sourceFilename": "exec-555b2127-e65f-46df-b6ab-d9d6bc9ef097.png"
+    },
+    "xyloveil": {
+      "number": 74,
+      "forms": [
+        "Xylolet",
+        "Xyloveil",
+        "Xylo Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #74 xyloveil; Types Ooze/Beast. Identity: A broad-shouldered salamander-shaped living ooze, with amber wood-grain suspended in its translucent body, muscular animal-like mass, bright bead eyes and flexible gel pseudopods.. LEFT Xylolet: Round amber salamander-shaped jelly with short four soft paw lobes. CENTER Xyloveil: Long flowing salamander ooze with an arched muscular core, long tail and suspended wood grain. RIGHT Xylo Sovereign: Broad low liquid salamander with a raised translucent dorsal sail, powerful flowing front lobes and a sweeping gel tail; preserve ooze texture.",
+      "sourceFilename": "exec-4e5db960-3f89-4ec3-85dc-3fa9c3e0e611.png"
+    },
+    "zephyrfang": {
+      "number": 76,
+      "forms": [
+        "Zephyrlet",
+        "Zephyrfang",
+        "Zephyr Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #76 zephyrfang; Types Undead/Plant. Identity: A rooted undead plant with a wind-worn wolf skull, bleached thorn fangs, dead reed fronds, skeletal root legs and pale green spectral sap.. LEFT Zephyrlet: Small rooted wolf-skull sprout with short dry reed fringe. CENTER Zephyrfang: Long arching grave plant with a wind-worn wolf skull held forward and skeletal root legs. RIGHT Zephyr Sovereign: Wide bowed spectral reed beast-plant with an elongated bone-fanged wolf trap, dense dead reed mane and exposed root scaffolding.",
+      "sourceFilename": "exec-38643613-16a7-4fd2-8b56-3d591fb648fb.png"
+    },
+    "ashenling": {
+      "number": 77,
+      "forms": [
+        "Ashenlet",
+        "Ashenling",
+        "Ashen Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #77 ashenling; Types Aberration/Construct. Identity: A horrific four-legged ash-gray construct with burnt cedar plates, exposed brass ribs, many coal-like eyes, an asymmetrical split jaw and long cable-like tentacles.. LEFT Ashenlet: Small charred cedar quadruped with close brass ribs and short cable tail. CENTER Ashenling: Lean lopsided construct with open ribs, a split asymmetric jaw and trailing cable tentacles. RIGHT Ashen Sovereign: Broad crouched ash engine with an overhanging burnt-wood shoulder mantle, widely spaced coal eyes and long dragging cable tendrils; four legs.",
+      "sourceFilename": "exec-79a6cee0-f334-47af-b055-8b80df8ba9e3.png"
+    },
+    "marrowfang": {
+      "number": 89,
+      "forms": [
+        "Marrowlet",
+        "Marrowfang",
+        "Marrow Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #89 marrowfang; Types Undead/Plant. Identity: A rooted undead carnivorous plant formed from tangled pale marrow roots and black sap, with a long wolf-skull trap, bone fangs and tiny dried funeral flowers.. LEFT Marrowlet: Small wolf-skull root sprout with short pale marrow roots. CENTER Marrowfang: Tall bowed marrow plant with an elongated wolf-skull trap held on a flexible skeletal stalk. RIGHT Marrow Sovereign: Low sprawling marrow-root predator with a large bone-fanged skull trap beneath a high interwoven bone-root arch and dried funeral flowers.",
+      "sourceFilename": "exec-a21f4198-c5a3-42f6-a849-d051512d4493.png"
+    },
+    "opalhorn": {
+      "number": 91,
+      "forms": [
+        "Opallet",
+        "Opalhorn",
+        "Opal Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #91 opalhorn; Types Beast/Fey. Identity: A recognizable massively muscled cape hare upright on two powerful hind legs, creamy gray fur, opal branching horns and pink-violet faerie ear membranes. No human face.. LEFT Opallet: Compact upright cape-hare juvenile with short opal horn nubs and a round fluffy chest. CENTER Opalhorn: Long-legged poised muscular hare with broad ear membranes and slender branching opal horns. RIGHT Opal Sovereign: Heavy-haunched cape-hare guardian with a low broad chest, huge ears flared into a fan and an elaborate opal horn crown; animal head.",
+      "sourceFilename": "exec-15d8bb0b-607d-44b2-9e57-7812b5eaf400.png"
+    },
+    "tundraglen": {
+      "number": 96,
+      "forms": [
+        "Tundralet",
+        "Tundraglen",
+        "Tundra Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #96 tundraglen; Types Fiend/Giant. Identity: A gigantic bipedal horned fiend of black tundra fur and slate hide, with ice-gray tusks, huge clawed hands and weathered iron-like horn ridges.. LEFT Tundralet: Small shaggy tundra fiend with short tusks and a compact hunched body. CENTER Tundraglen: Tall long-armed fiend giant with heavy slate shoulders, thick black fur and swept iron-like horns. RIGHT Tundra Sovereign: Low massive tundra titan with a broad fur hump, deep tusked muzzle and huge thick clawed forearms; two arms and two legs.",
+      "sourceFilename": "exec-9b204390-c00d-4fc1-ae7b-e6bd8f4e60dd.png"
+    },
+    "arborkin": {
+      "number": 101,
+      "forms": [
+        "Arborling",
+        "Arborkin",
+        "Arbor Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #101 arborkin; Types Celestial/Fey. Identity: A four-legged celestial woodland creature with a deerlike face, luminous ivory fur, flowering arbor antlers, faerie leaf wings and delicate golden halo arcs.. LEFT Arborling: Small luminous fawn with tiny flowering antler buds and close leaf wings. CENTER Arborkin: Slender arched-neck woodland deer with branching arbor antlers and a developing leaf-wing fan. RIGHT Arbor Exarch: Deep-chested celestial woodland guardian with a high flowering antler canopy, broad layered leaf wings and long sweeping fur; four legs.",
+      "sourceFilename": "exec-454a2b08-8db6-4a5b-98cc-83e7b74d14f9.png"
+    },
+    "cobaltwisp": {
+      "number": 103,
+      "forms": [
+        "Cobaltling",
+        "Cobaltwisp",
+        "Cobalt Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #103 cobaltwisp; Types Construct/Ooze. Identity: An amorphous cobalt-blue gel construct containing articulated silver cogwheels, floating porcelain joint pieces, a soft metal-mask core and fluid pseudopods.. LEFT Cobaltling: Small cobalt jelly holding a few floating silver cogs and a porcelain mask. CENTER Cobaltwisp: Raised cobalt gel mechanism with separated articulated porcelain limbs suspended in flexible ooze. RIGHT Cobalt Exarch: Broad amorphous cobalt engine with a large suspended cog halo, a recessed mask core and wide independently flowing pseudopod supports; no rigid skeleton.",
+      "sourceFilename": "exec-e8d0ccf0-0506-4723-8bd0-a5a9e62dc804.png"
+    },
+    "dapplejaw": {
+      "number": 104,
+      "forms": [
+        "Dappleling",
+        "Dapplejaw",
+        "Dapple Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #104 dapplejaw; Types Ooze/Fiend. Identity: An amorphous dappled burgundy-and-gold fiend ooze with curved dark horns, tooth-lined gel maws, oily highlights and floating thorn-like shards.. LEFT Dappleling: Low dappled burgundy gel imp with tiny horn nubs and one gold-lined maw. CENTER Dapplejaw: Arched oily fiend ooze with a deep main mouth, developed curved horns and short flowing side jaws. RIGHT Dapple Exarch: Broad low fiend-gel canopy with a dominant overhanging horned mouth, trailing gold-dappled lobes and floating thorn shards.",
+      "sourceFilename": "exec-b96561a1-47e2-485a-b631-52d5d20b1d5f.png"
+    },
+    "velvetgore": {
+      "number": 122,
+      "forms": [
+        "Velvetling",
+        "Velvetgore",
+        "Velvet Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #122 velvetgore; Types Fiend/Undead. Identity: A four-legged fiend deer with deep crimson velvet hide, curved black antlers, exposed ivory skeletal ribs, a long predatory muzzle and cold violet eyes.. LEFT Velvetling: Small crimson undead fawn with short horn nubs and a few exposed ribs. CENTER Velvetgore: Long-legged skeletal fiend deer with swept black antlers, thin tattered hide and a deep predatory muzzle. RIGHT Velvet Exarch: Deep-chested low-necked fiend stag with a wide black antler crown, open skeletal shoulder arches and a heavy crimson hide mantle; four legs.",
+      "sourceFilename": "exec-fa9f0122-135d-43b2-82c7-bd1bc816fe4b.png"
+    },
+    "whisperwisp": {
+      "number": 123,
+      "forms": [
+        "Whisperling",
+        "Whisperwisp",
+        "Whisper Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #123 whisperwisp; Types Aberration/Fey. Identity: A horrific nonhuman bipedal whispering faerie aberration with an eyeless split mask, many tiny mouths along its torso, long ear-like appendages and tattered lavender silk.. LEFT Whisperling: Small eyeless masked faerie with compact limbs, a few mouth slits and short silk fringes. CENTER Whisperwisp: Tall narrow whispering aberration with elongated mismatched arms and an opened torso-mouth column. RIGHT Whisper Exarch: Deeply hunched faerie aberration with a split eyeless mask, broad tattered lavender mantle and long grasping arms framing its many torso mouths; two arms and two legs.",
+      "sourceFilename": "exec-9878d4af-2515-4c41-a6ad-dc21e5309cba.png"
+    },
+    "xanthjaw": {
+      "number": 124,
+      "forms": [
+        "Xanthling",
+        "Xanthjaw",
+        "Xanth Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #124 xanthjaw; Types Giant/Elemental. Identity: A colossal bipedal citrine-yellow elemental giant with lightning-filled jaws, angular stone brows, massive gold-gray limbs and branching electric fractures.. LEFT Xanthling: Compact yellow stone giant with a short angular jaw and small lightning seams. CENTER Xanthjaw: Tall long-armed citrine giant with a deep illuminated jaw and separated jagged shoulder plates. RIGHT Xanth Exarch: Broad hunched lightning titan with a high craggy back, a deep wide glowing jaw and immense gold-gray forearms; two arms and legs.",
+      "sourceFilename": "exec-7629cb8a-5a73-49ce-a8f3-9c98e8bb61ec.png"
+    },
+    "yonderflare": {
+      "number": 125,
+      "forms": [
+        "Yonderling",
+        "Yonderflare",
+        "Yonder Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #125 yonderflare; Types Beast/Aberration. Identity: A recognizable enormously muscular saber-toothed cat aberration with eye stalks along its back, extra impossible jaws, and a long tentacle-like tail.. LEFT Yonderling: Round stocky saber-cat cub with short eye stalks and a small tentacle tail. CENTER Yonderflare: Lean muscular saber-cat with a long tentacle tail, eye stalk mane and a distinct extra side jaw. RIGHT Yonder Exarch: High-shouldered hulking saber-cat aberration with deep saber jaws, a broad eye-stalk ridge and a long sweeping tentacle tail; four legs.",
+      "sourceFilename": "exec-c00e5cdf-e25c-4850-b5a0-2ac89091e3e3.png"
+    },
+    "gossamerwisp": {
+      "number": 133,
+      "forms": [
+        "Gossamerling",
+        "Gossamerwisp",
+        "Gossamer Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #133 gossamerwisp; Types Fey/Giant. Identity: A towering visibly nonhuman bipedal moth faerie giant with silver antennae, pale fur, broad powerful limbs and a billowing gossamer wing mantle.. LEFT Gossamerling: Compact pale moth faerie juvenile with short antennae and close-folded gossamer mantle. CENTER Gossamerwisp: Tall long-armed moth giant with broad fur shoulders and opened layered wing mantle. RIGHT Gossamer Exarch: Hunched ancient moth titan with an enormous arched gossamer shoulder canopy, long silver antennae and heavy low-reaching hands; two arms, two legs.",
+      "sourceFilename": "exec-e8dad901-0db0-4e94-a49f-99664e5c2505.png"
+    },
+    "hearthjaw": {
+      "number": 134,
+      "forms": [
+        "Hearthling",
+        "Hearthjaw",
+        "Hearth Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #134 hearthjaw; Types Undead/Construct. Identity: A reanimated four-legged badger skeleton with dark red brick-and-bronze joint armor, exposed ash-white ribs and a faint coal glow behind its skull jaw.. LEFT Hearthling: Small badger skeleton with sparse brick-red joint plates and short bronze claws. CENTER Hearthjaw: Long-backed burrowing badger revenant with exposed ribwork, elongated digging claws and segmented red armor. RIGHT Hearth Exarch: Low heavy shoulder-armored skeletal badger with deep brick-and-bronze rib braces, broad digging forepaws and a short thick spine tail; four legs.",
+      "sourceFilename": "exec-5a9e082b-7eb0-4e99-b2e1-61130e7ff16a.png"
+    },
+    "isletflare": {
+      "number": 135,
+      "forms": [
+        "Isletling",
+        "Isletflare",
+        "Islet Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #135 isletflare; Types Fiend/Undead. Identity: A four-legged skeletal devil crocodile with algae-dark hide, pale driftbone armor, hooked fiend horns and spectral sea-green light, without a living animal appearance.. LEFT Isletling: Small driftbone crocodile skeleton with short black horns and algae-dark hide scraps. CENTER Isletflare: Long lean skeletal crocodile fiend with exposed ribwork, elongated hooked snout and finlike horn ridges. RIGHT Islet Exarch: Broad ancient low crocodile revenant with a high driftbone shoulder mantle, deep long skull and massive spectral-green jaw; four legs.",
+      "sourceFilename": "exec-f4dd41cc-6665-4f42-889a-97cf2d688a14.png"
+    },
+    "kryptonshard": {
+      "number": 137,
+      "forms": [
+        "Kryptonling",
+        "Kryptonshard",
+        "Krypton Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #137 kryptonshard; Types Giant/Elemental. Identity: A colossal bipedal green elemental stone giant with natural luminescent mineral shards, enormous craggy fists and dark charcoal skin fractured by emerald light.. LEFT Kryptonling: Compact green stone giant with few short mineral shards and small heavy fists. CENTER Kryptonshard: Tall angular mineral giant with separated shoulder crystals, long thick forearms and exposed emerald fractures. RIGHT Krypton Exarch: Deeply hunched broad-backed stone titan with a high natural mineral ridge, huge craggy forearms and deep emerald fissures; no extra arms or faces.",
+      "sourceFilename": "exec-8ee7113b-5f7c-403a-8b12-2aeee22af744.png"
+    },
+    "nectarplume": {
+      "number": 140,
+      "forms": [
+        "Nectarling",
+        "Nectarplume",
+        "Nectar Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #140 nectarplume; Types Celestial/Fey. Identity: A four-legged celestial faerie creature with an anteater-like long muzzle, cream feathers, gold nectar filaments, tiny flower-shaped lights and delicate halo rings.. LEFT Nectarling: Small cream anteater-like celestial with short muzzle, tiny gold nectar filaments and close feather tufts. CENTER Nectarplume: Long-bodied anteater faerie with a curved long muzzle, flowing tail and developed nectar whiskers. RIGHT Nectar Exarch: Arched-shouldered celestial anteater with a sweeping feathered tail, broad floral neck mantle and long golden nectar filaments; four legs.",
+      "sourceFilename": "exec-11181298-b727-433b-a968-b29939108bfc.png"
+    },
+    "ripplejaw": {
+      "number": 144,
+      "forms": [
+        "Rippleling",
+        "Ripplejaw",
+        "Ripple Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #144 ripplejaw; Types Elemental/Celestial. Identity: A four-legged elemental turtle-like creature made of flowing turquoise water, with a white foam shell, gold gill fronds and a delicate radiant celestial halo.. LEFT Rippleling: Small round water turtle with a low foam dome and tiny gold gill buds. CENTER Ripplejaw: Longer four-legged current turtle with a layered wave shell, broad water feet and flared gold gills. RIGHT Ripple Exarch: Broad ancient water tortoise with a high flowing foam shell, deep current neck mantle and strong turquoise tidal legs; four legs, one head.",
+      "sourceFilename": "exec-ff7d49e4-b7d8-4ad9-b535-e585f00015d2.png"
+    },
+    "truffleroot": {
+      "number": 146,
+      "forms": [
+        "Truffleling",
+        "Truffleroot",
+        "Truffle Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #146 truffleroot; Types Fey/Giant. Identity: A towering nonhuman bipedal woodland faerie giant with a truffle-like textured crown, a broad piglike muzzle, mushroom ears, enormous strong limbs and mossy fur.. LEFT Truffleling: Compact pig-muzzled woodland faerie with a round truffle crown, short mushroom ears and thick hands. CENTER Truffleroot: Tall heavy-shouldered woodland giant with long arms, rough fungal back ridges and mature mushroom ear shelves. RIGHT Truffle Exarch: Deeply hunched ancient woodland titan with a broad truffle-and-moss canopy back, huge low arms and a rugged piglike muzzle; two arms and legs.",
+      "sourceFilename": "exec-0a005382-2367-4a8b-8ae9-79fbd068bd16.png"
+    },
+    "violetgaze": {
+      "number": 148,
+      "forms": [
+        "Violetling",
+        "Violetgaze",
+        "Violet Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #148 violetgaze; Types Fiend/Undead. Identity: A four-legged undead fiend panther with dark violet hide remnants, exposed pale ribs, curved black brow horns and several luminous violet eye-like markings.. LEFT Violetling: Small violet skeletal panther cub with tiny horn nubs and small luminous eye markings. CENTER Violetgaze: Lean long-bodied undead fiend panther with exposed pale ribs, swept brow horns and a long sinuous tail. RIGHT Violet Exarch: Broad low predatory panther revenant with a deep skeletal head, high exposed shoulder arches and a large ragged violet hide mantle; four legs.",
+      "sourceFilename": "exec-272d9347-d078-4ca3-bd94-04e928465ad9.png"
+    },
+    "oculume": {
+      "number": 4,
+      "forms": [
+        "Oculit",
+        "Oculume",
+        "Thousand Vigil"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #4 oculume; Types Aberration/Celestial. Identity: A non-animal floating spiral mantle with asymmetrical eyes, orbiting gold feather-shaped lights, and a pearl-and-indigo body.. LEFT Oculit: A tiny single eye tightly wrapped in one tapering pearl mantle and two disconnected gold feather lights. CENTER Oculume: An open crescent-shaped indigo mantle with eyes lining its inner curve, a hanging twisting membrane and a lateral arc of feather lights. RIGHT Thousand Vigil: A hollow annular living aperture with several asymmetrically folded mantles, offset eye clusters and separate orbiting gold feather segments; no ordinary animal body.",
+      "sourceFilename": "exec-a7a4cfe1-66c8-4ac2-a157-e682d35affda.png"
+    },
+    "vellifold": {
+      "number": 6,
+      "forms": [
+        "Foldrop",
+        "Vellifold",
+        "Paradox Tide"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #6 vellifold; Types Aberration/Ooze. Identity: An impossible folded ribbon creature with recursive limbs and aperture eyes, softened by translucent turquoise gel and droplet edges.. LEFT Foldrop: A compact triangular folded ribbon droplet with one aperture eye, a hanging blue gel bead and no rigid animal skeleton. CENTER Vellifold: An elongated crawling ribbon creature whose four recurved limbs form linked geometric folds, turquoise gel joining the joints. RIGHT Paradox Tide: A suspended broad Mobius-like loop of recursive ribbon bridges and impossible negative spaces, eyes on opposing inner surfaces and liquid curtains beneath; no conventional quadruped torso.",
+      "sourceFilename": "exec-22d0f995-6fca-4090-93e7-9bfebd42a254.png"
+    },
+    "resonara": {
+      "number": 21,
+      "forms": [
+        "Plasmote",
+        "Resonara",
+        "Heavenly Resonance"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #21 resonara; Types Elemental/Celestial. Identity: A creature of ringing blue plasma shaped into nested bell-like currents, altered by small feathered light arcs and a gold celestial crown.. LEFT Plasmote: A single small blue bell spirit with a golden clapper and two tiny folded white winglets. CENTER Resonara: A long suspended paired-bell creature with a narrow articulated gold spine, wings spread horizontally and two separate glowing clappers. RIGHT Heavenly Resonance: A hovering radial carillon seraph with three open bells facing different directions around a bright gold core, six curved white feather lobes and one broad orbital halo; reorganized body, no conventional legs.",
+      "sourceFilename": "exec-5afca286-2f3e-4d44-b6b6-f89cc5bbef6a.png"
+    },
+    "yarrowwing": {
+      "number": 75,
+      "forms": [
+        "Yarrowlet",
+        "Yarrowwing",
+        "Yarrow Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #75 yarrowwing; Types Plant/Fiend. Identity: A rooted carnivorous yarrow plant with white clustered lures, red tooth-lined flower cups, barbed hornlike stems and dark infernal roots; botanically textured and predatory.. LEFT Yarrowlet: Small white yarrow cluster above one red tooth cup and short root feet. CENTER Yarrowwing: Branching carnivorous yarrow with three cup traps and hooked red stems. RIGHT Yarrow Sovereign: Tall umbrella-like yarrow predator with a broad white lure canopy over deep red tooth cups and a thick twisting black root pedestal.",
+      "sourceFilename": "exec-0f14e466-cc7a-4e12-ada4-3754924db3c1.png"
+    },
+    "berylhorn": {
+      "number": 78,
+      "forms": [
+        "Beryllet",
+        "Berylhorn",
+        "Beryl Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #78 berylhorn; Types Beast/Fey. Identity: A thickly muscled wallaby standing on two strong hind legs, warm gray fur, beryl-green branching horns, soft faerie ear fins and sparkling leaf-shaped markings. Clearly an animal.. LEFT Beryllet: Compact wallaby joey with little beryl horn nubs and short balancing tail. CENTER Berylhorn: Tall springing wallaby with elongated hindlegs, developed green horns and leaf ear fins. RIGHT Beryl Sovereign: Low heavy-chested muscular wallaby with large haunches, a long thick tail and a wide beryl horn crown; recognizable wallaby.",
+      "sourceFilename": "exec-6c080ca3-290e-4d0b-b2b0-32715f7e5269.png"
+    },
+    "kestrelveil": {
+      "number": 87,
+      "forms": [
+        "Kestrellet",
+        "Kestrelveil",
+        "Kestrel Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #87 kestrelveil; Types Ooze/Beast. Identity: An amorphous tawny-and-slate ooze with recognizable kestrel beak and feather-patterned gel fans, muscular beastlike core and flowing winglike pseudopods; no rigid skeleton.. LEFT Kestrellet: Small rounded kestrel-faced jelly with tiny gel feather fans. CENTER Kestrelveil: Long streamlined kestrel ooze with broad tapering wing pseudopods and a flowing tail. RIGHT Kestrel Sovereign: Wide soaring gel raptor with layered feather-patterned liquid fans and a deep muscular translucent core; no rigid bird skeleton.",
+      "sourceFilename": "exec-452cba52-3cfc-43e2-83c4-ec8b8b760a42.png"
+    },
+    "pyreshade": {
+      "number": 92,
+      "forms": [
+        "Pyrelet",
+        "Pyreshade",
+        "Pyre Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #92 pyreshade; Types Celestial/Aberration. Identity: A celestial four-legged lion-like creature of charcoal feathers and pearl-gold fire, a small radiant halo, and disturbing extra eyes and a second mouth in its chest.. LEFT Pyrelet: Small charcoal lion cub with pearl-gold fire tufts and a tiny misplaced chest eye. CENTER Pyreshade: Lean radiant lion with a partially open chest mouth and growing feather mane. RIGHT Pyre Sovereign: Deep-chested celestial lion with a broad burning feather mantle, fully visible uncanny chest mouth and broken halo above its high mane; four legs.",
+      "sourceFilename": "exec-b921634d-e4d2-499f-852a-933c1652d397.png"
+    },
+    "saffronwyrm": {
+      "number": 95,
+      "forms": [
+        "Saffronlet",
+        "Saffronwyrm",
+        "Saffron Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #95 saffronwyrm; Types Fey/Celestial. Identity: A long-bodied four-legged faerie creature with an otterlike face, saffron-striped cream fur, fine whiskers, luminous golden celestial tail ribbons and leaf-shaped ears.. LEFT Saffronlet: Small cream otterlike faerie with stubby saffron-striped tail and short leaf ears. CENTER Saffronwyrm: Long slender four-pawed faerie with tall leaf ears and a broad luminous ribbon tail. RIGHT Saffron Sovereign: Arched-neck low celestial otter guardian with wide golden tail ribbons, flowing whiskers and broad shoulder fur; preserve four paws.",
+      "sourceFilename": "exec-8d0559d2-24a9-4d51-b827-e41fa5dfa5b1.png"
+    },
+    "zirconveil": {
+      "number": 100,
+      "forms": [
+        "Zirconlet",
+        "Zirconveil",
+        "Zircon Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #100 zirconveil; Types Ooze/Beast. Identity: A heavy lynx-shaped translucent zircon-blue ooze with broad muscular animal-like mass, gel ear tufts, embedded pale mineral flecks and flowing soft paws.. LEFT Zirconlet: Small round lynx-faced zircon jelly with soft ear nubs and stubby gel paws. CENTER Zirconveil: Long-backed low liquid lynx with sharp translucent ear tufts and muscular shoulder core. RIGHT Zircon Sovereign: Broad flowing zircon lynx with high gel shoulders, long tapering tail and mineral-laced translucent paws; unmistakably ooze.",
+      "sourceFilename": "exec-e403b682-299e-4f60-9995-d21bf2d24279.png"
+    },
+    "basilgore": {
+      "number": 102,
+      "forms": [
+        "Basilling",
+        "Basilgore",
+        "Basil Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #102 basilgore; Types Monstrosity/Beast. Identity: A recognizable enormous muscular monitor lizard transformed into a basilisk-like monstrosity, with exaggerated saber fangs, oversized claws, basil-green ridges and thick heavy limbs.. LEFT Basilling: Small stocky monitor-lizard juvenile with broad feet and short saber fangs. CENTER Basilgore: Long low muscular basilisk lizard with thick forelimbs, developed fangs and a raised basil-green spine ridge. RIGHT Basil Exarch: Heavy arch-shouldered monitor monstrosity with a deep predatory skull, enormous foreclaws and broad overlapping dorsal ridges; four legs.",
+      "sourceFilename": "exec-e7e9932f-9c0f-4727-9e21-e91881121a8c.png"
+    },
+    "harborgaze": {
+      "number": 108,
+      "forms": [
+        "Harborling",
+        "Harborgaze",
+        "Harbor Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #108 harborgaze; Types Undead/Construct. Identity: A reanimated four-legged harbor mastiff skeleton with tarnished bronze rib braces, sea-worn armor joints, porthole-like eyes and dark salt-stained burial cloth.. LEFT Harborling: Small mastiff skeleton with a few bronze braces and short burial cloth. CENTER Harborgaze: Lean harbor revenant hound with exposed braced ribs, long paws and salt-stained cloth panels. RIGHT Harbor Exarch: Heavy shoulder-armored undead mastiff with deep articulated bronze rib cage, low skull and a wide sea-burial mantle; four legs.",
+      "sourceFilename": "exec-e4695d4a-b453-4621-a57a-e90a4c6fe53e.png"
+    },
+    "ichorfang": {
+      "number": 109,
+      "forms": [
+        "Ichorling",
+        "Ichorfang",
+        "Ichor Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #109 ichorfang; Types Fiend/Undead. Identity: A four-legged skeletal fiend hound with dark blood-red hide remnants, exposed luminous marrow ribs, curled black horns and long ivory fangs. Eerie, without gore.. LEFT Ichorling: Small skeletal fiend pup with short horns, dark hide remnants and little ivory fangs. CENTER Ichorfang: Lean long-legged bone hound with swept black horns and visibly open luminous ribs. RIGHT Ichor Exarch: Broad hunched infernal hound with a deep saber-fanged skull, high skeletal shoulder arches and a dark tattered hide mantle; four legs.",
+      "sourceFilename": "exec-f63d78e6-ca3e-4256-a6c2-c9a33e5f68de.png"
+    },
+    "jubilroot": {
+      "number": 136,
+      "forms": [
+        "Jubilling",
+        "Jubilroot",
+        "Jubil Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #136 jubilroot; Types Aberration/Fey. Identity: A horrific nonhuman bipedal root-and-faerie aberration with a split laughing mask, multiple small mouths, too many staring eyes and twisted vine-like arms.. LEFT Jubilling: Small laughing root faerie with a compact wooden torso and short twisted arms. CENTER Jubilroot: Tall asymmetric vine-limbed aberration with a split mask, several torso mouths and long fingers. RIGHT Jubil Exarch: Broad hunched root-and-faerie aberration with an overhanging vine mantle, many watchful eyes and long low-reaching twisted hands; two arms and two legs.",
+      "sourceFilename": "exec-148c5f92-6bb6-4e24-abf2-b54d6288fff0.png"
+    },
+    "larchgaze": {
+      "number": 138,
+      "forms": [
+        "Larchling",
+        "Larchgaze",
+        "Larch Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #138 larchgaze; Types Beast/Aberration. Identity: A recognizable massively muscled elk aberration with horrific staring eyes embedded in bark-textured antlers, extra tentacle jaws and thick shaggy fur.. LEFT Larchling: Small muscular elk calf with little eye-bearing antler buds and a short tentacle jaw. CENTER Larchgaze: Long-legged elk aberration with a broad shaggy chest, branching watchful antlers and developed secondary tentacle jaws. RIGHT Larch Exarch: Low-necked hulking elk with a tall eye-studded bark antler canopy, massive shoulder fur and long unnatural jaw tendrils; four legs.",
+      "sourceFilename": "exec-fbc93d92-5dac-4298-a736-17e5ca364674.png"
+    },
+    "miragefang": {
+      "number": 139,
+      "forms": [
+        "Mirageling",
+        "Miragefang",
+        "Mirage Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #139 miragefang; Types Fey/Monstrosity. Identity: A visibly nonhuman bipedal jackal-headed faerie monstrosity with oversized fangs, long hooked claws and a silver-violet mirage-shard mantle.. LEFT Mirageling: Small jackal-headed faerie with compact fanged muzzle, short claws and tiny mirage shards. CENTER Miragefang: Lean tall predatory jackal faerie with elongated hooked arms and a narrow silver-violet shard mantle. RIGHT Mirage Exarch: Forward-hunched jackal monstrosity with a deep saber-fanged muzzle, broad layered mirage mantle and long heavy grasping claws; two arms and two legs.",
+      "sourceFilename": "exec-bcebc573-a814-4c58-94c7-607d820e1835.png"
+    },
+    "oraclekin": {
+      "number": 141,
+      "forms": [
+        "Oracleling",
+        "Oraclekin",
+        "Oracle Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #141 oraclekin; Types Monstrosity/Beast. Identity: A huge muscular owl-bear monstrosity with oversized hooked beak fangs, massive bear claws, ochre feather ridges and a solid powerful quadrupedal body.. LEFT Oracleling: Round owl-bear cub with short hooked beak and broad soft paws. CENTER Oraclekin: Long-backed stalking owl-bear with developed bear shoulders, large beak fangs and layered ochre neck feathers. RIGHT Oracle Exarch: Massive high-shouldered owl-bear with a deep feather collar, immense hooked beak, heavy muscular forelimbs and large bear claws; four legs.",
+      "sourceFilename": "exec-1dbe46e7-17b0-4c8c-a9ac-3bc6ddf0afad.png"
+    },
+    "quiverwisp": {
+      "number": 143,
+      "forms": [
+        "Quiverling",
+        "Quiverwisp",
+        "Quiver Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #143 quiverwisp; Types Ooze/Fiend. Identity: An amorphous purple fiend ooze with curved obsidian horns, suspended arrowlike barbs, quivering liquid tendrils and a dark toothed mouth.. LEFT Quiverling: Small purple gel droplet with short horn nubs and a few suspended arrow barbs. CENTER Quiverwisp: Lean arching fiend ooze with long obsidian horns, a central dark mouth and flowing arrowlike lobes. RIGHT Quiver Exarch: Wide low quivering gel predator with a dominant horned maw, long trailing purple tendrils and a floating crown of arrow barbs; amorphous.",
+      "sourceFilename": "exec-3c40fbd6-1f63-4f40-8582-60ba35bf6216.png"
+    },
+    "zodiacplume": {
+      "number": 150,
+      "forms": [
+        "Zodiacling",
+        "Zodiacplume",
+        "Zodiac Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #150 zodiacplume; Types Giant/Elemental. Identity: A colossal nonhuman bipedal storm giant with dark blue craggy skin, huge hands, feather-like flame and cloud plumes, and glowing gold circular star motifs without lettering.. LEFT Zodiacling: Compact blue storm giant with small cloud shoulder tufts and subtle gold ring markings. CENTER Zodiacplume: Tall long-armed storm guardian with a high featherlike flame crest and separated cloud plumes. RIGHT Zodiac Exarch: Broad hunched celestial-storm titan with a towering arched cloud mantle, long heavy forearms and large flowing blue-gold flame plumes; no extra heads, arms or wings.",
+      "sourceFilename": "exec-10c95ad9-d2ca-4180-8909-e88fa53e64ce.png"
+    },
+    "pewtergore": {
+      "number": 142,
+      "forms": [
+        "Pewterling",
+        "Pewtergore",
+        "Pewter Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #142 pewtergore; Types Construct/Ooze. Identity: An amorphous smoke-gray ooze construct with floating ornate pewter armor pieces, articulated bronze cogs, black gel joints and a broad tusked mask core.. LEFT Pewterling: Low smoke-gray jelly with a small tusked pewter mask and a few bronze cogs. CENTER Pewtergore: Raised amorphous pewter construct with separate ornate armor sections suspended in black gel. RIGHT Pewter Exarch: Broad tusked ooze automaton with an overhanging ornate pewter mantle, recessed mask core and thick independently flowing black gel supports; no rigid skeleton.",
+      "sourceFilename": "exec-33639834-a6de-4458-856d-3e4239c7205e.png"
+    },
+    "starlingflare": {
+      "number": 145,
+      "forms": [
+        "Starlingling",
+        "Starlingflare",
+        "Starling Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #145 starlingflare; Types Plant/Undead. Identity: A rooted undead carnivorous starflower with black petals, bone-white pitcher traps shaped like tiny beaks, skeletal root fingers and pale violet soul light.. LEFT Starlingling: Small black starflower seedling with one white beaklike pitcher trap. CENTER Starlingflare: Bowed carnivorous starflower with separated black petal fans and several hanging white pitcher traps. RIGHT Starling Exarch: Broad layered funeral starflower canopy with a dominant central beaked trap, many black petals and an open cage of skeletal roots; botanical anatomy.",
+      "sourceFilename": "exec-c6615a96-fcb9-4741-98c9-bf01281f7894.png"
+    },
+    "uplandshard": {
+      "number": 147,
+      "forms": [
+        "Uplandling",
+        "Uplandshard",
+        "Upland Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #147 uplandshard; Types Undead/Construct. Identity: A reanimated four-legged bighorn skeleton with rugged natural stone armor plates, brass ankle hinges, ivory horns and faint ghostly upland mist.. LEFT Uplandling: Small bighorn skeleton with short ivory horns and a few small stone knee plates. CENTER Uplandshard: Lean mountain revenant ram with curled horns, exposed bronze-braced spine and articulated stone shoulder plates. RIGHT Upland Exarch: Deep-chested ancient skeletal bighorn with massive curled ivory horns, high natural stone shoulder ridges and heavy brass-braced hooves; four legs.",
+      "sourceFilename": "exec-6567175c-721d-4572-868e-0a0e1d82ec34.png"
+    },
+    "wardenfang": {
+      "number": 149,
+      "forms": [
+        "Wardenling",
+        "Wardenfang",
+        "Warden Exarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon. Input is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference, not a pose/layout to copy. Rebuild ALL THREE forms with unmistakably DISTINCT BODY ARCHITECTURES, proportions and silhouettes: compact juvenile, specialized transitional creature, reorganized mature creature. Not scaled copies, not merely more horns/plumage/jewels. A wide 3:1 genuinely TRANSPARENT canvas with EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and at least 5% padding around every silhouette and effect. No text, scenery, frames, platforms, duplicate creatures or cropped tips. Preserve the specified species, Types, recognizable family motifs and stated number/type of limbs. Avoid the same stance at all stages; the changes must remain obvious when forms are normalized to equal height. Lineage #149 wardenfang; Types Aberration/Fey. Identity: A horrific nonhuman bipedal faerie guardian aberration with an eye-stacked mask, mismatched fanged jaws, very long twisted arms and dark emerald silk fronds.. LEFT Wardenling: Small stacked-eye faerie guardian with compact limbs and a few dark emerald fronds. CENTER Wardenfang: Tall asymmetric guardian aberration with very long twisted arms, deep mismatched jaws and a narrow silk mantle. RIGHT Warden Exarch: Deeply hunched ancient faerie warden with a high emerald silk back mantle, many stacked watchful eyes and immense low grasping hands; two arms and two legs.",
+      "sourceFilename": "exec-70c5f8d8-65a9-48a0-b3b1-356620ade2f6.png"
     }
   }
 }

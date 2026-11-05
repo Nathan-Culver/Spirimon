@@ -909,7 +909,7 @@ function installRoster(){
   // Refresh shared artwork for existing journeys without replacing progression.
   if(row.atlas){sp.atlas=row.atlas;sp.artRevision=row.artRevision||1;sp.proceduralArt=false;sp.description=row.description;sp.body=row.description;delete sp.sprites;}
   if(row.formAnatomy){sp.formAnatomy=structuredClone(row.formAnatomy);sp.anatomy=sp.formAnatomy[0];syncCapabilities(sp);}
-  if(row.formDescriptions){sp.formDescriptions=[...row.formDescriptions];sp.evolutionRevision=row.evolutionRevision;}
+  if(row.evolutionRevision)sp.evolutionRevision=row.evolutionRevision;
   if(!sp.atlas&&sp.sprites?.length!==3)sp.proceduralArt=true;
   if(sp.proceduralArt)certifyRenderedAnatomy(sp);register(sp);
  }

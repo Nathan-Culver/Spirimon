@@ -68,7 +68,32 @@
         "A long coiling vine hunter rising from a small root base, three hinged sundew fans held like snapping jaws and one pale blossom",
         "An anchored umbrella-like sundew regent with a low spread of buttress roots, a tall swan-neck flower stalk and a wide radial crown of drooping nectar traps"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-15fca5ee-b9b3-4977-8626-70203fc3b48d.png",
+      "sourceSha256": "21e5074ee102b792fd894a7f00b020448fc6f6e1c2e4f8bbbe13f3d09c2d05fd",
+      "atlas": "./assets/roster/dewveil-v4.webp",
+      "sourceBoxes": [
+        [
+          156,
+          283,
+          582,
+          684
+        ],
+        [
+          730,
+          13,
+          1310,
+          695
+        ],
+        [
+          1334,
+          20,
+          2122,
+          693
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "dd29625e353c7a5124c3500979737809fdb09ec419ab7e4448d1035c1f32116f"
     },
     {
       "number": 3,
@@ -134,7 +159,33 @@
         "An open crescent-shaped indigo mantle with eyes lining its inner curve, a hanging twisting membrane and a lateral arc of feather lights",
         "A hollow annular living aperture with several asymmetrically folded mantles, offset eye clusters and separate orbiting gold feather segments; no ordinary animal body"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-a7a4cfe1-66c8-4ac2-a157-e682d35affda.png",
+      "sourceSha256": "cf10da4a62a060b8b4b5a6d26bcf397c9f8834f7ba5c40fa2b19cce991cac823",
+      "atlas": "./assets/roster/oculume-v4.webp",
+      "sourceBoxes": [
+        [
+          218,
+          159,
+          454,
+          532
+        ],
+        [
+          716,
+          22,
+          1280,
+          714
+        ],
+        [
+          1423,
+          4,
+          2114,
+          698
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "22853c29915a7f1f8a1b4ae8ddb6cc8bf432263dac7013be268f459436e2fb74",
+      "anatomyReviewed": true
     },
     {
       "number": 5,
@@ -155,7 +206,32 @@
         "A walking incomplete ring of fused eye-bearing mushrooms on four crooked mycelial struts, open space clearly visible through its body",
         "A spreading many-arched mycelial organism with a recessed central eye, dangling root curtain, broad fungal crown and several off-axis eye clusters; organic, no literal buildings"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-1196b43c-1b8d-4616-ab78-32c0f960c3b7.png",
+      "sourceSha256": "4dc4a242ad965e4f4edc9336ddafe2df5bc36f03acbbd4d78ddca20a61f94fb6",
+      "atlas": "./assets/roster/mycogaze-v4.webp",
+      "sourceBoxes": [
+        [
+          75,
+          171,
+          364,
+          651
+        ],
+        [
+          510,
+          47,
+          1135,
+          640
+        ],
+        [
+          1207,
+          17,
+          2135,
+          658
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "800ec1717aa9b90d2458362abe2eebde96c970b31812d20441ec92d6915f0d95"
     },
     {
       "number": 6,
@@ -176,7 +252,33 @@
         "An elongated crawling ribbon creature whose four recurved limbs form linked geometric folds, turquoise gel joining the joints",
         "A suspended broad Mobius-like loop of recursive ribbon bridges and impossible negative spaces, eyes on opposing inner surfaces and liquid curtains beneath; no conventional quadruped torso"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-22d0f995-6fca-4090-93e7-9bfebd42a254.png",
+      "sourceSha256": "f621bf32b2c5e146eddee2413d1cb948e732ab2fe501ff0b0ecc6e1033821a04",
+      "atlas": "./assets/roster/vellifold-v4.webp",
+      "sourceBoxes": [
+        [
+          120,
+          180,
+          435,
+          596
+        ],
+        [
+          589,
+          111,
+          1380,
+          577
+        ],
+        [
+          1410,
+          36,
+          2117,
+          652
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "72c632c2a7f1937ecb847a078d528ca0429b32a8b41f43921bbb53b6257e61d4",
+      "anatomyReviewed": true
     },
     {
       "number": 7,
@@ -197,7 +299,32 @@
         "A lean sugar glider in horizontal flight, fully extended hand-to-foot membranes with chestnut faerie patterns and a long rudder tail",
         "A tall upright perched sugar-glider courier with long spread membrane fingers forming a fan-shaped cloak, exceptionally long tufted ears and its prehensile tail looped overhead carrying nectar lights; animal face, no human anatomy"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-21c89a71-9169-41ff-b08d-05fed75b49a0.png",
+      "sourceSha256": "005295000c4d273632869923478c093392285328d56af1940b77e49c7eaaaf68",
+      "atlas": "./assets/roster/lanterglide-v4.webp",
+      "sourceBoxes": [
+        [
+          110,
+          278,
+          500,
+          665
+        ],
+        [
+          560,
+          194,
+          1371,
+          584
+        ],
+        [
+          1392,
+          21,
+          2137,
+          688
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "4d527d03ffa9b9c504b4aeabf1199457d454ad7a311dbb6c0131675131393ed6"
     },
     {
       "number": 8,
@@ -308,7 +435,33 @@
         "A tall long-necked gryphonlike guardian on four slender articulated legs with two open golden wing frames and a narrow flowing feather tail",
         "A levitating celestial gyroscope with a luminous core surrounded by six radial ivory feather wings on golden articulated frames, a turquoise central lens and dangling feather tail; the quadruped body has unfolded into the wing mechanism"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-e5a12ceb-5074-4b46-8acc-6b827b64d1f0.png",
+      "sourceSha256": "79449079669c7c0e70d265b2456e5294339c373b734e542e0a027f5292db12b6",
+      "atlas": "./assets/roster/aurelattice-v4.webp",
+      "sourceBoxes": [
+        [
+          90,
+          240,
+          510,
+          652
+        ],
+        [
+          605,
+          19,
+          1391,
+          679
+        ],
+        [
+          1454,
+          16,
+          2161,
+          714
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "d8de25e5df38a986cdaa4171020079921fd9f3cde2721e1f920be2df99026c31",
+      "anatomyReviewed": true
     },
     {
       "number": 11,
@@ -329,7 +482,33 @@
         "A slender long-necked striding lotus guardian with four long legs, swept-back opened petal wings and a trailing vine tail",
         "A floating open lotus entity whose layered ivory-and-green petals surround the recognizable guardian head, gold heart light and coiled vine center; legs fully withdrawn into the bloom, broad radial silhouette"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-8df5252c-becf-4718-acd8-98c5669105b8.png",
+      "sourceSha256": "4678dc6de2dc5d019fab7e8e0a12292334b18a447f3508205715655e83c6bf9e",
+      "atlas": "./assets/roster/seralotus-v4.webp",
+      "sourceBoxes": [
+        [
+          84,
+          216,
+          561,
+          646
+        ],
+        [
+          652,
+          25,
+          1377,
+          655
+        ],
+        [
+          1422,
+          19,
+          2150,
+          677
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "08aad99bb73a3fbe6578c807afd2ea3b24bc8ba091f638f83b6eea9b0797601c",
+      "anatomyReviewed": true
     },
     {
       "number": 12,
@@ -395,7 +574,33 @@
         "A long airborne solar serpent with an arched ivory neck, broad paired pastel flame wings and a narrow streaming ribbon tail",
         "An upright sun-phoenix elemental with an open radiant chest, six layered dawn-flame fans arranged around its central body, two ivory talons and an enormous circular solar corona"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-cea31348-7cf6-4262-ab52-d3043fef15a8.png",
+      "sourceSha256": "31f6ab8ef0f77c9b7f31f86e00f9a0fa9cd0c5dd672599b0dd64b43f1cb5dbe3",
+      "atlas": "./assets/roster/auroriel-v4.webp",
+      "sourceBoxes": [
+        [
+          151,
+          153,
+          497,
+          607
+        ],
+        [
+          617,
+          39,
+          1386,
+          682
+        ],
+        [
+          1404,
+          0,
+          2156,
+          676
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "6ae662e4d72b23d6e748079ce57ab7f37f5f17328642174d5ebb186d853b0ee2",
+      "anatomyReviewed": true
     },
     {
       "number": 14,
@@ -591,7 +796,33 @@
         "A long suspended paired-bell creature with a narrow articulated gold spine, wings spread horizontally and two separate glowing clappers",
         "A hovering radial carillon seraph with three open bells facing different directions around a bright gold core, six curved white feather lobes and one broad orbital halo; reorganized body, no conventional legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-5afca286-2f3e-4d44-b6b6-f89cc5bbef6a.png",
+      "sourceSha256": "54348939fc60b1a9f7170a2c6a614ad498abae07ff42b41bd072216b3986d334",
+      "atlas": "./assets/roster/resonara-v4.webp",
+      "sourceBoxes": [
+        [
+          143,
+          177,
+          437,
+          623
+        ],
+        [
+          595,
+          27,
+          1318,
+          705
+        ],
+        [
+          1380,
+          18,
+          2122,
+          660
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "9660ccc8c4fbc2ffd984422e16b267cdd5ac9cce279e35da2208875a9079f22b",
+      "anatomyReviewed": true
     },
     {
       "number": 22,
@@ -1930,9 +2161,9 @@
       "decision": "rework",
       "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
       "stages": [
-        "Stocky takin calf with horn buds and one flowering thorn sprig",
-        "Heavy shouldered takin with curved thorn horns and dense shaggy dewlap",
-        "Mature takin with a towering fur hump, broad branching thorn-horn crown and short heavily muscled legs; four hooves"
+        "Round stocky takin calf with a short pale face, four short legs, fuzzy compact torso and tiny flowering horn buds",
+        "Lean long-legged mountain-scrambling takin with a steep sloping back, rear-hooked thorn horns, shaggy chest bib and a raised front hoof",
+        "Broad low muscular takin with a bisonlike shoulder mass, deep split dewlap and laterally sweeping thorn horns forming a lantern-bearing bower"
       ],
       "status": "integrated",
       "sourceFilename": "exec-ca7da013-35b9-40cd-8961-76ec9450f4db.png",
@@ -2151,7 +2382,7 @@
         "Gloom Sovereign"
       ],
       "referenceAtlas": "./assets/roster/gloomglen.webp",
-      "identity": "A colossal horned fiend giant with a nonhuman basalt face, heavy moss-dark limbs, olive lichen beard, enormous clawed hands and dim green cracks; biped, never an ordinary human.",
+      "identity": "A colossal boar-headed basalt fiend giant with heavy moss-dark limbs, olive lichen beard, sweeping tusks, enormous clawed hands and dim green cracks; two arms and two legs.",
       "decision": "rework",
       "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
       "stages": [
@@ -2339,7 +2570,32 @@
         "Long swimming otter-ooze with muscular central core and flowing kelp fringes",
         "Broad river-otter jelly colossus with high liquid shoulders, long tapering gel tail and wide paddling pseudopods; not a rigid furred animal"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-0d8eec54-dd93-4c81-820f-0afeef54c96c.png",
+      "sourceSha256": "af3bde0e4c39cbd9e6c8ecc738eb49387fdcc33675cf0f2595eb386a110e0e47",
+      "atlas": "./assets/roster/kelpveil-v4.webp",
+      "sourceBoxes": [
+        [
+          64,
+          369,
+          415,
+          626
+        ],
+        [
+          507,
+          197,
+          1267,
+          573
+        ],
+        [
+          1259,
+          21,
+          2157,
+          628
+        ]
+      ],
+      "extraction": "connected-bodies",
+      "atlasSha256": "3c23f45278d93eb32a3bdd518ec2ff046f11cfb0435f7e0fe85a0b4391ecab88"
     },
     {
       "number": 62,
@@ -2360,7 +2616,32 @@
         "Branching pitcher plant with paired large cup-wing leaves and hooked black support roots",
         "Wide arching carnivorous lantern plant with a central deep trap, cascading luminous pitcher wings and a rooted thorn cage"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-5a0c736b-120d-46fe-b303-cb53084e8188.png",
+      "sourceSha256": "44d14b0f24d5a19791f19fcee2c78180adb34b6eddde1cae0277de0a393be890",
+      "atlas": "./assets/roster/lumenwing-v4.webp",
+      "sourceBoxes": [
+        [
+          94,
+          322,
+          450,
+          674
+        ],
+        [
+          578,
+          39,
+          1195,
+          676
+        ],
+        [
+          1274,
+          22,
+          2130,
+          677
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "bf407b9a4fe2fb48c80698b888655cb860f8ca1194f3420565a2e60ce324fb46"
     },
     {
       "number": 63,
@@ -2381,7 +2662,32 @@
         "Tall bowed skeletal root plant with an open jackal-skull trap and hanging dead petals",
         "Arched grave-root predator with a large low jackal skull, dense bone-root scaffold and several secondary leaf traps; plant, not skeletal animal"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-e74e67fe-4063-4a73-a89d-0ffe48756c03.png",
+      "sourceSha256": "acd3b7504b0fc639211d7294b4fdf5ea06dd55e9317fcf891d5b2894473e9550",
+      "atlas": "./assets/roster/morrowfang-v4.webp",
+      "sourceBoxes": [
+        [
+          88,
+          318,
+          467,
+          648
+        ],
+        [
+          634,
+          19,
+          1150,
+          664
+        ],
+        [
+          1229,
+          16,
+          2147,
+          664
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "15219658ac34a47e210c53ac9ed4961d9dad93ec81d6442e881dda3c6b477b82"
     },
     {
       "number": 64,
@@ -2402,7 +2708,32 @@
         "Elongated layered shell automaton with offset eyes, segmented bronze legs and twitching feelers",
         "Low broad spiral-shelled nacre aberration with overlapping shell mantle, a recessed multi-aperture core and widely planted four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-82edf949-c719-44bf-acaa-74b54b9a96ae.png",
+      "sourceSha256": "af03c911310b0da6fcef6e777139791676aaaea1a40ffbde17443ea78d0ffff5",
+      "atlas": "./assets/roster/nacreling-v4.webp",
+      "sourceBoxes": [
+        [
+          78,
+          293,
+          412,
+          646
+        ],
+        [
+          531,
+          97,
+          1204,
+          638
+        ],
+        [
+          1253,
+          29,
+          2148,
+          649
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "ed43e28be5a93645aa183541f18455a38a908f180798c06eee8b4999b4d8032d"
     },
     {
       "number": 65,
@@ -2423,7 +2754,32 @@
         "Long-legged black kangaroo with muscular forearms, curled horns and an upright ready stance",
         "Broad-chested hunched kangaroo with immense hindquarters, long balancing tail and a thick glossy horn crown; animal face, two arms and two hindlegs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-f86694d2-2a34-4f2c-9f6b-897fb5bb914f.png",
+      "sourceSha256": "34f6859d58eb23058c04250de37aea5003500293982616307e5b96a09de48084",
+      "atlas": "./assets/roster/obsidhorn-v4.webp",
+      "sourceBoxes": [
+        [
+          96,
+          249,
+          460,
+          658
+        ],
+        [
+          610,
+          4,
+          1226,
+          668
+        ],
+        [
+          1301,
+          9,
+          2164,
+          667
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "183e9a6471edca4eadd448b77b410e6021f3f4da63ec8769b07263fa60a74c83"
     },
     {
       "number": 66,
@@ -2444,7 +2800,32 @@
         "Slender long-necked deer with a branching eye-bearing mane and small gold halo motes",
         "Deep-chested pollen stag with a wide layered mane, long anatomically impossible eye tendrils and elevated feather shoulders; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-a4c52bc5-d0df-4f4e-b353-28f0e614d643.png",
+      "sourceSha256": "2f33e9560c7d59355ddb7455a63c99e04c765a4ad7f02f7946ae57d22a7dea37",
+      "atlas": "./assets/roster/pollenshade-v4.webp",
+      "sourceBoxes": [
+        [
+          128,
+          256,
+          433,
+          629
+        ],
+        [
+          659,
+          21,
+          1202,
+          652
+        ],
+        [
+          1354,
+          7,
+          2162,
+          667
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "5f815093259da82efc668a12d06e3c700b1963d6c51ec92f3e76e0b9bcca5fef"
     },
     {
       "number": 67,
@@ -2465,7 +2846,32 @@
         "Low elongated clockwork porcupine with articulated raised quill fans and strong front claws",
         "Broad armored porcupine engine with a high radial quill shield, deep wooden chest and heavy brass digging foreclaws; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-f12d8ab9-41d1-4700-ba8d-56298bd0d701.png",
+      "sourceSha256": "72656bd5df1c698d7745b77850bcda363bc90aba01dd4220f0d2f48a6a14bbe5",
+      "atlas": "./assets/roster/quillclaw-v4.webp",
+      "sourceBoxes": [
+        [
+          123,
+          292,
+          452,
+          655
+        ],
+        [
+          565,
+          127,
+          1262,
+          668
+        ],
+        [
+          1330,
+          16,
+          2131,
+          682
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "6bd471805b3cb8a0fd61fb0e7deda473f0b507d981ee8dd0591e583a13d20f65"
     },
     {
       "number": 68,
@@ -2486,7 +2892,32 @@
         "Tall soft winged ooze with translucent veined wing fans and an elongated floating abdomen",
         "Wide flowing violet rune-ooze mantle with several distinct cascading liquid wing panels and suspended silver droplets; amorphous, no hard limbs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-452284ea-265d-4679-a078-977415456b50.png",
+      "sourceSha256": "04e203e0f640a6eb838d71cd096eee3696b958e27e1c7c084bd8852a9447cc01",
+      "atlas": "./assets/roster/runemoth-v4.webp",
+      "sourceBoxes": [
+        [
+          143,
+          274,
+          465,
+          589
+        ],
+        [
+          592,
+          48,
+          1204,
+          691
+        ],
+        [
+          1263,
+          18,
+          2122,
+          671
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "68115d935bdb30a073c53cae47be599b3fdeeaaa1be27521453c1224760ac1d3"
     },
     {
       "number": 69,
@@ -2507,7 +2938,32 @@
         "Long slender four-pawed sable with an arched back, large faerie whiskers and a curling ringed tail",
         "Flowing low sable guardian with broad shoulder fur, an exceptionally long ribbonlike tail and suspended celestial rings framing its body"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-4020d554-5b18-4a6b-87d5-e8e9c7a7c1a3.png",
+      "sourceSha256": "8282bc194615b08a645fca6f0157b108446cac352f145e7601df04c4896bd5e5",
+      "atlas": "./assets/roster/sablewyrm-v4.webp",
+      "sourceBoxes": [
+        [
+          83,
+          307,
+          413,
+          579
+        ],
+        [
+          516,
+          102,
+          1198,
+          583
+        ],
+        [
+          1226,
+          65,
+          2149,
+          628
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "e2ced4c61bae78191e28221f2ebe7f50f7c141439e49d387835da8270b06952f"
     },
     {
       "number": 70,
@@ -2528,7 +2984,32 @@
         "Lean forward-stooping fiend giant with long clawed arms and thorn-covered shoulders",
         "Massive low thorn titan with an overhanging bramble hump, huge grasping hands and a sweeping hooked tail; two arms, two legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-118bc065-14f8-4c95-921a-b6f019380f5b.png",
+      "sourceSha256": "35e160b1b191ae133971d12257f22df7a802592b7c8b71e2d0bc45ddeb170990",
+      "atlas": "./assets/roster/thornglen-v4.webp",
+      "sourceBoxes": [
+        [
+          55,
+          320,
+          477,
+          648
+        ],
+        [
+          548,
+          154,
+          1164,
+          661
+        ],
+        [
+          1187,
+          17,
+          2164,
+          689
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "9ddf8b444d8a01e54fbf9caf34b8dd944addfbc9f882cf64d7e9649b6a15b9c1"
     },
     {
       "number": 71,
@@ -2549,7 +3030,32 @@
         "Tall skeletal earth revenant with open ribs, a long shroud skirt and drooping lily shoulders",
         "Broad bowed ancestral giant with a hollow stone-bone chest, heavy hanging arms and an immense dried lily mantle"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-d45db855-0c22-43a2-b95b-4aa491921098.png",
+      "sourceSha256": "3d6abc93c806e51a1de5358eade92f071c7b0f27aa82611b02fba1e9818dea55",
+      "atlas": "./assets/roster/umberbloom-v4.webp",
+      "sourceBoxes": [
+        [
+          144,
+          294,
+          512,
+          686
+        ],
+        [
+          622,
+          50,
+          1201,
+          704
+        ],
+        [
+          1265,
+          6,
+          2146,
+          704
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "726fd8347e352e3be6d17441dda61b2a6c47a2129a2c0b07456b00748ce7d931"
     },
     {
       "number": 72,
@@ -2570,7 +3076,32 @@
         "Slender long-legged twilight faerie with a narrow chest, long ears and flowing wind ribbons",
         "Hunched mature twilight faerie with a deep batlike muzzle, broad fur-and-wind shoulder mantle and long low-reaching hands; two arms and legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-555b2127-e65f-46df-b6ab-d9d6bc9ef097.png",
+      "sourceSha256": "3606b097919eb1170128633df1cae6aa8050eccdd85dcaa95b58d9148b89faf1",
+      "atlas": "./assets/roster/vesperspire-v4.webp",
+      "sourceBoxes": [
+        [
+          139,
+          213,
+          463,
+          643
+        ],
+        [
+          656,
+          15,
+          1251,
+          659
+        ],
+        [
+          1342,
+          22,
+          2147,
+          667
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "2d6a4fa3ce8cbfd7c97142a64b499d10b600eb780b1e7abf76a74ed9c8575715"
     },
     {
       "number": 73,
@@ -2591,7 +3122,32 @@
         "Tall arching willow ooze whose flexible fronds frame a large open central mouth",
         "Wide hanging willow-maw canopy with long needle-toothed fronds over a recessed hollow sap core and a low spreading base"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-44969d52-4e97-4e3c-b769-a2ba935904e4.png",
+      "sourceSha256": "7508cde80c1c7f2314e72c9169ad3b02a28d8fe0c832ef43bef5137767ed1785",
+      "atlas": "./assets/roster/willowmaw-v4.webp",
+      "sourceBoxes": [
+        [
+          82,
+          395,
+          464,
+          650
+        ],
+        [
+          571,
+          15,
+          1159,
+          648
+        ],
+        [
+          1250,
+          29,
+          2133,
+          652
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "adaf19034ebab1d2f3efa72464c761c716c118d80c134290a443f13cc7e40b27"
     },
     {
       "number": 74,
@@ -2612,7 +3168,32 @@
         "Long flowing salamander ooze with an arched muscular core, long tail and suspended wood grain",
         "Broad low liquid salamander with a raised translucent dorsal sail, powerful flowing front lobes and a sweeping gel tail; preserve ooze texture"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-4e5db960-3f89-4ec3-85dc-3fa9c3e0e611.png",
+      "sourceSha256": "d8c95bdc2782200771c720e52be07c51d49c020604c658e8103044e9e03d9a4a",
+      "atlas": "./assets/roster/xyloveil-v4.webp",
+      "sourceBoxes": [
+        [
+          93,
+          311,
+          446,
+          582
+        ],
+        [
+          511,
+          118,
+          1193,
+          577
+        ],
+        [
+          1194,
+          39,
+          2154,
+          615
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "bb0fc00cfc12228e23038dc1cbed4ed828d6873ff503d574dd9e6bb0bbc8f3c4"
     },
     {
       "number": 75,
@@ -2633,7 +3214,32 @@
         "Branching carnivorous yarrow with three cup traps and hooked red stems",
         "Tall umbrella-like yarrow predator with a broad white lure canopy over deep red tooth cups and a thick twisting black root pedestal"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-0f14e466-cc7a-4e12-ada4-3754924db3c1.png",
+      "sourceSha256": "12f5997388409395e477b3e34520cad5e7e1badc760d6e553c8a890e7253864f",
+      "atlas": "./assets/roster/yarrowwing-v4.webp",
+      "sourceBoxes": [
+        [
+          158,
+          401,
+          529,
+          675
+        ],
+        [
+          660,
+          98,
+          1278,
+          680
+        ],
+        [
+          1391,
+          17,
+          2064,
+          703
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "f2aea36163382276d8e731af3af1b78446288529dc6e825a66c247208e8fa204"
     },
     {
       "number": 76,
@@ -2654,7 +3260,32 @@
         "Long arching grave plant with a wind-worn wolf skull held forward and skeletal root legs",
         "Wide bowed spectral reed beast-plant with an elongated bone-fanged wolf trap, dense dead reed mane and exposed root scaffolding"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-38643613-16a7-4fd2-8b56-3d591fb648fb.png",
+      "sourceSha256": "7912dc41f8dcb82ce1105c51f629453e07bd4fd9849d3515f6679960060d9099",
+      "atlas": "./assets/roster/zephyrfang-v4.webp",
+      "sourceBoxes": [
+        [
+          80,
+          311,
+          413,
+          644
+        ],
+        [
+          520,
+          88,
+          1201,
+          634
+        ],
+        [
+          1216,
+          40,
+          2159,
+          642
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "dfcb81e4832d0f683c1b5cc39b0fd3bdae24163e9826d3ca39a9b6d37e2beb17"
     },
     {
       "number": 77,
@@ -2675,7 +3306,32 @@
         "Lean lopsided construct with open ribs, a split asymmetric jaw and trailing cable tentacles",
         "Broad crouched ash engine with an overhanging burnt-wood shoulder mantle, widely spaced coal eyes and long dragging cable tendrils; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-79a6cee0-f334-47af-b055-8b80df8ba9e3.png",
+      "sourceSha256": "896de44252326f22f0aae6392f803c6245960a6dae6224ee41f24965b6188c39",
+      "atlas": "./assets/roster/ashenling-v4.webp",
+      "sourceBoxes": [
+        [
+          112,
+          312,
+          523,
+          634
+        ],
+        [
+          598,
+          66,
+          1224,
+          637
+        ],
+        [
+          1250,
+          14,
+          2133,
+          671
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "e675e8ea5adeb80bef40dcb3de18c81e4c3f02c600915d2ac0f2c635ce668bcb"
     },
     {
       "number": 78,
@@ -2696,7 +3352,32 @@
         "Tall springing wallaby with elongated hindlegs, developed green horns and leaf ear fins",
         "Low heavy-chested muscular wallaby with large haunches, a long thick tail and a wide beryl horn crown; recognizable wallaby"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-6c080ca3-290e-4d0b-b2b0-32715f7e5269.png",
+      "sourceSha256": "55037db3d97c9a3f66bcadf9d8ff37a4922fe52187a9f9f39ff6f02744f2e5ad",
+      "atlas": "./assets/roster/berylhorn-v4.webp",
+      "sourceBoxes": [
+        [
+          185,
+          287,
+          460,
+          655
+        ],
+        [
+          667,
+          8,
+          1211,
+          667
+        ],
+        [
+          1305,
+          6,
+          2123,
+          658
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "57ba2adef1bbebac6294ce3ce06cb50bcf3cf3491d21d554c3c02c2bf3468042"
     },
     {
       "number": 79,
@@ -2717,7 +3398,32 @@
         "Long-bodied celestial griffin with a split beak, developing halo and partially spread copper wings",
         "Proud arch-backed griffin with a broad eye-bearing feather mantle and long outstretched copper wings; four legs and existing two wings"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-4fc0cc8b-dfd6-4e58-9e91-cec98b5afd9a.png",
+      "sourceSha256": "062cef0b1e314132ea50cbdda796b8f5b4d5df9940fdd71e2899fab2aea4d78c",
+      "atlas": "./assets/roster/coppershade-v4.webp",
+      "sourceBoxes": [
+        [
+          93,
+          277,
+          433,
+          633
+        ],
+        [
+          520,
+          119,
+          1299,
+          634
+        ],
+        [
+          1319,
+          1,
+          2158,
+          645
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "09652c68f90ce45b373b6f4aba0a82017996be577fa04663698bfe3b71dd89f4"
     },
     {
       "number": 80,
@@ -2738,7 +3444,32 @@
         "Flexible long-spined otter automaton with exposed bronze joints and broad paddle tail",
         "Low broad-chested driftwood otter with reinforced foreclaws, a sweeping articulated paddle tail and long faerie seaweed streamers; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-2215dab9-a26a-47d5-89bc-db636b92d476.png",
+      "sourceSha256": "5c04b08e84ca59aedbf76634ba67cfc8c43eaaa9ed971d927b368bd9c3e77794",
+      "atlas": "./assets/roster/driftclaw-v4.webp",
+      "sourceBoxes": [
+        [
+          63,
+          352,
+          463,
+          636
+        ],
+        [
+          497,
+          134,
+          1204,
+          634
+        ],
+        [
+          1230,
+          33,
+          2144,
+          648
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "8f985c558a545824a33ef51179dfadd2c26ec9e46e2dc8f002732e13b9566f9a"
     },
     {
       "number": 81,
@@ -2759,7 +3490,32 @@
         "Soft elongated resin moth shape with broad flowing wing fans and a narrow hanging core",
         "Ancient amber-resin elemental with a wide layered liquid wing mantle, suspended leaf fossils and long trailing droplet lobes; no hard moth skeleton"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-3d5ee530-93ec-4d20-8bd9-99357e0195f1.png",
+      "sourceSha256": "dd8d83c0878cf6e660395b348214d7caed5215d462e4a920ed492304c0a190ba",
+      "atlas": "./assets/roster/eldermoth-v4.webp",
+      "sourceBoxes": [
+        [
+          158,
+          248,
+          481,
+          573
+        ],
+        [
+          604,
+          48,
+          1268,
+          689
+        ],
+        [
+          1301,
+          20,
+          2143,
+          693
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "f7d0c84283cdc62a9b92d70d219c5abf5026f15c0641e2deb10a72d2bc33d6be"
     },
     {
       "number": 82,
@@ -2780,7 +3536,32 @@
         "Long four-pawed flint drake with a low opaline back ridge and wide leaf ears",
         "Broad-shouldered crouching flint guardian drake with tall chipped shoulder scales, long curling tail and a radiant thin gold crown; no arbitrary wings"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-dbde5454-29dc-4a6b-b533-60f6a738a460.png",
+      "sourceSha256": "0a150c19d4b2b808fe757acd69f57c4e00cc42899ee8749d62d97d9e22c15e13",
+      "atlas": "./assets/roster/flintwyrm-v4.webp",
+      "sourceBoxes": [
+        [
+          105,
+          253,
+          425,
+          601
+        ],
+        [
+          546,
+          91,
+          1326,
+          612
+        ],
+        [
+          1346,
+          25,
+          2134,
+          609
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "fbbc31fb72da370919c1897991cb36458f0fe96b397d61096edfa701ce4d19f2"
     },
     {
       "number": 83,
@@ -2801,7 +3582,32 @@
         "Muscular forward-leaning fiend giant with distinct long forearms and layered garnet shoulder horns",
         "Low immense obsidian titan with a deep hooked jaw, broad angular horn mantle and oversized ground-level clawed fists; two arms, two legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-14d93497-fc3f-467d-b672-4dc70669206e.png",
+      "sourceSha256": "b1646a51991af2935712ea1fc11f32212b3fd834cb362bd99a01eb21595caea2",
+      "atlas": "./assets/roster/garnetglen-v4.webp",
+      "sourceBoxes": [
+        [
+          57,
+          274,
+          507,
+          656
+        ],
+        [
+          540,
+          48,
+          1300,
+          657
+        ],
+        [
+          1318,
+          22,
+          2142,
+          658
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "3782d23be627be5b1fff6ff1a9ef13e65581eae8d2926c2dbb013b5fd2e1c228"
     },
     {
       "number": 84,
@@ -2822,7 +3628,32 @@
         "Tall bowed wooden-bone giant with long arms, hollow chest and branching dead crown",
         "Broad stooped ancient hazel titan with exposed skeletal shoulder arches, hanging burial shroud and an extensive dead-branch mantle"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-0fedb53a-0496-4ed2-9edf-e3a46b486d4e.png",
+      "sourceSha256": "503d9a05dd47cb58218e62e4cf973546f39d11576f036c0948a807298808e394",
+      "atlas": "./assets/roster/hazelbloom-v4.webp",
+      "sourceBoxes": [
+        [
+          98,
+          318,
+          436,
+          663
+        ],
+        [
+          527,
+          14,
+          1180,
+          664
+        ],
+        [
+          1272,
+          13,
+          2147,
+          677
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "740fc9c7084836f90f5c5b592034c41884b3de625be67b004c16259459f021bf"
     },
     {
       "number": 85,
@@ -2843,7 +3674,32 @@
         "Slender swimming-posture faerie with long gill fans, elongated webbed arms and flowing water ribbons",
         "Hunched regal water faerie with a wide frilled head crown, heavy liquid shoulder mantle and long splayed webbed fingers; two legs, two arms"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-fcded75e-f313-42dc-8a02-68cdf57efa05.png",
+      "sourceSha256": "d7063a8017061a9cfb686c86c98c77438adfddbd66a5d867b8077bb71adb27d8",
+      "atlas": "./assets/roster/indigospire-v4.webp",
+      "sourceBoxes": [
+        [
+          87,
+          235,
+          483,
+          654
+        ],
+        [
+          561,
+          30,
+          1222,
+          687
+        ],
+        [
+          1287,
+          17,
+          2149,
+          666
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "2997c62ba6834f70ba57f7e8bfbd361b4d9692bee289b1ae852ee5c7694e6e0e"
     },
     {
       "number": 86,
@@ -2864,7 +3720,32 @@
         "Arched gel predator with separated soft jaws and long needle-frond feelers",
         "Wide low juniper ooze canopy with a deep multi-jaw opening, tall floating berry scutes and long pooling evergreen gel fronds"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-db88774c-6efb-445a-a45f-f504e7ba77cc.png",
+      "sourceSha256": "09552f1c29f0bb802ef3d56f17798f9d898c3bca86a9697ca96da2d089728347",
+      "atlas": "./assets/roster/junipermaw-v4.webp",
+      "sourceBoxes": [
+        [
+          102,
+          375,
+          350,
+          623
+        ],
+        [
+          479,
+          51,
+          1092,
+          636
+        ],
+        [
+          1148,
+          14,
+          2150,
+          667
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "b0cb01bec947d75c1e5b5b84889f7a6a5d85561b32f75339b4394a79170c6cb9"
     },
     {
       "number": 87,
@@ -2885,7 +3766,32 @@
         "Long streamlined kestrel ooze with broad tapering wing pseudopods and a flowing tail",
         "Wide soaring gel raptor with layered feather-patterned liquid fans and a deep muscular translucent core; no rigid bird skeleton"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-452cba52-3cfc-43e2-83c4-ec8b8b760a42.png",
+      "sourceSha256": "b3ebc5688a73cd7a0af071a66326c0cf3b3ca543845a2495feed39d2964d73c2",
+      "atlas": "./assets/roster/kestrelveil-v4.webp",
+      "sourceBoxes": [
+        [
+          55,
+          345,
+          424,
+          642
+        ],
+        [
+          508,
+          169,
+          1275,
+          636
+        ],
+        [
+          1305,
+          23,
+          2158,
+          695
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "665d61c6f757a28bd7a53ae7d08d5b763d93386d1a691825ea441ea54f6ec8ff"
     },
     {
       "number": 88,
@@ -2906,7 +3812,32 @@
         "Creeping clustered lichen predator with wide leathery winglike leaves and ember cups",
         "Tall arched lichen colony with a broad funnel-trap canopy, hanging black leaf wings and dense hooked thorn roots; remains botanical"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-6ee0631a-350b-48cb-ae78-6a6870b1fea1.png",
+      "sourceSha256": "03f04acb3a320f53e4eb2b440a025cc654ca055ec87f437abf770e1fcd49625c",
+      "atlas": "./assets/roster/lichenwing-v4.webp",
+      "sourceBoxes": [
+        [
+          136,
+          355,
+          420,
+          678
+        ],
+        [
+          564,
+          201,
+          1311,
+          672
+        ],
+        [
+          1405,
+          10,
+          2113,
+          677
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "53d8d3688a9b2f14b3e257ad74d9bb3428eb25a682d47d78c3925df2502f3efa"
     },
     {
       "number": 89,
@@ -2927,7 +3858,32 @@
         "Tall bowed marrow plant with an elongated wolf-skull trap held on a flexible skeletal stalk",
         "Low sprawling marrow-root predator with a large bone-fanged skull trap beneath a high interwoven bone-root arch and dried funeral flowers"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-a21f4198-c5a3-42f6-a849-d051512d4493.png",
+      "sourceSha256": "091a5b9bb898020542d8cd136d48d889c5ee3f769ae0718f9e216cba630b9c75",
+      "atlas": "./assets/roster/marrowfang-v4.webp",
+      "sourceBoxes": [
+        [
+          100,
+          305,
+          472,
+          658
+        ],
+        [
+          614,
+          34,
+          1145,
+          672
+        ],
+        [
+          1274,
+          28,
+          2137,
+          677
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "da75b7979083ccfb4c8504951a4690f743c5db063bc9d881a7c26bbf5d138a40"
     },
     {
       "number": 90,
@@ -2948,7 +3904,32 @@
         "Long-backed uncanny construct with suspended rib hoops, exposed joints and dangling eye feelers",
         "Broad low thunderhead construct with a deeply overhanging fleshy cloud hump, open bronze rib cage and long asymmetrical feelers; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-4ccd5ad6-10d4-41a1-8732-eee156707a0f.png",
+      "sourceSha256": "9011f1fb851cb019280d211049e037ff80f7950b2d56cf283968d880204ebcce",
+      "atlas": "./assets/roster/nimbusling-v4.webp",
+      "sourceBoxes": [
+        [
+          45,
+          325,
+          386,
+          627
+        ],
+        [
+          441,
+          125,
+          1199,
+          629
+        ],
+        [
+          1236,
+          30,
+          2156,
+          637
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "ed626a9122c365921bda9a5c0cd4cf75d4e5c2825f78c6c3fa749cc1dfee1cde"
     },
     {
       "number": 91,
@@ -2969,7 +3950,32 @@
         "Long-legged poised muscular hare with broad ear membranes and slender branching opal horns",
         "Heavy-haunched cape-hare guardian with a low broad chest, huge ears flared into a fan and an elaborate opal horn crown; animal head"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-15d8bb0b-607d-44b2-9e57-7812b5eaf400.png",
+      "sourceSha256": "3183e6ea552c602d94a123f63a5579b67d97571da8c780900d6600860eee1e0a",
+      "atlas": "./assets/roster/opalhorn-v4.webp",
+      "sourceBoxes": [
+        [
+          172,
+          258,
+          511,
+          664
+        ],
+        [
+          685,
+          18,
+          1271,
+          669
+        ],
+        [
+          1379,
+          22,
+          2137,
+          668
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "7d614cc8f54c6bd6a188ac92389e8cab8451a0911bfc58abfbeecdc5e5b2a1c8"
     },
     {
       "number": 92,
@@ -2990,7 +3996,32 @@
         "Lean radiant lion with a partially open chest mouth and growing feather mane",
         "Deep-chested celestial lion with a broad burning feather mantle, fully visible uncanny chest mouth and broken halo above its high mane; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-b921634d-e4d2-499f-852a-933c1652d397.png",
+      "sourceSha256": "8e63b30abceb438535df18d4dc6561c23f59ec7e125b50f7aaa056517d0df8dd",
+      "atlas": "./assets/roster/pyreshade-v4.webp",
+      "sourceBoxes": [
+        [
+          92,
+          291,
+          479,
+          627
+        ],
+        [
+          597,
+          134,
+          1293,
+          638
+        ],
+        [
+          1361,
+          13,
+          2136,
+          653
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "9a85acf088bf8ce53cb4cae43c46c81c94cdc0820b57706d76213e1fa6cb2e69"
     },
     {
       "number": 93,
@@ -3011,7 +4042,32 @@
         "Long-legged segmented lynx automaton with a flexible bronze waist and extended quartz claws",
         "Broad shoulder-armored lynx engine with high tufted ears, deep translucent quartz chest and powerful articulated foreclaws; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-2cee0dac-b847-481d-acbc-793e44a601ae.png",
+      "sourceSha256": "012b624f79e642cf279ab001af609ab1e31135b989992bf481f885fc94a12faf",
+      "atlas": "./assets/roster/quartzclaw-v4.webp",
+      "sourceBoxes": [
+        [
+          59,
+          280,
+          522,
+          670
+        ],
+        [
+          612,
+          82,
+          1318,
+          682
+        ],
+        [
+          1384,
+          11,
+          2153,
+          695
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "b14eb35a47804fa0f762e2cd0b05573a1d8739566b4e78b4f0f29af275f766e7"
     },
     {
       "number": 94,
@@ -3032,7 +4088,32 @@
         "Elongated frost ooze with wide delicate winglike fans and a hanging frozen core",
         "Large arched frost-gel mantle with layered translucent liquid ice panels and separated suspended icy droplets; no rigid butterfly anatomy"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-cf81cf94-6399-4460-859d-e959b7a1a221.png",
+      "sourceSha256": "08fea58b1fb54c363367d77b34308d096c3242bf05f613dc9150ada46450afb8",
+      "atlas": "./assets/roster/rimemoth-v4.webp",
+      "sourceBoxes": [
+        [
+          70,
+          277,
+          453,
+          629
+        ],
+        [
+          545,
+          70,
+          1305,
+          692
+        ],
+        [
+          1335,
+          20,
+          2125,
+          692
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "0b99938bc159f3df0845147d81b6aa65adb4d7151faf1300e2f13f745ad9b46f"
     },
     {
       "number": 95,
@@ -3053,7 +4134,32 @@
         "Long slender four-pawed faerie with tall leaf ears and a broad luminous ribbon tail",
         "Arched-neck low celestial otter guardian with wide golden tail ribbons, flowing whiskers and broad shoulder fur; preserve four paws"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-8d0559d2-24a9-4d51-b827-e41fa5dfa5b1.png",
+      "sourceSha256": "90d4584ab687dfc8ffa3d379fdd2e09ab6ad6f53406e67bd425cdadb45a875b4",
+      "atlas": "./assets/roster/saffronwyrm-v4.webp",
+      "sourceBoxes": [
+        [
+          56,
+          349,
+          452,
+          604
+        ],
+        [
+          571,
+          135,
+          1297,
+          623
+        ],
+        [
+          1354,
+          62,
+          2127,
+          622
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "22780b5e8364fd78677ed332fa7cabd65ee6e1974a4c3d58f7cd0e675d708aa6"
     },
     {
       "number": 96,
@@ -3074,7 +4180,32 @@
         "Tall long-armed fiend giant with heavy slate shoulders, thick black fur and swept iron-like horns",
         "Low massive tundra titan with a broad fur hump, deep tusked muzzle and huge thick clawed forearms; two arms and two legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-9b204390-c00d-4fc1-ae7b-e6bd8f4e60dd.png",
+      "sourceSha256": "581f20f7b5fb05f470565992465fecad674f0a2981065a13c7efdfbb8659309c",
+      "atlas": "./assets/roster/tundraglen-v4.webp",
+      "sourceBoxes": [
+        [
+          73,
+          336,
+          522,
+          688
+        ],
+        [
+          628,
+          16,
+          1231,
+          692
+        ],
+        [
+          1295,
+          35,
+          2145,
+          691
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "7aec5942d76927449992230a135933ce5a5bf9bb17f14078905c1af15697fc37"
     },
     {
       "number": 97,
@@ -3095,7 +4226,32 @@
         "Tall stooped bog giant with extended forearms, exposed dark ribs and drooping fern shoulders",
         "Ancient broad-backed bog titan with a hollow rib chamber, heavily draped moss shroud and immense low stone-bone fists"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-ff5d3803-f9c0-4fff-a5cb-fe05dbcb629d.png",
+      "sourceSha256": "79164d724a9292654b7537b92f25c13c3c30fb404e1c8442a9e68ac108a7c5dd",
+      "atlas": "./assets/roster/verdantbloom-v4.webp",
+      "sourceBoxes": [
+        [
+          91,
+          233,
+          479,
+          684
+        ],
+        [
+          587,
+          41,
+          1223,
+          682
+        ],
+        [
+          1294,
+          11,
+          2131,
+          685
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "36770cc4460488c4cdee232c6b0ae6ef1a9ea747eb9d17e03e11964127b05ed9"
     },
     {
       "number": 98,
@@ -3108,7 +4264,7 @@
         "Wraith Sovereign"
       ],
       "referenceAtlas": "./assets/roster/wraithspire.webp",
-      "identity": "A visibly nonhuman tall bipedal wind faerie with a hollow carved-looking moth mask, pale vapor hair, long translucent limbs and violet storm ribbons; not an undead human.",
+      "identity": "A visibly nonhuman twin-headed wind faerie with two hollow moth masks on one shared bipedal body, pale vapor hair, long translucent limbs and violet storm ribbons.",
       "decision": "rework",
       "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
       "stages": [
@@ -3116,7 +4272,33 @@
         "Tall narrow shared faerie body with two distinct moth-mask heads, longer translucent arms and separated wind streamers",
         "Arch-backed twin-headed wind faerie with a broad unified vapor mantle, two clearly separated hollow moth masks and sweeping violet storm ribbons; exactly two heads throughout"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-0f06c964-69b1-42bc-b9cf-d30370cd67ba.png",
+      "sourceSha256": "743a9aea12067bc3b4d41a29a766b2a8b53a21294b7e8a0d2ddabad779e5d5ed",
+      "atlas": "./assets/roster/wraithspire-v4.webp",
+      "sourceBoxes": [
+        [
+          136,
+          169,
+          504,
+          654
+        ],
+        [
+          667,
+          12,
+          1197,
+          702
+        ],
+        [
+          1319,
+          7,
+          2120,
+          702
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "2cfbcd27d01f93921bf4338fb63de155414a2bc7ff4bebaae442b81fee1bae4b",
+      "anatomyReviewed": true
     },
     {
       "number": 99,
@@ -3137,7 +4319,32 @@
         "Bowed yew predator with a large hook-toothed trunk mouth and thick drooping fronds",
         "Wide overhanging yew canopy with a deep hollow central maw, heavy hooked teeth and translucent amber sap root lobes; botanical monstrosity"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-2d095f33-5b58-48b5-8056-327df33639ab.png",
+      "sourceSha256": "c34d1ed6ad9ec6cfa3ee5bc84368bac6931076865e63e04b0bee466e54edf70a",
+      "atlas": "./assets/roster/yewmaw-v4.webp",
+      "sourceBoxes": [
+        [
+          129,
+          284,
+          405,
+          647
+        ],
+        [
+          547,
+          128,
+          1253,
+          665
+        ],
+        [
+          1308,
+          20,
+          2143,
+          665
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "4b7f6b47c428444e1035c1575a08ef33a8eeffd69b9a7828cf75614bb01161a8"
     },
     {
       "number": 100,
@@ -3158,7 +4365,32 @@
         "Long-backed low liquid lynx with sharp translucent ear tufts and muscular shoulder core",
         "Broad flowing zircon lynx with high gel shoulders, long tapering tail and mineral-laced translucent paws; unmistakably ooze"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-e403b682-299e-4f60-9995-d21bf2d24279.png",
+      "sourceSha256": "91bbec1219c38f9df1f8bc33dfaf8f80334f5b8d31c247c1e887d1fdcc61a572",
+      "atlas": "./assets/roster/zirconveil-v4.webp",
+      "sourceBoxes": [
+        [
+          95,
+          325,
+          445,
+          620
+        ],
+        [
+          554,
+          233,
+          1349,
+          627
+        ],
+        [
+          1392,
+          34,
+          2147,
+          645
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "28e4fec631e12283cd81d114a0f1402b3a849a005431023e553cf6f3169c9c28"
     },
     {
       "number": 101,
@@ -3179,7 +4411,32 @@
         "Slender arched-neck woodland deer with branching arbor antlers and a developing leaf-wing fan",
         "Deep-chested celestial woodland guardian with a high flowering antler canopy, broad layered leaf wings and long sweeping fur; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-454a2b08-8db6-4a5b-98cc-83e7b74d14f9.png",
+      "sourceSha256": "7d30beb03fc8284be62b0944e0b35066d56a72025e44312d9a61eb8ad5cf15c6",
+      "atlas": "./assets/roster/arborkin-v4.webp",
+      "sourceBoxes": [
+        [
+          171,
+          252,
+          483,
+          655
+        ],
+        [
+          725,
+          99,
+          1203,
+          668
+        ],
+        [
+          1361,
+          8,
+          2096,
+          671
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "735927685bea46765e83998c0b090d520d33981bf523aef91da3df200f9a1d5e"
     },
     {
       "number": 102,
@@ -3200,7 +4457,32 @@
         "Long low muscular basilisk lizard with thick forelimbs, developed fangs and a raised basil-green spine ridge",
         "Heavy arch-shouldered monitor monstrosity with a deep predatory skull, enormous foreclaws and broad overlapping dorsal ridges; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-e7e9932f-9c0f-4727-9e21-e91881121a8c.png",
+      "sourceSha256": "8909f9707fe2492c5a7108554f69ffb4e2fe0683e073f78c9de55955ae643909",
+      "atlas": "./assets/roster/basilgore-v4.webp",
+      "sourceBoxes": [
+        [
+          112,
+          342,
+          480,
+          632
+        ],
+        [
+          544,
+          231,
+          1322,
+          629
+        ],
+        [
+          1373,
+          19,
+          2158,
+          655
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "8b311bf2c4a4db82ebc171dc551e62aa2365baac427e50896abe91e9b41798c5"
     },
     {
       "number": 103,
@@ -3221,7 +4503,32 @@
         "Raised cobalt gel mechanism with separated articulated porcelain limbs suspended in flexible ooze",
         "Broad amorphous cobalt engine with a large suspended cog halo, a recessed mask core and wide independently flowing pseudopod supports; no rigid skeleton"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-e8d0ccf0-0506-4723-8bd0-a5a9e62dc804.png",
+      "sourceSha256": "f00a05127553cd6ffd36dd4aae8a080b086154849a5f86fb3cee900d618781cb",
+      "atlas": "./assets/roster/cobaltwisp-v4.webp",
+      "sourceBoxes": [
+        [
+          94,
+          311,
+          430,
+          620
+        ],
+        [
+          600,
+          47,
+          1153,
+          664
+        ],
+        [
+          1213,
+          2,
+          2107,
+          655
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "0aadb5edbd7f9cc3f54f8f474d9fd597e9f37e6011d3eccc8d906d5b0fba72af"
     },
     {
       "number": 104,
@@ -3242,7 +4549,32 @@
         "Arched oily fiend ooze with a deep main mouth, developed curved horns and short flowing side jaws",
         "Broad low fiend-gel canopy with a dominant overhanging horned mouth, trailing gold-dappled lobes and floating thorn shards"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-b96561a1-47e2-485a-b631-52d5d20b1d5f.png",
+      "sourceSha256": "857aa2ab9a8fb6e5e1537e42a09005766ce38d2a9fe06e7a98508477ba7ecee2",
+      "atlas": "./assets/roster/dapplejaw-v4.webp",
+      "sourceBoxes": [
+        [
+          97,
+          383,
+          476,
+          667
+        ],
+        [
+          579,
+          132,
+          1202,
+          663
+        ],
+        [
+          1270,
+          50,
+          2146,
+          674
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "49e2a0487b09ac0001fda62de9f7e18fc3b53f9bb9fc6271f96b5fbc36a027fe"
     },
     {
       "number": 105,
@@ -3263,7 +4595,32 @@
         "Lean stalking plasma panther with a narrow waist, high shoulder flames and separated gold halo arcs",
         "Deep-chested flowing celestial panther with a large ivory-ember mantle and a long sweeping black-flame tail; four legs, no wings"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-2f42a755-6181-4f12-9bd0-c18cf39993b3.png",
+      "sourceSha256": "cd19d1e0f0b674410ff8eb181bcd34ac8848ea3eb4f9cf1b65a1f81bf9863010",
+      "atlas": "./assets/roster/ebonflare-v4.webp",
+      "sourceBoxes": [
+        [
+          127,
+          284,
+          389,
+          626
+        ],
+        [
+          516,
+          133,
+          1292,
+          635
+        ],
+        [
+          1395,
+          40,
+          2143,
+          635
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "4627207a5db7e3302fc37c3237fd4bd1b5c471618628379942ddba02e1338230"
     },
     {
       "number": 106,
@@ -3284,7 +4641,32 @@
         "Tall bowed skeletal willow with scroll-like bark panels and hanging flower traps",
         "Broad ancient funeral willow with a high parchment-bark canopy, long bone-twig trap branches and a dense pale root base; no book props or written text"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-aadb8188-27b3-4e6c-a755-ba68f844d67f.png",
+      "sourceSha256": "ff4c860a31b82b6538ab159008068074f039d09102393a233ce8479b959af0a7",
+      "atlas": "./assets/roster/fableroot-v4.webp",
+      "sourceBoxes": [
+        [
+          127,
+          344,
+          471,
+          646
+        ],
+        [
+          610,
+          25,
+          1181,
+          649
+        ],
+        [
+          1296,
+          3,
+          2147,
+          657
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "1608e3952771c31b13728a4f8988cbf77fb297dcd21b7576503f1f7e40c73363"
     },
     {
       "number": 107,
@@ -3305,7 +4687,32 @@
         "Tall broad-shouldered glacier guardian with elongated feathered ears and developed ice antlers",
         "Hunched wide-backed glacier faerie titan with a heavy fur mantle, broad ice-antler crown and immense long hands; two arms, two legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-7c2f35cf-79f7-4d95-b435-3b8f6f440d39.png",
+      "sourceSha256": "2a758f6f4b0ae3fa5db98bc5b06cdb90a85de1bf18fdef4b6a5591aa6241c26b",
+      "atlas": "./assets/roster/glaciershard-v4.webp",
+      "sourceBoxes": [
+        [
+          118,
+          214,
+          502,
+          664
+        ],
+        [
+          628,
+          23,
+          1277,
+          667
+        ],
+        [
+          1343,
+          10,
+          2131,
+          671
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "f49f3e838c35a30be36ce3a28ab6b6b0ec66090a0637b298636da85007396e8b"
     },
     {
       "number": 108,
@@ -3326,7 +4733,32 @@
         "Lean harbor revenant hound with exposed braced ribs, long paws and salt-stained cloth panels",
         "Heavy shoulder-armored undead mastiff with deep articulated bronze rib cage, low skull and a wide sea-burial mantle; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-e4695d4a-b453-4621-a57a-e90a4c6fe53e.png",
+      "sourceSha256": "9629f286cb71e4ac190d0758d529faf8343234cdeb7dd59cf7a6206253b5336e",
+      "atlas": "./assets/roster/harborgaze-v4.webp",
+      "sourceBoxes": [
+        [
+          94,
+          274,
+          437,
+          638
+        ],
+        [
+          566,
+          119,
+          1259,
+          634
+        ],
+        [
+          1299,
+          22,
+          2148,
+          645
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "13f7e0a39b8d3b51a32b09b6cc7c7ce89d5b6dded2f893157f376ff161bd5e12"
     },
     {
       "number": 109,
@@ -3347,7 +4779,32 @@
         "Lean long-legged bone hound with swept black horns and visibly open luminous ribs",
         "Broad hunched infernal hound with a deep saber-fanged skull, high skeletal shoulder arches and a dark tattered hide mantle; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-f63d78e6-ca3e-4256-a6c2-c9a33e5f68de.png",
+      "sourceSha256": "112e600023ac3e3c9ef73c99fd3f34c9adc9b63896cc1a830fcd78d0fb64542a",
+      "atlas": "./assets/roster/ichorfang-v4.webp",
+      "sourceBoxes": [
+        [
+          114,
+          284,
+          489,
+          609
+        ],
+        [
+          640,
+          87,
+          1285,
+          610
+        ],
+        [
+          1360,
+          109,
+          2144,
+          610
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "205123040c5f8100267ea305c9f9c2053039aa80b097720da1e2c355f5f1b425"
     },
     {
       "number": 110,
@@ -3368,7 +4825,32 @@
         "Tall narrow uncanny faerie with long mismatched arms, split mask and visible small torso mouths",
         "Broad bowed jasper aberration with an overhanging feather-filament mantle, deeply split moth mask and low sweeping grasping hands; two arms, two legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-44a7053f-fe97-4f5b-a95f-2e29d9485332.png",
+      "sourceSha256": "2ad31c2c98542e115163afb93c36db347487c463c6787df58bcf839eca9d5342",
+      "atlas": "./assets/roster/jasperplume-v4.webp",
+      "sourceBoxes": [
+        [
+          99,
+          317,
+          478,
+          666
+        ],
+        [
+          666,
+          15,
+          1186,
+          671
+        ],
+        [
+          1329,
+          8,
+          2154,
+          681
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "f3b296f28aff1aa6347fb8d86114639bd01b3dc3eaa53c663db3fc9df0c183d8"
     },
     {
       "number": 111,
@@ -3389,7 +4871,32 @@
         "Tall ember giant with an angular chest, long muscular arms and a developing living-coal beard",
         "Low broad volcanic titan with an overhanging broken-rock shoulder ridge, deep coal beard and massive fissured forearms; two arms and legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-44024e97-0ea3-4b8c-958a-7d42b31c4009.png",
+      "sourceSha256": "bff1c426fb2e8b8fc498165dba165a96dae401defd03c920535c51f4a1af0843",
+      "atlas": "./assets/roster/kindlekin-v4.webp",
+      "sourceBoxes": [
+        [
+          80,
+          258,
+          524,
+          658
+        ],
+        [
+          607,
+          8,
+          1258,
+          683
+        ],
+        [
+          1323,
+          23,
+          2150,
+          670
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "606a8e13e1652874510ef5de2841e8d3a3f6860538d02200a98cc8b8731be100"
     },
     {
       "number": 112,
@@ -3410,7 +4917,32 @@
         "Longer broad-backed hippo aberration with multiple eyes and a separated lateral jaw structure",
         "Deep hulking hippo with a high lotus-shaped eye-stalk mantle and a large disturbing multi-jaw head; four legs, recognizable hippo anatomy"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-2681225e-1e71-4364-8d49-5a5ff673886f.png",
+      "sourceSha256": "dab1805d32be91165037b640d5ab78fe5744a90a7ed5a626050c85a4a7efe7af",
+      "atlas": "./assets/roster/lotusgore-v4.webp",
+      "sourceBoxes": [
+        [
+          94,
+          293,
+          475,
+          663
+        ],
+        [
+          605,
+          176,
+          1337,
+          668
+        ],
+        [
+          1440,
+          17,
+          2136,
+          669
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "3dda8a37fcfd56cc4e98ae6fcacef2d2d2abc852e5fdc872a8f2ff5e9827d924"
     },
     {
       "number": 113,
@@ -3423,7 +4955,7 @@
         "Mistral Exarch"
       ],
       "referenceAtlas": "./assets/roster/mistralwisp.webp",
-      "identity": "A visibly nonhuman bipedal raptor-like faerie with a long narrow insect mask, enormous hooked talons, elongated predatory fangs and silver wind-fringed plumage.",
+      "identity": "A visibly nonhuman four-armed raptor-like faerie with a long narrow insect mask, enormous hooked talons, elongated predatory fangs and silver wind-fringed plumage.",
       "decision": "rework",
       "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
       "stages": [
@@ -3431,7 +4963,33 @@
         "Lean long-legged four-armed predator faerie with a narrow mask and elongated two pairs of grasping forearms",
         "Hunched broad-mantled four-armed faerie raptor with long hooked talons, sweeping silver wind plumage and deep predatory mask; exactly four arms, two legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-d07cdfd6-e7e8-413e-b793-df3fe74afb56.png",
+      "sourceSha256": "de659f99bbd4d00ffaa04cf03ea40345980291b285ce164d7d5c2b9df0bef057",
+      "atlas": "./assets/roster/mistralwisp-v4.webp",
+      "sourceBoxes": [
+        [
+          127,
+          254,
+          552,
+          671
+        ],
+        [
+          623,
+          13,
+          1355,
+          690
+        ],
+        [
+          1425,
+          21,
+          2146,
+          694
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "9e43c2e97c1ff6f55d1e8dbe26dc893965980349c33c526bf38ce439bef5908b",
+      "anatomyReviewed": true
     },
     {
       "number": 114,
@@ -3452,7 +5010,32 @@
         "Long-bodied sleek celestial weasel with branchlike nettle antlers and a wide leaf-wing fan",
         "Arched-neck woodland weasel guardian with a long streaming ivory tail, broad floral shoulder mantle and intricate golden nettle antlers; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-b56af229-1bda-415d-b98f-7c108ebc2164.png",
+      "sourceSha256": "058a88432ed376b2415ea2bfdbe74e539255916c374e3f1771a81f22fec13768",
+      "atlas": "./assets/roster/nettlejaw-v4.webp",
+      "sourceBoxes": [
+        [
+          106,
+          241,
+          481,
+          605
+        ],
+        [
+          526,
+          189,
+          1329,
+          614
+        ],
+        [
+          1408,
+          23,
+          2145,
+          620
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "803cb733df514d3e76308204f96629deba920449dcc6371d40b91e8367f0d650"
     },
     {
       "number": 115,
@@ -3473,7 +5056,32 @@
         "Long stalking lion-crocodile predator with heavy shoulder plates, extended fangs and strong foreclaws",
         "Massive low broad-chested lion-crocodile monstrosity with a high armored shoulder ridge, deep long skull and enormous claws; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-2a925c5f-ec01-4119-9474-e021a496a5ee.png",
+      "sourceSha256": "0c72b0ec296d3cba15ce80a54fff794a3b042345db18aac259f10a1244775d64",
+      "atlas": "./assets/roster/onyxflare-v4.webp",
+      "sourceBoxes": [
+        [
+          82,
+          338,
+          422,
+          626
+        ],
+        [
+          545,
+          164,
+          1311,
+          634
+        ],
+        [
+          1326,
+          54,
+          2148,
+          638
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "2caa3dab73887c4063c0b54e312c98e84c8a1ad4fdb53b91941dfd2b6a8afb6f"
     },
     {
       "number": 116,
@@ -3494,7 +5102,32 @@
         "Raised lotuslike gel construct with articulated floating porcelain petals and a long soft central column",
         "Wide blooming ooze automaton with an overhanging petal canopy, suspended bronze joint rings and several broad fluid support lobes; no humanoid limbs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-6809914f-5e34-4efd-a9f2-5f2845c86912.png",
+      "sourceSha256": "f94aa1e61544cb76d188c4e15010775ae49bb6754c054fb5b9766d501bca6c92",
+      "atlas": "./assets/roster/petalroot-v4.webp",
+      "sourceBoxes": [
+        [
+          96,
+          388,
+          426,
+          647
+        ],
+        [
+          619,
+          50,
+          1158,
+          658
+        ],
+        [
+          1219,
+          21,
+          2127,
+          655
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "baa03831e1e5ab56a1aa2f6e6b76bc90a4ebe4e9f16a75b78432c7fef0374e93"
     },
     {
       "number": 117,
@@ -3515,7 +5148,32 @@
         "Tall arched fiend ooze with a recessed toothed core, longer horn fins and orbiting dark fragments",
         "Wide low cosmic-gel predator with a deep overhanging horned mouth and many long trailing soft lobes; no hard quadruped skeleton"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-14d510e9-750d-488c-9be0-d3c3141a462d.png",
+      "sourceSha256": "2945e1388318b7901a5559fd7fb418079db4a8331d3c5021fef5e300b80f1dec",
+      "atlas": "./assets/roster/quasarshard-v4.webp",
+      "sourceBoxes": [
+        [
+          117,
+          328,
+          421,
+          611
+        ],
+        [
+          593,
+          31,
+          1161,
+          643
+        ],
+        [
+          1221,
+          36,
+          2160,
+          641
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "bf545571a11ec7f4fe438e018ff33eb74d3bb9b137a1dda0bc18e3105239d1df"
     },
     {
       "number": 118,
@@ -3536,7 +5194,32 @@
         "Lean wind raven with long taloned legs, partially spread layered storm wings and extended tail",
         "Deep-chested celestial storm raven with high feathered neck mantle, broad fully layered wings and long forked plasma tail; exactly two wings and two feet"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-67fbb123-a0b0-48c4-8b54-ba293f523b95.png",
+      "sourceSha256": "1e9f5687b6b7ae60e9be19731c6d97ad252ee62ad3faef7f7d5e0cc4ccbc3908",
+      "atlas": "./assets/roster/ravengaze-v4.webp",
+      "sourceBoxes": [
+        [
+          120,
+          259,
+          460,
+          629
+        ],
+        [
+          535,
+          87,
+          1261,
+          644
+        ],
+        [
+          1279,
+          3,
+          2133,
+          704
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "7e280025348b45e9e84b913867ea1ffb5789b44ffd449272121cd81d35d77dd9"
     },
     {
       "number": 119,
@@ -3557,7 +5240,32 @@
         "Bowed branching funeral plant with several long-stalked flytraps and a low bleached leaf mantle",
         "Broad arching funeral trap canopy with a dominant skull-like flytrap, layered white leaves and a thick cage of skeletal roots; clearly botanical"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-24622138-19a4-4182-8008-ba7f1cafa8e2.png",
+      "sourceSha256": "2503d798da421750beb6ef77fc73f5f8dbb4377fd2ceb34c35703fd0f600172c",
+      "atlas": "./assets/roster/solacefang-v4.webp",
+      "sourceBoxes": [
+        [
+          141,
+          360,
+          410,
+          678
+        ],
+        [
+          623,
+          109,
+          1226,
+          685
+        ],
+        [
+          1359,
+          4,
+          2112,
+          687
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "376deb1847c81652a7b2586aa6b5219063c6b42ab266f10c95345c8bb8e6a93b"
     },
     {
       "number": 120,
@@ -3578,7 +5286,32 @@
         "Tall slender talon guardian with long feather-fringed arms, hooked hand talons and amber chest plumes",
         "Hunched broad-shouldered avian titan with an enormous layered cream-and-amber mantle, rugged beak and low-reaching feathered hands; two arms, two legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-67e5ada9-3e4a-4638-a078-c84191a41a56.png",
+      "sourceSha256": "7215903f3b307722d88fbcadf30f1614a110fa60da4938ce74014c39c0fad78d",
+      "atlas": "./assets/roster/talonplume-v4.webp",
+      "sourceBoxes": [
+        [
+          86,
+          256,
+          465,
+          664
+        ],
+        [
+          585,
+          16,
+          1154,
+          687
+        ],
+        [
+          1243,
+          12,
+          2155,
+          688
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "af081a03aa827255547755c2f22c2f2e643ce256eba975f447e3bc1e8a2c9ff1"
     },
     {
       "number": 121,
@@ -3599,7 +5332,32 @@
         "Long-backed walking armadillo skeleton with separated steel shell plates and a fully exposed articulated spine",
         "Low heavily armored undead armadillo with a high arched segmented steel shell, robust mechanical digging foreclaws and a long bony tail; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-ae9587ec-b73d-4f02-9f83-a6d8995e116e.png",
+      "sourceSha256": "b26f9dab3bfb5230a44fbd1568074d1a95acbc37ade3e9ca7f9c0b2ed5c4afae",
+      "atlas": "./assets/roster/ulmarkin-v4.webp",
+      "sourceBoxes": [
+        [
+          30,
+          305,
+          343,
+          602
+        ],
+        [
+          425,
+          206,
+          1175,
+          613
+        ],
+        [
+          1216,
+          15,
+          2158,
+          663
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "5f9385ce470f68b93df9f6348d834f5069668554f94a942694e931c7756065b1"
     },
     {
       "number": 122,
@@ -3620,7 +5378,32 @@
         "Long-legged skeletal fiend deer with swept black antlers, thin tattered hide and a deep predatory muzzle",
         "Deep-chested low-necked fiend stag with a wide black antler crown, open skeletal shoulder arches and a heavy crimson hide mantle; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-fa9f0122-135d-43b2-82c7-bd1bc816fe4b.png",
+      "sourceSha256": "c2744fef738a10f3af2191c0da8863ef12fcabb04376ca8a5085a18a3146cb24",
+      "atlas": "./assets/roster/velvetgore-v4.webp",
+      "sourceBoxes": [
+        [
+          111,
+          255,
+          400,
+          643
+        ],
+        [
+          591,
+          129,
+          1354,
+          645
+        ],
+        [
+          1418,
+          16,
+          2140,
+          656
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "0573374106b651cd07674febca65727892ae0790ab7a1b16a9086a4a147b925f"
     },
     {
       "number": 123,
@@ -3641,7 +5424,32 @@
         "Tall narrow whispering aberration with elongated mismatched arms and an opened torso-mouth column",
         "Deeply hunched faerie aberration with a split eyeless mask, broad tattered lavender mantle and long grasping arms framing its many torso mouths; two arms and two legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-9878d4af-2515-4c41-a6ad-dc21e5309cba.png",
+      "sourceSha256": "b618d39ec476fad6a76215c0df4ad1ddd340e3faf2e9c1a7c13955795179dcae",
+      "atlas": "./assets/roster/whisperwisp-v4.webp",
+      "sourceBoxes": [
+        [
+          129,
+          233,
+          527,
+          676
+        ],
+        [
+          645,
+          14,
+          1273,
+          684
+        ],
+        [
+          1296,
+          7,
+          2147,
+          685
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "e1162e5055640c39bd0f83fff5753d404893c508ff9fa8efb472c78e9595d26d"
     },
     {
       "number": 124,
@@ -3662,7 +5470,32 @@
         "Tall long-armed citrine giant with a deep illuminated jaw and separated jagged shoulder plates",
         "Broad hunched lightning titan with a high craggy back, a deep wide glowing jaw and immense gold-gray forearms; two arms and legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-7629cb8a-5a73-49ce-a8f3-9c98e8bb61ec.png",
+      "sourceSha256": "b6a038650fa34dc7a0c9e378999dad1392e2711aa90716fc95d286334a93ef76",
+      "atlas": "./assets/roster/xanthjaw-v4.webp",
+      "sourceBoxes": [
+        [
+          114,
+          266,
+          523,
+          649
+        ],
+        [
+          627,
+          22,
+          1289,
+          686
+        ],
+        [
+          1367,
+          10,
+          2157,
+          665
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "063e4f8a55a4b80e06e2b0db3dd6ec599ca56bb935ad1b4094e0d361f58cc3d1"
     },
     {
       "number": 125,
@@ -3683,7 +5516,32 @@
         "Lean muscular saber-cat with a long tentacle tail, eye stalk mane and a distinct extra side jaw",
         "High-shouldered hulking saber-cat aberration with deep saber jaws, a broad eye-stalk ridge and a long sweeping tentacle tail; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-c00e5cdf-e25c-4850-b5a0-2ac89091e3e3.png",
+      "sourceSha256": "4456db27b64aa433d146fd5ceb0c4f0eba4a1994b967b0634c88b31794527027",
+      "atlas": "./assets/roster/yonderflare-v4.webp",
+      "sourceBoxes": [
+        [
+          96,
+          334,
+          449,
+          643
+        ],
+        [
+          599,
+          107,
+          1285,
+          643
+        ],
+        [
+          1341,
+          27,
+          2140,
+          664
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "66370e55bdd68f711b38a5735c92d8f4e4da93a7630a81c8052ebeb8ea8f2707"
     },
     {
       "number": 126,
@@ -3704,7 +5562,32 @@
         "Long-legged predatory faerie with an open narrow petal mask, long hooked mantis arms and a thin waist",
         "Hunched broad-petalled zinnia monstrosity with long jointed mantis forearms, deep fanged mask and widely braced taloned legs; two arms, two legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-058f5adb-7db5-4663-901c-58e0f750c7e6.png",
+      "sourceSha256": "6555450a906eb9f4af56d416d59c8122ac14e7842dbf89965912cfaf4a1512ce",
+      "atlas": "./assets/roster/zinniaroot-v4.webp",
+      "sourceBoxes": [
+        [
+          172,
+          246,
+          503,
+          684
+        ],
+        [
+          633,
+          21,
+          1218,
+          711
+        ],
+        [
+          1300,
+          24,
+          2076,
+          702
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "ff0a0e1558e9d63ff4a8c6494d71ed19ad99097b5bb438221833cef721eecfb0"
     },
     {
       "number": 127,
@@ -3725,7 +5608,32 @@
         "Lean mountain ibex with long curved shard horns, high shoulder fur and floating sun rings",
         "Deep-chested celestial ibex with broad angular gold horn crown, long ivory beard and raised mineral-like shoulder mantle; four hooves"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-f4088c11-900f-408b-958f-b63a5369a182.png",
+      "sourceSha256": "28a3457d6180367f0140bd0459f73d0522e51c0461ed8942f168718442c61e5d",
+      "atlas": "./assets/roster/aurumshard-v4.webp",
+      "sourceBoxes": [
+        [
+          154,
+          212,
+          466,
+          584
+        ],
+        [
+          714,
+          35,
+          1328,
+          675
+        ],
+        [
+          1416,
+          8,
+          2136,
+          677
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "8e498d2b60325c24505a3418da16cf760572c71112abfc90f835cc7828548497"
     },
     {
       "number": 128,
@@ -3746,7 +5654,32 @@
         "Long low stalking boar-tiger with developed tusks, narrow waist and raised armored shoulder plates",
         "Broad immensely muscled boar-tiger with a deep tusked head, huge foreclaws and a high bracken-colored armored hump; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-9cfdd61a-84a7-4252-b230-2f2559a3147c.png",
+      "sourceSha256": "baa08b7a2d86571bf322dcc793a5ad40ac83ad19dfc56b7f3ae94d6f66873642",
+      "atlas": "./assets/roster/brackengaze-v4.webp",
+      "sourceBoxes": [
+        [
+          87,
+          342,
+          486,
+          632
+        ],
+        [
+          606,
+          237,
+          1359,
+          639
+        ],
+        [
+          1425,
+          33,
+          2160,
+          653
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "27a071a95df7e82f29dbcb33c9e97f777a3ee6bc2505613fc602f64b1972cffc"
     },
     {
       "number": 129,
@@ -3767,7 +5700,32 @@
         "Arched coral ooze construct with separated paired jaw plates and long flowing gel support limbs",
         "Wide overhanging coral automaton with a deep segmented porcelain maw, floating carved coral plates and broad teal tentacle supports; no rigid humanoid skeleton"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-4fba2567-890a-4606-9e65-fc8644c1c10b.png",
+      "sourceSha256": "c629ef97ee3df9d94ef20a8eaeedfc642561d1e4368c3472b3693b91b78e2ed2",
+      "atlas": "./assets/roster/coralfang-v4.webp",
+      "sourceBoxes": [
+        [
+          89,
+          265,
+          422,
+          658
+        ],
+        [
+          552,
+          57,
+          1178,
+          672
+        ],
+        [
+          1255,
+          23,
+          2132,
+          679
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "63973d5630367392ef017309ae6095c022d64fa36e20cf4acd372d458cd19ad9"
     },
     {
       "number": 130,
@@ -3788,7 +5746,32 @@
         "Raised flowing fiend jelly with broad tooth-edged winglike lobes and long dagger fins",
         "Tall sweeping liquid-wing fiend mantle with a recessed charcoal core, deep tooth fringes and long dripping burgundy blades; no hard animal skeleton"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-d46c6f1f-4834-4a53-a4a4-58346e84cb07.png",
+      "sourceSha256": "e2cb829e0de11c5baf5a5502537b69499af0a0dbd80efc5f132456350a6d5e1e",
+      "atlas": "./assets/roster/daggerplume-v4.webp",
+      "sourceBoxes": [
+        [
+          82,
+          417,
+          515,
+          670
+        ],
+        [
+          618,
+          98,
+          1309,
+          686
+        ],
+        [
+          1372,
+          31,
+          2122,
+          699
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "56da9414169ce613faa3a8b89c5c99aa7e9a35e7f5604bfeb2dec2413600243a"
     },
     {
       "number": 131,
@@ -3809,7 +5792,32 @@
         "Lean long-legged plasma stag with divided black-white body currents and developed flame antlers",
         "Deep-chested arched-neck elemental stag with a high silver-gold mane, broad branching flame antlers and a distinct eclipsed-sun halo; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-de5b6117-c355-44d5-ae55-5492d3c3277a.png",
+      "sourceSha256": "778acfb5f6db5818ae32578e7df8856716c77c04ad148829056426931e98c016",
+      "atlas": "./assets/roster/eclipsekin-v4.webp",
+      "sourceBoxes": [
+        [
+          130,
+          248,
+          477,
+          609
+        ],
+        [
+          722,
+          61,
+          1330,
+          674
+        ],
+        [
+          1430,
+          1,
+          2156,
+          681
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "b45d99e28352abfbaef5217d27fd9867aa939a9f161ea6317460aa9ceaaf56e5"
     },
     {
       "number": 132,
@@ -3830,7 +5838,32 @@
         "Tall branching funeral fennel with hollow bone stems and separated hanging seedpod traps",
         "Broad umbrella-like fennel predator with a hollow skeletal trunk, many mature seedpod traps and drooping dead feathery fronds; botanical anatomy"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-b04248c4-0b1d-4c4f-b8cc-77f337da49c1.png",
+      "sourceSha256": "75c6a870bdd0d5d715ef5e91167a2b7fea30fc1cf9ff50568dcd512ad51212fe",
+      "atlas": "./assets/roster/fennelgore-v4.webp",
+      "sourceBoxes": [
+        [
+          145,
+          302,
+          449,
+          660
+        ],
+        [
+          650,
+          15,
+          1176,
+          689
+        ],
+        [
+          1316,
+          11,
+          2126,
+          685
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "bd09875bf11384f433502eb43147916710f1e9ea9f4740a843a10a16be232f7a"
     },
     {
       "number": 133,
@@ -3851,7 +5884,32 @@
         "Tall long-armed moth giant with broad fur shoulders and opened layered wing mantle",
         "Hunched ancient moth titan with an enormous arched gossamer shoulder canopy, long silver antennae and heavy low-reaching hands; two arms, two legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-e8dad901-0db0-4e94-a49f-99664e5c2505.png",
+      "sourceSha256": "c8253245c5bde7f366983daf9dc855f8d006a021c1d3dc6ff32ab2976c2ffa48",
+      "atlas": "./assets/roster/gossamerwisp-v4.webp",
+      "sourceBoxes": [
+        [
+          75,
+          302,
+          385,
+          662
+        ],
+        [
+          485,
+          15,
+          1239,
+          671
+        ],
+        [
+          1309,
+          16,
+          2135,
+          666
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "267b40a8326fdf6f8bb6cd549b027f875a32f39428e8dbc82c3021f77c9d37a2"
     },
     {
       "number": 134,
@@ -3872,7 +5930,32 @@
         "Long-backed burrowing badger revenant with exposed ribwork, elongated digging claws and segmented red armor",
         "Low heavy shoulder-armored skeletal badger with deep brick-and-bronze rib braces, broad digging forepaws and a short thick spine tail; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-5a9e082b-7eb0-4e99-b2e1-61130e7ff16a.png",
+      "sourceSha256": "4e1b535f5887b40728712c029f6aaacb03cfe548b97f308e6c6d0c4c898e1c7d",
+      "atlas": "./assets/roster/hearthjaw-v4.webp",
+      "sourceBoxes": [
+        [
+          82,
+          367,
+          458,
+          630
+        ],
+        [
+          537,
+          231,
+          1305,
+          662
+        ],
+        [
+          1348,
+          24,
+          2140,
+          651
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "d8b3bd6813432b70866a6edc0fa5619e1385e6b1c715f2482ed1c4a187355f38"
     },
     {
       "number": 135,
@@ -3893,7 +5976,32 @@
         "Long lean skeletal crocodile fiend with exposed ribwork, elongated hooked snout and finlike horn ridges",
         "Broad ancient low crocodile revenant with a high driftbone shoulder mantle, deep long skull and massive spectral-green jaw; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-f4dd41cc-6665-4f42-889a-97cf2d688a14.png",
+      "sourceSha256": "c9ec5b885cd63674911e2d192d4721a051dbd8ba92966b0478feff71908e8ca7",
+      "atlas": "./assets/roster/isletflare-v4.webp",
+      "sourceBoxes": [
+        [
+          80,
+          366,
+          433,
+          604
+        ],
+        [
+          536,
+          177,
+          1296,
+          606
+        ],
+        [
+          1346,
+          101,
+          2137,
+          605
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "c1a214c60f8b5ec3361e98ada35bd63820c6156522f725c1df981c370dbf538a"
     },
     {
       "number": 136,
@@ -3914,7 +6022,32 @@
         "Tall asymmetric vine-limbed aberration with a split mask, several torso mouths and long fingers",
         "Broad hunched root-and-faerie aberration with an overhanging vine mantle, many watchful eyes and long low-reaching twisted hands; two arms and two legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-148c5f92-6bb6-4e24-abf2-b54d6288fff0.png",
+      "sourceSha256": "076de9ce18d75d4d50e885f7a39be2526992c595f522eed26036a689b9447a8a",
+      "atlas": "./assets/roster/jubilroot-v4.webp",
+      "sourceBoxes": [
+        [
+          21,
+          201,
+          467,
+          678
+        ],
+        [
+          625,
+          13,
+          1228,
+          675
+        ],
+        [
+          1248,
+          5,
+          2132,
+          690
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "fce1afb879277857b806a26c4a525f5fa34043875d5a3bc60bc6c1ea8cdda090"
     },
     {
       "number": 137,
@@ -3935,7 +6068,32 @@
         "Tall angular mineral giant with separated shoulder crystals, long thick forearms and exposed emerald fractures",
         "Deeply hunched broad-backed stone titan with a high natural mineral ridge, huge craggy forearms and deep emerald fissures; no extra arms or faces"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-8ee7113b-5f7c-403a-8b12-2aeee22af744.png",
+      "sourceSha256": "7136ce733099d67f0bb136950ef465d7e80ecca3598a65aa71d8682238104ebd",
+      "atlas": "./assets/roster/kryptonshard-v4.webp",
+      "sourceBoxes": [
+        [
+          93,
+          286,
+          449,
+          650
+        ],
+        [
+          577,
+          29,
+          1245,
+          680
+        ],
+        [
+          1342,
+          13,
+          2109,
+          668
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "3d7a65c67855e4c49682d542354e096d7f7f195be65fb24a75393d3ef140c457"
     },
     {
       "number": 138,
@@ -3956,7 +6114,32 @@
         "Long-legged elk aberration with a broad shaggy chest, branching watchful antlers and developed secondary tentacle jaws",
         "Low-necked hulking elk with a tall eye-studded bark antler canopy, massive shoulder fur and long unnatural jaw tendrils; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-fbc93d92-5dac-4298-a736-17e5ca364674.png",
+      "sourceSha256": "501576c9f64a83353992f2a96beabd4834f598d5a96f3d276afa9144aed5de0f",
+      "atlas": "./assets/roster/larchgaze-v4.webp",
+      "sourceBoxes": [
+        [
+          110,
+          279,
+          441,
+          667
+        ],
+        [
+          638,
+          15,
+          1243,
+          681
+        ],
+        [
+          1346,
+          17,
+          2146,
+          679
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "b2c3a9d3cf36f38ffc269e311cb5b377954fc380986f8bb0072a0027a61bb70f"
     },
     {
       "number": 139,
@@ -3977,7 +6160,32 @@
         "Lean tall predatory jackal faerie with elongated hooked arms and a narrow silver-violet shard mantle",
         "Forward-hunched jackal monstrosity with a deep saber-fanged muzzle, broad layered mirage mantle and long heavy grasping claws; two arms and two legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-bcebc573-a814-4c58-94c7-607d820e1835.png",
+      "sourceSha256": "2d041e096b2a7435b563515c3a2a021468b374f2be657075ce70cbba6d79aec4",
+      "atlas": "./assets/roster/miragefang-v4.webp",
+      "sourceBoxes": [
+        [
+          141,
+          257,
+          528,
+          614
+        ],
+        [
+          647,
+          13,
+          1242,
+          683
+        ],
+        [
+          1346,
+          16,
+          2117,
+          686
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "b58cf952b51b2c6cd89aba202967076b1601868ee7143f1bd28c3e5dc59a6859"
     },
     {
       "number": 140,
@@ -3998,7 +6206,32 @@
         "Long-bodied anteater faerie with a curved long muzzle, flowing tail and developed nectar whiskers",
         "Arched-shouldered celestial anteater with a sweeping feathered tail, broad floral neck mantle and long golden nectar filaments; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-11181298-b727-433b-a968-b29939108bfc.png",
+      "sourceSha256": "4be5b1980b1a99a9df8afbf4524421cbe129a459b4b4a07439aa20ac312eb2e2",
+      "atlas": "./assets/roster/nectarplume-v4.webp",
+      "sourceBoxes": [
+        [
+          100,
+          274,
+          454,
+          615
+        ],
+        [
+          590,
+          211,
+          1385,
+          609
+        ],
+        [
+          1422,
+          10,
+          2155,
+          645
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "d16a9c051e1ffe123b066422dff7fff750874e799674919fe0760df66bdf33e2"
     },
     {
       "number": 141,
@@ -4019,7 +6252,32 @@
         "Long-backed stalking owl-bear with developed bear shoulders, large beak fangs and layered ochre neck feathers",
         "Massive high-shouldered owl-bear with a deep feather collar, immense hooked beak, heavy muscular forelimbs and large bear claws; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-1dbe46e7-17b0-4c8c-a9ac-3bc6ddf0afad.png",
+      "sourceSha256": "b62fcdb5458573361a7cb2c23e0b288bb901214af484aa4d6dc372f903d0e488",
+      "atlas": "./assets/roster/oraclekin-v4.webp",
+      "sourceBoxes": [
+        [
+          92,
+          289,
+          476,
+          651
+        ],
+        [
+          557,
+          225,
+          1343,
+          652
+        ],
+        [
+          1402,
+          4,
+          2158,
+          659
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "764f481e658bf3e6a0b795258145947a46fac8d6d1abf620db680f10d3b5fe0b"
     },
     {
       "number": 142,
@@ -4040,7 +6298,32 @@
         "Raised amorphous pewter construct with separate ornate armor sections suspended in black gel",
         "Broad tusked ooze automaton with an overhanging ornate pewter mantle, recessed mask core and thick independently flowing black gel supports; no rigid skeleton"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-33639834-a6de-4458-856d-3e4239c7205e.png",
+      "sourceSha256": "e9baf1249651073662329be4ae0284c7ad0c85c292ad9ed85c1069dca55f7907",
+      "atlas": "./assets/roster/pewtergore-v4.webp",
+      "sourceBoxes": [
+        [
+          83,
+          342,
+          521,
+          656
+        ],
+        [
+          615,
+          38,
+          1243,
+          681
+        ],
+        [
+          1327,
+          15,
+          2130,
+          680
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "61d9c634c5639226fab443ec86f2f4f2901af5e38bfb7a54f774a3673058e763"
     },
     {
       "number": 143,
@@ -4061,7 +6344,32 @@
         "Lean arching fiend ooze with long obsidian horns, a central dark mouth and flowing arrowlike lobes",
         "Wide low quivering gel predator with a dominant horned maw, long trailing purple tendrils and a floating crown of arrow barbs; amorphous"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-3c40fbd6-1f63-4f40-8582-60ba35bf6216.png",
+      "sourceSha256": "ba1f35e137ba02a43bd3207e5f2e371e92be90644c51845eed81575d3c9b2e5c",
+      "atlas": "./assets/roster/quiverwisp-v4.webp",
+      "sourceBoxes": [
+        [
+          128,
+          317,
+          389,
+          612
+        ],
+        [
+          528,
+          83,
+          1115,
+          632
+        ],
+        [
+          1120,
+          66,
+          2112,
+          631
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "1be1b459245dcf66f740c6af7aa72bf364ed88e62c1e08266a90de99c6b39ed8"
     },
     {
       "number": 144,
@@ -4082,7 +6390,32 @@
         "Longer four-legged current turtle with a layered wave shell, broad water feet and flared gold gills",
         "Broad ancient water tortoise with a high flowing foam shell, deep current neck mantle and strong turquoise tidal legs; four legs, one head"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-ff7d49e4-b7d8-4ad9-b535-e585f00015d2.png",
+      "sourceSha256": "9415885ee2c47cbf7c69d4cf25d993c3c7794959d7ec42b301848cc8d25650d6",
+      "atlas": "./assets/roster/ripplejaw-v4.webp",
+      "sourceBoxes": [
+        [
+          125,
+          318,
+          462,
+          619
+        ],
+        [
+          619,
+          145,
+          1239,
+          637
+        ],
+        [
+          1373,
+          1,
+          2130,
+          627
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "b832c81cb6dcd5f14cc71b2aafda5c8836d3ad661043f7419f4d97571e2ff218"
     },
     {
       "number": 145,
@@ -4103,7 +6436,32 @@
         "Bowed carnivorous starflower with separated black petal fans and several hanging white pitcher traps",
         "Broad layered funeral starflower canopy with a dominant central beaked trap, many black petals and an open cage of skeletal roots; botanical anatomy"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-c6615a96-fcb9-4741-98c9-bf01281f7894.png",
+      "sourceSha256": "a759cfe1f61408e3c2f026ec6f9462be0b9e49930fa370e145d11a75296b05cf",
+      "atlas": "./assets/roster/starlingflare-v4.webp",
+      "sourceBoxes": [
+        [
+          178,
+          288,
+          468,
+          666
+        ],
+        [
+          653,
+          127,
+          1267,
+          673
+        ],
+        [
+          1403,
+          10,
+          2155,
+          694
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "1014cca3cd3305987b9371fdd7e3aa62dc33f52d93151adc5e668ce5c006845f"
     },
     {
       "number": 146,
@@ -4124,7 +6482,32 @@
         "Tall heavy-shouldered woodland giant with long arms, rough fungal back ridges and mature mushroom ear shelves",
         "Deeply hunched ancient woodland titan with a broad truffle-and-moss canopy back, huge low arms and a rugged piglike muzzle; two arms and legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-0a005382-2367-4a8b-8ae9-79fbd068bd16.png",
+      "sourceSha256": "ccc6a13a88acdd003938a6f6ce61b838038756e2b4b6f28ce03f6cef69532b1d",
+      "atlas": "./assets/roster/truffleroot-v4.webp",
+      "sourceBoxes": [
+        [
+          106,
+          255,
+          495,
+          685
+        ],
+        [
+          599,
+          13,
+          1198,
+          696
+        ],
+        [
+          1262,
+          17,
+          2126,
+          692
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "d93db3785725a2da5624117557880296fb65a30309dd78c8acd4c11080da42b8"
     },
     {
       "number": 147,
@@ -4145,7 +6528,32 @@
         "Lean mountain revenant ram with curled horns, exposed bronze-braced spine and articulated stone shoulder plates",
         "Deep-chested ancient skeletal bighorn with massive curled ivory horns, high natural stone shoulder ridges and heavy brass-braced hooves; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-6567175c-721d-4572-868e-0a0e1d82ec34.png",
+      "sourceSha256": "a4def66676624d35e34fbb252b44e66d93d42ec677bf09d3c348aa5b98c06eb3",
+      "atlas": "./assets/roster/uplandshard-v4.webp",
+      "sourceBoxes": [
+        [
+          148,
+          263,
+          489,
+          676
+        ],
+        [
+          674,
+          160,
+          1338,
+          674
+        ],
+        [
+          1456,
+          15,
+          2141,
+          678
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "2acf94d36d7a839802ff5a96196a75115209602678487ac94fed6a89333e0a37"
     },
     {
       "number": 148,
@@ -4166,7 +6574,32 @@
         "Lean long-bodied undead fiend panther with exposed pale ribs, swept brow horns and a long sinuous tail",
         "Broad low predatory panther revenant with a deep skeletal head, high exposed shoulder arches and a large ragged violet hide mantle; four legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-272d9347-d078-4ca3-bd94-04e928465ad9.png",
+      "sourceSha256": "418cf131ed3e9cb7a856ad5b21509f787f7de2a3e9d85f5754b32e58e5529b05",
+      "atlas": "./assets/roster/violetgaze-v4.webp",
+      "sourceBoxes": [
+        [
+          90,
+          313,
+          450,
+          590
+        ],
+        [
+          551,
+          118,
+          1291,
+          614
+        ],
+        [
+          1297,
+          35,
+          2162,
+          610
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "1f366fcdf8fdeba4e062be4f69f9d3300ae837db8dce4da7dcef34f2313a294b"
     },
     {
       "number": 149,
@@ -4187,7 +6620,32 @@
         "Tall asymmetric guardian aberration with very long twisted arms, deep mismatched jaws and a narrow silk mantle",
         "Deeply hunched ancient faerie warden with a high emerald silk back mantle, many stacked watchful eyes and immense low grasping hands; two arms and two legs"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-70c5f8d8-65a9-48a0-b3b1-356620ade2f6.png",
+      "sourceSha256": "3ab20e79ab2e73b324f623f38e0c34c3c6adaa9be800cc6462ab3174f1fe209d",
+      "atlas": "./assets/roster/wardenfang-v4.webp",
+      "sourceBoxes": [
+        [
+          153,
+          236,
+          485,
+          679
+        ],
+        [
+          597,
+          14,
+          1283,
+          694
+        ],
+        [
+          1372,
+          14,
+          2143,
+          676
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "3d2559d1eb8b8ff684d5ac848793c98d555d2a5b49da5d4d5398757390069943"
     },
     {
       "number": 150,
@@ -4208,8 +6666,38 @@
         "Tall long-armed storm guardian with a high featherlike flame crest and separated cloud plumes",
         "Broad hunched celestial-storm titan with a towering arched cloud mantle, long heavy forearms and large flowing blue-gold flame plumes; no extra heads, arms or wings"
       ],
-      "status": "pending"
+      "status": "integrated",
+      "sourceFilename": "exec-10c95ad9-d2ca-4180-8909-e88fa53e64ce.png",
+      "sourceSha256": "772a00abff52dd46dae25a1f431b99391db46f215ef6bd6c3b66c99112aa3216",
+      "atlas": "./assets/roster/zodiacplume-v4.webp",
+      "sourceBoxes": [
+        [
+          67,
+          286,
+          563,
+          669
+        ],
+        [
+          625,
+          13,
+          1278,
+          681
+        ],
+        [
+          1315,
+          9,
+          2149,
+          674
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "001c7ba388cd80b083f84ec8f772aff1cee2deb68d11bb5e84779617733c03fc"
     }
   ],
-  "integrated": 45
+  "integrated": 144,
+  "status": "complete",
+  "reviewedForms": 450,
+  "reworkedForms": 432,
+  "retainedForms": 18,
+  "visualReview": "All selected three-form atlases inspected at runtime resolution for distinct silhouettes, proportions, posture and defining structures."
 }
