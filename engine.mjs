@@ -239,6 +239,7 @@ export function executeAction(actor,asp,target,tsp,move,style='normal',commit=.5
  const effect=move.effect,category=moveCategory(move),field=actor.battlefield||target.battlefield||{};actor.battlefield=target.battlefield=field;
  if(actor.conditions.taunt&&category==='Status'){log.push(name+' cannot use a support technique while silenced.');return log;}
  if(actor.conditions.disable&&actor.disabledMove===move.id){log.push(name+' cannot use the sealed technique.');return log;}
+ if(!releasing&&!context.prepaid&&move.id!=='struggle'&&!canUseMove(actor,asp,move,context.pressure?{ability:'Pressure'}:tsp)){log.push(name+' cannot fund the technique.');return log;}
  if(move.id==='struggle')log.push(name+' is forced to use Struggle.');
  else if(!releasing&&!context.prepaid){const key=category==='Physical'?'pp':'willpower',other=key==='pp'?'willpower':'pp';normalizeResources(actor,asp);const cost=moveCost(move,context.pressure?{ability:'Pressure'}:tsp),native=Math.min(actor[key],cost);actor[key]-=native;const needed=cost-native;if(needed&&actor[other]>=2){const used=Math.min(actor[other],needed*2);actor[other]-=used;log.push(name+' converts '+used+' '+(other==='pp'?'Stanima':'Willpower')+'.');}}
  actor.lastMove=move.id;actor.entryAction=false;context.funded=true;if(hasHook(actor,'choiceLock',asp))actor.itemMoveLock??=move.id;
@@ -277,10 +278,12 @@ export function executeAction(actor,asp,target,tsp,move,style='normal',commit=.5
  if(!context.realTime&&['twoTurn','chargeSun'].includes(effect)&&!actor.pendingMove&&!(effect==='chargeSun'&&field.weather==='sun')){actor.pendingMove={...move};log.push(name+' prepares '+move.name+'.');return log;}
  if(actor.pendingMove)actor.pendingMove=null;
  if(r()>=accuracy&&effect!=='sureHit'&&effect!=='struggle'){log.push(name+' uses '+move.name+' but misses.');return log;}
- let partialWard=1;if(target.ward&&!['breakWard','struggle'].includes(effect)){const strength=target.wardStrength??1;target.ward=false;if(strength>=1){log.push(targetName+' blocks the attack with a ward.');return log;}partialWard=Math.max(0,1-strength);log.push(targetName+' softens the attack with an exhausted ward.');}
+ let partialWard=1;if(target.ward&&!['breakWard','struggle','delayedStrike'].includes(effect)){const strength=target.wardStrength??1;target.ward=false;if(strength>=1){log.push(targetName+' blocks the attack with a ward.');return log;}partialWard=Math.max(0,1-strength);log.push(targetName+' softens the attack with an exhausted ward.');}
  if(effect==='breakWard'){target.ward=false;const screens=screenState(target);delete screens.reflect;delete screens.lightscreen;target.reflect=target.lightscreen=false;}
  const critical=r()<Math.min(1,(effect==='critical'?.25:style==='strong'?.15:.05)+(style==='agile'?.10:0)+(hasHook(actor,'critical',asp)?.125:0)),hits=effect==='multiHit'?2+Math.floor(r()*4):effect==='doubleHit'?2:1;
- let amount=0;for(let n=0;n<hits;n++)amount+=Math.max(1,Math.floor(damage(actor,asp,target,tsp,move,style,r)*(critical?1.5:1)));
+ const damageTarget=effect==='delayedStrike'?{...target,ward:false}:target;
+ const hitAmounts=[];for(let n=0;n<hits;n++)hitAmounts.push(Math.max(1,Math.floor(damage(actor,asp,damageTarget,tsp,move,style,r)*(critical?1.5:1))));
+ let amount=hitAmounts.reduce((sum,n)=>sum+n,0);
  const weather=field.weather,terrain=field.terrain;
  if(weather==='rain'&&move.domain==='Water'||weather==='sun'&&move.domain==='Fire')amount=Math.floor(amount*1.5);
  if(weather==='rain'&&move.domain==='Fire'||weather==='sun'&&move.domain==='Water')amount=Math.max(1,Math.floor(amount*.5));
@@ -290,13 +293,15 @@ export function executeAction(actor,asp,target,tsp,move,style='normal',commit=.5
  if(effect==='partyStrike')amount=Math.floor(amount*(1+.15*Math.min(5,living(context.actorTeam||[actor]).length-1)));
  if(effect==='counter'||effect==='mirrorCoat'){const hit=actor.lastHit;if(!hit||hit.source!==target.id||hit.category!==(effect==='counter'?'Physical':'Energy')){log.push(name+' has nothing to retaliate against.');return log;}amount=hit.amount*2;}
  if(actor.focused){amount=Math.floor(amount*1.5);actor.focused=false;}
- if(effect==='delayedStrike'){target.delayedDamage={amount,turns:2};log.push(name+' sets a delayed thunder omen.');return log;}
+ if(effect==='delayedStrike'){target.delayedDamage={amount:amount/directProtection(target,move,category),turns:2,category,source:actor.id,move:{id:move.id,domain:move.domain}};log.push(name+' sets a delayed thunder omen.');return log;}
  amount=Math.max(1,Math.floor(amount*partialWard));const before=target.hp;if(hasHook(target,'survive',tsp)&&!itemOnceUsed(target,'survive')&&before>=stats(target,tsp).hp&&amount>=before){amount=before-1;markItemUsed(target,'survive');log.push('Last-light Band holds '+targetName+' at 1 HP.');}
- amount=shieldDamage(target,amount);
+ const total=hitAmounts.reduce((sum,n)=>sum+n,0);let cumulative=0,allocated=0,damagingHits=0,remaining=0;
+ for(const hitAmount of hitAmounts){cumulative+=hitAmount;const boundary=Math.floor(amount*cumulative/total),hit=shieldDamage(target,boundary-allocated);allocated=boundary;if(hit>0&&remaining<before)damagingHits++;remaining+=hit;}
+ amount=remaining;
  const link=(target.spiritualLinks||[]).find(l=>l.until>(target.realtimeNow||0));
- if(link&&context.activeUnits){const partner=context.activeUnits.find(u=>u.id===link.partner&&u.hp>0&&u!==target);if(partner){const shared=Math.min(Math.floor(amount*link.amount),Math.max(0,partner.hp-1));partner.hp-=shared;amount-=shared;if(shared>0)context.onDamage?.(partner,{hits});}}
+ if(link&&context.activeUnits){const partner=context.activeUnits.find(u=>u.id===link.partner&&u.hp>0&&u!==target);if(partner){const shared=Math.min(Math.floor(amount*link.amount),Math.max(0,partner.hp-1));partner.hp-=shared;amount-=shared;if(shared>0)context.onDamage?.(partner,{hits:Math.min(damagingHits,shared)});}}
  target.hp=Math.max(0,target.hp-amount);const dealt=before-target.hp;target.tookDamageThisRound=true;target.lastHit={amount:dealt,category,source:actor.id};target.ward=false;
- if(dealt>0)context.onDamage?.(target,{hits,disruption:moveCooldownDisruption(move)});
+ if(dealt>0)context.onDamage?.(target,{hits:Math.min(damagingHits,dealt),disruption:moveCooldownDisruption(move)});
  log.push(name+' uses '+move.name+': '+dealt+' damage'+(critical?' — critical hit!':'')+(hits>1?' ('+hits+' hits)':'')+'.');
  if(effect==='drain'||hasHook(actor,'drain',asp))healHP(actor,asp,dealt*(effect==='drain'?.5:.125)*(1-exhaustion(actor)));
  if(hasHook(target,'thorns',tsp)&&category==='Physical'){actor.hp=Math.max(0,actor.hp-Math.max(1,Math.floor(stats(actor,asp).hp/10)));context.onDamage?.(actor,{periodic:true});}
@@ -313,9 +318,24 @@ export function executeAction(actor,asp,target,tsp,move,style='normal',commit=.5
  if(target.hp<=0&&target.conditions.destinyBond&&actor.hp>0){actor.hp=0;log.push(name+' falls with its destiny-bound opponent.');}
  triggerEquipment(actor,asp,log);triggerEquipment(target,tsp,log);return log;
 }
+function directProtection(ind,move,category){const screens=screenState(ind),screen=category==='Energy'?(screens.lightscreen||ind.lightscreen):(screens.reflect||ind.reflect);return (screen?.5:1)*spiritualDefense(ind,move,category)/spiritualMultiplier(ind,'empower');}
+export function resolveDelayedDamage(ind,sp,context={}){
+ const delayed=typeof ind.delayedDamage==='number'?{amount:ind.delayedDamage}:ind.delayedDamage;delete ind.delayedDamage;
+ if(!delayed||ind.hp<=0)return [];
+ const log=[],name=nameOf(ind,sp),category=delayed.category||'Energy';let amount=delayed.amount||0;
+ if(ind.ward){const strength=ind.wardStrength??1;ind.ward=false;if(strength>=1)return [name+' blocks the delayed attack with a ward.'];amount*=Math.max(0,1-strength);}
+ amount=Math.max(0,Math.floor(amount*directProtection(ind,delayed.move||{},category)));
+ if(hasHook(ind,'survive',sp)&&!itemOnceUsed(ind,'survive')&&ind.hp>=stats(ind,sp).hp&&amount>=ind.hp){amount=ind.hp-1;markItemUsed(ind,'survive');log.push('Last-light Band holds '+name+' at 1 HP.');}
+ amount=shieldDamage(ind,amount);
+ const link=(ind.spiritualLinks||[]).find(l=>l.until>(ind.realtimeNow||0)),partner=link&&(context.activeUnits||[]).find(u=>u.id===link.partner&&u.hp>0&&u!==ind);
+ if(partner){const shared=Math.min(Math.floor(amount*link.amount),Math.max(0,partner.hp-1));partner.hp-=shared;amount-=shared;if(shared>0)context.onDamage?.(partner,{hits:1});}
+ const dealt=Math.min(ind.hp,amount);ind.hp-=dealt;
+ if(dealt>0){ind.tookDamageThisRound=true;ind.lastHit={amount:dealt,category,source:delayed.source,at:ind.realtimeNow};context.onDamage?.(ind,{hits:1});}
+ log.push(name+' is struck by delayed energy: '+dealt+' damage.');triggerEquipment(ind,sp,log);return log;
+}
 function statusTick(ind,sp,log,context={}){
  if(ind.hp<=0)return;const max=stats(ind,sp).hp,c=ind.conditions||{},field=ind.battlefield||{};let loss=0;
- if(ind.delayedDamage){const delayed=typeof ind.delayedDamage==='number'?{amount:ind.delayedDamage,turns:1}:ind.delayedDamage;if(--delayed.turns<=0){loss+=delayed.amount;delete ind.delayedDamage;log.push(nameOf(ind,sp)+' is struck by delayed energy.');}}
+ if(ind.delayedDamage){const delayed=typeof ind.delayedDamage==='number'?{amount:ind.delayedDamage,turns:1}:ind.delayedDamage;if(--delayed.turns<=0)log.push(...resolveDelayedDamage(ind,sp,context));}
  if(['poison','burn','frostbite'].includes(ind.status))loss+=Math.max(1,Math.floor(max/16));
  if(ind.status==='toxic'){ind.toxicTurns=(ind.toxicTurns||0)+1;loss+=Math.max(1,Math.floor(max*Math.min(15,ind.toxicTurns)/16));}
  if(c.leechSeed){const seed=Math.max(1,Math.floor(max/8));loss+=seed;const source=(context.activeUnits||[]).find(u=>u.id===ind.conditionSources?.leechSeed&&u.hp>0);if(source)healHP(source,context.speciesOf(source),Math.min(seed,ind.hp));}

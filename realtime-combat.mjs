@@ -1,6 +1,6 @@
 import * as E from './engine.mjs';
 import * as SE from './spiritual-energy.mjs';
-import {bondEfficiency,clamp,spiritualBonus} from './spiritual-core.mjs';
+import {bondEfficiency,clamp,spiritualBonus,spiritualMultiplier} from './spiritual-core.mjs';
 import {supportFits,supportDescription} from './support-techniques.mjs';
 import {heldEquipment,heldItemActivation,hasHook} from './equipment.mjs';
 import {moveTiming,scaledMove,STATUS_RULES} from './realtime-moves.mjs';
@@ -65,6 +65,12 @@ export function applyDamageDelay(state,ind,{periodic=false,hits=1,disruption=nul
  ind.gcdReadyAt=c.gcdReadyAt;
 }
 function resetDamageBudget(clock,key,durationMs){clock.damageDelays??={};clock.damageDelays[key]={direct:0,periodic:0,durationMs};}
+function syncCastHaste(state,ind){
+ const pending=unitClock(state,ind).pending;if(!pending?.choice?.move)return;
+ const haste=spiritualMultiplier(ind,'haste',state.elapsedMs),previous=pending.castHaste??haste;
+ if(pending.resolveAt>state.elapsedMs&&haste!==previous)pending.resolveAt=state.elapsedMs+(pending.resolveAt-state.elapsedMs)*previous/haste;
+ pending.castHaste=haste;
+}
 function allUnits(context){return [...new Map([...context.teams.a,...context.teams.b].map(u=>[u.id,u])).values()];}
 function activeUnits(context){return [...context.active.a,...context.active.b].filter(u=>u?.hp>0);}
 function sideOf(context,ind){return context.active.a.some(u=>u.id===ind.id)?'a':context.active.b.some(u=>u.id===ind.id)?'b':null;}
@@ -135,7 +141,7 @@ export function scheduleAction(state,context,actor,choice){
  const fundedCheck=actionAvailability(state,actor,sp,{...choice,move},spreadPressure?{ability:'Pressure'}:targetSp);if(!fundedCheck.ok)return fundedCheck;
 
  choice={...choice,extraMoves:choice.type==='move'?Math.max(0,Math.min(2,Math.floor(Number(choice.extraMoves)||0))):0};
- clock.pending={choice:{...choice,move},resolveAt:state.elapsedMs+profile.castMs,side,targetId:target?.id,targetSide,sequence:state.sequence++};
+ clock.pending={choice:{...choice,move},resolveAt:state.elapsedMs+profile.castMs,castHaste:spiritualMultiplier(actor,'haste',state.elapsedMs),side,targetId:target?.id,targetSide,sequence:state.sequence++};
  if(profile.localCooldownMs){clock.cooldowns[key]=state.elapsedMs+profile.localCooldownMs;resetDamageBudget(clock,'move:'+key,profile.localCooldownMs);}if(profile.timing==='gcd'){clock.gcdReadyAt=state.elapsedMs+profile.gcdMs;resetDamageBudget(clock,'gcd',profile.gcdMs);}clock.readyAt=state.elapsedMs+profile.animationLockMs;actor.gcdReadyAt=clock.gcdReadyAt;actor.animationReadyAt=clock.readyAt;
  return {ok:true,profile};
 }
@@ -144,7 +150,8 @@ function expireTimers(state,context,log){
  for(const u of allUnits(context)){const c=unitClock(state,u);if(c.status&&c.status.until<=now){if(u.status===c.status.effect){log.push(name(u,context.speciesOf(u))+' recovers from '+c.status.effect+'.');u.status=null;u.statusTurns=0;}c.status=null;}
  for(const [effect,until]of Object.entries(c.conditions))if(until<=now){if(effect==='perish'&&u.conditions?.perish){u.hp=0;log.push(name(u,context.speciesOf(u))+' falls to the doom omen.');}else if(u.conditions?.[effect])log.push(name(u,context.speciesOf(u))+' recovers from '+effect+'.');delete u.conditions?.[effect];delete c.conditions[effect];delete c.conditionMeta?.[effect];}
  for(const [key,until]of Object.entries(c.buffs))if(until<=now){u[key]=false;delete c.buffs[key];}
- if(c.delayedAt&&c.delayedAt<=now){const hp=u.hp;u.hp=Math.max(0,u.hp-(u.delayedDamage?.amount||0));if(u.hp<hp)applyDamageDelay(state,u);delete u.delayedDamage;delete c.delayedAt;log.push(name(u,context.speciesOf(u))+' is struck by delayed energy.');}
+ u.realtimeNow=now;syncCastHaste(state,u);
+ if(c.delayedAt&&c.delayedAt<=now){log.push(...E.resolveDelayedDamage(u,context.speciesOf(u),{activeUnits:activeUnits(context),onDamage:(unit,options)=>applyDamageDelay(state,unit,options)}));delete c.delayedAt;}
  if(c.itemReadyAt<=now)u.itemCooldowns={};u.controlImmuneUntil=c.controlImmuneUntil;
  }
  for(const [key,timer]of Object.entries(state.fieldTimers))if(timer.until<=now){if(key==='weather'||key==='terrain'){if(field?.[key]===timer.value){field[key]=key==='weather'?field.ambientWeather||null:null;if(key==='weather')delete field.weatherTurns;}}else{const [side,effect]=key.split('-');if(field?.sides?.[side])delete field.sides[side].screens[effect];}delete state.fieldTimers[key];}
@@ -310,7 +317,7 @@ export function usePlayerSupport(state,context,side,techniqueId,recipientId){
     if(clock.status?.effect==='sleep')shortenAffliction(clock.status,now,.4);
     for(const key of ['confusion','infatuation','nightmare','taunt','disable','flinch'])if(clock.conditions[key]){const timer=clock.conditionMeta[key];if(timer){shortenAffliction(timer,now,.4);clock.conditions[key]=timer.until;}else clock.conditions[key]=now+(clock.conditions[key]-now)*.4;}
    }
-   if(['empower','haste','immunity','guard'].includes(effect.kind)){u.spiritualBuffs??=[];u.spiritualBuffs.push({kind:effect.kind,amount:Math.min(.3,amount),until,domain:effect.domain,category:effect.category});}
+   if(['empower','haste','immunity','guard'].includes(effect.kind)){syncCastHaste(state,u);u.spiritualBuffs??=[];u.spiritualBuffs.push({kind:effect.kind,amount:Math.min(.3,amount),until,domain:effect.domain,category:effect.category});if(effect.kind==='haste')syncCastHaste(state,u);}
    if(effect.kind==='cooldown'){clock.gcdReadyAt=now+Math.max(0,clock.gcdReadyAt-now)*(1-Math.min(.5,amount));for(const key of Object.keys(clock.cooldowns))clock.cooldowns[key]=now+Math.max(0,clock.cooldowns[key]-now)*(1-Math.min(.5,amount));u.gcdReadyAt=clock.gcdReadyAt;}
    if(effect.kind==='link'){const partner=context.active[side].filter(v=>v!==u&&v.hp>0).sort((a,b)=>b.hp-a.hp)[0];if(partner){u.spiritualLinks??=[];u.spiritualLinks.push({partner:partner.id,amount:Math.min(.4,amount),until});}}
    if(effect.kind==='revive'){E.resetCombat(u);u.hp=Math.max(1,Math.floor(max.hp*amount));u.status=null;u.conditions={};delete u.afflictions;clock.pending=null;clock.status=null;clock.conditions={};log.push(name(u,sp)+' revives within its seal. Release it separately to fight.');}
