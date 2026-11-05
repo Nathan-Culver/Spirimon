@@ -416,3 +416,7 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 .classic-battle .classic-stage.compact-battle-scene .classic-hud[data-battle-count="3"] .health-label,
 .classic-battle .classic-stage.compact-battle-scene .classic-hud[data-battle-count="3"] .compact-resources,
 .classic-battle .classic-stage.compact-battle-scene .classic-hud[data-battle-count="3"]>small{font-size:7px;line-height:1.1;margin-top:1px}
+
+/* Level changes remain readable for every participant on phone screens. */
+.level-up-list{display:grid;gap:12px;margin:12px 0}.level-up-card{display:flex;align-items:center;gap:12px;padding:12px;border:2px solid #aab58b;border-radius:6px;background:#edf0d5}.level-up-card canvas{width:96px;height:96px;flex:0 0 96px;image-rendering:pixelated}.level-up-card>div{min-width:0;overflow-wrap:anywhere}.level-up-card h3{font-size:20px;color:#344d36}.modal .level-up-level{font-size:23px;color:#7c3e2e;margin:4px 0}
+@media(max-width:480px){.level-up-card{gap:8px;padding:8px}.level-up-card canvas{width:72px;height:72px;flex-basis:72px}.level-up-card h3{font-size:18px}.modal .level-up-level{font-size:21px}}
