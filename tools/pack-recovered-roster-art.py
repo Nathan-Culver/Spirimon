@@ -7,6 +7,7 @@ root=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--first',type=int,default=1)
 parser.add_argument('--last',type=int,default=150)
+parser.add_argument('--source-directory',type=Path,default=root/'artwork/roster-source')
 args=parser.parse_args()
 report=[]
 def gap_runs(projection,lo,hi):
@@ -19,7 +20,7 @@ def gap_runs(projection,lo,hi):
    start=None
  if start is not None and hi-start>=3:runs.append((start,hi))
  return runs
-for source in sorted((root/'artwork/roster-source').glob('*.png')):
+for source in sorted(args.source_directory.resolve().glob('*.png')):
  number=int(source.stem.split('-',1)[0])
  if not args.first<=number<=args.last:continue
  lineage=re.sub(r'^\d+-','',source.stem)

@@ -1,0 +1,318 @@
+{
+  "generator": "OpenAI image_gen (built-in edit mode)",
+  "artRevision": 3,
+  "scope": "One or two focused anatomical changes per lineage; retain original identity.",
+  "lineages": [
+    {
+      "number": 23,
+      "id": "gelmirth",
+      "base": "Fey",
+      "alter": "Ooze",
+      "forms": [
+        "Dewglee",
+        "Gelmirth",
+        "Gossamer Gelcourt"
+      ],
+      "design": "Change ONLY the lower body: replace the skirtlike human legs with one graceful translucent mint slug body, flowing into a softly curled tip. Preserve the original animal-like faerie face, two arms, fern ears, delicate insect wings, dew beads, palette and all other identity details. Do not add extra arms, extra heads, scythes or additional wings.",
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon production three-form transparent atlas. Input image is the ORIGINAL lineage and EDIT TARGET. Apply ONLY the limited anatomical change below to ALL THREE forms. Keep every other original visual feature, creature identity, colors, material, shading, proportions and relative evolution sizes. Exactly three complete creatures in one horizontal row with equal invisible cells, juvenile left, mature middle, final right. Match the original fine detailed 16-bit-inspired pixel art, upper-left lighting and restrained outlines. True transparent background, no floor, no scenery, no text or labels. Leave clear empty gaps and generous transparent margins; every limb and plume inside its cell. Change ONLY the lower body: replace the skirtlike human legs with one graceful translucent mint slug body, flowing into a softly curled tip. Preserve the original animal-like faerie face, two arms, fern ears, delicate insect wings, dew beads, palette and all other identity details. Do not add extra arms, extra heads, scythes or additional wings.",
+      "outputAtlas": "./assets/roster/gelmirth-v3.webp",
+      "description": "A mint-green faerie with curled fern ears, delicate opalescent insect wings, two small arms and a flowing translucent slug body edged with luminous dew beads.",
+      "observedAnatomy": {
+        "version": 1,
+        "bodyPlan": "serpentine",
+        "traits": [
+          "gel",
+          "grasp",
+          "wings",
+          "fly"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 2,
+          "wings": 4,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 1,
+        "description": "A mint-green faerie with curled fern ears, delicate opalescent insect wings, two small arms and a flowing translucent slug body edged with luminous dew beads."
+      }
+    },
+    {
+      "number": 31,
+      "id": "cloudgron",
+      "base": "Giant",
+      "alter": "Elemental",
+      "forms": [
+        "Rumblekin",
+        "Cloudgron",
+        "Monsoon Grandfather"
+      ],
+      "design": "Change ONLY the head and face into a powerful thunder-ram head, with a broad sheep muzzle and curled ram horns integrated into the existing cloud mane. Preserve exactly TWO arms and TWO existing legs, storm wool, blue skin, costume and lightning. No extra arms, tail or wings.",
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon production three-form transparent atlas. Input image is the ORIGINAL lineage and EDIT TARGET. Apply ONLY the limited anatomical change below to ALL THREE forms. Keep every other original visual feature, creature identity, colors, material, shading, proportions and relative evolution sizes. Exactly three complete creatures in one horizontal row with equal invisible cells, juvenile left, mature middle, final right. Match the original fine detailed 16-bit-inspired pixel art, upper-left lighting and restrained outlines. True transparent background, no floor, no scenery, no text or labels. Leave clear empty gaps and generous transparent margins; every limb and plume inside its cell. Change ONLY the head and face into a powerful thunder-ram head, with a broad sheep muzzle and curled ram horns integrated into the existing cloud mane. Preserve exactly TWO arms and TWO existing legs, storm wool, blue skin, costume and lightning. No extra arms, tail or wings.",
+      "outputAtlas": "./assets/roster/cloudgron-v3.webp",
+      "description": "A slate-blue storm giant with a single ram head, curled horns, two powerful arms and two sturdy legs, wrapped in cloud wool and flickering lightning.",
+      "observedAnatomy": {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "horns"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "A slate-blue storm giant with a single ram head, curled horns, two powerful arms and two sturdy legs, wrapped in cloud wool and flickering lightning."
+      }
+    },
+    {
+      "number": 32,
+      "id": "lacquertor",
+      "base": "Giant",
+      "alter": "Construct",
+      "forms": [
+        "Plinthkin",
+        "Lacquertor",
+        "Living Fortress"
+      ],
+      "design": "Change ONLY the arm count: give each form SIX clearly separate stone arms total, arranged as three natural shoulder pairs along the torso. Keep the original single stone humanoid face, red crest, TWO original legs and feet, red lacquer armor, gold braces and rough boulder shoulders. No animal head, tail, wings, animal legs or fortress towers.",
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon production three-form transparent atlas. Input image is the ORIGINAL lineage and EDIT TARGET. Apply ONLY the limited anatomical change below to ALL THREE forms. Keep every other original visual feature, creature identity, colors, material, shading, proportions and relative evolution sizes. Exactly three complete creatures in one horizontal row with equal invisible cells, juvenile left, mature middle, final right. Match the original fine detailed 16-bit-inspired pixel art, upper-left lighting and restrained outlines. True transparent background, no floor, no scenery, no text or labels. Leave clear empty gaps and generous transparent margins; every limb and plume inside its cell. Change ONLY the arm count: give each form SIX clearly separate stone arms total, arranged as three natural shoulder pairs along the torso. Keep the original single stone humanoid face, red crest, TWO original legs and feet, red lacquer armor, gold braces and rough boulder shoulders. No animal head, tail, wings, animal legs or fortress towers.",
+      "outputAtlas": "./assets/roster/lacquertor-v3.webp",
+      "description": "A stone giant with a single carved face, a red crest, six stone arms, two sturdy legs, red lacquer armor, gold braces and rugged shoulder boulders.",
+      "observedAnatomy": {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "stone"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 6,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 6,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "A stone giant with a single carved face, a red crest, six stone arms, two sturdy legs, red lacquer armor, gold braces and rugged shoulder boulders."
+      }
+    },
+    {
+      "number": 33,
+      "id": "barrowgron",
+      "base": "Giant",
+      "alter": "Undead",
+      "forms": [
+        "Graveltot",
+        "Barrowgron",
+        "Sepulcher Titan"
+      ],
+      "design": "Change ONLY the arm proportions: greatly elongate the TWO existing arms so the massive hands hang near the ground in a menacing knuckle-dragging silhouette. Keep the single tomb-mask head, existing TWO legs, cyan ribs, burial linen, dark stone and funerary armor. No extra heads or arms, tails, wings or animal skull replacements.",
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon production three-form transparent atlas. Input image is the ORIGINAL lineage and EDIT TARGET. Apply ONLY the limited anatomical change below to ALL THREE forms. Keep every other original visual feature, creature identity, colors, material, shading, proportions and relative evolution sizes. Exactly three complete creatures in one horizontal row with equal invisible cells, juvenile left, mature middle, final right. Match the original fine detailed 16-bit-inspired pixel art, upper-left lighting and restrained outlines. True transparent background, no floor, no scenery, no text or labels. Leave clear empty gaps and generous transparent margins; every limb and plume inside its cell. Change ONLY the arm proportions: greatly elongate the TWO existing arms so the massive hands hang near the ground in a menacing knuckle-dragging silhouette. Keep the single tomb-mask head, existing TWO legs, cyan ribs, burial linen, dark stone and funerary armor. No extra heads or arms, tails, wings or animal skull replacements.",
+      "outputAtlas": "./assets/roster/barrowgron-v3.webp",
+      "description": "A tomb-masked undead giant with two exceptionally long knuckle-dragging arms, two sturdy legs, cyan-lit ribs, burial linen and weathered funerary armor.",
+      "observedAnatomy": {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "long-arms"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "A tomb-masked undead giant with two exceptionally long knuckle-dragging arms, two sturdy legs, cyan-lit ribs, burial linen and weathered funerary armor."
+      }
+    },
+    {
+      "number": 50,
+      "id": "draugale",
+      "base": "Undead",
+      "alter": "Elemental",
+      "forms": [
+        "Barrowick",
+        "Draugale",
+        "Tempest Revenant"
+      ],
+      "design": "Make just TWO anatomical edits: change the skull into a single predatory shark-like skull with a long tooth-lined jaw; replace the boots with two bony webbed claw feet. Preserve TWO arms, TWO legs, bronze burial armor, crown and flowing turquoise ghost currents. No extra heads, arms, tail or wings.",
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon production three-form transparent atlas. Input image is the ORIGINAL lineage and EDIT TARGET. Apply ONLY the limited anatomical change below to ALL THREE forms. Keep every other original visual feature, creature identity, colors, material, shading, proportions and relative evolution sizes. Exactly three complete creatures in one horizontal row with equal invisible cells, juvenile left, mature middle, final right. Match the original fine detailed 16-bit-inspired pixel art, upper-left lighting and restrained outlines. True transparent background, no floor, no scenery, no text or labels. Leave clear empty gaps and generous transparent margins; every limb and plume inside its cell. Make just TWO anatomical edits: change the skull into a single predatory shark-like skull with a long tooth-lined jaw; replace the boots with two bony webbed claw feet. Preserve TWO arms, TWO legs, bronze burial armor, crown and flowing turquoise ghost currents. No extra heads, arms, tail or wings.",
+      "outputAtlas": "./assets/roster/draugale-v3.webp",
+      "description": "An aquatic revenant with a single tooth-lined shark skull, two skeletal arms, two bony webbed feet, a bronze burial crown and armor, and flowing turquoise ghost currents.",
+      "observedAnatomy": {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "claws",
+          "webbed",
+          "swim"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "An aquatic revenant with a single tooth-lined shark skull, two skeletal arms, two bony webbed feet, a bronze burial crown and armor, and flowing turquoise ghost currents."
+      }
+    },
+    {
+      "number": 57,
+      "id": "gloomglen",
+      "base": "Fiend",
+      "alter": "Giant",
+      "forms": [
+        "Gloomlet",
+        "Gloomglen",
+        "Gloom Sovereign"
+      ],
+      "design": "Change ONLY the face into a single tusked boar head with a distinct snout and curved tusks, retaining the existing crown horns and moss mane. Preserve TWO arms, TWO legs, original feet, basalt skin, green fissures and armor. No additional heads, arms, tail or wings.",
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon production three-form transparent atlas. Input image is the ORIGINAL lineage and EDIT TARGET. Apply ONLY the limited anatomical change below to ALL THREE forms. Keep every other original visual feature, creature identity, colors, material, shading, proportions and relative evolution sizes. Exactly three complete creatures in one horizontal row with equal invisible cells, juvenile left, mature middle, final right. Match the original fine detailed 16-bit-inspired pixel art, upper-left lighting and restrained outlines. True transparent background, no floor, no scenery, no text or labels. Leave clear empty gaps and generous transparent margins; every limb and plume inside its cell. Change ONLY the face into a single tusked boar head with a distinct snout and curved tusks, retaining the existing crown horns and moss mane. Preserve TWO arms, TWO legs, original feet, basalt skin, green fissures and armor. No additional heads, arms, tail or wings.",
+      "outputAtlas": "./assets/roster/gloomglen-v3.webp",
+      "description": "A basalt fiend giant with a single tusked boar head, crown horns, two heavy clawed arms and two sturdy legs, draped in olive moss above glowing green fissures.",
+      "observedAnatomy": {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "claws",
+          "horns"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "A basalt fiend giant with a single tusked boar head, crown horns, two heavy clawed arms and two sturdy legs, draped in olive moss above glowing green fissures."
+      }
+    },
+    {
+      "number": 98,
+      "id": "wraithspire",
+      "base": "Fey",
+      "alter": "Elemental",
+      "forms": [
+        "Wraithlet",
+        "Wraithspire",
+        "Wraith Sovereign"
+      ],
+      "design": "Change ONLY the head arrangement: give each form TWO distinct long-beaked bird heads on separate graceful necks, drawing directly from the original existing face. Preserve TWO slender arms, TWO existing taloned legs, lavender plumes, costume, gold details and existing flowing feather train. No extra arms, added wings or extra tails.",
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon production three-form transparent atlas. Input image is the ORIGINAL lineage and EDIT TARGET. Apply ONLY the limited anatomical change below to ALL THREE forms. Keep every other original visual feature, creature identity, colors, material, shading, proportions and relative evolution sizes. Exactly three complete creatures in one horizontal row with equal invisible cells, juvenile left, mature middle, final right. Match the original fine detailed 16-bit-inspired pixel art, upper-left lighting and restrained outlines. True transparent background, no floor, no scenery, no text or labels. Leave clear empty gaps and generous transparent margins; every limb and plume inside its cell. Change ONLY the head arrangement: give each form TWO distinct long-beaked bird heads on separate graceful necks, drawing directly from the original existing face. Preserve TWO slender arms, TWO existing taloned legs, lavender plumes, costume, gold details and existing flowing feather train. No extra arms, added wings or extra tails.",
+      "outputAtlas": "./assets/roster/wraithspire-v3.webp",
+      "description": "A lavender wind faerie with two long-beaked bird heads, two slender arms, two taloned legs and an elaborate flowing feather train with gold ornaments.",
+      "observedAnatomy": {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "claws",
+          "feathers"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 2,
+        "tails": 1,
+        "description": "A lavender wind faerie with two long-beaked bird heads, two slender arms, two taloned legs and an elaborate flowing feather train with gold ornaments."
+      }
+    },
+    {
+      "number": 113,
+      "id": "mistralwisp",
+      "base": "Fey",
+      "alter": "Monstrosity",
+      "forms": [
+        "Mistralling",
+        "Mistralwisp",
+        "Mistral Exarch"
+      ],
+      "design": "Change ONLY the arm count: add ONE additional pair of slender clawed arms, so every form has FOUR clearly separated arms total. Preserve the original single beaked head, TWO taloned legs, feathered body, original opaline wing fins, flowing plumes and gold details. No extra heads, scythe forearms, added tails or added wings.",
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon production three-form transparent atlas. Input image is the ORIGINAL lineage and EDIT TARGET. Apply ONLY the limited anatomical change below to ALL THREE forms. Keep every other original visual feature, creature identity, colors, material, shading, proportions and relative evolution sizes. Exactly three complete creatures in one horizontal row with equal invisible cells, juvenile left, mature middle, final right. Match the original fine detailed 16-bit-inspired pixel art, upper-left lighting and restrained outlines. True transparent background, no floor, no scenery, no text or labels. Leave clear empty gaps and generous transparent margins; every limb and plume inside its cell. Change ONLY the arm count: add ONE additional pair of slender clawed arms, so every form has FOUR clearly separated arms total. Preserve the original single beaked head, TWO taloned legs, feathered body, original opaline wing fins, flowing plumes and gold details. No extra heads, scythe forearms, added tails or added wings.",
+      "outputAtlas": "./assets/roster/mistralwisp-v3.webp",
+      "description": "A predatory feathered faerie with a single beaked head, four slender clawed arms, two taloned legs, original opaline wing fins and flowing silver-lavender plumes.",
+      "observedAnatomy": {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "grasp",
+          "claws",
+          "wings",
+          "fly",
+          "feathers"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 4,
+          "wings": 4,
+          "tentacles": 0
+        },
+        "manipulators": 4,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 1,
+        "description": "A predatory feathered faerie with a single beaked head, four slender clawed arms, two taloned legs, original opaline wing fins and flowing silver-lavender plumes."
+      }
+    }
+  ]
+}

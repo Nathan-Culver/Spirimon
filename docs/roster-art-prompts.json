@@ -104,10 +104,11 @@
         "Gloomglen",
         "Gloom Sovereign"
       ],
-      "brief": "A colossal horned fiend giant with a nonhuman basalt face, heavy moss-dark limbs, olive lichen beard, enormous clawed hands and dim green cracks; biped, never an ordinary human.",
+      "brief": "Change ONLY the face into a single tusked boar head with a distinct snout and curved tusks, retaining the existing crown horns and moss mane. Preserve TWO arms, TWO legs, original feet, basalt skin, green fissures and armor. No additional heads, arms, tail or wings.",
       "generatedSource": true,
       "runtimeReady": true,
-      "sourceFilename": "exec-bef48dd4-6f9a-4ad0-a705-aa5d0cd19672.png"
+      "sourceFilename": "exec-bef48dd4-6f9a-4ad0-a705-aa5d0cd19672.png",
+      "artRevision": 3
     },
     {
       "number": 58,
@@ -719,10 +720,11 @@
         "Wraithspire",
         "Wraith Sovereign"
       ],
-      "brief": "A visibly nonhuman tall bipedal wind faerie with a hollow carved-looking moth mask, pale vapor hair, long translucent limbs and violet storm ribbons; not an undead human.",
+      "brief": "Change ONLY the head arrangement: give each form TWO distinct long-beaked bird heads on separate graceful necks, drawing directly from the original existing face. Preserve TWO slender arms, TWO existing taloned legs, lavender plumes, costume, gold details and existing flowing feather train. No extra arms, added wings or extra tails.",
       "generatedSource": true,
       "runtimeReady": true,
-      "sourceFilename": "artwork/roster-source/098-wraithspire.png"
+      "sourceFilename": "artwork/roster-source/098-wraithspire.png",
+      "artRevision": 3
     },
     {
       "number": 99,
@@ -944,10 +946,11 @@
         "Mistralwisp",
         "Mistral Exarch"
       ],
-      "brief": "A visibly nonhuman bipedal raptor-like faerie with a long narrow insect mask, enormous hooked talons, elongated predatory fangs and silver wind-fringed plumage.",
+      "brief": "Change ONLY the arm count: add ONE additional pair of slender clawed arms, so every form has FOUR clearly separated arms total. Preserve the original single beaked head, TWO taloned legs, feathered body, original opaline wing fins, flowing plumes and gold details. No extra heads, scythe forearms, added tails or added wings.",
       "generatedSource": true,
       "runtimeReady": true,
-      "sourceFilename": "artwork/roster-source/113-mistralwisp.png"
+      "sourceFilename": "artwork/roster-source/113-mistralwisp.png",
+      "artRevision": 3
     },
     {
       "number": 114,

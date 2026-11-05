@@ -295,8 +295,109 @@
       "Gelmirth",
       "Gossamer Gelcourt"
     ],
-    "description": "A faerie with curled fernlike ears and delicate insect wings whose mint-colored body flows into transparent gel skirts and dew beads.",
-    "atlas": "./assets/roster/gelmirth.webp"
+    "description": "A mint-green faerie with curled fern ears, delicate opalescent insect wings, two small arms and a flowing translucent slug body edged with luminous dew beads.",
+    "atlas": "./assets/roster/gelmirth-v3.webp",
+    "artRevision": 3,
+    "anatomyArtRevision": 3,
+    "proceduralArt": false,
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "serpentine",
+      "traits": [
+        "gel",
+        "grasp",
+        "wings",
+        "fly"
+      ],
+      "limbs": {
+        "legs": 0,
+        "arms": 2,
+        "wings": 4,
+        "tentacles": 0
+      },
+      "manipulators": 2,
+      "strength": 1,
+      "scale": "ordinary",
+      "source": "image-analysis",
+      "confidence": 0.95,
+      "heads": 1,
+      "tails": 1,
+      "description": "A mint-green faerie with curled fern ears, delicate opalescent insect wings, two small arms and a flowing translucent slug body edged with luminous dew beads."
+    },
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "serpentine",
+        "traits": [
+          "gel",
+          "grasp",
+          "wings",
+          "fly"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 2,
+          "wings": 4,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 1,
+        "description": "A mint-green faerie with curled fern ears, delicate opalescent insect wings, two small arms and a flowing translucent slug body edged with luminous dew beads."
+      },
+      {
+        "version": 1,
+        "bodyPlan": "serpentine",
+        "traits": [
+          "gel",
+          "grasp",
+          "wings",
+          "fly"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 2,
+          "wings": 4,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 1,
+        "description": "A mint-green faerie with curled fern ears, delicate opalescent insect wings, two small arms and a flowing translucent slug body edged with luminous dew beads."
+      },
+      {
+        "version": 1,
+        "bodyPlan": "serpentine",
+        "traits": [
+          "gel",
+          "grasp",
+          "wings",
+          "fly"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 2,
+          "wings": 4,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 1,
+        "description": "A mint-green faerie with curled fern ears, delicate opalescent insect wings, two small arms and a flowing translucent slug body edged with luminous dew beads."
+      }
+    ]
   },
   {
     "index": 23,
@@ -399,8 +500,105 @@
       "Cloudgron",
       "Monsoon Grandfather"
     ],
-    "description": "A colossal D&D-like giant with a huge cloud beard, storm-gray skin, broad hands, and thunderhead hair lit with small blue arcs.",
-    "atlas": "./assets/roster/cloudgron.webp"
+    "description": "A slate-blue storm giant with a single ram head, curled horns, two powerful arms and two sturdy legs, wrapped in cloud wool and flickering lightning.",
+    "atlas": "./assets/roster/cloudgron-v3.webp",
+    "artRevision": 3,
+    "anatomyArtRevision": 3,
+    "proceduralArt": false,
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "biped",
+      "traits": [
+        "hands",
+        "grasp",
+        "horns"
+      ],
+      "limbs": {
+        "legs": 2,
+        "arms": 2,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 2,
+      "strength": 3,
+      "scale": "colossal",
+      "source": "image-analysis",
+      "confidence": 0.95,
+      "heads": 1,
+      "tails": 0,
+      "description": "A slate-blue storm giant with a single ram head, curled horns, two powerful arms and two sturdy legs, wrapped in cloud wool and flickering lightning."
+    },
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "horns"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "A slate-blue storm giant with a single ram head, curled horns, two powerful arms and two sturdy legs, wrapped in cloud wool and flickering lightning."
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "horns"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "A slate-blue storm giant with a single ram head, curled horns, two powerful arms and two sturdy legs, wrapped in cloud wool and flickering lightning."
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "horns"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "A slate-blue storm giant with a single ram head, curled horns, two powerful arms and two sturdy legs, wrapped in cloud wool and flickering lightning."
+      }
+    ]
   },
   {
     "index": 31,
@@ -412,9 +610,105 @@
       "Lacquertor",
       "Living Fortress"
     ],
-    "description": "A colossal D&D-like humanoid giant with powerful limbs, dark red lacquer armor panels, massive rugged shoulder boulders, and gold mechanical braces.",
-    "atlas": "./assets/roster/lacquertor-v2.webp",
-    "artRevision": 2
+    "description": "A stone giant with a single carved face, a red crest, six stone arms, two sturdy legs, red lacquer armor, gold braces and rugged shoulder boulders.",
+    "atlas": "./assets/roster/lacquertor-v3.webp",
+    "artRevision": 3,
+    "anatomyArtRevision": 3,
+    "proceduralArt": false,
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "biped",
+      "traits": [
+        "hands",
+        "grasp",
+        "stone"
+      ],
+      "limbs": {
+        "legs": 2,
+        "arms": 6,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 6,
+      "strength": 3,
+      "scale": "colossal",
+      "source": "image-analysis",
+      "confidence": 0.95,
+      "heads": 1,
+      "tails": 0,
+      "description": "A stone giant with a single carved face, a red crest, six stone arms, two sturdy legs, red lacquer armor, gold braces and rugged shoulder boulders."
+    },
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "stone"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 6,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 6,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "A stone giant with a single carved face, a red crest, six stone arms, two sturdy legs, red lacquer armor, gold braces and rugged shoulder boulders."
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "stone"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 6,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 6,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "A stone giant with a single carved face, a red crest, six stone arms, two sturdy legs, red lacquer armor, gold braces and rugged shoulder boulders."
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "stone"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 6,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 6,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "A stone giant with a single carved face, a red crest, six stone arms, two sturdy legs, red lacquer armor, gold braces and rugged shoulder boulders."
+      }
+    ]
   },
   {
     "index": 32,
@@ -426,8 +720,105 @@
       "Barrowgron",
       "Sepulcher Titan"
     ],
-    "description": "A colossal D&D-like giant with slate skin, ancient wrappings, exposed spectral rib markings, and a heavy stone burial mask.",
-    "atlas": "./assets/roster/barrowgron.webp"
+    "description": "A tomb-masked undead giant with two exceptionally long knuckle-dragging arms, two sturdy legs, cyan-lit ribs, burial linen and weathered funerary armor.",
+    "atlas": "./assets/roster/barrowgron-v3.webp",
+    "artRevision": 3,
+    "anatomyArtRevision": 3,
+    "proceduralArt": false,
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "biped",
+      "traits": [
+        "hands",
+        "grasp",
+        "long-arms"
+      ],
+      "limbs": {
+        "legs": 2,
+        "arms": 2,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 2,
+      "strength": 3,
+      "scale": "colossal",
+      "source": "image-analysis",
+      "confidence": 0.95,
+      "heads": 1,
+      "tails": 0,
+      "description": "A tomb-masked undead giant with two exceptionally long knuckle-dragging arms, two sturdy legs, cyan-lit ribs, burial linen and weathered funerary armor."
+    },
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "long-arms"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "A tomb-masked undead giant with two exceptionally long knuckle-dragging arms, two sturdy legs, cyan-lit ribs, burial linen and weathered funerary armor."
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "long-arms"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "A tomb-masked undead giant with two exceptionally long knuckle-dragging arms, two sturdy legs, cyan-lit ribs, burial linen and weathered funerary armor."
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "long-arms"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "A tomb-masked undead giant with two exceptionally long knuckle-dragging arms, two sturdy legs, cyan-lit ribs, burial linen and weathered funerary armor."
+      }
+    ]
   },
   {
     "index": 33,
@@ -647,8 +1038,113 @@
       "Draugale",
       "Tempest Revenant"
     ],
-    "description": "A draugr from Norse undead folklore with weathered burial armor and a skeletal sea-worn face, altered by swirling salt wind and turquoise storm mist.",
-    "atlas": "./assets/roster/draugale.webp"
+    "description": "An aquatic revenant with a single tooth-lined shark skull, two skeletal arms, two bony webbed feet, a bronze burial crown and armor, and flowing turquoise ghost currents.",
+    "atlas": "./assets/roster/draugale-v3.webp",
+    "artRevision": 3,
+    "anatomyArtRevision": 3,
+    "proceduralArt": false,
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "biped",
+      "traits": [
+        "hands",
+        "grasp",
+        "claws",
+        "webbed",
+        "swim"
+      ],
+      "limbs": {
+        "legs": 2,
+        "arms": 2,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 2,
+      "strength": 1,
+      "scale": "ordinary",
+      "source": "image-analysis",
+      "confidence": 0.95,
+      "heads": 1,
+      "tails": 0,
+      "description": "An aquatic revenant with a single tooth-lined shark skull, two skeletal arms, two bony webbed feet, a bronze burial crown and armor, and flowing turquoise ghost currents."
+    },
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "claws",
+          "webbed",
+          "swim"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "An aquatic revenant with a single tooth-lined shark skull, two skeletal arms, two bony webbed feet, a bronze burial crown and armor, and flowing turquoise ghost currents."
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "claws",
+          "webbed",
+          "swim"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "An aquatic revenant with a single tooth-lined shark skull, two skeletal arms, two bony webbed feet, a bronze burial crown and armor, and flowing turquoise ghost currents."
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "claws",
+          "webbed",
+          "swim"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "An aquatic revenant with a single tooth-lined shark skull, two skeletal arms, two bony webbed feet, a bronze burial crown and armor, and flowing turquoise ghost currents."
+      }
+    ]
   },
   {
     "index": 50,
@@ -754,10 +1250,109 @@
       "Gloomglen",
       "Gloom Sovereign"
     ],
-    "description": "A colossal horned fiend giant with a nonhuman basalt face, heavy moss-dark limbs, olive lichen beard, enormous clawed hands and dim green cracks; biped, never an ordinary human.",
+    "description": "A basalt fiend giant with a single tusked boar head, crown horns, two heavy clawed arms and two sturdy legs, draped in olive moss above glowing green fissures.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/gloomglen.webp",
-    "artRevision": 2
+    "atlas": "./assets/roster/gloomglen-v3.webp",
+    "artRevision": 3,
+    "anatomyArtRevision": 3,
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "biped",
+      "traits": [
+        "hands",
+        "grasp",
+        "claws",
+        "horns"
+      ],
+      "limbs": {
+        "legs": 2,
+        "arms": 2,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 2,
+      "strength": 3,
+      "scale": "colossal",
+      "source": "image-analysis",
+      "confidence": 0.95,
+      "heads": 1,
+      "tails": 0,
+      "description": "A basalt fiend giant with a single tusked boar head, crown horns, two heavy clawed arms and two sturdy legs, draped in olive moss above glowing green fissures."
+    },
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "claws",
+          "horns"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "A basalt fiend giant with a single tusked boar head, crown horns, two heavy clawed arms and two sturdy legs, draped in olive moss above glowing green fissures."
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "claws",
+          "horns"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "A basalt fiend giant with a single tusked boar head, crown horns, two heavy clawed arms and two sturdy legs, draped in olive moss above glowing green fissures."
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "claws",
+          "horns"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 0,
+        "description": "A basalt fiend giant with a single tusked boar head, crown horns, two heavy clawed arms and two sturdy legs, draped in olive moss above glowing green fissures."
+      }
+    ]
   },
   {
     "index": 57,
@@ -1393,14 +1988,113 @@
       "Wraithspire",
       "Wraith Sovereign"
     ],
-    "description": "A visibly nonhuman tall bipedal wind faerie with a hollow carved-looking moth mask, pale vapor hair, long translucent limbs and violet storm ribbons; not an undead human.",
+    "description": "A lavender wind faerie with two long-beaked bird heads, two slender arms, two taloned legs and an elaborate flowing feather train with gold ornaments.",
     "proceduralArt": false,
     "legacyTypes": {
       "base": "Humanoid",
       "alter": "Elemental"
     },
-    "atlas": "./assets/roster/wraithspire.webp",
-    "artRevision": 2
+    "atlas": "./assets/roster/wraithspire-v3.webp",
+    "artRevision": 3,
+    "anatomyArtRevision": 3,
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "biped",
+      "traits": [
+        "hands",
+        "grasp",
+        "claws",
+        "feathers"
+      ],
+      "limbs": {
+        "legs": 2,
+        "arms": 2,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 2,
+      "strength": 1,
+      "scale": "ordinary",
+      "source": "image-analysis",
+      "confidence": 0.95,
+      "heads": 2,
+      "tails": 1,
+      "description": "A lavender wind faerie with two long-beaked bird heads, two slender arms, two taloned legs and an elaborate flowing feather train with gold ornaments."
+    },
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "claws",
+          "feathers"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 2,
+        "tails": 1,
+        "description": "A lavender wind faerie with two long-beaked bird heads, two slender arms, two taloned legs and an elaborate flowing feather train with gold ornaments."
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "claws",
+          "feathers"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 2,
+        "tails": 1,
+        "description": "A lavender wind faerie with two long-beaked bird heads, two slender arms, two taloned legs and an elaborate flowing feather train with gold ornaments."
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "hands",
+          "grasp",
+          "claws",
+          "feathers"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 2,
+        "tails": 1,
+        "description": "A lavender wind faerie with two long-beaked bird heads, two slender arms, two taloned legs and an elaborate flowing feather train with gold ornaments."
+      }
+    ]
   },
   {
     "index": 98,
@@ -1626,14 +2320,117 @@
       "Mistralwisp",
       "Mistral Exarch"
     ],
-    "description": "A visibly nonhuman bipedal raptor-like faerie with a long narrow insect mask, enormous hooked talons, elongated predatory fangs and silver wind-fringed plumage.",
+    "description": "A predatory feathered faerie with a single beaked head, four slender clawed arms, two taloned legs, original opaline wing fins and flowing silver-lavender plumes.",
     "proceduralArt": false,
     "legacyTypes": {
       "base": "Humanoid",
       "alter": "Monstrosity"
     },
-    "atlas": "./assets/roster/mistralwisp.webp",
-    "artRevision": 2
+    "atlas": "./assets/roster/mistralwisp-v3.webp",
+    "artRevision": 3,
+    "anatomyArtRevision": 3,
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "biped",
+      "traits": [
+        "grasp",
+        "claws",
+        "wings",
+        "fly",
+        "feathers"
+      ],
+      "limbs": {
+        "legs": 2,
+        "arms": 4,
+        "wings": 4,
+        "tentacles": 0
+      },
+      "manipulators": 4,
+      "strength": 1,
+      "scale": "ordinary",
+      "source": "image-analysis",
+      "confidence": 0.95,
+      "heads": 1,
+      "tails": 1,
+      "description": "A predatory feathered faerie with a single beaked head, four slender clawed arms, two taloned legs, original opaline wing fins and flowing silver-lavender plumes."
+    },
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "grasp",
+          "claws",
+          "wings",
+          "fly",
+          "feathers"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 4,
+          "wings": 4,
+          "tentacles": 0
+        },
+        "manipulators": 4,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 1,
+        "description": "A predatory feathered faerie with a single beaked head, four slender clawed arms, two taloned legs, original opaline wing fins and flowing silver-lavender plumes."
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "grasp",
+          "claws",
+          "wings",
+          "fly",
+          "feathers"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 4,
+          "wings": 4,
+          "tentacles": 0
+        },
+        "manipulators": 4,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 1,
+        "description": "A predatory feathered faerie with a single beaked head, four slender clawed arms, two taloned legs, original opaline wing fins and flowing silver-lavender plumes."
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "grasp",
+          "claws",
+          "wings",
+          "fly",
+          "feathers"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 4,
+          "wings": 4,
+          "tentacles": 0
+        },
+        "manipulators": 4,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "image-analysis",
+        "confidence": 0.95,
+        "heads": 1,
+        "tails": 1,
+        "description": "A predatory feathered faerie with a single beaked head, four slender clawed arms, two taloned legs, original opaline wing fins and flowing silver-lavender plumes."
+      }
+    ]
   },
   {
     "index": 113,

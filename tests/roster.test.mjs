@@ -18,22 +18,32 @@ test('all 150 roster lineages have distinct transparent strips with three 256px 
 import vm from 'node:vm';
 import * as E from '../engine.mjs';
 import {creatureArtworkSource} from '../sprites.mjs';
+import {syncCapabilities} from '../anatomy.mjs';
 test('existing journeys receive completed roster artwork without replacing individual progress',async()=>{
  const source=await readFile(new URL('../app.mjs',import.meta.url),'utf8');
  const begin=source.indexOf('function installRoster(){'),end=source.indexOf('\nfunction gameMenu',begin);
- const rows=ROSTER.filter(r=>r.artRevision===2),state=E.newGame('art-migration'),library={};state.species={};
- for(const row of rows){const id='roster-'+row.id;state.species[id]={...E.makeSpecies(id,row.base,row.alter,row.domains),id,proceduralArt:true,sprites:['legacy-0','legacy-1','legacy-2'],artRevision:1};}
+ const rows=ROSTER.filter(r=>r.artRevision>=2),state=E.newGame('art-migration'),library={};state.species={};
+ for(const row of rows){const id='roster-'+row.id;state.species[id]={...E.makeSpecies(id,row.base,row.alter,row.domains),id,proceduralArt:true,sprites:['legacy-0','legacy-1','legacy-2'],artRevision:1,anatomyArtRevision:1};}
  state.species['roster-lacquertor'].atlas='./assets/roster/lacquertor.webp';
  state.spirits=rows.map((r,i)=>({id:'owned-'+i,species:'roster-'+r.id,form:i%3,level:37,hp:21,stamina:14,willpower:18,bond:23,cooldowns:{move:72},heldItem:'keepsake'}));
  const before=structuredClone(state.spirits),moves=structuredClone(state.species['roster-aetherling'].moves);
- const context=vm.createContext({s:state,library,E,ROSTER,syncCapabilities:()=>{},certifyRenderedAnatomy:()=>{},register:sp=>{state.species[sp.id]=sp;library[sp.id]=sp;}});
+ const context=vm.createContext({s:state,library,E,ROSTER,structuredClone,syncCapabilities,certifyRenderedAnatomy:()=>{},register:sp=>{state.species[sp.id]=sp;library[sp.id]=sp;}});
  vm.runInContext(source.slice(begin,end)+'\ninstallRoster();',context);
  assert.deepEqual(state.spirits,before);assert.deepEqual(state.species['roster-aetherling'].moves,moves);
- for(const row of rows){const sp=state.species['roster-'+row.id];assert.equal(sp.atlas,row.atlas);assert.equal(sp.artRevision,2);assert.equal(sp.proceduralArt,false);assert.equal(sp.sprites,undefined);for(let form=0;form<3;form++)assert.equal(creatureArtworkSource(sp,form),row.atlas);}
+ for(const row of rows){const sp=state.species['roster-'+row.id];assert.equal(sp.atlas,row.atlas);assert.equal(sp.artRevision,row.artRevision);assert.equal(sp.proceduralArt,false);assert.equal(sp.sprites,undefined);if(row.anatomyArtRevision){assert.equal(sp.anatomyArtRevision,3);assert.deepEqual(sp.formAnatomy,row.formAnatomy);assert.equal(sp.anatomy.limbs.arms,row.anatomy.limbs.arms);assert.notEqual(sp.anatomy,row.anatomy);assert.notEqual(sp.formAnatomy,row.formAnatomy);}for(let form=0;form<3;form++)assert.equal(creatureArtworkSource(sp,form),row.atlas);}
  vm.runInContext('installRoster();',context);assert.deepEqual(state.spirits,before);
 });
 
 test('finished artwork descriptions preserve the planned canonical creature Types',async()=>{
  const production=JSON.parse(await readFile(new URL('../docs/roster-art-prompts.json',import.meta.url),'utf8'));
  for(const art of production.lineages.filter(a=>a.runtimeReady)){const row=ROSTER.find(r=>r.id===art.id);assert.equal(row.base,art.base,art.id);assert.equal(row.alter,art.alter,art.id);}
+});
+
+test('the eight reworked lineages retain their identities and reviewed monstrous anatomy in every form',()=>{
+ const expected={23:['gelmirth',2,1,0,1],31:['cloudgron',2,1,2,0],32:['lacquertor',6,1,2,0],33:['barrowgron',2,1,2,0],50:['draugale',2,1,2,0],57:['gloomglen',2,1,2,0],98:['wraithspire',2,2,2,1],113:['mistralwisp',4,1,2,1]};
+ assert.equal(ROSTER.filter(r=>r.artRevision===3).length,8);
+ for(const [number,[id,arms,heads,legs,tails]] of Object.entries(expected)){
+  const row=ROSTER[Number(number)-1];assert.equal(row.id,id);assert.equal(row.artRevision,3);assert.equal(row.atlas,'./assets/roster/'+id+'-v3.webp');assert.equal(row.formAnatomy.length,3);
+  for(const a of row.formAnatomy){assert.equal(a.limbs.arms,arms,id);assert.equal(a.heads,heads,id);assert.equal(a.limbs.legs,legs,id);assert.equal(a.tails,tails,id);assert.equal(a.source,'image-analysis');}
+ }
 });

@@ -1041,47 +1041,47 @@
     {
       "entry": 23,
       "id": "gelmirth",
-      "atlas": "./assets/roster/gelmirth.webp",
+      "atlas": "./assets/roster/gelmirth-v3.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 110238,
-      "sha256": "d4f85a67d4249f8c5cf7eb40f0040a162985101e85e65766801e9b9c488df577",
+      "bytes": 79286,
+      "sha256": "b64a1602cf5cf829ff30e10bcd2155b34d907584e1519aadcf7f6f27acdb94a9",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Dewglee",
           "bounds": [
-            55,
-            68,
-            201,
-            248
+            58,
+            74,
+            198,
+            249
           ],
-          "visiblePixels": 15506,
-          "sha256": "7a8816de55f431ae093bc4ba49f687873a3e026e0b56948510c7438a503b1ce2"
+          "visiblePixels": 15244,
+          "sha256": "c245a1aea1b82e98f12662bf8dc9fb39eef88cc39d322b1579e60adac45c6491"
         },
         {
           "name": "Gelmirth",
           "bounds": [
-            44,
-            36,
-            211,
-            248
+            47,
+            39,
+            209,
+            249
           ],
-          "visiblePixels": 19298,
-          "sha256": "b490975d8afddfa3d9a05aec90f0da13f21e3e8305055b7012ed45a4ff802103"
+          "visiblePixels": 19405,
+          "sha256": "74a315c0d7cb3d943ef99f460edd66a272d49621c30686094d20f8a3e2ac2995"
         },
         {
           "name": "Gossamer Gelcourt",
           "bounds": [
-            8,
-            18,
-            248,
-            248
+            11,
+            21,
+            245,
+            249
           ],
-          "visiblePixels": 34693,
-          "sha256": "70e14e8e2615d0e66aede23c8f4762c7e5fcc683df73f6f1ed264ad28e3bb09d"
+          "visiblePixels": 32230,
+          "sha256": "74eea0f02efd957bce6bea15810c0d5faeac233dab6b92774523419899a73e50"
         }
       ]
     },
@@ -1417,141 +1417,141 @@
     {
       "entry": 31,
       "id": "cloudgron",
-      "atlas": "./assets/roster/cloudgron.webp",
+      "atlas": "./assets/roster/cloudgron-v3.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 99786,
-      "sha256": "70e5dfd3f66285d343ff016bea853f3a93e3002aecb9a39ae2402544c6b971ee",
+      "bytes": 76810,
+      "sha256": "e480abb433e9e707836f0d13492647cfc9e4f3fa9519fdb75e83a045a5c84e27",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Rumblekin",
           "bounds": [
-            40,
-            68,
-            216,
-            248
+            44,
+            70,
+            211,
+            249
           ],
-          "visiblePixels": 17956,
-          "sha256": "a4fef29bba15386a9f0c71fe62ab959869d1459437103ae9c86e1061f633917d"
+          "visiblePixels": 17154,
+          "sha256": "d7ff295aba521776de4175477c2ca4f604033cccc9d9d4dd9b297095cf53cf45"
         },
         {
           "name": "Cloudgron",
           "bounds": [
-            23,
+            28,
             36,
-            232,
-            248
+            227,
+            249
           ],
-          "visiblePixels": 29225,
-          "sha256": "6c52dee9ffe630e5b5800952860950fae431907aa4b343a76754e7ab511f6275"
+          "visiblePixels": 28183,
+          "sha256": "9e61a8a9901636a513d2fdaa2f12f1437f20468cf963430fb8eac093dbb47de8"
         },
         {
           "name": "Monsoon Grandfather",
           "bounds": [
-            8,
-            49,
-            248,
-            248
+            11,
+            45,
+            245,
+            249
           ],
-          "visiblePixels": 34467,
-          "sha256": "0b731b9f24e45a7a3b9cbc445b89a749662a9c28e70adc11dc99b2c8b748ec09"
+          "visiblePixels": 34507,
+          "sha256": "c490572411fc1d82b1b0d925880067b1762283f4f782a89ff1e7726dab906007"
         }
       ]
     },
     {
       "entry": 32,
       "id": "lacquertor",
-      "atlas": "./assets/roster/lacquertor-v2.webp",
+      "atlas": "./assets/roster/lacquertor-v3.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 51364,
-      "sha256": "e69dfd5adc2a6fe76a0c0d46c9d8cd4fc9836e29ae68bd82ca9b2fb334e7c0d2",
+      "bytes": 68656,
+      "sha256": "272611c6b56ebfa23dbaf85d5d22bf8f826110228418dbf0b85373537759aab9",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Plinthkin",
           "bounds": [
+            65,
             71,
-            68,
-            184,
-            248
+            190,
+            249
           ],
-          "visiblePixels": 12449,
-          "sha256": "bb11fdb53dfb44a5bbfc195a773dea0f34cf8dd4c32a540e80fdaca3c7b0fe70"
+          "visiblePixels": 12987,
+          "sha256": "fd093c7032a09f26cbbe704c97a3ff12d218f059168398edc43eff6cc8298421"
         },
         {
           "name": "Lacquertor",
           "bounds": [
-            54,
             45,
-            202,
+            47,
+            210,
             249
           ],
-          "visiblePixels": 20150,
-          "sha256": "1d4d994bec9cb2430f356006335b9dc641ad7361495560a15a8dd12a937cc6af"
+          "visiblePixels": 20096,
+          "sha256": "df3e9abf2ddb12e9e16f4ea5c990ec7a842e0046187120705fb58ce0c5d34c81"
         },
         {
           "name": "Living Fortress",
           "bounds": [
-            31,
+            21,
             15,
-            225,
+            235,
             249
           ],
-          "visiblePixels": 32468,
-          "sha256": "d4756eae9aa0b1de23842ae13376356959a37dd343a6ae45ad86e9c4553249f7"
+          "visiblePixels": 31336,
+          "sha256": "513de9da355d394b35b558f327145ef81bc9cc8ca2aab6fb5d43a48d9a3fd5d1"
         }
       ]
     },
     {
       "entry": 33,
       "id": "barrowgron",
-      "atlas": "./assets/roster/barrowgron.webp",
+      "atlas": "./assets/roster/barrowgron-v3.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 106056,
-      "sha256": "86b65590a089d8473f0c79086cb861b75f2598e8d9d8fdb9803c84f250ab1c99",
+      "bytes": 71336,
+      "sha256": "3c8651b586a4abe384eb90e1b190cc7365ca6533d5139ab1f58edd5607230b83",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Graveltot",
           "bounds": [
-            40,
-            68,
-            215,
-            248
+            39,
+            96,
+            216,
+            249
           ],
-          "visiblePixels": 19338,
-          "sha256": "9c4f718f3530ae5a3d745a769fee471b2021d7b8ad69493da2939cec1c5d77ea"
+          "visiblePixels": 15165,
+          "sha256": "27aeecf8a42928c13e39b2a42844c02f2ec08d857bade7494a563f671961f1e7"
         },
         {
           "name": "Barrowgron",
           "bounds": [
-            25,
-            36,
-            231,
-            248
+            22,
+            63,
+            233,
+            249
           ],
-          "visiblePixels": 25342,
-          "sha256": "ee6e1df133e2137936bf0e76f05d1626d535020bc9536fcae19d7bad8c97301a"
+          "visiblePixels": 20554,
+          "sha256": "484dfd399475edebac5a72180519123be42ad16d60fd14fb81240fe291c4d36e"
         },
         {
           "name": "Sepulcher Titan",
           "bounds": [
-            8,
-            24,
-            248,
-            248
+            11,
+            44,
+            245,
+            249
           ],
-          "visiblePixels": 33479,
-          "sha256": "c175e27b874313eaff1cc097d86064402f717273e1f528e3b2ad7eeb90c807fe"
+          "visiblePixels": 27204,
+          "sha256": "19391ff064f1a71719c6735ebc9092995b4ab062a44f1d2210da06c9583df649"
         }
       ]
     },
@@ -2310,47 +2310,47 @@
     {
       "entry": 50,
       "id": "draugale",
-      "atlas": "./assets/roster/draugale.webp",
+      "atlas": "./assets/roster/draugale-v3.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 114988,
-      "sha256": "a58f9980f28fe191c6078457bbb19a673752a2bb9264612358d41217cbc7f517",
+      "bytes": 89788,
+      "sha256": "7413078c11b7627a9babb41de547aa474e25f56cedd8d8e7e7975ceedcc70857",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Barrowick",
           "bounds": [
-            65,
-            68,
-            190,
-            248
+            67,
+            78,
+            189,
+            249
           ],
-          "visiblePixels": 11920,
-          "sha256": "6298a223289e775394c9ba6146a06f25fa77edb1769a63f3201ba8c7033b1f85"
+          "visiblePixels": 10890,
+          "sha256": "1aa085b7007083b6f3bc11fe79d0c289f8ee5173aa3512c01a278c19dc6800d6"
         },
         {
           "name": "Draugale",
           "bounds": [
-            36,
-            36,
-            220,
-            248
+            37,
+            48,
+            218,
+            249
           ],
-          "visiblePixels": 20331,
-          "sha256": "609ca767cb1aa01743b9f3bdb23a7b49ca80adff6ac29343c393d9cefa48c1cb"
+          "visiblePixels": 19459,
+          "sha256": "0f572f8e386b9336582882991a1a6fb81f2a02c5aa4769d711a52ea75267a706"
         },
         {
           "name": "Tempest Revenant",
           "bounds": [
-            13,
-            8,
-            243,
-            248
+            14,
+            15,
+            241,
+            249
           ],
-          "visiblePixels": 32704,
-          "sha256": "e4346dd8cffd2be51976b86516bae41b0f729e756a71a1efbe977a3cd7bcc9e2"
+          "visiblePixels": 32498,
+          "sha256": "2bb875507e554e27e16299612813ff090d6098a6b31cbe6f5dcbe7121e1cde3b"
         }
       ]
     },
@@ -2639,47 +2639,47 @@
     {
       "entry": 57,
       "id": "gloomglen",
-      "atlas": "./assets/roster/gloomglen.webp",
+      "atlas": "./assets/roster/gloomglen-v3.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 56848,
-      "sha256": "6d4c706a3c0dac14ca3b179ed60d1c488ad762a1ea4202d080a63ae8d27fede2",
+      "bytes": 80166,
+      "sha256": "a27395f481e176b0f7e4e12b10231ea43f9c43deda066273f670521d6a9da51e",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Gloomlet",
           "bounds": [
-            65,
+            66,
             119,
-            190,
+            189,
             249
           ],
-          "visiblePixels": 9726,
-          "sha256": "14df9fdcbc6739efea3846951d1c7ea3007d5a2da29b7f00dcd7dae3c6badc86"
+          "visiblePixels": 10141,
+          "sha256": "1fb276e863d4311214531bd4af8762fd3cb38a4ae9a31111aaa87e7f88a776b9"
         },
         {
           "name": "Gloomglen",
           "bounds": [
             34,
-            39,
+            38,
             222,
             249
           ],
-          "visiblePixels": 25666,
-          "sha256": "313678a8a778475c8f8af37518629ab0c5864e314cbf441306464d849531e7cb"
+          "visiblePixels": 26771,
+          "sha256": "f94695405cd257d24861583a3c9c9c8af23b9319c098e8211c45129216171661"
         },
         {
           "name": "Gloom Sovereign",
           "bounds": [
             11,
-            17,
+            15,
             245,
             249
           ],
-          "visiblePixels": 37724,
-          "sha256": "969939ef7f62238a25fa8dc73881b3f8b820eba7d5d4fc1bacf0c3d11b437a53"
+          "visiblePixels": 39153,
+          "sha256": "1735c9ab89697c59e5e54b6873badac74623a3e001c725550569244d55de46ed"
         }
       ]
     },
@@ -4566,47 +4566,47 @@
     {
       "entry": 98,
       "id": "wraithspire",
-      "atlas": "./assets/roster/wraithspire.webp",
+      "atlas": "./assets/roster/wraithspire-v3.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 91682,
-      "sha256": "5c5da9d4a62c555bbc709ea6dfd0662dfa4185680562891c49594fbb3bd9de7d",
+      "bytes": 89308,
+      "sha256": "74958459909ff3f1715cdcdfe402008c4b263d5c932b98ca1d18254c31a1c6e8",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Wraithlet",
           "bounds": [
             78,
-            89,
+            83,
             178,
             249
           ],
-          "visiblePixels": 6995,
-          "sha256": "fba77f4a8b8e68be0839ed00830e1c1c634751b46322450dbcb1921428373238"
+          "visiblePixels": 7258,
+          "sha256": "9ac6afd8afa8c0a1fae2acf657ac230b458e9f535d087b1ac8541944ee4afa84"
         },
         {
           "name": "Wraithspire",
           "bounds": [
-            42,
-            35,
-            213,
+            43,
+            25,
+            212,
             249
           ],
-          "visiblePixels": 17720,
-          "sha256": "819c2c70603d6aea6f18ec45ff4531d6b47738ca2fd0f67ed1b18c7aac0b439c"
+          "visiblePixels": 18663,
+          "sha256": "9a05345fcc9620ac4e6679979e2e204bab170b53336d6bb68bd5b5a27d7532e8"
         },
         {
           "name": "Wraith Sovereign",
           "bounds": [
-            11,
+            17,
             15,
-            245,
+            238,
             249
           ],
-          "visiblePixels": 31296,
-          "sha256": "2206ee4d57cfe85d64db4223b3e17e16d65ba9f1fcb9613726b257f22f3d3e19"
+          "visiblePixels": 29770,
+          "sha256": "a2012646772023a578384e47d585fc218f6c5f6fd5b15f258efc8997c783cfdf"
         }
       ]
     },
@@ -5271,47 +5271,47 @@
     {
       "entry": 113,
       "id": "mistralwisp",
-      "atlas": "./assets/roster/mistralwisp.webp",
+      "atlas": "./assets/roster/mistralwisp-v3.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 112330,
-      "sha256": "8ac622e3f2f162f42639ed0ec016cf4ed64dc92febfaefe8be735a0124fa17fb",
+      "bytes": 100778,
+      "sha256": "a244d679f7aab54b1a4bee1d56d7a33ae38b68511b1a3faa423e663de3138a88",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Mistralling",
           "bounds": [
             54,
-            111,
-            202,
+            113,
+            201,
             249
           ],
-          "visiblePixels": 9144,
-          "sha256": "a148ef28a42f86a01fa42b947de2048d0170bf12ad5c318c4eae9aa026d05814"
+          "visiblePixels": 9416,
+          "sha256": "b28576e9e6dd18b7d476402a0f98c4dc048df1a05c04a389d4872e2a7a5c9079"
         },
         {
           "name": "Mistralwisp",
           "bounds": [
-            21,
-            48,
-            234,
+            26,
+            50,
+            230,
             249
           ],
-          "visiblePixels": 21705,
-          "sha256": "d2a11a5b3f235b97d852b89cd62c21f6be64ba8634ce52d519861ef545b27754"
+          "visiblePixels": 21457,
+          "sha256": "4a2c6d7d26ee5327ef852a9d85443c66078d5a33f75d5970e65df309f1de651c"
         },
         {
           "name": "Mistral Exarch",
           "bounds": [
-            11,
+            12,
             15,
-            245,
+            244,
             249
           ],
-          "visiblePixels": 31592,
-          "sha256": "92b5df519c7404a5bc89b01779d04cebb7935c3e7afed92a03aa5e5761848822"
+          "visiblePixels": 31893,
+          "sha256": "fa8b6d78960f635e2b584fd05ac44df30ce1758c65b0da4f44b040073f98860a"
         }
       ]
     },
