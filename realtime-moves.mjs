@@ -44,7 +44,7 @@ export function moveTiming(move,actor={},sp={},style='normal'){
  const castMs=Math.round(baseCast/haste*styleTime*penalty),animationLockMs=move.animationLockMs??(timing==='lcd'?550:450);
  const recoveryMs=animationLockMs,power=Math.round(rawPower*scale),healingFraction=effect==='teamHeal'?.18+tier*.01:effect==='heal'?.22+tier*.012:effect==='fullheal'?.65+tier*.01:effect==='rest'?.8+tier*.01:1;
  // Heavy GCDs need longer casts and/or their own recast to pay for burst strength.
- const localCooldownMs=timing==='gcd'&&work>65?Math.round(work*125/haste*styleTime*penalty):timing==='lcd'?cooldownMs:0;
+ const localCooldownMs=timing==='gcd'?(move.cooldownMs!=null?Math.max(0,Math.round(move.cooldownMs/haste*styleTime*penalty)):work>65?Math.round(work*125/haste*styleTime*penalty):0):cooldownMs;
  return {tier,threshold:MOVE_LEVEL_THRESHOLDS[tier],nextThreshold:MOVE_LEVEL_THRESHOLDS[tier+1]||null,timing,power,basePower:rawPower,gcdMs,cooldownMs,localCooldownMs,castMs,animationLockMs,recoveryMs,work:Math.round(work*10)/10,accuracy,effect,healingFraction,durationScale:(1+tier*.035)*(1-exhaustion(actor))};
 }
 export function scaledMove(move,actor,sp,style='normal'){const profile=moveTiming(move,actor,sp,style);return {...move,power:profile.power,realTimeBasePower:profile.basePower,realTimeProfile:profile};}

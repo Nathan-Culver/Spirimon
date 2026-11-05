@@ -7,6 +7,7 @@ import * as ST from './support-techniques.mjs';
 import * as SW from './spiritual-world.mjs';
 import * as CO from './cooperative-techniques.mjs';
 import * as RT from './realtime-combat.mjs';
+import {sealingGestureChoice} from './sealing-gesture.mjs';
 import * as CP from './classification-passives.mjs';
 import {realTimeMoveHTML,realTimeStatusHTML,seconds,damageDelayLabels} from './realtime-ui.mjs';
 import {completeProceduralSpecies,acceptGeneratedArtwork,atlasSprites} from './creature-browser.mjs';
@@ -622,10 +623,10 @@ function advanceBossPhase(){if(!battle?.boss||battle.enemy.hp<=0)return;const bo
 
 function winBattle(){endCombatState();const won=battle,ally=s.spirits.find(i=>i.id===won.ally),sp=spOf(ally),xp=Math.max(1,Math.floor(won.enemy.level*(won.trainer?35:24)/4)),previous=ally.appearance,result=gainSpirimonXP(ally,sp,xp),advancements=[result];if(result.evolved)transformSpirit(sp,previous,ally.appearance);for(const id of won.participants||[])if(id!==ally.id){const member=s.spirits.find(i=>i.id===id);if(member){advancements.push(gainSpirimonXP(member,spOf(member),xp));member.bond=Math.min(100,member.bond+4);}}ally.bond=Math.min(100,ally.bond+4);s.wins++;SE.gainSealerXP(s,30+won.enemy.level*4);if(won.adventure){SE.trainSealer(s,'victory:'+won.adventure.kind+':'+won.adventure.id,{ritual:true});const learned=SE.learnSupport(s,'victory:'+won.adventure.kind+':'+won.adventure.id,'Encounter discovery');if(learned)note('Discovered support technique: '+learned.name);}if(won.adventure){const a=adventureState(),{kind,id}=won.adventure;if(kind==='temple-trainer'){const [templeId,step]=id.split('|'),e=encounterState(),key='temple-progress-'+templeId;if((e[key]||0)<=Number(step))e[key]=Number(step)+1;note('Temple Sealer defeated. The next trial opens!');}if(kind==='clan'&&!a.crests.includes(id)){if(s.cave?.temple===id)caveLeave();a.crests.push(id);note('Earned '+A.CLANS.find(c=>c.id===id)?.crest+'!');}if(kind==='faction'&&!a.bosses.includes(id)){a.bosses.push(id);s.inventory.coins+=200;note('Defeated a hostile faction leader!');}if(kind==='legend'&&!a.legends.includes(id)){a.legends.push(id);s.inventory.ethers=(s.inventory.ethers||0)+3;note('An ancient legend has been overcome!');}if(kind==='facility'){a.facilityWins=(a.facilityWins||0)+1;a.facilityRecords??={};const facilityId=A.FACILITY_TYPES.some(f=>f.id===id)?id:'arena';a.facilityRecords[facilityId]=(a.facilityRecords[facilityId]||0)+1;s.inventory.coins+=A.facilityChallenge(facilityId,a.facilityRecords[facilityId],s.seed).reward;note('Won ranked facility match '+a.facilityWins+'!');}if(kind==='guild-trial'&&!a.guildTrials.includes(id)){a.guildTrials.push(id);note('Completed Guild trial: '+id);}if(kind==='facility'){const progress=A.recordFacilityResult(a,id,true);const run=a.facilityRuns[id];if(run){run.vitality=Object.fromEntries(party().map(u=>[u.id,{hp:u.hp,pp:u.pp,willpower:u.willpower}]));run.energy=s.sealer.energy;}if(progress.complete)note('Facility circuit complete!');}if(kind==='championship'){const progress=A.recordChampionshipResult(a,true);if(progress.complete){s.inventory.coins+=1000;note('You are Champion of the Seals!');}else note('Championship match won. Continue to '+A.CHAMPIONSHIP_STAGES[a.championship.stage].name+'.');}}for(const q of E.questTemplates()){const record=questState()[q.id];if(record&&typeof record==='object')s.questLog[q.id]=E.advanceQuest(s,q,record);}const reward=won.trainer?35+s.rank*12:0;if(reward)s.inventory.coins+=reward;renown(won.trainer?45:12);if(won.trainer&&!s.quests.rival){s.quests.rival=true;s.friendships['rival-0,0']=(s.friendships['rival-0,0']||0)+8;}if(won.challenger==='villain')challengerState().villainWins=(challengerState().villainWins||0)+1;if(won.challenger==='rival')challengerState().rivalWins=(challengerState().rivalWins||0)+1;awardBattleEquipment(won);if(won.roamer)removeRoamer(won.roamer);battle=null;ensurePlayerOnPath();note('Won '+(won.trainer?'a guild match':'a wild battle')+' with '+sp.forms[ally.appearance]+'.');save();render();showModal(advancements.some(change=>change.levels)?'Level up!':advancements.some(change=>change.evolved)?'A new form awakens.':'A bond grows stronger.',levelUpHTML(advancements)+(advancements.some(change=>change.levels||change.evolved)?'':'<div style="text-align:center">'+sprite(sp,ally.appearance,180)+'</div>')+'<p>You earned '+(reward?reward+' Coin and ':'')+xp+' experience.'+(won.itemFinds?.length?' Held Items: '+won.itemFinds.map(esc).join(', ')+'.':'')+(result.evolved?' Previous forms remain available as cosmetic appearances.':'')+(!result.levels&&!result.evolved&&result.learned?.length?' New techniques unlocked: '+result.learned.map(m=>esc(m.name)).join(', ')+'. Practice at a safe place to equip them.':'')+'</p><div class="btn-row">'+(['facility','championship'].includes(won.adventure?.kind)?action('competition-continue','Continue competition',won.adventure.kind):'')+action('close','Continue exploring','','btn primary')+'</div>');}
 function loseBattle(){recordCompetitionDefeat();endCombatState();const items={seals:Math.floor(s.inventory.seals/3),offerings:Math.floor(s.inventory.offerings/3),tonics:Math.floor(s.inventory.tonics/3),ethers:Math.floor((s.inventory.ethers||0)/3)};for(const k of Object.keys(items))s.inventory[k]-=items[k];items.spiritDraughts=Math.floor((s.inventory.spiritDraughts||0)/3);s.inventory.spiritDraughts-=items.spiritDraughts;s.drops.push({x:s.player.x,y:s.player.y,items});const cost=Math.min(s.inventory.coins,20+s.rank*5);s.inventory.coins-=cost;s.player.x=s.safe.x;s.player.y=s.safe.y;SE.restoreEnergy(s.sealer,s.sealer.maxEnergy*.25);party().forEach(i=>E.heal(i,spOf(i)));battle=null;save();render();showModal('Back beneath the guild lamps.','<p>A passing sealer helped you return to safety. Recovery cost '+cost+' Coin. Your dropped supplies are waiting where you fell; press E nearby to retrieve them.</p><div class="btn-row">'+action('close','Rest, then try again','','btn primary')+'</div>');}
-function battleSeal(){
- if(!battle||battle.trainer||battle.rt.paused)return;const target=battle.multi.enemies[battle.enemyTargetSelection||0]||battle.enemy;if(!target||target.hp<=0)return toast('Select a living wild Spirimon.');
- if(s.inventory.seals<1)return toast('No seal catalysts remain.');const quote=SE.sealInvestment(s.sealer,target,spOf(target),s.inventory.quality,battle.sealExtra||0);if(!quote.ok)return toast('This attempt costs '+quote.cost+' Spiritual Energy.');if(!claimRealTimeUtility(3500))return;
- const result=SE.commitSeal(s.sealer,target,spOf(target),s.inventory.quality,battle.sealExtra||0);if(!result.ok)return toast(result.reason);s.inventory.seals--;RT.synchronizeTimers(battle.rt,realTimeContext());
+function battleSeal(extra=battle?.sealExtra||0,targetId=null){
+ if(!battle||battle.trainer||battle.rt.paused)return;const target=targetId?battle.multi.enemies.find(u=>u.id===targetId):battle.multi.enemies[battle.enemyTargetSelection||0]||battle.enemy;if(!target||target.hp<=0)return toast('Select a living wild Spirimon.');
+ if(s.inventory.seals<1)return toast('No seal catalysts remain.');const quote=SE.sealInvestment(s.sealer,target,spOf(target),s.inventory.quality,extra);if(!quote.ok)return toast('This attempt costs '+quote.cost+' Spiritual Energy.');if(!claimRealTimeUtility(3500))return;
+ const result=SE.commitSeal(s.sealer,target,spOf(target),s.inventory.quality,extra);if(!result.ok)return toast(result.reason);s.inventory.seals--;battle.sealExtra=0;RT.synchronizeTimers(battle.rt,realTimeContext());
  if(result.success){if(battle.adventure?.kind==='legend'){const a=adventureState();if(!a.legends.includes(battle.adventure.id))a.legends.push(battle.adventure.id);}const roamer=battle.roamer;endCombatState();battle=null;capture(target,roamer);save();render();}else{battle.log.push('The seal breaks. '+result.cost+' Spiritual Energy and one catalyst were spent.');save();render();}
 }
 
@@ -911,6 +912,7 @@ case'style':style=v;render();break;
 case'borrow':borrow=Number(v);render();break;
 case'ether':useEther();break;
 case'rt-pause':if(battle?.rt){battle.rt.paused=!battle.rt.paused;save();render();}break;
+case'unified-seal':if(unifiedSuppressClick&&ev.detail!==0){unifiedSuppressClick=false;break;}unifiedSuppressClick=false;battleSeal(battle?.sealExtra||0,v);break;
 case'unified-move':{if(unifiedSuppressClick){unifiedSuppressClick=false;break;}const now=performance.now();if(unifiedTap&&unifiedTap.value===v&&now-unifiedTap.at<330){clearTimeout(unifiedTap.timer);unifiedTap=null;const preset=s.settings?.movePresets?.[v]||{};useUnifiedMove(v,preset.style||'normal',preset.commit||0,preset.extraMoves||0);}else{if(unifiedTap){clearTimeout(unifiedTap.timer);useUnifiedMove(unifiedTap.value,'normal',0,0);}const pending={value:v,at:now};pending.timer=setTimeout(()=>{if(unifiedTap===pending){unifiedTap=null;useUnifiedMove(v,'normal',0,0);}},330);unifiedTap=pending;}break;}
 case'rt-actor':if(battle?.rt&&(battle.multi?.allies||[battle.ally]).includes(v)){battle.controlledAlly=v;selectedMove=0;render();}break;
 case'rt-auto':break;
@@ -948,7 +950,7 @@ case'party-down':{if(!safe())return toast('Reorder your team at a safe place.');
 case'region-info':{const r=s.regions[v];showModal(r.name,'<p>'+esc(r.biome.desc)+'<br>Biome: '+esc(r.biome.name)+'<br>Stable danger: level '+r.danger+' and above<br>'+(r.town?'A guild settlement offers recovery, supplies, and familiar faces.':'Wilderness region. Follow the crossing trails to keep exploring.')+'</p>');break;}
 }});
 document.addEventListener('input',ev=>{if(ev.target.id==='commitment')commit=Number(ev.target.value)/100;if(ev.target.id==='spirit-search'){const pos=ev.target.selectionStart;search=ev.target.value.toLowerCase();render();$('#spirit-search').focus();$('#spirit-search').setSelectionRange(pos,pos);}});
-document.addEventListener('change',ev=>{if(ev.target.id==='held-recipient'){heldRecipient=ev.target.value;equipmentMenu();}if(ev.target.id==='held-category'){heldCategory=ev.target.value;equipmentMenu();}if(ev.target.id==='battle-target'&&battle){battle.targetSelection=Number(ev.target.value);}if(ev.target.id==='rt-enemy-target'){battle.enemyTargetSelection=Number(ev.target.value);}if(ev.target.id==='rt-ally-target'){battle.allyTargetSelection=Number(ev.target.value);}if(ev.target.id==='support-target'&&battle){battle.supportTargetId=ev.target.value;render();}if(ev.target.id==='seal-investment'&&battle){battle.sealExtra=Math.max(0,Math.floor(Number(ev.target.value)||0));render();}if(ev.target.id==='rt-style'){style=ev.target.value;render();}if(ev.target.id==='borrow-select'){borrow=Number(ev.target.value);render();}if(ev.target.id==='layout-setting'){s.settings.layout=ev.target.value;applyLayout();save();}if(ev.target.id==='starter-base'){s.player.name=$('#sealer-name').value||'Sealer';starterBase=ev.target.value;starters();}if(ev.target.id==='spirit-filter'){filter=ev.target.value;render();}if(ev.target.id==='timing-setting'){s.settings.timing=ev.target.value;save();}if(ev.target.id==='import-file')importSave(ev.target.files[0]);if(ev.target.id==='ai-provider'){s.settings.aiProvider=ev.target.value;save();}if(ev.target.id==='ai-fallback'){s.settings.aiFallback=ev.target.value;save();}if(ev.target.id==='ai-ollama-url'){s.settings.ollamaUrl=ev.target.value.trim();save();}if(ev.target.id==='ai-cloud-key'){aiSessionKey=ev.target.value;}if(ev.target.id==='ai-provider-model'&&aiProviderResult){s.settings.aiModels??={};s.settings.aiModels[aiProviderResult.type]=ev.target.value;save();}if(ev.target.id==='ai-enabled'){s.settings.aiEnabled=ev.target.checked;save();if(ev.target.checked)checkAI();}if(ev.target.id==='ai-model'){s.settings.model=ev.target.value;save();}if(ev.target.id==='ai-vision-model'){s.settings.visionModel=ev.target.value;save();}});
+document.addEventListener('change',ev=>{if(ev.target.id==='held-recipient'){heldRecipient=ev.target.value;equipmentMenu();}if(ev.target.id==='held-category'){heldCategory=ev.target.value;equipmentMenu();}if(ev.target.id==='battle-target'&&battle){battle.targetSelection=Number(ev.target.value);}if(ev.target.id==='rt-enemy-target'){battle.enemyTargetSelection=Number(ev.target.value);}if(ev.target.id==='rt-ally-target'){battle.allyTargetSelection=Number(ev.target.value);}if(ev.target.id==='support-target'&&battle){battle.supportTargetId=ev.target.value;render();}if(ev.target.id==='rt-style'){style=ev.target.value;render();}if(ev.target.id==='borrow-select'){borrow=Number(ev.target.value);render();}if(ev.target.id==='layout-setting'){s.settings.layout=ev.target.value;applyLayout();save();}if(ev.target.id==='starter-base'){s.player.name=$('#sealer-name').value||'Sealer';starterBase=ev.target.value;starters();}if(ev.target.id==='spirit-filter'){filter=ev.target.value;render();}if(ev.target.id==='timing-setting'){s.settings.timing=ev.target.value;save();}if(ev.target.id==='import-file')importSave(ev.target.files[0]);if(ev.target.id==='ai-provider'){s.settings.aiProvider=ev.target.value;save();}if(ev.target.id==='ai-fallback'){s.settings.aiFallback=ev.target.value;save();}if(ev.target.id==='ai-ollama-url'){s.settings.ollamaUrl=ev.target.value.trim();save();}if(ev.target.id==='ai-cloud-key'){aiSessionKey=ev.target.value;}if(ev.target.id==='ai-provider-model'&&aiProviderResult){s.settings.aiModels??={};s.settings.aiModels[aiProviderResult.type]=ev.target.value;save();}if(ev.target.id==='ai-enabled'){s.settings.aiEnabled=ev.target.checked;save();if(ev.target.checked)checkAI();}if(ev.target.id==='ai-model'){s.settings.model=ev.target.value;save();}if(ev.target.id==='ai-vision-model'){s.settings.visionModel=ev.target.value;save();}});
 document.addEventListener('keydown',ev=>{const k=ev.key.toLowerCase();if(['INPUT','SELECT','TEXTAREA'].includes(ev.target.tagName)&&ev.target.type!=='range')return;if(k==='escape'){if(modal==='starter'||modal==='welcome'||modal==='replacement')return;closeModal();return;}if(modal){if(ritual&&(k===' '||k==='enter')){ev.preventDefault();sealPulse();}return;}if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k))ev.preventDefault();keys.add(k);if(ev.repeat)return;const walkKeys={w:[0,-1],a:[-1,0],s:[0,1],d:[1,0],arrowup:[0,-1],arrowleft:[-1,0],arrowdown:[0,1],arrowright:[1,0]};if(walkKeys[k]){move(...walkKeys[k]);return;}if(k==='e'||k==='enter')interact();if(k==='b')bag();if(['1','2','3','4'].includes(k)&&!battle){view=['explore','spirits','atlas','journal'][Number(k)-1];render();}});
 document.addEventListener('keyup',ev=>keys.delete(ev.key.toLowerCase()));window.addEventListener('blur',()=>{keys.clear();running=false;queuedStep=null;});document.addEventListener('visibilitychange',()=>{keys.clear();persist();});window.addEventListener('pagehide',()=>persist());
 function startupStatus(message){window.dispatchEvent(new CustomEvent('spirimon-startup',{detail:message}));}
@@ -1161,8 +1163,7 @@ function unifiedBattleActionsHTML(){
   items.push('<button class="unified-action ua-utility" data-action="battle-switch"><span class="ua-icon">✧</span><b>Release</b></button>');
  if(active.some(u=>!u.conditions?.trap&&RT.actionAvailability(battle.rt,u,spOf(u),{type:'switch'}).ok))
   items.push('<button class="unified-action ua-utility" data-action="battle-switch"><span class="ua-icon">↻</span><b>Switch / Recall</b></button>');
- if(!battle.trainer&&utilityReady&&(s.inventory.seals||0)>0&&ctx.active.b.some(u=>u.hp>0&&SE.sealInvestment(s.sealer,u,spOf(u),s.inventory.quality,0).ok))
-  items.push('<button class="unified-action ua-utility" data-action="battle-bag"><span class="ua-icon">◎</span><b>Seal</b><small>Choose Energy investment</small></button>');
+ if(!battle.trainer&&utilityReady&&(s.inventory.seals||0)>0)items.push(sealButtonHTML());
  if(!battle.rt.paused&&(battle.utilityReadyAt||0)<=now)items.push('<button class="unified-action ua-run" data-action="flee"><span class="ua-icon">➜</span><b>Run</b></button>');
  if(battle.trainer)items.push('<button class="unified-action ua-run" data-action="yield"><b>Concede</b></button>');
  return items.join('')||'<p class="ua-wait">Waiting for an available action…</p>';
@@ -1170,7 +1171,7 @@ function unifiedBattleActionsHTML(){
 function realTimeBattleHTML(){
  const state=battle.rt,ctx=realTimeContext(),emergency=!ctx.active.a.some(u=>u.hp>0);
  const speech=battle.message?esc(battle.message):'Select an available action. Each Spirimon acts independently.';
- const controls=battleMode==='deploy'?deploymentHTML():battleMode==='support'?battleSupportHTML():battleMode==='coop'?cooperativeBattleHTML():battleMode==='bag'?'<div class="spiritual-options">'+action('tonic','TONIC ×'+s.inventory.tonics)+action('ether','SOUL DRAUGHT ×'+s.inventory.ethers)+action('spiritual-draught','SPIRITUAL DRAUGHT ×'+s.inventory.spiritDraughts)+(!battle.trainer?'<label>Extra sealing Energy <input id="seal-investment" type="number" min="0" max="'+Math.floor(s.sealer.energy)+'" value="'+(battle.sealExtra||0)+'"></label>'+sealPreviewHTML()+action('battle-seal','ATTEMPT SEAL ×'+s.inventory.seals):'')+action('battle-main','BACK')+'</div>':'<div class="unified-action-grid" id="unified-action-grid">'+unifiedBattleActionsHTML()+'</div>';
+ const controls=battleMode==='deploy'?deploymentHTML():battleMode==='support'?battleSupportHTML():battleMode==='coop'?cooperativeBattleHTML():battleMode==='bag'?'<div class="spiritual-options">'+action('tonic','TONIC ×'+s.inventory.tonics)+action('ether','SOUL DRAUGHT ×'+s.inventory.ethers)+action('spiritual-draught','SPIRITUAL DRAUGHT ×'+s.inventory.spiritDraughts)+(!battle.trainer?sealButtonHTML():'')+action('battle-main','BACK')+'</div>':'<div class="unified-action-grid" id="unified-action-grid">'+unifiedBattleActionsHTML()+'</div>';
  return '<section class="classic-battle realtime-battle unified-battle triple-battle double-battle"><div class="battle-sealers">'+spiritualEnergyHTML(s.sealer)+(battle.enemySealer?spiritualEnergyHTML(battle.enemySealer,'Enemy'):'')+'</div><div class="classic-stage"><canvas id="battle-canvas" width="1000" height="550" aria-label="Real-time Spirimon battle"></canvas>'+doubleHUDsHTML()+'<div class="battle-corner">'+action('battle-record','LOG')+'</div>'+(state.paused?'<div class="rt-paused">PAUSED</div>':'')+'</div><div class="classic-bottom"><div class="classic-dialogue"><p id="battle-speech" role="status">'+speech+'</p><p class="energy-emergency" data-emergency>'+(emergency?'Emergency recovery · '+seconds(6000-(state.undefendeda||0)):'')+'</p></div><div class="classic-control"><h3 class="unified-title">Available Actions</h3>'+(!['main','moves'].includes(battleMode)?action('battle-main','Back','','btn battle-dock-back'):'')+controls+'</div></div></section>';
 }
 
@@ -1215,6 +1216,7 @@ function refreshUnifiedActions(grid,html,held=null){
 function clearUnifiedGesture(){
  const g=unifiedGesture;unifiedGesture=null;if(!g)return;
  delete g.button.dataset.gesturePreview;g.button.style.removeProperty('--commit-progress');
+ if(g.kind==='seal'){unifiedSuppressClick=true;g.button.innerHTML=g.originalHTML;}
  try{if(g.button.hasPointerCapture?.(g.pointerId))g.button.releasePointerCapture(g.pointerId);}catch{}
 }
 
@@ -1236,14 +1238,36 @@ function unifiedGestureChoice(dx,dy){
  const commit=diagonal?0:ax>ay?Math.min(1,ax/110):0;
  return {style,commit,moveCount:extraMoves,diagonal};
 }
+function sealQuote(p){return p.base+' + '+p.extra+' = '+p.cost+' SE · '+Math.round(p.chance*100)+'%';}
+function sealButtonHTML(){
+ const target=battle.multi.enemies[battle.enemyTargetSelection||0]||battle.enemy;
+ if(!target||target.hp<=0||battle.trainer||battle.rt.paused||(battle.utilityReadyAt||0)>battle.rt.elapsedMs||!(s.inventory.seals>0))return '';
+ const base=SE.sealInvestment(s.sealer,target,spOf(target),s.inventory.quality,0);if(!base.ok)return '';
+ const p=SE.sealInvestment(s.sealer,target,spOf(target),s.inventory.quality,battle.sealExtra||0);
+ return '<button class="unified-action ua-seal" data-action="unified-seal" data-value="'+esc(target.id)+'" data-unified-seal="'+esc(target.id)+'" title="Tap to seal; slide right for Energy, up to cancel. Arrows adjust; Enter seals. Failure spends invested SE."><b>Seal ×'+s.inventory.seals+'</b><small data-seal-quote>'+sealQuote(p)+'</small><small>Tap · slide right +Energy · up cancel</small><i class="ua-commit"></i></button>';
+}
+function previewSeal(g,choice){
+ const target=battle?.multi.enemies.find(u=>u.id===g.value&&u.hp>0);if(!target)return;
+ const p=SE.sealInvestment(s.sealer,target,spOf(target),s.inventory.quality,choice.extra);
+ g.button.querySelector('b').textContent=choice.cancelled?'Cancel seal':'Release to seal';
+ g.button.querySelector('[data-seal-quote]').textContent=choice.cancelled?'No Energy or catalyst spent':sealQuote(p)+(p.ok?'':' · Insufficient Energy');
+ g.button.style.setProperty('--commit-progress',Math.round(choice.fraction*100)+'%');
+}
 document.addEventListener('pointerdown',ev=>{
- const button=ev.target.closest?.('[data-unified-move]');if(!button||button.disabled)return;
+ const button=ev.target.closest?.('[data-unified-move], [data-unified-seal]');if(!button||button.disabled||unifiedGesture||ev.isPrimary===false||ev.button>0)return;
  unifiedSuppressClick=false;
  unifiedGesture={button,x:ev.clientX,y:ev.clientY,value:button.dataset.unifiedMove,pointerId:ev.pointerId};
+ if(button.dataset.unifiedSeal){
+  const target=battle?.multi.enemies.find(u=>u.id===button.dataset.unifiedSeal&&u.hp>0);if(!target){unifiedGesture=null;return;}
+  const p=SE.sealInvestment(s.sealer,target,spOf(target),s.inventory.quality,0);
+  Object.assign(unifiedGesture,{kind:'seal',value:target.id,battle,maximum:Math.max(0,Math.floor(s.sealer.energy)-p.base),originalHTML:button.innerHTML});
+  ev.preventDefault();
+ }
  try{button.setPointerCapture?.(ev.pointerId);}catch{clearUnifiedGesture();}
 });
 document.addEventListener('pointermove',ev=>{
  const g=unifiedGesture;if(!g||g.pointerId!==ev.pointerId)return;
+ if(g.kind==='seal'){previewSeal(g,sealingGestureChoice(ev.clientX-g.x,ev.clientY-g.y,g.maximum));return;}
  const choice=unifiedGestureChoice(ev.clientX-g.x,ev.clientY-g.y);
  g.button.style.setProperty('--commit-progress',Math.round(choice.commit*100)+'%');
  g.button.dataset.gesturePreview=(choice.moveCount?'+'+choice.moveCount+' Moves · ':'')+choice.style.toUpperCase()+(choice.commit?' · ATK '+Math.round(choice.commit*100)+'%':'');
@@ -1251,6 +1275,7 @@ document.addEventListener('pointermove',ev=>{
 document.addEventListener('pointerup',ev=>{
  const g=unifiedGesture;if(!g||g.pointerId!==ev.pointerId)return;clearUnifiedGesture();
  const dx=ev.clientX-g.x,dy=ev.clientY-g.y;
+ if(g.kind==='seal'){const choice=sealingGestureChoice(dx,dy,g.maximum);if(!choice.cancelled&&battle===g.battle)battleSeal(choice.extra,g.value);return;}
  delete g.button.dataset.gesturePreview;
  if(Math.hypot(dx,dy)<18)return;
  unifiedSuppressClick=true;
@@ -1261,6 +1286,17 @@ document.addEventListener('pointercancel',ev=>{if(unifiedGesture?.pointerId===ev
 document.addEventListener('lostpointercapture',ev=>{if(unifiedGesture?.pointerId===ev.pointerId)clearUnifiedGesture();});
 window.addEventListener('blur',()=>{clearUnifiedGesture();if(unifiedTap){clearTimeout(unifiedTap.timer);unifiedTap=null;}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){clearUnifiedGesture();if(unifiedTap){clearTimeout(unifiedTap.timer);unifiedTap=null;}}});
+document.addEventListener('keydown',ev=>{
+ if(ev.key==='Escape'&&unifiedGesture?.kind==='seal'){ev.preventDefault();clearUnifiedGesture();return;}
+ const button=ev.target.closest?.('[data-unified-seal]');if(!button||!battle)return;
+ if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Escape'].includes(ev.key))return;ev.preventDefault();
+ const target=battle.multi.enemies.find(u=>u.id===button.dataset.unifiedSeal&&u.hp>0);if(!target)return;
+ const base=SE.sealInvestment(s.sealer,target,spOf(target),s.inventory.quality,0),max=Math.max(0,Math.floor(s.sealer.energy)-base.base);
+ battle.sealExtra=ev.key==='Escape'?0:Math.max(0,Math.min(max,(battle.sealExtra||0)+(['ArrowRight','ArrowUp'].includes(ev.key)?1:-1)*(ev.shiftKey?5:1)));
+ const p=SE.sealInvestment(s.sealer,target,spOf(target),s.inventory.quality,battle.sealExtra);
+ button.querySelector('[data-seal-quote]').textContent=sealQuote(p);
+ unifiedSuppressClick=false;
+});
 
 function advanceRealTimeBattle(delta,time){
  if(!battle?.rt||document.hidden||battle.rt.paused)return;
@@ -1427,7 +1463,6 @@ function refreshSpiritualBattleUI(){
  const emergency=document.querySelector('[data-emergency]');if(emergency)emergency.textContent=ctx.active.a.length?'':'No manifested ally! Restore, release, revive, or escape · '+seconds(6000-(battle.rt.undefendeda||0));
 }
 
-function sealPreviewHTML(){const target=battle.multi.enemies[battle.enemyTargetSelection||0]||battle.enemy,p=SE.sealInvestment(s.sealer,target,spOf(target),s.inventory.quality,battle.sealExtra||0);return '<p>Seal: '+p.base+' base + '+p.extra+' extra = '+p.cost+' SE · '+Math.round(p.chance*100)+'% chance. Failure spends everything.</p>';}
 
 function compactBattleHUD(u,side){const sp=spOf(u),st=E.stats(u,sp),c=RT.unitClock(battle.rt,u),now=battle.rt.elapsedMs;return '<div class="hud-name"><span>'+esc(sp.forms[u.appearance])+'</span><small>Lv.'+u.level+'</small></div><div class="health"><i style="width:'+Math.max(0,u.hp/st.hp*100)+'%"></i></div><div class="health-label"><span>'+(u.status?esc(u.status.toUpperCase()):'HP')+'</span><span>'+(side==='ally'?u.hp+' / '+st.hp:Math.round(u.hp/st.hp*100)+'%')+'</span></div><div class="compact-resources">STA '+(u.pp||0)+' / '+st.pp+' · WIL '+(u.willpower||0)+' / '+st.willpower+'</div>'+combatTagsHTML(u)+'<small>'+(c.pending?'CAST '+seconds(c.pending.resolveAt-now):c.gcdReadyAt>now?'GCD '+seconds(c.gcdReadyAt-now):'READY')+'</small>'+(side==='ally'?xpHTML(u):'');}
 

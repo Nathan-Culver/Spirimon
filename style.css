@@ -220,6 +220,8 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 .ua-support{background:linear-gradient(155deg,#58a66c,#2c7147)}
 .ua-item{background:linear-gradient(155deg,#bd9439,#85601d)}
 .ua-utility{background:linear-gradient(155deg,#78a888,#3c775b)}
+.ua-seal{background:linear-gradient(155deg,#4c9da8,#27566f);min-width:155px}
+.ua-seal [data-seal-quote]{font-weight:bold;font-size:11px;color:#fff2bd}
 .ua-run{background:linear-gradient(155deg,#e8a99b,#b75c55)}
 .ua-commit{position:absolute;bottom:2px;left:4px;width:var(--commit-progress,0%);height:4px;border-radius:4px;background:#ffdb7b;pointer-events:none}
 .unified-action:active{filter:brightness(1.16)}

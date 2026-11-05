@@ -19,3 +19,15 @@ Sleep, freeze and stagger stop creature commands and interrupt creature casts. H
 Zero Sealer Energy weakens creature damage, durability, casting/cooldowns and creature support. The free designated lead remains usable. See the main rules for bond mitigation, restoration, sealing, cooperation, NPC parity, persistence and verification.
 
 Automated audits provide reproducible budgets and regression coverage; they do not establish perfect competitive balance across all generated matchups.
+
+## Combat audit corrections
+
+An explicit `cooldownMs` overrides a GCD Move's individual recast independently of its shared GCD, including light Moves and an explicit zero. Speed, style, and exhaustion scale the recast.
+
+Resource funding is checked again at impact using every living target's Pressure ability. If the full cost cannot be paid, a spread attack damages no targets and spends neither pool. Only multi-hit strikes that penetrate shields and remove HP contribute damage delay.
+
+Delayed attacks check Ward, shields, screens, defensive support, survival equipment, and damage sharing when they land. Placing an omen does not consume Ward. Fully blocked or absorbed delayed damage adds no cooldown delay.
+
+Quickening accelerates the unfinished portion of an ongoing cast immediately, using the same capped haste multiplier as new casts. Stacking and expiration update the remaining cast without cancelling it. Existing GCD requirements for support still apply.
+
+The Seal button is available directly in the action dock and Bag. Tap for the base cost; slide right for extra Energy and release to attempt. The button previews base plus extra cost and success chance. Slide upward or left to cancel; interrupted touches and focus loss spend nothing. Keyboard arrows adjust extra Energy (Shift changes five points), Escape clears it, and Enter attempts. The gesture retains its original target and rechecks funds at release. Failure spends all invested Energy and one catalyst.
