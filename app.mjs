@@ -1,3 +1,4 @@
+import {battleStageLayout} from './battle-layout.mjs';
 import {drawDungeonAtlasTile,drawDungeonProp,dungeonArtworkReady,dungeonFeatureSprite,dungeonDecoration,drawDungeonLight} from './dungeon-atlas.mjs';
 import {updateMapCamera,movementProgress} from './map-camera.mjs';
 import * as SE from './spiritual-energy.mjs';
@@ -486,6 +487,24 @@ function battleHTML(){
 }
 function battleMoveCost(move){if(!battle)return E.moveCost(move);if(battle.multi&&E.moveTarget(move)==='allOpponents'&&battle.multi.enemies.some(i=>i.hp>0&&spOf(i).ability==='Pressure'))return 2;const index=Number($('#battle-target')?.value??battle.targetSelection??0),target=battle.multi?battle.multi.enemies[index]||battle.enemy:battle.enemy;return E.moveCost(move,spOf(target));}
 function totalActionCost(){if(!battle)return 0;const i=activeBattleAlly(),m=battleMoves(i)[selectedMove];let cost=0;for(let n=0;n<(battle.multi?1+(battle.multi.credits?.a?.[battle.multi.allies.indexOf(i.id)]||0)+borrow:1+(battle.credits?.a||0)+borrow);n++)if(n!==0||i.pendingMove?.id!==m.id)cost+=battleMoveCost(m);return cost;}
+function currentBattleLayout(canvas=$('#battle-canvas')){
+ return battleStageLayout({height:canvas?.height||550,compact:globalThis.matchMedia?.('(pointer:coarse), (max-width:1024px), (max-height:600px)').matches||false,multi:!!battle?.multi,
+  allies:(battle?.multi?.allies||[battle?.ally]).map(id=>s.spirits.find(i=>i.id===id)),enemies:battle?.multi?.enemies||[battle?.enemy]});
+}
+function positionBattleHUDs(canvas,layout){
+ const stage=canvas.parentElement;if(!stage)return;
+ const signature=[layout.compact,canvas.height,...['a','b'].flatMap(side=>layout[side].map(p=>side+p.slot))].join('|');
+ if(stage.dataset.battleLayout===signature)return;stage.dataset.battleLayout=signature;
+ stage.classList.toggle('compact-battle-scene',layout.compact);
+ for(const panel of stage.querySelectorAll('.classic-hud')){
+  const side=panel.classList.contains('ally')?'a':'b',slot=Number(panel.className.match(/slot-(\d+)/)?.[1]||0),point=layout[side].find(p=>p.slot===slot);
+  panel.hidden=!point;if(!point||!layout.compact)continue;panel.dataset.battleCount=layout[side].length;
+  for(const [key,value]of Object.entries(point.hud))panel.style.setProperty('--battle-hud-'+key.replace(/[A-Z]/g,c=>'-'+c.toLowerCase()),value+'%');
+ }
+ stage.style.setProperty('--battle-log-top',layout.b.length===3?'40%':'3%');
+ stage.style.setProperty('--battle-log-left',layout.b.length===3?'2%':'auto');
+ stage.style.setProperty('--battle-log-right',layout.b.length===3?'auto':'2%');
+}
 function drawBattle(anim=null){
  const canvas=$('#battle-canvas');if(!canvas||!battle)return;const rect=canvas.getBoundingClientRect(),H=Math.max(240,Math.round(1000*rect.height/Math.max(1,rect.width)));if(canvas.height!==H)canvas.height=H;const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;
  const reg=currentRegion(),ash=reg.biome.kind==='ash',fen=reg.biome.kind==='fen';
@@ -493,13 +512,13 @@ function drawBattle(anim=null){
  c.fillStyle=colors[0];c.fillRect(0,0,1000,H);
  for(let band=0;band<20;band++){c.fillStyle=colors[Math.min(3,Math.floor(band/6))];c.fillRect(0,Math.floor(band*H/20),1000,Math.ceil(H/20));for(let n=0;n<9;n++){c.fillStyle=band%2?'#d5e8a51c':'#285d2f14';c.fillRect((n*137+band*39)%1000,band*H/20+8,75+band*4,3);}}
  const platform=(x,y,rx,ry)=>{c.fillStyle=ash?'#8e7851':fen?'#47795d':'#5d8e42';c.beginPath();c.ellipse(x,y,rx,ry+6,0,0,Math.PI*2);c.fill();c.fillStyle=ash?'#c8b785':fen?'#97bd8e':'#b7c881';c.beginPath();c.ellipse(x,y-5,rx-4,ry,0,0,Math.PI*2);c.fill();c.fillStyle=ash?'#aa9a67':fen?'#5d9a70':'#82ae57';for(let n=0;n<70;n++){const r=E.rng(E.hash(x,n)),a=r()*Math.PI*2,d=Math.sqrt(r());c.fillRect(x+Math.cos(a)*d*(rx-12),y-5+Math.sin(a)*d*(ry-6),3+Math.floor(r()*6),2);}c.fillStyle='#477f3e';for(let n=0;n<32;n++){const a=n*Math.PI*2/32,xx=x+Math.cos(a)*(rx-4),yy=y-5+Math.sin(a)*ry;c.fillRect(xx,yy-3,2,6);}};
- if(battle.multi){const groups=[['b',battle.multi.enemies,650,850,H*.50],['a',battle.multi.allies.map(id=>s.spirits.find(i=>i.id===id)),190,390,H*.68]];for(const [side,units,x0,x1,ground]of groups)units.forEach((i,slot)=>{if(!i||i.hp<=0)return;const size=Math.min(175,H*.32),x=(side==='a'?[120,280,440]:[560,720,880])[slot],offset=anim?.side===side&&(anim.actor??0)===slot?anim.offset:0;platform(x,ground,110,Math.min(23,H*.055));drawAspectAura(c,i,x-size/2,ground-size,size);drawSpirit(c,spOf(i),i.appearance,x-size/2+offset,ground-size,size,side==='a');});return;}
- const enemyGround=H*.44,allyGround=H*.92,enemySize=Math.min(300,H*.62),allySize=Math.min(360,H*.82);platform(735,enemyGround,163,Math.min(30,H*.065));platform(260,allyGround,210,Math.min(43,H*.08));
- const ally=s.spirits.find(i=>i.id===battle.ally);
- drawAspectAura(c,battle.enemy,735-enemySize/2,enemyGround-enemySize+4,enemySize);
- drawSpirit(c,spOf(battle.enemy),battle.enemy.appearance,735-enemySize/2+(anim?.side==='b'?anim.offset:0),enemyGround-enemySize+4,enemySize);
- drawAspectAura(c,ally,260-allySize/2,allyGround-allySize+4,allySize);
- drawSpirit(c,spOf(ally),ally.appearance,260-allySize/2+(anim?.side==='a'?anim.offset:0),allyGround-allySize+4,allySize,true);
+ const layout=currentBattleLayout(canvas);positionBattleHUDs(canvas,layout);
+ for(const side of ['b','a'])for(const point of layout[side]){
+  const unit=(side==='a'?(battle.multi?.allies||[battle.ally]).map(id=>s.spirits.find(i=>i.id===id)):battle.multi?.enemies||[battle.enemy])[point.slot];
+  const {x,ground,size,rx,ry}=point,offset=anim?.side===side&&(anim.actor??0)===point.slot?anim.offset:0;
+  platform(x,ground,rx,ry);drawAspectAura(c,unit,x-size/2,ground-size,size);
+  drawSpirit(c,spOf(unit),unit.appearance,x-size/2+offset,ground-size,size,side==='a');
+ }
 }
 
 function battleTeams(){if(battle?.enemyRoster)return {allies:party(),enemies:battle.enemyRoster};const m=battle?.multi;return {allies:party(),enemies:m?[...m.enemies,...(m.reserves||[])]:[battle.enemy,...(battle.enemyTeam||[])]};}
@@ -900,7 +919,7 @@ function installRoster(){
 function gameMenu(){showModal('Sealer’s satchel.','<p>'+esc(s.player.name)+' · '+rankName()+' · '+s.inventory.coins+' Coin</p><div class="menu-grid">'+action('view','SPIRIMON','spirits')+action('bag','BAG')+action('view','MAP','atlas')+action('field-menu','FIELD SKILLS')+action('view','JOURNAL','journal')+action('profile','SEALER')+action('support-prepare','SUPPORT')+action('spiritual-recovery','COMMUNE / MEDITATE')+action('field-ritual-menu','RITUALS')+action('settings','OPTIONS')+action('save-now','SAVE')+action('close','RETURN','','btn primary')+'</div><p class="help-line">WASD / arrows: walk · Shift: run · E: interact<br>On touch: hold a direction; hold B to run.</p>');}
 
 function animationUnit(side,slot=0){if(!battle)return null;if(!battle.multi)return side==='a'?s.spirits.find(i=>i.id===battle.ally):battle.enemy;return side==='a'?s.spirits.find(i=>i.id===battle.multi.allies[slot]):battle.multi.enemies[slot];}
-function animationPositions(side,actorIndex,targetIndex,move){const H=$('#battle-canvas')?.height||550,kind=E.moveTarget(move),self=['self','ally','allAllies'].includes(kind),point=(team,index)=>({x:battle?.multi?(team==='a'?[120,280,440]:[560,720,880])[index||0]:team==='a'?260:735,y:H*(team==='a'?.72:.31)});const from=point(side,actorIndex),to=point(self?side:side==='a'?'b':'a',kind==='self'?actorIndex:targetIndex);return {from:self?to:from,to,self};}
+function animationPositions(side,actorIndex,targetIndex,move){const canvas=$('#battle-canvas'),kind=E.moveTarget(move),self=['self','ally','allAllies'].includes(kind),layout=currentBattleLayout(canvas),point=(team,index)=>layout[team].find(p=>p.slot===(index||0))?.effect||layout[team][0]?.effect||{x:500,y:(canvas?.height||550)/2};const from=point(side,actorIndex),to=point(self?side:side==='a'?'b':'a',kind==='self'?actorIndex:targetIndex);return {from:self?to:from,to,self};}
 async function playMoveAnimation(side,move,moveStyle='normal',actorIndex=0,targetIndex=0){
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,duration=reduced?80:moveStyle==='agile'?280:moveStyle==='strong'?520:390;
  const speech=$('#battle-speech');if(speech&&battle){const actor=animationUnit(side,actorIndex);speech.textContent=spOf(actor).forms[actor.appearance]+' used '+move.name+'!';}const actorSp=battle?spOf(animationUnit(side,actorIndex)):null;const visual=move.visual||(move.domain?.toLowerCase())||(move.type==='Plant'?'leaf':move.type==='Elemental'?(actorSp?.description.includes('crystal')?'ice':'fire'):move.type==='Ooze'?'water':'spirit');const start=performance.now(),color=({water:'#6bc9ef',fire:'#ee8a3d',ice:'#b2ecff',leaf:'#8ac95d'})[visual]||E.COLORS[move.type]||'#e5b457';const {from,to,self}=animationPositions(side,actorIndex,targetIndex,move);
@@ -1109,7 +1128,7 @@ function advanceRealTimeBattle(delta,time){
 function drawRealTimeEffects(){
  if(!battle?.rt)return;const canvas=$('#battle-canvas');if(!canvas)return;const c=canvas.getContext('2d'),ctx=realTimeContext();
  for(const event of battle.rtAnimations||[]){const age=battle.rt.elapsedMs-event.at;if(age<0||age>600)continue;const side=event.side,index=Math.max(0,ctx.active[side].findIndex(u=>u.id===event.actor)),targetSide=ctx.active[side].some(u=>u.id===event.target)?side:side==='a'?'b':'a',targetIndex=Math.max(0,ctx.active[targetSide].findIndex(u=>u.id===event.target));
- const point=(team,n)=>({x:battle.multi?(team==='a'?[120,280,440]:[560,720,880])[n||0]:team==='a'?260:735,y:canvas.height*(team==='a'?.72:.31)});
+ const layout=currentBattleLayout(canvas),point=(team,n)=>layout[team].find(p=>p.slot===n)?.effect||layout[team][0]?.effect||{x:500,y:canvas.height/2};
  c.save();drawTechnique(c,event.move,Math.min(1,age/600),point(side,index),point(targetSide,targetIndex),canvas.width,canvas.height);c.restore();}
 }
 

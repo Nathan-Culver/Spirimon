@@ -393,3 +393,26 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
  .unified-battle .classic-dialogue{max-height:20px}
  .unified-battle .classic-dialogue p{font-size:10px}
 }
+
+/* Mobile creature groups and their HUDs use the same live-team layout. */
+.classic-battle .classic-stage.compact-battle-scene .classic-hud{
+ left:var(--battle-hud-left);top:var(--battle-hud-top);width:var(--battle-hud-width);
+ right:auto;bottom:auto;min-width:0;max-width:none;max-height:var(--battle-hud-max-height);
+ transform:translateY(-50%);padding:3px 5px;overflow:hidden;transition:background .15s,color .15s;
+}
+.classic-battle .classic-stage.compact-battle-scene .classic-hud.enemy{transform:none}
+.classic-battle .classic-stage.compact-battle-scene .classic-hud .hud-name{font-size:clamp(9px,1.3vw,13px)}
+.classic-battle .classic-stage.compact-battle-scene .classic-hud .health-label,
+.classic-battle .classic-stage.compact-battle-scene .classic-hud .compact-resources,
+.classic-battle .classic-stage.compact-battle-scene .classic-hud>small{font-size:clamp(8px,1.05vw,10px);line-height:1.2}
+.classic-battle .classic-stage.compact-battle-scene .battle-corner{
+ top:var(--battle-log-top);left:var(--battle-log-left);right:var(--battle-log-right);bottom:auto;
+}
+
+.classic-battle .classic-stage.compact-battle-scene .classic-hud>small{display:block}
+.classic-battle .classic-stage.compact-battle-scene .classic-hud[data-battle-count="3"]{padding:2px 4px;font-size:8px;line-height:1.1}
+.classic-battle .classic-stage.compact-battle-scene .classic-hud[data-battle-count="3"] .hud-name{font-size:9px;line-height:1.1}
+.classic-battle .classic-stage.compact-battle-scene .classic-hud[data-battle-count="3"] .health{height:3px;margin-top:2px}
+.classic-battle .classic-stage.compact-battle-scene .classic-hud[data-battle-count="3"] .health-label,
+.classic-battle .classic-stage.compact-battle-scene .classic-hud[data-battle-count="3"] .compact-resources,
+.classic-battle .classic-stage.compact-battle-scene .classic-hud[data-battle-count="3"]>small{font-size:7px;line-height:1.1;margin-top:1px}
