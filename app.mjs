@@ -1,3 +1,4 @@
+import {DAMAGE_NUMBER_MS,drawDamageNumbers} from './damage-numbers.mjs';
 import {SACRED_ASSETS,drawCaveEntrance} from './sacred-art.mjs';
 import {battleStageLayout} from './battle-layout.mjs';
 import {drawDungeonAtlasTile,drawDungeonProp,dungeonArtworkReady,dungeonFeatureSprite,dungeonDecoration,drawDungeonLight} from './dungeon-atlas.mjs';
@@ -32,7 +33,7 @@ import * as EP from './environment-puzzles.mjs';
 import {periodicDamage} from './classification-status.mjs';
 import {drawInteriorScene,INTERIOR_ATLAS,MATERIAL_ATLAS,TOWN_ATLAS} from './interior-assets.mjs';
 import {drawTechnique} from './move-animations.mjs';
-import {creatureArtworkSource,drawSpirit,drawCompanion,drawAspectAura,drawPerson,drawTile,drawBuilding,drawTownDecor,drawTree,drawWell,drawTownBuilding,drawTownFeatures,renderSpiritCanvases} from './sprites.mjs';
+import {creatureArtworkSource,damageNumberAnchor,drawSpirit,drawCompanion,drawAspectAura,drawPerson,drawTile,drawBuilding,drawTownDecor,drawTree,drawWell,drawTownBuilding,drawTownFeatures,renderSpiritCanvases} from './sprites.mjs';
 const $=q=>document.querySelector(q);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const action=(name,label,value='',cls='btn')=>'<button class="'+cls+'" data-action="'+name+'" data-value="'+esc(value)+'">'+label+'</button>';
@@ -1172,7 +1173,7 @@ function realTimeBattleHTML(){
  const state=battle.rt,ctx=realTimeContext(),emergency=!ctx.active.a.some(u=>u.hp>0);
  const speech=battle.message?esc(battle.message):'Select an available action. Each Spirimon acts independently.';
  const controls=battleMode==='deploy'?deploymentHTML():battleMode==='support'?battleSupportHTML():battleMode==='coop'?cooperativeBattleHTML():battleMode==='bag'?'<div class="spiritual-options">'+action('tonic','TONIC ×'+s.inventory.tonics)+action('ether','SOUL DRAUGHT ×'+s.inventory.ethers)+action('spiritual-draught','SPIRITUAL DRAUGHT ×'+s.inventory.spiritDraughts)+(!battle.trainer?sealButtonHTML():'')+action('battle-main','BACK')+'</div>':'<div class="unified-action-grid" id="unified-action-grid">'+unifiedBattleActionsHTML()+'</div>';
- return '<section class="classic-battle realtime-battle unified-battle triple-battle double-battle"><div class="battle-sealers">'+spiritualEnergyHTML(s.sealer)+(battle.enemySealer?spiritualEnergyHTML(battle.enemySealer,'Enemy'):'')+'</div><div class="classic-stage"><canvas id="battle-canvas" width="1000" height="550" aria-label="Real-time Spirimon battle"></canvas>'+doubleHUDsHTML()+'<div class="battle-corner">'+action('battle-record','LOG')+'</div>'+(state.paused?'<div class="rt-paused">PAUSED</div>':'')+'</div><div class="classic-bottom"><div class="classic-dialogue"><p id="battle-speech" role="status">'+speech+'</p><p class="energy-emergency" data-emergency>'+(emergency?'Emergency recovery · '+seconds(6000-(state.undefendeda||0)):'')+'</p></div><div class="classic-control"><h3 class="unified-title">Available Actions</h3>'+(!['main','moves'].includes(battleMode)?action('battle-main','Back','','btn battle-dock-back'):'')+controls+'</div></div></section>';
+ return '<section class="classic-battle realtime-battle unified-battle triple-battle double-battle"><div class="battle-sealers">'+spiritualEnergyHTML(s.sealer)+(battle.enemySealer?spiritualEnergyHTML(battle.enemySealer,'Enemy'):'')+'</div><div class="classic-stage"><canvas id="battle-canvas" width="1000" height="550" aria-label="Real-time Spirimon battle"></canvas>'+doubleHUDsHTML()+'<div class="battle-corner">'+action('battle-record','LOG')+'</div>'+(state.paused&&!battle.damageEnding?'<div class="rt-paused">PAUSED</div>':'')+'</div><div class="classic-bottom"><div class="classic-dialogue"><p id="battle-speech" role="status">'+speech+'</p><p class="energy-emergency" data-emergency>'+(emergency?'Emergency recovery · '+seconds(6000-(state.undefendeda||0)):'')+'</p></div><div class="classic-control"><h3 class="unified-title">Available Actions</h3>'+(!['main','moves'].includes(battleMode)?action('battle-main','Back','','btn battle-dock-back'):'')+controls+'</div></div></section>';
 }
 
 let lastRealTimeUi=0,lastRealTimeDraw=0;
@@ -1301,13 +1302,34 @@ document.addEventListener('keydown',ev=>{
  unifiedSuppressClick=false;
 });
 
+function collectDamageNumbers(layout){
+ const canvas=document.querySelector?.('#battle-canvas'),state=battle.rt,events=state.damageEvents||[];state.damageEvents=[];
+ battle.damageNumbers=(battle.damageNumbers||[]).filter(n=>state.elapsedMs-n.at<DAMAGE_NUMBER_MS);
+ if(!canvas||!layout)return;
+ for(const event of events){
+  if(event.side!=='b')continue;
+  const point=layout.b.find(p=>p.id===event.target),unit=battleTeams().enemies.find(u=>u.id===event.target);
+  if(!point||!unit)continue;
+  const anchor=damageNumberAnchor(spOf(unit),unit.appearance,point),count=battle.damageNumbers.filter(n=>n.target===unit.id&&event.at-n.at<450).length;
+  anchor.y-=count*anchor.headSize*.8;
+  battle.damageNumbers.push({...event,...anchor,width:canvas.width,height:canvas.height});
+ }
+ battle.damageNumbers=battle.damageNumbers.slice(-64);
+}
 function advanceRealTimeBattle(delta,time){
- if(!battle?.rt||document.hidden||battle.rt.paused)return;
+ if(!battle?.rt||document.hidden)return;
+ if(battle.damageEnding){
+  battle.damageVisualMs+=delta;drawBattle();drawRealTimeEffects();
+  if(battle.damageVisualMs>=battle.damageEnding){delete battle.damageEnding;delete battle.damageVisualMs;battle.damageNumbers=[];battle.rt.paused=false;finishRealTimeEncounter();}
+  return;
+ }
+ if(battle.rt.paused)return;
+ const canvas=document.querySelector?.('#battle-canvas'),damageLayout=canvas?currentBattleLayout(canvas):null;
  const original=battle,rosterBefore=battle.multi.allies.join('|')+';'+battle.multi.enemies.map(u=>u.id).join('|'),state=battle.rt,ctx=realTimeContext(),previous=state.elapsedMs,result=RT.advanceRealTime(state,delta,ctx);
  s.sealer.clockMs=state.elapsedMs;if(battle.enemySealer){battle.enemySealer.clockMs=state.elapsedMs;battle.enemySealer.lastSeenClock=state.elapsedMs;}s.playTime=(s.playTime||0)+(state.elapsedMs-previous);
  applyRealTimeContext(ctx);if(result.log.length){battle.log.push(...result.log);battle.log=battle.log.slice(-150);battle.message=battle.log.at(-1);}
  battle.rtAnimations.push(...result.events);battle.rtAnimations=battle.rtAnimations.filter(e=>state.elapsedMs-e.at<650);
- runEnemySealer(ctx);
+ runEnemySealer(ctx);collectDamageNumbers(damageLayout);
  for(const actor of ctx.active.b){if(actor.hp<=0)continue;const clock=RT.unitClock(state,actor);if(state.elapsedMs<clock.aiAt)continue;clock.aiAt=state.elapsedMs+180;
   const opponents=ctx.active.a.filter(u=>u.hp>0);if(!opponents.length)continue;
   const decision=BAI.chooseBattleAction(actor,{realTime:true,speciesOf:spOf,opponents,allies:ctx.active.b,team:ctx.teams.b,reserves:[],enemyReserves:ctx.teams.a.filter(u=>u.hp>0&&!ctx.active.a.includes(u)),canUse:c=>RT.actionAvailability(state,actor,spOf(actor),c).ok});
@@ -1319,9 +1341,10 @@ function advanceRealTimeBattle(delta,time){
 }
 function drawRealTimeEffects(){
  if(!battle?.rt)return;const canvas=$('#battle-canvas');if(!canvas)return;const c=canvas.getContext('2d'),ctx=realTimeContext();
- for(const event of battle.rtAnimations||[]){const age=battle.rt.elapsedMs-event.at;if(age<0||age>600)continue;const side=event.side,index=Math.max(0,ctx.active[side].findIndex(u=>u.id===event.actor)),targetSide=ctx.active[side].some(u=>u.id===event.target)?side:side==='a'?'b':'a',targetIndex=Math.max(0,ctx.active[targetSide].findIndex(u=>u.id===event.target));
+ for(const event of battle.rtAnimations||[]){const age=(battle.damageVisualMs??battle.rt.elapsedMs)-event.at;if(age<0||age>600)continue;const side=event.side,index=Math.max(0,ctx.active[side].findIndex(u=>u.id===event.actor)),targetSide=ctx.active[side].some(u=>u.id===event.target)?side:side==='a'?'b':'a',targetIndex=Math.max(0,ctx.active[targetSide].findIndex(u=>u.id===event.target));
  const layout=currentBattleLayout(canvas),point=(team,n)=>layout[team].find(p=>p.slot===n)?.effect||layout[team][0]?.effect||{x:500,y:canvas.height/2};
  c.save();drawTechnique(c,event.move,Math.min(1,age/600),point(side,index),point(targetSide,targetIndex),canvas.width,canvas.height);c.restore();}
+ drawDamageNumbers(c,battle.damageNumbers,battle.damageVisualMs??battle.rt.elapsedMs,canvas.width,canvas.height);
  const layout=currentBattleLayout(canvas),now=battle.rt.elapsedMs;
  for(const side of ['a','b'])for(const point of layout[side]){
   const unit=ctx.active[side].find(u=>u.id===point.id),clock=unit&&battle.rt.units?.[unit.id],labels=damageDelayLabels(clock,now);if(!labels.length)continue;
@@ -1452,7 +1475,11 @@ function finishRealTimeEncounter(){
  if(!battle?.rt)return;const ctx=realTimeContext(),oldA=battle.multi.allies.join('|'),oldB=battle.multi.enemies.map(u=>u.id).join('|');
  for(const side of ['a','b']){for(const u of ctx.active[side])if(u.hp<=0){RT.unitClock(battle.rt,u).pending=null;}ctx.active[side]=ctx.active[side].filter(u=>u.hp>0);}
  applyRealTimeContext(ctx);
- if(!ctx.teams.b.some(u=>u.hp>0)){if(!ctx.teams.a.some(u=>u.hp>0))return drawnBattle();return winBattle();}
+ if(!ctx.teams.b.some(u=>u.hp>0)){
+  const until=Math.max(0,...(battle.damageNumbers||[]).map(n=>n.at+DAMAGE_NUMBER_MS));
+  if(until>battle.rt.elapsedMs){battle.damageEnding=until;battle.damageVisualMs=battle.rt.elapsedMs;battle.rt.paused=true;return;}
+  if(!ctx.teams.a.some(u=>u.hp>0))return drawnBattle();return winBattle();
+ }
  if(!ctx.active.a.length){battleMode='deploy';if((battle.rt.undefendeda||0)>6000)return loseBattle();}
  if(!ctx.active.b.length&&battle.enemySealer&&(battle.rt.undefendedb||0)>6000)return winBattle();
  for(const side of ['a','b'])for(const u of ctx.active[side])if(u.switchRequested){if(u.conditions?.trap&&!u.forcedDisplacement){u.switchRequested=false;continue;}u.switchRequested=false;RT.unitClock(battle.rt,u).pending=null;ctx.active[side]=ctx.active[side].filter(v=>v!==u);}

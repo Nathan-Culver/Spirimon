@@ -110,6 +110,13 @@ function portraitSourceBounds(image,atlas,form){
  try{const sample=document.createElement('canvas');sample.width=source.width;sample.height=source.height;const c=sample.getContext('2d',{willReadFrequently:true});c.drawImage(image,source.x,source.y,source.width,source.height,0,0,source.width,source.height);const content=opaqueBounds(c.getImageData(0,0,source.width,source.height));bounds={...content,x:source.x+content.x,y:source.y+content.y};}catch{}
  frames.set(key,bounds);return bounds;
 }
+export function damageNumberAnchor(sp,form,point){
+ const artwork=creatureArtworkSource(sp,form),image=artwork&&readyImage(artwork),{x,ground,size}=point;
+ if(!image)return {x,y:ground-size*.9,headSize:size*.24};
+ const b=portraitSourceBounds(image,!!sp.atlas,form),sourceW=sp.atlas?256:image.naturalWidth||image.width,sourceH=sp.atlas?256:image.naturalHeight||image.height;
+ const h=sp.atlas?size:Math.min(size,size*sourceH/sourceW),w=size;
+ return {x:x-size/2+(b.x-(sp.atlas?form*256:0)+b.width/2)*w/sourceW,y:ground-h+b.y*h/sourceH,headSize:Math.min(b.width*w/sourceW,b.height*h/sourceH)*.27};
+}
 export function drawSpiritPortrait(ctx,sp,form,x,y,width,height=width){
  const artwork=creatureArtworkSource(sp,form),image=artwork?readyImage(artwork):null;
  if(!image){const size=Math.min(width,height);drawSpirit(ctx,sp,form,x+(width-size)/2,y+(height-size)/2,size);return;}
@@ -118,21 +125,6 @@ export function drawSpiritPortrait(ctx,sp,form,x,y,width,height=width){
  ctx.save();ctx.imageSmoothingEnabled=false;ctx.drawImage(image,bounds.x,bounds.y,bounds.width,bounds.height,x+(width-w)/2,y+(height-h)/2,w,h);ctx.restore();
 }
 export function renderSpiritCanvases(root=document){root.querySelectorAll('canvas[data-species]').forEach(c=>{const sp=globalThis.spirimonSpecies?.[c.dataset.species];if(!sp)return;const ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);drawAspectAura(ctx,{aspect:c.dataset.aspect,rareVariant:c.dataset.radiant==='true'},0,0,c.width);drawSpiritPortrait(ctx,sp,Number(c.dataset.form)||0,0,0,c.width,c.height);});}
-function paintPerson(ctx,x,y,role='player',tick=0,face='down',moving=false){
- ctx.save();ctx.translate(Math.round(x),Math.round(y));const q=(a,b,w,h,col)=>{ctx.fillStyle=col;ctx.fillRect(a,b,w,h);};
- const step=moving?Math.round(Math.sin(tick/1000*Math.PI*4)*2):0;
- ellipse(ctx,16,29,9,3,'#355f4455');
- const coat={player:'#b94535',keeper:'#eee2bb',merchant:'#ba914f',rival:'#537994',scholar:'#8b7399'}[role],ink='#423e35';
- q(10,22,5,7+Math.max(0,step),'#424c52');q(18,22,5,7+Math.max(0,-step),'#424c52');q(9,28+step,7,3,ink);q(18,28-step,7,3,ink);
- q(9,13,15,11,ink);q(10,13,13,10,coat);q(7,15+step,4,9,coat);q(23,15-step,3,9,coat);
- q(10,23,13,2,'#d6be83');q(15,16,3,7,'#e8d9b4');q(17,14,2,6,'#e8d9b4');
- q(11,4,11,10,'#ecc99b');q(10,2,13,5,'#443b31');q(8,6,5,7,'#443b31');q(21,6,3,7,'#443b31');
- if(face!=='up'){if(face!=='right')q(14,9,2,2,ink);if(face!=='left')q(20,9,2,2,ink);}else q(12,6,10,6,'#443b31');
- if(role==='player'){q(9,4,15,3,'#a63d32');q(20,5,6,2,'#e0aa60');q(23,7,4,3,'#c64e36');q(23,20-step,3,2,'#6c8b78');}
- if(role==='merchant'){poly(ctx,[[2,8],[16,-1],[29,8]],'#b8995b');q(3,8,26,2,'#7b623d');}
- if(role==='keeper'){q(9,3,15,4,'#ded9b4');q(7,7,5,6,'#d8d1b1');}
- ctx.restore();
-}
 function fallbackDrawTile(ctx,type,x,y,seed,biome){
  const key='tile-'+type+'-'+biome+'-'+seed%16;let tile=cache.get(key);
  if(!tile){tile=document.createElement('canvas');tile.width=tile.height=32;const c=tile.getContext('2d'),r=rng(seed%16);const q=(a,b,w,h,col)=>{c.fillStyle=col;c.fillRect(a,b,w,h);};
@@ -150,43 +142,6 @@ function fallbackDrawTile(ctx,type,x,y,seed,biome){
  cache.set(key,tile);}
  ctx.imageSmoothingEnabled=false;ctx.drawImage(tile,Math.round(x),Math.round(y));
 }
-function oldDrawTree(ctx,x,y,seed,biome='forest'){
- const variant=seed%12,key='tree-detail-'+variant+'-'+biome;let tree=cache.get(key);
- if(!tree){tree=document.createElement('canvas');tree.width=64;tree.height=80;const c=tree.getContext('2d'),r=rng(variant);const q=(a,b,w,h,col)=>{c.fillStyle=col;c.fillRect(a,b,w,h);};
- ellipse(c,32,74,25,5,'#244f354d');q(25,43,15,29,'#514a32');q(28,43,5,28,'#91764a');q(34,46,4,26,'#6c5938');q(20,69,11,5,'#665636');q(36,68,10,6,'#665636');q(27,70,3,5,'#b2965d');
- const palette=variant===2?['#734b5c','#a9617e','#c77b96','#e19ab3','#f4b6c8','#ffd6dc']:biome==='ash'?['#4f5832','#626e3a','#7f8e42','#99a451','#b3ba64','#c7ca79']:['#234d2c','#316638','#477e3c','#5c9745','#78af4e','#95c45d'];
- const lobes=[[18,26,17,20],[44,27,18,20],[31,16,21,15],[31,37,25,19]];
- const inside=(xx,yy)=>lobes.some(([cx,cy,rx,ry])=>((xx-cx)/rx)**2+((yy-cy)/ry)**2<1);
- for(let yy=0;yy<61;yy++)for(let xx=0;xx<64;xx++){if(!inside(xx,yy))continue;let light=(1-yy/65)*3+(1-xx/70)*1.5;const cluster=hash(Math.floor(xx/3),Math.floor(yy/3),variant)%5;light+=(cluster-2)*.45;if(!inside(xx-1,yy)||!inside(xx+1,yy)||!inside(xx,yy+1))light=0;const color=palette[Math.max(0,Math.min(5,Math.floor(light)))];q(xx,yy,1,1,color);}
- for(let n=0;n<20;n++){const xx=10+Math.floor(r()*42),yy=8+Math.floor(r()*36);if(inside(xx,yy))q(xx,yy,2,1,palette[3+Math.floor(r()*3)]);}
- if(variant===7){c.clearRect(0,0,64,67);for(let n=0;n<5;n++){const xx=10+n*10,top=5+(n%2)*8;q(xx,top,4,66-top,'#3c7a39');q(xx+1,top,1,66-top,'#a0c766');for(let yy=top+4;yy<64;yy+=10){q(xx-1,yy,6,2,'#315e30');poly(c,[[xx,yy],[xx-12,yy-7],[xx-5,yy+2]],'#4b9346');poly(c,[[xx+4,yy+2],[xx+13,yy-6],[xx+9,yy+5]],'#6aaa4c');}}}
- cache.set(key,tree);}
- ctx.drawImage(tree,Math.round(x)-16,Math.round(y)-48);
-}
-function oldDrawBuilding(ctx,x,y,guild=false){
- const q=(a,b,w,h,col)=>{ctx.fillStyle=col;ctx.fillRect(Math.round(x+a),Math.round(y+b),w,h);};
- const w=guild?160:128,roof=guild?'#476f77':'#a84c3d',roofLight=guild?'#739397':'#cf7050',timber='#633e2e';
- q(-2,94,w+4,11,'#8d8a73');q(2,47,w-4,48,'#f0dfb5');q(4,85,w-8,10,'#b99972');q(7,48,6,45,timber);q(w-13,48,6,45,timber);q(5,58,w-10,4,timber);q(5,91,w-10,4,timber);
- // Swept tiled eaves, timber rafters and layered ridge caps.
- poly(ctx,[[x-9,y+50],[x+4,y+46],[x+22,y+21],[x+w-22,y+21],[x+w-4,y+46],[x+w+9,y+50],[x+w+5,y+55],[x-5,y+55]],timber);
- poly(ctx,[[x-12,y+45],[x+3,y+45],[x+25,y+15],[x+w-25,y+15],[x+w-3,y+45],[x+w+12,y+45],[x+w+8,y+50],[x-8,y+50]],roof);
- q(24,12,w-48,5,roofLight);q(20,16,w-40,3,timber);
- for(let row=0;row<5;row++){const inset=22-row*5,yy=22+row*5;q(inset,yy,w-inset*2,2,roofLight);for(let col=inset+4;col<w-inset;col+=12)q(col,yy-3,1,4,'#253f433f');}
- q(-12,42,10,3,roofLight);q(w+2,42,10,3,roofLight);q(-14,37,4,8,roof);q(w+10,37,4,8,roof);
- if(guild){poly(ctx,[[x+34,y+23],[x+48,y+3],[x+w-48,y+3],[x+w-34,y+23]],roof);q(47,0,w-94,4,roofLight);q(36,23,w-72,4,timber);q(44,18,w-88,2,roofLight);q(w/2-12,30,24,18,'#e5c878');q(w/2-10,32,20,14,'#794534');q(w/2-2,35,4,8,'#e6c17c');}
- q(w/2-14,63,28,32,timber);q(w/2-11,66,22,29,'#3d4b3b');q(w/2-1,66,2,29,'#b88b55');
- for(const xx of[22,w-44]){q(xx,65,22,19,timber);q(xx+2,67,18,15,'#e6c581');q(xx+9,66,2,18,timber);q(xx,74,22,2,timber);}
- for(const xx of[12,w-23]){q(xx+4,54,2,9,timber);q(xx,62,11,14,'#a43f32');q(xx+2,64,7,10,'#dc6c43');q(xx+4,62,3,14,'#e6a75e');q(xx+4,76,2,6,'#b45435');}
- q(w/2-22,96,44,4,'#b7ac8c');q(w/2-27,100,54,4,'#d8c5a0');
-}
-function oldDrawTownDecor(ctx,x,y){
- const q=(a,b,w,h,col)=>{ctx.fillStyle=col;ctx.fillRect(Math.round(x+a),Math.round(y+b),w,h);};
- // Vermilion shrine gate, with upturned crossbeam ends.
- q(2,6,7,49,'#8b3c2c');q(54,6,7,49,'#8b3c2c');q(4,7,3,46,'#d36d45');q(56,7,3,46,'#d36d45');q(-4,6,72,6,'#b74b32');q(6,21,51,5,'#b74b32');q(-8,1,80,6,'#3f4d43');q(-10,-2,8,5,'#3f4d43');q(66,-2,8,5,'#3f4d43');q(29,11,6,10,'#e1c486');q(0,54,12,4,'#797d68');q(52,54,12,4,'#797d68');
-}
-
-function oldDrawPerson(ctx,x,y,role='player',tick=0,face='down',moving=false){const frame=moving?Math.floor(tick/250)%4:0,key='person-'+role+'-'+face+'-'+frame;let p=cache.get(key);if(!p){p=document.createElement('canvas');p.width=32;p.height=36;paintPerson(p.getContext('2d'),0,0,role,[0,125,0,375][frame],face,moving);cache.set(key,p);}ctx.imageSmoothingEnabled=false;ctx.drawImage(p,Math.round(x)-5,Math.round(y)-15,42,47);}
-
 export function drawTree(ctx,x,y,seed,biome='forest'){prop(ctx,biome==='snow'?4:seed%7===0?5:3,x-16,y-48,64,80);}
 export function drawBuilding(ctx,x,y,guild=false,kind='home'){prop(ctx,guild?2:kind==='inn'?1:0,x+(guild?24:8),y-40,guild?176:144,guild?168:136);}
 export function drawTownDecor(ctx,x,y){prop(ctx,8,x-32,y-64,96,96);}

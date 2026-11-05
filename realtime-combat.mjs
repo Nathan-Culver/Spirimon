@@ -23,6 +23,13 @@ export function migrateRealTimeState(legacy,now,units=[]){
 }
 export function unitClock(state,ind){const c=state.units[ind.id]??={readyAt:ind.animationReadyAt||0,gcdReadyAt:ind.gcdReadyAt||0,cooldowns:{},pending:null,conditions:{},buffs:{},status:null,itemReadyAt:ind.itemReadyAt||0,controlImmuneUntil:0,aiAt:state.elapsedMs+400};c.gcdReadyAt??=0;ind.moveCooldowns??={};if(c.cooldowns!==ind.moveCooldowns){for(const [id,at]of Object.entries(c.cooldowns))ind.moveCooldowns[id]=Math.max(ind.moveCooldowns[id]||0,at);c.cooldowns=ind.moveCooldowns;}c.damageDelays??=ind.cooldownDelayBudgets||{};ind.cooldownDelayBudgets=c.damageDelays;return c;}
 // Delay budgets belong to each running timer; direct and ongoing damage have separate caps.
+function reportDamage(state,context,unit,options={}){
+ applyDamageDelay(state,unit,options);
+ if(!(options.amount>0))return;
+ const side=context.teams.a.includes(unit)?'a':'b';
+ state.damageEvents=(state.damageEvents||[]).filter(e=>state.elapsedMs-e.at<2600).slice(-63);
+ state.damageEvents.push({target:unit.id,side,amount:options.amount,at:state.elapsedMs});
+}
 export function applyDamageDelay(state,ind,{periodic=false,hits=1,disruption=null}={}){
  const c=unitClock(state,ind),now=state.elapsedMs;if(ind.hp<=0)return;
  const kind=periodic?'periodic':'direct',step=periodic?50:100;
@@ -151,7 +158,7 @@ function expireTimers(state,context,log){
  for(const [effect,until]of Object.entries(c.conditions))if(until<=now){if(effect==='perish'&&u.conditions?.perish){u.hp=0;log.push(name(u,context.speciesOf(u))+' falls to the doom omen.');}else if(u.conditions?.[effect])log.push(name(u,context.speciesOf(u))+' recovers from '+effect+'.');delete u.conditions?.[effect];delete c.conditions[effect];delete c.conditionMeta?.[effect];}
  for(const [key,until]of Object.entries(c.buffs))if(until<=now){u[key]=false;delete c.buffs[key];}
  u.realtimeNow=now;syncCastHaste(state,u);
- if(c.delayedAt&&c.delayedAt<=now){log.push(...E.resolveDelayedDamage(u,context.speciesOf(u),{activeUnits:activeUnits(context),onDamage:(unit,options)=>applyDamageDelay(state,unit,options)}));delete c.delayedAt;}
+ if(c.delayedAt&&c.delayedAt<=now){log.push(...E.resolveDelayedDamage(u,context.speciesOf(u),{activeUnits:activeUnits(context),onDamage:(unit,options)=>reportDamage(state,context,unit,options)}));delete c.delayedAt;}
  if(c.itemReadyAt<=now)u.itemCooldowns={};u.controlImmuneUntil=c.controlImmuneUntil;
  }
  for(const [key,timer]of Object.entries(state.fieldTimers))if(timer.until<=now){if(key==='weather'||key==='terrain'){if(field?.[key]===timer.value){field[key]=key==='weather'?field.ambientWeather||null:null;if(key==='weather')delete field.weatherTurns;}}else{const [side,effect]=key.split('-');if(field?.sides?.[side])delete field.sides[side].screens[effect];}delete state.fieldTimers[key];}
@@ -159,7 +166,7 @@ function expireTimers(state,context,log){
 function pulseEffects(state,context,log){
  const live=activeUnits(context);
  for(const u of live){const sp=context.speciesOf(u),max=E.stats(u,sp).hp,c=u.conditions||{},field=u.battlefield||{};let loss=0;
- const suffer=amount=>{if(amount<=0||u.hp<=0)return;const hp=u.hp;u.hp=Math.max(0,u.hp-amount);loss+=hp-u.hp;applyDamageDelay(state,u,{periodic:true});};
+ const suffer=amount=>{if(amount<=0||u.hp<=0)return;const hp=u.hp;u.hp=Math.max(0,u.hp-amount);loss+=hp-u.hp;reportDamage(state,context,u,{amount:hp-u.hp,periodic:true});};
  if(['poison','burn','frostbite'].includes(u.status))suffer(periodicDamage(max/32,u.status,sp,u));
  if(u.status==='toxic'){u.toxicTurns=(u.toxicTurns||0)+1;suffer(periodicDamage(max*Math.min(6,u.toxicTurns)/96,'toxic',sp,u));}
  if(c.leechSeed){const amount=periodicDamage(max/32,'leechSeed',sp,u),hp=u.hp;suffer(amount);const source=live.find(a=>a.id===u.conditionSources?.leechSeed);if(source)source.hp=Math.min(E.stats(source,context.speciesOf(source)).hp,source.hp+Math.min(amount,hp));}
@@ -180,7 +187,7 @@ function resolvePending(state,context,actor,clock,log,events,r){
  const other=side==='a'?'b':'a',allies=context.active[side],opponents=context.active[other];
  let target=[...allies,...opponents].find(u=>u.id===pending.targetId&&u.hp>0);
  if(!target)target=(pending.targetSide===side?allies:opponents).find(u=>u.hp>0);if(!target)return;
- const ctx={onDamage:(unit,options)=>applyDamageDelay(state,unit,options),realTime:true,speciesOf:context.speciesOf,actorTeam:context.teams[side],alliedActive:allies,targetActive:opponents,activeUnits:activeUnits(context),targetTeam:context.teams[other],funded:false};
+ const ctx={onDamage:(unit,options)=>reportDamage(state,context,unit,options),realTime:true,speciesOf:context.speciesOf,actorTeam:context.teams[side],alliedActive:allies,targetActive:opponents,activeUnits:activeUnits(context),targetTeam:context.teams[other],funded:false};
  if(actor.lastHit&&state.elapsedMs-(actor.lastHit.at??state.elapsedMs)>8000)actor.lastHit=null;
  if(choice.type==='switch'){
   const incoming=context.teams[side].find(u=>u.id===choice.switchId&&u.hp>0),index=allies.findIndex(u=>u.id===actor.id);if(!incoming||allies.includes(incoming))return;
@@ -276,7 +283,7 @@ export function deploySpirimon(state,context,side,ind){
  const check=deploymentAvailability(state,context,side,ind);if(!check.ok)return check;
  const q=context.sealers?.[side],field=context.active[side][0]?.battlefield||context.active[side==='a'?'b':'a'][0]?.battlefield;
  if(q&&!SE.spendEnergy(q,check.cost))return {ok:false,reason:'Not enough Spiritual Energy'};
- const from={id:'sealed-'+ind.id,hp:0,battlefield:field,battleSide:side},result=E.switchUnits(from,ind,context.speciesOf(ind),{forced:true,onDamage:(unit,options)=>applyDamageDelay(state,unit,options)});
+ const from={id:'sealed-'+ind.id,hp:0,battlefield:field,battleSide:side},result=E.switchUnits(from,ind,context.speciesOf(ind),{forced:true,onDamage:(unit,options)=>reportDamage(state,context,unit,options)});
  if(!result.ok){if(q)SE.restoreEnergy(q,check.cost);return {ok:false,reason:result.log.join(' ')};}
  context.active[side]=context.active[side].filter(u=>u.hp>0);context.active[side].push(ind);
  const clock=unitClock(state,ind);clock.pending=null;clock.readyAt=state.elapsedMs+650;SE.setExhaustion(ind,q);

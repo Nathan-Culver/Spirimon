@@ -48,7 +48,7 @@ test('app animations target the displayed slots after fainting compacts a phone 
  const allies=team(3),enemies=team(3).map(u=>({...u,id:'foe-'+u.id}));allies[0].hp=0;enemies[1].hp=0;
  const canvas={width:1000,height:240,getContext:()=>({save(){},restore(){},measureText:text=>({width:text.length*7}),strokeText(){},fillText:(text,x,y)=>notices.push({text,x,y})})},calls=[],notices=[];
  const battle={multi:{allies:allies.map(u=>u.id),enemies},rt:{elapsedMs:100,units:{[allies[1].id]:{delayNotice:{at:0,until:1200,castMs:250,timers:{gcd:100}}}}},rtAnimations:[{at:0,side:'a',actor:allies[1].id,target:enemies[2].id,move:{}}]};
- const h=vm.createContext({battleStageLayout,damageDelayLabels,battle,s:{spirits:allies},$:()=>canvas,matchMedia:()=>({matches:true}),E:{moveTarget:m=>m.target||'opponent'},realTimeContext:()=>({active:{a:allies,b:enemies}}),drawTechnique:(c,m,p,from,to)=>calls.push({from,to})});
+ const h=vm.createContext({battleStageLayout,damageDelayLabels,battle,s:{spirits:allies},$:()=>canvas,matchMedia:()=>({matches:true}),E:{moveTarget:m=>m.target||'opponent'},realTimeContext:()=>({active:{a:allies,b:enemies}}),drawDamageNumbers(){},drawTechnique:(c,m,p,from,to)=>calls.push({from,to})});
  const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
  for(const name of ['currentBattleLayout','animationPositions','drawRealTimeEffects']){
   const start=source.indexOf('function '+name+'('),next=source.slice(start+1).search(/\n(?:async )?function /);
