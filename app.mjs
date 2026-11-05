@@ -162,7 +162,7 @@ function partyHTML(){const members=party();return'<section class="panel party-pa
 function miniMapHTML(){const c=E.coord(s.player.x,s.player.y),cells=[];for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++){const key=(c.cx+dx)+','+(c.cy+dy),r=s.regions[key];cells.push('<button type="button" class="mini-cell '+(!dx&&!dy?'here':'')+'" data-action="mini-region" data-value="'+key+'" title="'+(r?.visited?esc(r.name):'Unexplored')+'" style="background:'+(r?.visited?r.biome.color:'#24312d')+'" '+(!r?.visited?'disabled':'')+'>'+(!dx&&!dy?'◆':r?.town&&r.visited?'⌂':'')+'</button>');}return '<div class="mini-map" aria-label="Explored regions"><div class="mini-grid">'+cells.join('')+'</div>'+action('view','Full map','atlas','btn small')+'</div>';}
 function exploreHTML(){const reg=currentRegion(),visited=Object.values(s.regions).filter(r=>r.visited).length;return spiritualEnergyHTML(s.sealer,'Sealer')+'<div class="page-heading"><div><div class="eyebrow">YOUR JOURNEY, UNWRITTEN</div><h1>The wild is calling.</h1><p>Follow a trail. Find a Spirimon. Make a bond.</p></div><span class="pill gold">◇ &nbsp; Rank '+s.rank+' · '+rankName()+'</span></div><div class="explore-layout"><div><div class="world-frame"><canvas id="world" width="960" height="640" tabindex="0" aria-label="Explorable procedural world. Use arrow keys or WASD to move, E to interact."></canvas><div class="map-location"><small id="map-biome">'+esc((PLAYTEST?'PLAYTEST · ':'')+reg.biome.name.toUpperCase())+'</small><strong id="map-location">'+esc(reg.name)+'</strong></div><div class="map-controls">'+(leadSteed()?action('steed-toggle',s.mountedSteed?'DISMOUNT':'MOUNT','','btn small'):'')+' '+action('companion-interact','COMPANION','','btn small')+' '+action('adventure-menu','PATH','','btn small')+' '+action('game-menu','MENU','','btn small')+' '+action('bag','BAG','','btn small')+'</div><div class="map-compass"><small>N</small><b>✧</b></div>'+miniMapHTML()+'<div class="dpad">'+['up','left','right','down'].map((d,i)=>action('step',['↑','←','→','↓'][i],d,'')).join('')+'</div><div class="map-hint" id="map-hint">'+esc(hint())+'</div>'+'<div class="map-coords" id="map-coords"></div></div><div class="world-toolbar"><div class="controls"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> move <span>·</span><kbd>E</kbd> interact <span>·</span><kbd>B</kbd> bag</div><div>'+action('bag','Bag','','btn ghost small')+'</div></div><div class="stat-strip"><div class="stat-block"><span class="stat-icon">♧</span><div><strong>'+s.seen.length+'</strong><small>Spirimon discovered</small></div></div><div class="stat-block"><span class="stat-icon">◇</span><div><strong>'+s.spirits.length+'</strong><small>Bonds sealed</small></div></div><div class="stat-block"><span class="stat-icon">⌖</span><div><strong>'+visited+'</strong><small>Regions explored</small></div></div><div class="stat-block"><span class="stat-icon">◉</span><div><strong>'+s.inventory.coins+'</strong><small>Coin</small></div></div></div></div><aside class="right-column">'+partyHTML()+'<section class="field-note"><div class="eyebrow">A SEALER’S FIELD NOTE</div><h3>Not every bond begins in battle.</h3><p>Approach a roaming Spirimon with an offering. A little patience can turn a wary encounter into a willing companion.</p></section><section class="panel quest-preview"><div class="section-label">ON YOUR PATH <small>OPTIONAL</small></div><h3>'+(s.quests.discovery?'Beyond the familiar':'First impressions')+'</h3><p>'+(s.quests.discovery?'Visit three regions, then speak to Scholar Elin.':'Discover five Spirimon species, then visit Scholar Elin.')+'</p><div class="progress-line"><i style="width:'+Math.min(100,(s.quests.discovery?visited/3:s.seen.length/5)*100)+'%"></i></div></section></aside></div>';}
 function rankName(){return['','Initiate','Wayfarer','Binder','Warden','Spiritkeeper','Elder'][Math.min(6,s.rank)];}
-function render(){if(!loaded)return;audio.setScene(O.offeringActive()?'offering':battle?'battle':'map');globalThis.spirimonSpecies=s.species;$('#main').innerHTML=view==='explore'?(battle?battleHTML():exploreHTML()):view==='spirits'?collectionHTML():view==='atlas'?atlasHTML():journalHTML();document.querySelectorAll('.nav-button[data-action="view"]').forEach(b=>b.classList.toggle('active',b.dataset.value===view));$('#footer-seed').textContent='WORLD '+s.seed+' · LOCAL FIRST';$('.player-avatar').textContent=s.player.name.slice(0,1).toUpperCase();applyLayout();renderSpiritCanvases();if(battle&&view==='explore')drawBattle();}
+function render(){if(!loaded)return;clearUnifiedGesture();audio.setScene(O.offeringActive()?'offering':battle?'battle':'map');globalThis.spirimonSpecies=s.species;$('#main').innerHTML=view==='explore'?(battle?battleHTML():exploreHTML()):view==='spirits'?collectionHTML():view==='atlas'?atlasHTML():journalHTML();document.querySelectorAll('.nav-button[data-action="view"]').forEach(b=>b.classList.toggle('active',b.dataset.value===view));$('#footer-seed').textContent='WORLD '+s.seed+' · LOCAL FIRST';$('.player-avatar').textContent=s.player.name.slice(0,1).toUpperCase();applyLayout();renderSpiritCanvases();if(battle&&view==='explore')drawBattle();}
 function showModal(title,body,options={}){keys.clear();modal=options.kind||'generic';document.body.classList.add('modal-open');$('#modal-root').innerHTML='<div class="modal-overlay"><section class="modal '+(options.wide?'wide':'')+'" role="dialog" aria-modal="true" aria-label="'+esc(title)+'">'+(options.lock?'':action('close','×','','modal-close'))+'<div class="eyebrow">SPIRIMON · '+esc(options.label||'THE SEALER’S FRONTIER')+'</div><h2>'+esc(title)+'</h2>'+body+'</section></div>';renderSpiritCanvases($('#modal-root'));$('#modal-root button:not(.modal-close),#modal-root input')?.focus({preventScroll:true});}
 function closeModal(){O.cancelOffering();audio.setScene(battle?'battle':'map');queuedStep=null;ritual=null;modal=null;document.body.classList.remove('modal-open');$('#modal-root').innerHTML='';keys.clear();if(view==='explore')$('#world')?.focus({preventScroll:true});}
 function starters(){showModal('Your first seal awaits.','<p>Welcome to Mossveil Crossing. You begin with no Spirimon. Find a roaming Spirimon, earn its trust through patience or an offering, then stabilize its tattoo seal.</p><label for="sealer-name">Your sealer’s name</label><input id="sealer-name" maxlength="24" placeholder="Your name"><div class="btn-row">'+action('begin-journey','Begin exploring','','btn primary')+'</div>',{lock:true,kind:'welcome'});}
@@ -1061,13 +1061,46 @@ let lastRealTimeUi=0,lastRealTimeDraw=0;
 function refreshRealTimeUI(){
  if(!battle?.rt)return;
  const grid=document.querySelector('#unified-action-grid');
- if(grid&&!unifiedGesture){
-  const next=unifiedBattleActionsHTML(),signature=next.replace(/data-action="[^"]*"/g,'');
-  if(grid.dataset.signature!==signature){grid.innerHTML=next;grid.dataset.signature=signature;}
+ if(grid){
+  if(unifiedGesture&&(!unifiedGesture.button.isConnected||!grid.contains(unifiedGesture.button)))clearUnifiedGesture();
+  refreshUnifiedActions(grid,unifiedBattleActionsHTML(),unifiedGesture?.button);
  }
  for(const box of document.querySelectorAll('[data-rt-status-container]')){const ctx=realTimeContext(),u=[...ctx.teams.a,...ctx.teams.b].find(u=>u.id===box.dataset.rtStatusContainer);if(u)box.innerHTML=realTimeStatusHTML(battle.rt,u,esc);}
 }
 let unifiedGesture=null,unifiedSuppressClick=false,unifiedTap=null;
+function refreshUnifiedActions(grid,html,held=null){
+ if(!held&&grid.dataset.signature===html)return;
+ const template=grid.ownerDocument.createElement('template');template.innerHTML=html;
+ const key=node=>node.dataset.unifiedMove?'move:'+node.dataset.unifiedMove:[node.dataset.action||node.tagName,node.dataset.value||'',node.querySelector('b')?.textContent||''].join('|');
+ const existing=new Map();for(const node of grid.children){const id=key(node);if(!existing.has(id))existing.set(id,[]);existing.get(id).push(node);}
+ const desired=[];
+ for(const incoming of template.content.children){
+  const node=existing.get(key(incoming))?.shift()||incoming;
+  if(node!==incoming&&node!==held&&node.outerHTML!==incoming.outerHTML){
+   for(const attr of [...node.attributes])if(!incoming.hasAttribute(attr.name))node.removeAttribute(attr.name);
+   for(const attr of incoming.attributes)if(node.getAttribute(attr.name)!==attr.value)node.setAttribute(attr.name,attr.value);
+   if(node.innerHTML!==incoming.innerHTML)node.innerHTML=incoming.innerHTML;
+  }
+  desired.push(node);
+ }
+ const keep=new Set(desired);if(held)keep.add(held);
+ for(const node of [...grid.children])if(!keep.has(node))node.remove();
+ if(held){
+  // Keep the captured node in place; newly ready actions can still appear.
+  for(const node of desired)if(node.parentElement!==grid)grid.append(node);
+  if(grid.querySelector('button'))for(const node of grid.querySelectorAll('.ua-wait'))node.remove();
+ }else{
+  let cursor=grid.firstElementChild;for(const node of desired){if(node!==cursor)grid.insertBefore(node,cursor);cursor=node.nextElementSibling;}
+ }
+ // A held action may need its markup/order reconciled after release.
+ grid.dataset.signature=held?'':html;
+}
+function clearUnifiedGesture(){
+ const g=unifiedGesture;unifiedGesture=null;if(!g)return;
+ delete g.button.dataset.gesturePreview;g.button.style.removeProperty('--commit-progress');
+ try{if(g.button.hasPointerCapture?.(g.pointerId))g.button.releasePointerCapture(g.pointerId);}catch{}
+}
+
 function useUnifiedMove(value,gestureStyle='normal',gestureCommit=0,extraMoves=0){
  if(!battle?.rt||battle.rt.paused)return;
  const [id,index]=value.split('|'),actor=s.spirits.find(u=>u.id===id);
@@ -1090,7 +1123,7 @@ document.addEventListener('pointerdown',ev=>{
  const button=ev.target.closest?.('[data-unified-move]');if(!button||button.disabled)return;
  unifiedSuppressClick=false;
  unifiedGesture={button,x:ev.clientX,y:ev.clientY,value:button.dataset.unifiedMove,pointerId:ev.pointerId};
- button.setPointerCapture?.(ev.pointerId);
+ try{button.setPointerCapture?.(ev.pointerId);}catch{clearUnifiedGesture();}
 });
 document.addEventListener('pointermove',ev=>{
  const g=unifiedGesture;if(!g||g.pointerId!==ev.pointerId)return;
@@ -1099,7 +1132,7 @@ document.addEventListener('pointermove',ev=>{
  g.button.dataset.gesturePreview=(choice.moveCount?'+'+choice.moveCount+' Moves · ':'')+choice.style.toUpperCase()+(choice.commit?' · ATK '+Math.round(choice.commit*100)+'%':'');
 });
 document.addEventListener('pointerup',ev=>{
- const g=unifiedGesture;if(!g||g.pointerId!==ev.pointerId)return;unifiedGesture=null;
+ const g=unifiedGesture;if(!g||g.pointerId!==ev.pointerId)return;clearUnifiedGesture();
  const dx=ev.clientX-g.x,dy=ev.clientY-g.y;
  delete g.button.dataset.gesturePreview;
  if(Math.hypot(dx,dy)<18)return;
@@ -1107,7 +1140,10 @@ document.addEventListener('pointerup',ev=>{
  const choice=unifiedGestureChoice(dx,dy);
  useUnifiedMove(g.value,choice.style,choice.commit,choice.moveCount);
 });
-document.addEventListener('pointercancel',()=>{unifiedGesture=null;});
+document.addEventListener('pointercancel',ev=>{if(unifiedGesture?.pointerId===ev.pointerId)clearUnifiedGesture();});
+document.addEventListener('lostpointercapture',ev=>{if(unifiedGesture?.pointerId===ev.pointerId)clearUnifiedGesture();});
+window.addEventListener('blur',()=>{clearUnifiedGesture();if(unifiedTap){clearTimeout(unifiedTap.timer);unifiedTap=null;}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){clearUnifiedGesture();if(unifiedTap){clearTimeout(unifiedTap.timer);unifiedTap=null;}}});
 
 function advanceRealTimeBattle(delta,time){
  if(!battle?.rt||document.hidden||battle.rt.paused)return;
