@@ -592,7 +592,7 @@ async function doBattle(overrideMove=null){
 async function enemyOnly(message){
  if(battle?.rt){if(message)battle.log.push(message);battle.message=message||battle.message;save();render();return;}
  if(!battle||actionBusy)return;actionBusy=true;if(message)battle.log.push(message);const i=s.spirits.find(i=>i.id===battle.ally),teams=battleTeams();
- // A skipped allied attack still runs a whole round: status, screens, weather and debt all advance.
+ // Skipped actions still advance the round.
  const result=E.resolveTempoRound(i,spOf(i),battle.enemy,spOf(battle.enemy),null,enemyChoice(),{a:0,b:battle.credits?.b||0},Math.random,{speciesOf:spOf,alliesTeam:teams.allies,enemiesTeam:teams.enemies});
  battle.enemy=result.enemies[0];battle.enemyTeam=teams.enemies.filter(u=>u!==battle.enemy);await animateEvents(result.events);actionBusy=false;battle.log.push(...result.log);battle.credits=result.nextCredits;borrow=0;battle.message=battle.log.at(-1);battleMode='main';battle.round++;finishRound();
 }
@@ -1107,8 +1107,7 @@ async function inspectCollectionAnatomy(){
  }catch(error){toast('Anatomy inspection: '+error.message);}
 }
 
-// Live combat uses a saved simulation clock; legacy round resolvers are never
-// called by a battle once its real-time state has been initialized.
+// Live battles use the saved simulation clock.
 function realTimeContext(){
  const teams=battleTeams(),active={a:(battle.multi?.allies||[battle.ally]).map(id=>s.spirits.find(i=>i.id===id)).filter(Boolean),b:battle.multi?.enemies||[battle.enemy]};
  return {active,teams:{a:teams.allies,b:teams.enemies},speciesOf:spOf,inventory:{a:s.inventory},sealers:{a:SE.ensureSealer(s),b:battle.enemySealer},rules:battle.rules||{}};
@@ -1233,11 +1232,16 @@ function useUnifiedMove(value,gestureStyle='normal',gestureCommit=0,extraMoves=0
 function unifiedGestureChoice(dx,dy){
  const ax=Math.abs(dx),ay=Math.abs(dy),diagonal=ax>22&&ay>22&&Math.min(ax,ay)/Math.max(ax,ay)>.42;
  const style=diagonal?(dx<0?'agile':'strong'):ax>ay?(dx<0?'agile':'strong'):(dy<0?'strong':'agile');
- // Only upward diagonals request additional repetitions. Downward diagonals
- // deliberately have neither repetitions nor attack commitment.
+ // Only upward diagonals add repetitions; diagonals never add commitment.
  const extraMoves=diagonal&&dy<0?Math.min(2,Math.max(1,Math.floor(Math.hypot(dx,dy)/85))):0;
  const commit=diagonal?0:ax>ay?Math.min(1,ax/110):0;
  return {style,commit,moveCount:extraMoves,diagonal};
+}
+function previewUnifiedMove(button,dx,dy){
+ if(Math.hypot(dx,dy)<18){delete button.dataset.gesturePreview;button.style.removeProperty('--commit-progress');return;}
+ const p=unifiedGestureChoice(dx,dy),arrow=p.diagonal?(dy<0?(dx<0?'↖':'↗'):(dx<0?'↙':'↘')):Math.abs(dx)>Math.abs(dy)?(dx<0?'←':'→'):(dy<0?'↑':'↓');
+ button.dataset.gesturePreview=arrow+' '+p.style.toUpperCase()+'\n'+(p.moveCount?'+'+p.moveCount+' extra Move'+(p.moveCount>1?'s':''):p.commit?'ATK '+Math.round(p.commit*100)+'%':p.diagonal?'No extra Moves':'No commitment');
+ button.style.setProperty('--commit-progress',Math.round(p.commit*100)+'%');
 }
 function sealQuote(p){return p.base+' + '+p.extra+' = '+p.cost+' SE · '+Math.round(p.chance*100)+'%';}
 function sealButtonHTML(){
@@ -1269,9 +1273,7 @@ document.addEventListener('pointerdown',ev=>{
 document.addEventListener('pointermove',ev=>{
  const g=unifiedGesture;if(!g||g.pointerId!==ev.pointerId)return;
  if(g.kind==='seal'){previewSeal(g,sealingGestureChoice(ev.clientX-g.x,ev.clientY-g.y,g.maximum));return;}
- const choice=unifiedGestureChoice(ev.clientX-g.x,ev.clientY-g.y);
- g.button.style.setProperty('--commit-progress',Math.round(choice.commit*100)+'%');
- g.button.dataset.gesturePreview=(choice.moveCount?'+'+choice.moveCount+' Moves · ':'')+choice.style.toUpperCase()+(choice.commit?' · ATK '+Math.round(choice.commit*100)+'%':'');
+ previewUnifiedMove(g.button,ev.clientX-g.x,ev.clientY-g.y);
 });
 document.addEventListener('pointerup',ev=>{
  const g=unifiedGesture;if(!g||g.pointerId!==ev.pointerId)return;clearUnifiedGesture();
