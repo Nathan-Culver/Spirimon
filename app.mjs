@@ -883,12 +883,13 @@ function releaseTouch(ev){if(ev.target.closest('[data-run]'))running=false;const
 document.addEventListener('pointerup',releaseTouch);document.addEventListener('pointercancel',()=>{keys.clear();running=false;document.querySelectorAll('.held').forEach(b=>b.classList.remove('held'));});window.addEventListener('resize',()=>{if(loaded)applyLayout();});
 
 function installRoster(){
- s.rosterRevision=3;
+ s.rosterRevision=4;
  for(const row of ROSTER){const id='roster-'+row.id,old=s.species[id]||library[id];let sp;
   if(old)sp=E.migrateSpecies(old);
   else{sp={...E.makeSpecies(id,row.base,row.alter,row.domains),id,name:row.forms[1],forms:row.forms,description:row.description,body:row.description,anatomy:row.anatomy,legacyTypes:row.legacyTypes,atlas:row.atlas,proceduralArt:!!row.proceduralArt,source:'original-roster'};delete sp.design;sp.learnset=[];sp.moveRevision=0;syncCapabilities(sp);}
   // Refresh shared artwork for existing journeys without replacing progression.
   if(row.atlas){sp.atlas=row.atlas;sp.artRevision=row.artRevision||1;sp.proceduralArt=false;sp.description=row.description;sp.body=row.description;delete sp.sprites;}
+  if(row.formAnatomy){sp.formAnatomy=structuredClone(row.formAnatomy);sp.anatomy=sp.formAnatomy[0];syncCapabilities(sp);}
   if(!sp.atlas&&sp.sprites?.length!==3)sp.proceduralArt=true;
   if(sp.proceduralArt)certifyRenderedAnatomy(sp);register(sp);
  }

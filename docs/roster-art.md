@@ -11,3 +11,7 @@ Existing journeys and imported backups automatically receive current roster atla
 `tools/pack-recovered-roster-art.py` locates transparent gaps and mechanically crops and scales the three forms together without redrawing creature designs. Its `--first` and `--last` options limit a packing pass to selected entry numbers. Generation-source filenames are production provenance, not runtime dependencies. The game consumes only the packed atlases.
 
 Validation covers all 150 atlas files, dimensions, alpha channels, distinct lineage assets, nonempty distinct form cells, transparent borders, actual runtime artwork selection and saved-game migration. `roster-art-audit.json` records the packed image hashes and per-form bounds.
+
+## Anatomical reworks
+
+Entries 17, 30, 31, 32, 33 and 49 now use versioned v3 atlases. Kilnwarden has a vertical fire-and-darkness eye and distinct brazier, warden and forge-sentinel stages. Lacquertor retains four long bulky arms with a hunchback and distinct boulder, guardian and ancient-titan stages. Bonsaitor has an elephant head; Cloudgron has a ram head and cloven legs; Barrowgron has ground-reaching arms; Jianglume has a spectral moth head and ectoplasmic arms. Per-form anatomy is refreshed in existing saves alongside artwork, while individual progression is retained.

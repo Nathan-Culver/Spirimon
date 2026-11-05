@@ -1,0 +1,80 @@
+[
+  {
+    "number": 17,
+    "id": "kilnwarden",
+    "forms": [
+      "Cinderbolt",
+      "Kilnwarden",
+      "Iron Hellkeeper"
+    ],
+    "description": "An iron furnace construct animated by one large vertical eye made of fire and darkness. It transforms from a round little brazier into a barrel-chested furnace warden and an angular forge sentinel.",
+    "source": "artwork/roster-source/017-kilnwarden.png",
+    "atlas": "./assets/roster/kilnwarden.webp",
+    "artRevision": 3
+  },
+  {
+    "number": 30,
+    "id": "bonsaitor",
+    "forms": [
+      "Terralow",
+      "Bonsaitor",
+      "Terrace Patriarch"
+    ],
+    "description": "A sandstone and living-wood giant with an elephant head, a moss-covered trunk, bark-textured tusks, enormous hands and terraced bonsai trees growing across its back.",
+    "source": "artwork/roster-source/030-bonsaitor.png",
+    "atlas": "./assets/roster/bonsaitor.webp",
+    "artRevision": 3
+  },
+  {
+    "number": 31,
+    "id": "cloudgron",
+    "forms": [
+      "Rumblekin",
+      "Cloudgron",
+      "Monsoon Grandfather"
+    ],
+    "description": "A slate-blue storm giant with a ram head, curling horns, a white cloud mane and beard, digitigrade legs and cloven hooves, bronze bracers and electric-blue lightning accents.",
+    "source": "artwork/roster-source/031-cloudgron.png",
+    "atlas": "./assets/roster/cloudgron.webp",
+    "artRevision": 3
+  },
+  {
+    "number": 32,
+    "id": "lacquertor",
+    "forms": [
+      "Plinthkin",
+      "Lacquertor",
+      "Living Fortress"
+    ],
+    "description": "A hunchbacked stone giant with four long bulky arms and red lacquer armor edged in antique gold. A rough boulder juvenile becomes an arch-backed guardian and a broad ancient titan with a ridged natural stone mantle; never architectural shoulders.",
+    "source": "artwork/roster-source/032-lacquertor.png",
+    "atlas": "./assets/roster/lacquertor.webp",
+    "artRevision": 3
+  },
+  {
+    "number": 33,
+    "id": "barrowgron",
+    "forms": [
+      "Graveltot",
+      "Barrowgron",
+      "Sepulcher Titan"
+    ],
+    "description": "An undead slate giant with greatly elongated arms and ground-reaching knuckles, weathered burial wraps, a shadowed stone mask, cyan-glowing exposed ribs and a tombstone mantle.",
+    "source": "artwork/roster-source/033-barrowgron.png",
+    "atlas": "./assets/roster/barrowgron.webp",
+    "artRevision": 3
+  },
+  {
+    "number": 49,
+    "id": "jianglume",
+    "forms": [
+      "Hushwick",
+      "Jianglume",
+      "Lantern Ancestor"
+    ],
+    "description": "A hopping ancestral undead faerie with a pale spectral moth head, luminous compound eyes, feathery antennae, exactly two ectoplasmic tendril arms emerging from silk sleeves, moth wings and warm antique lantern ornaments.",
+    "source": "artwork/roster-source/049-jianglume.png",
+    "atlas": "./assets/roster/jianglume.webp",
+    "artRevision": 3
+  }
+]

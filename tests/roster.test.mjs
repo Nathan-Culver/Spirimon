@@ -21,15 +21,15 @@ import {creatureArtworkSource} from '../sprites.mjs';
 test('existing journeys receive completed roster artwork without replacing individual progress',async()=>{
  const source=await readFile(new URL('../app.mjs',import.meta.url),'utf8');
  const begin=source.indexOf('function installRoster(){'),end=source.indexOf('\nfunction gameMenu',begin);
- const rows=ROSTER.filter(r=>r.artRevision===2),state=E.newGame('art-migration'),library={};state.species={};
+ const rows=ROSTER.filter(r=>r.artRevision>=2),state=E.newGame('art-migration'),library={};state.species={};
  for(const row of rows){const id='roster-'+row.id;state.species[id]={...E.makeSpecies(id,row.base,row.alter,row.domains),id,proceduralArt:true,sprites:['legacy-0','legacy-1','legacy-2'],artRevision:1};}
  state.species['roster-lacquertor'].atlas='./assets/roster/lacquertor.webp';
  state.spirits=rows.map((r,i)=>({id:'owned-'+i,species:'roster-'+r.id,form:i%3,level:37,hp:21,stamina:14,willpower:18,bond:23,cooldowns:{move:72},heldItem:'keepsake'}));
  const before=structuredClone(state.spirits),moves=structuredClone(state.species['roster-aetherling'].moves);
- const context=vm.createContext({s:state,library,E,ROSTER,syncCapabilities:()=>{},certifyRenderedAnatomy:()=>{},register:sp=>{state.species[sp.id]=sp;library[sp.id]=sp;}});
+ const context=vm.createContext({s:state,library,E,ROSTER,structuredClone,syncCapabilities:()=>{},certifyRenderedAnatomy:()=>{},register:sp=>{state.species[sp.id]=sp;library[sp.id]=sp;}});
  vm.runInContext(source.slice(begin,end)+'\ninstallRoster();',context);
  assert.deepEqual(state.spirits,before);assert.deepEqual(state.species['roster-aetherling'].moves,moves);
- for(const row of rows){const sp=state.species['roster-'+row.id];assert.equal(sp.atlas,row.atlas);assert.equal(sp.artRevision,2);assert.equal(sp.proceduralArt,false);assert.equal(sp.sprites,undefined);for(let form=0;form<3;form++)assert.equal(creatureArtworkSource(sp,form),row.atlas);}
+ for(const row of rows){const sp=state.species['roster-'+row.id];assert.equal(sp.atlas,row.atlas);assert.equal(sp.artRevision,row.artRevision);assert.equal(sp.proceduralArt,false);assert.equal(sp.sprites,undefined);if(row.formAnatomy)assert.deepEqual(JSON.parse(JSON.stringify(sp.formAnatomy)),row.formAnatomy);for(let form=0;form<3;form++)assert.equal(creatureArtworkSource(sp,form),row.atlas);}
  vm.runInContext('installRoster();',context);assert.deepEqual(state.spirits,before);
 });
 
