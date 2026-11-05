@@ -1189,7 +1189,7 @@ let unifiedGesture=null,unifiedSuppressClick=false,unifiedTap=null;
 function refreshUnifiedActions(grid,html,held=null){
  if(!held&&grid.dataset.signature===html)return;
  const template=grid.ownerDocument.createElement('template');template.innerHTML=html;
- const key=node=>node.dataset.unifiedMove?'move:'+node.dataset.unifiedMove:[node.dataset.action||node.tagName,node.dataset.value||'',node.querySelector('b')?.textContent||''].join('|');
+ const key=node=>node.dataset.unifiedMove?'move:'+node.dataset.unifiedMove:node.dataset.unifiedSeal?'seal:'+node.dataset.unifiedSeal:[node.dataset.action||node.tagName,node.dataset.value||'',node.querySelector('b')?.textContent||''].join('|');
  const existing=new Map();for(const node of grid.children){const id=key(node);if(!existing.has(id))existing.set(id,[]);existing.get(id).push(node);}
  const desired=[];
  for(const incoming of template.content.children){
@@ -1204,13 +1204,13 @@ function refreshUnifiedActions(grid,html,held=null){
  const keep=new Set(desired);if(held)keep.add(held);
  for(const node of [...grid.children])if(!keep.has(node))node.remove();
  if(held){
-  // Keep the captured node in place; newly ready actions can still appear.
+  // Preserve capture while adding ready actions.
   for(const node of desired)if(node.parentElement!==grid)grid.append(node);
   if(grid.querySelector('button'))for(const node of grid.querySelectorAll('.ua-wait'))node.remove();
  }else{
   let cursor=grid.firstElementChild;for(const node of desired){if(node!==cursor)grid.insertBefore(node,cursor);cursor=node.nextElementSibling;}
  }
- // A held action may need its markup/order reconciled after release.
+ // Reconcile after release.
  grid.dataset.signature=held?'':html;
 }
 function clearUnifiedGesture(){

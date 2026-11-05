@@ -35,3 +35,14 @@ test('cooldowns still refresh other options during a live move gesture',()=>{
  const t=harness(),button={isConnected:true};t.setGesture({button,pointerId:7});
  t.advance(4000);t.refresh();assert.match(t.grid.innerHTML,/data-action="flee"/);assert.match(t.grid.innerHTML,/data-unified-move/);assert.equal(t.preserved(),button);assert.equal(t.gesture().button,button);
 });
+test('a changing Seal preview retains the captured button while newly ready actions appear',()=>{
+ const node=(id,label)=>({dataset:{action:id==='seal'?'unified-seal':id,value:id==='seal'?'wild':'',...(id==='seal'?{unifiedSeal:'wild'}:{})},label,tagName:'BUTTON',querySelector(){return {textContent:this.label};},remove(){grid.children.splice(grid.children.indexOf(this),1);this.parentElement=null;}});
+ const held=node('seal','Release to seal'),run=node('flee','Run');
+ const grid={dataset:{},children:[held],ownerDocument:{createElement:()=>({set innerHTML(value){this.content={children:[node('seal','Seal ×8'),run]};}})},
+  append(n){this.children.push(n);n.parentElement=this;},querySelector:()=>held,querySelectorAll:()=>[]};held.parentElement=grid;
+ const h=vm.createContext({grid,held});vm.runInContext(extract('refreshUnifiedActions'),h);
+ vm.runInContext('refreshUnifiedActions(grid,"ready actions",held)',h);
+ assert.equal(grid.children.length,2);assert.equal(grid.children[0],held);assert.equal(grid.children[1],run);assert.equal(held.label,'Release to seal');
+ held.label='Cancel seal';vm.runInContext('refreshUnifiedActions(grid,"ready actions",held)',h);
+ assert.equal(grid.children.length,2);assert.equal(grid.children[0],held);assert.equal(held.label,'Cancel seal');
+});
