@@ -97,7 +97,27 @@ export function drawAspectAura(ctx,ind,x,y,size){
  if(ind.rareVariant){ctx.fillStyle='#fff4a2';for(const [dx,dy]of [[.2,.2],[.8,.35],[.65,.1]]){const xx=x+size*dx,yy=y+size*dy;ctx.fillRect(xx-1,yy-4,3,9);ctx.fillRect(xx-4,yy-1,9,3);}}
  ctx.restore();
 }
-export function renderSpiritCanvases(root=document){root.querySelectorAll('canvas[data-species]').forEach(c=>{const sp=globalThis.spirimonSpecies?.[c.dataset.species];if(!sp)return;const ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);drawAspectAura(ctx,{aspect:c.dataset.aspect,rareVariant:c.dataset.radiant==='true'},0,0,c.width);drawSpirit(ctx,sp,Number(c.dataset.form)||0,0,0,c.width);});}
+const portraitBoundsCache=new WeakMap();
+export function opaqueBounds({width,height,data},threshold=8){
+ let left=width,top=height,right=-1,bottom=-1;
+ for(let y=0;y<height;y++)for(let x=0;x<width;x++)if(data[(y*width+x)*4+3]>threshold){left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);}
+ return right<left?{x:0,y:0,width,height}:{x:left,y:top,width:right-left+1,height:bottom-top+1};
+}
+function portraitSourceBounds(image,atlas,form){
+ let frames=portraitBoundsCache.get(image);if(!frames){frames=new Map();portraitBoundsCache.set(image,frames);}
+ const key=atlas?'form-'+form:'single';if(frames.has(key))return frames.get(key);
+ const source={x:atlas?form*256:0,y:0,width:atlas?256:image.naturalWidth||image.width,height:atlas?256:image.naturalHeight||image.height};let bounds=source;
+ try{const sample=document.createElement('canvas');sample.width=source.width;sample.height=source.height;const c=sample.getContext('2d',{willReadFrequently:true});c.drawImage(image,source.x,source.y,source.width,source.height,0,0,source.width,source.height);const content=opaqueBounds(c.getImageData(0,0,source.width,source.height));bounds={...content,x:source.x+content.x,y:source.y+content.y};}catch{}
+ frames.set(key,bounds);return bounds;
+}
+export function drawSpiritPortrait(ctx,sp,form,x,y,width,height=width){
+ const artwork=creatureArtworkSource(sp,form),image=artwork?readyImage(artwork):null;
+ if(!image){const size=Math.min(width,height);drawSpirit(ctx,sp,form,x+(width-size)/2,y+(height-size)/2,size);return;}
+ const bounds=portraitSourceBounds(image,!!sp.atlas,Math.max(0,Math.min(2,Number(form)||0))),padding=Math.min(width,height)*.04;
+ const scale=Math.min((width-padding*2)/bounds.width,(height-padding*2)/bounds.height),w=bounds.width*scale,h=bounds.height*scale;
+ ctx.save();ctx.imageSmoothingEnabled=false;ctx.drawImage(image,bounds.x,bounds.y,bounds.width,bounds.height,x+(width-w)/2,y+(height-h)/2,w,h);ctx.restore();
+}
+export function renderSpiritCanvases(root=document){root.querySelectorAll('canvas[data-species]').forEach(c=>{const sp=globalThis.spirimonSpecies?.[c.dataset.species];if(!sp)return;const ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);drawAspectAura(ctx,{aspect:c.dataset.aspect,rareVariant:c.dataset.radiant==='true'},0,0,c.width);drawSpiritPortrait(ctx,sp,Number(c.dataset.form)||0,0,0,c.width,c.height);});}
 function paintPerson(ctx,x,y,role='player',tick=0,face='down',moving=false){
  ctx.save();ctx.translate(Math.round(x),Math.round(y));const q=(a,b,w,h,col)=>{ctx.fillStyle=col;ctx.fillRect(a,b,w,h);};
  const step=moving?Math.round(Math.sin(tick/1000*Math.PI*4)*2):0;
