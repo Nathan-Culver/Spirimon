@@ -10,12 +10,12 @@ function harness({enabled=true,route={type:'companion',status:{imageReady:true,m
  const ind=E.makeIndividual(sp,7);ind.xp=19;ind.bond=62;ind.heldItem={id:'keepsake'};
  const state={species:{[sp.id]:sp},spirits:[ind],settings:{aiEnabled:enabled},generationPlans:{},seed:'artwork'};
  let calls=0,accepted=0,chosen=0;const messages=[],requests=[];
- const h=vm.createContext({E,s:state,library:{[sp.id]:sp},queue:[],busy:false,activeGenerationId:null,aiSessionKey:'',COMPANION:'http://127.0.0.1:4317',structuredClone,AbortSignal,Date,console,modal:null,globalThis:{},document:{querySelectorAll:()=>[]},esc:String,
+ const h=vm.createContext({E,s:state,battle:null,library:{[sp.id]:sp},queue:[],busy:false,activeGenerationId:null,aiSessionKey:'',COMPANION:'http://127.0.0.1:4317',structuredClone,AbortSignal,AbortController,artworkAbort:null,Date,console,modal:null,globalThis:{},document:{querySelectorAll:()=>[]},esc:String,
  save:()=>calls++,note:text=>messages.push(text),toast:text=>messages.push(text),AI:{choose:async()=>{chosen++;return route;}},
  fetch:async(_url,options)=>{requests.push(JSON.parse(options.body));return {ok:true,json:async()=>data};},
  acceptGeneratedArtwork:async(target,result,existing)=>{accepted++;assert.ok(existing.every(p=>p.id!==target.id));target.sprites=[...result.sprites];target.proceduralArt=false;target.visualValidation=result.visualValidation;},
  register:next=>{state.species[next.id]=next;h.library[next.id]=next;return next;}});
- vm.runInContext(['hasFinishedArtwork','artworkStatusText','artworkStatusHTML','refreshArtworkStatus','queueOwnedArtwork','queueFresh','processQueue'].map(extract).join('\n'),h);
+ vm.runInContext(['hasFinishedArtwork','artworkStatusText','artworkStatusHTML','refreshArtworkStatus','queueOwnedArtwork','queueFresh','cancelArtworkGeneration','processQueue'].map(extract).join('\n'),h);
  return {h,sp,ind,state,requests,messages,run:()=>vm.runInContext('processQueue()',h),eval:code=>vm.runInContext(code,h),accepted:()=>accepted,chosen:()=>chosen};
 }
 test('a missing-art prototype queues its own species ID and design, without inventing another lineage',()=>{
@@ -46,4 +46,22 @@ test('disabled generation reports missing images honestly and performs no backgr
 });
 test('finished roster and generated artwork are not requeued for repair',async()=>{
  const t=harness();t.sp.atlas='./assets/roster/talonplume-v4.webp';await t.run();assert.equal(t.requests.length,0);assert.equal(t.h.queue.length,0);assert.equal(t.eval('artworkStatusText(s.species[Object.keys(s.species)[0]])'),'');
+});
+
+test('unfinished battle, trade and roaming Spirimon are also queued for their own artwork',()=>{
+ const t=harness();t.state.spirits=[];const refs=['enemy','trade','roamer'].map(seed=>E.makeSpecies(seed,'Beast','Fey'));
+ for(const sp of refs){t.state.species[sp.id]=sp;t.h.library[sp.id]=sp;}
+ t.h.battle={enemy:{species:refs[0].id}};t.state.trade={incoming:{species:refs[1].id}};t.state.roamers={'0,0':[{active:true,ind:{species:refs[2].id}}]};t.eval('queueOwnedArtwork()');
+ assert.deepEqual(Array.from(t.h.queue),refs.map(sp=>sp.id));
+});
+test('canceling a job on save/world change prevents late results from changing the new world',async()=>{
+ const t=harness();let resolve;t.h.AI.choose=()=>new Promise(r=>resolve=r);const job=t.run();assert.equal(t.h.busy,true);
+ t.eval('cancelArtworkGeneration()');const next=E.newGame('other-world');t.h.s=next;t.h.queue=['new-world-job'];resolve({type:'companion',status:{imageReady:true,models:['text'],visionModels:['vision']}});await job;
+ assert.equal(t.requests.length,0);assert.equal(t.h.busy,false);assert.deepEqual(Object.keys(next.species),[]);assert.deepEqual(Array.from(t.h.queue),['new-world-job']);
+});
+test('unseen future designs remain queued for artwork after a text-only fallback',()=>{
+ const t=harness();t.state.spirits=[];const sp=E.makeSpecies('future-text-design','Plant','Fey');t.h.library[sp.id]=sp;t.eval('queueOwnedArtwork()');assert.ok(t.h.queue.includes(sp.id));assert.deepEqual(t.state.generationPlans[sp.id],sp);
+});
+test('referenced artwork repairs cannot be starved by a full queue of future designs',()=>{
+ const t=harness();t.h.queue.push('future-a','future-b','future-c');const sp=E.makeSpecies('battle-pending','Plant','Fey');t.state.species[sp.id]=sp;t.h.library[sp.id]=sp;t.h.battle={enemy:{species:sp.id}};t.eval('queueOwnedArtwork()');assert.equal(t.h.queue[0],t.sp.id);assert.equal(t.h.queue[1],sp.id);
 });

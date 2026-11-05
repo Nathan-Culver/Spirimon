@@ -27,7 +27,7 @@ test('existing journeys receive completed roster artwork without replacing indiv
  state.spirits=rows.map((r,i)=>({id:'owned-'+i,species:'roster-'+r.id,form:i%3,level:37,hp:21,stamina:14,willpower:18,bond:23,cooldowns:{move:72},heldItem:'keepsake'}));
  const before=structuredClone(state.spirits),moves=structuredClone(state.species['roster-aetherling'].moves);
  const context=vm.createContext({s:state,library,E,ROSTER,structuredClone,syncCapabilities:()=>{},certifyRenderedAnatomy:()=>{},register:sp=>{state.species[sp.id]=sp;library[sp.id]=sp;}});
- vm.runInContext(source.slice(begin,end)+'\ninstallRoster();',context);
+ vm.runInContext(source.slice(source.indexOf('function hasFinishedArtwork('),source.indexOf('\nfunction artworkStatusText('))+'\n'+source.slice(begin,end)+'\ninstallRoster();',context);
  assert.deepEqual(state.spirits,before);assert.deepEqual(state.species['roster-aetherling'].moves,moves);
  for(const row of rows){const sp=state.species['roster-'+row.id];assert.equal(sp.atlas,row.atlas);assert.equal(sp.artRevision,row.artRevision);assert.equal(sp.proceduralArt,false);assert.equal(sp.sprites,undefined);if(row.formAnatomy)assert.deepEqual(JSON.parse(JSON.stringify(sp.formAnatomy)),row.formAnatomy);for(let form=0;form<3;form++)assert.equal(creatureArtworkSource(sp,form),row.atlas);}
  vm.runInContext('installRoster();',context);assert.deepEqual(state.spirits,before);

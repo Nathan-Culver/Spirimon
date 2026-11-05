@@ -10,7 +10,7 @@ The public taxonomy contains twelve ordered types. Humanoid is retained only as 
 4. Build a body plan, limb and manipulator counts, trait list, strength class, reference morphology, three related names, and a shared visual motif. Modifier traits are combined with the base; they do not replace its identity.
 5. Assign a guaranteed appropriate Domain from weighted anatomical/concept cues, then repeat the existing independent 1% check for each additional nonduplicated Domain. Old valid Domains are retained. Reloading does not reroll Domains.
 6. Build the initial four moves and broader learnset from types, assigned Domains and anatomy. Physical claw, fang, horn and wing moves require matching recorded anatomy; spiritual manifestations need not have physical appendages. Anatomical techniques add grasping, natural weapons, wings, armor, roots and psychic organs. New advanced Domain techniques require their assigned Domain; existing learned techniques remain available after migration.
-7. Complete and validate three form images before registering a newly generated lineage. Built-in generation works without AI. All providers use the same admission rules; text-only providers use original procedural artwork rather than borrowing another creature's atlas.
+7. Keep unfinished designs outside the encounter pool until finished artwork exists for all three forms. Offline encounters use completed lineages from the library, preferring the rolled ordered Type pair, then the same base Type, then biome-compatible lineages. AI generation prepares future discoveries in the background. Text-only and offline providers prepare design data rather than borrowing another creature's artwork.
 
 ## Combat Domains
 
@@ -45,3 +45,11 @@ AI may propose four starting moves and change their supported mechanics. Each mo
 Migration preserves species IDs, names, owned and wild individual IDs, levels, experience, bonds, training, equipment, permanent/cosmetic forms, learned move IDs and world progress. Former Humanoid types are reclassified from their existing concept into a distinct supported type; their old ordered types remain in hidden migration metadata. Old move IDs remain usable and their displayed type changes to the migrated species type. New Domains and techniques are added without replacing established moves.
 
 Species records are stored in the browser species library as well as the current world, fixing cross-world persistence. Backup import migrates creature records before validating the twelve-type taxonomy. Original roster installation reuses saved species snapshots instead of rerolling them.
+
+## Encounter artwork admission
+
+Normal wild, trainer, trade and facility encounters select only lineages with finished artwork for all three forms. Sparse or empty sprite arrays and internal procedural diagrams are excluded. Saved unfinished wild individuals remain intact in the save; they are withheld from new interactions and visible populations are backfilled once with completed lineages. They become available under their original identities when their own artwork is finished. Owned creatures and battles already in progress remain intact.
+
+Legendary encounters and binding rites also require finished artwork. An unavailable legend reports the reason before starting a battle or spending ritual Energy. Its design stays queued when image generation is enabled.
+
+Artwork recovery covers owned, battle, trade, active roaming and seen species. Loading or importing an old species snapshot recovers completed images already stored under that same ID in the shared library without replacing names, stats or individual progress. Imports restore their own generation queue, and changing worlds cancels pending artwork jobs so late results cannot be installed into another save.

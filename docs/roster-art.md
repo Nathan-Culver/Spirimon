@@ -14,7 +14,7 @@ Kilnwarden retains its vertical fire-and-darkness eye. Lacquertor retains four l
 
 ## Existing journeys
 
-Existing journeys and imported backups receive the current atlas paths, descriptions and form anatomy automatically. Individual IDs, forms, levels, resources, bonds, cooldowns, equipment and techniques are preserved. Old procedural PNG caches are discarded for roster species with dedicated atlases. Newly discovered procedural lineages still use mystery artwork until their own finished artwork is supplied.
+Existing journeys and imported backups receive the current atlas paths, descriptions and form anatomy automatically. Individual IDs, forms, levels, resources, bonds, cooldowns, equipment and techniques are preserved. Old procedural PNG caches are discarded for roster species with dedicated atlases. Unfinished generated lineages stay outside new encounters until their own finished artwork is supplied. Existing owned unfinished lineages retain their identities and the mystery sprite while their artwork is repaired.
 
 ## Packing and validation
 
