@@ -1,0 +1,4215 @@
+{
+  "reviewed": 150,
+  "flagged": 144,
+  "retained": 6,
+  "criteria": "Visual review of silhouette, relative body proportions, torso structure, posture and defining anatomy; size, ornament count and texture detail alone do not constitute a distinct transformation.",
+  "lineages": [
+    {
+      "number": 1,
+      "id": "kilnscale",
+      "base": "Beast",
+      "alter": "Construct",
+      "forms": [
+        "Kilnkit",
+        "Kilnscale",
+        "Porcelain Sentinel"
+      ],
+      "referenceAtlas": "./assets/roster/kilnscale.webp",
+      "identity": "A real pangolin with articulated cobalt-and-ivory porcelain scales, brass hinges, and a temple-bell tail.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Round curled pangolin pup with a few broad porcelain scales and short bell nub",
+        "Low armored crawler with overlapping hinged plates and a long articulated bell tail",
+        "High-shouldered sentinel pangolin with layered shieldlike scales, powerful digging foreclaws and a raised temple-bell tail"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-d7356ece-b461-4f4c-b642-c02556fc141f.png",
+      "sourceSha256": "0969eabc7710f7309181c332f2bb38786aa2dd5b62345cfc4ddb186c5fec91ef",
+      "atlas": "./assets/roster/kilnscale-v4.webp",
+      "sourceBoxes": [
+        [
+          117,
+          325,
+          450,
+          655
+        ],
+        [
+          590,
+          242,
+          1307,
+          658
+        ],
+        [
+          1399,
+          13,
+          2148,
+          664
+        ]
+      ],
+      "atlasSha256": "7430044953c5c77aec29a474902d8d100977e90c696ea8bdeb9cbc1e8ae59bc1"
+    },
+    {
+      "number": 2,
+      "id": "dewveil",
+      "base": "Plant",
+      "alter": "Fey",
+      "forms": [
+        "Dewbud",
+        "Dewveil",
+        "Sundew Regent"
+      ],
+      "referenceAtlas": "./assets/roster/dewveil.webp",
+      "identity": "A carnivorous sundew with luminous amber nectar beads, delicate fan leaves, fine root feet, and faerie blossoms.",
+      "decision": "rework",
+      "reason": "Reassessment: enlarged ornament or extra surface details do not sufficiently change the underlying body architecture.",
+      "stages": [
+        "A squat sundew seedling with two cupped sticky leaves folded around a central bud and a compact knot of fine root feet",
+        "A long coiling vine hunter rising from a small root base, three hinged sundew fans held like snapping jaws and one pale blossom",
+        "An anchored umbrella-like sundew regent with a low spread of buttress roots, a tall swan-neck flower stalk and a wide radial crown of drooping nectar traps"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 3,
+      "id": "zephyrtap",
+      "base": "Beast",
+      "alter": "Elemental",
+      "forms": [
+        "Gustling",
+        "Zephyrtap",
+        "Tempest Treader"
+      ],
+      "referenceAtlas": "./assets/roster/zephyrtap.webp",
+      "identity": "A real tapir with a short trunk, living cloud curls, teal wind ribbons, and copper spiral markings.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Stocky round tapir calf with short trunk and wisps at its ankles",
+        "Longer-legged wandering tapir with a substantial cloud saddle and curling trunk currents",
+        "Deep-chested storm tapir with high cloud shoulder crest, long flowing wind mane and broad anchored feet"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-d483b691-858e-4e7a-a804-f52ec23d9402.png",
+      "sourceSha256": "a783deb5be09c2b038b4de6dd8577438b683dd90c67271648d62c5b56901847e",
+      "atlas": "./assets/roster/zephyrtap-v4.webp",
+      "sourceBoxes": [
+        [
+          98,
+          203,
+          556,
+          608
+        ],
+        [
+          632,
+          127,
+          1339,
+          621
+        ],
+        [
+          1412,
+          16,
+          2131,
+          623
+        ]
+      ],
+      "atlasSha256": "cbd2cdd558288d3d79a970e1e153e6de1a1572a976c1de1ecdd036e74919d2fa"
+    },
+    {
+      "number": 4,
+      "id": "oculume",
+      "base": "Aberration",
+      "alter": "Celestial",
+      "forms": [
+        "Oculit",
+        "Oculume",
+        "Thousand Vigil"
+      ],
+      "referenceAtlas": "./assets/roster/oculume.webp",
+      "identity": "A non-animal floating spiral mantle with asymmetrical eyes, orbiting gold feather-shaped lights, and a pearl-and-indigo body.",
+      "decision": "rework",
+      "reason": "Reassessment: enlarged ornament or extra surface details do not sufficiently change the underlying body architecture.",
+      "stages": [
+        "A tiny single eye tightly wrapped in one tapering pearl mantle and two disconnected gold feather lights",
+        "An open crescent-shaped indigo mantle with eyes lining its inner curve, a hanging twisting membrane and a lateral arc of feather lights",
+        "A hollow annular living aperture with several asymmetrically folded mantles, offset eye clusters and separate orbiting gold feather segments; no ordinary animal body"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 5,
+      "id": "mycogaze",
+      "base": "Aberration",
+      "alter": "Plant",
+      "forms": [
+        "Sporblink",
+        "Mycogaze",
+        "Verdant Witness"
+      ],
+      "referenceAtlas": "./assets/roster/mycogaze.webp",
+      "identity": "A walking ring of watchful eyes and branching mycelial tendrils, modified by predatory moss and tiny violet spore cups.",
+      "decision": "rework",
+      "reason": "Reassessment: enlarged ornament or extra surface details do not sufficiently change the underlying body architecture.",
+      "stages": [
+        "A small closed fungal spore capsule with one large eye, three thin root feet and two violet cup buds",
+        "A walking incomplete ring of fused eye-bearing mushrooms on four crooked mycelial struts, open space clearly visible through its body",
+        "A spreading many-arched mycelial organism with a recessed central eye, dangling root curtain, broad fungal crown and several off-axis eye clusters; organic, no literal buildings"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 6,
+      "id": "vellifold",
+      "base": "Aberration",
+      "alter": "Ooze",
+      "forms": [
+        "Foldrop",
+        "Vellifold",
+        "Paradox Tide"
+      ],
+      "referenceAtlas": "./assets/roster/vellifold.webp",
+      "identity": "An impossible folded ribbon creature with recursive limbs and aperture eyes, softened by translucent turquoise gel and droplet edges.",
+      "decision": "rework",
+      "reason": "Reassessment: enlarged ornament or extra surface details do not sufficiently change the underlying body architecture.",
+      "stages": [
+        "A compact triangular folded ribbon droplet with one aperture eye, a hanging blue gel bead and no rigid animal skeleton",
+        "An elongated crawling ribbon creature whose four recurved limbs form linked geometric folds, turquoise gel joining the joints",
+        "A suspended broad Mobius-like loop of recursive ribbon bridges and impossible negative spaces, eyes on opposing inner surfaces and liquid curtains beneath; no conventional quadruped torso"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 7,
+      "id": "lanterglide",
+      "base": "Beast",
+      "alter": "Fey",
+      "forms": [
+        "Liltuft",
+        "Lanterglide",
+        "Gossamer Courier"
+      ],
+      "referenceAtlas": "./assets/roster/lanterglide.webp",
+      "identity": "A real sugar glider with a cream-and-chestnut body, faerie membrane patterns, tiny lantern-like nectar lights, and long silk ear tufts.",
+      "decision": "rework",
+      "reason": "Reassessment: enlarged ornament or extra surface details do not sufficiently change the underlying body architecture.",
+      "stages": [
+        "A compact perched sugar-glider joey with oversized round head, folded gliding skin, short silk ear tufts and a tightly curled lantern tail",
+        "A lean sugar glider in horizontal flight, fully extended hand-to-foot membranes with chestnut faerie patterns and a long rudder tail",
+        "A tall upright perched sugar-glider courier with long spread membrane fingers forming a fan-shaped cloak, exceptionally long tufted ears and its prehensile tail looped overhead carrying nectar lights; animal face, no human anatomy"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 8,
+      "id": "veilstripe",
+      "base": "Beast",
+      "alter": "Undead",
+      "forms": [
+        "Hushpup",
+        "Veilstripe",
+        "Pale Tracker"
+      ],
+      "referenceAtlas": "./assets/roster/veilstripe.webp",
+      "identity": "An extinct thylacine with charcoal stripes, bone-white markings, spectral lavender breath, and a translucent tail.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small thylacine cub with dark stripes and faint translucent tail tip",
+        "Lean stalking thylacine with angular shoulders and spectral mist escaping visible rib-shaped markings",
+        "Weathered ancestral thylacine with a long spectral mane, interrupted fading hindquarters and elongated ghostly tail; recognizable animal remains"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-2a3c809b-c746-47db-a437-bc8275de2790.png",
+      "sourceSha256": "b13ac35be501704d3db3addcea3ff52d1ceffabf9e5726c7f6a7a7757432bd66",
+      "atlas": "./assets/roster/veilstripe-v4.webp",
+      "sourceBoxes": [
+        [
+          100,
+          351,
+          577,
+          584
+        ],
+        [
+          651,
+          254,
+          1365,
+          580
+        ],
+        [
+          1430,
+          95,
+          2141,
+          587
+        ]
+      ],
+      "atlasSha256": "fb12cfe06f29928b42726efa6437fc3e9f9b7efb3c15db6d31f48c593cde41af"
+    },
+    {
+      "number": 9,
+      "id": "megalorn",
+      "base": "Beast",
+      "alter": "Giant",
+      "forms": [
+        "Megalow",
+        "Megalorn",
+        "Valley Colossus"
+      ],
+      "referenceAtlas": "./assets/roster/megalorn.webp",
+      "identity": "An extinct giant ground sloth with massive curved claws, sandy shaggy fur, slate-gray calluses, and increasingly colossal proportions.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact ground-sloth juvenile sitting low with short stout limbs and curved digging claws",
+        "Forward-hunched roaming ground sloth with longer forearms, broad shaggy shoulders and low heavy gait",
+        "Ancient ground-sloth colossus with towering shoulder hump, draped shaggy mantle, immense forelimbs and broad weight-bearing hind feet"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-72202961-5c5d-460e-8dc0-d93838d009e2.png",
+      "sourceSha256": "f82991821c29c08d8db8e64770afc40a121eb9ae5906cd09f4164770c99a0740",
+      "atlas": "./assets/roster/megalorn-v4.webp",
+      "sourceBoxes": [
+        [
+          100,
+          336,
+          519,
+          676
+        ],
+        [
+          607,
+          207,
+          1320,
+          675
+        ],
+        [
+          1386,
+          19,
+          2145,
+          685
+        ]
+      ],
+      "atlasSha256": "80167f8a9637773266f1b0e944aaeca7271564d11b57cd90510a2eb37384ce56"
+    },
+    {
+      "number": 10,
+      "id": "aurelattice",
+      "base": "Celestial",
+      "alter": "Construct",
+      "forms": [
+        "Sparkwrit",
+        "Aurelattice",
+        "Solar Mechanarch"
+      ],
+      "referenceAtlas": "./assets/roster/aurelattice.webp",
+      "identity": "A luminous many-winged celestial guardian with ivory feathers, articulated golden wing frames, rotating crystal joints, and warm cyan light.",
+      "decision": "rework",
+      "reason": "Reassessment: enlarged ornament or extra surface details do not sufficiently change the underlying body architecture.",
+      "stages": [
+        "A small crouched ivory-and-gold celestial hatchling with folded mechanical wing plates and one turquoise chest lens",
+        "A tall long-necked gryphonlike guardian on four slender articulated legs with two open golden wing frames and a narrow flowing feather tail",
+        "A levitating celestial gyroscope with a luminous core surrounded by six radial ivory feather wings on golden articulated frames, a turquoise central lens and dangling feather tail; the quadruped body has unfolded into the wing mechanism"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 11,
+      "id": "seralotus",
+      "base": "Celestial",
+      "alter": "Plant",
+      "forms": [
+        "Lotulume",
+        "Seralotus",
+        "Blossom Seraph"
+      ],
+      "referenceAtlas": "./assets/roster/seralotus.webp",
+      "identity": "A six-winged celestial guardian whose feather fans become layered white lotus petals and living green tendrils around a radiant core.",
+      "decision": "rework",
+      "reason": "Reassessment: enlarged ornament or extra surface details do not sufficiently change the underlying body architecture.",
+      "stages": [
+        "A compact four-legged ivory celestial lotus cub with tightly cupped green-tipped petal wings and a bud-shaped tail",
+        "A slender long-necked striding lotus guardian with four long legs, swept-back opened petal wings and a trailing vine tail",
+        "A floating open lotus entity whose layered ivory-and-green petals surround the recognizable guardian head, gold heart light and coiled vine center; legs fully withdrawn into the bloom, broad radial silhouette"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 12,
+      "id": "astraveil",
+      "base": "Celestial",
+      "alter": "Undead",
+      "forms": [
+        "Glimbone",
+        "Astraveil",
+        "Ancestral Radiance"
+      ],
+      "referenceAtlas": "./assets/roster/astraveil.webp",
+      "identity": "An otherworldly halo-bearing celestial whose pearl armor reveals elegant ancestral bone and trails of pale blue soul light.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Pearl-armored celestial foal with one small halo and subtle glowing bone seams",
+        "Lean spectral guardian with opened rib armor and a long flowing soul mantle",
+        "Solemn ancestral radiance with fully articulated floating pearl-bone armor, a deep luminous ribcage and sweeping auroral mane; keep four legs"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-ec568bbc-6da0-41c5-bfc0-039e85767138.png",
+      "sourceSha256": "e9afa2dc1f1aa92b6bf7e22250d8c4ae1b1bd2d6a8d0deae5b3371923f44ccc9",
+      "atlas": "./assets/roster/astraveil-v4.webp",
+      "sourceBoxes": [
+        [
+          102,
+          204,
+          548,
+          634
+        ],
+        [
+          728,
+          84,
+          1366,
+          639
+        ],
+        [
+          1450,
+          34,
+          2136,
+          640
+        ]
+      ],
+      "atlasSha256": "818916385bc7e379e5cbd24cff1b138bba903af52a36d3a6e58f4deb606f9ea1"
+    },
+    {
+      "number": 13,
+      "id": "auroriel",
+      "base": "Celestial",
+      "alter": "Elemental",
+      "forms": [
+        "Flarecho",
+        "Auroriel",
+        "Crown of Dawn"
+      ],
+      "referenceAtlas": "./assets/roster/auroriel.webp",
+      "identity": "A wing-ring celestial composed of soft aurora ribbons, opaline feathers, and a brilliant coral-and-gold elemental heart.",
+      "decision": "rework",
+      "reason": "Reassessment: enlarged ornament or extra surface details do not sufficiently change the underlying body architecture.",
+      "stages": [
+        "A small curled sun-spark creature with an ivory head, short paired flame fins and one peach-gold halo fragment",
+        "A long airborne solar serpent with an arched ivory neck, broad paired pastel flame wings and a narrow streaming ribbon tail",
+        "An upright sun-phoenix elemental with an open radiant chest, six layered dawn-flame fans arranged around its central body, two ivory talons and an enormous circular solar corona"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 14,
+      "id": "bronzewade",
+      "base": "Construct",
+      "alter": "Beast",
+      "forms": [
+        "Rivetreed",
+        "Bronzewade",
+        "Heron Magistrate"
+      ],
+      "referenceAtlas": "./assets/roster/bronzewade.webp",
+      "identity": "A bronze automaton shaped with long heron-like legs and a curved mechanical beak, with emerald patina and articulated wing plates.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Squat short-legged bronze heron chick automaton with compact folded wing plates",
+        "Long-necked wading automaton with thin high-jointed legs, longer beak and partially opened wing fans",
+        "Tall arched-neck heron magistrate with broad layered mechanical wing fans and flared bronze tail; anatomically avian throughout"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-5dfad2ae-a97d-430b-bfd4-e0fe9e425072.png",
+      "sourceSha256": "ae2e3cb644f66381864da3159ee52265423ef0ff0fe24ddd6f7696f2ee9dd872",
+      "atlas": "./assets/roster/bronzewade-v4.webp",
+      "sourceBoxes": [
+        [
+          168,
+          256,
+          525,
+          637
+        ],
+        [
+          742,
+          41,
+          1289,
+          690
+        ],
+        [
+          1402,
+          10,
+          2114,
+          698
+        ]
+      ],
+      "atlasSha256": "d74455b499287158c1317abc871d0cb19fc3bd3e11532ad78115d0bc815149ba"
+    },
+    {
+      "number": 15,
+      "id": "jarjell",
+      "base": "Construct",
+      "alter": "Ooze",
+      "forms": [
+        "Lacquib",
+        "Jarjell",
+        "Lacquer Custodian"
+      ],
+      "referenceAtlas": "./assets/roster/jarjell.webp",
+      "identity": "A walking black-and-vermilion lacquer vessel whose ceramic limbs are joined by clear amber jelly and floating brass fasteners.",
+      "decision": "retain",
+      "reason": "Cup, jar and lidded vessel bodies are structurally distinct.",
+      "stages": null,
+      "status": "retained"
+    },
+    {
+      "number": 16,
+      "id": "puppetide",
+      "base": "Construct",
+      "alter": "Fey",
+      "forms": [
+        "Twigknock",
+        "Puppetide",
+        "Woodland Puppeteer"
+      ],
+      "referenceAtlas": "./assets/roster/puppetide.webp",
+      "identity": "A carved wooden marionette with a lacquered nonhuman mask, jointed branch limbs, faerie silk cords, and small luminous bell flowers.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small crude twig marionette with simple mask, short limbs and a few hanging bell flowers",
+        "Long-limbed articulated puppeteer with clear carved wooden joints and silk strings spanning its outstretched fingers",
+        "Hunched branching woodland puppet master with layered bark torso, many dangling floral cords and an elaborate nonhuman carved face; retain two arms and legs"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-3b401dc8-347d-4f4c-b445-f706751014eb.png",
+      "sourceSha256": "1d3f851fd1a241678363f4c1b908309f61fda88fb4803da0039596288d77bff9",
+      "atlas": "./assets/roster/puppetide-v4.webp",
+      "sourceBoxes": [
+        [
+          126,
+          149,
+          485,
+          667
+        ],
+        [
+          643,
+          14,
+          1293,
+          694
+        ],
+        [
+          1392,
+          30,
+          2152,
+          692
+        ]
+      ],
+      "atlasSha256": "8016836be86e8e57a3b30804c88d6027cdbae0380b9f078e0532654afb1c36cc"
+    },
+    {
+      "number": 17,
+      "id": "kilnwarden",
+      "base": "Construct",
+      "alter": "Fiend",
+      "forms": [
+        "Cinderbolt",
+        "Kilnwarden",
+        "Iron Hellkeeper"
+      ],
+      "referenceAtlas": "./assets/roster/kilnwarden-v3.webp",
+      "identity": "An iron furnace construct animated by one large vertical eye made of fire and darkness. It transforms from a round little brazier into a barrel-chested furnace warden and an angular forge sentinel.",
+      "decision": "retain",
+      "reason": "New brazier, barrel warden and angular sentinel designs are distinct.",
+      "stages": null,
+      "status": "retained"
+    },
+    {
+      "number": 18,
+      "id": "torrentreed",
+      "base": "Elemental",
+      "alter": "Plant",
+      "forms": [
+        "Rillbud",
+        "Torrentreed",
+        "Riverbloom Torrent"
+      ],
+      "referenceAtlas": "./assets/roster/torrentreed.webp",
+      "identity": "A living swirl of river water with curling current limbs, carnivorous reed fronds, floating seed pods, and jade ripples.",
+      "decision": "retain",
+      "reason": "River vortex, reed crown and current limbs change structure.",
+      "stages": null,
+      "status": "retained"
+    },
+    {
+      "number": 19,
+      "id": "cinerwraith",
+      "base": "Elemental",
+      "alter": "Undead",
+      "forms": [
+        "Ashwhisp",
+        "Cinerwraith",
+        "Last Emberstorm"
+      ],
+      "referenceAtlas": "./assets/roster/cinerwraith.webp",
+      "identity": "A living ash-and-ember whirlwind modified by spectral ribs and fading ancestral cloth, in charcoal, peach ember, and cold violet.",
+      "decision": "retain",
+      "reason": "Ember vortex opens into a spectral rib structure.",
+      "stages": null,
+      "status": "retained"
+    },
+    {
+      "number": 20,
+      "id": "glasswhorl",
+      "base": "Elemental",
+      "alter": "Construct",
+      "forms": [
+        "Sandsplin",
+        "Glasswhorl",
+        "Dune Orrery"
+      ],
+      "referenceAtlas": "./assets/roster/glasswhorl.webp",
+      "identity": "A spinning elemental sand creature with segmented glass rings and bronze pivot joints, using amber sand and teal glass highlights.",
+      "decision": "retain",
+      "reason": "Independent rotating rings and glass cage develop.",
+      "stages": null,
+      "status": "retained"
+    },
+    {
+      "number": 21,
+      "id": "resonara",
+      "base": "Elemental",
+      "alter": "Celestial",
+      "forms": [
+        "Plasmote",
+        "Resonara",
+        "Heavenly Resonance"
+      ],
+      "referenceAtlas": "./assets/roster/resonara.webp",
+      "identity": "A creature of ringing blue plasma shaped into nested bell-like currents, altered by small feathered light arcs and a gold celestial crown.",
+      "decision": "rework",
+      "reason": "Reassessment: enlarged ornament or extra surface details do not sufficiently change the underlying body architecture.",
+      "stages": [
+        "A single small blue bell spirit with a golden clapper and two tiny folded white winglets",
+        "A long suspended paired-bell creature with a narrow articulated gold spine, wings spread horizontally and two separate glowing clappers",
+        "A hovering radial carillon seraph with three open bells facing different directions around a bright gold core, six curved white feather lobes and one broad orbital halo; reorganized body, no conventional legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 22,
+      "id": "whiskerfey",
+      "base": "Fey",
+      "alter": "Beast",
+      "forms": [
+        "Velvetip",
+        "Whiskerfey",
+        "Velvet Regent"
+      ],
+      "referenceAtlas": "./assets/roster/whiskerfey.webp",
+      "identity": "A small nonhuman woodland faerie with velvet mothlike wings, dormouse whiskers, nimble paws, and a plum-and-cream tufted tail.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Round dormouse faerie with tucked small moth wings and a short fluffy tail",
+        "Nimble long-bodied faerie glider with wide functional moth wings and long whiskers",
+        "Poised woodland faerie courier with elongated hindlegs, broad scalloped moth wings and a large sweeping tufted tail; no human face"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-eb462541-5ec6-4fa1-8af3-fa02300b91ac.png",
+      "sourceSha256": "adff7206a8e71c7c725739ae90c1f318f4f0446d957bddf3e1c4d7de28340120",
+      "atlas": "./assets/roster/whiskerfey-v4.webp",
+      "sourceBoxes": [
+        [
+          79,
+          326,
+          524,
+          648
+        ],
+        [
+          620,
+          118,
+          1305,
+          659
+        ],
+        [
+          1424,
+          27,
+          2151,
+          659
+        ]
+      ],
+      "atlasSha256": "d11f58d0e05125ba692b4cbc8f558bb47a97e1a9301988bb6819b1609a40c2d3"
+    },
+    {
+      "number": 23,
+      "id": "gelmirth",
+      "base": "Fey",
+      "alter": "Ooze",
+      "forms": [
+        "Dewglee",
+        "Gelmirth",
+        "Gossamer Gelcourt"
+      ],
+      "referenceAtlas": "./assets/roster/gelmirth.webp",
+      "identity": "A faerie with curled fernlike ears and delicate insect wings whose mint-colored body flows into transparent gel skirts and dew beads.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Dewdrop-shaped slug-bodied faerie with tiny wing buds, curled fern ears and small grasping arms",
+        "Upright faerie torso flowing into a long soft translucent slug foot, with two developed insect wings",
+        "Regal gel faerie with a broad rippling slug mantle, raised fern crown and long glassy wings; no human legs, retain two arms"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-652ea2ac-622d-46a0-ae92-86b012681df1.png",
+      "sourceSha256": "fd28b894adb7c88faa555c8c7e136eb6acec08e96cc3da36158f73a7f8a7e20a",
+      "atlas": "./assets/roster/gelmirth-v4.webp",
+      "sourceBoxes": [
+        [
+          173,
+          205,
+          500,
+          619
+        ],
+        [
+          754,
+          69,
+          1232,
+          673
+        ],
+        [
+          1391,
+          10,
+          2127,
+          688
+        ]
+      ],
+      "atlasSha256": "43d0b2886fbde4b5d2912a3f49e3b207f7c9a959da76fde12fd00140ca966bc8"
+    },
+    {
+      "number": 24,
+      "id": "silkvisage",
+      "base": "Fey",
+      "alter": "Beast",
+      "forms": [
+        "Masklet",
+        "Silkvisage",
+        "Sixfinger Envoy"
+      ],
+      "referenceAtlas": "./assets/roster/silkvisage.webp",
+      "identity": "A slender faerie with a moth-wing cloak, smooth porcelain insect mask, six-fingered hands, and a bipedal but visibly nonhuman body.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small hunched moth-masked faerie with simple close-folded wing cape and short grasping hands",
+        "Long-legged faerie envoy with narrow upright torso, elongated six-fingered hands and a split moth cape",
+        "Forward-leaning imposing envoy with pronounced insect-mask profile, long low-reaching arms and a broad folded moth mantle; keep two arms and two legs"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-8eb1cd5f-aec0-4ca8-b7a6-5e8a8da21bda.png",
+      "sourceSha256": "3ca8b682eb08225f32023337b1e1c5f708f7275dd7c57c1aeed3680ef8402404",
+      "atlas": "./assets/roster/silkvisage-v4.webp",
+      "sourceBoxes": [
+        [
+          182,
+          215,
+          563,
+          666
+        ],
+        [
+          684,
+          17,
+          1218,
+          694
+        ],
+        [
+          1288,
+          25,
+          2155,
+          680
+        ]
+      ],
+      "atlasSha256": "08a499cdaeec215a45eba2cf3857342c6c0cd9f2cb045df2741d9f95b5ffc334"
+    },
+    {
+      "number": 25,
+      "id": "jesthorn",
+      "base": "Fey",
+      "alter": "Fiend",
+      "forms": [
+        "Prankcoal",
+        "Jesthorn",
+        "Thorn Court Jester"
+      ],
+      "referenceAtlas": "./assets/roster/jesthorn.webp",
+      "identity": "A mischievous faerie with curled leaf wings, a striped violet tail, little infernal antlers, and ember-red thorn tips.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Impish round leaf faerie with little antler nubs and short striped tail",
+        "Lean bounding jester faerie with swept leaf wings and a long balancing violet tail",
+        "Arch-backed antlered thorn faerie with a wide leaf-wing fan, long springing hindlegs and elaborately curled tail; preserve one head and four animal limbs"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-f3caf5b2-22d3-4792-ba93-7494a27ad1e8.png",
+      "sourceSha256": "59835e0b457a24563be1875cadc25670fb556972c5e69dda8af0030545135ed8",
+      "atlas": "./assets/roster/jesthorn-v4.webp",
+      "sourceBoxes": [
+        [
+          101,
+          258,
+          527,
+          623
+        ],
+        [
+          683,
+          168,
+          1319,
+          622
+        ],
+        [
+          1386,
+          27,
+          2130,
+          657
+        ]
+      ],
+      "atlasSha256": "9bdc2a36770a7a0d2bfedc60171b7e38c7cbd7dd6793ed1e2d0fd15f8ee9f808"
+    },
+    {
+      "number": 26,
+      "id": "bramblefiend",
+      "base": "Fiend",
+      "alter": "Plant",
+      "forms": [
+        "Burrimp",
+        "Bramblefiend",
+        "Infernal Briar"
+      ],
+      "referenceAtlas": "./assets/roster/bramblefiend.webp",
+      "identity": "A horned fiend with a barbed tail and folded membrane wings, overgrown by burgundy pitcher plants and hooked olive thorns.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact thorn imp with small pitchers and low folded wings",
+        "Long-backed stalking briar fiend whose spine supports distinct pitcher traps and barbed vines",
+        "Heavy-rooted crouching briar predator with large shoulder pitcher cups, broad thorn forearms and a sweeping hooked tail; keep its established body plan"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-ee20f07a-cf27-47a0-a26b-3df091da5787.png",
+      "sourceSha256": "5133fe7d87ef3ff37442a1cc4d0abde1538ae40f028ec16da8e86402181a66b7",
+      "atlas": "./assets/roster/bramblefiend-v4.webp",
+      "sourceBoxes": [
+        [
+          91,
+          220,
+          538,
+          600
+        ],
+        [
+          589,
+          152,
+          1304,
+          597
+        ],
+        [
+          1348,
+          54,
+          2145,
+          604
+        ]
+      ],
+      "atlasSha256": "c39937a111d444d96f96ed2d7dc98a575421b7f43bf47e965893991be31ec15a"
+    },
+    {
+      "number": 27,
+      "id": "chainhorn",
+      "base": "Fiend",
+      "alter": "Construct",
+      "forms": [
+        "Linkimp",
+        "Chainhorn",
+        "Furnace Bailiff"
+      ],
+      "referenceAtlas": "./assets/roster/chainhorn.webp",
+      "identity": "A long-armed horned fiend with brass jaw plates, dark iron chain loops, riveted shoulder guards, and red-hot joint seams.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Crouched chain imp with disproportionately large hands and a few loose brass links",
+        "Lean high-shouldered chain fiend with very long articulated forearms and linked shoulder chains",
+        "Massive stooping furnace bailiff with deep plated chest, heavy dragging chain loops and enormous grasping gauntlets; two arms and two legs"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-59919e22-e10f-4e49-b7f0-08fcb5854894.png",
+      "sourceSha256": "0ab32a6a01280f22496a90b568c16f0c13fe546eaf857ddc9d0149735b907631",
+      "atlas": "./assets/roster/chainhorn-v4.webp",
+      "sourceBoxes": [
+        [
+          52,
+          242,
+          541,
+          686
+        ],
+        [
+          592,
+          69,
+          1266,
+          697
+        ],
+        [
+          1283,
+          15,
+          2164,
+          687
+        ]
+      ],
+      "atlasSha256": "5e1e3f690c66eb5996e20d23c490235f5a1c537443bfeba7c07ef9bf481e3ab1"
+    },
+    {
+      "number": 28,
+      "id": "crownscar",
+      "base": "Fiend",
+      "alter": "Celestial",
+      "forms": [
+        "Ashhalo",
+        "Crownscar",
+        "Eclipsed Herald"
+      ],
+      "referenceAtlas": "./assets/roster/crownscar.webp",
+      "identity": "A charcoal-skinned winged fiend with curling ivory horns, a fractured luminous feather halo, and silver celestial markings; no moral alignment implied.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small charcoal fiend with tucked membrane wings and a broken feather halo fragment",
+        "Long-necked lean winged guardian with wide unfurling wings and luminous feather markings",
+        "Regal crouching celestial fiend with a tall horn crown, broad feather-fringed membrane wings and a segmented halo; four-legged source body plan retained"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-91a60ed5-c390-446f-8aaa-a7688f4e845a.png",
+      "sourceSha256": "093a6ee3f2561166d856593a1d665d1e25b2c51f24cc617de9740bfb235787fc",
+      "atlas": "./assets/roster/crownscar-v4.webp",
+      "sourceBoxes": [
+        [
+          108,
+          225,
+          538,
+          614
+        ],
+        [
+          578,
+          52,
+          1313,
+          620
+        ],
+        [
+          1347,
+          26,
+          2116,
+          641
+        ]
+      ],
+      "atlasSha256": "461a35041c9c22e3949d622ec09ac3f54f5ae060c8f33f5ea01489ba020e5cb1"
+    },
+    {
+      "number": 29,
+      "id": "pitchmaw",
+      "base": "Fiend",
+      "alter": "Ooze",
+      "forms": [
+        "Tarpip",
+        "Pitchmaw",
+        "Obsidian Mirefiend"
+      ],
+      "referenceAtlas": "./assets/roster/pitchmaw.webp",
+      "identity": "A crouching horned fiend whose glossy black body drips into viscous oil-like gel, with ochre eyes and amber-lit cracks.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Low glossy tar imp with small horns and soft grasping forelimbs",
+        "Hunched oily fiend with an elevated chest, elongated clawed arms and liquid hindquarters",
+        "Broad predatory mirefiend with a high flowing tar mantle, split glowing chest cracks and long pooling forearms; gel anatomy remains flexible"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-c1d227e3-12bf-41bf-a4a5-e202df7fa30b.png",
+      "sourceSha256": "e85c539177a15bfa31163d5c3dbf594766445c95bdc17f00da8bbf1f3da06877",
+      "atlas": "./assets/roster/pitchmaw-v4.webp",
+      "sourceBoxes": [
+        [
+          74,
+          261,
+          524,
+          623
+        ],
+        [
+          618,
+          65,
+          1289,
+          645
+        ],
+        [
+          1349,
+          27,
+          2142,
+          683
+        ]
+      ],
+      "atlasSha256": "72ecc5c56b38fbbd99b8235f37288ef342d08f1c5144bbb653681e386cb9490d"
+    },
+    {
+      "number": 30,
+      "id": "bonsaitor",
+      "base": "Giant",
+      "alter": "Plant",
+      "forms": [
+        "Terralow",
+        "Bonsaitor",
+        "Terrace Patriarch"
+      ],
+      "referenceAtlas": "./assets/roster/bonsaitor-v3.webp",
+      "identity": "A sandstone and living-wood giant with an elephant head, a moss-covered trunk, bark-textured tusks, enormous hands and terraced bonsai trees growing across its back.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small hunched elephant-headed woodland giant with a short mossy trunk, stubby tusks and one sapling growing from a rounded back",
+        "Broad forward-leaning elephant giant with longer trunk, reinforced root-covered forearms and several separate bonsai ledges",
+        "Ancient low-slung elephant titan supporting a wide terraced grove across a high craggy back, huge root-braced arms and sweeping mossy trunk; two arms and legs"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-e425c1bc-8768-4067-b520-59cc22ee9bfb.png",
+      "sourceSha256": "ec32f40466654b695c127d302315993e640df6dfa28ae6605248e33f2ee5d230",
+      "atlas": "./assets/roster/bonsaitor-v4.webp",
+      "sourceBoxes": [
+        [
+          56,
+          188,
+          505,
+          655
+        ],
+        [
+          602,
+          51,
+          1245,
+          657
+        ],
+        [
+          1293,
+          14,
+          2144,
+          657
+        ]
+      ],
+      "atlasSha256": "b5f3cf9bfc2c9580f2c7a47f15e0cc085471d85dad176494690dacf762606aaa"
+    },
+    {
+      "number": 31,
+      "id": "cloudgron",
+      "base": "Giant",
+      "alter": "Elemental",
+      "forms": [
+        "Rumblekin",
+        "Cloudgron",
+        "Monsoon Grandfather"
+      ],
+      "referenceAtlas": "./assets/roster/cloudgron-v3.webp",
+      "identity": "A slate-blue storm giant with a ram head, curling horns, a white cloud mane and beard, digitigrade legs and cloven hooves, bronze bracers and electric-blue lightning accents.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact ram-headed cloud giant with small curled horns, patchy fleece and springy digitigrade cloven legs",
+        "Broad-chested storm shepherd with mature curled horns, dense cloud shoulder fleece and thick braced arms",
+        "Hunched ancient monsoon ram giant with a towering thunderhead mane, long cloud beard and heavy cloven legs; distinct domed silhouette, no added wings"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-3e37ab27-52a0-47f0-9575-f0610992458a.png",
+      "sourceSha256": "e39ac7a9daa8e1dbc4cae39733ac03d2abf4e4b0e1d76d710544c195ce841037",
+      "atlas": "./assets/roster/cloudgron-v4.webp",
+      "sourceBoxes": [
+        [
+          154,
+          185,
+          565,
+          667
+        ],
+        [
+          682,
+          22,
+          1294,
+          682
+        ],
+        [
+          1380,
+          4,
+          2136,
+          680
+        ]
+      ],
+      "atlasSha256": "041838a3353737aaff714bd0be9fcb99c793be707960ff9b58a0b96ffdb73e59"
+    },
+    {
+      "number": 32,
+      "id": "lacquertor",
+      "base": "Giant",
+      "alter": "Construct",
+      "forms": [
+        "Plinthkin",
+        "Lacquertor",
+        "Living Fortress"
+      ],
+      "referenceAtlas": "./assets/roster/lacquertor-v3.webp",
+      "identity": "A hunchbacked stone giant with four long bulky arms and red lacquer armor edged in antique gold. A rough boulder juvenile becomes an arch-backed guardian and a broad ancient titan with a ridged natural stone mantle; never architectural shoulders.",
+      "decision": "retain",
+      "reason": "New boulder juvenile, arch-backed guardian and ridged titan are distinct.",
+      "stages": null,
+      "status": "retained"
+    },
+    {
+      "number": 33,
+      "id": "barrowgron",
+      "base": "Giant",
+      "alter": "Undead",
+      "forms": [
+        "Graveltot",
+        "Barrowgron",
+        "Sepulcher Titan"
+      ],
+      "referenceAtlas": "./assets/roster/barrowgron-v3.webp",
+      "identity": "An undead slate giant with greatly elongated arms and ground-reaching knuckles, weathered burial wraps, a shadowed stone mask, cyan-glowing exposed ribs and a tombstone mantle.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact shrouded grave giant with long knuckle-reaching arms, small mask and simple glowing rib seams",
+        "Forward-stooping revenant with elongated massive forearms, exposed cyan ribs and a narrow grave-slab back mantle",
+        "Ancient sepulcher titan with a deeply arched burial mantle, low recessed stone-mask head and immense long knuckle-bearing arms; two arms, two legs"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-a9538b91-9166-49ee-bd02-6910f6351971.png",
+      "sourceSha256": "17c906c8c58bd465c789aa8ddf67b24ad42bb4c26a39289ab5ba7385ef18a479",
+      "atlas": "./assets/roster/barrowgron-v4.webp",
+      "sourceBoxes": [
+        [
+          51,
+          249,
+          545,
+          673
+        ],
+        [
+          624,
+          55,
+          1251,
+          684
+        ],
+        [
+          1331,
+          22,
+          2137,
+          686
+        ]
+      ],
+      "atlasSha256": "06d04d2e06267175796a02d916ae3cde3dc1ee9067b874a8253c7ac8f538cf37"
+    },
+    {
+      "number": 34,
+      "id": "silkclasp",
+      "base": "Fey",
+      "alter": "Beast",
+      "forms": [
+        "Mothling",
+        "Silkclasp",
+        "Mothmask Adept"
+      ],
+      "referenceAtlas": "./assets/roster/silkclasp.webp",
+      "identity": "A visibly nonhuman biped with a moth head, four delicate grasping forearms, soft fur cuffs, and broad patterned antennae; never a human.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small fuzzy moth-headed biped with tiny four forearms and short antennae",
+        "Slender four-armed moth adept with distinct upper and lower arm proportions and long patterned antennae",
+        "Hunched broad-mantled moth adept with four elongated dexterous forearms, thick fur collar and a fanlike antenna crown; no additional arms or wings"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-35f142b4-dbd5-403b-82ef-ec8bd3a7b6d2.png",
+      "sourceSha256": "5b107c4653f63ddbc7faf02e12827cf29608ac7de05db53f781a7a575946061a",
+      "atlas": "./assets/roster/silkclasp-v4.webp",
+      "sourceBoxes": [
+        [
+          213,
+          200,
+          504,
+          669
+        ],
+        [
+          715,
+          15,
+          1198,
+          692
+        ],
+        [
+          1388,
+          9,
+          2068,
+          694
+        ]
+      ],
+      "atlasSha256": "9ac7532f0a26976059111bfe139ba4d6998057267c24321b3043419422b108bb"
+    },
+    {
+      "number": 35,
+      "id": "wickerstride",
+      "base": "Construct",
+      "alter": "Plant",
+      "forms": [
+        "Reedkin",
+        "Wickerstride",
+        "Bamboo Wayfarer"
+      ],
+      "referenceAtlas": "./assets/roster/wickerstride.webp",
+      "identity": "A visibly nonhuman human-shaped Spirimon with a reed-bundle head, hollow wooden face, two long legs, and living strangler-vine fingers; never a human.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small uneven reed bundle with a narrow hollow wooden face, short root hands and bent legs",
+        "Tall lean bamboo wayfarer with long jointed reed limbs and vines binding its torso",
+        "Hunched mature walking bamboo grove with a broad reed canopy back, long hanging vine fingers and sturdy root-braced legs; no extra arms"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-4b266eed-6fc9-4d37-819b-d1a42e58ff40.png",
+      "sourceSha256": "c6d3c136bb077b7c7fe3315c9913bf6e4ecab6f2414041cf74d3431c3ae3ca72",
+      "atlas": "./assets/roster/wickerstride-v4.webp",
+      "sourceBoxes": [
+        [
+          157,
+          239,
+          486,
+          675
+        ],
+        [
+          761,
+          26,
+          1222,
+          687
+        ],
+        [
+          1415,
+          21,
+          2140,
+          692
+        ]
+      ],
+      "atlasSha256": "8a62e48154fafe4126d80f4f98169c3c9fd57211badc41bd596e8560c308bfca"
+    },
+    {
+      "number": 36,
+      "id": "mirrorkin",
+      "base": "Construct",
+      "alter": "Aberration",
+      "forms": [
+        "Shiverglass",
+        "Mirrorkin",
+        "Manyhand Reflection"
+      ],
+      "referenceAtlas": "./assets/roster/mirrorkin.webp",
+      "identity": "A visibly nonhuman four-armed biped with a shifting mirrored face, offset eyes, ribbon joints, and asymmetric turquoise glass skin; never a human.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small fractured mirror biped with four short mismatched arms and offset eye reflections",
+        "Tall asymmetric glass creature with long ribbon-jointed arms and an open split reflective torso",
+        "Broad arched four-armed reflection with floating layered mirror shards and a deeply recessed shifting face; preserve existing four arms, no extra heads"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-7316b4dd-1341-4efe-a1da-2ab237cd53a8.png",
+      "sourceSha256": "62dd5c1310dca874627450ed50eb6b8a0d054c14ef968ee52bdf33595c109d24",
+      "atlas": "./assets/roster/mirrorkin-v4.webp",
+      "sourceBoxes": [
+        [
+          137,
+          167,
+          567,
+          682
+        ],
+        [
+          691,
+          18,
+          1328,
+          687
+        ],
+        [
+          1463,
+          14,
+          2147,
+          687
+        ]
+      ],
+      "atlasSha256": "6d858a4d27926468e7bd24ad9fc5658de6fba99b9265561a66794937b369d370"
+    },
+    {
+      "number": 37,
+      "id": "prismonk",
+      "base": "Beast",
+      "alter": "Celestial",
+      "forms": [
+        "Plumask",
+        "Prismonk",
+        "Iridescent Envoy"
+      ],
+      "referenceAtlas": "./assets/roster/prismonk.webp",
+      "identity": "A visibly nonhuman avian-headed biped with taloned hands, opaline feather crests, long ceremonial-looking plumage, and a small radiant wing mantle.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small avian-headed biped with short taloned hands, soft crest and close feather mantle",
+        "Long-legged poised bird envoy with elongated hand talons and a narrow radiant shoulder mantle",
+        "Hunched regal iridescent envoy with broad layered shoulder plumage, high opaline crest and long feather-fringed arms; retain two arms, two legs"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-878612ab-e3a5-422f-87ce-0e386b91d28b.png",
+      "sourceSha256": "6eafa1e5fc24de34b6f5c632fd2d0455407edbdc3e64f7b71c834f8a3034c9a4",
+      "atlas": "./assets/roster/prismonk-v4.webp",
+      "sourceBoxes": [
+        [
+          139,
+          143,
+          595,
+          682
+        ],
+        [
+          776,
+          12,
+          1325,
+          685
+        ],
+        [
+          1426,
+          16,
+          2157,
+          687
+        ]
+      ],
+      "atlasSha256": "f403459de87c5e62b0339bc18d7821fdc760a6327fdb2e16621a1d1305b7905b"
+    },
+    {
+      "number": 38,
+      "id": "tempestrill",
+      "base": "Monstrosity",
+      "alter": "Elemental",
+      "forms": [
+        "Skyscale",
+        "Tempestrill",
+        "Storm Amphiptere"
+      ],
+      "referenceAtlas": "./assets/roster/tempestrill.webp",
+      "identity": "An amphiptere from myth: a feather-winged serpent without walking legs, modified by swirling storm currents and blue-white feather sparks.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact legless feathered serpent coiled tightly with two short wings",
+        "Long serpentine flyer with broad separated feather wings and narrow wind-fringed body",
+        "Grand amphiptere with an arched ribbonlike body, immense layered storm wings and a long streaming tail; no walking legs at any stage"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-ad90e0f8-b647-45ef-98ca-5396815a0eb9.png",
+      "sourceSha256": "4b789562034e71b6eca0ecffd739aaee61e53cc00c35f87c84915775884c0681",
+      "atlas": "./assets/roster/tempestrill-v4.webp",
+      "sourceBoxes": [
+        [
+          115,
+          219,
+          504,
+          610
+        ],
+        [
+          554,
+          58,
+          1309,
+          658
+        ],
+        [
+          1341,
+          8,
+          2159,
+          707
+        ]
+      ],
+      "atlasSha256": "c62e2a1892330a4ba75b622cc43643bb59e456255ba34189a5365e1d085bbef3"
+    },
+    {
+      "number": 39,
+      "id": "reinroot",
+      "base": "Monstrosity",
+      "alter": "Plant",
+      "forms": [
+        "Kelpfoal",
+        "Reinroot",
+        "Strangler Kelpie"
+      ],
+      "referenceAtlas": "./assets/roster/reinroot.webp",
+      "identity": "A kelpie from Celtic myth: an eerie long-maned water horse modified by carnivorous aquatic vines, reed fins, and hooked green tendrils.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small reed-maned water foal with short vine tail and low aquatic crest",
+        "Lean long-necked kelpie with hanging aquatic-vine mane and reed fin ridges",
+        "Deep-chested eerie water horse with a high flowing vine mantle, hooked tendonlike vines and a long trailing reed tail; keep four hooved legs"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-73bc239d-302b-43e3-876b-ccdb5faa8589.png",
+      "sourceSha256": "d2f814226538fbdb6241e872342caed1f017beda87efb98b72b753f963f12def",
+      "atlas": "./assets/roster/reinroot-v4.webp",
+      "sourceBoxes": [
+        [
+          123,
+          228,
+          540,
+          639
+        ],
+        [
+          687,
+          99,
+          1283,
+          643
+        ],
+        [
+          1319,
+          19,
+          2150,
+          645
+        ]
+      ],
+      "atlasSha256": "2a457bb10b9d48c80aeb806e9eb94c3bd1fe7b9685252239ff2aad72c0f22ce7"
+    },
+    {
+      "number": 40,
+      "id": "fengweave",
+      "base": "Monstrosity",
+      "alter": "Construct",
+      "forms": [
+        "Cogspark",
+        "Fengweave",
+        "Bronze Fenghuang"
+      ],
+      "referenceAtlas": "./assets/roster/fengweave.webp",
+      "identity": "A fenghuang from Chinese myth with elaborate tail plumes, modified by bronze feather joints, jade inlays, and articulated golden crest plates.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Short-tailed young mechanical phoenix with simple bronze wing plates and a small jade crest",
+        "Long-necked fenghuang with articulated fan wings and several distinct sweeping tail plumes",
+        "Regal arched-neck fenghuang with a wide tiered golden wing fan and exceptionally long articulated tail streamers; two wings, two legs"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-69f84c70-639d-4bab-ba55-7f26a3364d73.png",
+      "sourceSha256": "2cd099a6155667b562a985cb192c763dc54d0263fbcfdfe105b1a476bf15b613",
+      "atlas": "./assets/roster/fengweave-v4.webp",
+      "sourceBoxes": [
+        [
+          102,
+          222,
+          502,
+          631
+        ],
+        [
+          557,
+          87,
+          1223,
+          671
+        ],
+        [
+          1301,
+          6,
+          2150,
+          693
+        ]
+      ],
+      "atlasSha256": "c1406923531a43c120e8239b4a5251823348928fa15e5c7a6c4b7820476f016a"
+    },
+    {
+      "number": 41,
+      "id": "vitrilisk",
+      "base": "Monstrosity",
+      "alter": "Ooze",
+      "forms": [
+        "Slimescale",
+        "Vitrilisk",
+        "Basilisk of Glass"
+      ],
+      "referenceAtlas": "./assets/roster/vitrilisk.webp",
+      "identity": "A basilisk from myth with a crownlike crest and serpentine body, modified by translucent violet gel, floating scales, and dripping glassy edges.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small low gel basilisk with blunt crest and short soft tail",
+        "Long-bodied translucent basilisk with an arched dorsal crest and broad dripping gel forelimbs",
+        "Heavy coiled gel basilisk with a crownlike ridge, deep predatory head and an elongated liquid tail; retain recognizable violet basilisk"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-1a72f267-1f2c-4bf7-a7bb-ad41a2c3f100.png",
+      "sourceSha256": "009595675b56504ba0ae93a95ec37379eb1da0d78a6dedf44c2d7eeba52e3d18",
+      "atlas": "./assets/roster/vitrilisk-v4.webp",
+      "sourceBoxes": [
+        [
+          57,
+          270,
+          470,
+          631
+        ],
+        [
+          606,
+          56,
+          1315,
+          689
+        ],
+        [
+          1440,
+          15,
+          2137,
+          704
+        ]
+      ],
+      "atlasSha256": "cdcafb8e8f35eb86ae3559d87f3078e4eb20f62f283b1fa8c852100d98da808e"
+    },
+    {
+      "number": 42,
+      "id": "amberwork",
+      "base": "Ooze",
+      "alter": "Construct",
+      "forms": [
+        "Ambit",
+        "Amberwork",
+        "Living Reliquary"
+      ],
+      "referenceAtlas": "./assets/roster/amberwork.webp",
+      "identity": "An amorphous amber ooze containing floating bronze mechanisms and broken porcelain charms, with pseudopod feet and a fluid silhouette.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Low amber puddle holding a few disconnected bronze gears and a porcelain face charm",
+        "Raised walking amber mass with articulated floating mechanism clusters and thick pseudopod feet",
+        "Broad amber ooze automaton with a suspended interlocking gear core, separated porcelain plates and a tall flowing gel back mantle; not rigid humanoid armor"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-c82b095f-3531-49ae-a46b-2145b6b18dc8.png",
+      "sourceSha256": "71536e07c59f6dda86b596af605ab21ad27e951025f63664377830fc01a4d357",
+      "atlas": "./assets/roster/amberwork-v4.webp",
+      "sourceBoxes": [
+        [
+          56,
+          377,
+          592,
+          632
+        ],
+        [
+          673,
+          174,
+          1263,
+          622
+        ],
+        [
+          1361,
+          17,
+          2135,
+          633
+        ]
+      ],
+      "atlasSha256": "3c16964050fa4eb7289ba9f591d81af4d01921e590485850df6345a067571129"
+    },
+    {
+      "number": 43,
+      "id": "halojell",
+      "base": "Ooze",
+      "alter": "Celestial",
+      "forms": [
+        "Glimdrop",
+        "Halojell",
+        "Celestial Tidelight"
+      ],
+      "referenceAtlas": "./assets/roster/halojell.webp",
+      "identity": "A translucent pearlescent ooze with floating feather-shaped lights, small golden ring arcs, and luminous blue pseudopods.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Round pearlescent jelly droplet with small feather-shaped lights and one incomplete halo",
+        "Long flowing jelly swimmer with broad finlike pseudopods and two suspended golden ring arcs",
+        "Tall translucent celestial tide with a central luminous core and broad layered featherlike gel fans; no rigid legs or human hands"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-6730f53d-6dc0-4af1-8e64-4ac7e201daa5.png",
+      "sourceSha256": "ab8a9084ebef1db170c789a2b364b97fe1b918b95b63659ec3feceb68e137508",
+      "atlas": "./assets/roster/halojell-v4.webp",
+      "sourceBoxes": [
+        [
+          171,
+          199,
+          593,
+          596
+        ],
+        [
+          731,
+          67,
+          1354,
+          633
+        ],
+        [
+          1450,
+          12,
+          2138,
+          679
+        ]
+      ],
+      "atlasSha256": "061f0eacde5183beb4c49390de38aecdfe835c6eea63e06fe204f6508137ee5b"
+    },
+    {
+      "number": 44,
+      "id": "nepentide",
+      "base": "Ooze",
+      "alter": "Plant",
+      "forms": [
+        "Pitchdrop",
+        "Nepentide",
+        "Pitcher Deluge"
+      ],
+      "referenceAtlas": "./assets/roster/nepentide.webp",
+      "identity": "An amorphous green jelly creature containing living carnivorous pitcher cups and red sundew tendrils, with soft gel feet and trapped seed pods.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Low green gel droplet containing one young pitcher trap and short red sundew hairs",
+        "Raised carnivorous gel body bearing several functional pitcher cups and thick soft walking lobes",
+        "Broad living jelly bog with tall connected pitchers, an overhanging sundew canopy and low spreading pseudopods; botanical traps determine silhouette"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-b59e8026-07fc-42b5-a2c7-9bbeeb947764.png",
+      "sourceSha256": "bdb8aee06bac41f949cf5b3d6e01bfedc9841795a860a64a0e076e674edfa083",
+      "atlas": "./assets/roster/nepentide-v4.webp",
+      "sourceBoxes": [
+        [
+          98,
+          272,
+          507,
+          610
+        ],
+        [
+          661,
+          14,
+          1237,
+          626
+        ],
+        [
+          1323,
+          9,
+          2147,
+          624
+        ]
+      ],
+      "atlasSha256": "c020f29a4c8d998e71388ebdd12cebc7f9c3a7e8d037089ae4336ea01477bb53"
+    },
+    {
+      "number": 45,
+      "id": "ossigel",
+      "base": "Ooze",
+      "alter": "Undead",
+      "forms": [
+        "Ectobit",
+        "Ossigel",
+        "Ossuary Drift"
+      ],
+      "referenceAtlas": "./assets/roster/ossigel.webp",
+      "identity": "An ectoplasmic ooze with pale lavender gel, drifting small bones, skull-like bubbles, and wispy trailing pseudopods.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Round lavender ghost jelly with a small suspended bone and skull-like bubble",
+        "Arched transparent ectoplasmic body with a visible loose rib cluster and curling soft tendrils",
+        "Long flowing ancestral ooze with a suspended skeletal core and broad veil-like trailing pseudopods; no rigid humanoid legs"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-2334a2a9-5c68-43b5-8ca5-49a6f5f3b36e.png",
+      "sourceSha256": "ff0f1ffef57d655e0f6776fbfca50af066ac4f574a0a567120e31010b2f6ec6b",
+      "atlas": "./assets/roster/ossigel-v4.webp",
+      "sourceBoxes": [
+        [
+          128,
+          219,
+          553,
+          549
+        ],
+        [
+          705,
+          141,
+          1223,
+          603
+        ],
+        [
+          1366,
+          79,
+          2129,
+          669
+        ]
+      ],
+      "atlasSha256": "c99cec58dee53cd474bb073810902994c936dbb4d941734e4bf15c2715babd58"
+    },
+    {
+      "number": 46,
+      "id": "strangleweld",
+      "base": "Plant",
+      "alter": "Construct",
+      "forms": [
+        "Wirebud",
+        "Strangleweld",
+        "Ironwood Snare"
+      ],
+      "referenceAtlas": "./assets/roster/strangleweld.webp",
+      "identity": "A dangerous strangler fig with mobile root legs, modified by bronze vine hinges, iron bark plates, and articulated trapping branches.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small strangler fig with a simple woody trunk, two jointed branch arms and clustered root feet",
+        "Arched mobile ironwood with iron-bark armor, long hinged trapping branches and raised root legs",
+        "Broad hunched ironwood snare with a heavy twisted canopy, enormous articulated root hands and widely braced roots; no arbitrary extra humanoid features"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-80585522-f953-4e2f-993b-6c6f3e7c568d.png",
+      "sourceSha256": "8986c1caae92b9c87396a9104ef878fd6f15ed0be4e4fe7aa3c41bc0492eb4ae",
+      "atlas": "./assets/roster/strangleweld-v4.webp",
+      "sourceBoxes": [
+        [
+          61,
+          229,
+          533,
+          651
+        ],
+        [
+          689,
+          50,
+          1312,
+          659
+        ],
+        [
+          1384,
+          50,
+          2164,
+          661
+        ]
+      ],
+      "atlasSha256": "8793239a2a8c17a27b400ce56993e4affb764076fe3274acd6e0dc9cc4f30f24"
+    },
+    {
+      "number": 47,
+      "id": "fumepitcher",
+      "base": "Plant",
+      "alter": "Fiend",
+      "forms": [
+        "Censerpod",
+        "Fumepitcher",
+        "Censer Tyrant"
+      ],
+      "referenceAtlas": "./assets/roster/fumepitcher.webp",
+      "identity": "A carnivorous pitcher plant with deep red trapping cups, hornlike leaf tips, black roots, and sulfurous orange lure vapor.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Single upright red pitcher trap supported by thin thorn roots and small hornlike leaves",
+        "Low branching carnivorous plant with three deep functional pitchers and curling infernal leaf lobes",
+        "Tall arching infernal pitcher grove with a dominant central trap, smaller flanking traps and hooked black supporting roots; natural botanical development"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-e9d41f6e-5c64-40d5-8e57-6f968a20993a.png",
+      "sourceSha256": "14c1a494e988d8024e2a936b51f7ed3eb3b690f8fa0ce696cd9ddd157597a691",
+      "atlas": "./assets/roster/fumepitcher-v4.webp",
+      "sourceBoxes": [
+        [
+          197,
+          155,
+          456,
+          642
+        ],
+        [
+          689,
+          108,
+          1323,
+          655
+        ],
+        [
+          1449,
+          17,
+          2123,
+          679
+        ]
+      ],
+      "atlasSha256": "61574e71429e9229178c99a29584387f1363db25b974c4f769941071b7cf4b4a"
+    },
+    {
+      "number": 48,
+      "id": "needlebristle",
+      "base": "Plant",
+      "alter": "Beast",
+      "forms": [
+        "Stingbud",
+        "Needlebristle",
+        "Stinging Grovebeast"
+      ],
+      "referenceAtlas": "./assets/roster/needlebristle.webp",
+      "identity": "A dangerous gympie-gympie stinging plant with dense needle hairs, modified by hedgehog-like leaf spines and quick root paws.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small compact stinging seedling on tiny root paws with broad round fuzzy leaves",
+        "Low creeping hedge with stiff hedgehog-like leaf spines and a distinct pointed leafy muzzle",
+        "Broad armored bristle-hedge beast-plant with long layered needle leaves, powerful root paws and a high protective leaf ridge"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-9a521afb-ecd2-4cfd-8a34-e775086304b9.png",
+      "sourceSha256": "88b85989ad557931d9bfb537e9bb8f61517c812c16dcc24caf864d8e25f5d20c",
+      "atlas": "./assets/roster/needlebristle-v4.webp",
+      "sourceBoxes": [
+        [
+          119,
+          218,
+          509,
+          624
+        ],
+        [
+          623,
+          189,
+          1278,
+          627
+        ],
+        [
+          1377,
+          14,
+          2124,
+          633
+        ]
+      ],
+      "atlasSha256": "7bddfd3a48b89bb67eda6041479080ad10ce6af6fc1267d5e9e33ce048f6eddb"
+    },
+    {
+      "number": 49,
+      "id": "jianglume",
+      "base": "Undead",
+      "alter": "Fey",
+      "forms": [
+        "Hushwick",
+        "Jianglume",
+        "Lantern Ancestor"
+      ],
+      "referenceAtlas": "./assets/roster/jianglume-v3.webp",
+      "identity": "A hopping ancestral undead faerie with a pale spectral moth head, luminous compound eyes, feathery antennae, exactly two ectoplasmic tendril arms emerging from silk sleeves, moth wings and warm antique lantern ornaments.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small hopping spectral moth revenant with round compound eyes, short ectoplasmic sleeve tendrils and small folded moth wings",
+        "Tall slender lantern revenant with longer flowing tendril arms, broad open moth wings and layered plum silk robes",
+        "Ancient bowed moth ancestor with a broad draped wing mantle, long lantern chains and curling ectoplasmic arms; cap, two feet and existing two arms remain"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-b2f7bb46-26b9-415f-8973-3e57a9bb562f.png",
+      "sourceSha256": "b315dfc41c6a8a82333d7b4c2a5537bb335c217a1d5a06c0767319dd43ce2d32",
+      "atlas": "./assets/roster/jianglume-v4.webp",
+      "sourceBoxes": [
+        [
+          88,
+          182,
+          425,
+          648
+        ],
+        [
+          587,
+          24,
+          1251,
+          684
+        ],
+        [
+          1301,
+          22,
+          2148,
+          674
+        ]
+      ],
+      "atlasSha256": "bc53abedccab2311ba1a1a62c12616f56818b4d78f6e2dac36bc8724846af728"
+    },
+    {
+      "number": 50,
+      "id": "draugale",
+      "base": "Undead",
+      "alter": "Elemental",
+      "forms": [
+        "Barrowick",
+        "Draugale",
+        "Tempest Revenant"
+      ],
+      "referenceAtlas": "./assets/roster/draugale.webp",
+      "identity": "A draugr from Norse undead folklore with weathered burial armor and a skeletal sea-worn face, altered by swirling salt wind and turquoise storm mist.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small sea-worn skeletal revenant with a short aquatic skull, burial wraps and stubby webbed bony feet",
+        "Lean armored aquatic draugr with elongated fishlike skull, fin-fringed legs and rising turquoise salt mist",
+        "Broad stooped tempest revenant with a deep aquatic skull, trailing sea-burial armor and large webbed skeletal feet; two arms, no added arms or wings"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-b289511c-f05c-45ca-8d5d-f869df42b7ef.png",
+      "sourceSha256": "34fac0e4ea1471536073bd2e1d16884c4f0e22c03adc5bc428c3ef913b1a8554",
+      "atlas": "./assets/roster/draugale-v4.webp",
+      "sourceBoxes": [
+        [
+          142,
+          213,
+          532,
+          664
+        ],
+        [
+          692,
+          26,
+          1252,
+          683
+        ],
+        [
+          1376,
+          14,
+          2150,
+          678
+        ]
+      ],
+      "atlasSha256": "7a92afb101ce861102a837484b0bbc842e5e4c27092480c3c93f42145b14e613"
+    },
+    {
+      "number": 51,
+      "id": "aetherling",
+      "base": "Aberration",
+      "alter": "Construct",
+      "forms": [
+        "Aetherlet",
+        "Aetherling",
+        "Aether Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/aetherling.webp",
+      "identity": "A horrific four-legged aether hound built from pale ceramic ribs and bronze clockwork, with six asymmetrical eyes, jointed tentacles instead of a tail, and impossible floating jaw plates.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small compact ceramic hound with six misplaced eyes and short cable-tentacle tail",
+        "Lean long-backed clockwork aberration with exposed ceramic ribs and an offset floating jaw",
+        "Low-slung high-shouldered hound engine with a split ceramic mantle, extended bronze joint legs and a large tangled tentacle tail; four legs"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-686cf5ba-dfa5-43f7-a656-b98ac6f1fb96.png",
+      "sourceSha256": "a9199f5afafda1cf4b2bc6cb5be26fb175b2e736014b74f3eb8792ffa8b285a1",
+      "atlas": "./assets/roster/aetherling-v4.webp",
+      "sourceBoxes": [
+        [
+          123,
+          322,
+          450,
+          604
+        ],
+        [
+          571,
+          186,
+          1228,
+          605
+        ],
+        [
+          1270,
+          83,
+          2137,
+          614
+        ]
+      ],
+      "atlasSha256": "be081c7fa3dc2664da31cfd89ee9d38c42be08207b9a3eb0c5c5277e0ead0377"
+    },
+    {
+      "number": 52,
+      "id": "bramblehorn",
+      "base": "Beast",
+      "alter": "Fey",
+      "forms": [
+        "Bramblelet",
+        "Bramblehorn",
+        "Bramble Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/bramblehorn.webp",
+      "identity": "A recognizable massively muscular takin with thick fur, curling horns grown into flowering thorn branches, tiny faerie lantern seedpods and moss-gold markings. Four sturdy hooved legs.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Stocky takin calf with horn buds and one flowering thorn sprig",
+        "Heavy shouldered takin with curved thorn horns and dense shaggy dewlap",
+        "Mature takin with a towering fur hump, broad branching thorn-horn crown and short heavily muscled legs; four hooves"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-ca7da013-35b9-40cd-8961-76ec9450f4db.png",
+      "sourceSha256": "b9fe0f024c7f48f6be42cf8ae1e660ad469d52ffe35b26c1180e24e4c6cc04d0",
+      "atlas": "./assets/roster/bramblehorn-v4.webp",
+      "sourceBoxes": [
+        [
+          142,
+          336,
+          495,
+          642
+        ],
+        [
+          714,
+          71,
+          1258,
+          635
+        ],
+        [
+          1365,
+          54,
+          2119,
+          644
+        ]
+      ],
+      "atlasSha256": "03424f5215bc48265d4ead42a0edd79269e0daf34529161f831c86e6da527b27"
+    },
+    {
+      "number": 53,
+      "id": "cindershade",
+      "base": "Celestial",
+      "alter": "Aberration",
+      "forms": [
+        "Cinderlet",
+        "Cindershade",
+        "Cinder Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/cindershade.webp",
+      "identity": "A radiant four-hoofed kirin with charcoal feathers, molten pearl halo rings and a hollow chest containing misplaced watchful eyes. Beautiful celestial light disturbed by horrific asymmetry.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Slender kirin foal with one halo arc and a small misplaced chest eye",
+        "Long-legged radiant kirin with a partially opened feather chest and mismatched watching eyes",
+        "Deep-chested arched-neck celestial kirin with a hollow eye-lined chest, layered charcoal-feather mane and large broken pearl halo; four hooves"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-63fed037-42ed-4c3c-b938-65611a023beb.png",
+      "sourceSha256": "532c48fd018bbf1af7ce326d6358530709431dc33fc0dd39d4f8eaf5d35f8845",
+      "atlas": "./assets/roster/cindershade-v4.webp",
+      "sourceBoxes": [
+        [
+          159,
+          242,
+          459,
+          653
+        ],
+        [
+          687,
+          30,
+          1262,
+          655
+        ],
+        [
+          1372,
+          9,
+          2139,
+          669
+        ]
+      ],
+      "atlasSha256": "bdccc9e91549266029b5ed65567254f32c877a8ecb2478a7a7f461b73e1c1b69"
+    },
+    {
+      "number": 54,
+      "id": "duskclaw",
+      "base": "Construct",
+      "alter": "Fey",
+      "forms": [
+        "Dusklet",
+        "Duskclaw",
+        "Dusk Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/duskclaw.webp",
+      "identity": "A four-legged automaton civet made of dark cedar, articulated brass claws and violet glass eyes, with dusk-colored faerie silk tails and tiny luminous leaf charms.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Round cedar civet kit with compact brass paws and a short silk tail",
+        "Long-bodied articulated civet with flexible wooden spine and forked dusk-silk tail ornaments",
+        "High-shouldered sleek automaton civet with a flared cedar collar, broad mechanical claws and long flowing violet silk tail; four legs"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-a813e392-885f-464f-8a66-d1ded292c43c.png",
+      "sourceSha256": "5bb2f769044d6695c6471d35a9682e676e01d876c20aa25450a2e39a4a848f83",
+      "atlas": "./assets/roster/duskclaw-v4.webp",
+      "sourceBoxes": [
+        [
+          76,
+          290,
+          449,
+          629
+        ],
+        [
+          563,
+          196,
+          1345,
+          630
+        ],
+        [
+          1392,
+          16,
+          2137,
+          650
+        ]
+      ],
+      "atlasSha256": "58f208f06bf223ebdd225ce923c9b759bda1cc889a3ad836abe9a173a0fd9517"
+    },
+    {
+      "number": 55,
+      "id": "embermoth",
+      "base": "Elemental",
+      "alter": "Ooze",
+      "forms": [
+        "Emberlet",
+        "Embermoth",
+        "Ember Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/embermoth.webp",
+      "identity": "An amorphous molten-amber ooze elemental whose flowing lobes suggest moth wings; ember veins and drifting liquid droplets, a soft translucent body with no rigid animal skeleton.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Single molten-amber droplet with tiny symmetrical winglike lobes",
+        "Flowing mothlike ooze with a raised soft core and broad liquid wings",
+        "Tall molten gel elemental with deeply scalloped cascading wing lobes and a hanging amber droplet abdomen; amorphous, no hard moth skeleton"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-46586560-ff68-4d97-8bc0-7559f41a92ac.png",
+      "sourceSha256": "84dd33d18c5faa7f1a928bdd5382216ea3ad717208c823721ddb3e059e8cbf74",
+      "atlas": "./assets/roster/embermoth-v4.webp",
+      "sourceBoxes": [
+        [
+          129,
+          281,
+          477,
+          618
+        ],
+        [
+          624,
+          108,
+          1237,
+          649
+        ],
+        [
+          1374,
+          15,
+          2116,
+          698
+        ]
+      ],
+      "atlasSha256": "4c5f1b523b0a0480fc047957447b5b4b866ac1c5231e419ef5d981000e231b82"
+    },
+    {
+      "number": 56,
+      "id": "frostwyrm",
+      "base": "Fey",
+      "alter": "Celestial",
+      "forms": [
+        "Frostlet",
+        "Frostwyrm",
+        "Frost Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/frostwyrm.webp",
+      "identity": "A four-legged frost faerie dragon with snow-gecko features, fernlike ice ears, opaline scale tufts and delicate golden celestial halo arcs. Nonhuman, long-bodied, four paws.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Round snow-gecko faerie with short body and little ice ear fronds",
+        "Longer frost drake with fan ears, four climbing paws and a low ice crest",
+        "Graceful arch-backed frost faerie dragon with a long curling body, high opaline shoulder fans and floating halo arcs; four paws"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-f7417206-9f01-4117-aa09-31d8df48e56b.png",
+      "sourceSha256": "33adf0993b9f41ce212a5c5f7e02ec9ba78c8476b4090fa611ffd9bcaf5fc9d0",
+      "atlas": "./assets/roster/frostwyrm-v4.webp",
+      "sourceBoxes": [
+        [
+          87,
+          309,
+          476,
+          636
+        ],
+        [
+          602,
+          209,
+          1367,
+          621
+        ],
+        [
+          1417,
+          19,
+          2121,
+          669
+        ]
+      ],
+      "atlasSha256": "0b99f981837c31172b82e7b8c3897f9c31d20424ab2529196bdad6a3554a84fc"
+    },
+    {
+      "number": 57,
+      "id": "gloomglen",
+      "base": "Fiend",
+      "alter": "Giant",
+      "forms": [
+        "Gloomlet",
+        "Gloomglen",
+        "Gloom Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/gloomglen.webp",
+      "identity": "A colossal horned fiend giant with a nonhuman basalt face, heavy moss-dark limbs, olive lichen beard, enormous clawed hands and dim green cracks; biped, never an ordinary human.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact basalt boar-headed fiend giant with short tusks and thick hunched shoulders",
+        "Broad bipedal boar-faced fiend with long heavy forearms, curled horns and deep lichen mane",
+        "Ancient low-hunched boar titan with a huge bristled basalt shoulder ridge, sweeping tusks and immense grasping hands; two arms and two legs"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-e0ed229f-c48a-46ac-adc0-916d4f8360fd.png",
+      "sourceSha256": "9261ffc289b49c5a286afd46be317e4ff19319ac89d9762117f98e3d4a3bbf00",
+      "atlas": "./assets/roster/gloomglen-v4.webp",
+      "sourceBoxes": [
+        [
+          94,
+          267,
+          541,
+          686
+        ],
+        [
+          667,
+          5,
+          1214,
+          696
+        ],
+        [
+          1287,
+          6,
+          2152,
+          694
+        ]
+      ],
+      "atlasSha256": "09c6112f8cdcd34d725ea6f7a18ebad79eed04df7f0fafcde280af5438bd97a2"
+    },
+    {
+      "number": 58,
+      "id": "hollowbloom",
+      "base": "Giant",
+      "alter": "Undead",
+      "forms": [
+        "Hollowlet",
+        "Hollowbloom",
+        "Hollow Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/hollowbloom.webp",
+      "identity": "A hollow-bodied undead giant with weathered bone ribs, gray stone flesh, fungal funeral blossoms and torn burial wrappings. Bipedal, immensely broad shoulders and massive hands.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small hunched undead giant with a shallow hollow ribcage and sparse funeral fungi",
+        "Tall bowed revenant with visibly opened ribs, long hanging arms and a fungal shoulder shelf",
+        "Low broad ancient hollow titan with a large empty rib chamber, collapsed shrouded mantle and heavy ground-reaching hands"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-a21c5018-4e9f-4747-9639-18a4a2a058ea.png",
+      "sourceSha256": "7e7242d0397b4f4a2411ffe08d2615fc8dc9750b51ae81b4db3d37dd804d587b",
+      "atlas": "./assets/roster/hollowbloom-v4.webp",
+      "sourceBoxes": [
+        [
+          76,
+          378,
+          461,
+          688
+        ],
+        [
+          569,
+          14,
+          1093,
+          698
+        ],
+        [
+          1116,
+          15,
+          2157,
+          698
+        ]
+      ],
+      "atlasSha256": "76a79218de3f5649c218d453a0d749260343ebda038bb45e64ca74a745f21723"
+    },
+    {
+      "number": 59,
+      "id": "ivoryspire",
+      "base": "Fey",
+      "alter": "Elemental",
+      "forms": [
+        "Ivorylet",
+        "Ivoryspire",
+        "Ivory Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/ivoryspire.webp",
+      "identity": "A visibly nonhuman bipedal ivory faerie with an antelope-like porcelain face, branching ears, slender elongated limbs and ribbons of pale wind and gold dust. No human face.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small ivory antelope-faced faerie with short branch ears and compact curled posture",
+        "Long-limbed upright faerie with broad branching ears and narrow wind-swept shoulders",
+        "Arch-backed ivory wind faerie with a broad branching ear crown, elongated hands and a long flowing wind mantle; two arms and two legs"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-be13f20f-955c-4338-b3a8-81a0f00566f5.png",
+      "sourceSha256": "ec39b4bc616c1ee210081968d4e9f18c8ee6c2b19e93afe5875cddc2cf41a863",
+      "atlas": "./assets/roster/ivoryspire-v4.webp",
+      "sourceBoxes": [
+        [
+          154,
+          290,
+          526,
+          656
+        ],
+        [
+          721,
+          13,
+          1241,
+          677
+        ],
+        [
+          1382,
+          0,
+          2143,
+          691
+        ]
+      ],
+      "atlasSha256": "b9a5bec0679907b86ade6e290ad9b95aa0373762d67048082eeea9357ccb52d5"
+    },
+    {
+      "number": 60,
+      "id": "jademaw",
+      "base": "Monstrosity",
+      "alter": "Ooze",
+      "forms": [
+        "Jadelet",
+        "Jademaw",
+        "Jade Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/jademaw.webp",
+      "identity": "An amorphous jade gel monstrosity with a huge split predatory maw, oversized curved fangs, floating jade scutes and several flowing rootlike pseudopods. No rigid legs.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Low jade droplet with one large tooth-lined mouth and few floating scutes",
+        "Raised arched gel predator with a deep central split maw and thick flowing support lobes",
+        "Broad overhanging jade maw canopy with long curved fangs, suspended scute jaws and a wide low gel base; no rigid legs"
+      ],
+      "status": "integrated",
+      "sourceFilename": "exec-df5365f8-8118-46d2-8fcc-56eb6a5dd71a.png",
+      "sourceSha256": "a9b5413c13908340c8a085e808da90a2ce0c8618b9a16507b750e4807aa9033f",
+      "atlas": "./assets/roster/jademaw-v4.webp",
+      "sourceBoxes": [
+        [
+          74,
+          348,
+          450,
+          632
+        ],
+        [
+          589,
+          51,
+          1166,
+          646
+        ],
+        [
+          1264,
+          10,
+          2135,
+          651
+        ]
+      ],
+      "atlasSha256": "350f2d58a35d219136820dc17e7a56ad9571231cf006e1b1fdb14b02e1bd57d9"
+    },
+    {
+      "number": 61,
+      "id": "kelpveil",
+      "base": "Ooze",
+      "alter": "Beast",
+      "forms": [
+        "Kelplet",
+        "Kelpveil",
+        "Kelp Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/kelpveil.webp",
+      "identity": "A translucent sea-green ooze with the recognizable broad muzzle and muscular mass of a river otter, flowing kelp-shaped gel fringes, suspended river stones and soft pseudopod feet.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small round otter-faced sea-green jelly with short soft paddle lobes",
+        "Long swimming otter-ooze with muscular central core and flowing kelp fringes",
+        "Broad river-otter jelly colossus with high liquid shoulders, long tapering gel tail and wide paddling pseudopods; not a rigid furred animal"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 62,
+      "id": "lumenwing",
+      "base": "Plant",
+      "alter": "Fiend",
+      "forms": [
+        "Lumenlet",
+        "Lumenwing",
+        "Lumen Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/lumenwing.webp",
+      "identity": "A rooted carnivorous plant with luminous pitcher-cup wings, black thorn roots, hooked infernal leaf tips and orange nectar lures. Remains unmistakably a plant.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small rooted lantern pitcher with two short luminous leaf lobes",
+        "Branching pitcher plant with paired large cup-wing leaves and hooked black support roots",
+        "Wide arching carnivorous lantern plant with a central deep trap, cascading luminous pitcher wings and a rooted thorn cage"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 63,
+      "id": "morrowfang",
+      "base": "Undead",
+      "alter": "Plant",
+      "forms": [
+        "Morrowlet",
+        "Morrowfang",
+        "Morrow Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/morrowfang.webp",
+      "identity": "A reanimated carnivorous grave-root plant with a cracked jackal skull caught in its trunk, skeletal root fingers, dead lavender petals and pale soul light.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Low grave-root seedling carrying a small jackal skull trap",
+        "Tall bowed skeletal root plant with an open jackal-skull trap and hanging dead petals",
+        "Arched grave-root predator with a large low jackal skull, dense bone-root scaffold and several secondary leaf traps; plant, not skeletal animal"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 64,
+      "id": "nacreling",
+      "base": "Aberration",
+      "alter": "Construct",
+      "forms": [
+        "Nacrelet",
+        "Nacreling",
+        "Nacre Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/nacreling.webp",
+      "identity": "A horrific four-legged pearlescent construct with a mollusk-like layered body, articulated nacre plates, aperture mouths, extra mismatched eyes and twitching bronze feelers.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small rounded nacre construct with short four legs and one exposed aperture mouth",
+        "Elongated layered shell automaton with offset eyes, segmented bronze legs and twitching feelers",
+        "Low broad spiral-shelled nacre aberration with overlapping shell mantle, a recessed multi-aperture core and widely planted four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 65,
+      "id": "obsidhorn",
+      "base": "Beast",
+      "alter": "Fey",
+      "forms": [
+        "Obsidlet",
+        "Obsidhorn",
+        "Obsid Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/obsidhorn.webp",
+      "identity": "A recognizable powerfully built black-furred kangaroo standing on two heavy hind legs, broad muscular forearms, glossy dark curling horns and faint faerie leaf runes. No human face.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact kangaroo joey with a short heavy tail and little dark horn buds",
+        "Long-legged black kangaroo with muscular forearms, curled horns and an upright ready stance",
+        "Broad-chested hunched kangaroo with immense hindquarters, long balancing tail and a thick glossy horn crown; animal face, two arms and two hindlegs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 66,
+      "id": "pollenshade",
+      "base": "Celestial",
+      "alter": "Aberration",
+      "forms": [
+        "Pollenlet",
+        "Pollenshade",
+        "Pollen Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/pollenshade.webp",
+      "identity": "A celestial deer-like quadruped with layered ivory pollen plumes, gold halo motes and multiple mismatched eye-bearing tendrils branching from its mane, eerie and anatomically unnatural.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small celestial fawn with soft pollen tufts and tiny eye tendrils",
+        "Slender long-necked deer with a branching eye-bearing mane and small gold halo motes",
+        "Deep-chested pollen stag with a wide layered mane, long anatomically impossible eye tendrils and elevated feather shoulders; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 67,
+      "id": "quillclaw",
+      "base": "Construct",
+      "alter": "Fey",
+      "forms": [
+        "Quilllet",
+        "Quillclaw",
+        "Quill Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/quillclaw.webp",
+      "identity": "A quadruped clockwork porcupine made of bronze and pale wood, articulated quill plates, small faerie bellflowers and precise amethyst claws. Fine brass joint details.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Round wooden porcupine automaton with short brass feet and a few flat quill plates",
+        "Low elongated clockwork porcupine with articulated raised quill fans and strong front claws",
+        "Broad armored porcupine engine with a high radial quill shield, deep wooden chest and heavy brass digging foreclaws; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 68,
+      "id": "runemoth",
+      "base": "Elemental",
+      "alter": "Ooze",
+      "forms": [
+        "Runelet",
+        "Runemoth",
+        "Rune Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/runemoth.webp",
+      "identity": "An amorphous violet magic-and-ooze creature with fluid mothlike wing lobes, unreadable luminous rune-shaped marks beneath its gel skin, silver droplets and a soft core.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small round violet gel mote with two little winglike lobes",
+        "Tall soft winged ooze with translucent veined wing fans and an elongated floating abdomen",
+        "Wide flowing violet rune-ooze mantle with several distinct cascading liquid wing panels and suspended silver droplets; amorphous, no hard limbs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 69,
+      "id": "sablewyrm",
+      "base": "Fey",
+      "alter": "Celestial",
+      "forms": [
+        "Sablelet",
+        "Sablewyrm",
+        "Sable Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/sablewyrm.webp",
+      "identity": "A recognizable long-bodied sable marten with four paws, silver velvet fur, faerie whisker filaments and small gold celestial rings woven around its flowing tail.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small rounded silver sable kit with short tail and one small gold ring",
+        "Long slender four-pawed sable with an arched back, large faerie whiskers and a curling ringed tail",
+        "Flowing low sable guardian with broad shoulder fur, an exceptionally long ribbonlike tail and suspended celestial rings framing its body"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 70,
+      "id": "thornglen",
+      "base": "Fiend",
+      "alter": "Giant",
+      "forms": [
+        "Thornlet",
+        "Thornglen",
+        "Thorn Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/thornglen.webp",
+      "identity": "A hulking bipedal fiend giant with a thorn-crowned nonhuman face, heavy black-red limbs, a hooked tail and a dense crown of burgundy spines and moss-dark brambles.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Squat thorn-faced fiend juvenile with short hooked tail and small bramble collar",
+        "Lean forward-stooping fiend giant with long clawed arms and thorn-covered shoulders",
+        "Massive low thorn titan with an overhanging bramble hump, huge grasping hands and a sweeping hooked tail; two arms, two legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 71,
+      "id": "umberbloom",
+      "base": "Giant",
+      "alter": "Undead",
+      "forms": [
+        "Umberlet",
+        "Umberbloom",
+        "Umber Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/umberbloom.webp",
+      "identity": "An undead bipedal earth giant with umber mummified skin, open stone-and-bone ribs, burial linen, dried lily blooms and a pale turquoise spirit glow.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small wrapped umber undead giant with narrow rib seams and a dried lily bud",
+        "Tall skeletal earth revenant with open ribs, a long shroud skirt and drooping lily shoulders",
+        "Broad bowed ancestral giant with a hollow stone-bone chest, heavy hanging arms and an immense dried lily mantle"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 72,
+      "id": "vesperspire",
+      "base": "Fey",
+      "alter": "Elemental",
+      "forms": [
+        "Vesperlet",
+        "Vesperspire",
+        "Vesper Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/vesperspire.webp",
+      "identity": "A visibly nonhuman tall bipedal bat-eared twilight faerie with a long muzzle, amber eyes, flowing dusk-blue fur and thin ribbons of moving wind. No ordinary human anatomy.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small bat-eared dusk faerie with short muzzle and compact fuzzy body",
+        "Slender long-legged twilight faerie with a narrow chest, long ears and flowing wind ribbons",
+        "Hunched mature twilight faerie with a deep batlike muzzle, broad fur-and-wind shoulder mantle and long low-reaching hands; two arms and legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 73,
+      "id": "willowmaw",
+      "base": "Monstrosity",
+      "alter": "Ooze",
+      "forms": [
+        "Willowlet",
+        "Willowmaw",
+        "Willow Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/willowmaw.webp",
+      "identity": "An amorphous willow-green ooze monstrosity whose drooping liquid fronds conceal rows of long needle teeth, translucent sap lobes and an enormous hinged predatory mouth.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Low green sap blob with one small drooping tooth-lined frond",
+        "Tall arching willow ooze whose flexible fronds frame a large open central mouth",
+        "Wide hanging willow-maw canopy with long needle-toothed fronds over a recessed hollow sap core and a low spreading base"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 74,
+      "id": "xyloveil",
+      "base": "Ooze",
+      "alter": "Beast",
+      "forms": [
+        "Xylolet",
+        "Xyloveil",
+        "Xylo Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/xyloveil.webp",
+      "identity": "A broad-shouldered salamander-shaped living ooze, with amber wood-grain suspended in its translucent body, muscular animal-like mass, bright bead eyes and flexible gel pseudopods.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Round amber salamander-shaped jelly with short four soft paw lobes",
+        "Long flowing salamander ooze with an arched muscular core, long tail and suspended wood grain",
+        "Broad low liquid salamander with a raised translucent dorsal sail, powerful flowing front lobes and a sweeping gel tail; preserve ooze texture"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 75,
+      "id": "yarrowwing",
+      "base": "Plant",
+      "alter": "Fiend",
+      "forms": [
+        "Yarrowlet",
+        "Yarrowwing",
+        "Yarrow Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/yarrowwing.webp",
+      "identity": "A rooted carnivorous yarrow plant with white clustered lures, red tooth-lined flower cups, barbed hornlike stems and dark infernal roots; botanically textured and predatory.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small white yarrow cluster above one red tooth cup and short root feet",
+        "Branching carnivorous yarrow with three cup traps and hooked red stems",
+        "Tall umbrella-like yarrow predator with a broad white lure canopy over deep red tooth cups and a thick twisting black root pedestal"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 76,
+      "id": "zephyrfang",
+      "base": "Undead",
+      "alter": "Plant",
+      "forms": [
+        "Zephyrlet",
+        "Zephyrfang",
+        "Zephyr Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/zephyrfang.webp",
+      "identity": "A rooted undead plant with a wind-worn wolf skull, bleached thorn fangs, dead reed fronds, skeletal root legs and pale green spectral sap.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small rooted wolf-skull sprout with short dry reed fringe",
+        "Long arching grave plant with a wind-worn wolf skull held forward and skeletal root legs",
+        "Wide bowed spectral reed beast-plant with an elongated bone-fanged wolf trap, dense dead reed mane and exposed root scaffolding"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 77,
+      "id": "ashenling",
+      "base": "Aberration",
+      "alter": "Construct",
+      "forms": [
+        "Ashenlet",
+        "Ashenling",
+        "Ashen Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/ashenling.webp",
+      "identity": "A horrific four-legged ash-gray construct with burnt cedar plates, exposed brass ribs, many coal-like eyes, an asymmetrical split jaw and long cable-like tentacles.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small charred cedar quadruped with close brass ribs and short cable tail",
+        "Lean lopsided construct with open ribs, a split asymmetric jaw and trailing cable tentacles",
+        "Broad crouched ash engine with an overhanging burnt-wood shoulder mantle, widely spaced coal eyes and long dragging cable tendrils; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 78,
+      "id": "berylhorn",
+      "base": "Beast",
+      "alter": "Fey",
+      "forms": [
+        "Beryllet",
+        "Berylhorn",
+        "Beryl Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/berylhorn.webp",
+      "identity": "A thickly muscled wallaby standing on two strong hind legs, warm gray fur, beryl-green branching horns, soft faerie ear fins and sparkling leaf-shaped markings. Clearly an animal.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact wallaby joey with little beryl horn nubs and short balancing tail",
+        "Tall springing wallaby with elongated hindlegs, developed green horns and leaf ear fins",
+        "Low heavy-chested muscular wallaby with large haunches, a long thick tail and a wide beryl horn crown; recognizable wallaby"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 79,
+      "id": "coppershade",
+      "base": "Celestial",
+      "alter": "Aberration",
+      "forms": [
+        "Copperlet",
+        "Coppershade",
+        "Copper Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/coppershade.webp",
+      "identity": "A four-legged copper-plumed celestial griffin with small gold halo rings, an unnaturally split beak, misplaced eyes in its feather mantle and an eerie asymmetric silhouette.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small copper-feathered griffin chick with folded wing buds and one misplaced eye",
+        "Long-bodied celestial griffin with a split beak, developing halo and partially spread copper wings",
+        "Proud arch-backed griffin with a broad eye-bearing feather mantle and long outstretched copper wings; four legs and existing two wings"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 80,
+      "id": "driftclaw",
+      "base": "Construct",
+      "alter": "Fey",
+      "forms": [
+        "Driftlet",
+        "Driftclaw",
+        "Drift Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/driftclaw.webp",
+      "identity": "A four-legged driftwood otter automaton with bronze claw joints, pale weathered grain, sea-glass eyes and faerie silk seaweed streamers. Small shell-shaped mechanical accents.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Round driftwood otter kit with short mechanical paws and a small silk seaweed tail",
+        "Flexible long-spined otter automaton with exposed bronze joints and broad paddle tail",
+        "Low broad-chested driftwood otter with reinforced foreclaws, a sweeping articulated paddle tail and long faerie seaweed streamers; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 81,
+      "id": "eldermoth",
+      "base": "Elemental",
+      "alter": "Ooze",
+      "forms": [
+        "Elderlet",
+        "Eldermoth",
+        "Elder Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/eldermoth.webp",
+      "identity": "An amorphous old-gold resin ooze elemental with flowing moth-wing lobes, soft molten light, suspended ancient leaf patterns and tiny slow droplets. No hard limbs.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small suspended old-gold resin droplet with tiny leaf-patterned lobes",
+        "Soft elongated resin moth shape with broad flowing wing fans and a narrow hanging core",
+        "Ancient amber-resin elemental with a wide layered liquid wing mantle, suspended leaf fossils and long trailing droplet lobes; no hard moth skeleton"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 82,
+      "id": "flintwyrm",
+      "base": "Fey",
+      "alter": "Celestial",
+      "forms": [
+        "Flintlet",
+        "Flintwyrm",
+        "Flint Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/flintwyrm.webp",
+      "identity": "A four-legged flint-gray faerie drake with a gecko-like face, chipped opaline scales, fanlike leaf ears and a thin radiant gold celestial crown, clearly nonhuman.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact chipped-flint gecko faerie with tiny fan ears and short tail",
+        "Long four-pawed flint drake with a low opaline back ridge and wide leaf ears",
+        "Broad-shouldered crouching flint guardian drake with tall chipped shoulder scales, long curling tail and a radiant thin gold crown; no arbitrary wings"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 83,
+      "id": "garnetglen",
+      "base": "Fiend",
+      "alter": "Giant",
+      "forms": [
+        "Garnetlet",
+        "Garnetglen",
+        "Garnet Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/garnetglen.webp",
+      "identity": "A colossal bipedal obsidian-skinned fiend giant with garnet-studded horn plates, massive clawed fists, a hooked lower jaw and deep burgundy ritual-like skin markings.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Squat obsidian fiend with small garnet horn plates and round heavy hands",
+        "Muscular forward-leaning fiend giant with distinct long forearms and layered garnet shoulder horns",
+        "Low immense obsidian titan with a deep hooked jaw, broad angular horn mantle and oversized ground-level clawed fists; two arms, two legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 84,
+      "id": "hazelbloom",
+      "base": "Giant",
+      "alter": "Undead",
+      "forms": [
+        "Hazellet",
+        "Hazelbloom",
+        "Hazel Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/hazelbloom.webp",
+      "identity": "A hulking undead giant with hollow hazel-wood-colored stone flesh, skeletal hands, a crown of dead hazel branches, old burial fabric and pale amber ghostlight.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small hollow hazelwood undead figure with short skeletal hands and a few dead twigs",
+        "Tall bowed wooden-bone giant with long arms, hollow chest and branching dead crown",
+        "Broad stooped ancient hazel titan with exposed skeletal shoulder arches, hanging burial shroud and an extensive dead-branch mantle"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 85,
+      "id": "indigospire",
+      "base": "Fey",
+      "alter": "Elemental",
+      "forms": [
+        "Indigolet",
+        "Indigospire",
+        "Indigo Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/indigospire.webp",
+      "identity": "A visibly nonhuman indigo bipedal faerie with an axolotl-like face, frilled ears, long webbed fingers and flowing cobalt water ribbons. No ordinary human face.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small indigo axolotl-faced faerie with short gill frills and tiny webbed hands",
+        "Slender swimming-posture faerie with long gill fans, elongated webbed arms and flowing water ribbons",
+        "Hunched regal water faerie with a wide frilled head crown, heavy liquid shoulder mantle and long splayed webbed fingers; two legs, two arms"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 86,
+      "id": "junipermaw",
+      "base": "Monstrosity",
+      "alter": "Ooze",
+      "forms": [
+        "Juniperlet",
+        "Junipermaw",
+        "Juniper Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/junipermaw.webp",
+      "identity": "An amorphous juniper-blue sap ooze monstrosity with floating berry-like nodules, jagged evergreen-colored fangs, several soft jaws and needle-frond gel tentacles.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Round juniper sap droplet with one small jagged maw and a berry nodule",
+        "Arched gel predator with separated soft jaws and long needle-frond feelers",
+        "Wide low juniper ooze canopy with a deep multi-jaw opening, tall floating berry scutes and long pooling evergreen gel fronds"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 87,
+      "id": "kestrelveil",
+      "base": "Ooze",
+      "alter": "Beast",
+      "forms": [
+        "Kestrellet",
+        "Kestrelveil",
+        "Kestrel Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/kestrelveil.webp",
+      "identity": "An amorphous tawny-and-slate ooze with recognizable kestrel beak and feather-patterned gel fans, muscular beastlike core and flowing winglike pseudopods; no rigid skeleton.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small rounded kestrel-faced jelly with tiny gel feather fans",
+        "Long streamlined kestrel ooze with broad tapering wing pseudopods and a flowing tail",
+        "Wide soaring gel raptor with layered feather-patterned liquid fans and a deep muscular translucent core; no rigid bird skeleton"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 88,
+      "id": "lichenwing",
+      "base": "Plant",
+      "alter": "Fiend",
+      "forms": [
+        "Lichenlet",
+        "Lichenwing",
+        "Lichen Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/lichenwing.webp",
+      "identity": "A rooted carnivorous lichen colony with tooth-edged trumpet traps, ember-red fruiting cups, leathery black leaf wings and hooked fiend-like thorn horns.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small tooth-edged lichen trumpet rooted on a dark stone-like fungal base",
+        "Creeping clustered lichen predator with wide leathery winglike leaves and ember cups",
+        "Tall arched lichen colony with a broad funnel-trap canopy, hanging black leaf wings and dense hooked thorn roots; remains botanical"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 89,
+      "id": "marrowfang",
+      "base": "Undead",
+      "alter": "Plant",
+      "forms": [
+        "Marrowlet",
+        "Marrowfang",
+        "Marrow Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/marrowfang.webp",
+      "identity": "A rooted undead carnivorous plant formed from tangled pale marrow roots and black sap, with a long wolf-skull trap, bone fangs and tiny dried funeral flowers.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small wolf-skull root sprout with short pale marrow roots",
+        "Tall bowed marrow plant with an elongated wolf-skull trap held on a flexible skeletal stalk",
+        "Low sprawling marrow-root predator with a large bone-fanged skull trap beneath a high interwoven bone-root arch and dried funeral flowers"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 90,
+      "id": "nimbusling",
+      "base": "Aberration",
+      "alter": "Construct",
+      "forms": [
+        "Nimbuslet",
+        "Nimbusling",
+        "Nimbus Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/nimbusling.webp",
+      "identity": "A horrific four-legged storm-gray construct with bronze rib hoops, a cloudlike fleshy mantle, several staring eyes, exposed gear joints and impossible dangling feelers.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small storm-gray gear quadruped with round cloud mantle and short bronze rib hoops",
+        "Long-backed uncanny construct with suspended rib hoops, exposed joints and dangling eye feelers",
+        "Broad low thunderhead construct with a deeply overhanging fleshy cloud hump, open bronze rib cage and long asymmetrical feelers; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 91,
+      "id": "opalhorn",
+      "base": "Beast",
+      "alter": "Fey",
+      "forms": [
+        "Opallet",
+        "Opalhorn",
+        "Opal Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/opalhorn.webp",
+      "identity": "A recognizable massively muscled cape hare upright on two powerful hind legs, creamy gray fur, opal branching horns and pink-violet faerie ear membranes. No human face.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact upright cape-hare juvenile with short opal horn nubs and a round fluffy chest",
+        "Long-legged poised muscular hare with broad ear membranes and slender branching opal horns",
+        "Heavy-haunched cape-hare guardian with a low broad chest, huge ears flared into a fan and an elaborate opal horn crown; animal head"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 92,
+      "id": "pyreshade",
+      "base": "Celestial",
+      "alter": "Aberration",
+      "forms": [
+        "Pyrelet",
+        "Pyreshade",
+        "Pyre Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/pyreshade.webp",
+      "identity": "A celestial four-legged lion-like creature of charcoal feathers and pearl-gold fire, a small radiant halo, and disturbing extra eyes and a second mouth in its chest.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small charcoal lion cub with pearl-gold fire tufts and a tiny misplaced chest eye",
+        "Lean radiant lion with a partially open chest mouth and growing feather mane",
+        "Deep-chested celestial lion with a broad burning feather mantle, fully visible uncanny chest mouth and broken halo above its high mane; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 93,
+      "id": "quartzclaw",
+      "base": "Construct",
+      "alter": "Fey",
+      "forms": [
+        "Quartzlet",
+        "Quartzclaw",
+        "Quartz Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/quartzclaw.webp",
+      "identity": "A quadrupedal quartz-and-bronze lynx automaton with segmented translucent claws, warm gray plates, faerie ear tassels and tiny copper leaf charms.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact quartz lynx kit with large mechanical paws and short ear tassels",
+        "Long-legged segmented lynx automaton with a flexible bronze waist and extended quartz claws",
+        "Broad shoulder-armored lynx engine with high tufted ears, deep translucent quartz chest and powerful articulated foreclaws; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 94,
+      "id": "rimemoth",
+      "base": "Elemental",
+      "alter": "Ooze",
+      "forms": [
+        "Rimelet",
+        "Rimemoth",
+        "Rime Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/rimemoth.webp",
+      "identity": "An amorphous pale-blue frost elemental mixed with translucent gel, forming delicate moth-wing lobes, suspended icy droplets and softly glowing silver veins.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small round icy gel droplet with two short silver-veined lobes",
+        "Elongated frost ooze with wide delicate winglike fans and a hanging frozen core",
+        "Large arched frost-gel mantle with layered translucent liquid ice panels and separated suspended icy droplets; no rigid butterfly anatomy"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 95,
+      "id": "saffronwyrm",
+      "base": "Fey",
+      "alter": "Celestial",
+      "forms": [
+        "Saffronlet",
+        "Saffronwyrm",
+        "Saffron Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/saffronwyrm.webp",
+      "identity": "A long-bodied four-legged faerie creature with an otterlike face, saffron-striped cream fur, fine whiskers, luminous golden celestial tail ribbons and leaf-shaped ears.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small cream otterlike faerie with stubby saffron-striped tail and short leaf ears",
+        "Long slender four-pawed faerie with tall leaf ears and a broad luminous ribbon tail",
+        "Arched-neck low celestial otter guardian with wide golden tail ribbons, flowing whiskers and broad shoulder fur; preserve four paws"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 96,
+      "id": "tundraglen",
+      "base": "Fiend",
+      "alter": "Giant",
+      "forms": [
+        "Tundralet",
+        "Tundraglen",
+        "Tundra Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/tundraglen.webp",
+      "identity": "A gigantic bipedal horned fiend of black tundra fur and slate hide, with ice-gray tusks, huge clawed hands and weathered iron-like horn ridges.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small shaggy tundra fiend with short tusks and a compact hunched body",
+        "Tall long-armed fiend giant with heavy slate shoulders, thick black fur and swept iron-like horns",
+        "Low massive tundra titan with a broad fur hump, deep tusked muzzle and huge thick clawed forearms; two arms and two legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 97,
+      "id": "verdantbloom",
+      "base": "Giant",
+      "alter": "Undead",
+      "forms": [
+        "Verdantlet",
+        "Verdantbloom",
+        "Verdant Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/verdantbloom.webp",
+      "identity": "A bipedal undead bog giant with moss-covered burial wrappings, dark exposed ribs, fern-fringed shoulders, huge stone-bone fists and cold green soul light.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small moss-wrapped bog revenant with narrow open ribs and compact stone-bone fists",
+        "Tall stooped bog giant with extended forearms, exposed dark ribs and drooping fern shoulders",
+        "Ancient broad-backed bog titan with a hollow rib chamber, heavily draped moss shroud and immense low stone-bone fists"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 98,
+      "id": "wraithspire",
+      "base": "Fey",
+      "alter": "Elemental",
+      "forms": [
+        "Wraithlet",
+        "Wraithspire",
+        "Wraith Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/wraithspire.webp",
+      "identity": "A visibly nonhuman tall bipedal wind faerie with a hollow carved-looking moth mask, pale vapor hair, long translucent limbs and violet storm ribbons; not an undead human.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small two-headed hollow-masked wind faerie with compact shared torso and short vapor hair",
+        "Tall narrow shared faerie body with two distinct moth-mask heads, longer translucent arms and separated wind streamers",
+        "Arch-backed twin-headed wind faerie with a broad unified vapor mantle, two clearly separated hollow moth masks and sweeping violet storm ribbons; exactly two heads throughout"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 99,
+      "id": "yewmaw",
+      "base": "Monstrosity",
+      "alter": "Ooze",
+      "forms": [
+        "Yewlet",
+        "Yewmaw",
+        "Yew Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/yewmaw.webp",
+      "identity": "A rooted carnivorous yew monstrosity with a hollow trunk filled with huge hook teeth, poisonous red berry-like eyes, drooping dark green fronds and amber gel sap.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small yew sap sprout with a tiny hollow tooth cup and red berry eyes",
+        "Bowed yew predator with a large hook-toothed trunk mouth and thick drooping fronds",
+        "Wide overhanging yew canopy with a deep hollow central maw, heavy hooked teeth and translucent amber sap root lobes; botanical monstrosity"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 100,
+      "id": "zirconveil",
+      "base": "Ooze",
+      "alter": "Beast",
+      "forms": [
+        "Zirconlet",
+        "Zirconveil",
+        "Zircon Sovereign"
+      ],
+      "referenceAtlas": "./assets/roster/zirconveil.webp",
+      "identity": "A heavy lynx-shaped translucent zircon-blue ooze with broad muscular animal-like mass, gel ear tufts, embedded pale mineral flecks and flowing soft paws.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small round lynx-faced zircon jelly with soft ear nubs and stubby gel paws",
+        "Long-backed low liquid lynx with sharp translucent ear tufts and muscular shoulder core",
+        "Broad flowing zircon lynx with high gel shoulders, long tapering tail and mineral-laced translucent paws; unmistakably ooze"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 101,
+      "id": "arborkin",
+      "base": "Celestial",
+      "alter": "Fey",
+      "forms": [
+        "Arborling",
+        "Arborkin",
+        "Arbor Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/arborkin.webp",
+      "identity": "A four-legged celestial woodland creature with a deerlike face, luminous ivory fur, flowering arbor antlers, faerie leaf wings and delicate golden halo arcs.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small luminous fawn with tiny flowering antler buds and close leaf wings",
+        "Slender arched-neck woodland deer with branching arbor antlers and a developing leaf-wing fan",
+        "Deep-chested celestial woodland guardian with a high flowering antler canopy, broad layered leaf wings and long sweeping fur; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 102,
+      "id": "basilgore",
+      "base": "Monstrosity",
+      "alter": "Beast",
+      "forms": [
+        "Basilling",
+        "Basilgore",
+        "Basil Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/basilgore.webp",
+      "identity": "A recognizable enormous muscular monitor lizard transformed into a basilisk-like monstrosity, with exaggerated saber fangs, oversized claws, basil-green ridges and thick heavy limbs.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small stocky monitor-lizard juvenile with broad feet and short saber fangs",
+        "Long low muscular basilisk lizard with thick forelimbs, developed fangs and a raised basil-green spine ridge",
+        "Heavy arch-shouldered monitor monstrosity with a deep predatory skull, enormous foreclaws and broad overlapping dorsal ridges; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 103,
+      "id": "cobaltwisp",
+      "base": "Construct",
+      "alter": "Ooze",
+      "forms": [
+        "Cobaltling",
+        "Cobaltwisp",
+        "Cobalt Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/cobaltwisp.webp",
+      "identity": "An amorphous cobalt-blue gel construct containing articulated silver cogwheels, floating porcelain joint pieces, a soft metal-mask core and fluid pseudopods.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small cobalt jelly holding a few floating silver cogs and a porcelain mask",
+        "Raised cobalt gel mechanism with separated articulated porcelain limbs suspended in flexible ooze",
+        "Broad amorphous cobalt engine with a large suspended cog halo, a recessed mask core and wide independently flowing pseudopod supports; no rigid skeleton"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 104,
+      "id": "dapplejaw",
+      "base": "Ooze",
+      "alter": "Fiend",
+      "forms": [
+        "Dappleling",
+        "Dapplejaw",
+        "Dapple Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/dapplejaw.webp",
+      "identity": "An amorphous dappled burgundy-and-gold fiend ooze with curved dark horns, tooth-lined gel maws, oily highlights and floating thorn-like shards.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Low dappled burgundy gel imp with tiny horn nubs and one gold-lined maw",
+        "Arched oily fiend ooze with a deep main mouth, developed curved horns and short flowing side jaws",
+        "Broad low fiend-gel canopy with a dominant overhanging horned mouth, trailing gold-dappled lobes and floating thorn shards"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 105,
+      "id": "ebonflare",
+      "base": "Elemental",
+      "alter": "Celestial",
+      "forms": [
+        "Ebonling",
+        "Ebonflare",
+        "Ebon Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/ebonflare.webp",
+      "identity": "A four-legged elemental panther made of living black fire and luminous ivory embers, with fine gold celestial halo arcs and flowing plume-like flame tails.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small compact black-fire panther cub with short ember tail",
+        "Lean stalking plasma panther with a narrow waist, high shoulder flames and separated gold halo arcs",
+        "Deep-chested flowing celestial panther with a large ivory-ember mantle and a long sweeping black-flame tail; four legs, no wings"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 106,
+      "id": "fableroot",
+      "base": "Plant",
+      "alter": "Undead",
+      "forms": [
+        "Fableling",
+        "Fableroot",
+        "Fable Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/fableroot.webp",
+      "identity": "A rooted undead carnivorous willow with scroll-like peeling bark, dead flower traps, bone twigs, hollow eye knots and pale parchment-colored spirit sap.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small peeling-bark carnivorous willow seedling with one dead flower trap",
+        "Tall bowed skeletal willow with scroll-like bark panels and hanging flower traps",
+        "Broad ancient funeral willow with a high parchment-bark canopy, long bone-twig trap branches and a dense pale root base; no book props or written text"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 107,
+      "id": "glaciershard",
+      "base": "Fey",
+      "alter": "Giant",
+      "forms": [
+        "Glacierling",
+        "Glaciershard",
+        "Glacier Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/glaciershard.webp",
+      "identity": "A towering visibly nonhuman bipedal glacier faerie giant with pale blue fur, enormous feathered ears, broad powerful hands and a crown of natural icy antlers.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact pale-furred faerie giant with short icy antler nubs and thick hands",
+        "Tall broad-shouldered glacier guardian with elongated feathered ears and developed ice antlers",
+        "Hunched wide-backed glacier faerie titan with a heavy fur mantle, broad ice-antler crown and immense long hands; two arms, two legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 108,
+      "id": "harborgaze",
+      "base": "Undead",
+      "alter": "Construct",
+      "forms": [
+        "Harborling",
+        "Harborgaze",
+        "Harbor Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/harborgaze.webp",
+      "identity": "A reanimated four-legged harbor mastiff skeleton with tarnished bronze rib braces, sea-worn armor joints, porthole-like eyes and dark salt-stained burial cloth.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small mastiff skeleton with a few bronze braces and short burial cloth",
+        "Lean harbor revenant hound with exposed braced ribs, long paws and salt-stained cloth panels",
+        "Heavy shoulder-armored undead mastiff with deep articulated bronze rib cage, low skull and a wide sea-burial mantle; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 109,
+      "id": "ichorfang",
+      "base": "Fiend",
+      "alter": "Undead",
+      "forms": [
+        "Ichorling",
+        "Ichorfang",
+        "Ichor Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/ichorfang.webp",
+      "identity": "A four-legged skeletal fiend hound with dark blood-red hide remnants, exposed luminous marrow ribs, curled black horns and long ivory fangs. Eerie, without gore.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small skeletal fiend pup with short horns, dark hide remnants and little ivory fangs",
+        "Lean long-legged bone hound with swept black horns and visibly open luminous ribs",
+        "Broad hunched infernal hound with a deep saber-fanged skull, high skeletal shoulder arches and a dark tattered hide mantle; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 110,
+      "id": "jasperplume",
+      "base": "Aberration",
+      "alter": "Fey",
+      "forms": [
+        "Jasperling",
+        "Jasperplume",
+        "Jasper Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/jasperplume.webp",
+      "identity": "A horrific nonhuman bipedal faerie aberration with jasper-red feather filaments, a split mothlike mask, multiple small mouths in the torso and long asymmetrical grasping arms.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small jasper moth-mask aberration with a round hunched torso and short asymmetric arms",
+        "Tall narrow uncanny faerie with long mismatched arms, split mask and visible small torso mouths",
+        "Broad bowed jasper aberration with an overhanging feather-filament mantle, deeply split moth mask and low sweeping grasping hands; two arms, two legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 111,
+      "id": "kindlekin",
+      "base": "Giant",
+      "alter": "Elemental",
+      "forms": [
+        "Kindleling",
+        "Kindlekin",
+        "Kindle Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/kindlekin.webp",
+      "identity": "A colossal bipedal ember giant with brick-gray craggy skin, a living coal beard, massive broad hands and volcanic orange seams; unmistakably a nonhuman giant.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact coal giant with rounded stone torso and short chunky hands",
+        "Tall ember giant with an angular chest, long muscular arms and a developing living-coal beard",
+        "Low broad volcanic titan with an overhanging broken-rock shoulder ridge, deep coal beard and massive fissured forearms; two arms and legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 112,
+      "id": "lotusgore",
+      "base": "Beast",
+      "alter": "Aberration",
+      "forms": [
+        "Lotusling",
+        "Lotusgore",
+        "Lotus Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/lotusgore.webp",
+      "identity": "A recognizable enormously muscular hippopotamus aberration with horrific extra eyes, multiple impossible jaws and lotus-petal eye stalks emerging from its broad back.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small muscular hippo calf with one extra eye stalk and a short impossible cheek jaw",
+        "Longer broad-backed hippo aberration with multiple eyes and a separated lateral jaw structure",
+        "Deep hulking hippo with a high lotus-shaped eye-stalk mantle and a large disturbing multi-jaw head; four legs, recognizable hippo anatomy"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 113,
+      "id": "mistralwisp",
+      "base": "Fey",
+      "alter": "Monstrosity",
+      "forms": [
+        "Mistralling",
+        "Mistralwisp",
+        "Mistral Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/mistralwisp.webp",
+      "identity": "A visibly nonhuman bipedal raptor-like faerie with a long narrow insect mask, enormous hooked talons, elongated predatory fangs and silver wind-fringed plumage.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small four-armed raptor faerie with compact insect mask, short silver feather tufts and small hooked hand talons",
+        "Lean long-legged four-armed predator faerie with a narrow mask and elongated two pairs of grasping forearms",
+        "Hunched broad-mantled four-armed faerie raptor with long hooked talons, sweeping silver wind plumage and deep predatory mask; exactly four arms, two legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 114,
+      "id": "nettlejaw",
+      "base": "Celestial",
+      "alter": "Fey",
+      "forms": [
+        "Nettleling",
+        "Nettlejaw",
+        "Nettle Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/nettlejaw.webp",
+      "identity": "A four-legged celestial faerie weasel with ivory fur, delicate gold nettle-shaped antlers, tiny leaf wings and warm turquoise nectar-like light markings.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small long-faced ivory weasel kit with tiny nettle antler buds and small leaf wings",
+        "Long-bodied sleek celestial weasel with branchlike nettle antlers and a wide leaf-wing fan",
+        "Arched-neck woodland weasel guardian with a long streaming ivory tail, broad floral shoulder mantle and intricate golden nettle antlers; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 115,
+      "id": "onyxflare",
+      "base": "Monstrosity",
+      "alter": "Beast",
+      "forms": [
+        "Onyxling",
+        "Onyxflare",
+        "Onyx Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/onyxflare.webp",
+      "identity": "A massively muscular black lion-crocodile monstrosity with oversized saber teeth, heavy reptilian shoulder plates, huge claws and pale gold spine ridges. Four sturdy legs.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small stocky lion-crocodile cub with short saber teeth and a low plated back",
+        "Long stalking lion-crocodile predator with heavy shoulder plates, extended fangs and strong foreclaws",
+        "Massive low broad-chested lion-crocodile monstrosity with a high armored shoulder ridge, deep long skull and enormous claws; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 116,
+      "id": "petalroot",
+      "base": "Construct",
+      "alter": "Ooze",
+      "forms": [
+        "Petalling",
+        "Petalroot",
+        "Petal Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/petalroot.webp",
+      "identity": "An amorphous pale-pink ooze construct with floating white porcelain petal plates, small bronze joint rings and a soft glowing seed-shaped core.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Low pink gel seed with a few disconnected porcelain petal plates",
+        "Raised lotuslike gel construct with articulated floating porcelain petals and a long soft central column",
+        "Wide blooming ooze automaton with an overhanging petal canopy, suspended bronze joint rings and several broad fluid support lobes; no humanoid limbs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 117,
+      "id": "quasarshard",
+      "base": "Ooze",
+      "alter": "Fiend",
+      "forms": [
+        "Quasarling",
+        "Quasarshard",
+        "Quasar Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/quasarshard.webp",
+      "identity": "An amorphous deep-violet fiend ooze with dark obsidian horns, star-like glowing inner gel, serrated floating fragments and a low predatory mouth.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small violet star-speckled gel droplet with short obsidian horn fins",
+        "Tall arched fiend ooze with a recessed toothed core, longer horn fins and orbiting dark fragments",
+        "Wide low cosmic-gel predator with a deep overhanging horned mouth and many long trailing soft lobes; no hard quadruped skeleton"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 118,
+      "id": "ravengaze",
+      "base": "Elemental",
+      "alter": "Celestial",
+      "forms": [
+        "Ravenling",
+        "Ravengaze",
+        "Raven Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/ravengaze.webp",
+      "identity": "A recognizable raven whose body and one pair of wings are made of living storm wind and dark feathered plasma, with a white-gold celestial halo and two taloned feet.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Round raven chick made of dark plasma with tiny wings and a small halo arc",
+        "Lean wind raven with long taloned legs, partially spread layered storm wings and extended tail",
+        "Deep-chested celestial storm raven with high feathered neck mantle, broad fully layered wings and long forked plasma tail; exactly two wings and two feet"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 119,
+      "id": "solacefang",
+      "base": "Plant",
+      "alter": "Undead",
+      "forms": [
+        "Solaceling",
+        "Solacefang",
+        "Solace Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/solacefang.webp",
+      "identity": "A rooted undead carnivorous white funeral plant with large bone-fanged flytraps, bleached leaves, skeletal root fingers and gentle pale blue spirit light.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small white funeral sprout with one bone-fanged flytrap and short root fingers",
+        "Bowed branching funeral plant with several long-stalked flytraps and a low bleached leaf mantle",
+        "Broad arching funeral trap canopy with a dominant skull-like flytrap, layered white leaves and a thick cage of skeletal roots; clearly botanical"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 120,
+      "id": "talonplume",
+      "base": "Fey",
+      "alter": "Giant",
+      "forms": [
+        "Talonling",
+        "Talonplume",
+        "Talon Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/talonplume.webp",
+      "identity": "A towering nonhuman bipedal faerie giant with an avian head, huge feather-fringed forearms, hooked talons and a long cream-and-amber plumage mantle.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small avian-headed faerie giant with short cream feathers and compact hands",
+        "Tall slender talon guardian with long feather-fringed arms, hooked hand talons and amber chest plumes",
+        "Hunched broad-shouldered avian titan with an enormous layered cream-and-amber mantle, rugged beak and low-reaching feathered hands; two arms, two legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 121,
+      "id": "ulmarkin",
+      "base": "Undead",
+      "alter": "Construct",
+      "forms": [
+        "Ulmarling",
+        "Ulmarkin",
+        "Ulmar Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/ulmarkin.webp",
+      "identity": "A reanimated four-legged armadillo skeleton with articulated dark steel shell bands, bronze spinal hinges, visible pale ribs and ghostly green eyes.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small curled armadillo skeleton with a few steel shell bands and short bronze feet",
+        "Long-backed walking armadillo skeleton with separated steel shell plates and a fully exposed articulated spine",
+        "Low heavily armored undead armadillo with a high arched segmented steel shell, robust mechanical digging foreclaws and a long bony tail; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 122,
+      "id": "velvetgore",
+      "base": "Fiend",
+      "alter": "Undead",
+      "forms": [
+        "Velvetling",
+        "Velvetgore",
+        "Velvet Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/velvetgore.webp",
+      "identity": "A four-legged fiend deer with deep crimson velvet hide, curved black antlers, exposed ivory skeletal ribs, a long predatory muzzle and cold violet eyes.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small crimson undead fawn with short horn nubs and a few exposed ribs",
+        "Long-legged skeletal fiend deer with swept black antlers, thin tattered hide and a deep predatory muzzle",
+        "Deep-chested low-necked fiend stag with a wide black antler crown, open skeletal shoulder arches and a heavy crimson hide mantle; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 123,
+      "id": "whisperwisp",
+      "base": "Aberration",
+      "alter": "Fey",
+      "forms": [
+        "Whisperling",
+        "Whisperwisp",
+        "Whisper Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/whisperwisp.webp",
+      "identity": "A horrific nonhuman bipedal whispering faerie aberration with an eyeless split mask, many tiny mouths along its torso, long ear-like appendages and tattered lavender silk.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small eyeless masked faerie with compact limbs, a few mouth slits and short silk fringes",
+        "Tall narrow whispering aberration with elongated mismatched arms and an opened torso-mouth column",
+        "Deeply hunched faerie aberration with a split eyeless mask, broad tattered lavender mantle and long grasping arms framing its many torso mouths; two arms and two legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 124,
+      "id": "xanthjaw",
+      "base": "Giant",
+      "alter": "Elemental",
+      "forms": [
+        "Xanthling",
+        "Xanthjaw",
+        "Xanth Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/xanthjaw.webp",
+      "identity": "A colossal bipedal citrine-yellow elemental giant with lightning-filled jaws, angular stone brows, massive gold-gray limbs and branching electric fractures.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact yellow stone giant with a short angular jaw and small lightning seams",
+        "Tall long-armed citrine giant with a deep illuminated jaw and separated jagged shoulder plates",
+        "Broad hunched lightning titan with a high craggy back, a deep wide glowing jaw and immense gold-gray forearms; two arms and legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 125,
+      "id": "yonderflare",
+      "base": "Beast",
+      "alter": "Aberration",
+      "forms": [
+        "Yonderling",
+        "Yonderflare",
+        "Yonder Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/yonderflare.webp",
+      "identity": "A recognizable enormously muscular saber-toothed cat aberration with eye stalks along its back, extra impossible jaws, and a long tentacle-like tail.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Round stocky saber-cat cub with short eye stalks and a small tentacle tail",
+        "Lean muscular saber-cat with a long tentacle tail, eye stalk mane and a distinct extra side jaw",
+        "High-shouldered hulking saber-cat aberration with deep saber jaws, a broad eye-stalk ridge and a long sweeping tentacle tail; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 126,
+      "id": "zinniaroot",
+      "base": "Fey",
+      "alter": "Monstrosity",
+      "forms": [
+        "Zinnialing",
+        "Zinniaroot",
+        "Zinnia Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/zinniaroot.webp",
+      "identity": "A visibly nonhuman bipedal flower faerie monstrosity with a zinnia-petal mask, hooked mantis-like forearms, sharp taloned feet and exaggerated predatory fangs.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small compact flower-masked faerie with closed zinnia petals and short mantis forearms",
+        "Long-legged predatory faerie with an open narrow petal mask, long hooked mantis arms and a thin waist",
+        "Hunched broad-petalled zinnia monstrosity with long jointed mantis forearms, deep fanged mask and widely braced taloned legs; two arms, two legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 127,
+      "id": "aurumshard",
+      "base": "Celestial",
+      "alter": "Fey",
+      "forms": [
+        "Aurumling",
+        "Aurumshard",
+        "Aurum Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/aurumshard.webp",
+      "identity": "A four-legged radiant celestial ibex with creamy opaline fur, golden shard antlers, faerie leaflike ear fins and small floating sun rings.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small luminous ibex kid with little golden shard horns and short leaf ear fins",
+        "Lean mountain ibex with long curved shard horns, high shoulder fur and floating sun rings",
+        "Deep-chested celestial ibex with broad angular gold horn crown, long ivory beard and raised mineral-like shoulder mantle; four hooves"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 128,
+      "id": "brackengaze",
+      "base": "Monstrosity",
+      "alter": "Beast",
+      "forms": [
+        "Brackenling",
+        "Brackengaze",
+        "Bracken Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/brackengaze.webp",
+      "identity": "A heavily muscled boar-tiger monstrosity with massive forward tusks, huge claws, dark bracken-colored fur, armored ridges and a predatory low quadruped stance.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Stocky boar-tiger cub with small forward tusks and a short bristled back",
+        "Long low stalking boar-tiger with developed tusks, narrow waist and raised armored shoulder plates",
+        "Broad immensely muscled boar-tiger with a deep tusked head, huge foreclaws and a high bracken-colored armored hump; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 129,
+      "id": "coralfang",
+      "base": "Construct",
+      "alter": "Ooze",
+      "forms": [
+        "Coralling",
+        "Coralfang",
+        "Coral Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/coralfang.webp",
+      "identity": "An amorphous coral-pink ooze construct with floating carved coral-like porcelain jaws, small bronze gears, teal gel joints and fluid soft tentacles.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small coral jelly with one floating porcelain jaw and short bronze joint fragments",
+        "Arched coral ooze construct with separated paired jaw plates and long flowing gel support limbs",
+        "Wide overhanging coral automaton with a deep segmented porcelain maw, floating carved coral plates and broad teal tentacle supports; no rigid humanoid skeleton"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 130,
+      "id": "daggerplume",
+      "base": "Ooze",
+      "alter": "Fiend",
+      "forms": [
+        "Daggerling",
+        "Daggerplume",
+        "Dagger Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/daggerplume.webp",
+      "identity": "An amorphous burgundy fiend ooze with dagger-shaped horn fins, tooth-edged liquid wing lobes and a charcoal core, no rigid skeleton.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Low burgundy ooze with tiny dagger horn fins and a short soft charcoal core",
+        "Raised flowing fiend jelly with broad tooth-edged winglike lobes and long dagger fins",
+        "Tall sweeping liquid-wing fiend mantle with a recessed charcoal core, deep tooth fringes and long dripping burgundy blades; no hard animal skeleton"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 131,
+      "id": "eclipsekin",
+      "base": "Elemental",
+      "alter": "Celestial",
+      "forms": [
+        "Eclipseling",
+        "Eclipsekin",
+        "Eclipse Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/eclipsekin.webp",
+      "identity": "A four-legged celestial elemental stag made of black-and-white luminous plasma, with a fine eclipsed sun halo and flowing silver-gold flame antlers.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small luminous eclipse fawn with short silver-gold flame antler buds",
+        "Lean long-legged plasma stag with divided black-white body currents and developed flame antlers",
+        "Deep-chested arched-neck elemental stag with a high silver-gold mane, broad branching flame antlers and a distinct eclipsed-sun halo; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 132,
+      "id": "fennelgore",
+      "base": "Plant",
+      "alter": "Undead",
+      "forms": [
+        "Fennelling",
+        "Fennelgore",
+        "Fennel Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/fennelgore.webp",
+      "identity": "A rooted undead carnivorous fennel plant with bone-white hollow stems, toothed seedpod traps, dead feathery fronds and black ghostly sap.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small dead fennel shoot with one toothed seedpod and short bone-white roots",
+        "Tall branching funeral fennel with hollow bone stems and separated hanging seedpod traps",
+        "Broad umbrella-like fennel predator with a hollow skeletal trunk, many mature seedpod traps and drooping dead feathery fronds; botanical anatomy"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 133,
+      "id": "gossamerwisp",
+      "base": "Fey",
+      "alter": "Giant",
+      "forms": [
+        "Gossamerling",
+        "Gossamerwisp",
+        "Gossamer Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/gossamerwisp.webp",
+      "identity": "A towering visibly nonhuman bipedal moth faerie giant with silver antennae, pale fur, broad powerful limbs and a billowing gossamer wing mantle.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact pale moth faerie juvenile with short antennae and close-folded gossamer mantle",
+        "Tall long-armed moth giant with broad fur shoulders and opened layered wing mantle",
+        "Hunched ancient moth titan with an enormous arched gossamer shoulder canopy, long silver antennae and heavy low-reaching hands; two arms, two legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 134,
+      "id": "hearthjaw",
+      "base": "Undead",
+      "alter": "Construct",
+      "forms": [
+        "Hearthling",
+        "Hearthjaw",
+        "Hearth Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/hearthjaw.webp",
+      "identity": "A reanimated four-legged badger skeleton with dark red brick-and-bronze joint armor, exposed ash-white ribs and a faint coal glow behind its skull jaw.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small badger skeleton with sparse brick-red joint plates and short bronze claws",
+        "Long-backed burrowing badger revenant with exposed ribwork, elongated digging claws and segmented red armor",
+        "Low heavy shoulder-armored skeletal badger with deep brick-and-bronze rib braces, broad digging forepaws and a short thick spine tail; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 135,
+      "id": "isletflare",
+      "base": "Fiend",
+      "alter": "Undead",
+      "forms": [
+        "Isletling",
+        "Isletflare",
+        "Islet Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/isletflare.webp",
+      "identity": "A four-legged skeletal devil crocodile with algae-dark hide, pale driftbone armor, hooked fiend horns and spectral sea-green light, without a living animal appearance.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small driftbone crocodile skeleton with short black horns and algae-dark hide scraps",
+        "Long lean skeletal crocodile fiend with exposed ribwork, elongated hooked snout and finlike horn ridges",
+        "Broad ancient low crocodile revenant with a high driftbone shoulder mantle, deep long skull and massive spectral-green jaw; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 136,
+      "id": "jubilroot",
+      "base": "Aberration",
+      "alter": "Fey",
+      "forms": [
+        "Jubilling",
+        "Jubilroot",
+        "Jubil Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/jubilroot.webp",
+      "identity": "A horrific nonhuman bipedal root-and-faerie aberration with a split laughing mask, multiple small mouths, too many staring eyes and twisted vine-like arms.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small laughing root faerie with a compact wooden torso and short twisted arms",
+        "Tall asymmetric vine-limbed aberration with a split mask, several torso mouths and long fingers",
+        "Broad hunched root-and-faerie aberration with an overhanging vine mantle, many watchful eyes and long low-reaching twisted hands; two arms and two legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 137,
+      "id": "kryptonshard",
+      "base": "Giant",
+      "alter": "Elemental",
+      "forms": [
+        "Kryptonling",
+        "Kryptonshard",
+        "Krypton Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/kryptonshard.webp",
+      "identity": "A colossal bipedal green elemental stone giant with natural luminescent mineral shards, enormous craggy fists and dark charcoal skin fractured by emerald light.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact green stone giant with few short mineral shards and small heavy fists",
+        "Tall angular mineral giant with separated shoulder crystals, long thick forearms and exposed emerald fractures",
+        "Deeply hunched broad-backed stone titan with a high natural mineral ridge, huge craggy forearms and deep emerald fissures; no extra arms or faces"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 138,
+      "id": "larchgaze",
+      "base": "Beast",
+      "alter": "Aberration",
+      "forms": [
+        "Larchling",
+        "Larchgaze",
+        "Larch Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/larchgaze.webp",
+      "identity": "A recognizable massively muscled elk aberration with horrific staring eyes embedded in bark-textured antlers, extra tentacle jaws and thick shaggy fur.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small muscular elk calf with little eye-bearing antler buds and a short tentacle jaw",
+        "Long-legged elk aberration with a broad shaggy chest, branching watchful antlers and developed secondary tentacle jaws",
+        "Low-necked hulking elk with a tall eye-studded bark antler canopy, massive shoulder fur and long unnatural jaw tendrils; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 139,
+      "id": "miragefang",
+      "base": "Fey",
+      "alter": "Monstrosity",
+      "forms": [
+        "Mirageling",
+        "Miragefang",
+        "Mirage Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/miragefang.webp",
+      "identity": "A visibly nonhuman bipedal jackal-headed faerie monstrosity with oversized fangs, long hooked claws and a silver-violet mirage-shard mantle.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small jackal-headed faerie with compact fanged muzzle, short claws and tiny mirage shards",
+        "Lean tall predatory jackal faerie with elongated hooked arms and a narrow silver-violet shard mantle",
+        "Forward-hunched jackal monstrosity with a deep saber-fanged muzzle, broad layered mirage mantle and long heavy grasping claws; two arms and two legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 140,
+      "id": "nectarplume",
+      "base": "Celestial",
+      "alter": "Fey",
+      "forms": [
+        "Nectarling",
+        "Nectarplume",
+        "Nectar Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/nectarplume.webp",
+      "identity": "A four-legged celestial faerie creature with an anteater-like long muzzle, cream feathers, gold nectar filaments, tiny flower-shaped lights and delicate halo rings.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small cream anteater-like celestial with short muzzle, tiny gold nectar filaments and close feather tufts",
+        "Long-bodied anteater faerie with a curved long muzzle, flowing tail and developed nectar whiskers",
+        "Arched-shouldered celestial anteater with a sweeping feathered tail, broad floral neck mantle and long golden nectar filaments; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 141,
+      "id": "oraclekin",
+      "base": "Monstrosity",
+      "alter": "Beast",
+      "forms": [
+        "Oracleling",
+        "Oraclekin",
+        "Oracle Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/oraclekin.webp",
+      "identity": "A huge muscular owl-bear monstrosity with oversized hooked beak fangs, massive bear claws, ochre feather ridges and a solid powerful quadrupedal body.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Round owl-bear cub with short hooked beak and broad soft paws",
+        "Long-backed stalking owl-bear with developed bear shoulders, large beak fangs and layered ochre neck feathers",
+        "Massive high-shouldered owl-bear with a deep feather collar, immense hooked beak, heavy muscular forelimbs and large bear claws; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 142,
+      "id": "pewtergore",
+      "base": "Construct",
+      "alter": "Ooze",
+      "forms": [
+        "Pewterling",
+        "Pewtergore",
+        "Pewter Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/pewtergore.webp",
+      "identity": "An amorphous smoke-gray ooze construct with floating ornate pewter armor pieces, articulated bronze cogs, black gel joints and a broad tusked mask core.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Low smoke-gray jelly with a small tusked pewter mask and a few bronze cogs",
+        "Raised amorphous pewter construct with separate ornate armor sections suspended in black gel",
+        "Broad tusked ooze automaton with an overhanging ornate pewter mantle, recessed mask core and thick independently flowing black gel supports; no rigid skeleton"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 143,
+      "id": "quiverwisp",
+      "base": "Ooze",
+      "alter": "Fiend",
+      "forms": [
+        "Quiverling",
+        "Quiverwisp",
+        "Quiver Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/quiverwisp.webp",
+      "identity": "An amorphous purple fiend ooze with curved obsidian horns, suspended arrowlike barbs, quivering liquid tendrils and a dark toothed mouth.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small purple gel droplet with short horn nubs and a few suspended arrow barbs",
+        "Lean arching fiend ooze with long obsidian horns, a central dark mouth and flowing arrowlike lobes",
+        "Wide low quivering gel predator with a dominant horned maw, long trailing purple tendrils and a floating crown of arrow barbs; amorphous"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 144,
+      "id": "ripplejaw",
+      "base": "Elemental",
+      "alter": "Celestial",
+      "forms": [
+        "Rippleling",
+        "Ripplejaw",
+        "Ripple Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/ripplejaw.webp",
+      "identity": "A four-legged elemental turtle-like creature made of flowing turquoise water, with a white foam shell, gold gill fronds and a delicate radiant celestial halo.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small round water turtle with a low foam dome and tiny gold gill buds",
+        "Longer four-legged current turtle with a layered wave shell, broad water feet and flared gold gills",
+        "Broad ancient water tortoise with a high flowing foam shell, deep current neck mantle and strong turquoise tidal legs; four legs, one head"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 145,
+      "id": "starlingflare",
+      "base": "Plant",
+      "alter": "Undead",
+      "forms": [
+        "Starlingling",
+        "Starlingflare",
+        "Starling Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/starlingflare.webp",
+      "identity": "A rooted undead carnivorous starflower with black petals, bone-white pitcher traps shaped like tiny beaks, skeletal root fingers and pale violet soul light.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small black starflower seedling with one white beaklike pitcher trap",
+        "Bowed carnivorous starflower with separated black petal fans and several hanging white pitcher traps",
+        "Broad layered funeral starflower canopy with a dominant central beaked trap, many black petals and an open cage of skeletal roots; botanical anatomy"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 146,
+      "id": "truffleroot",
+      "base": "Fey",
+      "alter": "Giant",
+      "forms": [
+        "Truffleling",
+        "Truffleroot",
+        "Truffle Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/truffleroot.webp",
+      "identity": "A towering nonhuman bipedal woodland faerie giant with a truffle-like textured crown, a broad piglike muzzle, mushroom ears, enormous strong limbs and mossy fur.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact pig-muzzled woodland faerie with a round truffle crown, short mushroom ears and thick hands",
+        "Tall heavy-shouldered woodland giant with long arms, rough fungal back ridges and mature mushroom ear shelves",
+        "Deeply hunched ancient woodland titan with a broad truffle-and-moss canopy back, huge low arms and a rugged piglike muzzle; two arms and legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 147,
+      "id": "uplandshard",
+      "base": "Undead",
+      "alter": "Construct",
+      "forms": [
+        "Uplandling",
+        "Uplandshard",
+        "Upland Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/uplandshard.webp",
+      "identity": "A reanimated four-legged bighorn skeleton with rugged natural stone armor plates, brass ankle hinges, ivory horns and faint ghostly upland mist.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small bighorn skeleton with short ivory horns and a few small stone knee plates",
+        "Lean mountain revenant ram with curled horns, exposed bronze-braced spine and articulated stone shoulder plates",
+        "Deep-chested ancient skeletal bighorn with massive curled ivory horns, high natural stone shoulder ridges and heavy brass-braced hooves; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 148,
+      "id": "violetgaze",
+      "base": "Fiend",
+      "alter": "Undead",
+      "forms": [
+        "Violetling",
+        "Violetgaze",
+        "Violet Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/violetgaze.webp",
+      "identity": "A four-legged undead fiend panther with dark violet hide remnants, exposed pale ribs, curved black brow horns and several luminous violet eye-like markings.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small violet skeletal panther cub with tiny horn nubs and small luminous eye markings",
+        "Lean long-bodied undead fiend panther with exposed pale ribs, swept brow horns and a long sinuous tail",
+        "Broad low predatory panther revenant with a deep skeletal head, high exposed shoulder arches and a large ragged violet hide mantle; four legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 149,
+      "id": "wardenfang",
+      "base": "Aberration",
+      "alter": "Fey",
+      "forms": [
+        "Wardenling",
+        "Wardenfang",
+        "Warden Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/wardenfang.webp",
+      "identity": "A horrific nonhuman bipedal faerie guardian aberration with an eye-stacked mask, mismatched fanged jaws, very long twisted arms and dark emerald silk fronds.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Small stacked-eye faerie guardian with compact limbs and a few dark emerald fronds",
+        "Tall asymmetric guardian aberration with very long twisted arms, deep mismatched jaws and a narrow silk mantle",
+        "Deeply hunched ancient faerie warden with a high emerald silk back mantle, many stacked watchful eyes and immense low grasping hands; two arms and two legs"
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 150,
+      "id": "zodiacplume",
+      "base": "Giant",
+      "alter": "Elemental",
+      "forms": [
+        "Zodiacling",
+        "Zodiacplume",
+        "Zodiac Exarch"
+      ],
+      "referenceAtlas": "./assets/roster/zodiacplume.webp",
+      "identity": "A colossal nonhuman bipedal storm giant with dark blue craggy skin, huge hands, feather-like flame and cloud plumes, and glowing gold circular star motifs without lettering.",
+      "decision": "rework",
+      "reason": "Existing stages preserve essentially the same body architecture and pose, with size and increasing ornament the dominant changes.",
+      "stages": [
+        "Compact blue storm giant with small cloud shoulder tufts and subtle gold ring markings",
+        "Tall long-armed storm guardian with a high featherlike flame crest and separated cloud plumes",
+        "Broad hunched celestial-storm titan with a towering arched cloud mantle, long heavy forearms and large flowing blue-gold flame plumes; no extra heads, arms or wings"
+      ],
+      "status": "pending"
+    }
+  ],
+  "integrated": 45
+}

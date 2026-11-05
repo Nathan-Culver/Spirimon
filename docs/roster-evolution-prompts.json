@@ -1,0 +1,455 @@
+{
+  "generator": "OpenAI image_gen",
+  "lineages": {
+    "kilnscale": {
+      "number": 1,
+      "forms": [
+        "Kilnkit",
+        "Kilnscale",
+        "Porcelain Sentinel"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #1 kilnscale. Types Beast/Construct. Identity: A real pangolin with articulated cobalt-and-ivory porcelain scales, brass hinges, and a temple-bell tail. First form Kilnkit: Round curled pangolin pup with a few broad porcelain scales and short bell nub. Second Kilnscale: Low armored crawler with overlapping hinged plates and a long articulated bell tail. Final Porcelain Sentinel: High-shouldered sentinel pangolin with layered shieldlike scales, powerful digging foreclaws and a raised temple-bell tail.",
+      "sourceFilename": "exec-d7356ece-b461-4f4c-b642-c02556fc141f.png"
+    },
+    "zephyrtap": {
+      "number": 3,
+      "forms": [
+        "Gustling",
+        "Zephyrtap",
+        "Tempest Treader"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #3 zephyrtap. Types Beast/Elemental. Identity: A real tapir with a short trunk, living cloud curls, teal wind ribbons, and copper spiral markings. First form Gustling: Stocky round tapir calf with short trunk and wisps at its ankles. Second Zephyrtap: Longer-legged wandering tapir with a substantial cloud saddle and curling trunk currents. Final Tempest Treader: Deep-chested storm tapir with high cloud shoulder crest, long flowing wind mane and broad anchored feet.",
+      "sourceFilename": "exec-d483b691-858e-4e7a-a804-f52ec23d9402.png"
+    },
+    "veilstripe": {
+      "number": 8,
+      "forms": [
+        "Hushpup",
+        "Veilstripe",
+        "Pale Tracker"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #8 veilstripe. Types Beast/Undead. Identity: An extinct thylacine with charcoal stripes, bone-white markings, spectral lavender breath, and a translucent tail. First form Hushpup: Small thylacine cub with dark stripes and faint translucent tail tip. Second Veilstripe: Lean stalking thylacine with angular shoulders and spectral mist escaping visible rib-shaped markings. Final Pale Tracker: Weathered ancestral thylacine with a long spectral mane, interrupted fading hindquarters and elongated ghostly tail; recognizable animal remains.",
+      "sourceFilename": "exec-2a3c809b-c746-47db-a437-bc8275de2790.png"
+    },
+    "megalorn": {
+      "number": 9,
+      "forms": [
+        "Megalow",
+        "Megalorn",
+        "Valley Colossus"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #9 megalorn. Types Beast/Giant. Identity: An extinct giant ground sloth with massive curved claws, sandy shaggy fur, slate-gray calluses, and increasingly colossal proportions. First form Megalow: Compact ground-sloth juvenile sitting low with short stout limbs and curved digging claws. Second Megalorn: Forward-hunched roaming ground sloth with longer forearms, broad shaggy shoulders and low heavy gait. Final Valley Colossus: Ancient ground-sloth colossus with towering shoulder hump, draped shaggy mantle, immense forelimbs and broad weight-bearing hind feet.",
+      "sourceFilename": "exec-72202961-5c5d-460e-8dc0-d93838d009e2.png"
+    },
+    "astraveil": {
+      "number": 12,
+      "forms": [
+        "Glimbone",
+        "Astraveil",
+        "Ancestral Radiance"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #12 astraveil. Types Celestial/Undead. Identity: An otherworldly halo-bearing celestial whose pearl armor reveals elegant ancestral bone and trails of pale blue soul light. First form Glimbone: Pearl-armored celestial foal with one small halo and subtle glowing bone seams. Second Astraveil: Lean spectral guardian with opened rib armor and a long flowing soul mantle. Final Ancestral Radiance: Solemn ancestral radiance with fully articulated floating pearl-bone armor, a deep luminous ribcage and sweeping auroral mane; keep four legs.",
+      "sourceFilename": "exec-ec568bbc-6da0-41c5-bfc0-039e85767138.png"
+    },
+    "bronzewade": {
+      "number": 14,
+      "forms": [
+        "Rivetreed",
+        "Bronzewade",
+        "Heron Magistrate"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #14 bronzewade. Types Construct/Beast. Identity: A bronze automaton shaped with long heron-like legs and a curved mechanical beak, with emerald patina and articulated wing plates. First form Rivetreed: Squat short-legged bronze heron chick automaton with compact folded wing plates. Second Bronzewade: Long-necked wading automaton with thin high-jointed legs, longer beak and partially opened wing fans. Final Heron Magistrate: Tall arched-neck heron magistrate with broad layered mechanical wing fans and flared bronze tail; anatomically avian throughout.",
+      "sourceFilename": "exec-5dfad2ae-a97d-430b-bfd4-e0fe9e425072.png"
+    },
+    "puppetide": {
+      "number": 16,
+      "forms": [
+        "Twigknock",
+        "Puppetide",
+        "Woodland Puppeteer"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #16 puppetide. Types Construct/Fey. Identity: A carved wooden marionette with a lacquered nonhuman mask, jointed branch limbs, faerie silk cords, and small luminous bell flowers. First form Twigknock: Small crude twig marionette with simple mask, short limbs and a few hanging bell flowers. Second Puppetide: Long-limbed articulated puppeteer with clear carved wooden joints and silk strings spanning its outstretched fingers. Final Woodland Puppeteer: Hunched branching woodland puppet master with layered bark torso, many dangling floral cords and an elaborate nonhuman carved face; retain two arms and legs.",
+      "sourceFilename": "exec-3b401dc8-347d-4f4c-b445-f706751014eb.png"
+    },
+    "whiskerfey": {
+      "number": 22,
+      "forms": [
+        "Velvetip",
+        "Whiskerfey",
+        "Velvet Regent"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #22 whiskerfey. Types Fey/Beast. Identity: A small nonhuman woodland faerie with velvet mothlike wings, dormouse whiskers, nimble paws, and a plum-and-cream tufted tail. First form Velvetip: Round dormouse faerie with tucked small moth wings and a short fluffy tail. Second Whiskerfey: Nimble long-bodied faerie glider with wide functional moth wings and long whiskers. Final Velvet Regent: Poised woodland faerie courier with elongated hindlegs, broad scalloped moth wings and a large sweeping tufted tail; no human face.",
+      "sourceFilename": "exec-eb462541-5ec6-4fa1-8af3-fa02300b91ac.png"
+    },
+    "gelmirth": {
+      "number": 23,
+      "forms": [
+        "Dewglee",
+        "Gelmirth",
+        "Gossamer Gelcourt"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #23 gelmirth. Types Fey/Ooze. Identity: A faerie with curled fernlike ears and delicate insect wings whose mint-colored body flows into transparent gel skirts and dew beads. First form Dewglee: Dewdrop-shaped slug-bodied faerie with tiny wing buds, curled fern ears and small grasping arms. Second Gelmirth: Upright faerie torso flowing into a long soft translucent slug foot, with two developed insect wings. Final Gossamer Gelcourt: Regal gel faerie with a broad rippling slug mantle, raised fern crown and long glassy wings; no human legs, retain two arms.",
+      "sourceFilename": "exec-652ea2ac-622d-46a0-ae92-86b012681df1.png"
+    },
+    "silkvisage": {
+      "number": 24,
+      "forms": [
+        "Masklet",
+        "Silkvisage",
+        "Sixfinger Envoy"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #24 silkvisage. Types Fey/Beast. Identity: A slender faerie with a moth-wing cloak, smooth porcelain insect mask, six-fingered hands, and a bipedal but visibly nonhuman body. First form Masklet: Small hunched moth-masked faerie with simple close-folded wing cape and short grasping hands. Second Silkvisage: Long-legged faerie envoy with narrow upright torso, elongated six-fingered hands and a split moth cape. Final Sixfinger Envoy: Forward-leaning imposing envoy with pronounced insect-mask profile, long low-reaching arms and a broad folded moth mantle; keep two arms and two legs.",
+      "sourceFilename": "exec-8eb1cd5f-aec0-4ca8-b7a6-5e8a8da21bda.png"
+    },
+    "jesthorn": {
+      "number": 25,
+      "forms": [
+        "Prankcoal",
+        "Jesthorn",
+        "Thorn Court Jester"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #25 jesthorn. Types Fey/Fiend. Identity: A mischievous faerie with curled leaf wings, a striped violet tail, little infernal antlers, and ember-red thorn tips. First form Prankcoal: Impish round leaf faerie with little antler nubs and short striped tail. Second Jesthorn: Lean bounding jester faerie with swept leaf wings and a long balancing violet tail. Final Thorn Court Jester: Arch-backed antlered thorn faerie with a wide leaf-wing fan, long springing hindlegs and elaborately curled tail; preserve one head and four animal limbs.",
+      "sourceFilename": "exec-f3caf5b2-22d3-4792-ba93-7494a27ad1e8.png"
+    },
+    "bramblefiend": {
+      "number": 26,
+      "forms": [
+        "Burrimp",
+        "Bramblefiend",
+        "Infernal Briar"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #26 bramblefiend. Types Fiend/Plant. Identity: A horned fiend with a barbed tail and folded membrane wings, overgrown by burgundy pitcher plants and hooked olive thorns. First form Burrimp: Compact thorn imp with small pitchers and low folded wings. Second Bramblefiend: Long-backed stalking briar fiend whose spine supports distinct pitcher traps and barbed vines. Final Infernal Briar: Heavy-rooted crouching briar predator with large shoulder pitcher cups, broad thorn forearms and a sweeping hooked tail; keep its established body plan.",
+      "sourceFilename": "exec-ee20f07a-cf27-47a0-a26b-3df091da5787.png"
+    },
+    "chainhorn": {
+      "number": 27,
+      "forms": [
+        "Linkimp",
+        "Chainhorn",
+        "Furnace Bailiff"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #27 chainhorn. Types Fiend/Construct. Identity: A long-armed horned fiend with brass jaw plates, dark iron chain loops, riveted shoulder guards, and red-hot joint seams. First form Linkimp: Crouched chain imp with disproportionately large hands and a few loose brass links. Second Chainhorn: Lean high-shouldered chain fiend with very long articulated forearms and linked shoulder chains. Final Furnace Bailiff: Massive stooping furnace bailiff with deep plated chest, heavy dragging chain loops and enormous grasping gauntlets; two arms and two legs.",
+      "sourceFilename": "exec-59919e22-e10f-4e49-b7f0-08fcb5854894.png"
+    },
+    "crownscar": {
+      "number": 28,
+      "forms": [
+        "Ashhalo",
+        "Crownscar",
+        "Eclipsed Herald"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #28 crownscar. Types Fiend/Celestial. Identity: A charcoal-skinned winged fiend with curling ivory horns, a fractured luminous feather halo, and silver celestial markings; no moral alignment implied. First form Ashhalo: Small charcoal fiend with tucked membrane wings and a broken feather halo fragment. Second Crownscar: Long-necked lean winged guardian with wide unfurling wings and luminous feather markings. Final Eclipsed Herald: Regal crouching celestial fiend with a tall horn crown, broad feather-fringed membrane wings and a segmented halo; four-legged source body plan retained.",
+      "sourceFilename": "exec-91a60ed5-c390-446f-8aaa-a7688f4e845a.png"
+    },
+    "pitchmaw": {
+      "number": 29,
+      "forms": [
+        "Tarpip",
+        "Pitchmaw",
+        "Obsidian Mirefiend"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #29 pitchmaw. Types Fiend/Ooze. Identity: A crouching horned fiend whose glossy black body drips into viscous oil-like gel, with ochre eyes and amber-lit cracks. First form Tarpip: Low glossy tar imp with small horns and soft grasping forelimbs. Second Pitchmaw: Hunched oily fiend with an elevated chest, elongated clawed arms and liquid hindquarters. Final Obsidian Mirefiend: Broad predatory mirefiend with a high flowing tar mantle, split glowing chest cracks and long pooling forearms; gel anatomy remains flexible.",
+      "sourceFilename": "exec-c1d227e3-12bf-41bf-a4a5-e202df7fa30b.png"
+    },
+    "bonsaitor": {
+      "number": 30,
+      "forms": [
+        "Terralow",
+        "Bonsaitor",
+        "Terrace Patriarch"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #30 bonsaitor. Types Giant/Plant. Identity: A sandstone and living-wood giant with an elephant head, a moss-covered trunk, bark-textured tusks, enormous hands and terraced bonsai trees growing across its back. First form Terralow: Small hunched elephant-headed woodland giant with a short mossy trunk, stubby tusks and one sapling growing from a rounded back. Second Bonsaitor: Broad forward-leaning elephant giant with longer trunk, reinforced root-covered forearms and several separate bonsai ledges. Final Terrace Patriarch: Ancient low-slung elephant titan supporting a wide terraced grove across a high craggy back, huge root-braced arms and sweeping mossy trunk; two arms and legs.",
+      "sourceFilename": "exec-e425c1bc-8768-4067-b520-59cc22ee9bfb.png"
+    },
+    "cloudgron": {
+      "number": 31,
+      "forms": [
+        "Rumblekin",
+        "Cloudgron",
+        "Monsoon Grandfather"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #31 cloudgron. Types Giant/Elemental. Identity: A slate-blue storm giant with a ram head, curling horns, a white cloud mane and beard, digitigrade legs and cloven hooves, bronze bracers and electric-blue lightning accents. First form Rumblekin: Compact ram-headed cloud giant with small curled horns, patchy fleece and springy digitigrade cloven legs. Second Cloudgron: Broad-chested storm shepherd with mature curled horns, dense cloud shoulder fleece and thick braced arms. Final Monsoon Grandfather: Hunched ancient monsoon ram giant with a towering thunderhead mane, long cloud beard and heavy cloven legs; distinct domed silhouette, no added wings.",
+      "sourceFilename": "exec-3e37ab27-52a0-47f0-9575-f0610992458a.png"
+    },
+    "barrowgron": {
+      "number": 33,
+      "forms": [
+        "Graveltot",
+        "Barrowgron",
+        "Sepulcher Titan"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #33 barrowgron. Types Giant/Undead. Identity: An undead slate giant with greatly elongated arms and ground-reaching knuckles, weathered burial wraps, a shadowed stone mask, cyan-glowing exposed ribs and a tombstone mantle. First form Graveltot: Compact shrouded grave giant with long knuckle-reaching arms, small mask and simple glowing rib seams. Second Barrowgron: Forward-stooping revenant with elongated massive forearms, exposed cyan ribs and a narrow grave-slab back mantle. Final Sepulcher Titan: Ancient sepulcher titan with a deeply arched burial mantle, low recessed stone-mask head and immense long knuckle-bearing arms; two arms, two legs.",
+      "sourceFilename": "exec-a9538b91-9166-49ee-bd02-6910f6351971.png"
+    },
+    "silkclasp": {
+      "number": 34,
+      "forms": [
+        "Mothling",
+        "Silkclasp",
+        "Mothmask Adept"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #34 silkclasp. Types Fey/Beast. Identity: A visibly nonhuman biped with a moth head, four delicate grasping forearms, soft fur cuffs, and broad patterned antennae; never a human. First form Mothling: Small fuzzy moth-headed biped with tiny four forearms and short antennae. Second Silkclasp: Slender four-armed moth adept with distinct upper and lower arm proportions and long patterned antennae. Final Mothmask Adept: Hunched broad-mantled moth adept with four elongated dexterous forearms, thick fur collar and a fanlike antenna crown; no additional arms or wings.",
+      "sourceFilename": "exec-35f142b4-dbd5-403b-82ef-ec8bd3a7b6d2.png"
+    },
+    "wickerstride": {
+      "number": 35,
+      "forms": [
+        "Reedkin",
+        "Wickerstride",
+        "Bamboo Wayfarer"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #35 wickerstride. Types Construct/Plant. Identity: A visibly nonhuman human-shaped Spirimon with a reed-bundle head, hollow wooden face, two long legs, and living strangler-vine fingers; never a human. First form Reedkin: Small uneven reed bundle with a narrow hollow wooden face, short root hands and bent legs. Second Wickerstride: Tall lean bamboo wayfarer with long jointed reed limbs and vines binding its torso. Final Bamboo Wayfarer: Hunched mature walking bamboo grove with a broad reed canopy back, long hanging vine fingers and sturdy root-braced legs; no extra arms.",
+      "sourceFilename": "exec-4b266eed-6fc9-4d37-819b-d1a42e58ff40.png"
+    },
+    "mirrorkin": {
+      "number": 36,
+      "forms": [
+        "Shiverglass",
+        "Mirrorkin",
+        "Manyhand Reflection"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #36 mirrorkin. Types Construct/Aberration. Identity: A visibly nonhuman four-armed biped with a shifting mirrored face, offset eyes, ribbon joints, and asymmetric turquoise glass skin; never a human. First form Shiverglass: Small fractured mirror biped with four short mismatched arms and offset eye reflections. Second Mirrorkin: Tall asymmetric glass creature with long ribbon-jointed arms and an open split reflective torso. Final Manyhand Reflection: Broad arched four-armed reflection with floating layered mirror shards and a deeply recessed shifting face; preserve existing four arms, no extra heads.",
+      "sourceFilename": "exec-7316b4dd-1341-4efe-a1da-2ab237cd53a8.png"
+    },
+    "prismonk": {
+      "number": 37,
+      "forms": [
+        "Plumask",
+        "Prismonk",
+        "Iridescent Envoy"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #37 prismonk. Types Beast/Celestial. Identity: A visibly nonhuman avian-headed biped with taloned hands, opaline feather crests, long ceremonial-looking plumage, and a small radiant wing mantle. First form Plumask: Small avian-headed biped with short taloned hands, soft crest and close feather mantle. Second Prismonk: Long-legged poised bird envoy with elongated hand talons and a narrow radiant shoulder mantle. Final Iridescent Envoy: Hunched regal iridescent envoy with broad layered shoulder plumage, high opaline crest and long feather-fringed arms; retain two arms, two legs.",
+      "sourceFilename": "exec-878612ab-e3a5-422f-87ce-0e386b91d28b.png"
+    },
+    "tempestrill": {
+      "number": 38,
+      "forms": [
+        "Skyscale",
+        "Tempestrill",
+        "Storm Amphiptere"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #38 tempestrill. Types Monstrosity/Elemental. Identity: An amphiptere from myth: a feather-winged serpent without walking legs, modified by swirling storm currents and blue-white feather sparks. First form Skyscale: Compact legless feathered serpent coiled tightly with two short wings. Second Tempestrill: Long serpentine flyer with broad separated feather wings and narrow wind-fringed body. Final Storm Amphiptere: Grand amphiptere with an arched ribbonlike body, immense layered storm wings and a long streaming tail; no walking legs at any stage.",
+      "sourceFilename": "exec-ad90e0f8-b647-45ef-98ca-5396815a0eb9.png"
+    },
+    "reinroot": {
+      "number": 39,
+      "forms": [
+        "Kelpfoal",
+        "Reinroot",
+        "Strangler Kelpie"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #39 reinroot. Types Monstrosity/Plant. Identity: A kelpie from Celtic myth: an eerie long-maned water horse modified by carnivorous aquatic vines, reed fins, and hooked green tendrils. First form Kelpfoal: Small reed-maned water foal with short vine tail and low aquatic crest. Second Reinroot: Lean long-necked kelpie with hanging aquatic-vine mane and reed fin ridges. Final Strangler Kelpie: Deep-chested eerie water horse with a high flowing vine mantle, hooked tendonlike vines and a long trailing reed tail; keep four hooved legs.",
+      "sourceFilename": "exec-73bc239d-302b-43e3-876b-ccdb5faa8589.png"
+    },
+    "fengweave": {
+      "number": 40,
+      "forms": [
+        "Cogspark",
+        "Fengweave",
+        "Bronze Fenghuang"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #40 fengweave. Types Monstrosity/Construct. Identity: A fenghuang from Chinese myth with elaborate tail plumes, modified by bronze feather joints, jade inlays, and articulated golden crest plates. First form Cogspark: Short-tailed young mechanical phoenix with simple bronze wing plates and a small jade crest. Second Fengweave: Long-necked fenghuang with articulated fan wings and several distinct sweeping tail plumes. Final Bronze Fenghuang: Regal arched-neck fenghuang with a wide tiered golden wing fan and exceptionally long articulated tail streamers; two wings, two legs.",
+      "sourceFilename": "exec-69f84c70-639d-4bab-ba55-7f26a3364d73.png"
+    },
+    "vitrilisk": {
+      "number": 41,
+      "forms": [
+        "Slimescale",
+        "Vitrilisk",
+        "Basilisk of Glass"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #41 vitrilisk. Types Monstrosity/Ooze. Identity: A basilisk from myth with a crownlike crest and serpentine body, modified by translucent violet gel, floating scales, and dripping glassy edges. First form Slimescale: Small low gel basilisk with blunt crest and short soft tail. Second Vitrilisk: Long-bodied translucent basilisk with an arched dorsal crest and broad dripping gel forelimbs. Final Basilisk of Glass: Heavy coiled gel basilisk with a crownlike ridge, deep predatory head and an elongated liquid tail; retain recognizable violet basilisk.",
+      "sourceFilename": "exec-1a72f267-1f2c-4bf7-a7bb-ad41a2c3f100.png"
+    },
+    "amberwork": {
+      "number": 42,
+      "forms": [
+        "Ambit",
+        "Amberwork",
+        "Living Reliquary"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #42 amberwork. Types Ooze/Construct. Identity: An amorphous amber ooze containing floating bronze mechanisms and broken porcelain charms, with pseudopod feet and a fluid silhouette. First form Ambit: Low amber puddle holding a few disconnected bronze gears and a porcelain face charm. Second Amberwork: Raised walking amber mass with articulated floating mechanism clusters and thick pseudopod feet. Final Living Reliquary: Broad amber ooze automaton with a suspended interlocking gear core, separated porcelain plates and a tall flowing gel back mantle; not rigid humanoid armor.",
+      "sourceFilename": "exec-c82b095f-3531-49ae-a46b-2145b6b18dc8.png"
+    },
+    "halojell": {
+      "number": 43,
+      "forms": [
+        "Glimdrop",
+        "Halojell",
+        "Celestial Tidelight"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #43 halojell. Types Ooze/Celestial. Identity: A translucent pearlescent ooze with floating feather-shaped lights, small golden ring arcs, and luminous blue pseudopods. First form Glimdrop: Round pearlescent jelly droplet with small feather-shaped lights and one incomplete halo. Second Halojell: Long flowing jelly swimmer with broad finlike pseudopods and two suspended golden ring arcs. Final Celestial Tidelight: Tall translucent celestial tide with a central luminous core and broad layered featherlike gel fans; no rigid legs or human hands.",
+      "sourceFilename": "exec-6730f53d-6dc0-4af1-8e64-4ac7e201daa5.png"
+    },
+    "nepentide": {
+      "number": 44,
+      "forms": [
+        "Pitchdrop",
+        "Nepentide",
+        "Pitcher Deluge"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #44 nepentide. Types Ooze/Plant. Identity: An amorphous green jelly creature containing living carnivorous pitcher cups and red sundew tendrils, with soft gel feet and trapped seed pods. First form Pitchdrop: Low green gel droplet containing one young pitcher trap and short red sundew hairs. Second Nepentide: Raised carnivorous gel body bearing several functional pitcher cups and thick soft walking lobes. Final Pitcher Deluge: Broad living jelly bog with tall connected pitchers, an overhanging sundew canopy and low spreading pseudopods; botanical traps determine silhouette.",
+      "sourceFilename": "exec-b59e8026-07fc-42b5-a2c7-9bbeeb947764.png"
+    },
+    "ossigel": {
+      "number": 45,
+      "forms": [
+        "Ectobit",
+        "Ossigel",
+        "Ossuary Drift"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #45 ossigel. Types Ooze/Undead. Identity: An ectoplasmic ooze with pale lavender gel, drifting small bones, skull-like bubbles, and wispy trailing pseudopods. First form Ectobit: Round lavender ghost jelly with a small suspended bone and skull-like bubble. Second Ossigel: Arched transparent ectoplasmic body with a visible loose rib cluster and curling soft tendrils. Final Ossuary Drift: Long flowing ancestral ooze with a suspended skeletal core and broad veil-like trailing pseudopods; no rigid humanoid legs.",
+      "sourceFilename": "exec-2334a2a9-5c68-43b5-8ca5-49a6f5f3b36e.png"
+    },
+    "strangleweld": {
+      "number": 46,
+      "forms": [
+        "Wirebud",
+        "Strangleweld",
+        "Ironwood Snare"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #46 strangleweld. Types Plant/Construct. Identity: A dangerous strangler fig with mobile root legs, modified by bronze vine hinges, iron bark plates, and articulated trapping branches. First form Wirebud: Small strangler fig with a simple woody trunk, two jointed branch arms and clustered root feet. Second Strangleweld: Arched mobile ironwood with iron-bark armor, long hinged trapping branches and raised root legs. Final Ironwood Snare: Broad hunched ironwood snare with a heavy twisted canopy, enormous articulated root hands and widely braced roots; no arbitrary extra humanoid features.",
+      "sourceFilename": "exec-80585522-f953-4e2f-993b-6c6f3e7c568d.png"
+    },
+    "fumepitcher": {
+      "number": 47,
+      "forms": [
+        "Censerpod",
+        "Fumepitcher",
+        "Censer Tyrant"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #47 fumepitcher. Types Plant/Fiend. Identity: A carnivorous pitcher plant with deep red trapping cups, hornlike leaf tips, black roots, and sulfurous orange lure vapor. First form Censerpod: Single upright red pitcher trap supported by thin thorn roots and small hornlike leaves. Second Fumepitcher: Low branching carnivorous plant with three deep functional pitchers and curling infernal leaf lobes. Final Censer Tyrant: Tall arching infernal pitcher grove with a dominant central trap, smaller flanking traps and hooked black supporting roots; natural botanical development.",
+      "sourceFilename": "exec-e9d41f6e-5c64-40d5-8e57-6f968a20993a.png"
+    },
+    "needlebristle": {
+      "number": 48,
+      "forms": [
+        "Stingbud",
+        "Needlebristle",
+        "Stinging Grovebeast"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #48 needlebristle. Types Plant/Beast. Identity: A dangerous gympie-gympie stinging plant with dense needle hairs, modified by hedgehog-like leaf spines and quick root paws. First form Stingbud: Small compact stinging seedling on tiny root paws with broad round fuzzy leaves. Second Needlebristle: Low creeping hedge with stiff hedgehog-like leaf spines and a distinct pointed leafy muzzle. Final Stinging Grovebeast: Broad armored bristle-hedge beast-plant with long layered needle leaves, powerful root paws and a high protective leaf ridge.",
+      "sourceFilename": "exec-9a521afb-ecd2-4cfd-8a34-e775086304b9.png"
+    },
+    "jianglume": {
+      "number": 49,
+      "forms": [
+        "Hushwick",
+        "Jianglume",
+        "Lantern Ancestor"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #49 jianglume. Types Undead/Fey. Identity: A hopping ancestral undead faerie with a pale spectral moth head, luminous compound eyes, feathery antennae, exactly two ectoplasmic tendril arms emerging from silk sleeves, moth wings and warm antique lantern ornaments. First form Hushwick: Small hopping spectral moth revenant with round compound eyes, short ectoplasmic sleeve tendrils and small folded moth wings. Second Jianglume: Tall slender lantern revenant with longer flowing tendril arms, broad open moth wings and layered plum silk robes. Final Lantern Ancestor: Ancient bowed moth ancestor with a broad draped wing mantle, long lantern chains and curling ectoplasmic arms; cap, two feet and existing two arms remain.",
+      "sourceFilename": "exec-b2f7bb46-26b9-415f-8973-3e57a9bb562f.png"
+    },
+    "draugale": {
+      "number": 50,
+      "forms": [
+        "Barrowick",
+        "Draugale",
+        "Tempest Revenant"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #50 draugale. Types Undead/Elemental. Identity: A draugr from Norse undead folklore with weathered burial armor and a skeletal sea-worn face, altered by swirling salt wind and turquoise storm mist. First form Barrowick: Small sea-worn skeletal revenant with a short aquatic skull, burial wraps and stubby webbed bony feet. Second Draugale: Lean armored aquatic draugr with elongated fishlike skull, fin-fringed legs and rising turquoise salt mist. Final Tempest Revenant: Broad stooped tempest revenant with a deep aquatic skull, trailing sea-burial armor and large webbed skeletal feet; two arms, no added arms or wings.",
+      "sourceFilename": "exec-b289511c-f05c-45ca-8d5d-f869df42b7ef.png"
+    },
+    "aetherling": {
+      "number": 51,
+      "forms": [
+        "Aetherlet",
+        "Aetherling",
+        "Aether Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Rework this existing Spirimon evolution atlas into THREE DISTINCT DESIGNS, not resized copies. Retain its recognizable creature, colors, Types, materials and fine detailed painterly pixel-art-inspired JRPG style. A wide horizontal 3:1 canvas with EXACTLY THREE equal-width invisible cells, one complete full-body creature in each: juvenile left, middle evolution center, final right. True transparent background, no scenery, platform, words, labels or grid. Every silhouette including tips and effects fits its own third with at least 6% clear padding, no touching neighbors or clipping. Shared family motifs, but conspicuous changes in silhouette, relative limb proportions, torso architecture, posture and defining structures. Ornament and size changes alone are insufficient. Use the specified anatomical progression; avoid unrelated additional mutations or switching animal species. Lineage #51 aetherling. Types Aberration/Construct. Identity: A horrific four-legged aether hound built from pale ceramic ribs and bronze clockwork, with six asymmetrical eyes, jointed tentacles instead of a tail, and impossible floating jaw plates. First form Aetherlet: Small compact ceramic hound with six misplaced eyes and short cable-tentacle tail. Second Aetherling: Lean long-backed clockwork aberration with exposed ceramic ribs and an offset floating jaw. Final Aether Sovereign: Low-slung high-shouldered hound engine with a split ceramic mantle, extended bronze joint legs and a large tangled tentacle tail; four legs.",
+      "sourceFilename": "exec-686cf5ba-dfa5-43f7-a656-b98ac6f1fb96.png"
+    },
+    "bramblehorn": {
+      "number": 52,
+      "forms": [
+        "Bramblelet",
+        "Bramblehorn",
+        "Bramble Sovereign"
+      ],
+      "prompt": "Distinct compact calf, long-legged mountain scrambler and low broad takin with living thorn bower; retain four hooves and recognizable takin identity.",
+      "sourceFilename": "exec-ca7da013-35b9-40cd-8961-76ec9450f4db.png"
+    },
+    "cindershade": {
+      "number": 53,
+      "forms": [
+        "Cinderlet",
+        "Cindershade",
+        "Cinder Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon #53 cindershade. Input image is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference. Rebuild ALL THREE forms with visibly distinct silhouettes and anatomy, not simply scale or ornament changes. Wide 3:1 genuinely transparent canvas, EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and padding, no text, scenery, frames or platforms. Preserve Types Celestial/Aberration. Identity: A radiant four-hoofed kirin with charcoal feathers, molten pearl halo rings and a hollow chest containing misplaced watchful eyes. Beautiful celestial light disturbed by horrific asymmetry.. Left Cinderlet: Slender kirin foal with one halo arc and a small misplaced chest eye. Center Cindershade: Long-legged radiant kirin with a partially opened feather chest and mismatched watching eyes. Right Cinder Sovereign: Deep-chested arched-neck celestial kirin with a hollow eye-lined chest, layered charcoal-feather mane and large broken pearl halo; four hooves. Strongly differentiate compact juvenile versus elongated transitional body versus reorganized mature body, head/torso/limb ratios and posture. Add structure only where this identity supports it. Avoid duplicating the same pose three times; the transition must remain obvious when all forms are viewed at the same height. Retain recognizable family motifs and stated number/type of limbs. Every tip and effect fully inside its own third.",
+      "sourceFilename": "exec-63fed037-42ed-4c3c-b938-65611a023beb.png"
+    },
+    "duskclaw": {
+      "number": 54,
+      "forms": [
+        "Dusklet",
+        "Duskclaw",
+        "Dusk Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon #54 duskclaw. Input image is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference. Rebuild ALL THREE forms with visibly distinct silhouettes and anatomy, not simply scale or ornament changes. Wide 3:1 genuinely transparent canvas, EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and padding, no text, scenery, frames or platforms. Preserve Types Construct/Fey. Identity: A four-legged automaton civet made of dark cedar, articulated brass claws and violet glass eyes, with dusk-colored faerie silk tails and tiny luminous leaf charms.. Left Dusklet: Round cedar civet kit with compact brass paws and a short silk tail. Center Duskclaw: Long-bodied articulated civet with flexible wooden spine and forked dusk-silk tail ornaments. Right Dusk Sovereign: High-shouldered sleek automaton civet with a flared cedar collar, broad mechanical claws and long flowing violet silk tail; four legs. Strongly differentiate compact juvenile versus elongated transitional body versus reorganized mature body, head/torso/limb ratios and posture. Add structure only where this identity supports it. Avoid duplicating the same pose three times; the transition must remain obvious when all forms are viewed at the same height. Retain recognizable family motifs and stated number/type of limbs. Every tip and effect fully inside its own third.",
+      "sourceFilename": "exec-a813e392-885f-464f-8a66-d1ded292c43c.png"
+    },
+    "embermoth": {
+      "number": 55,
+      "forms": [
+        "Emberlet",
+        "Embermoth",
+        "Ember Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon #55 embermoth. Input image is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference. Rebuild ALL THREE forms with visibly distinct silhouettes and anatomy, not simply scale or ornament changes. Wide 3:1 genuinely transparent canvas, EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and padding, no text, scenery, frames or platforms. Preserve Types Elemental/Ooze. Identity: An amorphous molten-amber ooze elemental whose flowing lobes suggest moth wings; ember veins and drifting liquid droplets, a soft translucent body with no rigid animal skeleton.. Left Emberlet: Single molten-amber droplet with tiny symmetrical winglike lobes. Center Embermoth: Flowing mothlike ooze with a raised soft core and broad liquid wings. Right Ember Sovereign: Tall molten gel elemental with deeply scalloped cascading wing lobes and a hanging amber droplet abdomen; amorphous, no hard moth skeleton. Strongly differentiate compact juvenile versus elongated transitional body versus reorganized mature body, head/torso/limb ratios and posture. Add structure only where this identity supports it. Avoid duplicating the same pose three times; the transition must remain obvious when all forms are viewed at the same height. Retain recognizable family motifs and stated number/type of limbs. Every tip and effect fully inside its own third.",
+      "sourceFilename": "exec-46586560-ff68-4d97-8bc0-7559f41a92ac.png"
+    },
+    "frostwyrm": {
+      "number": 56,
+      "forms": [
+        "Frostlet",
+        "Frostwyrm",
+        "Frost Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon #56 frostwyrm. Input image is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference. Rebuild ALL THREE forms with visibly distinct silhouettes and anatomy, not simply scale or ornament changes. Wide 3:1 genuinely transparent canvas, EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and padding, no text, scenery, frames or platforms. Preserve Types Fey/Celestial. Identity: A four-legged frost faerie dragon with snow-gecko features, fernlike ice ears, opaline scale tufts and delicate golden celestial halo arcs. Nonhuman, long-bodied, four paws.. Left Frostlet: Round snow-gecko faerie with short body and little ice ear fronds. Center Frostwyrm: Longer frost drake with fan ears, four climbing paws and a low ice crest. Right Frost Sovereign: Graceful arch-backed frost faerie dragon with a long curling body, high opaline shoulder fans and floating halo arcs; four paws. Strongly differentiate compact juvenile versus elongated transitional body versus reorganized mature body, head/torso/limb ratios and posture. Add structure only where this identity supports it. Avoid duplicating the same pose three times; the transition must remain obvious when all forms are viewed at the same height. Retain recognizable family motifs and stated number/type of limbs. Every tip and effect fully inside its own third.",
+      "sourceFilename": "exec-f7417206-9f01-4117-aa09-31d8df48e56b.png"
+    },
+    "gloomglen": {
+      "number": 57,
+      "forms": [
+        "Gloomlet",
+        "Gloomglen",
+        "Gloom Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon #57 gloomglen. Input image is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference. Rebuild ALL THREE forms with visibly distinct silhouettes and anatomy, not simply scale or ornament changes. Wide 3:1 genuinely transparent canvas, EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and padding, no text, scenery, frames or platforms. Preserve Types Fiend/Giant. Identity: A colossal horned fiend giant with a nonhuman basalt face, heavy moss-dark limbs, olive lichen beard, enormous clawed hands and dim green cracks; biped, never an ordinary human.. Left Gloomlet: Compact basalt boar-headed fiend giant with short tusks and thick hunched shoulders. Center Gloomglen: Broad bipedal boar-faced fiend with long heavy forearms, curled horns and deep lichen mane. Right Gloom Sovereign: Ancient low-hunched boar titan with a huge bristled basalt shoulder ridge, sweeping tusks and immense grasping hands; two arms and two legs. Strongly differentiate compact juvenile versus elongated transitional body versus reorganized mature body, head/torso/limb ratios and posture. Add structure only where this identity supports it. Avoid duplicating the same pose three times; the transition must remain obvious when all forms are viewed at the same height. Retain recognizable family motifs and stated number/type of limbs. Every tip and effect fully inside its own third.",
+      "sourceFilename": "exec-e0ed229f-c48a-46ac-adc0-916d4f8360fd.png"
+    },
+    "hollowbloom": {
+      "number": 58,
+      "forms": [
+        "Hollowlet",
+        "Hollowbloom",
+        "Hollow Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon #58 hollowbloom. Input image is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference. Rebuild ALL THREE forms with visibly distinct silhouettes and anatomy, not simply scale or ornament changes. Wide 3:1 genuinely transparent canvas, EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and padding, no text, scenery, frames or platforms. Preserve Types Giant/Undead. Identity: A hollow-bodied undead giant with weathered bone ribs, gray stone flesh, fungal funeral blossoms and torn burial wrappings. Bipedal, immensely broad shoulders and massive hands.. Left Hollowlet: Small hunched undead giant with a shallow hollow ribcage and sparse funeral fungi. Center Hollowbloom: Tall bowed revenant with visibly opened ribs, long hanging arms and a fungal shoulder shelf. Right Hollow Sovereign: Low broad ancient hollow titan with a large empty rib chamber, collapsed shrouded mantle and heavy ground-reaching hands. Strongly differentiate compact juvenile versus elongated transitional body versus reorganized mature body, head/torso/limb ratios and posture. Add structure only where this identity supports it. Avoid duplicating the same pose three times; the transition must remain obvious when all forms are viewed at the same height. Retain recognizable family motifs and stated number/type of limbs. Every tip and effect fully inside its own third.",
+      "sourceFilename": "exec-a21c5018-4e9f-4747-9639-18a4a2a058ea.png"
+    },
+    "ivoryspire": {
+      "number": 59,
+      "forms": [
+        "Ivorylet",
+        "Ivoryspire",
+        "Ivory Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon #59 ivoryspire. Input image is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference. Rebuild ALL THREE forms with visibly distinct silhouettes and anatomy, not simply scale or ornament changes. Wide 3:1 genuinely transparent canvas, EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and padding, no text, scenery, frames or platforms. Preserve Types Fey/Elemental. Identity: A visibly nonhuman bipedal ivory faerie with an antelope-like porcelain face, branching ears, slender elongated limbs and ribbons of pale wind and gold dust. No human face.. Left Ivorylet: Small ivory antelope-faced faerie with short branch ears and compact curled posture. Center Ivoryspire: Long-limbed upright faerie with broad branching ears and narrow wind-swept shoulders. Right Ivory Sovereign: Arch-backed ivory wind faerie with a broad branching ear crown, elongated hands and a long flowing wind mantle; two arms and two legs. Strongly differentiate compact juvenile versus elongated transitional body versus reorganized mature body, head/torso/limb ratios and posture. Add structure only where this identity supports it. Avoid duplicating the same pose three times; the transition must remain obvious when all forms are viewed at the same height. Retain recognizable family motifs and stated number/type of limbs. Every tip and effect fully inside its own third.",
+      "sourceFilename": "exec-be13f20f-955c-4338-b3a8-81a0f00566f5.png"
+    },
+    "jademaw": {
+      "number": 60,
+      "forms": [
+        "Jadelet",
+        "Jademaw",
+        "Jade Sovereign"
+      ],
+      "prompt": "Use case: precise-object-edit. Production replacement evolution artwork for Spirimon #60 jademaw. Input image is the existing identity, palette, materials and detailed painterly pixel-art-inspired JRPG style reference. Rebuild ALL THREE forms with visibly distinct silhouettes and anatomy, not simply scale or ornament changes. Wide 3:1 genuinely transparent canvas, EXACTLY THREE complete isolated creatures in equal left/center/right thirds, clear gutters and padding, no text, scenery, frames or platforms. Preserve Types Monstrosity/Ooze. Identity: An amorphous jade gel monstrosity with a huge split predatory maw, oversized curved fangs, floating jade scutes and several flowing rootlike pseudopods. No rigid legs.. Left Jadelet: Low jade droplet with one large tooth-lined mouth and few floating scutes. Center Jademaw: Raised arched gel predator with a deep central split maw and thick flowing support lobes. Right Jade Sovereign: Broad overhanging jade maw canopy with long curved fangs, suspended scute jaws and a wide low gel base; no rigid legs. Strongly differentiate compact juvenile versus elongated transitional body versus reorganized mature body, head/torso/limb ratios and posture. Add structure only where this identity supports it. Avoid duplicating the same pose three times; the transition must remain obvious when all forms are viewed at the same height. Retain recognizable family motifs and stated number/type of limbs. Every tip and effect fully inside its own third.",
+      "sourceFilename": "exec-df5365f8-8118-46d2-8fcc-56eb6a5dd71a.png"
+    }
+  }
+}

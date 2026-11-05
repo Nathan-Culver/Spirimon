@@ -10,7 +10,15 @@
       "Porcelain Sentinel"
     ],
     "description": "A real pangolin with articulated cobalt-and-ivory porcelain scales, brass hinges, and a temple-bell tail.",
-    "atlas": "./assets/roster/kilnscale.webp"
+    "atlas": "./assets/roster/kilnscale-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Round curled pangolin pup with a few broad porcelain scales and short bell nub",
+      "Low armored crawler with overlapping hinged plates and a long articulated bell tail",
+      "High-shouldered sentinel pangolin with layered shieldlike scales, powerful digging foreclaws and a raised temple-bell tail"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 1,
@@ -36,7 +44,15 @@
       "Tempest Treader"
     ],
     "description": "A real tapir with a short trunk, living cloud curls, teal wind ribbons, and copper spiral markings.",
-    "atlas": "./assets/roster/zephyrtap.webp"
+    "atlas": "./assets/roster/zephyrtap-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Stocky round tapir calf with short trunk and wisps at its ankles",
+      "Longer-legged wandering tapir with a substantial cloud saddle and curling trunk currents",
+      "Deep-chested storm tapir with high cloud shoulder crest, long flowing wind mane and broad anchored feet"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 3,
@@ -101,7 +117,15 @@
       "Pale Tracker"
     ],
     "description": "An extinct thylacine with charcoal stripes, bone-white markings, spectral lavender breath, and a translucent tail.",
-    "atlas": "./assets/roster/veilstripe.webp"
+    "atlas": "./assets/roster/veilstripe-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small thylacine cub with dark stripes and faint translucent tail tip",
+      "Lean stalking thylacine with angular shoulders and spectral mist escaping visible rib-shaped markings",
+      "Weathered ancestral thylacine with a long spectral mane, interrupted fading hindquarters and elongated ghostly tail; recognizable animal remains"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 8,
@@ -114,7 +138,15 @@
       "Valley Colossus"
     ],
     "description": "An extinct giant ground sloth with massive curved claws, sandy shaggy fur, slate-gray calluses, and increasingly colossal proportions.",
-    "atlas": "./assets/roster/megalorn.webp"
+    "atlas": "./assets/roster/megalorn-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Compact ground-sloth juvenile sitting low with short stout limbs and curved digging claws",
+      "Forward-hunched roaming ground sloth with longer forearms, broad shaggy shoulders and low heavy gait",
+      "Ancient ground-sloth colossus with towering shoulder hump, draped shaggy mantle, immense forelimbs and broad weight-bearing hind feet"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 9,
@@ -153,7 +185,15 @@
       "Ancestral Radiance"
     ],
     "description": "An otherworldly halo-bearing celestial whose pearl armor reveals elegant ancestral bone and trails of pale blue soul light.",
-    "atlas": "./assets/roster/astraveil.webp"
+    "atlas": "./assets/roster/astraveil-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Pearl-armored celestial foal with one small halo and subtle glowing bone seams",
+      "Lean spectral guardian with opened rib armor and a long flowing soul mantle",
+      "Solemn ancestral radiance with fully articulated floating pearl-bone armor, a deep luminous ribcage and sweeping auroral mane; keep four legs"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 12,
@@ -179,7 +219,15 @@
       "Heron Magistrate"
     ],
     "description": "A bronze automaton shaped with long heron-like legs and a curved mechanical beak, with emerald patina and articulated wing plates.",
-    "atlas": "./assets/roster/bronzewade.webp"
+    "atlas": "./assets/roster/bronzewade-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Squat short-legged bronze heron chick automaton with compact folded wing plates",
+      "Long-necked wading automaton with thin high-jointed legs, longer beak and partially opened wing fans",
+      "Tall arched-neck heron magistrate with broad layered mechanical wing fans and flared bronze tail; anatomically avian throughout"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 14,
@@ -205,7 +253,15 @@
       "Woodland Puppeteer"
     ],
     "description": "A carved wooden marionette with a lacquered nonhuman mask, jointed branch limbs, faerie silk cords, and small luminous bell flowers.",
-    "atlas": "./assets/roster/puppetide.webp"
+    "atlas": "./assets/roster/puppetide-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small crude twig marionette with simple mask, short limbs and a few hanging bell flowers",
+      "Long-limbed articulated puppeteer with clear carved wooden joints and silk strings spanning its outstretched fingers",
+      "Hunched branching woodland puppet master with layered bark torso, many dangling floral cords and an elaborate nonhuman carved face; retain two arms and legs"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 16,
@@ -285,7 +341,15 @@
       "Velvet Regent"
     ],
     "description": "A small nonhuman woodland faerie with velvet mothlike wings, dormouse whiskers, nimble paws, and a plum-and-cream tufted tail.",
-    "atlas": "./assets/roster/whiskerfey.webp"
+    "atlas": "./assets/roster/whiskerfey-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Round dormouse faerie with tucked small moth wings and a short fluffy tail",
+      "Nimble long-bodied faerie glider with wide functional moth wings and long whiskers",
+      "Poised woodland faerie courier with elongated hindlegs, broad scalloped moth wings and a large sweeping tufted tail; no human face"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 22,
@@ -298,7 +362,15 @@
       "Gossamer Gelcourt"
     ],
     "description": "A faerie with curled fernlike ears and delicate insect wings whose mint-colored body flows into transparent gel skirts and dew beads.",
-    "atlas": "./assets/roster/gelmirth.webp"
+    "atlas": "./assets/roster/gelmirth-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Dewdrop-shaped slug-bodied faerie with tiny wing buds, curled fern ears and small grasping arms",
+      "Upright faerie torso flowing into a long soft translucent slug foot, with two developed insect wings",
+      "Regal gel faerie with a broad rippling slug mantle, raised fern crown and long glassy wings; no human legs, retain two arms"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 23,
@@ -311,7 +383,15 @@
       "Sixfinger Envoy"
     ],
     "description": "A slender faerie with a moth-wing cloak, smooth porcelain insect mask, six-fingered hands, and a bipedal but visibly nonhuman body.",
-    "atlas": "./assets/roster/silkvisage.webp"
+    "atlas": "./assets/roster/silkvisage-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small hunched moth-masked faerie with simple close-folded wing cape and short grasping hands",
+      "Long-legged faerie envoy with narrow upright torso, elongated six-fingered hands and a split moth cape",
+      "Forward-leaning imposing envoy with pronounced insect-mask profile, long low-reaching arms and a broad folded moth mantle; keep two arms and two legs"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 24,
@@ -324,7 +404,15 @@
       "Thorn Court Jester"
     ],
     "description": "A mischievous faerie with curled leaf wings, a striped violet tail, little infernal antlers, and ember-red thorn tips.",
-    "atlas": "./assets/roster/jesthorn.webp"
+    "atlas": "./assets/roster/jesthorn-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Impish round leaf faerie with little antler nubs and short striped tail",
+      "Lean bounding jester faerie with swept leaf wings and a long balancing violet tail",
+      "Arch-backed antlered thorn faerie with a wide leaf-wing fan, long springing hindlegs and elaborately curled tail; preserve one head and four animal limbs"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 25,
@@ -337,7 +425,15 @@
       "Infernal Briar"
     ],
     "description": "A horned fiend with a barbed tail and folded membrane wings, overgrown by burgundy pitcher plants and hooked olive thorns.",
-    "atlas": "./assets/roster/bramblefiend.webp"
+    "atlas": "./assets/roster/bramblefiend-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Compact thorn imp with small pitchers and low folded wings",
+      "Long-backed stalking briar fiend whose spine supports distinct pitcher traps and barbed vines",
+      "Heavy-rooted crouching briar predator with large shoulder pitcher cups, broad thorn forearms and a sweeping hooked tail; keep its established body plan"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 26,
@@ -350,7 +446,15 @@
       "Furnace Bailiff"
     ],
     "description": "A long-armed horned fiend with brass jaw plates, dark iron chain loops, riveted shoulder guards, and red-hot joint seams.",
-    "atlas": "./assets/roster/chainhorn.webp"
+    "atlas": "./assets/roster/chainhorn-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Crouched chain imp with disproportionately large hands and a few loose brass links",
+      "Lean high-shouldered chain fiend with very long articulated forearms and linked shoulder chains",
+      "Massive stooping furnace bailiff with deep plated chest, heavy dragging chain loops and enormous grasping gauntlets; two arms and two legs"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 27,
@@ -363,7 +467,15 @@
       "Eclipsed Herald"
     ],
     "description": "A charcoal-skinned winged fiend with curling ivory horns, a fractured luminous feather halo, and silver celestial markings; no moral alignment implied.",
-    "atlas": "./assets/roster/crownscar.webp"
+    "atlas": "./assets/roster/crownscar-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small charcoal fiend with tucked membrane wings and a broken feather halo fragment",
+      "Long-necked lean winged guardian with wide unfurling wings and luminous feather markings",
+      "Regal crouching celestial fiend with a tall horn crown, broad feather-fringed membrane wings and a segmented halo; four-legged source body plan retained"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 28,
@@ -376,7 +488,15 @@
       "Obsidian Mirefiend"
     ],
     "description": "A crouching horned fiend whose glossy black body drips into viscous oil-like gel, with ochre eyes and amber-lit cracks.",
-    "atlas": "./assets/roster/pitchmaw.webp"
+    "atlas": "./assets/roster/pitchmaw-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Low glossy tar imp with small horns and soft grasping forelimbs",
+      "Hunched oily fiend with an elevated chest, elongated clawed arms and liquid hindquarters",
+      "Broad predatory mirefiend with a high flowing tar mantle, split glowing chest cracks and long pooling forearms; gel anatomy remains flexible"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 29,
@@ -389,9 +509,15 @@
       "Terrace Patriarch"
     ],
     "description": "A sandstone and living-wood giant with an elephant head, a moss-covered trunk, bark-textured tusks, enormous hands and terraced bonsai trees growing across its back.",
-    "atlas": "./assets/roster/bonsaitor-v3.webp",
-    "artRevision": 3,
-    "proceduralArt": false
+    "atlas": "./assets/roster/bonsaitor-v4.webp",
+    "artRevision": 4,
+    "proceduralArt": false,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small hunched elephant-headed woodland giant with a short mossy trunk, stubby tusks and one sapling growing from a rounded back",
+      "Broad forward-leaning elephant giant with longer trunk, reinforced root-covered forearms and several separate bonsai ledges",
+      "Ancient low-slung elephant titan supporting a wide terraced grove across a high craggy back, huge root-braced arms and sweeping mossy trunk; two arms and legs"
+    ]
   },
   {
     "index": 30,
@@ -404,9 +530,15 @@
       "Monsoon Grandfather"
     ],
     "description": "A slate-blue storm giant with a ram head, curling horns, a white cloud mane and beard, digitigrade legs and cloven hooves, bronze bracers and electric-blue lightning accents.",
-    "atlas": "./assets/roster/cloudgron-v3.webp",
-    "artRevision": 3,
-    "proceduralArt": false
+    "atlas": "./assets/roster/cloudgron-v4.webp",
+    "artRevision": 4,
+    "proceduralArt": false,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Compact ram-headed cloud giant with small curled horns, patchy fleece and springy digitigrade cloven legs",
+      "Broad-chested storm shepherd with mature curled horns, dense cloud shoulder fleece and thick braced arms",
+      "Hunched ancient monsoon ram giant with a towering thunderhead mane, long cloud beard and heavy cloven legs; distinct domed silhouette, no added wings"
+    ]
   },
   {
     "index": 31,
@@ -434,9 +566,15 @@
       "Sepulcher Titan"
     ],
     "description": "An undead slate giant with greatly elongated arms and ground-reaching knuckles, weathered burial wraps, a shadowed stone mask, cyan-glowing exposed ribs and a tombstone mantle.",
-    "atlas": "./assets/roster/barrowgron-v3.webp",
-    "artRevision": 3,
-    "proceduralArt": false
+    "atlas": "./assets/roster/barrowgron-v4.webp",
+    "artRevision": 4,
+    "proceduralArt": false,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Compact shrouded grave giant with long knuckle-reaching arms, small mask and simple glowing rib seams",
+      "Forward-stooping revenant with elongated massive forearms, exposed cyan ribs and a narrow grave-slab back mantle",
+      "Ancient sepulcher titan with a deeply arched burial mantle, low recessed stone-mask head and immense long knuckle-bearing arms; two arms, two legs"
+    ]
   },
   {
     "index": 33,
@@ -449,7 +587,15 @@
       "Mothmask Adept"
     ],
     "description": "A visibly nonhuman biped with a moth head, four delicate grasping forearms, soft fur cuffs, and broad patterned antennae; never a human.",
-    "atlas": "./assets/roster/silkclasp.webp"
+    "atlas": "./assets/roster/silkclasp-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small fuzzy moth-headed biped with tiny four forearms and short antennae",
+      "Slender four-armed moth adept with distinct upper and lower arm proportions and long patterned antennae",
+      "Hunched broad-mantled moth adept with four elongated dexterous forearms, thick fur collar and a fanlike antenna crown; no additional arms or wings"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 34,
@@ -462,7 +608,15 @@
       "Bamboo Wayfarer"
     ],
     "description": "A visibly nonhuman human-shaped Spirimon with a reed-bundle head, hollow wooden face, two long legs, and living strangler-vine fingers; never a human.",
-    "atlas": "./assets/roster/wickerstride.webp"
+    "atlas": "./assets/roster/wickerstride-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small uneven reed bundle with a narrow hollow wooden face, short root hands and bent legs",
+      "Tall lean bamboo wayfarer with long jointed reed limbs and vines binding its torso",
+      "Hunched mature walking bamboo grove with a broad reed canopy back, long hanging vine fingers and sturdy root-braced legs; no extra arms"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 35,
@@ -475,7 +629,15 @@
       "Manyhand Reflection"
     ],
     "description": "A visibly nonhuman four-armed biped with a shifting mirrored face, offset eyes, ribbon joints, and asymmetric turquoise glass skin; never a human.",
-    "atlas": "./assets/roster/mirrorkin.webp"
+    "atlas": "./assets/roster/mirrorkin-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small fractured mirror biped with four short mismatched arms and offset eye reflections",
+      "Tall asymmetric glass creature with long ribbon-jointed arms and an open split reflective torso",
+      "Broad arched four-armed reflection with floating layered mirror shards and a deeply recessed shifting face; preserve existing four arms, no extra heads"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 36,
@@ -488,7 +650,15 @@
       "Iridescent Envoy"
     ],
     "description": "A visibly nonhuman avian-headed biped with taloned hands, opaline feather crests, long ceremonial-looking plumage, and a small radiant wing mantle.",
-    "atlas": "./assets/roster/prismonk.webp"
+    "atlas": "./assets/roster/prismonk-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small avian-headed biped with short taloned hands, soft crest and close feather mantle",
+      "Long-legged poised bird envoy with elongated hand talons and a narrow radiant shoulder mantle",
+      "Hunched regal iridescent envoy with broad layered shoulder plumage, high opaline crest and long feather-fringed arms; retain two arms, two legs"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 37,
@@ -501,7 +671,15 @@
       "Storm Amphiptere"
     ],
     "description": "An amphiptere from myth: a feather-winged serpent without walking legs, modified by swirling storm currents and blue-white feather sparks.",
-    "atlas": "./assets/roster/tempestrill.webp"
+    "atlas": "./assets/roster/tempestrill-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Compact legless feathered serpent coiled tightly with two short wings",
+      "Long serpentine flyer with broad separated feather wings and narrow wind-fringed body",
+      "Grand amphiptere with an arched ribbonlike body, immense layered storm wings and a long streaming tail; no walking legs at any stage"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 38,
@@ -514,7 +692,15 @@
       "Strangler Kelpie"
     ],
     "description": "A kelpie from Celtic myth: an eerie long-maned water horse modified by carnivorous aquatic vines, reed fins, and hooked green tendrils.",
-    "atlas": "./assets/roster/reinroot.webp"
+    "atlas": "./assets/roster/reinroot-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small reed-maned water foal with short vine tail and low aquatic crest",
+      "Lean long-necked kelpie with hanging aquatic-vine mane and reed fin ridges",
+      "Deep-chested eerie water horse with a high flowing vine mantle, hooked tendonlike vines and a long trailing reed tail; keep four hooved legs"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 39,
@@ -527,7 +713,15 @@
       "Bronze Fenghuang"
     ],
     "description": "A fenghuang from Chinese myth with elaborate tail plumes, modified by bronze feather joints, jade inlays, and articulated golden crest plates.",
-    "atlas": "./assets/roster/fengweave.webp"
+    "atlas": "./assets/roster/fengweave-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Short-tailed young mechanical phoenix with simple bronze wing plates and a small jade crest",
+      "Long-necked fenghuang with articulated fan wings and several distinct sweeping tail plumes",
+      "Regal arched-neck fenghuang with a wide tiered golden wing fan and exceptionally long articulated tail streamers; two wings, two legs"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 40,
@@ -540,7 +734,15 @@
       "Basilisk of Glass"
     ],
     "description": "A basilisk from myth with a crownlike crest and serpentine body, modified by translucent violet gel, floating scales, and dripping glassy edges.",
-    "atlas": "./assets/roster/vitrilisk.webp"
+    "atlas": "./assets/roster/vitrilisk-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small low gel basilisk with blunt crest and short soft tail",
+      "Long-bodied translucent basilisk with an arched dorsal crest and broad dripping gel forelimbs",
+      "Heavy coiled gel basilisk with a crownlike ridge, deep predatory head and an elongated liquid tail; retain recognizable violet basilisk"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 41,
@@ -553,7 +755,15 @@
       "Living Reliquary"
     ],
     "description": "An amorphous amber ooze containing floating bronze mechanisms and broken porcelain charms, with pseudopod feet and a fluid silhouette.",
-    "atlas": "./assets/roster/amberwork.webp"
+    "atlas": "./assets/roster/amberwork-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Low amber puddle holding a few disconnected bronze gears and a porcelain face charm",
+      "Raised walking amber mass with articulated floating mechanism clusters and thick pseudopod feet",
+      "Broad amber ooze automaton with a suspended interlocking gear core, separated porcelain plates and a tall flowing gel back mantle; not rigid humanoid armor"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 42,
@@ -566,7 +776,15 @@
       "Celestial Tidelight"
     ],
     "description": "A translucent pearlescent ooze with floating feather-shaped lights, small golden ring arcs, and luminous blue pseudopods.",
-    "atlas": "./assets/roster/halojell.webp"
+    "atlas": "./assets/roster/halojell-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Round pearlescent jelly droplet with small feather-shaped lights and one incomplete halo",
+      "Long flowing jelly swimmer with broad finlike pseudopods and two suspended golden ring arcs",
+      "Tall translucent celestial tide with a central luminous core and broad layered featherlike gel fans; no rigid legs or human hands"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 43,
@@ -579,7 +797,15 @@
       "Pitcher Deluge"
     ],
     "description": "An amorphous green jelly creature containing living carnivorous pitcher cups and red sundew tendrils, with soft gel feet and trapped seed pods.",
-    "atlas": "./assets/roster/nepentide.webp"
+    "atlas": "./assets/roster/nepentide-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Low green gel droplet containing one young pitcher trap and short red sundew hairs",
+      "Raised carnivorous gel body bearing several functional pitcher cups and thick soft walking lobes",
+      "Broad living jelly bog with tall connected pitchers, an overhanging sundew canopy and low spreading pseudopods; botanical traps determine silhouette"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 44,
@@ -592,7 +818,15 @@
       "Ossuary Drift"
     ],
     "description": "An ectoplasmic ooze with pale lavender gel, drifting small bones, skull-like bubbles, and wispy trailing pseudopods.",
-    "atlas": "./assets/roster/ossigel.webp"
+    "atlas": "./assets/roster/ossigel-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Round lavender ghost jelly with a small suspended bone and skull-like bubble",
+      "Arched transparent ectoplasmic body with a visible loose rib cluster and curling soft tendrils",
+      "Long flowing ancestral ooze with a suspended skeletal core and broad veil-like trailing pseudopods; no rigid humanoid legs"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 45,
@@ -605,7 +839,15 @@
       "Ironwood Snare"
     ],
     "description": "A dangerous strangler fig with mobile root legs, modified by bronze vine hinges, iron bark plates, and articulated trapping branches.",
-    "atlas": "./assets/roster/strangleweld.webp"
+    "atlas": "./assets/roster/strangleweld-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small strangler fig with a simple woody trunk, two jointed branch arms and clustered root feet",
+      "Arched mobile ironwood with iron-bark armor, long hinged trapping branches and raised root legs",
+      "Broad hunched ironwood snare with a heavy twisted canopy, enormous articulated root hands and widely braced roots; no arbitrary extra humanoid features"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 46,
@@ -618,7 +860,15 @@
       "Censer Tyrant"
     ],
     "description": "A carnivorous pitcher plant with deep red trapping cups, hornlike leaf tips, black roots, and sulfurous orange lure vapor.",
-    "atlas": "./assets/roster/fumepitcher.webp"
+    "atlas": "./assets/roster/fumepitcher-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Single upright red pitcher trap supported by thin thorn roots and small hornlike leaves",
+      "Low branching carnivorous plant with three deep functional pitchers and curling infernal leaf lobes",
+      "Tall arching infernal pitcher grove with a dominant central trap, smaller flanking traps and hooked black supporting roots; natural botanical development"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 47,
@@ -631,7 +881,15 @@
       "Stinging Grovebeast"
     ],
     "description": "A dangerous gympie-gympie stinging plant with dense needle hairs, modified by hedgehog-like leaf spines and quick root paws.",
-    "atlas": "./assets/roster/needlebristle.webp"
+    "atlas": "./assets/roster/needlebristle-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small compact stinging seedling on tiny root paws with broad round fuzzy leaves",
+      "Low creeping hedge with stiff hedgehog-like leaf spines and a distinct pointed leafy muzzle",
+      "Broad armored bristle-hedge beast-plant with long layered needle leaves, powerful root paws and a high protective leaf ridge"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 48,
@@ -644,9 +902,15 @@
       "Lantern Ancestor"
     ],
     "description": "A hopping ancestral undead faerie with a pale spectral moth head, luminous compound eyes, feathery antennae, exactly two ectoplasmic tendril arms emerging from silk sleeves, moth wings and warm antique lantern ornaments.",
-    "atlas": "./assets/roster/jianglume-v3.webp",
-    "artRevision": 3,
-    "proceduralArt": false
+    "atlas": "./assets/roster/jianglume-v4.webp",
+    "artRevision": 4,
+    "proceduralArt": false,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small hopping spectral moth revenant with round compound eyes, short ectoplasmic sleeve tendrils and small folded moth wings",
+      "Tall slender lantern revenant with longer flowing tendril arms, broad open moth wings and layered plum silk robes",
+      "Ancient bowed moth ancestor with a broad draped wing mantle, long lantern chains and curling ectoplasmic arms; cap, two feet and existing two arms remain"
+    ]
   },
   {
     "index": 49,
@@ -659,7 +923,15 @@
       "Tempest Revenant"
     ],
     "description": "A draugr from Norse undead folklore with weathered burial armor and a skeletal sea-worn face, altered by swirling salt wind and turquoise storm mist.",
-    "atlas": "./assets/roster/draugale.webp"
+    "atlas": "./assets/roster/draugale-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small sea-worn skeletal revenant with a short aquatic skull, burial wraps and stubby webbed bony feet",
+      "Lean armored aquatic draugr with elongated fishlike skull, fin-fringed legs and rising turquoise salt mist",
+      "Broad stooped tempest revenant with a deep aquatic skull, trailing sea-burial armor and large webbed skeletal feet; two arms, no added arms or wings"
+    ],
+    "proceduralArt": false
   },
   {
     "index": 50,
@@ -673,8 +945,14 @@
     ],
     "description": "A horrific four-legged aether hound built from pale ceramic ribs and bronze clockwork, with six asymmetrical eyes, jointed tentacles instead of a tail, and impossible floating jaw plates.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/aetherling.webp",
-    "artRevision": 2
+    "atlas": "./assets/roster/aetherling-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small compact ceramic hound with six misplaced eyes and short cable-tentacle tail",
+      "Lean long-backed clockwork aberration with exposed ceramic ribs and an offset floating jaw",
+      "Low-slung high-shouldered hound engine with a split ceramic mantle, extended bronze joint legs and a large tangled tentacle tail; four legs"
+    ]
   },
   {
     "index": 51,
@@ -688,12 +966,18 @@
     ],
     "description": "A recognizable massively muscular takin with thick fur, curling horns grown into flowering thorn branches, tiny faerie lantern seedpods and moss-gold markings. Four sturdy hooved legs.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/bramblehorn.webp",
-    "artRevision": 2,
+    "atlas": "./assets/roster/bramblehorn-v4.webp",
+    "artRevision": 4,
     "legacyTypes": {
       "base": "Beast",
       "alter": "Humanoid"
-    }
+    },
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Stocky takin calf with horn buds and one flowering thorn sprig",
+      "Heavy shouldered takin with curved thorn horns and dense shaggy dewlap",
+      "Mature takin with a towering fur hump, broad branching thorn-horn crown and short heavily muscled legs; four hooves"
+    ]
   },
   {
     "index": 52,
@@ -707,8 +991,14 @@
     ],
     "description": "A radiant four-hoofed kirin with charcoal feathers, molten pearl halo rings and a hollow chest containing misplaced watchful eyes. Beautiful celestial light disturbed by horrific asymmetry.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/cindershade.webp",
-    "artRevision": 2
+    "atlas": "./assets/roster/cindershade-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Slender kirin foal with one halo arc and a small misplaced chest eye",
+      "Long-legged radiant kirin with a partially opened feather chest and mismatched watching eyes",
+      "Deep-chested arched-neck celestial kirin with a hollow eye-lined chest, layered charcoal-feather mane and large broken pearl halo; four hooves"
+    ]
   },
   {
     "index": 53,
@@ -722,8 +1012,14 @@
     ],
     "description": "A four-legged automaton civet made of dark cedar, articulated brass claws and violet glass eyes, with dusk-colored faerie silk tails and tiny luminous leaf charms.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/duskclaw.webp",
-    "artRevision": 2
+    "atlas": "./assets/roster/duskclaw-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Round cedar civet kit with compact brass paws and a short silk tail",
+      "Long-bodied articulated civet with flexible wooden spine and forked dusk-silk tail ornaments",
+      "High-shouldered sleek automaton civet with a flared cedar collar, broad mechanical claws and long flowing violet silk tail; four legs"
+    ]
   },
   {
     "index": 54,
@@ -737,8 +1033,14 @@
     ],
     "description": "An amorphous molten-amber ooze elemental whose flowing lobes suggest moth wings; ember veins and drifting liquid droplets, a soft translucent body with no rigid animal skeleton.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/embermoth.webp",
-    "artRevision": 2
+    "atlas": "./assets/roster/embermoth-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Single molten-amber droplet with tiny symmetrical winglike lobes",
+      "Flowing mothlike ooze with a raised soft core and broad liquid wings",
+      "Tall molten gel elemental with deeply scalloped cascading wing lobes and a hanging amber droplet abdomen; amorphous, no hard moth skeleton"
+    ]
   },
   {
     "index": 55,
@@ -752,8 +1054,14 @@
     ],
     "description": "A four-legged frost faerie dragon with snow-gecko features, fernlike ice ears, opaline scale tufts and delicate golden celestial halo arcs. Nonhuman, long-bodied, four paws.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/frostwyrm.webp",
-    "artRevision": 2
+    "atlas": "./assets/roster/frostwyrm-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Round snow-gecko faerie with short body and little ice ear fronds",
+      "Longer frost drake with fan ears, four climbing paws and a low ice crest",
+      "Graceful arch-backed frost faerie dragon with a long curling body, high opaline shoulder fans and floating halo arcs; four paws"
+    ]
   },
   {
     "index": 56,
@@ -767,8 +1075,14 @@
     ],
     "description": "A colossal horned fiend giant with a nonhuman basalt face, heavy moss-dark limbs, olive lichen beard, enormous clawed hands and dim green cracks; biped, never an ordinary human.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/gloomglen.webp",
-    "artRevision": 2
+    "atlas": "./assets/roster/gloomglen-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Compact basalt boar-headed fiend giant with short tusks and thick hunched shoulders",
+      "Broad bipedal boar-faced fiend with long heavy forearms, curled horns and deep lichen mane",
+      "Ancient low-hunched boar titan with a huge bristled basalt shoulder ridge, sweeping tusks and immense grasping hands; two arms and two legs"
+    ]
   },
   {
     "index": 57,
@@ -782,8 +1096,14 @@
     ],
     "description": "A hollow-bodied undead giant with weathered bone ribs, gray stone flesh, fungal funeral blossoms and torn burial wrappings. Bipedal, immensely broad shoulders and massive hands.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/hollowbloom.webp",
-    "artRevision": 2
+    "atlas": "./assets/roster/hollowbloom-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small hunched undead giant with a shallow hollow ribcage and sparse funeral fungi",
+      "Tall bowed revenant with visibly opened ribs, long hanging arms and a fungal shoulder shelf",
+      "Low broad ancient hollow titan with a large empty rib chamber, collapsed shrouded mantle and heavy ground-reaching hands"
+    ]
   },
   {
     "index": 58,
@@ -797,12 +1117,18 @@
     ],
     "description": "A visibly nonhuman bipedal ivory faerie with an antelope-like porcelain face, branching ears, slender elongated limbs and ribbons of pale wind and gold dust. No human face.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/ivoryspire.webp",
-    "artRevision": 2,
+    "atlas": "./assets/roster/ivoryspire-v4.webp",
+    "artRevision": 4,
     "legacyTypes": {
       "base": "Humanoid",
       "alter": "Elemental"
-    }
+    },
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Small ivory antelope-faced faerie with short branch ears and compact curled posture",
+      "Long-limbed upright faerie with broad branching ears and narrow wind-swept shoulders",
+      "Arch-backed ivory wind faerie with a broad branching ear crown, elongated hands and a long flowing wind mantle; two arms and two legs"
+    ]
   },
   {
     "index": 59,
@@ -816,8 +1142,14 @@
     ],
     "description": "An amorphous jade gel monstrosity with a huge split predatory maw, oversized curved fangs, floating jade scutes and several flowing rootlike pseudopods. No rigid legs.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/jademaw.webp",
-    "artRevision": 2
+    "atlas": "./assets/roster/jademaw-v4.webp",
+    "artRevision": 4,
+    "evolutionRevision": 1,
+    "formDescriptions": [
+      "Low jade droplet with one large tooth-lined mouth and few floating scutes",
+      "Raised arched gel predator with a deep central split maw and thick flowing support lobes",
+      "Broad overhanging jade maw canopy with long curved fangs, suspended scute jaws and a wide low gel base; no rigid legs"
+    ]
   },
   {
     "index": 60,

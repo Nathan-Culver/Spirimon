@@ -29,7 +29,7 @@ test('existing journeys receive completed roster artwork without replacing indiv
  const context=vm.createContext({s:state,library,E,ROSTER,structuredClone,syncCapabilities:()=>{},certifyRenderedAnatomy:()=>{},register:sp=>{state.species[sp.id]=sp;library[sp.id]=sp;}});
  vm.runInContext(source.slice(begin,end)+'\ninstallRoster();',context);
  assert.deepEqual(state.spirits,before);assert.deepEqual(state.species['roster-aetherling'].moves,moves);
- for(const row of rows){const sp=state.species['roster-'+row.id];assert.equal(sp.atlas,row.atlas);assert.equal(sp.artRevision,row.artRevision);assert.equal(sp.proceduralArt,false);assert.equal(sp.sprites,undefined);if(row.formAnatomy)assert.deepEqual(JSON.parse(JSON.stringify(sp.formAnatomy)),row.formAnatomy);for(let form=0;form<3;form++)assert.equal(creatureArtworkSource(sp,form),row.atlas);}
+ for(const row of rows){const sp=state.species['roster-'+row.id];assert.equal(sp.atlas,row.atlas);assert.equal(sp.artRevision,row.artRevision);assert.equal(sp.proceduralArt,false);assert.equal(sp.sprites,undefined);if(row.formDescriptions)assert.deepEqual(Array.from(sp.formDescriptions),row.formDescriptions);if(row.formAnatomy)assert.deepEqual(JSON.parse(JSON.stringify(sp.formAnatomy)),row.formAnatomy);for(let form=0;form<3;form++)assert.equal(creatureArtworkSource(sp,form),row.atlas);}
  vm.runInContext('installRoster();',context);assert.deepEqual(state.spirits,before);
 });
 
