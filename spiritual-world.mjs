@@ -6,7 +6,7 @@ export function shrinesForRegion(seed,cx,cy){
  const key=seed+'|'+cx+'|'+cy;if(cache.has(key))return cache.get(key);
  const reg=E.region(seed,cx,cy),r=E.rng(E.hash(seed,'shrines',cx,cy)),count=reg.town?2:2+(E.hash(seed,cx,cy,'pilgrimage')%3===0?1:0),out=[];
  const buildings=reg.town?W.buildings(cx,cy):[],reachable=new Set(),queue=[[24,18]];
- const accessible=(lx,ly)=>{const x=cx*48+lx,y=cy*36+ly;return E.walkable(E.tile(seed,x,y))&&!buildings.some(b=>x>=b.footX&&x<b.footX+b.w&&y>=b.footY&&y<b.footY+b.h&&!(x===b.doorX&&y===b.doorY))&&(!reg.town||!W.featureFootprintBlocked(lx,ly,cx,cy));};
+ const accessible=(lx,ly)=>{const x=cx*48+lx,y=cy*36+ly;return E.walkable(E.tile(seed,x,y))&&!buildings.some(b=>W.buildingFootprintBlocked(b,x,y))&&(!reg.town||!W.featureFootprintBlocked(lx,ly,cx,cy));};
  for(let n=0;n<queue.length;n++){const [x,y]=queue[n],k=x+','+y;if(x<0||y<0||x>=48||y>=36||reachable.has(k)||!accessible(x,y))continue;reachable.add(k);for(const [dx,dy]of [[1,0],[-1,0],[0,1],[0,-1]])queue.push([x+dx,y+dy]);}
  for(let n=0;n<count;n++)for(let attempt=0;attempt<180;attempt++){
   let lx=n===0&&attempt===0&&reg.town?21:Math.floor(4+r()*40),ly=n===0&&attempt===0&&reg.town?20:Math.floor(4+r()*28);

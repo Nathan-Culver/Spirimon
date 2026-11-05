@@ -2,6 +2,7 @@ import {SACRED_ASSETS,drawCaveEntrance} from './sacred-art.mjs';
 import {battleStageLayout} from './battle-layout.mjs';
 import {drawDungeonAtlasTile,drawDungeonProp,dungeonArtworkReady,dungeonFeatureSprite,dungeonDecoration,drawDungeonLight} from './dungeon-atlas.mjs';
 import {updateMapCamera,movementProgress} from './map-camera.mjs';
+import {sceneryDepth,caveFootprint,caveRimBlocked} from './scenery.mjs';
 import * as SE from './spiritual-energy.mjs';
 import * as ST from './support-techniques.mjs';
 import * as SW from './spiritual-world.mjs';
@@ -213,8 +214,14 @@ function rest(){if(!safe())return toast('Rest at a town or guild.');party().forE
 function atlasHTML(){const c=E.coord(s.player.x,s.player.y),cells=[],radius=innerWidth<560?2:3;for(let dy=-radius;dy<=radius;dy++)for(let dx=-radius;dx<=radius;dx++){const cx=c.cx+dx,cy=c.cy+dy,reg=s.regions[cx+','+cy];cells.push(reg?.visited?'<button class="atlas-cell '+(!dx&&!dy?'current':'')+'" data-action="region-info" data-value="'+reg.key+'" style="background:'+reg.biome.color+'55"><small>'+cx+', '+cy+(reg.town?' · GUILD':'')+'</small><strong>'+esc(reg.name)+'</strong><small>'+esc(reg.biome.name)+' · Lv. '+reg.danger+'+</small></button>':'<div class="atlas-cell unknown" aria-label="Unexplored region">·</div>');}return'<div class="page-heading"><div><div class="eyebrow">THERE IS ALWAYS ANOTHER TRAIL</div><h1>Your world, unfolding.</h1><p>Discovered places stay where you left them. Walk beyond the edge to find more.</p></div><span class="pill">'+Object.values(s.regions).filter(r=>r.visited).length+' regions mapped</span></div><div class="panel"><div class="atlas-grid">'+cells.join('')+'</div><p class="help-line" style="text-align:center">Your location is outlined in gold. Region danger stays fixed as your Spirimon grow.</p></div>';}
 function journalHTML(){const visited=Object.values(s.regions).filter(r=>r.visited).length,quests=[['discovery','First impressions','Discover five different Spirimon species, then report to Scholar Elin.',s.seen.length+'/5 species · Reward: 50 renown'],['rival','A friendly rivalry','Defeat Rowan in an organized guild battle.',s.wins+' victories · Reward: guild rank progress'],['explorer','Beyond the familiar','Visit three regions and share your findings with Scholar Elin.',visited+'/3 regions · Reward: 50 renown']];return'<div class="page-heading"><div><div class="eyebrow">NO DESTINY REQUIRED</div><h1>A journey of your own.</h1><p>Small promises, familiar faces, and whatever lies around the next bend.</p></div><span class="pill">Rank '+s.rank+' · '+s.rankXP+' / '+s.rank*100+' renown</span></div><div class="journal-grid"><div class="panel"><div class="section-label">GUILD NOTICES <small>ALL OPTIONAL</small></div>'+quests.map(([id,title,desc,progress])=>'<div class="quest '+(s.quests[id]?'quest-complete':'')+'"><h3>'+(s.quests[id]?'✓ ':'')+title+'</h3><p>'+desc+'</p><small>'+(s.quests[id]?'Completed':progress)+'</small></div>').join('')+'<div class="subheading">PEOPLE YOU KNOW</div>'+['Keeper Iona','Tavi','Rowan','Scholar Elin'].map((name,n)=>{const role=['keeper','merchant','rival','scholar'][n],value=Object.entries(s.friendships).filter(([k])=>k.startsWith(role)).reduce((sum,[,v])=>sum+v,0);return'<div class="friend-row"><span>'+name+'</span><span class="muted">'+(value>15?'Friend':value>3?'Acquaintance':'New face')+' · '+value+'</span></div>';}).join('')+'</div><div class="panel"><div class="section-label">FIELD JOURNAL</div>'+s.notes.slice(0,18).map(n=>'<p class="journal-entry">'+esc(n)+'</p>').join('')+'</div></div>';}
 
-function buildingSpriteBlocked(x,y){const p=E.coord(x,y);if(!E.region(s.seed,p.cx,p.cy).town)return false;const buildings=W.buildings(p.cx,p.cy);if(buildings.some(b=>{const left=b.footX,right=b.footX+b.w-1,top=b.footY,bottom=b.footY+b.h-1;if(x===b.doorX&&y===b.doorY)return false;return x>=left&&x<=right&&y>=top&&y<=bottom;}))return true;return W.featureFootprintBlocked(p.lx,p.ly,p.cx,p.cy);}
-function caveEntranceHere(x=s.player.x,y=s.player.y){const p=E.coord(x,y),e=E.caveEntrance(s.seed,p.cx,p.cy);return e&&Math.abs(e.x-x)+Math.abs(e.y-y)<=1?e:null;}
+function buildingSpriteBlocked(x,y){
+ const p=E.coord(x,y),entrance=E.caveEntrance(s.seed,p.cx,p.cy);
+ if(entrance&&caveRimBlocked(entrance,x,y))return true;
+ if(SW.shrinesForRegion(s.seed,p.cx,p.cy).some(shrine=>shrine.x===x&&shrine.y===y))return true;
+ if(!E.region(s.seed,p.cx,p.cy).town)return false;
+ return W.buildings(p.cx,p.cy).some(b=>W.buildingFootprintBlocked(b,x,y))||W.featureFootprintBlocked(p.lx,p.ly,p.cx,p.cy);
+}
+function caveEntranceHere(x=s.player.x,y=s.player.y){return E.caveEntranceAt(s.seed,x,y);}
 const dungeonLayouts=new Map();
 function dungeonLayout(room){const key=s.seed+'|'+room.id+'|'+room.level;if(!dungeonLayouts.has(key)){if(dungeonLayouts.size>=96)dungeonLayouts.delete(dungeonLayouts.keys().next().value);const map=E.caveMap(s.seed,room.id,room.level),floorKey=room.id+'|'+room.level;dungeonLayouts.set(key,{map,objects:EP.puzzleObjects(map,s.seed,floorKey,E.hash),features:EP.dungeonFeatures(map,s.seed,floorKey,E.hash,room.level),secret:EP.secretPassage(map,s.seed,floorKey,E.hash)});}return dungeonLayouts.get(key);}
 function baseDungeonMap(room){return dungeonLayout(room).map;}
@@ -696,8 +703,6 @@ function wanderSpirits(now){if(s.interior||modal||battle||view!=='explore')retur
 function drawWorld(time){
  const canvas=$('#world');if(!canvas||view!=='explore'||battle)return;
  if(s.cave){drawCave(canvas,time);return;}if(s.interior){drawInterior(canvas,time);return;}
- // Keep the last fully painted frame rather than flashing the low-detail fallback
- // while the authored terrain atlas is temporarily unavailable.
  if(!readyImage(ART.terrain)||!readyImage(ART.world)||!readyImage(ART.sealer)||!readyImage(TOWN_ATLAS))return;
  const rect=canvas.getBoundingClientRect(),scale=document.body.classList.contains('emulator-mode')?1.5:2;
  const width=Math.max(240,Math.round(rect.width/scale)),height=Math.max(160,Math.round(rect.height/scale));
@@ -724,39 +729,35 @@ function drawWorld(time){
  }
  const moving=!!walkAnim&&elapsed<1;
  const actors=[];
- // All elevated scenery shares the actors' ground-contact depth ordering.
- // This lets characters pass behind crowns, roofs and monuments but in front of their bases.
  for(let ty=Math.floor(oy)-3;ty<=Math.ceil(oy+rows)+3;ty++)for(let tx=Math.floor(ox)-3;tx<=Math.ceil(ox+cols)+3;tx++){
  if(E.tile(s.seed,tx,ty)!=='tree')continue;
  const x=px(tx),y=py(ty);if(!visible(x-16,y-48,64,80))continue;const seed=E.hash(s.seed,tx,ty),biome=E.region(s.seed,Math.floor(tx/48),Math.floor(ty/36)).biome.kind;
- actors.push({y:ty+0.85,draw:()=>drawTree(c,x,y,seed,biome)});
+ actors.push({y:sceneryDepth({y:ty}),draw:()=>drawTree(c,x,y,seed,biome)});
  }
  for(const {cx,cy} of nearRegions){
  const entrance=E.caveEntrance(s.seed,cx,cy);
  if(entrance&&visible(px(entrance.x)-64,py(entrance.y)-112,160,144)){
  const biome=E.region(s.seed,cx,cy).biome.kind;
- actors.push({y:entrance.y+0.85,draw:()=>drawCaveEntrance(c,px(entrance.x),py(entrance.y),biome)});
+ actors.push({y:sceneryDepth(caveFootprint(entrance)),draw:()=>drawCaveEntrance(c,px(entrance.x),py(entrance.y),biome)});
  }
  for(const shrine of SW.shrinesForRegion(s.seed,cx,cy)){
  if(!visible(px(shrine.x)-96,py(shrine.y)-128,192,192))continue;
- actors.push({y:shrine.y+0.85,draw:()=>SW.drawShrine(c,px(shrine.x),py(shrine.y),!SE.recoveryAvailable(s,'commune',shrine.id).ok,shrine.kind||0)});
+ actors.push({y:sceneryDepth(shrine),draw:()=>SW.drawShrine(c,px(shrine.x),py(shrine.y),!SE.recoveryAvailable(s,'commune',shrine.id).ok,shrine.kind||0)});
  }
  if(!E.region(s.seed,cx,cy).town)continue;
  for(const f of W.townFeatures(cx,cy)){
- const fy=cy*36+f.y+f.h-1;if(!visible(px(cx*48+f.x)-96,py(cy*36+f.y)-128,Math.max(192,f.w*32+64),Math.max(192,f.h*32+64)))continue;
- actors.push({y:fy+0.6,draw:()=>drawTownFeatures(c,cx,cy,px,py,f)});
+ if(!visible(px(cx*48+f.x)-96,py(cy*36+f.y)-128,Math.max(192,f.w*32+64),Math.max(192,f.h*32+64)))continue;
+ actors.push({y:cy*36+sceneryDepth(f),draw:()=>drawTownFeatures(c,cx,cy,px,py,f)});
  }
- if(visible(px(cx*48+27)-64,py(cy*36+18)-64,160,160))actors.push({y:cy*36+18+0.6,draw:()=>drawWell(c,px(cx*48+27),py(cy*36+18))});
- if(visible(px(cx*48+33)-64,py(cy*36+14)-64,192,192))actors.push({y:cy*36+14+0.6,draw:()=>drawTownDecor(c,px(cx*48+33),py(cy*36+14))});
+ if(visible(px(cx*48+27)-64,py(cy*36+18)-64,160,160))actors.push({y:cy*36+sceneryDepth(W.PLAZA_FEATURES[0]),draw:()=>drawWell(c,px(cx*48+27),py(cy*36+18))});
+ if(visible(px(cx*48+33)-64,py(cy*36+14)-64,192,192))actors.push({y:cy*36+sceneryDepth(W.PLAZA_FEATURES[1]),draw:()=>drawTownDecor(c,px(cx*48+33),py(cy*36+14))});
  }
 
- // Buildings are tall sprites anchored at their front entrance/ground contact.
- // Drawing them in the same depth queue as characters allows walking behind roofs.
  for(const {cx,cy} of nearRegions){
  if(!E.region(s.seed,cx,cy).town)continue;
  for(const b of W.buildings(cx,cy)){const x=px(b.footX),y=py(b.footY);
  if(!visible(x-96,y-180,Math.max(240,b.w*32+96),240))continue;
- actors.push({y:b.footY+0.25,draw:()=>drawTownBuilding(c,b,x,y)});
+ actors.push({y:sceneryDepth({y:b.footY,h:b.h}),draw:()=>drawTownBuilding(c,b,x,y)});
  }}
 
  for(const n of people){const w=n.walk,progress=w?Math.min(1,(time-w.start)/w.duration):1,nx=w&&progress<1?w.x+(n.x-w.x)*progress:n.x,ny=w&&progress<1?w.y+(n.y-w.y)*progress:n.y;if(!visible(px(nx)-24,py(ny)-48,80,96))continue;actors.push({y:ny,draw:()=>{const x=px(nx),y=py(ny);drawPerson(c,x,y-5,n.role,time,n.face||'down',progress<1);if(Math.abs(n.x-s.player.x)+Math.abs(n.y-s.player.y)<=2){c.fillStyle='#fff5bd';c.strokeStyle='#4f4430';c.font='bold 10px monospace';c.textAlign='center';c.strokeText('!',x+16,y-8);c.fillText('!',x+16,y-8);}}});}

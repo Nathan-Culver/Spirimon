@@ -189,7 +189,7 @@ function oldDrawPerson(ctx,x,y,role='player',tick=0,face='down',moving=false){co
 
 export function drawTree(ctx,x,y,seed,biome='forest'){prop(ctx,biome==='snow'?4:seed%7===0?5:3,x-16,y-48,64,80);}
 export function drawBuilding(ctx,x,y,guild=false,kind='home'){prop(ctx,guild?2:kind==='inn'?1:0,x+(guild?24:8),y-40,guild?176:144,guild?168:136);}
-export function drawTownDecor(ctx,x,y){prop(ctx,8,x,y-25,96,96);}
+export function drawTownDecor(ctx,x,y){prop(ctx,8,x-32,y-64,96,96);}
 export function drawPerson(ctx,x,y,role='player',tick=0,face='down',moving=false,appearance=null){
  const image=readyImage(ART.sealer);if(!image)return;
  const row=face==='left'?2:({down:0,right:2,up:3}[face]??0);
@@ -250,11 +250,7 @@ export function drawTile(ctx,type,x,y,seed,biome,options={}){
 }
 export function drawWell(ctx,x,y){prop(ctx,7,x-16,y-32,64,64);}
 
-function expandedProp(ctx,index,x,y,w,h){const image=readyImage(ART.towns);if(!image)return;ctx.imageSmoothingEnabled=false;ctx.drawImage(image,index%3*256,Math.floor(index/3)*256,256,256,Math.round(x),Math.round(y),w,h);}
 export function drawTownBuilding(ctx,b,x,y){
- // The original service-specific ART.towns atlas contains visibly blocky,
- // prototype-quality facades. All service buildings now use the detailed
- // settlement facade atlas or the authored world-building sprites instead.
  const facade=b.facade!=null?b.facade:({forge:1,herbalist:2,archive:3}[b.kind]);
  if(facade!=null){
   const width=b.kind==='archive'?176:144,height=b.kind==='archive'?168:144;
