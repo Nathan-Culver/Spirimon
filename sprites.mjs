@@ -97,9 +97,14 @@ export function drawBattleSpirit(ctx,sp,form,x,y,size=96,side='a'){
  const rear=battleBackSource(sp,form),image=rear&&readyImage(rear.source);
  if(!image){drawMysteryPlaceholder(ctx,x,y,size,{face:'up'});return;}
  const width=image.naturalWidth||image.width,height=image.naturalHeight||image.height;
- const cell=rear.atlas?width/3:width,sx=rear.atlas?rear.form*cell:0;
+ const cell=rear.atlas?width/3:width,frame=rear.frame||[rear.atlas?rear.form*cell:0,0,cell,height];
+ const [sx,sy,sw,sh]=frame;
+ if(!frame.every(Number.isFinite)||sx<0||sy<0||sw<=0||sh<=0||sx+sw>width||sy+sh>height){drawMysteryPlaceholder(ctx,x,y,size,{face:'up'});return;}
+ // Preserve authored form size and aspect ratio, center it, and ground its feet.
+ // Wide final forms fit inside the slot without clipping or horizontal squeezing.
+ const scale=size/Math.max(height,sw,sh),dw=sw*scale,dh=sh*scale;
  ctx.save();ctx.imageSmoothingEnabled=false;
- ctx.drawImage(image,sx,0,cell,height,x,y,size,size);
+ ctx.drawImage(image,sx,sy,sw,sh,x+(size-dw)/2,y+size-dh,dw,dh);
  ctx.restore();
 }
 function prop(ctx,index,x,y,w,h){const image=readyImage(ART.world);if(!image)return;ctx.imageSmoothingEnabled=false;ctx.drawImage(image,(index%3)*256,Math.floor(index/3)*256,256,256,Math.round(x),Math.round(y),w,h);}

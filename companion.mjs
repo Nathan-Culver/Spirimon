@@ -16,6 +16,7 @@ const FILES={'/sealer-disciplines.mjs':'sealer-disciplines.mjs','/sacred-art.mjs
 let generating=false;
 FILES['/damage-numbers.mjs']='damage-numbers.mjs';
 FILES['/battle-art.mjs']='battle-art.mjs';
+FILES['/battle-back-frames.mjs']='battle-back-frames.mjs';
 FILES['/spiridex.mjs']='spiridex.mjs';
 FILES['/spiridex-view.mjs']='spiridex-view.mjs';
 FILES['/scenery.mjs']='scenery.mjs';

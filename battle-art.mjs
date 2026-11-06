@@ -1,3 +1,4 @@
+import {BATTLE_BACK_FRAMES} from './battle-back-frames.mjs';
 import {ROSTER} from './roster.mjs';
 const v6="aurelattice bronzewade jarjell resonara silkclasp wickerstride fumepitcher jianglume embermoth kelpveil obsidhorn quillclaw runemoth xyloveil berylhorn eldermoth kestrelveil lichenwing opalhorn quartzclaw rimemoth zirconveil basilgore fableroot harborgaze lotusgore mistralwisp onyxflare petalroot quasarshard talonplume xanthjaw brackengaze coralfang gossamerwisp isletflare kryptonshard miragefang oraclekin pewtergore ripplejaw truffleroot".split(' '),v5="dewveil tempestrill vitrilisk strangleweld hollowbloom thornglen umberbloom vesperspire ashenling indigospire junipermaw verdantbloom wraithspire jasperplume hearthjaw zodiacplume".split(' ');
 export const BATTLE_BACK_ART=Object.freeze(Object.fromEntries(ROSTER.map(({id})=>[id,'./assets/battle-back/'+id+'.webp'])));
@@ -13,5 +14,6 @@ export function battleBackSource(species,form=0){
  if(!species.battleBackAtlas&&species.atlas!==rearReferenceAtlas(id))return null;
  const source=species.battleBackAtlas||BATTLE_BACK_ART[id];
  if(!source)return null;
- return {source,atlas:true,form:Math.max(0,Math.min(2,Math.trunc(Number(form)||0)))};
+ const index=Math.max(0,Math.min(2,Math.trunc(Number(form)||0))),frame=species.battleBackFrames?.[index]||(source===BATTLE_BACK_ART[id]?BATTLE_BACK_FRAMES[id]?.[index]:null);
+ return {source,atlas:true,form:index,...(frame?{frame}:{} )};
 }
