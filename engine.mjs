@@ -124,7 +124,7 @@ export function matchingClassificationBonus(move,attacker,sp){
  for(let i=0;i<matchedDomains;i++)bonus+=.10/(2**i);
  return 1+Math.min(.25,bonus);
 }
-export const STYLES={normal:{damage:1,speed:0},agile:{damage:.8,speed:22},strong:{damage:1.25,speed:-22}};
+export const STYLES={normal:{damage:1,speed:0},agile:{damage:.85,speed:22},strong:{damage:1.25,speed:-22}};
 export const STATUS_EFFECTS=['burn','freeze','paralysis','poison','toxic','sleep','confusion','infatuation','flinch','frostbite','nightmare','trap','leechSeed','curse','perish','disable','taunt','slow'];
 const MAJOR=new Set(['burn','freeze','paralysis','poison','toxic','sleep','frostbite']);
 const STAGE_KEYS={boostMight:['might',1],boostPower:['power',1],boostDefense:['defense',1],boostResistance:['resistance',1],boostSpeed:['speed',1],boostAccuracy:['accuracy',1],boostEvasion:['evasion',1],lowerMight:['might',-1],lowerPower:['power',-1],lowerDefense:['defense',-1],lowerResistance:['resistance',-1],lowerSpeed:['speed',-1],lowerAccuracy:['accuracy',-1]};
