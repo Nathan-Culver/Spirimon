@@ -4,7 +4,7 @@ The current live system is specified in [Spiritual Energy and GCD/LCD combat](sp
 
 ## Timing and controls
 
-Each side can manifest up to three Spirimon. Player creatures are manually controlled, with separate GCD/LCD timers and no input queue. The base GCD is 3.5 seconds, reducible by Creature Speed and buffs to a minimum of 1.5 seconds. Cast and GCD start together and overlap. LCD Moves do not trigger the GCD; their animation locks allow weaving and can cause clipping. Powerful GCD Moves can have an additional local recast. Move Speed has been removed from generated and migrated Move data.
+Each side can manifest up to three Spirimon. Player creatures are manually controlled, with separate GCD/LCD timers and no input queue. The base GCD is 3.5 seconds, reducible by Creature Speed and buffs to a minimum of 1 second. Cast and GCD start together and overlap. LCD Techniques do not trigger the GCD; their animation locks allow weaving and can cause clipping. Powerful GCD Techniques can have an additional local recast. Technique Speed has been removed from generated and migrated Technique data.
 
 All long timers persist across encounters, healing, recall, revival and save/load. Only elapsed unpaused gameplay advances them. Pausing/backgrounding freezes the simulation; selection menus and deployment panels during battle do not. No recovery method resets timers.
 
@@ -12,7 +12,7 @@ Player support uses Spiritual Energy and separately assigned techniques. It neve
 
 ## Scaling and effects
 
-Power scales at levels 1, 16, 36, 60, 85 and 100. All catalogue Move timings are audited in [move-balance-audit.csv](move-balance-audit.csv), including accuracy, multi-hit/spread workload, effects, resource contribution, GCD/LCD classification and local recasts.
+Power scales at levels 1, 16, 36, 60, 85 and 100. All catalogue Technique timings are audited in [move-balance-audit.csv](move-balance-audit.csv), including accuracy, multi-hit/spread workload, effects, resource contribution, GCD/LCD classification and local recasts.
 
 Sleep, freeze and stagger stop creature commands and interrupt creature casts. Hard-control protection prevents immediate repeated immobilization. Confusion, burns, poison, toxic poison, paralysis, frostbite, infatuation, binding, leeching, curses, nightmares, disable, silence, regeneration and doom have timed simulation effects and visible badges. Afflictions and damage-over-time progress without player input. Shields, buffs, healing, screens, hazards, weather and terrain use the same timeline.
 
@@ -22,7 +22,7 @@ Automated audits provide reproducible budgets and regression coverage; they do n
 
 ## Combat audit corrections
 
-An explicit `cooldownMs` overrides a GCD Move's individual recast independently of its shared GCD, including light Moves and an explicit zero. Speed, style, and exhaustion scale the recast.
+An explicit `cooldownMs` overrides a GCD Technique's individual recast independently of its shared GCD, including light Techniques and an explicit zero. Speed, style, and exhaustion scale the recast.
 
 Resource funding is checked again at impact using every living target's Pressure ability. If the full cost cannot be paid, a spread attack damages no targets and spends neither pool. Only multi-hit strikes that penetrate shields and remove HP contribute damage delay.
 
@@ -31,3 +31,7 @@ Delayed attacks check Ward, shields, screens, defensive support, survival equipm
 Quickening accelerates the unfinished portion of an ongoing cast immediately, using the same capped haste multiplier as new casts. Stacking and expiration update the remaining cast without cancelling it. Existing GCD requirements for support still apply.
 
 The Seal button is available directly in the action dock and Bag. Tap for the base cost; slide right for extra Energy and release to attempt. The button previews base plus extra cost and success chance. Slide upward or left to cancel; interrupted touches and focus loss spend nothing. Keyboard arrows adjust extra Energy (Shift changes five points), Escape clears it, and Enter attempts. The gesture retains its original target and rechecks funds at release. Failure spends all invested Energy and one catalyst.
+
+### Styles and gesture controls
+
+Strong uses the normal 5% base critical chance and increases critical damage from 1.5× to 1.65×. Agile retains its +10 percentage point critical chance bonus. All diagonals add one or two extra Technique uses based on drag distance. Upward diagonals also increase attack commitment with distance; downward diagonals use zero commitment. Incoming damage cannot extend GCD or local cooldown timers started by instant-cast Techniques, even while another Technique is being cast. Cast-time Technique timers retain their existing delay limits.

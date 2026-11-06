@@ -12,7 +12,7 @@ function fixture(move=attack){
  E.bindBattlefield(context.teams.a,context.teams.b);
  return {a,b,c,sp,state,q,context,step:ms=>RT.advanceRealTime(state,ms,context,()=>.5),schedule:()=>RT.scheduleAction(state,context,a,{type:'move',move})};
 }
-test('explicit individual recasts work for both light and heavy GCD Moves without changing their GCD',()=>{
+test('explicit individual recasts work for both light and heavy GCD Techniques without changing their GCD',()=>{
  for(const power of [20,80]){
   const f=fixture(),short=RT.moveTiming({...attack,power,cooldownMs:1000},f.a,f.sp),long=RT.moveTiming({...attack,power,cooldownMs:60000},f.a,f.sp);
   assert.equal(long.gcdMs,short.gcdMs);assert.ok(long.localCooldownMs>short.localCooldownMs*59);

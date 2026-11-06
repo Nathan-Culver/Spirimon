@@ -24,3 +24,12 @@ test('both sides may borrow and receive exactly the other side’s funded extras
 test('animation events follow actual funded actions and preserve post-action snapshots',()=>{const x=ind(a,50),y=ind(b,50);x.hp=y.hp=10000;const out=E.resolveTempoRound(x,a,y,b,{move:a.moves[0],style:'agile',commit:.5,borrow:1},{move:b.moves[0],style:'strong',commit:.5,borrow:0},{a:0,b:0},()=>.5);assert.equal(out.events.length,out.actions.a+out.actions.b);assert(out.events.every(e=>['a','b'].includes(e.side)&&e.move.name&&Number.isFinite(e.aPP)&&Number.isFinite(e.bHP)));assert.equal(out.events.at(-1).aHP,x.hp);assert.equal(out.events.at(-1).bHP,y.hp);});
 test('main trails remain traversable and cliff walls need stairs rather than ordinary walking',()=>{assert(!E.walkable('cliff'));assert(E.walkable('forest'));assert(E.walkable('stairs'));for(let x=-100;x<=100;x++){const t=E.tile('trail-check',x,19);assert(E.walkable(t),'Main east/west trail at '+x);}for(let y=-100;y<=100;y++){const t=E.tile('trail-check',24,y);assert(E.walkable(t),'Main north/south trail at '+y);}});
 
+
+test('Strong keeps normal critical chance and adds fifteen percentage points to critical damage',()=>{
+ const sp={...a,ability:'None',physicalRes:1,spiritualRes:1},m={id:'test-critical',name:'Test',power:100,accuracy:1,kind:'physical',category:'Physical',type:'Beast'};
+ function run(style,roll){const actor=ind(sp,50),target=ind(sp,100);target.hp=100000;const before=target.hp;let n=0;const log=E.executeAction(actor,sp,target,sp,m,style,.5,()=>++n===2?roll:.5,1,{realTime:true,prepaid:true});return {damage:before-target.hp,critical:log.some(s=>s.includes('critical hit'))};}
+ assert.equal(run('strong',.10).critical,false);assert.equal(run('agile',.10).critical,true);
+ assert.equal(run('strong',.04).critical,true);
+ assert.ok(Math.abs(run('strong',.04).damage/run('strong',.5).damage-1.65)<.03);
+ assert.ok(Math.abs(run('normal',.04).damage/run('normal',.5).damage-1.5)<.03);
+});

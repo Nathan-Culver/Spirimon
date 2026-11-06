@@ -15,7 +15,7 @@ Normal wild, trainer, trade and facility encounters now use completed artwork. N
 
 Legendary battles and binding rites check artwork before beginning a battle or offering an Energy-spending ritual stage. A missing-art legend remains unavailable until its images are ready and reports why.
 
-Saved species recover finished images already stored under that same species ID. Owned records retain their names, stats, Moves and progression. Imports and recovery worlds load the correct queue. Changing worlds cancels generation requests, and late responses cannot write into another save.
+Saved species recover finished images already stored under that same species ID. Owned records retain their names, stats, Techniques and progression. Imports and recovery worlds load the correct queue. Changing worlds cancels generation requests, and late responses cannot write into another save.
 
 Artwork repairs cover owned, battle, trade, roaming and seen species. Unseen future designs remain repairable after text-only generation. Referenced and owned repairs cannot be starved by a full queue of future designs.
 

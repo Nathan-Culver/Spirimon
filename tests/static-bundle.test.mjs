@@ -8,7 +8,7 @@ import {buildPage} from '../build.mjs';
 test('Pages entry is small and references one content-versioned classic bundle',async()=>{
  const built=await buildPage(),published=readFileSync(new URL('../index.html',import.meta.url),'utf8');
  assert.equal(built.html,published,'Run npm run build before publishing');
- assert.ok(Buffer.byteLength(published)<12000);assert.ok(Buffer.byteLength(built.pageScript)<925000,'Keep the guide and complete game below the 925 KB bundle budget');
+ assert.ok(Buffer.byteLength(published)<12000);assert.ok(Buffer.byteLength(built.pageScript)<1000000,'Keep the guide and complete game below the 1 MB bundle budget, including Sealer disciplines');
  assert.ok(built.modules.includes('spiridex.mjs'));assert.ok(built.modules.includes('spiridex-view.mjs'));
  assert.ok(published.includes(built.bundleName));assert.ok(published.includes(built.styleName));
  assert.equal(built.bundleName,'game-'+createHash('sha256').update(built.pageScript).digest('hex').slice(0,12)+'.js');

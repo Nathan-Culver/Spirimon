@@ -1,6 +1,6 @@
 creature_level,sealer_level,maximum_energy,median_nonlead_release,reference_support_cost,estimated_routine_battles
-5,2,108,6,3,7.20
-20,10,172,9,3,8.19
-40,20,252,13,3,8.69
-70,35,372,18,4,9.30
-100,50,492,23,4,9.84
+5,2,115,6,3,7.67
+20,10,155,9,4,7.05
+40,20,205,12,4,7.32
+70,35,280,15,5,8.00
+100,50,355,18,5,8.66

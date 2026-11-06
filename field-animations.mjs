@@ -1,4 +1,4 @@
-// Small, asset-free overlays for non-Move field activities.
+// Small, asset-free overlays for non-Technique field activities.
 export function drawFieldAnimation(ctx,kind,x,y,elapsed,duration=620){
  const t=Math.max(0,Math.min(1,elapsed/duration)),fade=1-t;
  if(fade<=0)return;

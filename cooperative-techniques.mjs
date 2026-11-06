@@ -1,6 +1,6 @@
 import * as E from './engine.mjs';
 import {moveTiming} from './realtime-moves.mjs';
-import {spendEnergy} from './spiritual-energy.mjs';
+import {energyCost,vowViolation,breakVow,spendEnergy} from './spiritual-energy.mjs';
 const attack=u=>u.moves.filter(m=>m.power>0),support=u=>u.moves.find(m=>['heal','ward','protect','teamHeal','teamWard','regenerate'].includes(m.effect));
 export function cooperativePlans(active,speciesOf,sealer){
  const units=active.filter(u=>u.hp>0).map(u=>({u,sp:speciesOf(u),moves:E.equippedMoves(u,speciesOf(u)),domains:E.activeDomains(speciesOf(u),u)})),plans=[];
@@ -16,12 +16,13 @@ export function cooperativePlans(active,speciesOf,sealer){
  }
  if(units.length===3&&sealer.advanced.includes('triune')&&units.every(p=>attack(p).length))plans.push({id:'triune',name:'Triune Release',kind:'attack',cost:22,participants:units.map(p=>({id:p.u.id,move:attack(p)[0]})),multiplier:1.25,advanced:true});
  if(sealer.advanced.includes('united'))for(const p of units)if(attack(p).length)plans.push({id:'united:'+p.u.id,name:'United Release',kind:'attack',cost:14,participants:[{id:p.u.id,move:attack(p)[0]}],multiplier:1.45,advanced:true});
- return plans;
+ return plans.map(p=>({...p,cost:Math.ceil(energyCost(sealer,p.cost,{kind:'cooperative'}))}));
 }
-export function commitCooperative(plan,state,context,side,availability,schedule){
- const q=context.sealers[side],current=cooperativePlans(context.active[side],context.speciesOf,q).find(p=>p.id===plan.id);if(!current)return {ok:false,reason:'The equipped Moves, Domains, or participants no longer fit.'};
+export function commitCooperative(plan,state,context,side,availability,schedule,options={}){
+ const q=context.sealers[side],current=cooperativePlans(context.active[side],context.speciesOf,q).find(p=>p.id===plan.id);if(!current)return {ok:false,reason:'The equipped Techniques, Domains, or participants no longer fit.'};
  if((q.cooperativeCooldowns[current.id]||0)>state.elapsedMs)return {ok:false,reason:'Cooperative technique is cooling down.'};
  for(const part of current.participants){const u=context.active[side].find(u=>u.id===part.id),friendly=['self','ally','allAllies'].includes(E.moveTarget(part.move)),target=friendly?u:context.active[side==='a'?'b':'a'].find(v=>v.hp>0),pressure=E.moveTarget(part.move)==='allOpponents'&&context.active[side==='a'?'b':'a'].some(v=>v.hp>0&&context.speciesOf(v).ability==='Pressure'),check=availability(state,u,context.speciesOf(u),{type:'move',move:part.move},pressure?{ability:'Pressure'}:target?context.speciesOf(target):null);if(!check.ok)return {ok:false,reason:context.speciesOf(u).forms[u.appearance]+': '+check.reason};}
+ const violation=vowViolation(q,'cooperative',{offensive:current.kind==='attack'});if(violation&&!options.breakVow)return {ok:false,reason:'This breaks '+violation.name,requiresVowBreak:true};if(violation)breakVow(q,true);
  if(!spendEnergy(q,current.cost))return {ok:false,reason:'Not enough Spiritual Energy.'};
  const snapshots=current.participants.map(p=>({u:context.active[side].find(u=>u.id===p.id),move:p.move}));
  for(const {u,move}of snapshots){const boosted={...move,timing:moveTiming(move,u,context.speciesOf(u)).timing,name:current.name+' · '+move.name,power:Math.round(move.power*current.multiplier),realTimeBasePower:undefined};

@@ -4,7 +4,7 @@ import {anatomyRecord,effectiveFieldDomains,fieldCapabilityAvailable} from '../a
 
 const anatomy=anatomyRecord('quadruped',['fur'],{source:'procedural-render',confidence:.95});
 const species={anatomy,domains:['Nature'],moves:[],learnset:[{id:'mind',domain:'Psionic'},{id:'gate',domain:'Void'}]};
-test('equipped Move Domains qualify for field capabilities without becoming innate',()=>{
+test('equipped Technique Domains qualify for field capabilities without becoming innate',()=>{
  const ind={form:0,moveIds:['mind']};
  assert.deepEqual(effectiveFieldDomains(species,ind),['Nature','Psionic']);
  assert.equal(fieldCapabilityAvailable(species,'teleport',ind),true);

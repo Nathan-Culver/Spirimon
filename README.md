@@ -35,7 +35,7 @@ Walk north into a doorway or interact directly below it. Sealer Halls, inns and 
 - Shared local species library, with per-world discovery history.
 - Six attuned tattoo Spirimon; reserves remain sealed. Change attunement in towns.
 - Combined attack/defense power, unnumbered commitment slider, physical/spiritual resistance, physical/spiritual move traits, intuitive core matchups, statuses, passive abilities, speed modifiers and independent Agile/Normal/Strong styles.
-- Real-time single/double battles with per-Move cooldowns, casts, shared recovery, independent enemy AI, Pause and optional ally automation.
+- Real-time single/double battles with per-Technique cooldowns, casts, shared recovery, independent enemy AI, Pause and optional ally automation.
 - Shared Stanima for Physical moves and Willpower for Energy/Spiritual/Status moves, soul draught recovery, and Struggle with recoil when no move can be funded.
 - Battle sealing influenced by health, status, catalyst quality and form; cooperative sealing through patience/offerings and an accessible timing challenge.
 - Levels, individual potential, natures, training investment, bonds, permanent level/bond transformations, and cosmetic switching among unlocked forms.
@@ -44,13 +44,13 @@ Walk north into a doorway or interact directly below it. Sealer Halls, inns and 
 - Autosave, battle resume, export/import and previous-world recovery.
 
 ## Real-time combat, Stanima and Willpower
-Tap a ready Move to begin its cast. Both sides act on one elapsed-time clock; enemies never wait for player input. Each Spirimon has per-Move cooldowns and shared recovery, so cycling four powerful Moves or switching cannot bypass recovery. In doubles, select either ally or turn on Auto for that ally. Bag actions and switching use the same timeline. Borrowed actions and round debt are removed from live combat.
+Tap a ready Technique to begin its cast. Both sides act on one elapsed-time clock; enemies never wait for player input. Each Spirimon has per-Technique cooldowns and shared recovery, so cycling four powerful Techniques or switching cannot bypass recovery. In doubles, select either ally or turn on Auto for that ally. Bag actions and switching use the same timeline. Borrowed actions and round debt are removed from live combat.
 
 Pause stops combat explicitly. Hidden/background tabs and required replacement selection also stop it; elapsed time away is not replayed on return. Menus and the battle log otherwise leave combat running.
 
-Moves scale at levels 1, 16, 36, 60, 85 and 100. Quick, resource-efficient attacks, slow burst attacks, control, recovery and conditional combinations have separate roles. Cooldowns account for expected hits, accuracy, secondary effects and spread targeting. See [real-time rules](docs/real-time-combat.md) and the [complete Move audit](docs/move-balance-audit.csv).
+Techniques scale at levels 1, 16, 36, 60, 85 and 100. Quick, resource-efficient attacks, slow burst attacks, control, recovery and conditional combinations have separate roles. Cooldowns account for expected hits, accuracy, secondary effects and spread targeting. See [real-time rules](docs/real-time-combat.md) and the [complete Technique audit](docs/move-balance-audit.csv).
 
-Each equipped Physical Move contributes to maximum Stanima; Energy/Status Moves contribute to Willpower. A funded execution costs one point, or two against Pressure; shortages can convert the other pool at two-for-one. Items do not replace the four equipped Moves. Struggle remains available only when no equipped Move can be funded. Resource maximums, collections, learned Moves and current encounter progress survive migration. New timed afflictions include sleep, freezing, confusion, burns, poison, toxic poison, paralysis and frostbite; HUD badges display their remaining seconds.
+Each equipped Physical Technique contributes to maximum Stanima; Energy/Status Techniques contribute to Willpower. A funded execution costs one point, or two against Pressure; shortages can convert the other pool at two-for-one. Items do not replace the four equipped Techniques. Struggle remains available only when no equipped Technique can be funded. Resource maximums, collections, learned Techniques and current encounter progress survive migration. New timed afflictions include sleep, freezing, confusion, burns, poison, toxic poison, paralysis and frostbite; HUD badges display their remaining seconds.
 
 ## Optional free local AI
 The game is immediately playable with **authored roster artwork and procedurally generated creature designs**. Unfinished creature artwork uses the supplied mystery creature; basic geometric anatomy diagrams are never displayed as finished sprites.
@@ -122,8 +122,10 @@ Held Items now generate from 37 archetypes across six categories, with five rari
 
 Sealers now spend Energy to release non-lead Spirimon, use generated support, seal new creatures, and perform cooperative rituals. The designated lead is free even at zero Energy. Prepare six assigned techniques across the traveling party plus one distinct floating technique; learn the procedural catalog through instruction and discoveries. Communing at individually tracked shrines restores 50%, meditation 25%, and passive recovery takes two hours of active exploration.
 
-Battles use a 3.5-second base GCD (1.5-second haste floor), independent LCDs, casting/animation locks and no action queue or allied automation. Creature Speed affects GCD/LCD timers; Move Speed is retired. Cooldowns survive battles, healing, recall, revival, preparation changes, and saved journeys.
+Battles use a 3.5-second base GCD (1-second haste floor), independent LCDs, casting/animation locks and no action queue or allied automation. Creature Speed affects GCD/LCD timers; Technique Speed is retired. Cooldowns survive battles, healing, recall, revival, preparation changes, and saved journeys.
 
-Read [the complete Spiritual Energy rules](docs/spiritual-energy.md), [Move audit](docs/move-balance-audit.csv), [Energy economy audit](docs/spiritual-economy-audit.csv), and [example procedural support audit](docs/support-generation-audit.csv). Run `npm test`, `npm run audit:moves`, and `npm run audit:energy` to reproduce validation.
+Read [the complete Spiritual Energy rules](docs/spiritual-energy.md), [Technique audit](docs/move-balance-audit.csv), [Energy economy audit](docs/spiritual-economy-audit.csv), and [example procedural support audit](docs/support-generation-audit.csv). Run `npm test`, `npm run audit:moves`, and `npm run audit:energy` to reproduce validation.
 
 ![Three-creature Spiritual Energy battle preview](assets/spiritual-battle-preview.jpg)
+
+Sealers now develop Reserve, Control and Output through allocated level points and distinct spiritual milestones. Open **Menu → Spiritual Arts** to allocate points, retrain at safe places, choose a vow or toggle perception and concealment. Tap support for normal strength, or drag right for an exact empowerment preview; drag upward to cancel. See [Sealer Spiritual Arts](docs/sealer-spiritual-arts.md) for rules, formulas, migration and controls.

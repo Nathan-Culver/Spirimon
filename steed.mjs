@@ -1,4 +1,4 @@
-// Field-scale and rideability are anatomical capabilities, never battle Moves.
+// Field-scale and rideability are anatomical capabilities, never battle Techniques.
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const readNumber=(...values)=>values.map(Number).find(v=>Number.isFinite(v)&&v>0);
 export function companionSize(sp,form=0){

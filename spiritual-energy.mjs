@@ -1,3 +1,5 @@
+import * as SD from './sealer-disciplines.mjs';
+export const {ATTRIBUTES,VOWS,attribute,earnedPoints,ensureDisciplines,allocateAttribute,retrainingCost,retrainAttributes,awardAttribute,availableVows,selectVow,activeVow,vowViolation,breakVow,beginSealerBattle,endSealerBattle,controlReduction,energyCost,outputLimit,empowerment,supportQuote,perceptionProfile,concealmentProfile,encounterMultiplier,toggleSense,drainSenses,recoveryMultiplier,ritualQuote}=SD;
 import * as E from './engine.mjs';
 import {moveTiming} from './realtime-moves.mjs';
 import {newSealer,clamp,bondEfficiency,calendarPhase,PASSIVE_RECOVERY_MS,spiritualHash,setExhaustion} from './spiritual-core.mjs';
@@ -6,7 +8,7 @@ export {calendarPhase,setExhaustion};
 
 export function maximumEnergy(sealer,spirits=[]){
  const bonds=Math.min(45,Math.floor(Math.sqrt(spirits.reduce((sum,u)=>sum+Math.max(0,(u.bond||0)-30)/70,0))*8));
- return 100+(Math.max(1,sealer.level||1)-1)*8+Math.min(40,(sealer.training||0)*2)+Math.min(40,(sealer.rituals?.length||0)*4)+bonds;
+ return 100+5*SD.attribute(sealer,'reserve')+bonds;
 }
 export function ensureSealer(save){
  const first=!save.sealer,base=newSealer(save.party?.[0]||null);if(first)save.sealer=base;else for(const [key,value]of Object.entries(base))if(save.sealer[key]===undefined)save.sealer[key]=value;const q=save.sealer;
@@ -15,19 +17,19 @@ export function ensureSealer(save){
  q.level=Math.max(1,Math.floor(Number(q.level)||1));q.clockMs=Number.isFinite(q.clockMs)?Math.max(0,q.clockMs):0;q.xp=Number.isFinite(q.xp)?Math.max(0,q.xp):0;q.training=clamp(Number(q.training)||0,0,20);
  q.advanced=Array.isArray(q.advanced)?q.advanced:[];q.rituals=Array.isArray(q.rituals)?q.rituals:[];
  if(!save.party?.includes(q.leadId))q.leadId=save.party?.[0]||null;
- q.maxEnergy=maximumEnergy(q,save.spirits||[]);q.energy=first?q.maxEnergy:clamp(Math.round(Number(q.energy)||0),0,q.maxEnergy);
+ SD.ensureDisciplines(q);q.maxEnergy=maximumEnergy(q,save.spirits||[]);q.energy=first?q.maxEnergy:clamp(Number(q.energy)||0,0,q.maxEnergy);
  if(!Array.isArray(q.startingChosen))q.startingChosen=[];for(const [id,list]of Object.entries(q.assignments))if(!Array.isArray(list))delete q.assignments[id];
  if(!Array.isArray(q.startingChoices)||!q.startingChoices.every(validateSupport))q.startingChoices=startingSupport(save.seed||'Sealer');
  for(const [id,t]of Object.entries(q.known))if(!validateSupport(t)||t.id!==id)delete q.known[id];
  save.inventory??={};save.inventory.spiritDraughts??=3;
  return q;
 }
-export function restoreEnergy(sealer,amount){const before=sealer.energy;sealer.energy=clamp(before+Math.max(0,Math.round(amount)),0,sealer.maxEnergy);return sealer.energy-before;}
+export function restoreEnergy(sealer,amount){const before=sealer.energy;sealer.energy=clamp(before+Math.max(0,Math.round(amount*SD.recoveryMultiplier(sealer))),0,sealer.maxEnergy);return sealer.energy-before;}
 export function spendEnergy(sealer,amount){if(!Number.isFinite(amount)||amount<0||sealer.energy+1e-6<amount)return false;sealer.energy=Math.max(0,sealer.energy-amount);return true;}
-export function advanceSpiritualClock(save,ms,{exploring=false,paused=false}={}){const q=save.sealer||ensureSealer(save);if(paused||!Number.isFinite(ms)||ms<=0)return 0;const delta=Math.min(ms,1000);q.clockMs+=delta;if(exploring)passiveRecovery(q,delta);return delta;}
+export function advanceSpiritualClock(save,ms,{exploring=false,paused=false}={}){const q=save.sealer||ensureSealer(save);if(paused||!Number.isFinite(ms)||ms<=0)return 0;const delta=Math.min(ms,1000);q.clockMs+=delta;if(exploring){SD.drainSenses(q,delta);passiveRecovery(q,delta);}return delta;}
 export function passiveRecovery(q,ms){if(q.energy>=q.maxEnergy){q.passiveEnergy=0;return 0;}q.passiveEnergy=(q.passiveEnergy||0)+q.maxEnergy*Math.max(0,ms)/PASSIVE_RECOVERY_MS;const whole=Math.floor(q.passiveEnergy+1e-9);q.passiveEnergy-=whole;return whole?restoreEnergy(q,whole):0;}
-export function gainSealerXP(save,amount,eventId=null){const q=save.sealer||ensureSealer(save);if(eventId&&q.discoveries['xp:'+eventId])return 0;if(eventId)q.discoveries['xp:'+eventId]=true;q.xp+=Math.max(0,amount);let gained=0;while(q.xp>=80+q.level*20){q.xp-=80+q.level*20;q.level++;gained++;}q.maxEnergy=maximumEnergy(q,save.spirits||[]);return gained;}
-export function trainSealer(save,eventId,{ritual=false}={}){const q=save.sealer||ensureSealer(save);const key='training:'+eventId;if(q.discoveries[key])return false;q.discoveries[key]=true;if(ritual)q.rituals.push(eventId);else q.training=Math.min(20,q.training+1);gainSealerXP(save,30);q.maxEnergy=maximumEnergy(q,save.spirits||[]);return true;}
+export function gainSealerXP(save,amount,eventId=null){const q=save.sealer||ensureSealer(save);if(eventId&&q.discoveries['xp:'+eventId])return 0;if(eventId)q.discoveries['xp:'+eventId]=true;q.xp+=Math.max(0,amount);let gained=0;while(q.xp>=80+q.level*20){q.xp-=80+q.level*20;q.level++;gained++;}SD.ensureDisciplines(q);q.maxEnergy=maximumEnergy(q,save.spirits||[]);return gained;}
+export function trainSealer(save,eventId,{ritual=false}={}){const q=save.sealer||ensureSealer(save);const key='training:'+eventId;if(q.discoveries[key])return false;q.discoveries[key]=true;if(ritual)q.rituals.push(eventId);else q.training=Math.min(20,q.training+1);SD.awardAttribute(q,key,{attribute:ritual?'output':'reserve',points:ritual?2:1});gainSealerXP(save,30);q.maxEnergy=maximumEnergy(q,save.spirits||[]);return true;}
 export function bondRecovery(save,ind){const q=save.sealer||ensureSealer(save),key=ind.id+':'+calendarPhase(save.playTime).key;if(q.bondRewards[key])return 0;q.bondRewards[key]=true;gainSealerXP(save,5);return restoreEnergy(q,q.maxEnergy*.04);}
 export function combatStrength(ind,sp){
  const st=E.stats(ind,sp),moves=E.equippedMoves(ind,sp),durability=Math.sqrt(st.hp*Math.sqrt(st.defense*st.resistance));
@@ -36,7 +38,7 @@ export function combatStrength(ind,sp){
  const passive=sp.ability==='Pressure'?1.12:sp.ability==='Second Wind'?1.08:1.05;
  return Math.max(10,Math.sqrt(durability*(offense*8+utility))*passive*(sp.physicalRes<1||sp.spiritualRes<1?1.06:1));
 }
-export function manifestationCost(sealer,ind,sp,{ignoreLead=false}={}){if(!ignoreLead&&ind.id===sealer.leadId)return 0;const raw=6*Math.pow(combatStrength(ind,sp)/70,.8)*(1+Math.max(0,ind.level-15)*.004)/(1+(Math.max(1,sealer.level)-1)*.018);return Math.max(1,Math.ceil(raw*bondEfficiency(ind)));}
+export function manifestationCost(sealer,ind,sp,{ignoreLead=false}={}){if(!ignoreLead&&ind.id===sealer.leadId)return 0;const raw=6*Math.pow(combatStrength(ind,sp)/70,.8)*(1+Math.max(0,ind.level-15)*.004)/(1+(Math.max(1,sealer.level)-1)*.018);return Math.max(1,Math.ceil(SD.energyCost(sealer,raw,{kind:'manifest',bond:bondEfficiency(ind)})));}
 export function changeLead(save,id,{safe=false,battle=false}={}){const q=ensureSealer(save);if(battle||!safe)return {ok:false,reason:'Change your lead at a safe place.'};if(!save.party.includes(id))return {ok:false,reason:'The lead must be in your active traveling team.'};q.leadId=id;return {ok:true};}
 export function chooseStartingSupport(save,id){const q=ensureSealer(save);if(q.startingChosen.length>=3)return {ok:false,reason:'Three starting techniques have already been chosen.'};const t=q.startingChoices.find(t=>t.id===id);if(!t||q.startingChosen.includes(id))return {ok:false,reason:'Choose a different starting technique.'};q.startingChosen.push(id);q.known[id]=t;if(q.startingChosen.length===3)autoAssignSupport(save);return {ok:true,complete:q.startingChosen.length===3};}
 export function autoAssignSupport(save){
@@ -61,10 +63,12 @@ export function beginRecovery(save,kind,{shrineId=null,safe=false,random=Math.ra
  const q=ensureSealer(save),check=recoveryAvailable(save,kind,shrineId);if(!check.ok)return {ok:false,reason:'This opportunity was used during the current day/night period.'};if(kind==='commune'&&!shrineId)return {ok:false,reason:'Approach a shrine to commune.'};
  q.recoveryUses[check.key]=true;const fraction=kind==='commune'?.5:.25,interrupted=!safe&&random()<.25;save.playTime=(save.playTime||0)+(kind==='commune'?90000:180000);
  const amount=restoreEnergy(q,q.maxEnergy*fraction*(interrupted?.5:1));q.meditations=(q.meditations||0)+1;
- if(q.meditations%4===0)trainSealer(save,'meditation-'+Math.floor(q.meditations/4));
+ if([4,12,24,48].includes(q.meditations))trainSealer(save,'meditation-'+Math.floor(q.meditations/4));
  return {ok:true,amount,interrupted,key:check.key};
 }
-export function sealInvestment(sealer,ind,sp,quality=1,extra=0){const base=Math.max(3,Math.ceil(manifestationCost(sealer,ind,sp,{ignoreLead:true})*1.25)),additional=clamp(Math.floor(Number(extra)||0),0,sealer.maxEnergy),cost=base+additional,trust=clamp(ind.trust??ind.bond??0,0,100)/100;
- return {base,extra:additional,cost,chance:clamp(E.sealChance(ind,sp,quality)+trust*.12+.28*(1-Math.exp(-additional/Math.max(1,base*2))),.03,.98),ok:sealer.energy>=cost};}
-export function commitSeal(sealer,ind,sp,quality,extra,r=Math.random){const p=sealInvestment(sealer,ind,sp,quality,extra);if(!spendEnergy(sealer,p.cost))return {...p,ok:false,reason:'Not enough Spiritual Energy for this sealing attempt.'};return {...p,ok:true,success:r()<p.chance};}
-export function enemySealer(seed,team,speciesOf){const level=Math.max(1,Math.round(team.reduce((n,u)=>n+u.level,0)/Math.max(1,team.length))),q=newSealer(team[0]?.id);q.level=level;q.maxEnergy=maximumEnergy(q,team);q.energy=q.maxEnergy;const families=['shield','heal','calm','cleanse','empower','guard','revive'];for(let n=0;n<7;n++){const t=generateSupport(seed+'|npc|'+n,{level,primary:families[n]});q.known[t.id]=t;}const techs=Object.values(q.known);q.floating=techs.at(-1).id;let left=6;for(const u of team.slice(0,6)){q.assignments[u.id]=[];const matches=techs.slice(0,-1).filter(t=>supportFits(t,u,speciesOf(u),E.activeDomains(speciesOf(u),u)));if(matches.length&&left){q.assignments[u.id].push(matches[spiritualHash(u.id)%matches.length].id);left--;}}for(const u of team.slice(0,6)){for(const t of techs.slice(0,-1)){if(!left)break;if(!q.assignments[u.id].includes(t.id)&&supportFits(t,u,speciesOf(u),E.activeDomains(speciesOf(u),u))){q.assignments[u.id].push(t.id);left--;}}}return q;}
+export function sealInvestment(sealer,ind,sp,quality=1,extra=0){const rawBase=4,base=Math.ceil(SD.energyCost(sealer,rawBase,{kind:'seal'})),additional=SD.empowerment(sealer,extra).extra,cost=Math.ceil(SD.energyCost(sealer,rawBase+additional,{kind:'seal'})),trust=clamp(ind.trust??ind.bond??0,0,100)/100;
+ return {base,extra:additional,cost,chance:clamp(E.sealChance(ind,sp,quality)+trust*.12+.28*(1-Math.exp(-additional/Math.max(1,rawBase*2)))+(additional===0?SD.activeVow(sealer)?.seal||0:0),.03,.98),ok:sealer.energy>=cost};}
+export function commitSeal(sealer,ind,sp,quality,extra,r=Math.random,{breakVow:approved=false}={}){const p=sealInvestment(sealer,ind,sp,quality,extra);if(sealer.energy<p.cost)return {...p,ok:false,reason:'Not enough Spiritual Energy for this sealing attempt.'};if(SD.vowViolation(sealer,'seal',{extra:p.extra})){if(!approved)return {...p,ok:false,reason:'This investment breaks your vow.',requiresVowBreak:true};SD.breakVow(sealer,!!sealer.inBattle);}if(!spendEnergy(sealer,p.cost))return {...p,ok:false,reason:'Not enough Spiritual Energy for this sealing attempt.'};return {...p,ok:true,success:r()<p.chance};}
+export function enemySealer(seed,team,speciesOf){const level=Math.max(1,Math.round(team.reduce((n,u)=>n+u.level,0)/Math.max(1,team.length))),q=newSealer(team[0]?.id);q.level=level;SD.ensureDisciplines(q);const points=q.unspentPoints;for(const [n,key] of SD.ATTRIBUTES.entries())q.attributes[key]=Math.floor(points/3)+(n<points%3?1:0);SD.ensureDisciplines(q);q.maxEnergy=maximumEnergy(q,team);q.energy=q.maxEnergy;const families=['shield','heal','calm','cleanse','empower','guard','revive'];for(let n=0;n<7;n++){const t=generateSupport(seed+'|npc|'+n,{level,primary:families[n]});q.known[t.id]=t;}const techs=Object.values(q.known);q.floating=techs.at(-1).id;let left=6;for(const u of team.slice(0,6)){q.assignments[u.id]=[];const matches=techs.slice(0,-1).filter(t=>supportFits(t,u,speciesOf(u),E.activeDomains(speciesOf(u),u)));if(matches.length&&left){q.assignments[u.id].push(matches[spiritualHash(u.id)%matches.length].id);left--;}}for(const u of team.slice(0,6)){for(const t of techs.slice(0,-1)){if(!left)break;if(!q.assignments[u.id].includes(t.id)&&supportFits(t,u,speciesOf(u),E.activeDomains(speciesOf(u),u))){q.assignments[u.id].push(t.id);left--;}}}return q;}
+
+export function fieldReleaseCost(q,ind,sp){return Math.max(1,Math.ceil(SD.energyCost(q,Math.max(2,Math.min(6,combatStrength(ind,sp)/25)),{kind:'field',bond:bondEfficiency(ind)})));}

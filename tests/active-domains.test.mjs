@@ -9,7 +9,7 @@ const water={...plain,id:'water',domain:'Water'};
 const species=domains=>({id:'test',forms:['Test'],base:'Beast',alter:'Fey',domains,health:100,power:50,speed:40,physicalRes:1,spiritualRes:1,moves:[plain],learnset:[plain,fire,ice,water]});
 const individual=sp=>heal(makeIndividual(sp,25,0,rng(7)),sp);
 
-test('assigned Domains remain active with Domain-free Moves or no Moves',()=>{
+test('assigned Domains remain active with Domain-free Techniques or no Techniques',()=>{
  const sp=species(['Water']);assert.deepEqual(activeDomains(sp),['Water']);
  assert.deepEqual(activeDomains(sp,{moveIds:['plain']}),['Water']);
  assert.deepEqual(activeDomains({...sp,moves:[]}),['Water']);
@@ -17,7 +17,7 @@ test('assigned Domains remain active with Domain-free Moves or no Moves',()=>{
  assert.equal(effectiveness({domain:'Fire'},sp),.75);
 });
 
-test('equipped Moves add temporary Domains and replacement removes only the temporary affinity',()=>{
+test('equipped Techniques add temporary Domains and replacement removes only the temporary affinity',()=>{
  const sp=species(['Water']),ind={moveIds:['plain','fire']},before=structuredClone(sp);
  assert.deepEqual(activeDomains(sp,ind),['Water','Fire']);
  ind.moveIds=['plain','ice'];assert.deepEqual(activeDomains(sp,ind),['Water','Ice']);
@@ -25,19 +25,19 @@ test('equipped Moves add temporary Domains and replacement removes only the temp
  assert.deepEqual(sp,before,'Combat affinity must not mutate species or learnsets');
 });
 
-test('assigned, Move and legacy-alias Domains are canonicalized and counted once',()=>{
+test('assigned, Technique and legacy-alias Domains are canonicalized and counted once',()=>{
  const sp=species(['Water','Time','Fate','Mind','invalid']);sp.moves=[water,water,{...plain,domain:'Fate'},{...plain,domain:'Psionic'},plain];
  assert.deepEqual(activeDomains(sp),['Water','Fate','Psionic']);
  assert.equal(effectiveness({domain:'Lightning'},{...sp,domains:['Water','Water'],moves:[water,water]}),1.5);
 });
 
-test('unequipped known Moves and other individuals do not supply combat Domains',()=>{
+test('unequipped known Techniques and other individuals do not supply combat Domains',()=>{
  const sp={...species(['Water']),moves:[fire]},a={moveIds:['plain']},b={moveIds:['ice']};
  assert.deepEqual(activeDomains(sp,a),['Water']);assert.deepEqual(activeDomains(sp,b),['Water','Ice']);
  assert.deepEqual(activeDomains(sp),['Water','Fire']);assert.deepEqual(activeDomains(sp,a),['Water']);
 });
 
-test('actual damage retains assigned affinity and uses the defender individual’s current equipped Moves',()=>{
+test('actual damage retains assigned affinity and uses the defender individual’s current equipped Techniques',()=>{
  const asp=species([]),dsp={...species(['Water']),moves:[fire]},a=individual(asp),d=individual(dsp);
  d.moveIds=['plain'];const lightning={...plain,id:'lightning',domain:'Lightning'};
  const neutral=damage(a,asp,d,{...dsp,domains:[]},lightning,'normal',()=>.5);
@@ -47,7 +47,7 @@ test('actual damage retains assigned affinity and uses the defender individual�
  d.moveIds=['plain'];assert.equal(damage(a,asp,d,dsp,waterAttack,'normal',()=>.5),withoutFire);
 });
 
-test('weather protection uses innate Domains plus temporary equipped-Move Domains',()=>{
+test('weather protection uses innate Domains plus temporary equipped-Technique Domains',()=>{
  for(const [domain,weather]of [['Ice','snow'],['Earth','sand'],['Metal','sand']]){
   const sp=species([domain]),ind=individual(sp);ind.moveIds=['plain'];ind.battlefield={weather};
   const hp=ind.hp;endBattleRound([ind],()=>sp);assert.equal(ind.hp,hp,domain+' innate protection must survive move replacement');

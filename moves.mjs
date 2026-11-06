@@ -117,7 +117,7 @@ export function validateGeneratedMoves(proposals,sp){
   const m={id:original.id,name:typeof p.name==='string'?p.name.replace(/[<>\x00-\x1f]/g,'').slice(0,40):original.name,type:original.type,domain:original.domain,power:p.power,accuracy:p.accuracy,kind:p.kind,category:p.power===0?'Status':p.kind==='physical'?'Physical':'Energy',effect:p.effect??null,target:p.target||'opponent',visual:original.visual};
   if(m.power>0&&['self','ally'].includes(m.target)||m.power===0&&['heal','ward','boostMight','boostPower','boostDefense','boostResistance','boostSpeed','protect','cleanse'].includes(m.effect)&&!['self','ally'].includes(m.target))return bad('Incompatible target and effect');
   if(!moveFitsAnatomy(m,sp.anatomy))return bad('Anatomical requirements not met');
-  if(generatedMoveBudget(m)>120)return bad('Move exceeds balance budget');
+  if(generatedMoveBudget(m)>120)return bad('Technique exceeds balance budget');
   m.baseUses=moveBaseValue(m);m.desc=moveLore(m).description;report.push({slot:n,status:'accepted',budget:generatedMoveBudget(m)});return m;
  });return {moves,report};
 }
@@ -452,10 +452,10 @@ export function moveLore(move={}){
  const context=DOMAIN_CONTEXT[theme]||TYPE_CONTEXT[theme]||'The glow fades slowly, leaving the quiet impression of a presence that is difficult to mistake for any other.';
  const disruption=moveCooldownDisruption(move);
  let disruptionText='';
- if(disruption){disruptionText='On damaging hits, delays the target’s running GCD by '+(disruption.gcdMs/1000)+' seconds'+(disruption.lcdMs?' and its last-used Move’s running LCD by '+(disruption.lcdMs/1000)+' seconds':'')+'. The target resists further explicit cooldown disruption for 2 seconds. Ordinary hits and explicit disruption share an allowance of 15% of each cooldown’s starting duration, up to 0.5 seconds. Ordinary damage delays still apply.';}
+ if(disruption){disruptionText='On damaging hits, delays the target’s running GCD by '+(disruption.gcdMs/1000)+' seconds'+(disruption.lcdMs?' and its last-used Technique’s running LCD by '+(disruption.lcdMs/1000)+' seconds':'')+'. The target resists further explicit cooldown disruption for 2 seconds. Ordinary hits and explicit disruption share an allowance of 15% of each cooldown’s starting duration, up to 0.5 seconds. Ordinary damage delays still apply.';}
  return {description,context,disruptionText};
 }
 for(const move of [...Object.values(TYPE_MOVES).flat(),...EXTRA_MOVES,...ENVIRONMENT_MOVES,...ADVANCED_MOVES,...CORE_STATUS_MOVES]){if(move.domain==='Plant')move.domain='Nature';if(moveCooldownDisruption(move))move.cooldownDisruption=moveCooldownDisruption(move);move.desc=moveLore(move).description;}
 
-// Includes original, Domain, anatomy, environmental, team and legacy template Moves.
+// Includes original, Domain, anatomy, environmental, team and legacy template Techniques.
 export function allMoveTemplates(){const byId=new Map();for(const m of [...Object.values(TYPE_MOVES).flat(),...['Air','Earth','Fire','Water','Light','Dark','Sun','Moon','Lightning','Ice','Metal','Chaos','Law','Good','Evil','Creation','Destruction','War','Peace','Fear','Wrath','Love','Hope','Despair','Sorrow','Fate','Dreams','Nightmares','Life','Death','Spirit','Psionic','Nature','Void','Storm','Magic'].flatMap(d=>domainMoves(d,'Elemental')),...ANATOMICAL_MOVES,...CORE_STATUS_MOVES,...ADVANCED_MOVES,...ENVIRONMENT_MOVES,...EXTRA_MOVES])byId.set(m.id,{...m,domain:m.domain==='Plant'?'Nature':m.domain});return [...byId.values()].map(m=>{const out={...m};delete out.speed;return out;});}

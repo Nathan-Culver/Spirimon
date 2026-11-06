@@ -39,6 +39,7 @@ export function applyDamageDelay(state,ind,{periodic=false,hits=1,disruption=nul
  const delay=(key,at,requested,source=kind)=>{
   if(!(at>now)){delete c.damageDelays[key];return at;}
   const budget=c.damageDelays[key]??={direct:0,periodic:0};
+  if(budget.instantCast)return at;
   // Older saves without a recorded starting duration keep their existing absolute caps
   // until this timer starts again; never infer a duration from remaining time.
   const duration=Number.isFinite(budget.durationMs)?Math.max(0,budget.durationMs):Infinity;
@@ -71,7 +72,7 @@ export function applyDamageDelay(state,ind,{periodic=false,hits=1,disruption=nul
  }
  ind.gcdReadyAt=c.gcdReadyAt;
 }
-function resetDamageBudget(clock,key,durationMs){clock.damageDelays??={};clock.damageDelays[key]={direct:0,periodic:0,durationMs};}
+function resetDamageBudget(clock,key,durationMs,instantCast=false){clock.damageDelays??={};clock.damageDelays[key]={direct:0,periodic:0,durationMs,instantCast};}
 function syncCastHaste(state,ind){
  const pending=unitClock(state,ind).pending;if(!pending?.choice?.move)return;
  const haste=spiritualMultiplier(ind,'haste',state.elapsedMs),previous=pending.castHaste??haste;
@@ -111,14 +112,14 @@ export function actionAvailability(state,actor,sp,choice={},targetSp=null){
  const clock=unitClock(state,actor),now=state.elapsedMs;
  if(state.paused)return {ok:false,reason:'Battle paused',remainingMs:0};if(actor.hp<=0)return {ok:false,reason:'Fainted',remainingMs:0};
  const locked=statusBadges(state,actor).find(s=>STATUS_RULES[s.effect]?.control);if(locked)return {ok:false,reason:locked.label,remainingMs:locked.remainingMs};
- const requested=choice.cooldownKey||choice.move?.id;if(choice.move&&choice.type!=='heldItem'&&((actor.lockedMove&&requested!=='struggle'&&E.canUseMove(actor,sp,actor.lockedMove,targetSp)&&actor.lockedMove.id!==requested)||(actor.pendingMove&&actor.pendingMove.id!==requested)))return {ok:false,reason:'This Spirimon is committed to another Move',remainingMs:0};
+ const requested=choice.cooldownKey||choice.move?.id;if(choice.move&&choice.type!=='heldItem'&&((actor.lockedMove&&requested!=='struggle'&&E.canUseMove(actor,sp,actor.lockedMove,targetSp)&&actor.lockedMove.id!==requested)||(actor.pendingMove&&actor.pendingMove.id!==requested)))return {ok:false,reason:'This Spirimon is committed to another Technique',remainingMs:0};
  if(clock.pending)return {ok:false,reason:'Casting',remainingMs:Math.max(0,clock.pending.resolveAt-now)};
  if(clock.readyAt>now)return {ok:false,reason:'Animation lock',remainingMs:clock.readyAt-now};
  const p=choice.move?moveTiming(choice.move,actor,sp,choice.style):null;if((p?.timing==='gcd'||!p)&&clock.gcdReadyAt>now)return {ok:false,reason:'GCD',remainingMs:clock.gcdReadyAt-now};
  if(choice.type==='heldItem'&&clock.itemReadyAt>now)return {ok:false,reason:'Item cooldown',remainingMs:clock.itemReadyAt-now};
- const key=choice.cooldownKey||choice.move?.id,remaining=(clock.cooldowns[key]||0)-now;if(remaining>0)return {ok:false,reason:'Move cooldown',remainingMs:remaining};
+ const key=choice.cooldownKey||choice.move?.id,remaining=(clock.cooldowns[key]||0)-now;if(remaining>0)return {ok:false,reason:'Technique cooldown',remainingMs:remaining};
  if(choice.move&&choice.type!=='heldItem'&&choice.move.id!=='struggle'&&!E.canUseMove(actor,sp,choice.move,targetSp))return {ok:false,reason:'Unavailable or insufficient resources',remainingMs:0};
- if(choice.move?.id==='struggle'&&targetSp&&E.equippedMoves(actor,sp).some(m=>E.canUseMove(actor,sp,m,targetSp)))return {ok:false,reason:'An equipped Move can still be funded',remainingMs:0};
+ if(choice.move?.id==='struggle'&&targetSp&&E.equippedMoves(actor,sp).some(m=>E.canUseMove(actor,sp,m,targetSp)))return {ok:false,reason:'An equipped Technique can still be funded',remainingMs:0};
  return {ok:true,remainingMs:0};
 }
 export function scheduleAction(state,context,actor,choice){
@@ -130,15 +131,15 @@ export function scheduleAction(state,context,actor,choice){
  if(choice.type==='heldItem'){const item=heldItemActivation(actor,sp);if(!item.ok)return item;move=item.move;choice={...choice,move,itemId:item.item.id};}
  if(choice.type==='move'){
   const known=E.equippedMoves(actor,sp),valid=known.find(m=>m.id===move?.id||choice.cooldownKey===m.id);
-  if(!valid&&move?.id!=='struggle'&&!actor.pendingMove&&!actor.lockedMove)return {ok:false,reason:'Move is not equipped'};
-  if(actor.itemMoveLock&&actor.itemMoveLock!==move.id&&hasHook(actor,'choiceLock',sp))return {ok:false,reason:'Equipment locks the previous Move'};
+  if(!valid&&move?.id!=='struggle'&&!actor.pendingMove&&!actor.lockedMove)return {ok:false,reason:'Technique is not equipped'};
+  if(actor.itemMoveLock&&actor.itemMoveLock!==move.id&&hasHook(actor,'choiceLock',sp))return {ok:false,reason:'Equipment locks the previous Technique'};
  }
  if(choice.type==='switch'){
   if(Object.values(state.units).some(c=>c.pending?.side===side&&c.pending?.choice?.type==='switch'&&c.pending.choice.switchId===choice.switchId))return {ok:false,reason:'That reserve is already entering'};
   if(actor.conditions?.trap&&!choice.forced)return {ok:false,reason:'Binding prevents switching'};
   const incoming=context.teams[side].find(u=>u.id===choice.switchId&&u.hp>0);if(!incoming||context.active[side].some(u=>u.id===incoming.id))return {ok:false,reason:'No healthy reserve selected'};
  }
- if(choice.type==='switch'){const incoming=context.teams[side].find(u=>u.id===choice.switchId),q=context.sealers?.[side];if(q&&q.energy<SE.manifestationCost(q,incoming,context.speciesOf(incoming)))return {ok:false,reason:'Not enough Spiritual Energy to release this Spirimon.'};}
+ if(choice.type==='switch'){const q=context.sealers?.[side],v=q&&SE.vowViolation(q,'switch');if(v&&!choice.breakVow)return {ok:false,reason:'This switch breaks '+v.name,requiresVowBreak:true};const incoming=context.teams[side].find(u=>u.id===choice.switchId);if(q&&q.energy<SE.manifestationCost(q,incoming,context.speciesOf(incoming)))return {ok:false,reason:'Not enough Spiritual Energy to release this Spirimon.'};}
  const profile=move?moveTiming(move,actor,sp,choice.style):{timing:'gcd',castMs:350,gcdMs:3500,cooldownMs:3500,localCooldownMs:0,animationLockMs:550,recoveryMs:550};
  const clock=unitClock(state,actor),key=choice.cooldownKey||move?.id||choice.type;
  const friendlyAction=['item','support','switch'].includes(choice.type)||move&&['self','ally','allAllies'].includes(E.moveTarget(move));
@@ -148,8 +149,10 @@ export function scheduleAction(state,context,actor,choice){
  const fundedCheck=actionAvailability(state,actor,sp,{...choice,move},spreadPressure?{ability:'Pressure'}:targetSp);if(!fundedCheck.ok)return fundedCheck;
 
  choice={...choice,extraMoves:choice.type==='move'?Math.max(0,Math.min(2,Math.floor(Number(choice.extraMoves)||0))):0};
+ if(choice.type==='move'&&context.sealers?.[side])context.sealers[side].vowFormationClosed=true;
+ if(choice.type==='switch'&&choice.breakVow)SE.breakVow(context.sealers[side],true);
  clock.pending={choice:{...choice,move},resolveAt:state.elapsedMs+profile.castMs,castHaste:spiritualMultiplier(actor,'haste',state.elapsedMs),side,targetId:target?.id,targetSide,sequence:state.sequence++};
- if(profile.localCooldownMs){clock.cooldowns[key]=state.elapsedMs+profile.localCooldownMs;resetDamageBudget(clock,'move:'+key,profile.localCooldownMs);}if(profile.timing==='gcd'){clock.gcdReadyAt=state.elapsedMs+profile.gcdMs;resetDamageBudget(clock,'gcd',profile.gcdMs);}clock.readyAt=state.elapsedMs+profile.animationLockMs;actor.gcdReadyAt=clock.gcdReadyAt;actor.animationReadyAt=clock.readyAt;
+ if(profile.localCooldownMs){clock.cooldowns[key]=state.elapsedMs+profile.localCooldownMs;resetDamageBudget(clock,'move:'+key,profile.localCooldownMs,profile.castMs===0);}if(profile.timing==='gcd'){clock.gcdReadyAt=state.elapsedMs+profile.gcdMs;resetDamageBudget(clock,'gcd',profile.gcdMs,profile.castMs===0);}clock.readyAt=state.elapsedMs+profile.animationLockMs;actor.gcdReadyAt=clock.gcdReadyAt;actor.animationReadyAt=clock.readyAt;
  return {ok:true,profile};
 }
 function expireTimers(state,context,log){
@@ -205,8 +208,8 @@ function resolvePending(state,context,actor,clock,log,events,r){
    const targets=E.moveTarget(move)==='allOpponents'?opponents.filter(u=>u.hp>0):[target];ctx.pressure=targets.some(u=>context.speciesOf(u).ability==='Pressure');
    for(let n=0;n<targets.length;n++){const victim=targets[n],hp=victim.hp;log.push(...E.executeAction(actor,sp,victim,context.speciesOf(victim),move,choice.style||'normal',choice.commit??.5,r,1,n?{...ctx,prepaid:true}:ctx));if(victim.lastHit&&victim.hp<hp)victim.lastHit.at=state.elapsedMs;if(n===0&&!ctx.funded)break;}
   }
-  // Repeat the selected Move immediately; each additional use pays its normal resource cost.
-  // The existing Move cooldown and GCD are charged once for the entire committed sequence.
+  // Repeat the selected Technique immediately; each additional use pays its normal resource cost.
+  // The existing Technique cooldown and GCD are charged once for the entire committed sequence.
   const repeats=Math.max(0,Math.min(2,choice.extraMoves||0));
   if(choice.type==='move'&&ctx.funded&&repeats){
    for(let repeat=0;repeat<repeats;repeat++){
@@ -262,6 +265,7 @@ export function advanceRealTime(state,deltaMs,context,r=Math.random){
  const log=[],events=[];if(state.paused||!Number.isFinite(deltaMs)||deltaMs<=0)return {log,events};
  synchronizeTimers(state,context);for(const u of allUnits(context)){const clock=unitClock(state,u);if(clock.interrupted){log.push(name(u,context.speciesOf(u))+' is interrupted while casting '+clock.interrupted+'.');delete clock.interrupted;}}let remaining=Math.min(5000,deltaMs);
  while(remaining>0){const step=Math.min(50,remaining);state.elapsedMs+=step;remaining-=step;pauseSealedAfflictions(state,context,step);for(const side of ['a','b'])for(const u of [...context.active[side]])if(u.recallAfterCast&&!unitClock(state,u).pending){delete u.recallAfterCast;context.active[side]=context.active[side].filter(v=>v!==u);}expireTimers(state,context,log);
+ for(const pending of (state.supportCasts||[]).filter(p=>p.resolveAt<=state.elapsedMs)){state.supportCasts=state.supportCasts.filter(p=>p!==pending);const team=context.teams[pending.side],targets=pending.targets.map(id=>team.find(u=>u.id===id)).filter(Boolean),recipient=team.find(u=>u.id===pending.recipient);if(recipient){const resolved=applySupportEffects(state,context,pending.side,{technique:pending.technique,targets,recipient,cost:pending.cost,gcdStarted:true});log.push(...resolved.log);}}
  const due=activeUnits(context).map(actor=>({actor,clock:unitClock(state,actor)})).filter(x=>x.clock.pending&&x.clock.pending.resolveAt<=state.elapsedMs).sort((a,b)=>a.clock.pending.resolveAt-b.clock.pending.resolveAt||a.clock.pending.sequence-b.clock.pending.sequence);
  for(const {actor,clock}of due)if(clock.pending&&clock.pending.resolveAt<=state.elapsedMs)resolvePending(state,context,actor,clock,log,events,r);
  if(state.elapsedMs>=state.nextPulseAt){pulseEffects(state,context,log);state.nextPulseAt+=EFFECT_PULSE_MS;synchronizeTimers(state,context);}
@@ -270,29 +274,31 @@ export function advanceRealTime(state,deltaMs,context,r=Math.random){
  return {log,events};
 }
 
-export function deploymentAvailability(state,context,side,ind){
+export function deploymentAvailability(state,context,side,ind,{breakVow=false}={}){
  const team=context.teams[side],active=context.active[side].filter(u=>u.hp>0),q=context.sealers?.[side];
  if(state.paused)return {ok:false,reason:'Battle paused'};
  if(!team.includes(ind)||!ind||ind.hp<=0)return {ok:false,reason:'No healthy team member selected'};
  if(active.includes(ind))return {ok:false,reason:'Already manifested'};
  if(active.length>=(context.rules?.maxActive||3))return {ok:false,reason:'The active Spirimon limit has been reached'};
+ const vow=q&&SE.vowViolation(q,'manifest',{activeCount:active.length,initial:q.initialManifested||[],memberId:ind.id});if(vow&&!breakVow)return {ok:false,reason:'This release breaks '+vow.name,requiresVowBreak:true};
  const cost=q?SE.manifestationCost(q,ind,context.speciesOf(ind)):0;
  return {ok:!q||q.energy>=cost,cost,reason:q&&q.energy<cost?'Not enough Spiritual Energy':''};
 }
-export function deploySpirimon(state,context,side,ind){
- const check=deploymentAvailability(state,context,side,ind);if(!check.ok)return check;
+export function deploySpirimon(state,context,side,ind,options={}){
+ const check=deploymentAvailability(state,context,side,ind,options);if(!check.ok)return check;
  const q=context.sealers?.[side],field=context.active[side][0]?.battlefield||context.active[side==='a'?'b':'a'][0]?.battlefield;
+ if(options.breakVow&&q)SE.breakVow(q,true);
  if(q&&!SE.spendEnergy(q,check.cost))return {ok:false,reason:'Not enough Spiritual Energy'};
  const from={id:'sealed-'+ind.id,hp:0,battlefield:field,battleSide:side},result=E.switchUnits(from,ind,context.speciesOf(ind),{forced:true,onDamage:(unit,options)=>reportDamage(state,context,unit,options)});
  if(!result.ok){if(q)SE.restoreEnergy(q,check.cost);return {ok:false,reason:result.log.join(' ')};}
- context.active[side]=context.active[side].filter(u=>u.hp>0);context.active[side].push(ind);
+ context.active[side]=context.active[side].filter(u=>u.hp>0);context.active[side].push(ind);if(q&&!q.vowFormationClosed){q.initialManifested??=[];if(!q.initialManifested.includes(ind.id))q.initialManifested.push(ind.id);}
  const clock=unitClock(state,ind);clock.pending=null;clock.readyAt=state.elapsedMs+650;SE.setExhaustion(ind,q);
  return {ok:true,cost:check.cost,log:result.log};
 }
-export function supportAvailability(state,context,side,techniqueId,recipientId){
+export function supportAvailability(state,context,side,techniqueId,recipientId,{extra=0,breakVow=false}={}){
  if(context.rules?.noSupport)return {ok:false,reason:'Support is restricted in this challenge'};
  const q=context.sealers?.[side],t=q?.known[techniqueId],u=context.teams[side].find(u=>u.id===recipientId);
- if(state.paused)return {ok:false,reason:'Battle paused'};if(!t||!u)return {ok:false,reason:'Select a learned technique and a team member'};
+ if(state.paused)return {ok:false,reason:'Battle paused'};if((state.supportCasts||[]).some(p=>p.side===side))return {ok:false,reason:'Sealer is channeling support'};if(!t||!u)return {ok:false,reason:'Select a learned technique and a team member'};
  if(!(q.assignments[u.id]||[]).includes(t.id)&&q.floating!==t.id)return {ok:false,reason:'Technique is not assigned to this Spirimon'};
  if(!supportFits(t,u,context.speciesOf(u),E.activeDomains(context.speciesOf(u),u)))return {ok:false,reason:'This Spirimon is not compatible'};
  const revive=t.effects.some(e=>e.kind==='revive');if(revive?u.hp>0:u.hp<=0||!context.active[side].includes(u))return {ok:false,reason:revive?'Choose a defeated team member':'The recipient must be manifested'};
@@ -302,16 +308,30 @@ export function supportAvailability(state,context,side,techniqueId,recipientId){
  if(t.effects.some(e=>e.kind==='link')&&!context.active[side].some(v=>v!==u&&v.hp>0))return {ok:false,reason:'Damage sharing needs another manifested ally'};
  if(t.effects.some(e=>e.kind==='recall')&&u.conditions?.trap)return {ok:false,reason:'This binding prevents protected recall'};
  if(t.sacrifice?.kind==='hp'&&targets.some(v=>v.hp<=Math.ceil(E.stats(v,context.speciesOf(v)).hp*t.sacrifice.amount)))return {ok:false,reason:'Not enough HP to make this sacrifice safely'};
- const cost=Math.max(1,Math.ceil(t.energyCost*(1+(q.level-1)*.02)*bondEfficiency(u)));
- return {ok:q.energy>=cost,reason:q.energy<cost?'Not enough Spiritual Energy':'',cost,targets,technique:t,recipient:u};
+ const quote=SE.supportQuote(q,t,u,extra),vow=SE.vowViolation(q,t.effects.some(e=>e.kind==='recall')?'recall':'support',{offensive:quote.offensive,extra:quote.extra});
+ if(vow&&!breakVow)return {ok:false,reason:'This Technique breaks '+vow.name,requiresVowBreak:true};
+ const actual=vow&&breakVow?SE.supportQuote({...q,vowBroken:'battle'},t,u,extra):quote;
+ return {ok:q.energy>=actual.cost,reason:q.energy<actual.cost?'Not enough Spiritual Energy':'',...actual,targets,recipient:u};
 }
-export function usePlayerSupport(state,context,side,techniqueId,recipientId){
- const result=supportAvailability(state,context,side,techniqueId,recipientId);if(!result.ok)return result;
- const {technique:t,targets,recipient}=result,q=context.sealers[side],now=state.elapsedMs;
+export function usePlayerSupport(state,context,side,techniqueId,recipientId,options={}){
+ const result=supportAvailability(state,context,side,techniqueId,recipientId,options);if(!result.ok)return result;
+ const q=context.sealers[side],t=result.technique;if(options.breakVow)SE.breakVow(q,true);
  if(!SE.spendEnergy(q,result.cost))return {ok:false,reason:'Not enough Spiritual Energy'};
- q.supportCooldowns[t.id]=now+t.cooldownMs;const log=[];
- for(const u of targets){const sp=context.speciesOf(u),max=E.stats(u,sp),clock=unitClock(state,u),efficiency=(1+Math.min(.1,(u.bond||0)/1000))*(1-SE.setExhaustion(u,q)),until=now+t.durationMs;
-  if(t.timing==='gcd'){clock.gcdReadyAt=now+moveTiming({id:'support-gcd',timing:'gcd',power:0},u,sp).gcdMs;resetDamageBudget(clock,'gcd',clock.gcdReadyAt-now);}u.gcdReadyAt=clock.gcdReadyAt;
+ q.vowFormationClosed=true;q.supportCooldowns[t.id]=state.elapsedMs+t.cooldownMs;
+ if(t.castMs>0){
+  for(const u of result.targets)if(t.timing==='gcd'){const c=unitClock(state,u);c.gcdReadyAt=state.elapsedMs+moveTiming({id:'support-gcd',timing:'gcd',power:0},u,context.speciesOf(u)).gcdMs;u.gcdReadyAt=c.gcdReadyAt;resetDamageBudget(c,'gcd',c.gcdReadyAt-state.elapsedMs,false);}
+  state.supportCasts??=[];state.supportCasts.push({side,technique:t,targets:result.targets.map(u=>u.id),recipient:result.recipient.id,cost:result.cost,resolveAt:state.elapsedMs+t.castMs});
+  return {ok:true,cost:result.cost,log:['The Sealer channels '+t.name+' for '+(t.castMs/1000).toFixed(2)+'s ('+result.cost+' Energy).'],targets:result.targets.map(u=>u.id)};
+ }
+ return applySupportEffects(state,context,side,result);
+}
+function applySupportEffects(state,context,side,result){
+ const {technique:t,targets,recipient}=result,q=context.sealers[side],now=state.elapsedMs,log=[];
+ for(const u of targets){if(u.hp<=0&&!t.effects.some(e=>e.kind==='revive')||u.hp>0&&t.effects.some(e=>e.kind==='revive'))continue;
+  if(u.hp>0&&!context.active[side].includes(u))continue;
+  const sp=context.speciesOf(u),max=E.stats(u,sp),clock=unitClock(state,u),efficiency=(1+Math.min(.1,(u.bond||0)/1000))*(1-SE.setExhaustion(u,q)),until=now+t.durationMs;
+  if(t.sacrifice?.kind==='hp'&&u.hp<=Math.ceil(max.hp*t.sacrifice.amount))continue;
+  if(t.timing==='gcd'&&!result.gcdStarted){clock.gcdReadyAt=now+moveTiming({id:'support-gcd',timing:'gcd',power:0},u,sp).gcdMs;resetDamageBudget(clock,'gcd',clock.gcdReadyAt-now,!t.castMs);}u.gcdReadyAt=clock.gcdReadyAt;
   if(t.sacrifice?.kind==='hp')u.hp-=Math.ceil(max.hp*t.sacrifice.amount);
   if(t.sacrifice?.kind==='defense'){u.spiritualBuffs??=[];u.spiritualBuffs.push({kind:'guard',amount:-t.sacrifice.amount,until});}
   for(const effect of t.effects){const amount=effect.amount*efficiency;
@@ -319,6 +339,7 @@ export function usePlayerSupport(state,context,side,techniqueId,recipientId){
    if(effect.kind==='willpower')u.willpower=Math.min(max.willpower,(u.willpower||0)+Math.max(1,Math.ceil(max.willpower*amount)));
    if(effect.kind==='shield'){u.spiritualShields??=[];const existing=u.spiritualShields.filter(s=>s.until>now).reduce((n,s)=>n+s.hp,0);u.spiritualShields.push({hp:Math.max(0,Math.min(Math.ceil(max.hp*amount),Math.ceil(max.hp*.45)-existing)),until});}
    if(effect.kind==='cleanse'&&['poison','toxic','burn','freeze','frostbite','paralysis'].includes(u.status)){u.status=null;u.statusTurns=0;clock.status=null;}
+   if(effect.kind==='cleanse'&&t.empowermentExtra>=5){const keys=Object.keys(clock.conditions).filter(k=>['confusion','infatuation','nightmare','taunt','disable','slow','trap'].includes(k));for(const key of keys.slice(0,Math.floor(t.empowermentExtra/5))){delete clock.conditions[key];delete clock.conditionMeta?.[key];delete u.conditions?.[key];}}
    if(effect.kind==='calm'){
     u.spiritualBuffs??=[];u.spiritualBuffs.push({kind:'concentration',amount:.5,until});
     if(clock.status?.effect==='sleep')shortenAffliction(clock.status,now,.4);

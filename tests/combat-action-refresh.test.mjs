@@ -22,7 +22,7 @@ function harness(){
  const ctx=vm.runInContext('realTimeContext()',h);for(const u of allies){const c=RT.unitClock(state,u);c.gcdReadyAt=4000;c.readyAt=3500;}
  return {h,state,ctx,grid,allies,setGesture:g=>{h.inputGesture=g;vm.runInContext('unifiedGesture=inputGesture',h);},gesture:()=>vm.runInContext('unifiedGesture',h),preserved:()=>preserved,refresh:()=>vm.runInContext('refreshRealTimeUI()',h),advance:ms=>RT.advanceRealTime(state,ms,ctx,()=>.5)};
 }
-test('a failed-escape utility cooldown returns Run, then ready Moves, without a full render',()=>{
+test('a failed-escape utility cooldown returns Run, then ready Techniques, without a full render',()=>{
  const t=harness();t.refresh();assert.match(t.grid.innerHTML,/Waiting/);
  t.advance(3500);t.refresh();assert.match(t.grid.innerHTML,/data-action="flee"/);assert.doesNotMatch(t.grid.innerHTML,/data-unified-move/);
  t.advance(500);t.refresh();assert.match(t.grid.innerHTML,/data-unified-move="a0\|0"/);assert.match(t.grid.innerHTML,/data-unified-move="a1\|0"/);assert.match(t.grid.innerHTML,/data-unified-move="a2\|0"/);

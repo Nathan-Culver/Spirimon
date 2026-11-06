@@ -35,7 +35,7 @@ test('a seal tap commits base Energy immediately and its synthesized click canno
 });
 test('sliding previews total cost and chance without spending, then release commits the preview',()=>{
  const f=harness();f.emit('pointerdown');f.emit('pointermove',{clientX:73});assert.match(f.quote.textContent,/SE · \d+%/);assert.equal(f.count(),0);assert.equal(f.s.sealer.energy,100);
- const extra=sealingGestureChoice(73,0,100-f.base).extra;f.emit('pointerup',{clientX:73});assert.equal(f.s.sealer.energy,100-f.base-extra);assert.equal(f.count(),1);
+ const extra=sealingGestureChoice(73,0,SE.outputLimit(f.s.sealer)).extra;f.emit('pointerup',{clientX:73});assert.equal(f.s.sealer.energy,100-f.base-extra);assert.equal(f.count(),1);
 });
 test('upward cancel, touch cancellation, lost capture, Escape and focus loss spend nothing',()=>{
  for(const mode of ['up','pointercancel','lostpointercapture','blur','escape','hidden']){

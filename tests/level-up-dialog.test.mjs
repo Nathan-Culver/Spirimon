@@ -24,7 +24,7 @@ test('training shows a persistent level-up dialog instead of only a toast',()=>{
  const t=harness(),coins=t.state.inventory.coins;t.eval("training('ally-0')");const dialog=t.dialogs.at(-1);
  assert.equal(dialog.title,'Level up!');assert.equal(dialog.options.kind,'level-up');assert.match(dialog.html,/Level 4 → 5/);assert.match(dialog.html,/data-action="detail" data-value="ally-0"/);assert.equal(t.toasts.length,0);assert.equal(t.state.inventory.coins,coins-25);assert.equal(t.saves(),1);
 });
-test('multiple levels, transformations and learned Moves appear in the same advancement card',()=>{
+test('multiple levels, transformations and learned Techniques appear in the same advancement card',()=>{
  const t=harness(),ind=t.units[0],sp=t.species[0];ind.level=15;ind.xp=269;ind.bond=80;sp.learnset.push({...sp.moves[0],id:'new-dialog-move',name:'Dawn <Lance>',learnLevel:16});
  t.eval("training('ally-0')");const dialog=t.dialogs.at(-1);assert.equal(dialog.title,'Level up!');assert.match(dialog.html,/Level 15 → 16/);assert.match(dialog.html,/Transformed:/);assert.ok(dialog.html.includes(sp.forms[0])&&dialog.html.includes(sp.forms[1]));assert.match(dialog.html,/Dawn &lt;Lance&gt;/);assert.equal(ind.form,1);assert.equal(t.transforms.length,1);
  const fresh=harness();fresh.h.amount=4*18+5*18+6*18+1;fresh.units[0].xp=0;const change=fresh.eval('gainSpirimonXP(s.spirits[0],spOf(s.spirits[0]),amount)');fresh.h.change=change;assert.equal(change.levels,3);assert.match(fresh.eval('levelUpHTML([change])'),/Level 4 → 7/);

@@ -20,7 +20,7 @@ test('an enemy action resolves without a player action and only its own resource
 test('move cooldown and actor recovery prevent immediate repeats, then expire by elapsed time',()=>{
  const f=fixture();const first=f.schedule(f.a[0],hit);assert.ok(first.ok);assert.equal(f.schedule(f.a[0],hit).ok,false);f.step(1000);assert.equal(f.schedule(f.a[0],hit).ok,false);f.step(first.profile.cooldownMs+first.profile.recoveryMs);assert.ok(f.schedule(f.a[0],hit).ok);
 });
-test('fast and heavy Moves trade damage for time and independent individual cooldown records',()=>{
+test('fast and heavy Techniques trade damage for time and independent individual cooldown records',()=>{
  const f=fixture(2),a=moveTiming(fast,f.a[0],f.sp),b=moveTiming(heavy,f.a[0],f.sp);assert.ok(b.localCooldownMs>a.localCooldownMs||b.work>a.work);assert.ok(a.castMs<b.castMs);f.schedule(f.a[0],heavy);assert.ok(f.schedule(f.a[1],heavy).ok);assert.notEqual(RT.unitClock(f.state,f.a[0]),RT.unitClock(f.state,f.a[1]));
 });
 test('pause freezes casts, cooldowns and afflictions without a resume burst',()=>{
@@ -60,14 +60,14 @@ test('Bag supplies use the actor timeline, heal allies, and do not spend a force
 test('held abilities participate in the same timeline and retain cooldowns',()=>{
  const f=fixture();f.a[0].heldItem=generateHeldItem('rt-item',{templateId:'edge'});assert.ok(RT.scheduleAction(f.state,f.context,f.a[0],{type:'heldItem'}).ok);const hp=f.b[0].hp;f.step(1000);assert.ok(f.b[0].hp<hp);assert.ok(RT.unitClock(f.state,f.a[0]).itemReadyAt>f.state.elapsedMs);
 });
-test('AI filters cooling Moves instead of using Struggle while funded Moves are cooling',()=>{
+test('AI filters cooling Techniques instead of using Struggle while funded Techniques are cooling',()=>{
  const f=fixture();const decision=chooseBattleAction(f.b[0],{realTime:true,speciesOf:()=>f.sp,opponents:[f.a[0]],allies:[f.b[0]],team:[f.b[0]],canUse:()=>false},()=>.5);assert.equal(decision,null);
  const ready=chooseBattleAction(f.b[0],{realTime:true,speciesOf:()=>f.sp,opponents:[f.a[0]],allies:[f.b[0]],team:[f.b[0]],canUse:c=>c.move?.id==='fast'},()=>.5);assert.equal(ready.move.id,'fast');assert.equal(ready.borrow,0);
 });
-test('all catalog Moves have bounded cooldowns and scale at each level threshold',()=>{
+test('all catalog Techniques have bounded cooldowns and scale at each level threshold',()=>{
  const all=allMoveTemplates();assert.ok(all.length>400);for(const m of all){let previous=-1;for(const level of MOVE_LEVEL_THRESHOLDS){const p=moveTiming(m,{level},{speed:40});assert.ok(p.cooldownMs>=1000&&p.cooldownMs<=180000,m.name);assert.ok(p.castMs>=0&&p.castMs<6000,m.name);assert.ok(p.power>=previous,m.name);previous=p.power;}if(m.power>0)assert.ok(moveTiming(m,{level:100},{speed:40}).power>moveTiming(m,{level:1},{speed:40}).power,m.name);}
 });
-test('major afflictions all have actual catalog Moves and appropriate early learnset access',()=>{
+test('major afflictions all have actual catalog Techniques and appropriate early learnset access',()=>{
  const all=allMoveTemplates();for(const effect of ['confusion','sleep','freeze','burn','poison','toxic','paralysis','frostbite'])assert.ok(all.some(m=>m.effect===effect),effect);
  for(const m of CORE_STATUS_MOVES){const base=m.eligibleTypes[0],alter=base==='Fey'?'Beast':'Fey',pool=buildLearnset(base,alter,[]);assert.ok(pool.some(p=>p.id===m.id));const sp={...E.makeSpecies('status-'+m.id,base,alter),learnset:pool};const ind={level:m.learnLevel,form:0};assert.ok(E.availableTechniques(ind,sp).some(p=>p.id===m.id),m.name);}
 });
@@ -75,10 +75,10 @@ test('real-time controls expose cooldown timers and readiness without turn or bo
  const f=fixture();f.schedule(f.a[0],hit);const html=realTimeMoveHTML(f.state,f.a[0],f.sp,[hit]);assert.match(html,/GCD|LCD/);assert.match(html,/Casting/);assert.match(html,/disabled/);assert.doesNotMatch(html,/borrow|ROUND /);
 });
 
-test('re-evaluating a locked or charged Move never compounds its level-scaled power',()=>{
+test('re-evaluating a locked or charged Technique never compounds its level-scaled power',()=>{
  const base={...hit,effect:'rampage'},u={level:100},sp={speed:40};const first=scaledMove(base,u,sp),second=scaledMove(first,u,sp),third=scaledMove(second,u,sp);assert.equal(first.power,50);assert.equal(second.power,first.power);assert.equal(third.power,first.power);assert.equal(moveTiming(third,u,sp).cooldownMs,moveTiming(base,u,sp).cooldownMs);
 });
-test('every catalog Move executes through the live scheduler without an unsupported-effect failure',()=>{
+test('every catalog Technique executes through the live scheduler without an unsupported-effect failure',()=>{
  for(const m of allMoveTemplates()){const f=fixture();f.sp.moves=[m];f.sp.learnset=[m];f.a[0].hp=Math.floor(E.stats(f.a[0],f.sp).hp*.6);f.a[0].lastHit={amount:20,category:m.effect==='mirrorCoat'?'Energy':'Physical',source:f.b[0].id,at:0};f.b[0].lastMove='hit';
  if(['sleepStrike','nightmare'].includes(m.effect)){f.b[0].status='sleep';f.b[0].statusTurns=3;}
  if(m.effect==='auroraVeil')f.a[0].battlefield.weather='snow';
@@ -152,7 +152,7 @@ test('multi-hit damage counts each impact but only pushes a cast once in the thr
  RT.applyDamageDelay(f.state,u,{hits:3});assert.equal(c.gcdReadyAt,10300);assert.equal(c.pending.resolveAt,10250);
  RT.applyDamageDelay(f.state,u,{hits:3});assert.equal(c.gcdReadyAt,10500);assert.equal(c.pending.resolveAt,10250);
 });
-test('selected existing Moves expose their disruption rules and affect actual timers',()=>{
+test('selected existing Techniques expose their disruption rules and affect actual timers',()=>{
  const templates=allMoveTemplates();for(const name of ['Spirit Break','Fatebreaker']){
   const f=fixture(),attack=templates.find(m=>m.name===name);assert.ok(attack.cooldownDisruption);assert.match(E.moveLore(attack).disruptionText,/2 seconds/);
   f.sp.moves=[attack];f.sp.learnset=[attack];f.a[0].equippedMoves=[attack.id];f.a[0].learnedMoves=[attack.id];
@@ -215,4 +215,18 @@ test('proportional allowances persist across save/load and also bound explicit d
  RT.preserveAfflictions(f.state,u);const saved=JSON.parse(JSON.stringify(u)),state=RT.createRealTimeState(1000),restored=RT.unitClock(state,saved);
  assert.equal(restored.damageDelays.gcd.durationMs,2000);RT.applyDamageDelay(state,saved);assert.equal(restored.gcdReadyAt,2300);
  for(let n=0;n<10;n++)RT.applyDamageDelay(state,saved,{periodic:true});assert.equal(restored.gcdReadyAt,2450);
+});
+
+test('incoming direct, periodic and disruptive damage cannot extend instant Technique timers',()=>{
+ const f=fixture(),u=f.a[0],instant={...hit,castMs:0,cooldownMs:12000};
+ assert.ok(f.schedule(u,instant).ok);const c=RT.unitClock(f.state,u),gcd=c.gcdReadyAt,local=c.cooldowns.hit;
+ f.step(100);assert.equal(c.pending,null);
+ for(const options of [{hits:4},{periodic:true},{disruption:{gcdMs:500,moveId:'hit',lcdMs:500}}])RT.applyDamageDelay(f.state,u,options);
+ assert.equal(c.gcdReadyAt,gcd);assert.equal(c.cooldowns.hit,local);
+});
+test('instant local cooldown remains protected while another Technique is being cast',()=>{
+ const f=fixture(),u=f.a[0];f.schedule(u,{...hit,timing:'lcd',castMs:0,cooldownMs:20000});f.step(1000);
+ const c=RT.unitClock(f.state,u),local=c.cooldowns.hit;assert.ok(f.schedule(u,heavy).ok);
+ const gcd=c.gcdReadyAt,cast=c.pending.resolveAt;RT.applyDamageDelay(f.state,u);
+ assert.equal(c.cooldowns.hit,local);assert.ok(c.gcdReadyAt>gcd);assert.ok(c.pending.resolveAt>cast);
 });

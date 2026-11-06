@@ -12,7 +12,7 @@ All surviving manifested creatures return to their seals at battle end. An ordin
 
 Sealer level grows through battles and first-time exploration. Unique spiritual instruction, meditation milestones, and completed rituals improve spiritual training. Strong individual bonds contribute a capped capacity bonus. Existing saves receive credit for historic victories once; migration never repeatedly awards experience or refills an existing reserve.
 
-Maximum Energy is 100 + 8 per Sealer level after the first + up to 40 training + up to 40 ritual growth + up to 45 bond growth. Release strength estimates healthy HP/defenses, expected damage throughput, utility, passive abilities, equipment-adjusted stats, equipped Moves and level. It ignores current injuries and transient buffs. Bond discounts cap at 15%.
+Maximum Energy is 100 + 8 per Sealer level after the first + up to 40 training + up to 40 ritual growth + up to 45 bond growth. Release strength estimates healthy HP/defenses, expected damage throughput, utility, passive abilities, equipment-adjusted stats, equipped Techniques and level. It ignores current injuries and transient buffs. Bond discounts cap at 15%.
 
 `npm run audit:energy` checks a free lead plus two ordinary releases and occasional support at five reference stages. These estimates meet 6–10 routine encounters; actual solo expeditions can last longer because the lead is free. Three powerful creatures can be stronger in a particular encounter while costing more over an expedition. Equal expenditure is not a guarantee of identical matchup outcomes.
 
@@ -38,13 +38,13 @@ No resting place, shrine, item, meditation, preparation change, recall, revival 
 
 ## GCDs, LCDs and manual controls
 
-Each creature has independent timers. Base GCD is 3.5 seconds with a 1.5-second haste floor. Creature Speed affects both GCD and individual Move LCDs with diminishing returns; temporary speed effects, styles and afflictions also apply. **Move Speed is retired**, including AI-generated mechanics. Individual Move cast and recast profiles instead pay for their power, spread coverage, accuracy, utility and level scaling.
+Each creature has independent timers. Base GCD is 3.5 seconds with a 1-second haste floor. Creature Speed affects both GCD and individual Technique LCDs with diminishing returns; temporary speed effects, styles and afflictions also apply. **Technique Speed is retired**, including AI-generated mechanics. Individual Technique cast and recast profiles instead pay for their power, spread coverage, accuracy, utility and level scaling.
 
-A casting GCD Move starts the shared timer immediately. Cast and GCD overlap. Another GCD cannot begin before both the cast and GCD finish. LCD Moves have their own timers and do not restart the GCD. Basic LCD execution locks last 550ms; using one late enough can clip the next GCD. Heavy GCD Moves can also require a longer individual recast. These are shown in Move details.
+A casting GCD Technique starts the shared timer immediately. Cast and GCD overlap. Another GCD cannot begin before both the cast and GCD finish. LCD Techniques have their own timers and do not restart the GCD. Basic LCD execution locks last 550ms; using one late enough can clip the next GCD. Heavy GCD Techniques can also require a longer individual recast. These are shown in Technique details.
 
-There is no action queue or allied AI automation. A pressed unavailable Move is rejected rather than saved for later. Select an ally tab, a foe/ally target, and a ready Move. Other creatures' timers continue normally. Status, HP/resource readouts, shields and cooldown labels update during selection. Pause freezes execution and prevents issuing actions.
+There is no action queue or allied AI automation. A pressed unavailable Technique is rejected rather than saved for later. Select an ally tab, a foe/ally target, and a ready Technique. Other creatures' timers continue normally. Status, HP/resource readouts, shields and cooldown labels update during selection. Pause freezes execution and prevents issuing actions.
 
-GCD/LCD Move profiles retain level thresholds 1, 16, 36, 60, 85 and 100. The Move audit includes timing class, shared GCD, local recast, casts, resources, effects, and power at all six thresholds. Precise competitive balance still benefits from extended human playtesting.
+GCD/LCD Technique profiles retain level thresholds 1, 16, 36, 60, 85 and 100. The Technique audit includes timing class, shared GCD, local recast, casts, resources, effects, and power at all six thresholds. Precise competitive balance still benefits from extended human playtesting.
 
 ## Procedural support and preparation
 
@@ -64,8 +64,8 @@ Copies of the exact same generated technique share a Sealer-wide cooldown. Mecha
 | Recall | Protected withdrawal; binding can prevent it; an existing cast finishes before withdrawal |
 | Purification | Removes physical afflictions |
 | Sanctuary | Prevents new statuses/interruption |
-| Quickening | Accelerates subsequent casting and Move cooldown profiles |
-| Reprise | Reduces remaining Move GCDs/LCDs, never player support timers |
+| Quickening | Accelerates subsequent casting and Technique cooldown profiles |
+| Reprise | Reduces remaining Technique GCDs/LCDs, never player support timers |
 | Soulbridge | Shares incoming damage with a living active ally without recursive redirection |
 | Reawakening | Revives a defeated party member within its seal |
 | Mantle | General or damage-category/Domain-specific protection |
@@ -74,13 +74,13 @@ The generator combines compatible effects, durations, potency, team coverage, re
 
 Support never cancels the recipient's ongoing cast. GCD-classified support requires the recipient GCD ready and restarts it. Team-wide GCD support requires **every affected GCD ready and restarts all of them**. LCD support applies immediately and uses its own shared technique cooldown. GCD classification is derived from the generated effects.
 
-Revival may be repeated whenever Energy and cooldowns allow. It restores HP within the seal, with a separate manifestation payment to return to battle; the designated lead retains its free-release exception. Neither revival nor recall resets creature Move timers. With no manifested defender, a six-second emergency window permits items, revival, release or escape before rescue/defeat.
+Revival may be repeated whenever Energy and cooldowns allow. It restores HP within the seal, with a separate manifestation payment to return to battle; the designated lead retains its free-release exception. Neither revival nor recall resets creature Technique timers. With no manifested defender, a six-second emergency window permits items, revival, release or escape before rescue/defeat.
 
 ## Sealing, cooperation and enemies
 
 Sealing requires a fixed strength-based base payment plus optional extra Energy. Extra investment improves success with diminishing returns. Health/status, creature stats, trust and seal quality contribute to success. Both the base and extra are lost on failure, along with the catalyst. Peaceful offering seals also need Energy after the first-bond tutorial exception.
 
-Basic coordinated physical attacks, shared-Domain attacks, Water/Lightning combinations, and restorative combinations are recognized from equipped Moves and actual active Domains. Advanced United and Triune Releases are learned from spiritual instruction. Cooperation requires every participant's selected action to be ready and fundable; it commits Energy and each creature's action/resources. Dedicated cooperative cooldowns persist.
+Basic coordinated physical attacks, shared-Domain attacks, Water/Lightning combinations, and restorative combinations are recognized from equipped Techniques and actual active Domains. Advanced United and Triune Releases are learned from spiritual instruction. Cooperation requires every participant's selected action to be ready and fundable; it commits Energy and each creature's action/resources. Dedicated cooperative cooldowns persist.
 
 Field rituals can purify the party, permanently unseal nearby dungeon obstacles, or stabilize an area against random encounters for 30 steps. They require suitable Domains and pay for non-lead manifestation. First-time ritual discoveries award training and procedural support instruction. Cleared barriers are stored in the actual dungeon's persistent changes.
 
@@ -90,4 +90,4 @@ NPC Sealers and bosses follow the same maximum of three, free designated lead, p
 
 Regression tests cover migration, persistence, resource accounting, three-creature limits, manual control, casting/GCD overlap, weaving, exhaustion, each recovery source, exact-copy support sharing, team-wide GCD gating, procedural validation, repeated revival, sacrifices, sealing, cooperation, and shrine placement. The browser playtest uses its own save namespace.
 
-Balance remains data-driven: the main tuning points are Speed curves, per-Move recasts/locks, generated support budgets and stacking caps, NPC support choices, and shrine/encounter pacing. Audit CSVs are reproducible with the npm audit commands; they are design benchmarks rather than proof of universal matchup equivalence.
+Balance remains data-driven: the main tuning points are Speed curves, per-Technique recasts/locks, generated support budgets and stacking caps, NPC support choices, and shrine/encounter pacing. Audit CSVs are reproducible with the npm audit commands; they are design benchmarks rather than proof of universal matchup equivalence.

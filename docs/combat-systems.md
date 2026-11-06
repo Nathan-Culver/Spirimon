@@ -2,17 +2,17 @@
 
 # Combat systems
 
-This release uses one elapsed-time simulation for single and double battles. See [real-time combat](real-time-combat.md) for cooldowns, level thresholds, timers and pause behavior. Existing saves, creature IDs, learned moves, shared resource pools, and the original five charm IDs are retained.
+This release uses one elapsed-time simulation for single and double battles. See [real-time combat](real-time-combat.md) for cooldowns, level thresholds, timers and pause behavior. Existing saves, creature IDs, learned techniques, shared resource pools, and the original five charm IDs are retained.
 
-## Moves and conditions
+## Techniques and conditions
 
-Every catalog effect has a combat handler. Might, power, defenses, speed, accuracy and evasion stages affect their calculations and are bounded from −6 to +6. Paralysis reduces speed and can interrupt actions. Confusion can cause self-damage. Sleep, freezing, trapping, disabling, taunting, regeneration, screens, weather and terrain have timed lifetimes. Their lifetimes use elapsed-time deadlines. Ongoing damage pulses every two simulated seconds, including while selecting Moves or using Bag controls. Pause, backgrounding and required replacement selection freeze the clock.
+Every catalog effect has a combat handler. Might, power, defenses, speed, accuracy and evasion stages affect their calculations and are bounded from −6 to +6. Paralysis reduces speed and can interrupt actions. Confusion can cause self-damage. Sleep, freezing, trapping, disabling, taunting, regeneration, screens, weather and terrain have timed lifetimes. Their lifetimes use elapsed-time deadlines. Ongoing damage pulses every two simulated seconds, including while selecting Techniques or using Bag controls. Pause, backgrounding and required replacement selection freeze the clock.
 
 Counter and Mirror Coat retaliate against the matching attack category received within the last eight seconds. Destiny Bond can cause a mutual knockout. Seed effects drain vitality to their living source. Sleep-only attacks require sleep, delayed attacks wait for their countdown, rampages lock the selected move, and damaging pivots and Baton Pass request replacement selection on the live timeline. Baton Pass carries combat stages to that replacement.
 
 Rain and sun affect matching elemental damage. Sand and snow cause chip damage with defined type/domain exemptions. Grassy terrain restores vitality; electric terrain prevents sleep, misty terrain prevents afflictions and psychic terrain stops priority-effect attacks. Reflect and energy screens protect a whole side and expire. Safeguard protects against afflictions. Break-ward attacks remove wards and defensive screens before damage.
 
-Move previews remain narrative only. Numerical data, targeting, equipment rules and action costs appear in their own controls or inventory pages.
+Technique previews remain narrative only. Numerical data, targeting, equipment rules and action costs appear in their own controls or inventory pages.
 
 ## Switching
 
@@ -22,7 +22,7 @@ Ordinary switches clear volatile conditions and stages while preserving major st
 
 ## Double battles
 
-Both teams have independently acting active Spirimon. Select an ally to command it, or enable Auto for that ally. Each has its own casting, recovery and Move cooldown record. Single-target attacks choose a foe, compatible support techniques choose an ally, and spread attacks pay resources once even when both targets are struck. Pressure increases that single payment if any struck target has Pressure.
+Both teams have independently acting active Spirimon. Select an ally to command it, or enable Auto for that ally. Each has its own casting, recovery and Technique cooldown record. Single-target attacks choose a foe, compatible support techniques choose an ally, and spread attacks pay resources once even when both targets are struck. Pressure increases that single payment if any struck target has Pressure.
 
 Four HUDs show health, resources and timed status badges. Each enemy chooses actions without waiting for player orders. Bag abilities and switches commit the acting Spirimon's recovery. Healthy reserves replace defeated creatures; required allied replacement selection pauses the timeline. Participants receive experience on victory. Cooldowns remain attached to each individual across withdrawal and re-entry.
 

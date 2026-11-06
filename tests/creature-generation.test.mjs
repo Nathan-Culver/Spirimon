@@ -68,7 +68,7 @@ test('framing, distinct evolution images and duplicate lineages are enforced',()
  const clipped=structuredClone(images[0]);for(let x=0;x<clipped.width;x++)clipped.data.set([10,10,10,255],x*4);assert.throws(()=>validateLineageImages([clipped,...images.slice(1)]),/cropped/);
  const empty={width:32,height:32,data:new Uint8ClampedArray(4096)};assert.throws(()=>validateLineageImages([empty,empty,empty]),/empty/);assert.equal(visualMetrics(images[0]).bounds.length,4);
 });
-test('legacy Humanoid migration preserves owned and wild individuals, equipment, progress and learned moves',()=>{
+test('legacy Humanoid migration preserves owned and wild individuals, equipment, progress and learned techniques',()=>{
  const old=E.makeSpecies('saved','Beast','Fey');old.base='Humanoid';old.alter='Plant';old.description='A nonhuman moth-headed biped with four grasping hands.';old.moves[0].type='Humanoid';delete old.taxonomyRevision;delete old.anatomy;delete old.capabilities;
  const item=generateHeldItem('saved-sabre',{templateId:'sabre'});item.requires={types:['Humanoid']};item.active.type='Humanoid';
  const ind={id:'owned',species:old.id,level:42,xp:123,bond:77,form:2,appearance:1,ivs:{hp:31},evs:{might:120},moveIds:['humanoid-1','beast-2'],unlockedMoves:['humanoid-7'],heldItem:item,hp:10};

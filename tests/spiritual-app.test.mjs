@@ -25,7 +25,7 @@ test('changing an NPC roster keeps active objects in that roster and pays for ad
  vm.runInContext("startBattle(team[0],null,true,{sealerId:'test-opponent'});configureEnemyRoster(team)",h);assert.ok(h.battle.enemyRoster.includes(h.battle.multi.enemies[0]));const q=h.battle.enemySealer,before=q.energy;
  vm.runInContext('runEnemySealer(realTimeContext())',h);const ctx=vm.runInContext('realTimeContext()',h);assert.ok(q.energy<before);assert.ok(ctx.active.b.length<=3);assert.ok(ctx.active.b.every(u=>ctx.teams.b.includes(u)));
 });
-test('named opponent rematches preserve Energy, shared support timers, and creature Move timers',()=>{
+test('named opponent rematches preserve Energy, shared support timers, and creature Technique timers',()=>{
  const h=harness(),sp=Object.values(h.s.species)[0];h.team=[E.heal(E.makeIndividual(sp,10),sp)];const q=vm.runInContext("persistentEnemySealer('rowan',team)",h);q.energy=25;q.supportCooldowns.example=60000;h.team[0].moveCooldowns.example=70000;h.s.sealer.clockMs=1000;h.next=[E.heal(E.makeIndividual(sp,10),sp)];const again=vm.runInContext("persistentEnemySealer('rowan',next)",h);assert.equal(again,q);assert.equal(again.energy,25);assert.equal(again.supportCooldowns.example,60000);assert.equal(h.next[0].moveCooldowns.example,70000);assert.equal(h.next[0].id,h.team[0].id);
 });
 test('offering plan commits Energy and supplies exactly once, with no payment when unaffordable',async()=>{

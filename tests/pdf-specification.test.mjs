@@ -36,7 +36,7 @@ test('individual passive retraining persists without modifying another member of
  assert.deepEqual(f.sp.passives,spBefore);assert.deepEqual(f.reserve.passives,otherBefore);
  const restored=JSON.parse(JSON.stringify(f.a));CP.ensureIndividualPassives(f.sp,restored);assert.equal(restored.passives.Beast,selected.id);
 });
-test('maximum HP and Speed passives change actual health and Move cooldowns',()=>{
+test('maximum HP and Speed passives change actual health and Technique cooldowns',()=>{
  const f=fixture();f.a.passives.Beast=CP.passivePool('Beast').find(p=>p.kind==='maxHp').id;f.a.passives.Giant=CP.passivePool('Giant').find(p=>p.kind==='speed'&&!p.condition).id;
  const suppressed={...f.a,suppressedTypes:['Beast','Giant']},before=E.stats(suppressed,f.sp),after=E.stats(f.a,f.sp);
  assert.equal(after.hp,Math.floor(before.hp*1.05));assert.equal(after.speed,Math.floor(before.speed*1.05));
@@ -138,7 +138,7 @@ test('Sealer development continues beyond level 100 without resetting Energy or 
  SE.gainSealerXP(f.save,10000);assert.ok(f.q.level>100);assert.equal(f.q.energy,12);assert.equal(f.q.supportCooldowns.shared,50000);
 });
 
-test('ambient world weather survives ordinary battle time and returns after a temporary weather Move',()=>{
+test('ambient world weather survives ordinary battle time and returns after a temporary weather Technique',()=>{
  const f=fixture();const field=E.bindBattlefield(f.context.teams.a,f.context.teams.b,{weather:'rain',ambientWeather:'rain'});f.step(12000);assert.equal(field.weather,'rain');
  field.weather='snow';field.weatherTurns=1;RT.synchronizeTimers(f.state,f.context);f.step(2000);assert.equal(field.weather,'rain');f.step(10000);assert.equal(field.weather,'rain');
 });

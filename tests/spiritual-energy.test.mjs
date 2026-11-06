@@ -18,7 +18,7 @@ function fixture(size=3){
 }
 function learn(f,kind,options={}){const t={...ST.generateSupport('test-'+kind,{primary:kind,basic:true}),...options};f.s.sealer.known[t.id]=t;f.s.sealer.assignments[f.a[0].id]=[t.id];return t;}
 
-test('migration is idempotent, preserves zero Energy and never resets learned/support/Move cooldowns',()=>{
+test('migration is idempotent, preserves zero Energy and never resets learned/support/Technique cooldowns',()=>{
  const f=fixture(),q=f.s.sealer;q.energy=0;q.supportCooldowns.example=50000;f.a[0].moveCooldowns={example:70000};assert.equal(SE.ensureSealer(f.s),q);const save=JSON.parse(JSON.stringify(f.s));SE.ensureSealer(save);assert.equal(save.sealer.energy,0);assert.equal(save.sealer.supportCooldowns.example,50000);assert.equal(save.spirits[0].moveCooldowns.example,70000);
 });
 test('a designated lead is free even at zero; other creatures need a paid release and only three can fight',()=>{
@@ -69,10 +69,10 @@ test('team-wide GCD support requires all recipient GCDs ready and restarts all w
 test('LCD weaving is legal during GCD recovery, animation locks cause clipping, and inputs never queue',()=>{
  const f=fixture();assert.ok(RT.scheduleAction(f.state,f.context,f.a[0],{type:'move',move:hit}).ok);f.step(600);const gcd=RT.unitClock(f.state,f.a[0]).gcdReadyAt;assert.ok(gcd>f.state.elapsedMs);assert.ok(RT.scheduleAction(f.state,f.context,f.a[0],{type:'move',move:lcd}).ok);assert.equal(RT.scheduleAction(f.state,f.context,f.a[0],{type:'move',move:hit}).ok,false);f.step(100);assert.equal(RT.unitClock(f.state,f.a[0]).pending,null);assert.equal(RT.unitClock(f.state,f.a[0]).gcdReadyAt,gcd);assert.ok(RT.unitClock(f.state,f.a[0]).readyAt>f.state.elapsedMs);
 });
-test('GCD starts at cast initiation and has a 1.5-second haste floor; retired Move Speed has no effect',()=>{
- const f=fixture(),u=f.a[0],p=RT.moveTiming(long,u,f.sp);RT.scheduleAction(f.state,f.context,u,{type:'move',move:long});assert.equal(RT.unitClock(f.state,u).gcdReadyAt,p.gcdMs);assert.deepEqual(RT.moveTiming({...long,speed:999},u,f.sp),p);u.stages={speed:6};u.spiritualBuffs=[{kind:'haste',amount:5,until:100000}];assert.ok(RT.moveTiming(long,u,{...f.sp,speed:100000}).gcdMs>=1500);assert.ok(RT.moveTiming(lcd,u,{...f.sp,speed:100000}).cooldownMs<RT.moveTiming(lcd,{...u,stages:{},spiritualBuffs:[]},f.sp).cooldownMs);
+test('GCD starts at cast initiation and has a 1-second haste floor; retired Technique Speed has no effect',()=>{
+ const f=fixture(),u=f.a[0],p=RT.moveTiming(long,u,f.sp);RT.scheduleAction(f.state,f.context,u,{type:'move',move:long});assert.equal(RT.unitClock(f.state,u).gcdReadyAt,p.gcdMs);assert.deepEqual(RT.moveTiming({...long,speed:999},u,f.sp),p);u.stages={speed:6};u.spiritualBuffs=[{kind:'haste',amount:5,until:100000}];assert.equal(RT.moveTiming(long,u,{...f.sp,speed:100000}).gcdMs,1000);assert.ok(RT.moveTiming(lcd,u,{...f.sp,speed:100000}).cooldownMs<RT.moveTiming(lcd,{...u,stages:{},spiritualBuffs:[]},f.sp).cooldownMs);
 });
-test('cooldown manipulation affects Move GCDs/LCDs but never player support timers',()=>{
+test('cooldown manipulation affects Technique GCDs/LCDs but never player support timers',()=>{
  const f=fixture(),t=learn(f,'cooldown'),clock=RT.unitClock(f.state,f.a[0]);clock.cooldowns.independent=10000;clock.gcdReadyAt=0;f.s.sealer.supportCooldowns.other=12000;assert.ok(RT.usePlayerSupport(f.state,f.context,'a',t.id,f.a[0].id).ok);assert.ok(clock.cooldowns.independent<10000);assert.equal(f.s.sealer.supportCooldowns.other,12000);assert.ok(f.s.sealer.supportCooldowns[t.id]>0);
 });
 test('revival restores a defeated creature within its seal, permits later repeats and requires another paid release',()=>{
@@ -86,9 +86,9 @@ test('physical cleansing, shielding, interruption resistance and damage sharing 
  const link=learn(f,'link');RT.usePlayerSupport(f.state,f.context,'a',link.id,u.id);const before=v.hp;E.executeAction(enemy,f.sp,u,f.sp,{...hit,power:200},'normal',.5,()=>.5,1,{realTime:true,activeUnits:[...f.a,enemy]});assert.ok(v.hp<before);
 });
 test('fixed seal costs and diminishing extra investment spend everything on failure',()=>{
- const f=fixture(),q=f.s.sealer,u=f.b[0],a=SE.sealInvestment(q,u,f.sp,1,0),b=SE.sealInvestment(q,u,f.sp,1,10),c=SE.sealInvestment(q,u,f.sp,1,20);assert.ok(b.chance>a.chance&&c.chance>b.chance);assert.ok(b.chance-a.chance>c.chance-b.chance);const before=q.energy,r=SE.commitSeal(q,u,f.sp,1,10,()=>1);assert.ok(r.ok&&!r.success);assert.equal(q.energy,before-r.cost);
+ const f=fixture(),q=f.s.sealer,u=f.b[0];q.attributes.output=20;const a=SE.sealInvestment(q,u,f.sp,1,0),b=SE.sealInvestment(q,u,f.sp,1,10),c=SE.sealInvestment(q,u,f.sp,1,20);assert.ok(b.chance>a.chance&&c.chance>b.chance);assert.ok(b.chance-a.chance>c.chance-b.chance);const before=q.energy,r=SE.commitSeal(q,u,f.sp,1,10,()=>1);assert.ok(r.ok&&!r.success);assert.equal(q.energy,before-r.cost);
 });
-test('cooperative recognition uses equipped Moves and Domains and commits participants with Energy',()=>{
+test('cooperative recognition uses equipped Techniques and Domains and commits participants with Energy',()=>{
  const f=fixture(2),plans=CO.cooperativePlans(f.context.active.a,()=>f.sp,f.s.sealer),plan=plans.find(p=>p.id.startsWith('pack:'));assert.ok(plan);const before=f.s.sealer.energy,r=CO.commitCooperative(plan,f.state,f.context,'a',RT.actionAvailability,RT.scheduleAction);assert.ok(r.ok);assert.equal(f.s.sealer.energy,before-plan.cost);assert.ok(f.a.slice(0,2).every(u=>RT.unitClock(f.state,u).pending));assert.equal(CO.commitCooperative(plan,f.state,f.context,'a',RT.actionAvailability,RT.scheduleAction).ok,false);
 });
 test('advanced cooperation is discovered rather than granted by level, and field rituals require suitable Domains',()=>{
@@ -100,7 +100,7 @@ test('enemy Sealers use the same release, exhaustion and support rules without b
 test('shrine placement is deterministic, traversable, distributed and has nearby restoration opportunities',()=>{
  let total=0,clustered=0;for(let x=-2;x<=2;x++)for(let y=-2;y<=2;y++){const list=SW.shrinesForRegion('shrines',x,y);assert.deepEqual(SW.shrinesForRegion('shrines',x,y),list);assert.ok(list.length>=2);for(const t of list){assert.ok(E.walkable(E.tile('shrines',t.x,t.y)));assert.equal(E.coord(t.x,t.y).cx,x);assert.equal(E.coord(t.x,t.y).cy,y);}total+=list.length;if(list.length>2)clustered++;}assert.ok(total>=50&&clustered>0);assert.notEqual(calendarPhase(0).key,calendarPhase(DAY_MS).key);
 });
-test('long Move, GCD and support timers survive healing, save/load, and a new encounter',()=>{
+test('long Technique, GCD and support timers survive healing, save/load, and a new encounter',()=>{
  const f=fixture(),u=f.a[0],t=learn(f,'shield');RT.scheduleAction(f.state,f.context,u,{type:'move',move:hit});f.step(600);RT.scheduleAction(f.state,f.context,u,{type:'move',move:lcd});f.step(600);RT.usePlayerSupport(f.state,f.context,'a',t.id,u.id);const gcd=u.gcdReadyAt,local=u.moveCooldowns.independent,shared=f.s.sealer.supportCooldowns[t.id];
  E.heal(u,f.sp);SE.restoreEnergy(f.s.sealer,f.s.sealer.maxEnergy);const next=RT.createRealTimeState(f.state.elapsedMs),clock=RT.unitClock(next,u);assert.equal(clock.gcdReadyAt,gcd);assert.equal(clock.cooldowns.independent,local);assert.equal(f.s.sealer.supportCooldowns[t.id],shared);assert.equal(RT.actionAvailability(next,u,f.sp,{type:'move',move:lcd}).ok,false);
 });
@@ -117,7 +117,7 @@ test('an exhausted creature has weaker actual healing and a shorter support dura
 test('cooperation rejects unfundable Pressure costs before spending Energy or starting any participant',()=>{
  const f=fixture(2);f.sp.ability='Pressure';for(const u of f.a.slice(0,2)){u.pp=1;u.willpower=0;}const p=CO.cooperativePlans(f.context.active.a,()=>f.sp,f.s.sealer).find(p=>p.id.startsWith('pack:')),energy=f.s.sealer.energy;assert.ok(p);assert.equal(CO.commitCooperative(p,f.state,f.context,'a',RT.actionAvailability,RT.scheduleAction).ok,false);assert.equal(f.s.sealer.energy,energy);assert.ok(f.a.slice(0,2).every(u=>!RT.unitClock(f.state,u).pending));
 });
-test('a funded rampage blocks unrelated Moves, but exhausted locked Moves do not block Struggle',()=>{
+test('a funded rampage blocks unrelated Techniques, but exhausted locked Techniques do not block Struggle',()=>{
  const f=fixture(),u=f.a[0];u.lockedMove={...hit,effect:'rampage'};assert.equal(RT.actionAvailability(f.state,u,f.sp,{type:'move',move:lcd}).ok,false);u.pp=0;u.willpower=0;assert.ok(RT.scheduleAction(f.state,f.context,u,{type:'move',move:{...E.STRUGGLE,type:'Beast'}}).ok);
 });
 test('exhausted wards allow a weakened portion of damage through instead of blocking it fully',()=>{

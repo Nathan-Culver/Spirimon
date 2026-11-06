@@ -79,7 +79,7 @@ test('world renderer covers actors behind each building and draws actors in fron
   updateMapCamera:()=>({left:(s.player.x-3)*32,top:(s.player.y-2)*32}),townNPCs:()=>[],drawTile(){},drawTallGrass(){},
   drawTree(){},drawCaveEntrance(){},drawTownFeatures(){},drawWell(){},drawTownDecor(){},
   drawTownBuilding:(c,b)=>order.push(b.id),drawPerson:()=>order.push('player'),swimmingAt:()=>false,
-  companionTrail:[],challengerApproach:null,fieldAnimation:null,drawAtmosphere(){},adventureState:()=>({appearance:{}})});
+  companionTrail:[],challengerApproach:null,fieldAnimation:null,drawSpiritualPerception(){},drawAtmosphere(){},adventureState:()=>({appearance:{}})});
  vm.runInContext(extract('drawWorld'),h);
  for(const b of W.buildings(0,0)){
   s.player={x:b.footX+1,y:b.doorY-1};order.length=0;vm.runInContext('drawWorld(100)',h);

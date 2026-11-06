@@ -6,7 +6,7 @@ Each Physical move contributes its base value to the shared Stanima maximum; Ene
 
 ## Core moves
 
-| Move | ID | Category | Domain | Power | Speed | Accuracy | Pool contribution | Target | Effect |
+| Technique | ID | Category | Domain | Power | Speed | Accuracy | Pool contribution | Target | Effect |
 |---|---|---|---|---:|---:|---:|---:|---|---|
 | Spirit Strike | `strike` | Physical | — | 38 | 8 | 90% | 35 | opponent | — |
 | Binding Lash | `lash` | Energy | — | 29 | 4 | 90% | 35 | opponent | `slow` |
@@ -19,7 +19,7 @@ Each Physical move contributes its base value to the shared Stanima maximum; Ene
 
 ## Creature techniques
 
-| Move | ID | Category | Domain | Power | Speed | Accuracy | Pool contribution | Target | Effect |
+| Technique | ID | Category | Domain | Power | Speed | Accuracy | Pool contribution | Target | Effect |
 |---|---|---|---|---:|---:|---:|---:|---|---|
 | Aperture Jab | `aberration-0` | Physical | — | 32 | 16 | 90% | 35 | opponent | — |
 | Mind Knot | `aberration-1` | Physical | — | 25 | 3 | 90% | 35 | opponent | `slow` |
@@ -128,7 +128,7 @@ Each Physical move contributes its base value to the shared Stanima maximum; Ene
 
 ## Domain techniques
 
-| Move | ID | Category | Domain | Power | Speed | Accuracy | Pool contribution | Target | Effect |
+| Technique | ID | Category | Domain | Power | Speed | Accuracy | Pool contribution | Target | Effect |
 |---|---|---|---|---:|---:|---:|---:|---|---|
 | Zephyr Needle | `domain-air-0` | Energy | Air | 35 | 12 | 90% | 35 | opponent | — |
 | Still Air | `domain-air-1` | Energy | Air | 20 | 2 | 90% | 40 | opponent | `slow` |
@@ -277,7 +277,7 @@ Each Physical move contributes its base value to the shared Stanima maximum; Ene
 
 ## General techniques
 
-| Move | ID | Category | Domain | Power | Speed | Accuracy | Pool contribution | Target | Effect |
+| Technique | ID | Category | Domain | Power | Speed | Accuracy | Pool contribution | Target | Effect |
 |---|---|---|---|---:|---:|---:|---:|---|---|
 | Ash Brand | `tech-0` | Energy | — | 65 | 0 | 90% | 20 | opponent | `burn` |
 | Cinder Hex | `tech-1` | Status | — | 0 | 0 | 90% | 20 | opponent | `burn` |
@@ -362,7 +362,7 @@ Each Physical move contributes its base value to the shared Stanima maximum; Ene
 
 ## Environment techniques
 
-| Move | ID | Category | Domain | Power | Speed | Accuracy | Pool contribution | Target | Effect |
+| Technique | ID | Category | Domain | Power | Speed | Accuracy | Pool contribution | Target | Effect |
 |---|---|---|---|---:|---:|---:|---:|---|---|
 | Rain Invocation | `environment-0` | Status | — | 0 | 0 | 90% | 20 | field | `weatherRain` |
 | Sun Invocation | `environment-1` | Status | — | 0 | 0 | 90% | 20 | field | `weatherSun` |
@@ -399,7 +399,7 @@ Each Physical move contributes its base value to the shared Stanima maximum; Ene
 
 ## Advanced and team techniques
 
-| Move | ID | Category | Domain | Power | Speed | Accuracy | Pool contribution | Target | Effect |
+| Technique | ID | Category | Domain | Power | Speed | Accuracy | Pool contribution | Target | Effect |
 |---|---|---|---|---:|---:|---:|---:|---|---|
 | Aether Absorption | `advanced-0` | Energy | Plant | 20 | 0 | 90% | 40 | opponent | `drain` |
 | Quickstone | `advanced-1` | Physical | Earth | 40 | 30 | 90% | 35 | opponent | `priority` |

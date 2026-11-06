@@ -236,7 +236,7 @@ export function executeAction(actor,asp,target,tsp,move,style='normal',commit=.5
  if(actor.status==='paralysis'&&r()<.25||actor.conditions.infatuation&&r()<.5){log.push(name+' cannot act.');return log;}
  if(actor.conditions.confusion&&r()<.33){const loss=Math.max(1,Math.floor(stats(actor,asp).hp/12));const hpBefore=actor.hp;actor.hp=Math.max(0,actor.hp-loss);context.onDamage?.(actor,{amount:hpBefore-actor.hp,periodic:true});log.push(name+' hurts itself in confusion for '+loss+'.');return log;}
  const releasing=!!actor.pendingMove;move=context.realTime||context.prepaid||context.heldAction?move:battleMove(actor,asp,move,tsp);
- if(!move){log.push(name+' cannot use that exhausted technique. Choose another move.');return log;}
+ if(!move){log.push(name+' cannot use that exhausted technique. Choose another technique.');return log;}
  const effect=move.effect,category=moveCategory(move),field=actor.battlefield||target.battlefield||{};actor.battlefield=target.battlefield=field;
  if(actor.conditions.taunt&&category==='Status'){log.push(name+' cannot use a support technique while silenced.');return log;}
  if(actor.conditions.disable&&actor.disabledMove===move.id){log.push(name+' cannot use the sealed technique.');return log;}
@@ -281,9 +281,9 @@ export function executeAction(actor,asp,target,tsp,move,style='normal',commit=.5
  if(r()>=accuracy&&effect!=='sureHit'&&effect!=='struggle'){log.push(name+' uses '+move.name+' but misses.');return log;}
  let partialWard=1;if(target.ward&&!['breakWard','struggle','delayedStrike'].includes(effect)){const strength=target.wardStrength??1;target.ward=false;if(strength>=1){log.push(targetName+' blocks the attack with a ward.');return log;}partialWard=Math.max(0,1-strength);log.push(targetName+' softens the attack with an exhausted ward.');}
  if(effect==='breakWard'){target.ward=false;const screens=screenState(target);delete screens.reflect;delete screens.lightscreen;target.reflect=target.lightscreen=false;}
- const critical=r()<Math.min(1,(effect==='critical'?.25:style==='strong'?.15:.05)+(style==='agile'?.10:0)+(hasHook(actor,'critical',asp)?.125:0)),hits=effect==='multiHit'?2+Math.floor(r()*4):effect==='doubleHit'?2:1;
+ const critical=r()<Math.min(1,(effect==='critical'?.25:.05)+(style==='agile'?.10:0)+(hasHook(actor,'critical',asp)?.125:0)),hits=effect==='multiHit'?2+Math.floor(r()*4):effect==='doubleHit'?2:1;
  const damageTarget=effect==='delayedStrike'?{...target,ward:false}:target;
- const hitAmounts=[];for(let n=0;n<hits;n++)hitAmounts.push(Math.max(1,Math.floor(damage(actor,asp,damageTarget,tsp,move,style,r)*(critical?1.5:1))));
+ const hitAmounts=[];for(let n=0;n<hits;n++)hitAmounts.push(Math.max(1,Math.floor(damage(actor,asp,damageTarget,tsp,move,style,r)*(critical?(style==='strong'?1.65:1.5):1))));
  let amount=hitAmounts.reduce((sum,n)=>sum+n,0);
  const weather=field.weather,terrain=field.terrain;
  if(weather==='rain'&&move.domain==='Water'||weather==='sun'&&move.domain==='Fire')amount=Math.floor(amount*1.5);
@@ -383,7 +383,7 @@ export function learnProgression(ind,sp,previousLevel=ind.level,previousForm=ind
    if(m.level<=previousLevel&&m.form<=previousForm)continue;
    owned.add(m.id);ind.unlockedMoves.push(m.id);earned.push(byId.get(m.id));
  }
- // Unlocked moves are remembered permanently. Equip newly learned moves without erasing custom selections.
+ // Unlocked moves are remembered permanently. Equip newly learned techniques without erasing custom selections.
  for(const m of earned){if(ind.moveIds.length<4)ind.moveIds.push(m.id);else {const replace=ind.moveIds.findIndex(id=>!byId.has(id));if(replace>=0)ind.moveIds[replace]=m.id;}}
  return earned;
 }
@@ -392,7 +392,7 @@ export function gainXP(ind,sp,amount){const previousLevel=ind.level,previousForm
  const oldMax=oldMaxHp;
  ind.hp=clamp(Math.round(newMax*(ind.hp/oldMax)),0,newMax);
  ind.lastMaxHp=newMax;
- // Do not clear status, equipped Moves, resource pools, or cooldowns on advancement.
+ // Do not clear status, equipped Techniques, resource pools, or cooldowns on advancement.
  normalizeResources(ind,sp);
 }
 return{levels,evolved,learned};}

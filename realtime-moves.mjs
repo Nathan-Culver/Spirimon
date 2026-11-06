@@ -9,7 +9,7 @@ export const STATUS_RULES={
  toxic:{label:'Badly poisoned',duration:16000},paralysis:{label:'Paralyzed',duration:12000},frostbite:{label:'Frostbitten',duration:16000},
  infatuation:{label:'Infatuated',duration:6000},flinch:{label:'Staggered',duration:900,control:true},slow:{label:'Slowed',duration:6000},
  trap:{label:'Bound',duration:8000},leechSeed:{label:'Seeded',duration:14000},curse:{label:'Cursed',duration:12000},
- nightmare:{label:'Nightmare',duration:8000},perish:{label:'Doom',duration:20000},disable:{label:'Move sealed',duration:8000},taunt:{label:'Silenced',duration:8000},
+ nightmare:{label:'Nightmare',duration:8000},perish:{label:'Doom',duration:20000},disable:{label:'Technique sealed',duration:8000},taunt:{label:'Silenced',duration:8000},
  regenerate:{label:'Regenerating',duration:10000},destinyBond:{label:'Destiny bond',duration:4000}
 };
 export const EFFECT_WORK={sleep:170,freeze:180,flinch:38,confusion:80,burn:65,poison:65,toxic:90,paralysis:95,frostbite:65,slow:45,infatuation:90,trap:55,leechSeed:100,curse:115,nightmare:50,perish:560,disable:110,taunt:80,heal:190,rest:420,fullheal:520,cleanse:90,partyCleanse:155,ward:90,protect:115,reflect:170,lightscreen:170,safeguard:145,regenerate:160,auroraVeil:250,focus:90,batonPass:55,bellyDrum:230,destinyBond:240,teamHeal:260,teamWard:165,haze:100,swapStats:100,invertStats:100,clearHazards:75,spikes:110,toxicSpikes:150,stealthRock:160,stickyWeb:120,counter:55,mirrorCoat:55,priority:0,sureHit:15,breakWard:30,drain:40,recoil:-15,recharge:-12,unburdened:45,critical:18,omniBoost:22,selfDebuff:-15,revenge:35,partyStrike:35,twoTurn:-20,chargeSun:-15,rampage:8,pivot:25,forceSwitch:45,sunStrike:12,weatherStrike:12,sandStrike:12,snowStrike:12,terrainStrike:12,electricStrike:12,psychicStrike:12,mistStrike:12,delayedStrike:10,sleepStrike:-12,hexStrike:18,venomStrike:18,itemResources:150};
@@ -30,7 +30,7 @@ export function moveTiming(move,actor={},sp={},style='normal'){
  if(actor.status==='paralysis')haste*=.75;if(actor.conditions?.slow)haste*=.8;
  haste*=spiritualMultiplier(actor,'haste');
  const styleTime=style==='agile'?.9:style==='strong'?1.15:1,penalty=1+exhaustion(actor);
- const gcdMs=Math.max(1500,Math.round(3500/haste*styleTime*penalty));
+ const gcdMs=Math.max(1000,Math.round(3500/haste*styleTime*penalty));
  // Baseline attacks remain repeatable GCDs. Reactions, utility, spread bursts,
  // and large finishers are independent actions that can be woven between them.
  const reactions=['priority','protect','ward','cleanse','clearHazards','safeguard','counter','mirrorCoat','focus'];

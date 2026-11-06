@@ -22,7 +22,7 @@ test('aquatic forms can carry a swimmer without a land steed',()=>{
  assert.equal(canWaterMount(fish),true);
  assert.equal(canSteed(fish),false);
 });
-test('water travel is independent of learned battle Moves and cannot run',()=>{
+test('water travel is independent of learned battle Techniques and cannot run',()=>{
  const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
  assert.match(source,/targetTile!=='water'&&!E\.walkable/);
  assert.ok(source.includes("water?(waterMount?(running||keys.has('shift')?95:170):680)"));
