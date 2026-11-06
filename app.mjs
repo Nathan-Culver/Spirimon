@@ -1138,7 +1138,7 @@ function unifiedBattleActionsHTML(){
  for(const u of active){const sp=spOf(u);battleMoves(u).forEach((m,index)=>{
   const friendly=['self','ally','allAllies'].includes(E.moveTarget(m)),target=friendly?(ctx.active.a[battle.allyTargetSelection??ctx.active.a.indexOf(u)]||u):(battle.multi.enemies[battle.enemyTargetSelection||0]||battle.enemy);if(!RT.actionAvailability(battle.rt,u,sp,{type:'move',move:m,style:'normal'},spOf(target)).ok)return;
   const p=RT.moveTiming(m,u,sp,'normal');
-  items.push('<button class="unified-action ua-move ua-actor-'+active.indexOf(u)+'" data-action="unified-move" data-value="'+esc(u.id)+'|'+index+'" data-unified-move="'+esc(u.id)+'|'+index+'" title="'+esc(E.moveLore(m).description)+'"><span class="ua-icon">✦</span><b>'+esc(m.name)+'</b><small>'+esc(sp.forms[u.appearance])+' · '+p.timing.toUpperCase()+' · '+seconds(p.localCooldownMs||p.gcdMs)+' CD</small><small>'+(E.moveCategory(m)==='Physical'?'STA ':'WIL ')+E.moveCost(m,spOf(target))+' · '+(E.moveCategory(m)==='Status'?'Support':E.effectiveness(m,spOf(target),target).toFixed(2)+'×')+' · '+esc(m.effect||'Direct damage')+'</small><i class="ua-commit"></i></button>');
+  items.push('<button class="unified-action ua-move ua-actor-'+active.indexOf(u)+'" data-action="unified-move" data-value="'+esc(u.id)+'|'+index+'" data-unified-move="'+esc(u.id)+'|'+index+'" title="'+esc(E.moveLore(m).description)+'"><span class="ua-icon">✦</span><b>'+esc(m.name)+'</b><small>'+esc(sp.forms[u.appearance])+' · '+p.timing.toUpperCase()+' · '+seconds(p.localCooldownMs||p.gcdMs)+' CD</small><small>'+(E.moveCategory(m)==='Physical'?'STA ':'WIL ')+E.moveCost(m,spOf(target))+' · '+(E.moveCategory(m)==='Status'?'Support':E.effectiveness(m,spOf(target),target).toFixed(2)+'×')+' · '+esc(m.effect||'Direct damage')+'</small></button>');
  });}
  const plans=active.length>1&&!ctx.rules?.noSupport?CO.cooperativePlans(active,spOf,s.sealer):[];
  for(const plan of plans){if(plan.cost>s.sealer.energy)continue;
@@ -1216,7 +1216,7 @@ function refreshUnifiedActions(grid,html,held=null){
 }
 function clearUnifiedGesture(){
  const g=unifiedGesture;unifiedGesture=null;if(!g)return;
- delete g.button.dataset.gesturePreview;g.button.style.removeProperty('--commit-progress');
+ delete g.button.dataset.gesturePreview;g.line?.remove();
  if(g.kind==='seal'){unifiedSuppressClick=true;g.button.innerHTML=g.originalHTML;}
  try{if(g.button.hasPointerCapture?.(g.pointerId))g.button.releasePointerCapture(g.pointerId);}catch{}
 }
@@ -1238,11 +1238,17 @@ function unifiedGestureChoice(dx,dy){
  const commit=diagonal?0:ax>ay?Math.min(1,ax/110):0;
  return {style,commit,moveCount:extraMoves,diagonal};
 }
+function drawGestureLine(g,dx=0,dy=0){
+ if(!g.line){
+  g.line=document.createElement('div');g.line.className='gesture-line';g.line.setAttribute('aria-hidden','true');
+  Object.assign(g.line.style,{left:g.x+'px',top:g.y+'px'});document.body.append(g.line);
+ }
+ Object.assign(g.line.style,{width:Math.hypot(dx,dy)+'px',transform:'rotate('+Math.atan2(dy,dx)+'rad)'});
+}
 function previewUnifiedMove(button,dx,dy){
- if(Math.hypot(dx,dy)<18){delete button.dataset.gesturePreview;button.style.removeProperty('--commit-progress');return;}
+ if(Math.hypot(dx,dy)<18){delete button.dataset.gesturePreview;return;}
  const p=unifiedGestureChoice(dx,dy),arrow=p.diagonal?(dy<0?(dx<0?'↖':'↗'):(dx<0?'↙':'↘')):Math.abs(dx)>Math.abs(dy)?(dx<0?'←':'→'):(dy<0?'↑':'↓');
  button.dataset.gesturePreview=arrow+' '+p.style.toUpperCase()+'\n'+(p.moveCount?'+'+p.moveCount+' extra Move'+(p.moveCount>1?'s':''):p.commit?'ATK '+Math.round(p.commit*100)+'%':p.diagonal?'No extra Moves':'No commitment');
- button.style.setProperty('--commit-progress',Math.round(p.commit*100)+'%');
 }
 function sealQuote(p){return p.base+' + '+p.extra+' = '+p.cost+' SE · '+Math.round(p.chance*100)+'%';}
 function sealButtonHTML(){
@@ -1250,14 +1256,13 @@ function sealButtonHTML(){
  if(!target||target.hp<=0||battle.trainer||battle.rt.paused||(battle.utilityReadyAt||0)>battle.rt.elapsedMs||!(s.inventory.seals>0))return '';
  const base=SE.sealInvestment(s.sealer,target,spOf(target),s.inventory.quality,0);if(!base.ok)return '';
  const p=SE.sealInvestment(s.sealer,target,spOf(target),s.inventory.quality,battle.sealExtra||0);
- return '<button class="unified-action ua-seal" data-action="unified-seal" data-value="'+esc(target.id)+'" data-unified-seal="'+esc(target.id)+'" title="Tap to seal; slide right for Energy, up to cancel. Arrows adjust; Enter seals. Failure spends invested SE."><b>Seal ×'+s.inventory.seals+'</b><small data-seal-quote>'+sealQuote(p)+'</small><small>Tap · slide right +Energy · up cancel</small><i class="ua-commit"></i></button>';
+ return '<button class="unified-action ua-seal" data-action="unified-seal" data-value="'+esc(target.id)+'" data-unified-seal="'+esc(target.id)+'" title="Tap to seal; slide right for Energy, up to cancel. Arrows adjust; Enter seals. Failure spends invested SE."><b>Seal ×'+s.inventory.seals+'</b><small data-seal-quote>'+sealQuote(p)+'</small><small>Tap · slide right +Energy · up cancel</small></button>';
 }
 function previewSeal(g,choice){
  const target=battle?.multi.enemies.find(u=>u.id===g.value&&u.hp>0);if(!target)return;
  const p=SE.sealInvestment(s.sealer,target,spOf(target),s.inventory.quality,choice.extra);
  g.button.querySelector('b').textContent=choice.cancelled?'Cancel seal':'Release to seal';
  g.button.querySelector('[data-seal-quote]').textContent=choice.cancelled?'No Energy or catalyst spent':sealQuote(p)+(p.ok?'':' · Insufficient Energy');
- g.button.style.setProperty('--commit-progress',Math.round(choice.fraction*100)+'%');
 }
 document.addEventListener('pointerdown',ev=>{
  const button=ev.target.closest?.('[data-unified-move], [data-unified-seal]');if(!button||button.disabled||unifiedGesture||ev.isPrimary===false||ev.button>0)return;
@@ -1269,10 +1274,12 @@ document.addEventListener('pointerdown',ev=>{
   Object.assign(unifiedGesture,{kind:'seal',value:target.id,battle,maximum:Math.max(0,Math.floor(s.sealer.energy)-p.base),originalHTML:button.innerHTML});
   ev.preventDefault();
  }
+ drawGestureLine(unifiedGesture);
  try{button.setPointerCapture?.(ev.pointerId);}catch{clearUnifiedGesture();}
 });
 document.addEventListener('pointermove',ev=>{
  const g=unifiedGesture;if(!g||g.pointerId!==ev.pointerId)return;
+ drawGestureLine(g,ev.clientX-g.x,ev.clientY-g.y);
  if(g.kind==='seal'){previewSeal(g,sealingGestureChoice(ev.clientX-g.x,ev.clientY-g.y,g.maximum));return;}
  previewUnifiedMove(g.button,ev.clientX-g.x,ev.clientY-g.y);
 });
@@ -1291,7 +1298,7 @@ document.addEventListener('lostpointercapture',ev=>{if(unifiedGesture?.pointerId
 window.addEventListener('blur',()=>{clearUnifiedGesture();if(unifiedTap){clearTimeout(unifiedTap.timer);unifiedTap=null;}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){clearUnifiedGesture();if(unifiedTap){clearTimeout(unifiedTap.timer);unifiedTap=null;}}});
 document.addEventListener('keydown',ev=>{
- if(ev.key==='Escape'&&unifiedGesture?.kind==='seal'){ev.preventDefault();clearUnifiedGesture();return;}
+ if(ev.key==='Escape'&&unifiedGesture){ev.preventDefault();clearUnifiedGesture();return;}
  const button=ev.target.closest?.('[data-unified-seal]');if(!button||!battle)return;
  if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Escape'].includes(ev.key))return;ev.preventDefault();
  const target=battle.multi.enemies.find(u=>u.id===button.dataset.unifiedSeal&&u.hp>0);if(!target)return;
