@@ -58,7 +58,7 @@
 })();
 </script>
 <!-- SPIRIMON_GAME -->
-<script>if("serviceWorker" in navigator && location.protocol==="https:")window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(console.warn));</script>
+<script>if("serviceWorker" in navigator && location.protocol==="https:")window.addEventListener("load",()=>{if(!window.__spirimonPackaged)navigator.serviceWorker.register("./service-worker.js").catch(console.warn);});</script>
 </body>
 </html>
 

@@ -5,15 +5,32 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/standalone.yml'
+      - '**.mjs'
+      - '**.js'
+      - '**.css'
+      - '**.html'
+      - 'assets/**'
       - 'desktop/**'
       - 'capacitor.config.json'
-      - 'build.mjs'
-      - 'index.template.html'
+      - 'package*.json'
     tags: ['v*']
 permissions:
-  contents: write
+  contents: read
+concurrency:
+  group: standalone-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build and test current game
+        run: npm run build && npm test
   desktop:
+    needs: validate
     strategy:
       fail-fast: false
       matrix:
@@ -34,19 +51,17 @@ jobs:
         with:
           node-version: '22'
       - name: Build standalone game
-        run: node build.mjs --out-dir _site
+        run: node build.mjs --target app --out-dir desktop/game
       - name: Package desktop application
         shell: bash
         run: |
-          mkdir -p desktop/game
-          cp _site/Spirimon.html desktop/game/Spirimon.html
-          cp -R _site/assets desktop/game/assets
           npx --yes @electron/packager@20.3.0 desktop Spirimon --electron-version=45.2.2 --platform=${{ matrix.platform }} --arch=${{ matrix.arch }} --out=dist --overwrite --prune=false
       - uses: actions/upload-artifact@v4
         with:
           name: Spirimon-${{ matrix.platform }}-${{ matrix.arch }}
           path: dist/
   android:
+    needs: validate
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -62,7 +77,7 @@ jobs:
           test -d "$ANDROID_HOME/platforms/android-35"
           test -d "$ANDROID_HOME/build-tools/35.0.0"
       - name: Build offline web assets
-        run: node build.mjs --out-dir _site
+        run: node build.mjs --target app --out-dir _site
       - name: Generate Android app
         run: |
           npm install --no-save @capacitor/core@7 @capacitor/cli@7 @capacitor/android@7

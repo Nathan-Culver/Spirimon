@@ -1,73 +1,54 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
+import {readFileSync} from 'node:fs';
 import * as E from '../engine.mjs';
-import {individualSpecies} from '../anatomy.mjs';
-import * as BAI from '../battle-ai.mjs';
-import * as Q from '../equipment.mjs';
 import * as RT from '../realtime-combat.mjs';
+import * as SE from '../spiritual-energy.mjs';
+import {individualSpecies} from '../anatomy.mjs';
+import {installBattleBoundaries} from './helpers/battle-boundaries.mjs';
 
 const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
-// Exercise the actual battle rendering/selection functions without booting storage or canvas.
-const functions=['battleTeams','battleTargetHTML','doubleStatusHTML','combatTagsHTML','doubleHUDsHTML','party','spOf','activeBattleAlly','battleMoves','moveEligibility','moveDetails','battleMovePreviewKey','openBattleMoves','selectBattleMove','movePreviewHTML','battleHTML','totalActionCost','battleMoveCost','speedHint','enemyChoice'];
-const extract=name=>{const start=source.indexOf('function '+name+'('),next=source.slice(start+1).search(/\n(?:async )?function /);return source.slice(start,next<0?source.length:start+1+next);};
-const move=n=>({id:'move-'+n,name:'Technique '+n,kind:'physical',power:30,speed:0,baseUses:35,desc:'A test technique.'});
-const species=(id,moves)=>({id,forms:['Test Spirimon'],base:'Beast',alter:'Elemental',domains:[],health:100,power:50,speed:40,moves,ability:'None'});
-const individual=(s,id)=>({...E.heal(E.makeIndividual(s,10,0,()=>.5),s),id});
-function ui(allies,enemy,speciesList,extra={}){
- const context=vm.createContext({E,BAI,Q,RT,individualSpecies,s:{spirits:allies,species:Object.fromEntries(speciesList.map(s=>[s.id,s])),party:allies.map(i=>i.id),rank:1},battle:{ally:allies[0].id,enemy,round:1,credits:{a:0,b:0}},selectedMove:0,borrow:0,style:'normal',commit:.5,battleMode:'moves',movePreviewKey:null,actionBusy:false,render:()=>{},$:()=>null,hpHTML:()=>'',esc:String,action:(name,label)=>'<button>'+label+'</button>',...extra});
- vm.runInContext(functions.map(extract).join('\n'),context);return context;
+const extract=name=>{const start=source.indexOf('function '+name+'('),next=source.slice(start+1).search(/\n(?:async )?function /);assert.ok(start>=0,name);return source.slice(start,next<0?source.length:start+1+next);};
+function harness(){
+ const hit={id:'test-hit',name:'Test Strike',kind:'physical',type:'Beast',power:32,accuracy:1,baseUses:5};
+ const sp={...E.makeSpecies('resource-ui','Beast','Elemental',[]),forms:['Test','Second','Third'],moves:[hit],learnset:[hit],ability:'None'};
+ const units=['one','two','three','foe'].map((id,n)=>({...E.heal(E.makeIndividual(sp,20,0,E.rng(n)),sp),id})),allies=units.slice(0,3),enemy=units[3];
+ const s=E.newGame('resource-ui');Object.assign(s,{spirits:allies,party:allies.map(u=>u.id),species:{[sp.id]:sp},inventory:{tonics:2,ethers:2,seals:0}});SE.ensureSealer(s);
+ const battle={ally:allies[0].id,controlledAlly:allies[0].id,enemy,enemyRoster:[enemy],multi:{allies:allies.map(u=>u.id),enemies:[enemy],reserves:[],orders:{}},rt:RT.createRealTimeState(),log:[],rules:{}};
+ const h=vm.createContext({E,RT,SE,individualSpecies,s,battle,battleMode:'main',esc:String,action:(name,label)=>'<button data-action="'+name+'">'+label+'</button>'});
+ vm.runInContext(['party','spOf','activeBattleAlly','battleMoves','battleTeams','realTimeContext','ensureRealTimeBattle','realTimeBattleHTML','battleHTML'].map(extract).join('\n'),h);installBattleBoundaries(h);
+ return {h,s,battle,sp,hit,allies,enemy,html:()=>h.battleView.realTimeBattleHTML(),actions:()=>h.battleView.unifiedBattleActionsHTML()};
 }
-test('double-battle previews use the next acting Spirimon, including its fourth move',()=>{
- const firstSp=species('first',[move(0)]),secondSp=species('second',[move(1),move(2),move(3),move(4)]),enemySp=species('enemy',[move(5)]),a=individual(firstSp,'first-unit'),b=individual(secondSp,'second-unit'),enemy=individual(enemySp,'enemy-unit');a.pp=a.willpower=0;
- const context=ui([a,b],enemy,[firstSp,secondSp,enemySp],{selectedMove:3,battleMode:'tactics'});context.battle.multi={allies:[a.id,b.id],enemies:[enemy],orders:{[a.id]:{move:E.STRUGGLE}}};
- assert.equal(vm.runInContext('activeBattleAlly().id',context),b.id);
- const html=vm.runInContext('battleHTML()',context);assert.match(html,/USE Technique 4/);assert.match(html,/1 STA/);
+test('the current action dock exposes every ready ally without queuing turn orders',()=>{
+ const t=harness(),html=t.actions();for(const u of t.allies)assert.match(html,new RegExp('data-unified-move="'+u.id+'\\|0"'));
+ assert.deepEqual(Object.keys(t.battle.multi.orders),[]);assert.doesNotMatch(t.html(),/USE Test Strike|ROUND |YOUR BONUS/);
 });
-test('a paid charged move remains selectable at 0/0 and previews no additional cost',()=>{
- const charge={...move(0),effect:'twoTurn'},s=species('charge',[charge]),enemySp=species('enemy',[move(1)]),a=individual(s,'actor'),enemy=individual(enemySp,'enemy');a.pp=1;
- E.executeAction(a,s,enemy,enemySp,charge,'normal',.5,()=>.5);assert.equal(a.pp,0);assert.equal(a.willpower,0);
- const context=ui([a],enemy,[s,enemySp]);const html=vm.runInContext('battleHTML()',context);
- assert.doesNotMatch(html,/disabled/);assert.match(html,/STA <strong>0<\/strong>/);assert.equal(vm.runInContext('totalActionCost()',context),0);
+test('one ally cooling down does not hide another ally’s available Technique',()=>{
+ const t=harness();RT.unitClock(t.battle.rt,t.allies[0]).gcdReadyAt=4000;const html=t.actions();assert.doesNotMatch(html,/data-unified-move="one\|0"/);assert.match(html,/data-unified-move="two\|0"/);
 });
-test('enemy AI retains its paid charged move after exhausting both shared pools',()=>{
- const charge={...move(0),effect:'twoTurn'},s=species('charge',[charge]),other=species('other',[move(1)]),a=individual(other,'ally'),enemy=individual(s,'enemy');enemy.pp=1;
- E.executeAction(enemy,s,a,other,charge,'normal',.5,()=>.5);
- const context=ui([a],enemy,[s,other]);assert.equal(vm.runInContext('enemyChoice().move.id',context),charge.id);
+test('exhausted allies receive Struggle instead of an unfunded equipped Technique',()=>{
+ const t=harness();t.allies[0].pp=t.allies[0].willpower=0;assert.match(t.actions(),/<b>Struggle<\/b>/);assert.equal(t.h.battleMoves(t.allies[0])[0].id,'struggle');
 });
-
-test('first selection previews narrative while keeping every move visible and spending nothing',()=>{
- const ward={...move(1),kind:'status',power:0,effect:'ward',desc:'Raise a protective ward.'},sp=species('preview',[move(0),ward]),foe=species('foe',[move(2)]),a=individual(sp,'actor'),enemy=individual(foe,'foe');
- const context=ui([a],enemy,[sp,foe]),before={hp:a.hp,pp:a.pp,willpower:a.willpower};
- vm.runInContext('selectBattleMove(1)',context);
- assert.equal(context.battleMode,'moves');assert.equal(context.selectedMove,1);assert.equal(context.battle.round,1);assert.deepEqual({hp:a.hp,pp:a.pp,willpower:a.willpower},before);
- const html=vm.runInContext('battleHTML()',context);assert.ok(html.includes(E.moveLore(ward).description));assert.ok(html.includes(E.moveLore(ward).context));assert.doesNotMatch(html,/Effects:<\/b>/);assert.match(html,/aria-pressed="true"/);assert.match(html,/move-preview/);assert.match(html,/Technique 0/);assert.match(html,/Technique 1/);assert.doesNotMatch(html,/USE Technique/);
+test('the selected enemy’s Pressure changes the displayed and required resource cost',()=>{
+ const t=harness();t.sp.ability='Pressure';t.allies[0].pp=1;t.allies[0].willpower=2;const html=t.actions();assert.match(html,/STA 2/);
+ t.allies[0].willpower=0;assert.equal(t.h.battleMoves(t.allies[0])[0].id,'struggle');assert.match(t.actions(),/<b>Struggle<\/b>/);
 });
-test('a different move replaces the preview; selecting that same move again opens its tactics',()=>{
- const sp=species('preview',[move(0),move(1)]),foe=species('foe',[move(2)]),a=individual(sp,'actor'),enemy=individual(foe,'foe'),context=ui([a],enemy,[sp,foe]);
- vm.runInContext('selectBattleMove(0);selectBattleMove(1)',context);assert.equal(context.battleMode,'moves');assert.equal(context.selectedMove,1);
- vm.runInContext('selectBattleMove(1)',context);assert.equal(context.battleMode,'tactics');assert.match(vm.runInContext('battleHTML()',context),/USE Technique 1/);assert.equal(context.battle.round,1);
+test('rendering the battle does not spend resources or advance the simulation',()=>{
+ const t=harness(),before=JSON.stringify({hp:t.allies.map(u=>u.hp),pp:t.allies.map(u=>u.pp),time:t.battle.rt.elapsedMs});
+ t.html();t.actions();assert.equal(JSON.stringify({hp:t.allies.map(u=>u.hp),pp:t.allies.map(u=>u.pp),time:t.battle.rt.elapsedMs}),before);
 });
-test('returning from tactics retains the preview but reopening Fight starts a fresh first selection',()=>{
- const sp=species('preview',[move(0)]),foe=species('foe',[move(1)]),a=individual(sp,'actor'),enemy=individual(foe,'foe'),context=ui([a],enemy,[sp,foe]);
- vm.runInContext('selectBattleMove(0);selectBattleMove(0);openBattleMoves()',context);assert.ok(vm.runInContext('battleHTML()',context).includes(E.moveLore(sp.moves[0]).description));
- vm.runInContext('selectBattleMove(0)',context);assert.equal(context.battleMode,'tactics');
- vm.runInContext('openBattleMoves(true);selectBattleMove(0)',context);assert.equal(context.battleMode,'moves');
+test('casting blocks only that actor and the HUD reports its remaining cast',()=>{
+ const t=harness(),clock=RT.unitClock(t.battle.rt,t.allies[0]);clock.pending={resolveAt:2000,choice:{type:'move',move:t.hit}};
+ assert.doesNotMatch(t.actions(),/data-unified-move="one\|0"/);assert.match(t.actions(),/data-unified-move="two\|0"/);assert.match(t.html(),/CAST 2\.0s/);
 });
-test('a preview from another actor or round cannot skip the first selection',()=>{
- const sp=species('preview',[move(0)]),foe=species('foe',[move(1)]),a=individual(sp,'first'),b=individual(sp,'second'),enemy=individual(foe,'foe'),context=ui([a,b],enemy,[sp,foe]);
- context.battle.multi={allies:[a.id,b.id],orders:{}};vm.runInContext('selectBattleMove(0)',context);context.battle.multi.orders[a.id]={move:sp.moves[0]};
- vm.runInContext('selectBattleMove(0)',context);assert.equal(context.battleMode,'moves');assert.equal(vm.runInContext('activeBattleAlly().id',context),b.id);
- context.battle.round++;vm.runInContext('selectBattleMove(0)',context);assert.equal(context.battleMode,'moves');
+test('item restrictions hide consumables without disabling ready attacks',()=>{
+ const t=harness();t.allies[0].hp-=5;assert.match(t.actions(),/Tonic ×2/);t.battle.rules.noItems=true;assert.doesNotMatch(t.actions(),/Tonic ×2/);assert.match(t.actions(),/data-unified-move=/);
 });
-test('unfunded and invalid selections cannot arm a preview',()=>{
- const energy={...move(1),kind:'spiritual',baseUses:10},sp=species('preview',[move(0),energy]),foe=species('foe',[move(2)]),a=individual(sp,'actor'),enemy=individual(foe,'foe');a.pp=0;a.willpower=1;
- const context=ui([a],enemy,[sp,foe]);vm.runInContext('selectBattleMove(0);selectBattleMove(-1);selectBattleMove(99)',context);assert.equal(context.movePreviewKey,null);assert.equal(context.battleMode,'moves');
- vm.runInContext('selectBattleMove(1)',context);assert.notEqual(context.movePreviewKey,null);assert.equal(a.willpower,1);
+test('Technique action tooltips keep the narrative description',()=>{
+ const t=harness();assert.ok(t.actions().includes('title="'+E.moveLore(t.hit).description+'"'));
 });
-test('a paid charged move can be previewed and confirmed at 0/0 without spending again',()=>{
- const charge={...move(0),effect:'twoTurn'},sp=species('preview',[charge]),foe=species('foe',[move(1)]),a=individual(sp,'actor'),enemy=individual(foe,'foe');a.pp=1;
- E.executeAction(a,sp,enemy,foe,charge,'normal',.5,()=>.5);const context=ui([a],enemy,[sp,foe]);vm.runInContext('selectBattleMove(0);selectBattleMove(0)',context);
- assert.equal(context.battleMode,'tactics');assert.equal(a.pp,0);assert.equal(a.willpower,0);assert.equal(vm.runInContext('totalActionCost()',context),0);
+test('legacy battles migrate to the current view and never expose the old round UI',()=>{
+ const t=harness();delete t.battle.rt;t.battle.credits={a:2,b:1};t.battle.multi.orders={one:{move:t.hit}};
+ const html=vm.runInContext('battleHTML()',t.h);assert.equal(t.battle.rt.version,2);assert.equal(t.battle.credits,undefined);assert.deepEqual(Object.keys(t.battle.multi.orders),[]);assert.match(html,/unified-action-grid/);assert.doesNotMatch(html,/ROUND |YOUR BONUS|USE Test Strike/);
 });

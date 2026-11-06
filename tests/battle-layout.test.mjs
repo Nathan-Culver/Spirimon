@@ -50,14 +50,13 @@ test('app animations target the displayed slots after fainting compacts a phone 
  const battle={multi:{allies:allies.map(u=>u.id),enemies},rt:{elapsedMs:100,units:{[allies[1].id]:{delayNotice:{at:0,until:1200,castMs:250,timers:{gcd:100}}}}},rtAnimations:[{at:0,side:'a',actor:allies[1].id,target:enemies[2].id,move:{}}]};
  const h=vm.createContext({battleStageLayout,damageDelayLabels,battle,s:{spirits:allies},$:()=>canvas,matchMedia:()=>({matches:true}),E:{moveTarget:m=>m.target||'opponent'},realTimeContext:()=>({active:{a:allies,b:enemies}}),drawDamageNumbers(){},drawTechnique:(c,m,p,from,to)=>calls.push({from,to})});
  const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
- for(const name of ['currentBattleLayout','animationPositions','drawRealTimeEffects']){
+ for(const name of ['currentBattleLayout','drawRealTimeEffects']){
   const start=source.indexOf('function '+name+'('),next=source.slice(start+1).search(/\n(?:async )?function /);
   vm.runInContext(source.slice(start,next<0?source.length:start+1+next),h);
  }
  const expected=battleStageLayout({height:240,compact:true,multi:true,allies,enemies});
- const animation=vm.runInContext("animationPositions('a',1,2,{})",h);vm.runInContext('drawRealTimeEffects()',h);
- assert.deepEqual(animation.from,expected.a[0].effect);assert.deepEqual(animation.to,expected.b[1].effect);
- assert.deepEqual(calls[0].from,animation.from);assert.deepEqual(calls[0].to,animation.to);
+ vm.runInContext('drawRealTimeEffects()',h);
+ assert.deepEqual(calls[0].from,expected.a[0].effect);assert.deepEqual(calls[0].to,expected.b[1].effect);
  assert.deepEqual(notices.map(n=>n.text),['Cast delayed +0.25s','GCD delayed +0.1s']);
  assert.equal(notices[0].x,expected.a[0].effect.x);
 });

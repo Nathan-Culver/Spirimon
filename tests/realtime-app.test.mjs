@@ -1,3 +1,4 @@
+import {installBattleBoundaries} from './helpers/battle-boundaries.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
@@ -15,7 +16,7 @@ function harness(double=false){
  const battle={ally:allies[0].id,enemy:enemies[0],enemyTeam:[enemies[1]],round:7,log:[],credits:{a:2,b:1},...(double?{multi:{allies:allies.map(u=>u.id),enemies,reserves:[],orders:{[allies[0].id]:{move:hit}},credits:{a:{0:1}}}}:{})};
  const h=vm.createContext({E,RT,BAI,SE,individualSpecies,s:{seed:'qa',playTime:0,spirits:allies,party:allies.map(u=>u.id),species:{test:sp},inventory:{tonics:2,ethers:2}},battle,modal:null,document:{hidden:false},lastRealTimeUi:0,lastRealTimeDraw:0,save(){},render(){},collectDamageNumbers(){},refreshSpiritualBattleUI(){},refreshRealTimeUI(){},finishRealTimeEncounter(){},drawBattle(){},drawRealTimeEffects(){},finishRound(){},seconds:x=>x/1000+'s'});
  vm.runInContext(['party','spOf','activeBattleAlly','battleMoves','battleTeams','realTimeContext','ensureRealTimeBattle','applyRealTimeContext','runEnemySealer','advanceRealTimeBattle'].map(extract).join('\n'),h);
- vm.runInContext('ensureRealTimeBattle()',h);return {h,allies,enemies,sp,frame:ms=>vm.runInContext('advanceRealTimeBattle(100,'+ms+')',h)};
+ installBattleBoundaries(h);vm.runInContext('ensureRealTimeBattle()',h);return {h,allies,enemies,sp,frame:ms=>vm.runInContext('advanceRealTimeBattle(100,'+ms+')',h)};
 }
 test('legacy single battles migrate to a real-time clock and the enemy attacks an idle player',()=>{
  const t=harness(),hp=t.allies[0].hp;assert.equal(t.h.battle.credits,undefined);assert.equal(t.h.battle.rt.version,2);

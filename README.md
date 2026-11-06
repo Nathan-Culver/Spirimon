@@ -17,7 +17,7 @@ Hold Shift to run. Touch/click movement controls are on the map. Tile movement a
 On phones, Spirimon automatically uses a landscape emulator layout with translucent D-pad, A/B, Menu and Bag buttons. Hold a direction to keep walking. A interacts; holding B runs. The BAG button opens supplies. MENU opens Spirimon, Map, Journal, Sealer, Options and Save. Rotate the phone sideways; fullscreen and orientation locking are offered where the browser supports them. Settings can force emulator or desktop layout. Battle and collection menus remain directly touchable. Mobile saves stay on the phone; export/import moves saves between devices. AI generation targets the Windows companion, not phone hardware.
 
 ## The first journey
-Begin with no Spirimon. Your first encounter is random: earn its trust with interaction or offerings, then complete the sealing challenge. A completed fresh local-AI lineage is used when available; otherwise the original shared roster provides the encounter. Keeper Iona restores Spirimon; Tavi sells supplies; Rowan offers rank-scaled battles and reserve Spirimon trades; Scholar Elin rewards discoveries and exploration. Roaming Spirimon can be approached peacefully, offered food, or challenged. Hidden encounters occur in tall grass.
+Begin with no Spirimon. Your first encounter is random: earn its trust with interaction or offerings, then complete the sealing challenge. A completed fresh local-AI lineage is used when available; otherwise the original shared roster provides the encounter. Keeper Iona offers instruction; Shrines restore Spirimon; Tavi sells supplies; Rowan offers rank-scaled battles and reserve Spirimon trades; Scholar Elin rewards discoveries and exploration. Roaming Spirimon can be approached peacefully, offered food, or challenged. Hidden encounters occur in tall grass.
 
 ## Art direction and animations
 A bright handheld-era presentation with original feudal Japanese/Chinese-inspired pixel villages: swept tiled roofs, timber halls, lanterns, shrine gates, bamboo, cherry trees and robed sealers. Exploration fills every screen shape. The overworld uses textured forest canopies, tall-grass patches, terraced cliffs, shoreline banks, bright village tiles and smooth grid-aligned movement. Battles use compact HP, Stanima, Willpower and XP HUDs, a bottom dialogue window and Fight / Bag / Spirimon / Run menus. Physical lunges, elemental streams, ice shards, leaf bursts, healing and wards animate across the battle stage. Reduced-motion preferences are respected. An original offline 5×7 pixel font ships with the game.
@@ -25,7 +25,7 @@ A bright handheld-era presentation with original feudal Japanese/Chinese-inspire
 The shared roster contains 150 lineages with dedicated full-body artwork for all 450 named forms. Existing journeys automatically receive the current roster artwork without resetting individual progress. New discoveries can also create additional lineages from the expanded anatomical catalogs. Artwork has transparent backgrounds and bounded 256×256 form cells. Local AI lineages become encounterable only when all three sprites and their validated information are complete.
 
 ## Buildings
-Walk north into a doorway or interact directly below it. Sealer Halls, inns and homes have interiors, residents and a south exit. Hall keepers restore HP, Stanima and Willpower; attunement is available at safe places.
+Walk north into a doorway or interact directly below it. Sealer Halls, inns and homes have interiors, residents and a south exit. Full team restoration is available at Shrines; attunement and instruction remain available at safe places. Each Shrine allows one Restore, Meditate, or Commune until the next day/night transition.
 
 ## Implemented systems
 - Seeded, expanding world with five biomes, persistent regions, towns, terrain collision, trails and fixed regional danger.
@@ -35,7 +35,7 @@ Walk north into a doorway or interact directly below it. Sealer Halls, inns and 
 - Shared local species library, with per-world discovery history.
 - Six attuned tattoo Spirimon; reserves remain sealed. Change attunement in towns.
 - Combined attack/defense power, unnumbered commitment slider, physical/spiritual resistance, physical/spiritual move traits, intuitive core matchups, statuses, passive abilities, speed modifiers and independent Agile/Normal/Strong styles.
-- Real-time single/double battles with per-Technique cooldowns, casts, shared recovery, independent enemy AI, Pause and optional ally automation.
+- Real-time battles with up to three manifested Spirimon per side, per-Technique cooldowns, casts, independent enemy AI, and manual allied commands.
 - Shared Stanima for Physical moves and Willpower for Energy/Spiritual/Status moves, soul draught recovery, and Struggle with recoil when no move can be funded.
 - Battle sealing influenced by health, status, catalyst quality and form; cooperative sealing through patience/offerings and an accessible timing challenge.
 - Levels, individual potential, natures, training investment, bonds, permanent level/bond transformations, and cosmetic switching among unlocked forms.
@@ -46,7 +46,7 @@ Walk north into a doorway or interact directly below it. Sealer Halls, inns and 
 ## Real-time combat, Stanima and Willpower
 Tap a ready Technique to begin its cast. Both sides act on one elapsed-time clock; enemies never wait for player input. Each Spirimon has per-Technique cooldowns and shared recovery, so cycling four powerful Techniques or switching cannot bypass recovery. In doubles, select either ally or turn on Auto for that ally. Bag actions and switching use the same timeline. Borrowed actions and round debt are removed from live combat.
 
-Pause stops combat explicitly. Hidden/background tabs and required replacement selection also stop it; elapsed time away is not replayed on return. Menus and the battle log otherwise leave combat running.
+Hidden/background tabs freeze combat without replaying elapsed time on return. Menus, the battle log, and deployment choices leave combat running. Allies act only on manual commands; no turn queue or allied automation is exposed.
 
 Techniques scale at levels 1, 16, 36, 60, 85 and 100. Quick, resource-efficient attacks, slow burst attacks, control, recovery and conditional combinations have separate roles. Cooldowns account for expected hits, accuracy, secondary effects and spread targeting. See [real-time rules](docs/real-time-combat.md) and the [complete Technique audit](docs/move-balance-audit.csv).
 
@@ -85,25 +85,31 @@ node build.mjs
 npm start
 
 engine.mjs: deterministic generation and combat rules.
-sprites.mjs: original procedural pixel renderer.
-app.mjs: gameplay, interface, browser storage, generation queue.
+sprites.mjs: atlas rendering, battle rear views and companion animation.
+app.mjs: exploration, interface actions, browser storage and generation queue.
+battle-session.mjs: live combat rosters, enemy decisions and legacy-save migration.
+battle-view.mjs: current battle HUDs, support menus and available-action rendering.
 companion.mjs: static server and local-model adapters.
 build.mjs: dependency-free Pages bundle and standalone HTML packager.
 tests/: rule and HTTP tests.
 
 Pushes to main run .github/workflows/deploy-pages.yml: build, run regression tests, stage the runtime files in _site, and publish them with actions/deploy-pages. Run `node build.mjs --out-dir _site` to reproduce the published artifact. The entry page loads one content-versioned classic JavaScript bundle; the four original world atlases load independently with bounded retries. The generated Spirimon.html download includes code, font, styles and world atlases for offline play. `npm start` builds these files before starting the companion server. Startup failures preserve the existing browser save; Retry loading requests fresh HTML without clearing storage.
 
+Desktop and Android builds use a separate local-asset target: `node build.mjs --target app --out-dir _app`. These installers load current artwork from bundled files as needed and do not include the large single-file HTML download. Gameplay modules, styles, templates and artwork changes trigger `.github/workflows/standalone.yml`; validation must pass before packaging. Download the resulting platform artifact from its Actions run.
+
+See [Maintenance and release architecture](docs/maintenance.md) for build targets, asset budgets, combat boundaries and validation.
+
 ## Scope of this release
-This is the first playable alpha, not a completed FireRed-sized RPG. It has original assets and rules inspired by the agreed design. Authored dungeon adventures, tournament brackets, richer NPC event chains, additional transformation quests, full creature animation sets and production balance remain expansion work. The implemented combat rules, equipment, aspects and double-battle behavior are documented in [Combat systems](docs/combat-systems.md). The local model adapters are optional and need installed models; no actual AI model or generated AI artwork is bundled.
+This is the first playable alpha, not a completed FireRed-sized RPG. It has original assets and rules inspired by the agreed design. Physical dungeon and Temple maps, championship progression and competitive circuits are implemented. Finished legendary artwork, physical faction investigations, richer NPC event chains, full creature walking animation sets and production balance remain expansion work. The implemented combat rules, equipment, aspects and double-battle behavior are documented in [Combat systems](docs/combat-systems.md). The local model adapters are optional and need installed models; no actual AI model or generated AI artwork is bundled.
 
 
 
 ## Latest expansion
-All50 lineages and150 distinct sprites are included. Detailed painted ground textures and irregular paths/shorelines match the town/Spirimon art. Six enterable building types include the forge, herbalist and archive; towns also have roofed stone wells, barrels, crates, guardian statues, timber fencing, stone walls and stalls. The lead Spirimon no longer follows on the map.
+All 150 lineages and 450 named forms are included. Detailed painted ground textures and irregular paths/shorelines match the town/Spirimon art. Six enterable building types include the forge, herbalist and archive; towns also have roofed stone wells, barrels, crates, guardian statues, timber fencing, stone walls and stalls. The lead Spirimon follows on the map and inside buildings/dungeons; its current walk frames are generated from roster artwork.
 
 Wild encounters stay level1–5 in the starting region and6–8 in its eight immediate neighbors. After every seeded group of1–3 towns visited, newly formed farther areas gain1–3 levels. Caught Spirimon levels are preserved; old wild encounters are rebalanced.
 
-The move library has eight techniques for each of13 main types and four for each rare domain. Individuals can practice alternative moves at safe places. Mobile move menus reserve a separate Back row. Cosmetic changes and permanent transformations use generic seal-ring/silhouette/particle animations.
+The move library has eight techniques for each of the 12 main Types and four for each rare domain. Individuals can practice alternative moves at safe places. Mobile move menus reserve a separate Back row. Cosmetic changes and permanent transformations use generic seal-ring/silhouette/particle animations.
 
 Offerings are one cooperation attempt per individual. Choose a resource plan: lavish requires one trial, careful two, humble three. Materials and a seal catalyst are consumed at commitment. Trial order is randomized perindividual; riddles allow one answer, while singing and dance use15-second original wordless synthesized melodies. Exact input timestamps are scored at±45/90/150ms with60% required. Options offers eight-tap median lag calibration. Failed Spirimon remain available for battle and battle seals. Closing or reloading an active trial forfeits cooperation for that individual.
 

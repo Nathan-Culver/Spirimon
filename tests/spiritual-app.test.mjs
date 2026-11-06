@@ -1,3 +1,4 @@
+import {installBattleBoundaries} from './helpers/battle-boundaries.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
@@ -15,7 +16,7 @@ function extract(name){const start=app.indexOf('function '+name+'('),next=app.sl
 function harness(){
  const state=E.newGame('integration');for(let n=0;n<6;n++){const sp=E.makeSpecies('integrated-'+n,E.TYPES[n],E.TYPES[(n+4)%12]);state.species[sp.id]=sp;const u=E.heal(E.makeIndividual(sp,20,0,E.rng(n)),sp);u.id='party'+n;state.spirits.push(u);state.party.push(u.id);}SE.ensureSealer(state);
  const h=vm.createContext({E,SE,RT,BAI,CO,A,CP,individualSpecies,mapWeather:()=>({kind:'rain'}),currentRegion:()=>({minLevel:1}),speciesFor:()=>Object.values(state.species)[0],encounterState:()=>({}),showModal(){},safe:()=>true,note(){},esc:String,action:()=>'',structuredClone,s:state,battle:null,closeModal(){},save(){},render(){},toast(){},discover(){},equipWildItem:u=>u,commit:.5,style:'normal',selectedMove:0,movePreviewKey:null,battleMode:'main',view:'explore'});
- vm.runInContext(['party','lead','spOf','battleTeams','realTimeContext','applyRealTimeContext','ensureRealTimeBattle','persistentEnemySealer','configureEnemyRoster','startBattle','runEnemySealer','finishRealTimeEncounter','adventureState','competitionPartyLevel','prepareCompetitionBattle','startGuildTrial','startChampionshipMatch','recordCompetitionDefeat','passiveMenu','studyPassive','equipPassive','selectRealTimeTarget'].map(extract).join('\n'),h);return h;
+ vm.runInContext(['party','lead','spOf','battleTeams','realTimeContext','applyRealTimeContext','ensureRealTimeBattle','persistentEnemySealer','configureEnemyRoster','startBattle','runEnemySealer','finishRealTimeEncounter','adventureState','competitionPartyLevel','prepareCompetitionBattle','startGuildTrial','startChampionshipMatch','recordCompetitionDefeat','passiveMenu','studyPassive','equipPassive','selectRealTimeTarget'].map(extract).join('\n'),h);return installBattleBoundaries(h);
 }
 test('actual encounter entry gives only the designated lead a free release and creates manual three-creature combat',()=>{
  const h=harness(),sp=Object.values(h.s.species)[0],enemy=E.heal(E.makeIndividual(sp,10,0,E.rng('foe')),sp);h.enemy=enemy;vm.runInContext('startBattle(enemy)',h);assert.equal(h.battle.multi.allies.length,1);assert.equal(h.battle.multi.allies[0],h.s.sealer.leadId);assert.equal(h.s.sealer.energy,h.s.sealer.maxEnergy);assert.equal(h.battle.rt.version,2);assert.deepEqual(Object.keys(h.battle.autoAllies),[]);

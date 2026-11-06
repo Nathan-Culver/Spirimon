@@ -12,18 +12,19 @@ const IMAGE=process.env.SPIRIMON_IMAGE||'http://127.0.0.1:7860';
 for(const target of[OLLAMA,IMAGE]){const u=new URL(target);if(!['127.0.0.1','localhost','[::1]'].includes(u.hostname))throw Error('Model endpoints must run on this computer.');}
 const ALLOWED=new Set(['http://127.0.0.1:'+PORT,'http://localhost:'+PORT,'https://nathan-culver.github.io']);
 for(const v of(process.env.SPIRIMON_ORIGINS||'').split(',').filter(Boolean))ALLOWED.add(new URL(v).origin);
-const FILES={'/sealer-disciplines.mjs':'sealer-disciplines.mjs','/sacred-art.mjs':'sacred-art.mjs','/battle-layout.mjs':'battle-layout.mjs','/dungeon-atlas.mjs':'dungeon-atlas.mjs','/map-camera.mjs':'map-camera.mjs','/field-animations.mjs':'field-animations.mjs','/steed.mjs':'steed.mjs','/spiritual-core.mjs':'spiritual-core.mjs','/spiritual-energy.mjs':'spiritual-energy.mjs','/support-techniques.mjs':'support-techniques.mjs','/spiritual-world.mjs':'spiritual-world.mjs','/cooperative-techniques.mjs':'cooperative-techniques.mjs','/realtime-moves.mjs':'realtime-moves.mjs','/realtime-combat.mjs':'realtime-combat.mjs','/realtime-ui.mjs':'realtime-ui.mjs','/creature-browser.mjs':'creature-browser.mjs','/creature-catalog.mjs':'creature-catalog.mjs','/anatomy.mjs':'anatomy.mjs','/creature-visuals.mjs':'creature-visuals.mjs','/environment-puzzles.mjs':'environment-puzzles.mjs','/equipment.mjs':'equipment.mjs','/battle-ai.mjs':'battle-ai.mjs','/assets/placeholder/preview.html':'assets/placeholder/preview.html','/':'index.html','/index.html':'index.html','/style.css':'style.css','/app.mjs':'app.mjs','/engine.mjs':'engine.mjs','/sprites.mjs':'sprites.mjs','/roster.mjs':'roster.mjs','/world.mjs':'world.mjs','/terrain.mjs':'terrain.mjs','/moves.mjs':'moves.mjs','/towns.mjs':'towns.mjs','/audio.mjs':'audio.mjs','/offerings.mjs':'offerings.mjs','/transformation.mjs':'transformation.mjs','/ai-providers.mjs':'ai-providers.mjs','/adventure-systems.mjs':'adventure-systems.mjs','/move-animations.mjs':'move-animations.mjs','/interior-assets.mjs':'interior-assets.mjs','/asset-loader.mjs':'asset-loader.mjs','/world-art.mjs':'world-art.mjs','/placeholder-art.mjs':'placeholder-art.mjs'};
+// Only serve browser modules reachable from app.mjs, never arbitrary server files.
+const FILES={'/':'index.html','/index.html':'index.html','/style.css':'style.css','/assets/placeholder/preview.html':'assets/placeholder/preview.html'};
+const browserModules=['app.mjs'];
+for(let n=0;n<browserModules.length;n++){
+ const id=browserModules[n];if(FILES['/'+id])continue;
+ if(id.startsWith('../')||path.isAbsolute(id)||!id.endsWith('.mjs'))throw Error('Unsafe browser module: '+id);
+ const source=await readFile(path.join(ROOT,id),'utf8');FILES['/'+id]=id;
+ for(const match of source.matchAll(/^import\s+.+?\s+from\s+['"](.+?)['"];?\s*$/gm)){
+  if(!match[1].startsWith('./'))throw Error('External browser import: '+match[1]);
+  browserModules.push(path.posix.normalize(path.posix.join(path.posix.dirname(id),match[1])));
+ }
+}
 let generating=false;
-FILES['/damage-numbers.mjs']='damage-numbers.mjs';
-FILES['/battle-art.mjs']='battle-art.mjs';
-FILES['/battle-back-frames.mjs']='battle-back-frames.mjs';
-FILES['/spiridex.mjs']='spiridex.mjs';
-FILES['/spiridex-view.mjs']='spiridex-view.mjs';
-FILES['/scenery.mjs']='scenery.mjs';
-FILES['/sealing-gesture.mjs']='sealing-gesture.mjs';
-FILES['/classification-passives.mjs']='classification-passives.mjs';
-FILES['/classification-status.mjs']='classification-status.mjs';
-FILES['/classifications.mjs']='classifications.mjs';
 function respond(res,status,data){res.writeHead(status,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify(data));}
 async function jsonRequest(url,body,timeout=3000){const response=await fetch(url,{...(body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(timeout)});if(!response.ok)throw Error('Local model returned HTTP '+response.status);return response.json();}
 async function readJSON(req){let raw='';for await(const chunk of req){raw+=chunk;if(raw.length>24000000)throw Error('Request is too large.');}return JSON.parse(raw);}

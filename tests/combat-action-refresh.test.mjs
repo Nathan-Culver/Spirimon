@@ -1,3 +1,4 @@
+import {installBattleBoundaries} from './helpers/battle-boundaries.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
@@ -9,6 +10,7 @@ import * as ST from '../support-techniques.mjs';
 import * as CO from '../cooperative-techniques.mjs';
 import * as Q from '../equipment.mjs';
 import {individualSpecies} from '../anatomy.mjs';
+import {realTimeStatusHTML} from '../realtime-ui.mjs';
 const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
 const extract=name=>{const start=source.indexOf('function '+name+'(');if(start<0)return '';const next=source.slice(start+1).search(/\n(?:async )?function /);return source.slice(start,next<0?source.length:start+1+next);};
 function harness(){
@@ -19,7 +21,7 @@ function harness(){
  const grid={innerHTML:'<p class="ua-wait">Waiting for an available action…</p>',dataset:{},contains:node=>node?.isConnected===true};let preserved=null;
  const h=vm.createContext({E,RT,SE,ST,CO,Q,individualSpecies,s,battle,grid,unifiedGesture:null,unifiedTap:null,unifiedSuppressClick:false,clearTimeout,document:{querySelector:()=>grid,querySelectorAll:()=>[]},esc:String,seconds:n=>n/1000+'s',refreshUnifiedActions:(el,html,held)=>{preserved=held;el.innerHTML=html;}});
  vm.runInContext(['party','spOf','battleMoves','battleTeams','realTimeContext','unifiedBattleActionsHTML','clearUnifiedGesture','refreshRealTimeUI'].map(extract).join('\n'),h);
- const ctx=vm.runInContext('realTimeContext()',h);for(const u of allies){const c=RT.unitClock(state,u);c.gcdReadyAt=4000;c.readyAt=3500;}
+ installBattleBoundaries(h);const ctx=vm.runInContext('realTimeContext()',h);for(const u of allies){const c=RT.unitClock(state,u);c.gcdReadyAt=4000;c.readyAt=3500;}
  return {h,state,ctx,grid,allies,setGesture:g=>{h.inputGesture=g;vm.runInContext('unifiedGesture=inputGesture',h);},gesture:()=>vm.runInContext('unifiedGesture',h),preserved:()=>preserved,refresh:()=>vm.runInContext('refreshRealTimeUI()',h),advance:ms=>RT.advanceRealTime(state,ms,ctx,()=>.5)};
 }
 test('a failed-escape utility cooldown returns Run, then ready Techniques, without a full render',()=>{
@@ -45,4 +47,11 @@ test('a changing Seal preview retains the captured button while newly ready acti
  assert.equal(grid.children.length,2);assert.equal(grid.children[0],held);assert.equal(grid.children[1],run);assert.equal(held.label,'Release to seal');
  held.label='Cancel seal';vm.runInContext('refreshUnifiedActions(grid,"ready actions",held)',h);
  assert.equal(grid.children.length,2);assert.equal(grid.children[0],held);assert.equal(held.label,'Cancel seal');
+});
+test('live HUD status updates use the same current simulation as the extracted battle view',()=>{
+ const t=harness(),box={dataset:{rtStatusContainer:'a0'},innerHTML:''};
+ t.h.realTimeStatusHTML=realTimeStatusHTML;t.h.document.querySelectorAll=selector=>selector==='[data-rt-status-container]'?[box]:[];
+ t.allies[0].conditions={burn:10000};t.allies[0].status='burn';
+ RT.unitClock(t.state,t.allies[0]).status={effect:'burn',until:10000};
+ t.refresh();assert.match(box.innerHTML,/Burned|burn/i);
 });

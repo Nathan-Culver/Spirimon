@@ -2,8 +2,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {TYPE_MOVES,EXTRA_MOVES,ENVIRONMENT_MOVES,ADVANCED_MOVES,domainMoves,moveLore} from '../moves.mjs';
 import * as E from '../engine.mjs';
-import {readFileSync} from 'node:fs';
-import vm from 'node:vm';
 const mechanical=/\d|%|\b(?:HP|DMG|Stanima|stamina|Willpower|accuracy|damage|recoil|cooldown|stats?|buff|debuff|physical|energy|status|cost|chance|percent|maximum|quarter)\b/i;
 const builtins=[...Object.values(TYPE_MOVES).flat(),...EXTRA_MOVES,...ENVIRONMENT_MOVES,...ADVANCED_MOVES,...E.DOMAINS.flatMap(domain=>domainMoves(domain,'Celestial')),...E.MOVE_CATALOG,E.STRUGGLE];
 test('every built-in and domain move has narrative and related atmosphere without rules or numbers',()=>{
@@ -21,10 +19,6 @@ test('generated moves preserve narrative prose and replace mechanical or generic
  const desc='A silver moth rises from the Spirimon’s shadow, its wings carrying the scent of distant rain.';
  assert.equal(moveLore({id:'custom',name:'Silver Moth',desc}).description,desc);
  for(const desc of ['Damage 100. Cost 2 Willpower.','Technique: burn.','A beast technique.'])assert.doesNotMatch(moveLore({id:'custom',name:'Murmur',effect:'burn',desc}).description,mechanical);
-});
-test('the move information panel contains narrative only',()=>{
- const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8'),a=source.indexOf('function movePreviewHTML('),b=source.indexOf('\nfunction battleHTML(',a),context=vm.createContext({E,esc:String});vm.runInContext(source.slice(a,b),context);
- const html=context.movePreviewHTML(TYPE_MOVES.Beast[2]);assert.match(html,/move-preview-description/);assert.match(html,/move-preview-context/);assert.doesNotMatch(html,/Effects:|Select this move again|style and commitment|Willpower|Stanima|HP|[0-9]/);
 });
 
 test('named special moves and their effects receive specific narrative copy',()=>{

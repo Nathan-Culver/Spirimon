@@ -21,7 +21,7 @@ test('downloaded copy retains complete code, styles, font and exact core artwork
  const built=await buildPage();assert.doesNotMatch(built.standaloneHtml,/<script[^>]+src=|<link rel="stylesheet"|type="importmap"|type="module"/);
  assert.ok(built.standaloneHtml.includes('data:font/ttf;base64,'));assert.ok(built.standaloneHtml.includes('data:image/webp;base64,'));
  assert.ok(built.standaloneHtml.includes('id="spirimon-game"'));assert.doesNotThrow(()=>new vm.Script(built.script));
- assert.match(built.script,/href="\.\/Spirimon.html" download="Spirimon.html"/);
+ assert.match(built.script,/download="Spirimon.html"/);assert.ok(built.script.includes('https://nathan-culver.github.io/Spirimon/Spirimon.html'));
 });
 test('bundle keeps all exported values, including multi-variable declarations',async()=>{
  const {pageScript}=await buildPage();assert.match(pageScript,/return \{[^}]*\bCHUNK_H\b[^}]*\bCHUNK_W\b[^}]*\}/);assert.match(pageScript,/return \{[^}]*\bROOM_H\b[^}]*\bROOM_W\b[^}]*\}/);

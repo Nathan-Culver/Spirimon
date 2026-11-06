@@ -1,4 +1,7 @@
 _site/
+_app/
+desktop/game/
+dist/
 game-*.js
 style-*.css
 Spirimon.html

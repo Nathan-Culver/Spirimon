@@ -2,19 +2,19 @@ name: Combat regression tests
 on:
   push:
     paths:
-      - 'equipment.mjs'
-      - 'battle-ai.mjs'
-      - 'engine.mjs'
-      - 'moves.mjs'
-      - 'move-animations.mjs'
-      - 'adventure-systems.mjs'
-      - 'app.mjs'
+      - '**.mjs'
+      - '**.js'
+      - '**.css'
+      - '**.html'
+      - 'assets/**'
       - 'tests/**'
-      - 'build.mjs'
-      - 'index.template.html'
-      - 'asset-loader.mjs'
       - '.github/workflows/combat-tests.yml'
   workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: combat-tests-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -24,5 +24,7 @@ jobs:
         with:
           node-version: '22'
       - run: node build.mjs
-      - run: node --check engine.mjs && node --check moves.mjs && node --check move-animations.mjs && node --check adventure-systems.mjs && node --check app.mjs && node --test tests/*.test.mjs
+      - name: Check browser and server modules
+        run: for file in *.mjs; do node --check "$file" || exit 1; done
+      - run: npm test
 
