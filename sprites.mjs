@@ -4,6 +4,7 @@ import {townFeatures} from './towns.mjs';
 import {drawAtlasAsset,TOWN_ATLAS} from './interior-assets.mjs';
 import {groundCell,terrainCell,connectedEdges} from './terrain.mjs';
 import {ART} from './roster.mjs';
+import {battleBackSource} from './battle-art.mjs';
 import {COLORS,hash,rng} from './engine.mjs';
 const cache=new Map();
 // Generated anatomy diagrams and their legacy cached PNGs are design data,
@@ -90,6 +91,17 @@ export function drawSpirit(ctx,sp,form,x,y,size=96,flip=false,motion=null){
  const artwork=creatureArtworkSource(sp,form),image=artwork?readyImage(artwork):null;
  if(!image){drawMysteryPlaceholder(ctx,x,y,size,motion?{...motion,flip}:{flip});return;}
  ctx.save();ctx.imageSmoothingEnabled=false;if(flip){ctx.translate(x+size,y);ctx.scale(-1,1);}else ctx.translate(x,y);if(sp.atlas){ctx.drawImage(image,form*256,0,256,256,0,0,size,size);}else{const h=size*image.height/image.width;ctx.drawImage(image,0,size-Math.min(size,h),size,Math.min(size,h));}ctx.restore();}
+export function drawBattleSpirit(ctx,sp,form,x,y,size=96,side='a'){
+ if(!sp)return;
+ if(side!=='a'){drawSpirit(ctx,sp,form,x,y,size);return;}
+ const rear=battleBackSource(sp,form),image=rear&&readyImage(rear.source);
+ if(!image){drawMysteryPlaceholder(ctx,x,y,size,{face:'up'});return;}
+ const width=image.naturalWidth||image.width,height=image.naturalHeight||image.height;
+ const cell=rear.atlas?width/3:width,sx=rear.atlas?rear.form*cell:0;
+ ctx.save();ctx.imageSmoothingEnabled=false;
+ ctx.drawImage(image,sx,0,cell,height,x,y,size,size);
+ ctx.restore();
+}
 function prop(ctx,index,x,y,w,h){const image=readyImage(ART.world);if(!image)return;ctx.imageSmoothingEnabled=false;ctx.drawImage(image,(index%3)*256,Math.floor(index/3)*256,256,256,Math.round(x),Math.round(y),w,h);}
 export function drawAspectAura(ctx,ind,x,y,size){
  const color={Primal:'#ef8d53',Astral:'#ad9cef',Titan:'#d0b477',Swift:'#a1e7d7',Verdant:'#8fce72',Umbral:'#a682be',Stormbound:'#78cceb'}[ind.aspect];if(!color&&!ind.rareVariant)return;

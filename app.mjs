@@ -35,7 +35,7 @@ import * as EP from './environment-puzzles.mjs';
 import {periodicDamage} from './classification-status.mjs';
 import {drawInteriorScene,INTERIOR_ATLAS,MATERIAL_ATLAS,TOWN_ATLAS} from './interior-assets.mjs';
 import {drawTechnique} from './move-animations.mjs';
-import {creatureArtworkSource,damageNumberAnchor,drawSpirit,drawCompanion,drawAspectAura,drawPerson,drawTile,drawBuilding,drawTownDecor,drawTree,drawWell,drawTownBuilding,drawTownFeatures,renderSpiritCanvases} from './sprites.mjs';
+import {creatureArtworkSource,damageNumberAnchor,drawSpirit,drawBattleSpirit,drawCompanion,drawAspectAura,drawPerson,drawTile,drawBuilding,drawTownDecor,drawTree,drawWell,drawTownBuilding,drawTownFeatures,renderSpiritCanvases} from './sprites.mjs';
 const $=q=>document.querySelector(q);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const action=(name,label,value='',cls='btn')=>'<button class="'+cls+'" data-action="'+name+'" data-value="'+esc(value)+'">'+label+'</button>';
@@ -571,7 +571,7 @@ function drawBattle(anim=null){
   const unit=(side==='a'?(battle.multi?.allies||[battle.ally]).map(id=>s.spirits.find(i=>i.id===id)):battle.multi?.enemies||[battle.enemy])[point.slot];
   const {x,ground,size,rx,ry}=point,offset=anim?.side===side&&(anim.actor??0)===point.slot?anim.offset:0;
   platform(x,ground,rx,ry);drawAspectAura(c,unit,x-size/2,ground-size,size);
-  drawSpirit(c,spOf(unit),unit.appearance,x-size/2+offset,ground-size,size,side==='a');
+  drawBattleSpirit(c,spOf(unit),unit.appearance,x-size/2+offset,ground-size,size,side);
  }
 }
 
