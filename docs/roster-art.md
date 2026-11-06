@@ -10,7 +10,13 @@ Reworked lines use versioned `-v4.webp` filenames. Designs retain their creature
 
 `roster-evolution-review.json` records every decision, all three stage descriptions, source and packed-image hashes, extraction bounds, and completion status. `roster-evolution-prompts.json` records the OpenAI image_gen design prompts and any finishing prompt used to correct a background. Full-resolution generation-source filenames are provenance, not runtime dependencies; the game consumes only the packed atlases.
 
-Kilnwarden retains its vertical fire-and-darkness eye. Lacquertor retains four long bulky arms, its hunchback and natural boulder mantle. Other requested monstrous features are preserved, including Gloomglen’s boar head, Wraithspire’s two heads, and Mistralwisp’s four arms. Form-specific anatomy follows the observed artwork when an evolution changes its body plan or limb structure.
+Kilnwarden retains its vertical fire-and-darkness eye. Lacquertor retains four long bulky arms, its hunchback and natural boulder mantle. Other requested monstrous features are preserved, including Gloomglen’s boar head and Wraithspire’s two heads. Form-specific anatomy follows the observed artwork when an evolution changes its body plan or limb structure.
+
+## Approved anatomy and identity review
+
+The subsequent review of all 450 forms selected 74 lineages for correction. Their three-form previews from `Spirimon_Anatomy_Identity_Art_Review.pdf` are now packed as `-v5.webp` atlases. The pass clarifies accidental anatomy and muddled surfaces, makes personhood traits readable, and retains deliberate surreal spirit features. The final approved Mistralwisp preview has two arms in every form; its form anatomy now matches that image. Nectarplume uses a mammalian anteater snout, and Zephyrtap has separate rounded toes.
+
+`roster-art-review-v5.json` records the 74 selected lineages, source identities and hashes, extraction bounds, previous paths, and new atlas hashes. `tools/pack-reviewed-art.py` packs those approved sources without redrawing them. New atlas paths refresh existing journeys through the standard roster migration.
 
 ## Existing journeys
 

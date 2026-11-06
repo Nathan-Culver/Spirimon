@@ -1,0 +1,2675 @@
+{
+  "revision": 5,
+  "generator": "OpenAI image_gen",
+  "reviewedLineages": 150,
+  "reviewedForms": 450,
+  "approvedLineages": 74,
+  "approvedPreviewForms": 222,
+  "reviewFile": "Spirimon_Anatomy_Identity_Art_Review.pdf",
+  "lineages": [
+    {
+      "number": 2,
+      "id": "dewveil",
+      "forms": [
+        "Dewbud",
+        "Dewveil",
+        "Sundew Regent"
+      ],
+      "previousAtlas": "./assets/roster/dewveil-v4.webp",
+      "atlas": "./assets/roster/dewveil-v5.webp",
+      "libraryFileId": "libfile_7160ebea8d8481918975f758fd986f88",
+      "sourceFilename": "Three-Stage Amber-Eyed Sundew.png",
+      "sourceSha256": "15dc6cbbaef27ff5726df5386206d18ff885382f33cb4783d4d189cb27347942",
+      "sourceBoxes": [
+        [
+          140,
+          285,
+          511,
+          668
+        ],
+        [
+          698,
+          21,
+          1296,
+          687
+        ],
+        [
+          1377,
+          30,
+          2128,
+          689
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "8b3870e457ccfef90a1d138ecc3acbe5ccfc52a592b3d6bc9298cee29effe675"
+    },
+    {
+      "number": 3,
+      "id": "zephyrtap",
+      "forms": [
+        "Gustling",
+        "Zephyrtap",
+        "Tempest Treader"
+      ],
+      "previousAtlas": "./assets/roster/zephyrtap-v4.webp",
+      "atlas": "./assets/roster/zephyrtap-v5.webp",
+      "libraryFileId": "libfile_e13ce90b59b081918bed55d70bfeebd7",
+      "sourceFilename": "Zephyrtap tapir atlas with rounded toes.png",
+      "sourceSha256": "ccda9e143c18c7c4b233aca815a61f2f295e22ab2f27d506a24d6fb65dbb6abf",
+      "sourceBoxes": [
+        [
+          22,
+          240,
+          569,
+          692
+        ],
+        [
+          603,
+          143,
+          1336,
+          693
+        ],
+        [
+          1400,
+          16,
+          2145,
+          702
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "5215a0b315d4cc48b988e13040c4191cb1ee8c2f4a4d59bb38245c32d19a07dc"
+    },
+    {
+      "number": 10,
+      "id": "aurelattice",
+      "forms": [
+        "Sparkwrit",
+        "Aurelattice",
+        "Solar Mechanarch"
+      ],
+      "previousAtlas": "./assets/roster/aurelattice-v4.webp",
+      "atlas": "./assets/roster/aurelattice-v5.webp",
+      "libraryFileId": "libfile_e9e6e06152948191afb55d62b5c9c744",
+      "sourceFilename": "Aurelattice\u2019s Three Celestial Forms(1).png",
+      "sourceSha256": "afbf97dc5fe8e137ced047c52d2644b6b3f1e53151f2717db8977eb3a964b8ea",
+      "sourceBoxes": [
+        [
+          87,
+          274,
+          524,
+          676
+        ],
+        [
+          632,
+          14,
+          1399,
+          690
+        ],
+        [
+          1458,
+          15,
+          2150,
+          711
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "1cd22503d96654695eaf4281b59180aa088a70d199df710fe94e86d9e0136c97"
+    },
+    {
+      "number": 14,
+      "id": "bronzewade",
+      "forms": [
+        "Rivetreed",
+        "Bronzewade",
+        "Heron Magistrate"
+      ],
+      "previousAtlas": "./assets/roster/bronzewade-v4.webp",
+      "atlas": "./assets/roster/bronzewade-v5.webp",
+      "libraryFileId": "libfile_275527b7ea2481918e47c687545a0b89",
+      "sourceFilename": "Bronzewade heron automaton trio.png",
+      "sourceSha256": "a8f4df2409909d130c1ad772dde050110fc8204c039552d148b030c913b61ff9",
+      "sourceBoxes": [
+        [
+          154,
+          291,
+          531,
+          690
+        ],
+        [
+          762,
+          52,
+          1308,
+          697
+        ],
+        [
+          1461,
+          18,
+          2092,
+          708
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "cf7c71d2532ba63c57366f0f52f4d74c2e09dc7ed71d68c46a56d0d831e5b737"
+    },
+    {
+      "number": 15,
+      "id": "jarjell",
+      "forms": [
+        "Lacquib",
+        "Jarjell",
+        "Lacquer Custodian"
+      ],
+      "previousAtlas": "./assets/roster/jarjell.webp",
+      "atlas": "./assets/roster/jarjell-v5.webp",
+      "libraryFileId": "libfile_ac482f23580c8191b4d8a7a52d0fe7f5",
+      "sourceFilename": "Lacquer Jelly Trio with Expressive Mouths.png",
+      "sourceSha256": "8d9e06231747f8a4cfd42d0fca1976b7a84fdeeeff0e57c1a7da46f07711168c",
+      "sourceBoxes": [
+        [
+          81,
+          224,
+          622,
+          680
+        ],
+        [
+          737,
+          23,
+          1385,
+          689
+        ],
+        [
+          1484,
+          9,
+          2147,
+          701
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "2f3720b7454f308c67bc3e54cb843259d6cc48784ae9cb511c4d5ac67c8f8283"
+    },
+    {
+      "number": 19,
+      "id": "cinerwraith",
+      "forms": [
+        "Ashwhisp",
+        "Cinerwraith",
+        "Last Emberstorm"
+      ],
+      "previousAtlas": "./assets/roster/cinerwraith.webp",
+      "atlas": "./assets/roster/cinerwraith-v5.webp",
+      "libraryFileId": "libfile_0f9a530fdafc8191855cb29b4b0078c2",
+      "sourceFilename": "Cinerwraith\u2019s Three Ashen Forms.png",
+      "sourceSha256": "8596de9fbccd94e7f9795f1f2825b5503f4a3f5da26001ff0cab68ad378a7424",
+      "sourceBoxes": [
+        [
+          133,
+          59,
+          588,
+          604
+        ],
+        [
+          761,
+          32,
+          1369,
+          657
+        ],
+        [
+          1445,
+          15,
+          2147,
+          679
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "87be1a3f869d232822a8b09cf0dab47e4a983553d3677cf39bdb70f41a5dfea9"
+    },
+    {
+      "number": 20,
+      "id": "glasswhorl",
+      "forms": [
+        "Sandsplin",
+        "Glasswhorl",
+        "Dune Orrery"
+      ],
+      "previousAtlas": "./assets/roster/glasswhorl.webp",
+      "atlas": "./assets/roster/glasswhorl-v5.webp",
+      "libraryFileId": "libfile_c956c6938fe0819182ff8c14111ed373",
+      "sourceFilename": "Glasswhorl Trio with Restored Amber Eye.png",
+      "sourceSha256": "9958bb874edbb7ca6fcdc5e90b84e86b716d7f05d76d280aaa666060ba99bc9a",
+      "sourceBoxes": [
+        [
+          126,
+          76,
+          566,
+          662
+        ],
+        [
+          770,
+          32,
+          1311,
+          665
+        ],
+        [
+          1475,
+          0,
+          2128,
+          680
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "300bef5403781defba07469285d88c6a7a70cc552e93bfd84df6b47b1d820ff2"
+    },
+    {
+      "number": 21,
+      "id": "resonara",
+      "forms": [
+        "Plasmote",
+        "Resonara",
+        "Heavenly Resonance"
+      ],
+      "previousAtlas": "./assets/roster/resonara-v4.webp",
+      "atlas": "./assets/roster/resonara-v5.webp",
+      "libraryFileId": "libfile_fd455d91475c81918066378af0587a9f",
+      "sourceFilename": "Resonara\u2019s Three Celestial Bell Forms(1).png",
+      "sourceSha256": "767034c0abc4eb1c2c521f23453e299fcf4647cde3787935e8219d53f8cadfbf",
+      "sourceBoxes": [
+        [
+          205,
+          225,
+          468,
+          674
+        ],
+        [
+          653,
+          16,
+          1383,
+          666
+        ],
+        [
+          1427,
+          10,
+          2115,
+          685
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "dbf51a535d834c8c8006df0899bd72b7944aa68b8e638ea74105dc231adda5f7"
+    },
+    {
+      "number": 24,
+      "id": "silkvisage",
+      "forms": [
+        "Masklet",
+        "Silkvisage",
+        "Sixfinger Envoy"
+      ],
+      "previousAtlas": "./assets/roster/silkvisage-v4.webp",
+      "atlas": "./assets/roster/silkvisage-v5.webp",
+      "libraryFileId": "libfile_feca8c7db3dc819194d37e0cf7053694",
+      "sourceFilename": "Three-form moth-masked silkvisage evolution.png",
+      "sourceSha256": "735a46375e9a95e30c6232975d17d6ec69a87271a54775ef37429987c1c733d6",
+      "sourceBoxes": [
+        [
+          118,
+          252,
+          516,
+          693
+        ],
+        [
+          778,
+          36,
+          1292,
+          692
+        ],
+        [
+          1402,
+          76,
+          2134,
+          698
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "fbbef336d82c61f660900e0c8011d510567fce58827771c9b320a687728b22f7"
+    },
+    {
+      "number": 34,
+      "id": "silkclasp",
+      "forms": [
+        "Mothling",
+        "Silkclasp",
+        "Mothmask Adept"
+      ],
+      "previousAtlas": "./assets/roster/silkclasp-v4.webp",
+      "atlas": "./assets/roster/silkclasp-v5.webp",
+      "libraryFileId": "libfile_146993115f348191b46aa16b1a59b500",
+      "sourceFilename": "Silkclasp Moth's Three-Form Evolution.png",
+      "sourceSha256": "ee752491cf4c09b97ba97a84b634802106a6cce853cc70fee82c3713856c0b67",
+      "sourceBoxes": [
+        [
+          116,
+          236,
+          464,
+          707
+        ],
+        [
+          636,
+          14,
+          1306,
+          708
+        ],
+        [
+          1334,
+          13,
+          2117,
+          715
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "b42c76829085ebad3f80b25b02d4540092a5c7659225fc6d5e77d6a6d82bf59a"
+    },
+    {
+      "number": 35,
+      "id": "wickerstride",
+      "forms": [
+        "Reedkin",
+        "Wickerstride",
+        "Bamboo Wayfarer"
+      ],
+      "previousAtlas": "./assets/roster/wickerstride-v4.webp",
+      "atlas": "./assets/roster/wickerstride-v5.webp",
+      "libraryFileId": "libfile_4d9ec36142848191a744c01e0c16fd9c",
+      "sourceFilename": "Moss-eyed Wickerstride trio.png",
+      "sourceSha256": "edd641215a6190edc4582781364b42c4a4df83f610a80faac1933ae4db1d36d2",
+      "sourceBoxes": [
+        [
+          158,
+          202,
+          495,
+          687
+        ],
+        [
+          746,
+          11,
+          1235,
+          697
+        ],
+        [
+          1403,
+          13,
+          2095,
+          696
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "a6039abc84768f53301017835371f1f8f0830d3a5c5131fbf4a58f75aa284374"
+    },
+    {
+      "number": 38,
+      "id": "tempestrill",
+      "forms": [
+        "Skyscale",
+        "Tempestrill",
+        "Storm Amphiptere"
+      ],
+      "previousAtlas": "./assets/roster/tempestrill-v4.webp",
+      "atlas": "./assets/roster/tempestrill-v5.webp",
+      "libraryFileId": "libfile_59e354ea274c8191998eb27d7997688e",
+      "sourceFilename": "Three-Form Storm Amphiptere.png",
+      "sourceSha256": "c77dd0891ad03bc9162c607b86ae53f825d8436b886f170033b88621ff441436",
+      "sourceBoxes": [
+        [
+          96,
+          301,
+          453,
+          659
+        ],
+        [
+          592,
+          120,
+          1307,
+          673
+        ],
+        [
+          1343,
+          23,
+          2149,
+          679
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "d83cdedd09a4f803f17598e82a54a09345bafb5941e020f13eb50d0c6d4e2e55"
+    },
+    {
+      "number": 41,
+      "id": "vitrilisk",
+      "forms": [
+        "Slimescale",
+        "Vitrilisk",
+        "Basilisk of Glass"
+      ],
+      "previousAtlas": "./assets/roster/vitrilisk-v4.webp",
+      "atlas": "./assets/roster/vitrilisk-v5.webp",
+      "libraryFileId": "libfile_f61c44f960ec8191ad14cb1c5e0fa887",
+      "sourceFilename": "Violet Gel Basilisk Evolution Strip.png",
+      "sourceSha256": "4718a0693f96a4d3c42f76799569285b5c2a7a8098845491060d8251e6b51967",
+      "sourceBoxes": [
+        [
+          159,
+          339,
+          528,
+          642
+        ],
+        [
+          720,
+          110,
+          1371,
+          647
+        ],
+        [
+          1456,
+          55,
+          2113,
+          673
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "43c6b0c7deac884622ee39d6505f0c342c3329f55b42a30abdb58751d9933da2"
+    },
+    {
+      "number": 42,
+      "id": "amberwork",
+      "forms": [
+        "Ambit",
+        "Amberwork",
+        "Living Reliquary"
+      ],
+      "previousAtlas": "./assets/roster/amberwork-v4.webp",
+      "atlas": "./assets/roster/amberwork-v5.webp",
+      "libraryFileId": "libfile_b93a60990c348191a8e402743b698c13",
+      "sourceFilename": "Amber ooze: three reliquary forms.png",
+      "sourceSha256": "7dbdf655f54a81f57c98a3cb2339121ea067107165718555ff037df2e6b85e89",
+      "sourceBoxes": [
+        [
+          46,
+          367,
+          611,
+          634
+        ],
+        [
+          670,
+          152,
+          1321,
+          629
+        ],
+        [
+          1372,
+          29,
+          2145,
+          636
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "fd0fff4895cee6643228c130e37ef82fc6b6cab093b9df489cd6a01c8ddcc30d"
+    },
+    {
+      "number": 44,
+      "id": "nepentide",
+      "forms": [
+        "Pitchdrop",
+        "Nepentide",
+        "Pitcher Deluge"
+      ],
+      "previousAtlas": "./assets/roster/nepentide-v4.webp",
+      "atlas": "./assets/roster/nepentide-v5.webp",
+      "libraryFileId": "libfile_9733f34264e0819194c7b840db0a60b3",
+      "sourceFilename": "Three-form pitcher jelly evolution.png",
+      "sourceSha256": "2470f0a0180c3e60387499c4c11b9148935e49ba0eaff8305dd92be8bbac66da",
+      "sourceBoxes": [
+        [
+          158,
+          321,
+          517,
+          625
+        ],
+        [
+          749,
+          69,
+          1295,
+          631
+        ],
+        [
+          1390,
+          90,
+          2149,
+          630
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "76c122940d14f02d1f013191ab552b38e6f41380d5e2d6228ed1424334d13801"
+    },
+    {
+      "number": 46,
+      "id": "strangleweld",
+      "forms": [
+        "Wirebud",
+        "Strangleweld",
+        "Ironwood Snare"
+      ],
+      "previousAtlas": "./assets/roster/strangleweld-v4.webp",
+      "atlas": "./assets/roster/strangleweld-v5.webp",
+      "libraryFileId": "libfile_8444436f7c0c819190f231ff0c9b93c7",
+      "sourceFilename": "Three-stage amber-eyed Strangleweld.png",
+      "sourceSha256": "73696c8ae59acb7fa06951115be36ea48d2e8e9d22f1e8c4f260c4fcd5a0367a",
+      "sourceBoxes": [
+        [
+          62,
+          226,
+          477,
+          660
+        ],
+        [
+          606,
+          26,
+          1298,
+          680
+        ],
+        [
+          1349,
+          15,
+          2157,
+          696
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "fef024235cda09dbbe6d1fa0c6bd75dff5ab493a89a2308b336475a27b71f054"
+    },
+    {
+      "number": 47,
+      "id": "fumepitcher",
+      "forms": [
+        "Censerpod",
+        "Fumepitcher",
+        "Censer Tyrant"
+      ],
+      "previousAtlas": "./assets/roster/fumepitcher-v4.webp",
+      "atlas": "./assets/roster/fumepitcher-v5.webp",
+      "libraryFileId": "libfile_31a35529eaa8819184597bd3c2990cb3",
+      "sourceFilename": "Three-form infernal pitcher plant.png",
+      "sourceSha256": "ca08952b72e87af2014b1ed77a578b4988b3021fad07722538bfcfd2746bf157",
+      "sourceBoxes": [
+        [
+          198,
+          181,
+          433,
+          695
+        ],
+        [
+          696,
+          116,
+          1345,
+          692
+        ],
+        [
+          1445,
+          7,
+          2132,
+          712
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "463048716e8324bb6a75b74bd36b161463d4f444cf43fda2cee18f1b3f73a6f9"
+    },
+    {
+      "number": 49,
+      "id": "jianglume",
+      "forms": [
+        "Hushwick",
+        "Jianglume",
+        "Lantern Ancestor"
+      ],
+      "previousAtlas": "./assets/roster/jianglume-v4.webp",
+      "atlas": "./assets/roster/jianglume-v5.webp",
+      "libraryFileId": "libfile_5e965c0f87f0819197020b4ddc093a03",
+      "sourceFilename": "Lantern Moth Revenant Trio.png",
+      "sourceSha256": "5fe56b5182b3e7bad5674891fe2e8c58e9280403731bafbbd52a908d983c8f7e",
+      "sourceBoxes": [
+        [
+          75,
+          209,
+          491,
+          642
+        ],
+        [
+          619,
+          25,
+          1270,
+          699
+        ],
+        [
+          1362,
+          70,
+          2159,
+          677
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "2f63ea525843e0a1e48b178413d18ec331ceea1219e853496ee326fa841ec151"
+    },
+    {
+      "number": 55,
+      "id": "embermoth",
+      "forms": [
+        "Emberlet",
+        "Embermoth",
+        "Ember Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/embermoth-v4.webp",
+      "atlas": "./assets/roster/embermoth-v5.webp",
+      "libraryFileId": "libfile_99c5a0bfb5dc819184dd9e4540ec2ed3",
+      "sourceFilename": "Embermoth Trio with Molten Eyes.png",
+      "sourceSha256": "47c9da98aae90260e47006c3f259051d9fd1a8ba9e578f5f20fb79f1519fd711",
+      "sourceBoxes": [
+        [
+          107,
+          317,
+          453,
+          634
+        ],
+        [
+          592,
+          113,
+          1239,
+          687
+        ],
+        [
+          1333,
+          39,
+          2129,
+          690
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "4cb4453f5ae9720505b659f0b50f989608ee8923266d139ae0f8295aca085808"
+    },
+    {
+      "number": 58,
+      "id": "hollowbloom",
+      "forms": [
+        "Hollowlet",
+        "Hollowbloom",
+        "Hollow Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/hollowbloom-v4.webp",
+      "atlas": "./assets/roster/hollowbloom-v5.webp",
+      "libraryFileId": "libfile_ac8b41530ffc8191bccd94f9587cc2d4",
+      "sourceFilename": "Hollowbloom: Three Masked Undead Forms.png",
+      "sourceSha256": "c0f8e9d1701e6c8ea01b424521ddfca7f06fe2351b8fea829d6e2a7add96c7c1",
+      "sourceBoxes": [
+        [
+          82,
+          372,
+          492,
+          690
+        ],
+        [
+          639,
+          15,
+          1138,
+          693
+        ],
+        [
+          1267,
+          20,
+          2156,
+          694
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "9f5dde382bc0d69928512fc40ff0cfb8d7137cd013f55b2dd019e6cbc817da0c"
+    },
+    {
+      "number": 61,
+      "id": "kelpveil",
+      "forms": [
+        "Kelplet",
+        "Kelpveil",
+        "Kelp Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/kelpveil-v4.webp",
+      "atlas": "./assets/roster/kelpveil-v5.webp",
+      "libraryFileId": "libfile_2dff194890048191ad0334660bf6ffb9",
+      "sourceFilename": "Three-form sea-green kelpveil.png",
+      "sourceSha256": "19a9e22c12b42c32aa8a4ba730e72329e7a3618aa1b41f728a55e6faf1205a2b",
+      "sourceBoxes": [
+        [
+          216,
+          429,
+          471,
+          633
+        ],
+        [
+          761,
+          325,
+          1339,
+          631
+        ],
+        [
+          1444,
+          165,
+          2127,
+          639
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "a277f41ad7c56418898ba9b669bcbd8bd51b9821e020c54d6a8b507faf48c089"
+    },
+    {
+      "number": 65,
+      "id": "obsidhorn",
+      "forms": [
+        "Obsidlet",
+        "Obsidhorn",
+        "Obsid Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/obsidhorn-v4.webp",
+      "atlas": "./assets/roster/obsidhorn-v5.webp",
+      "libraryFileId": "libfile_7710188dc4188191a5e313a6a3247afc",
+      "sourceFilename": "Horned kangaroo evolution trio.png",
+      "sourceSha256": "aa0edc0486560425faa074ba488125265e2886e56d6e6d24c0f5e1d299cb38ee",
+      "sourceBoxes": [
+        [
+          187,
+          311,
+          475,
+          655
+        ],
+        [
+          758,
+          121,
+          1310,
+          669
+        ],
+        [
+          1436,
+          105,
+          2138,
+          666
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "e2f33ea88387379ced6443bb4a4bfe62e4691b506b96e448e609f8bb7c3efd74"
+    },
+    {
+      "number": 67,
+      "id": "quillclaw",
+      "forms": [
+        "Quilllet",
+        "Quillclaw",
+        "Quill Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/quillclaw-v4.webp",
+      "atlas": "./assets/roster/quillclaw-v5.webp",
+      "libraryFileId": "libfile_08bccca23d9881919ca71000d0ffc5f2",
+      "sourceFilename": "Three-Form Clockwork Quillclaw.png",
+      "sourceSha256": "18e6b3cec4c779aeae5fd57a2757d67652f98ee0d9fb85981719c2ab9d9fc72d",
+      "sourceBoxes": [
+        [
+          215,
+          319,
+          525,
+          633
+        ],
+        [
+          747,
+          248,
+          1293,
+          643
+        ],
+        [
+          1464,
+          129,
+          2085,
+          648
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "8130eddb11049a55999b12f6c00925398699fc68215c710d77d843776372b210"
+    },
+    {
+      "number": 68,
+      "id": "runemoth",
+      "forms": [
+        "Runelet",
+        "Runemoth",
+        "Rune Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/runemoth-v4.webp",
+      "atlas": "./assets/roster/runemoth-v5.webp",
+      "libraryFileId": "libfile_af6b4cfce08c8191b0c272a6b8a7c130",
+      "sourceFilename": "Three-form violet rune moth.png",
+      "sourceSha256": "f75b3031f32c7baabe9ca9ff5ea84545e0f7a58240593b6d1416cda94fb34473",
+      "sourceBoxes": [
+        [
+          235,
+          386,
+          480,
+          625
+        ],
+        [
+          835,
+          130,
+          1306,
+          648
+        ],
+        [
+          1499,
+          241,
+          2105,
+          608
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "e9a0c14d39b943cf232267966f5f5a6e21a6e765cd08cc81f01c6ab3d646ab29"
+    },
+    {
+      "number": 70,
+      "id": "thornglen",
+      "forms": [
+        "Thornlet",
+        "Thornglen",
+        "Thorn Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/thornglen-v4.webp",
+      "atlas": "./assets/roster/thornglen-v5.webp",
+      "libraryFileId": "libfile_dfa621ccb73c819190b4c4e56362c621",
+      "sourceFilename": "Thornglen\u2019s three thorn forms.png",
+      "sourceSha256": "8ce5353e1bc9915c8b7453d60a26986d90706609db80897c8a1051cb4844d113",
+      "sourceBoxes": [
+        [
+          183,
+          423,
+          479,
+          653
+        ],
+        [
+          776,
+          249,
+          1257,
+          657
+        ],
+        [
+          1423,
+          145,
+          2105,
+          667
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "21bc34eea8740976446bee5d89b09e26b7822d5aaf038fc97c27ae0fa36b8f2e"
+    },
+    {
+      "number": 71,
+      "id": "umberbloom",
+      "forms": [
+        "Umberlet",
+        "Umberbloom",
+        "Umber Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/umberbloom-v4.webp",
+      "atlas": "./assets/roster/umberbloom-v5.webp",
+      "libraryFileId": "libfile_fc194ffe66508191a93ebf6270c27f72",
+      "sourceFilename": "Umberbloom trio of masked earth revenants.png",
+      "sourceSha256": "fc2cd7e8ab3c7f2781a06a23ca0883b11f77ed5b0fad3d00a5da2aaecd8fa006",
+      "sourceBoxes": [
+        [
+          166,
+          319,
+          493,
+          641
+        ],
+        [
+          815,
+          114,
+          1285,
+          654
+        ],
+        [
+          1426,
+          95,
+          2136,
+          656
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "656c3e47bce94173addf3c5e8ac10256cd7ddbbe0ce8c8f335e32ca88f50d896"
+    },
+    {
+      "number": 72,
+      "id": "vesperspire",
+      "forms": [
+        "Vesperlet",
+        "Vesperspire",
+        "Vesper Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/vesperspire-v4.webp",
+      "atlas": "./assets/roster/vesperspire-v5.webp",
+      "libraryFileId": "libfile_137876e640dc8191acd2524b42571438",
+      "sourceFilename": "Vesperspire\u2019s Three-Form Twilight Faerie.png",
+      "sourceSha256": "2bb1072a4335735da5046a6d5fae88156b96c8610812869a847312445465cfa9",
+      "sourceBoxes": [
+        [
+          172,
+          244,
+          528,
+          629
+        ],
+        [
+          773,
+          63,
+          1280,
+          636
+        ],
+        [
+          1445,
+          64,
+          2113,
+          642
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "397e10f42731abb7180542566b0e031126b856aaee4d1e3ebb1b8e3edb3d5d95"
+    },
+    {
+      "number": 73,
+      "id": "willowmaw",
+      "forms": [
+        "Willowlet",
+        "Willowmaw",
+        "Willow Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/willowmaw-v4.webp",
+      "atlas": "./assets/roster/willowmaw-v5.webp",
+      "libraryFileId": "libfile_fbd79e96bd7c819180443eafee5c0ea6",
+      "sourceFilename": "Three-form willow ooze evolution.png",
+      "sourceSha256": "9b2eb30b5aa232717b10464ba0e794b0b253e44b42aa1c6c956de58e941eda25",
+      "sourceBoxes": [
+        [
+          222,
+          484,
+          509,
+          683
+        ],
+        [
+          863,
+          209,
+          1307,
+          682
+        ],
+        [
+          1472,
+          212,
+          2112,
+          678
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "7f536df4027149b4e386ed5674f91afefb648561b9e6d024f0058ba27faeb363"
+    },
+    {
+      "number": 74,
+      "id": "xyloveil",
+      "forms": [
+        "Xylolet",
+        "Xyloveil",
+        "Xylo Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/xyloveil-v4.webp",
+      "atlas": "./assets/roster/xyloveil-v5.webp",
+      "libraryFileId": "libfile_bbb26bcbd68c8191812033fdd4356938",
+      "sourceFilename": "Three-form amber salamander ooze.png",
+      "sourceSha256": "3daf95438bc5e8ede01d070f1b590125f025e3dbd809c46fa9a4799c02317baf",
+      "sourceBoxes": [
+        [
+          225,
+          459,
+          467,
+          625
+        ],
+        [
+          785,
+          357,
+          1301,
+          612
+        ],
+        [
+          1468,
+          306,
+          2135,
+          624
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "bc0159e5739025f973ec039ac7f6a9e1f262992ad497ab31862e8bb5b1a45078"
+    },
+    {
+      "number": 76,
+      "id": "zephyrfang",
+      "forms": [
+        "Zephyrlet",
+        "Zephyrfang",
+        "Zephyr Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/zephyrfang-v4.webp",
+      "atlas": "./assets/roster/zephyrfang-v5.webp",
+      "libraryFileId": "libfile_ca718bf2d21081918d5211a1711d942a",
+      "sourceFilename": "Zephyrfang\u2019s Rooted Wolf-Skull Trio.png",
+      "sourceSha256": "d934944ba6f10261449e7738612f441f15f91410a2895be61323fb2f2280682a",
+      "sourceBoxes": [
+        [
+          239,
+          391,
+          481,
+          628
+        ],
+        [
+          837,
+          247,
+          1331,
+          627
+        ],
+        [
+          1455,
+          229,
+          2108,
+          628
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "b90c8b3eb72635d87646c6a9df567d7e77c144fecb83627a11934291130785c5"
+    },
+    {
+      "number": 77,
+      "id": "ashenling",
+      "forms": [
+        "Ashenlet",
+        "Ashenling",
+        "Ashen Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/ashenling-v4.webp",
+      "atlas": "./assets/roster/ashenling-v5.webp",
+      "libraryFileId": "libfile_756184537aa88191b8a86300fc954163",
+      "sourceFilename": "Ashen construct\u2019s three-form evolution.png",
+      "sourceSha256": "b5187361412ee862c56e687e4d5b8d9d1b4f9bd803187b12d9cb9f7ba2303f1f",
+      "sourceBoxes": [
+        [
+          129,
+          366,
+          557,
+          626
+        ],
+        [
+          720,
+          185,
+          1285,
+          629
+        ],
+        [
+          1401,
+          140,
+          2133,
+          628
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "a2a9436eb518f962479c2f2da2f629ae39d6d548296e98d7a6571a5c6e95869c"
+    },
+    {
+      "number": 78,
+      "id": "berylhorn",
+      "forms": [
+        "Beryllet",
+        "Berylhorn",
+        "Beryl Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/berylhorn-v4.webp",
+      "atlas": "./assets/roster/berylhorn-v5.webp",
+      "libraryFileId": "libfile_15af3e731d60819196f9820143a28f21",
+      "sourceFilename": "Three beryl-horned wallaby forms.png",
+      "sourceSha256": "076817e05629db864609826b2306c9a18593fd27379a3f7ef9e31e2d9239065d",
+      "sourceBoxes": [
+        [
+          232,
+          328,
+          499,
+          633
+        ],
+        [
+          870,
+          88,
+          1314,
+          642
+        ],
+        [
+          1536,
+          102,
+          2085,
+          641
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "6fd3072cc4cbfa34cd89797c48a0902d950bbba2f34f09254428deb16b5ff744"
+    },
+    {
+      "number": 81,
+      "id": "eldermoth",
+      "forms": [
+        "Elderlet",
+        "Eldermoth",
+        "Elder Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/eldermoth-v4.webp",
+      "atlas": "./assets/roster/eldermoth-v5.webp",
+      "libraryFileId": "libfile_b199b8f9bb6c81919d9ccf3e06ef768a",
+      "sourceFilename": "Three-Form Amber Resin Eldermoth.png",
+      "sourceSha256": "d92faa00d90cdc2824bdda87d7b3b464ef3d5b3e845e4a22c58e450ba776f63d",
+      "sourceBoxes": [
+        [
+          219,
+          339,
+          514,
+          637
+        ],
+        [
+          749,
+          82,
+          1343,
+          666
+        ],
+        [
+          1427,
+          63,
+          2139,
+          664
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "06d3ff7d67a56ceeb41d438ae03e1a76545a47e205bc3171b23995e9ee64142d"
+    },
+    {
+      "number": 84,
+      "id": "hazelbloom",
+      "forms": [
+        "Hazellet",
+        "Hazelbloom",
+        "Hazel Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/hazelbloom-v4.webp",
+      "atlas": "./assets/roster/hazelbloom-v5.webp",
+      "libraryFileId": "libfile_20e082e00a6881918db0be8f5fa8d4c4",
+      "sourceFilename": "Hazelbloom Undead Giant Trio.png",
+      "sourceSha256": "f6406a3752ca1ae6e4c8db48865fb4bf835d590972b90305ed2e640c169e75e8",
+      "sourceBoxes": [
+        [
+          223,
+          370,
+          474,
+          641
+        ],
+        [
+          822,
+          158,
+          1299,
+          646
+        ],
+        [
+          1467,
+          151,
+          2124,
+          650
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "962157e7c577891e41041a5187ad51df693b9e2518e8f9b8a68dca19fdb74666"
+    },
+    {
+      "number": 85,
+      "id": "indigospire",
+      "forms": [
+        "Indigolet",
+        "Indigospire",
+        "Indigo Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/indigospire-v4.webp",
+      "atlas": "./assets/roster/indigospire-v5.webp",
+      "libraryFileId": "libfile_cf6fbf8a5c388191a117120376fc739b",
+      "sourceFilename": "Indigo faerie three-form progression.png",
+      "sourceSha256": "58890002a47f64d7fab211b9ae818a76997892caf5d799d490999a0c3fcada24",
+      "sourceBoxes": [
+        [
+          187,
+          321,
+          484,
+          647
+        ],
+        [
+          752,
+          112,
+          1299,
+          643
+        ],
+        [
+          1440,
+          129,
+          2123,
+          651
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "4827982e00837a52079df6a25483c13c44794b40393d01e762e819ab6cb876fc"
+    },
+    {
+      "number": 86,
+      "id": "junipermaw",
+      "forms": [
+        "Juniperlet",
+        "Junipermaw",
+        "Juniper Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/junipermaw-v4.webp",
+      "atlas": "./assets/roster/junipermaw-v5.webp",
+      "libraryFileId": "libfile_a7bde203668c8191be3935623619dada",
+      "sourceFilename": "Junipermaw\u2019s three-form evolution.png",
+      "sourceSha256": "ce45aaf156eeeef31572ccc169d614cec97587347da8db6f4ef2c8e917fedae9",
+      "sourceBoxes": [
+        [
+          280,
+          461,
+          452,
+          631
+        ],
+        [
+          880,
+          233,
+          1290,
+          634
+        ],
+        [
+          1450,
+          216,
+          2114,
+          615
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "7bb372e569c2689d66b8a77f6d9a29c98459e7fe505a6f09caf60dfe28f16082"
+    },
+    {
+      "number": 87,
+      "id": "kestrelveil",
+      "forms": [
+        "Kestrellet",
+        "Kestrelveil",
+        "Kestrel Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/kestrelveil-v4.webp",
+      "atlas": "./assets/roster/kestrelveil-v5.webp",
+      "libraryFileId": "libfile_40bd8e28fb4c8191833319be25f98f13",
+      "sourceFilename": "Kestrel Ooze Evolution Trio.png",
+      "sourceSha256": "99efa4cab9c9124e65c0013db6f85dd5534fdac767956580b3cfeb9b3485c32b",
+      "sourceBoxes": [
+        [
+          186,
+          391,
+          474,
+          631
+        ],
+        [
+          704,
+          260,
+          1305,
+          645
+        ],
+        [
+          1392,
+          118,
+          2121,
+          644
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "27f7bc237a018a99c4acdd6e2da45c92a1825e71d166eb7145042e685c478c09"
+    },
+    {
+      "number": 88,
+      "id": "lichenwing",
+      "forms": [
+        "Lichenlet",
+        "Lichenwing",
+        "Lichen Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/lichenwing-v4.webp",
+      "atlas": "./assets/roster/lichenwing-v5.webp",
+      "libraryFileId": "libfile_2703ad5519b8819191e8c8036a47dc0a",
+      "sourceFilename": "Rooted Lichen\u2019s Three-Form Evolution.png",
+      "sourceSha256": "1261914eab227403effbd3fa4ef5640f61552c4ea98292520c7b388030654323",
+      "sourceBoxes": [
+        [
+          214,
+          318,
+          483,
+          645
+        ],
+        [
+          687,
+          195,
+          1357,
+          659
+        ],
+        [
+          1466,
+          50,
+          2094,
+          651
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "74964c3393d1cc75c78103bc2651b0b34534dba4458d714f7b4ef8ad901ba4b3"
+    },
+    {
+      "number": 91,
+      "id": "opalhorn",
+      "forms": [
+        "Opallet",
+        "Opalhorn",
+        "Opal Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/opalhorn-v4.webp",
+      "atlas": "./assets/roster/opalhorn-v5.webp",
+      "libraryFileId": "libfile_940b73b97f4081919079b97a244b1d80",
+      "sourceFilename": "Opalhorn Hare: Three Ascendant Forms.png",
+      "sourceSha256": "509c3f403aba4aa155e559c77074d4860e199b77993a873d1f23aa65f99759ff",
+      "sourceBoxes": [
+        [
+          169,
+          249,
+          480,
+          669
+        ],
+        [
+          779,
+          46,
+          1360,
+          667
+        ],
+        [
+          1479,
+          43,
+          2119,
+          679
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "2e6cb6cf35c4a9fd58f480a07feca16170e46c1aafee6b62ff337bbac6b9d64f"
+    },
+    {
+      "number": 93,
+      "id": "quartzclaw",
+      "forms": [
+        "Quartzlet",
+        "Quartzclaw",
+        "Quartz Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/quartzclaw-v4.webp",
+      "atlas": "./assets/roster/quartzclaw-v5.webp",
+      "libraryFileId": "libfile_696764bf781c8191bd4b8a46760c978f",
+      "sourceFilename": "Three-form quartz lynx automaton.png",
+      "sourceSha256": "4c566001a1d845000c83cb56a573fdf95a9692af735a2827e31620769a1fbc2d",
+      "sourceBoxes": [
+        [
+          149,
+          300,
+          541,
+          651
+        ],
+        [
+          747,
+          137,
+          1353,
+          658
+        ],
+        [
+          1469,
+          88,
+          2110,
+          672
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "01bdb17fc04df603e8fa297e5748ff3aaf778d3a151d0eda0276905cc893401c"
+    },
+    {
+      "number": 94,
+      "id": "rimemoth",
+      "forms": [
+        "Rimelet",
+        "Rimemoth",
+        "Rime Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/rimemoth-v4.webp",
+      "atlas": "./assets/roster/rimemoth-v5.webp",
+      "libraryFileId": "libfile_1b581657a4f88191970dbb786e29207e",
+      "sourceFilename": "Three-Form Frost Spirit with Ice Eyes.png",
+      "sourceSha256": "5cfc9cc9b544c9ce009698c62c404103e8079e48e8080e37f943171bc4f7c6ee",
+      "sourceBoxes": [
+        [
+          192,
+          331,
+          506,
+          623
+        ],
+        [
+          731,
+          123,
+          1348,
+          628
+        ],
+        [
+          1425,
+          87,
+          2086,
+          645
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "d356d23526c2fd967bad0e144c13def4b0e98ab4796e8a6de54b50e9087aea90"
+    },
+    {
+      "number": 97,
+      "id": "verdantbloom",
+      "forms": [
+        "Verdantlet",
+        "Verdantbloom",
+        "Verdant Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/verdantbloom-v4.webp",
+      "atlas": "./assets/roster/verdantbloom-v5.webp",
+      "libraryFileId": "libfile_8f59f33ee9e4819185c638ef621b56d2",
+      "sourceFilename": "Three mossbound bog titan forms.png",
+      "sourceSha256": "98ec1ab0ff33eedec3f0ca2b907ed51d4d45c992b00070d20bea404915f3ccda",
+      "sourceBoxes": [
+        [
+          182,
+          308,
+          523,
+          698
+        ],
+        [
+          795,
+          154,
+          1332,
+          698
+        ],
+        [
+          1468,
+          146,
+          2131,
+          699
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "afdc671d9b2688d9f698f085e1c3c3b59bf20ff2a935c5f8b7c33b028943e00c"
+    },
+    {
+      "number": 98,
+      "id": "wraithspire",
+      "forms": [
+        "Wraithlet",
+        "Wraithspire",
+        "Wraith Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/wraithspire-v4.webp",
+      "atlas": "./assets/roster/wraithspire-v5.webp",
+      "libraryFileId": "libfile_eefdcb37760081919e8c21b4fbf86be0",
+      "sourceFilename": "Twin-headed wind faerie forms.png",
+      "sourceSha256": "20a88e52b8e7f7957f5017e9a16950277c049fd567c52fd7067236d6c597dc40",
+      "sourceBoxes": [
+        [
+          174,
+          233,
+          535,
+          614
+        ],
+        [
+          799,
+          37,
+          1305,
+          639
+        ],
+        [
+          1430,
+          27,
+          2127,
+          643
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "ae2a6abb34193b7380861a85720edc22b037f725c830f4dbcf97f0bad9fc2856"
+    },
+    {
+      "number": 100,
+      "id": "zirconveil",
+      "forms": [
+        "Zirconlet",
+        "Zirconveil",
+        "Zircon Sovereign"
+      ],
+      "previousAtlas": "./assets/roster/zirconveil-v4.webp",
+      "atlas": "./assets/roster/zirconveil-v5.webp",
+      "libraryFileId": "libfile_15917995a450819193a83859773f0cdb",
+      "sourceFilename": "Three-Form Zircon Lynx Ooze.png",
+      "sourceSha256": "ad21a584d4dc935c8116803f7913c751b1cc826d9055a2e0958679f3c4e83c3f",
+      "sourceBoxes": [
+        [
+          176,
+          370,
+          492,
+          634
+        ],
+        [
+          713,
+          287,
+          1388,
+          633
+        ],
+        [
+          1497,
+          85,
+          2103,
+          633
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "a94be323007a965324c7a5c8b5c33bfe6828c98dc4cf11da3c7ef0b4c178119a"
+    },
+    {
+      "number": 102,
+      "id": "basilgore",
+      "forms": [
+        "Basilling",
+        "Basilgore",
+        "Basil Exarch"
+      ],
+      "previousAtlas": "./assets/roster/basilgore-v4.webp",
+      "atlas": "./assets/roster/basilgore-v5.webp",
+      "libraryFileId": "libfile_3cfda53432408191a94b59a34278a165",
+      "sourceFilename": "Three-form basilisk monitor evolution.png",
+      "sourceSha256": "9d0fc3785d585503c7506fb6a02d82f2cb787f384a83d4549a092cdf77c30925",
+      "sourceBoxes": [
+        [
+          168,
+          414,
+          500,
+          664
+        ],
+        [
+          670,
+          307,
+          1344,
+          668
+        ],
+        [
+          1407,
+          128,
+          2112,
+          672
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "5794622e36e38c8fbc840eadb179e110c9188fdf4e580c47a06b1aca0b66a0c2"
+    },
+    {
+      "number": 103,
+      "id": "cobaltwisp",
+      "forms": [
+        "Cobaltling",
+        "Cobaltwisp",
+        "Cobalt Exarch"
+      ],
+      "previousAtlas": "./assets/roster/cobaltwisp-v4.webp",
+      "atlas": "./assets/roster/cobaltwisp-v5.webp",
+      "libraryFileId": "libfile_6b65647cd920819199d8e1cb946f311f",
+      "sourceFilename": "Cobaltwisp's Three Forms.png",
+      "sourceSha256": "03eb1000217a08daadbf25100457389be11392813e1a5cdb6e528454e709188c",
+      "sourceBoxes": [
+        [
+          223,
+          371,
+          478,
+          636
+        ],
+        [
+          839,
+          124,
+          1289,
+          653
+        ],
+        [
+          1433,
+          126,
+          2121,
+          645
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "e5e7ef5b2725ed2d4473fa7d10e64228f9b7d74bb0836fa0a4f855f7d54d4b23"
+    },
+    {
+      "number": 106,
+      "id": "fableroot",
+      "forms": [
+        "Fableling",
+        "Fableroot",
+        "Fable Exarch"
+      ],
+      "previousAtlas": "./assets/roster/fableroot-v4.webp",
+      "atlas": "./assets/roster/fableroot-v5.webp",
+      "libraryFileId": "libfile_1269934ff1588191ae7c44a39ca2f8c5",
+      "sourceFilename": "Three Forms of the Eyed Fableroot.png",
+      "sourceSha256": "42bff55fa4a7ebcbba89b9ca606e93cb8b5c03102fcf810804c6605b4c3a3764",
+      "sourceBoxes": [
+        [
+          185,
+          357,
+          493,
+          661
+        ],
+        [
+          785,
+          86,
+          1288,
+          667
+        ],
+        [
+          1411,
+          37,
+          2128,
+          664
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "384a8075d2242d8048213eb15bcabe5dc0aa37d58d7168cc4e5deb1dd58b7647"
+    },
+    {
+      "number": 108,
+      "id": "harborgaze",
+      "forms": [
+        "Harborling",
+        "Harborgaze",
+        "Harbor Exarch"
+      ],
+      "previousAtlas": "./assets/roster/harborgaze-v4.webp",
+      "atlas": "./assets/roster/harborgaze-v5.webp",
+      "libraryFileId": "libfile_1db5c0b3e86881919fcb1abeb8a38ee8",
+      "sourceFilename": "Three-Form Harbor Mastiff Progression.png",
+      "sourceSha256": "32c29ce9f73058810728992a26cf22e82246b5ee19ea6af1e3efd738f1cdf090",
+      "sourceBoxes": [
+        [
+          225,
+          342,
+          489,
+          630
+        ],
+        [
+          798,
+          217,
+          1347,
+          629
+        ],
+        [
+          1467,
+          260,
+          2117,
+          634
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "3954d26dd6546f9c69f8a44c9892d4048447be90883aac2df1cbf0813fa1a31e"
+    },
+    {
+      "number": 110,
+      "id": "jasperplume",
+      "forms": [
+        "Jasperling",
+        "Jasperplume",
+        "Jasper Exarch"
+      ],
+      "previousAtlas": "./assets/roster/jasperplume-v4.webp",
+      "atlas": "./assets/roster/jasperplume-v5.webp",
+      "libraryFileId": "libfile_592d8df7dd30819185281bcd8878600b",
+      "sourceFilename": "Three-Form Jasperplume Faerie Aberration.png",
+      "sourceSha256": "6e3bb3385193aa23d9b3808212155abf2580ee65743936c40cb2b6e75314a1ba",
+      "sourceBoxes": [
+        [
+          185,
+          342,
+          521,
+          659
+        ],
+        [
+          812,
+          65,
+          1276,
+          657
+        ],
+        [
+          1414,
+          78,
+          2118,
+          657
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "02d4e7bdfdbeb5645abf07a9ad4ae90e9369748d0f6e43af6ef1812e4494b5d1"
+    },
+    {
+      "number": 111,
+      "id": "kindlekin",
+      "forms": [
+        "Kindleling",
+        "Kindlekin",
+        "Kindle Exarch"
+      ],
+      "previousAtlas": "./assets/roster/kindlekin-v4.webp",
+      "atlas": "./assets/roster/kindlekin-v5.webp",
+      "libraryFileId": "libfile_f55a571855c081918b0965de6c6f9c67",
+      "sourceFilename": "Three-form ember giant lineage.png",
+      "sourceSha256": "377dd6f73b51b56ff92a58db507a638e8f1530904c13cc1572527858b1b3bd1e",
+      "sourceBoxes": [
+        [
+          147,
+          323,
+          541,
+          665
+        ],
+        [
+          758,
+          95,
+          1338,
+          675
+        ],
+        [
+          1456,
+          130,
+          2134,
+          667
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "43d732f3b006a3c0e4ea35953a0f55e56d5e9d25a25bc0c957f83057046331c3"
+    },
+    {
+      "number": 112,
+      "id": "lotusgore",
+      "forms": [
+        "Lotusling",
+        "Lotusgore",
+        "Lotus Exarch"
+      ],
+      "previousAtlas": "./assets/roster/lotusgore-v4.webp",
+      "atlas": "./assets/roster/lotusgore-v5.webp",
+      "libraryFileId": "libfile_f2e3f22e1a848191ba4d0f7f57d4ea64",
+      "sourceFilename": "Lotusgore: Three-form hippo aberration.png",
+      "sourceSha256": "25efaa29f79ece113770a95388e6e00206f04e24712178430c2151d7a4604db4",
+      "sourceBoxes": [
+        [
+          137,
+          337,
+          491,
+          672
+        ],
+        [
+          705,
+          220,
+          1358,
+          677
+        ],
+        [
+          1479,
+          75,
+          2111,
+          680
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "1ee38170b1b529f52535c3caaf5cc045e88f5f33363b2ae914efcd25e9d3cc08"
+    },
+    {
+      "number": 113,
+      "id": "mistralwisp",
+      "forms": [
+        "Mistralling",
+        "Mistralwisp",
+        "Mistral Exarch"
+      ],
+      "previousAtlas": "./assets/roster/mistralwisp-v4.webp",
+      "atlas": "./assets/roster/mistralwisp-v5.webp",
+      "libraryFileId": "libfile_d870f509c9e881919479f27111e331e5",
+      "sourceFilename": "Three-Form Mistralwisp Raptor Atlas.png",
+      "sourceSha256": "3baf7ac2e9677b1a7419d4c8cb0d2c6ba3f91baba888520698eb1c314a39d912",
+      "sourceBoxes": [
+        [
+          139,
+          285,
+          555,
+          671
+        ],
+        [
+          710,
+          63,
+          1340,
+          670
+        ],
+        [
+          1425,
+          75,
+          2139,
+          677
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "2c53219dbc730e639dd987e3864af8f0423834d7938510c36f034363c8a84acc"
+    },
+    {
+      "number": 115,
+      "id": "onyxflare",
+      "forms": [
+        "Onyxling",
+        "Onyxflare",
+        "Onyx Exarch"
+      ],
+      "previousAtlas": "./assets/roster/onyxflare-v4.webp",
+      "atlas": "./assets/roster/onyxflare-v5.webp",
+      "libraryFileId": "libfile_9d762dd7cb6081918b6162f000083a34",
+      "sourceFilename": "Onyxflare\u2019s Three-Form Evolution.png",
+      "sourceSha256": "27bd908b145d179c62f33e30c790995ddc5db7ed6e2e7437efe7f262a17372dd",
+      "sourceBoxes": [
+        [
+          187,
+          428,
+          480,
+          670
+        ],
+        [
+          710,
+          280,
+          1349,
+          674
+        ],
+        [
+          1424,
+          193,
+          2144,
+          678
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "ff167852f0e2a5346db62e8548b5e56addc3f748b5935e2886b10ba0a68e587b"
+    },
+    {
+      "number": 116,
+      "id": "petalroot",
+      "forms": [
+        "Petalling",
+        "Petalroot",
+        "Petal Exarch"
+      ],
+      "previousAtlas": "./assets/roster/petalroot-v4.webp",
+      "atlas": "./assets/roster/petalroot-v5.webp",
+      "libraryFileId": "libfile_2639a9cd8e488191aad9f6609ff2c16e",
+      "sourceFilename": "Three blooming Petalroot forms.png",
+      "sourceSha256": "15f9c55f12bd2466d6d92038c8aefccf00b9441df078ead179b6348d0fe67b45",
+      "sourceBoxes": [
+        [
+          225,
+          436,
+          496,
+          644
+        ],
+        [
+          865,
+          166,
+          1295,
+          648
+        ],
+        [
+          1444,
+          155,
+          2141,
+          648
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "958d7f0ab0469c76328f7fe3f87073090c239d90a6d5ae09217065115616be07"
+    },
+    {
+      "number": 117,
+      "id": "quasarshard",
+      "forms": [
+        "Quasarling",
+        "Quasarshard",
+        "Quasar Exarch"
+      ],
+      "previousAtlas": "./assets/roster/quasarshard-v4.webp",
+      "atlas": "./assets/roster/quasarshard-v5.webp",
+      "libraryFileId": "libfile_67344516deac81918ead3243b7a32ec0",
+      "sourceFilename": "Quasarshard's Three-Form Evolution.png",
+      "sourceSha256": "e201d9a0caa3130addec6ed8c17d0bef62003193b4338c7f3c0d3efef95ac947",
+      "sourceBoxes": [
+        [
+          212,
+          402,
+          452,
+          638
+        ],
+        [
+          776,
+          136,
+          1224,
+          637
+        ],
+        [
+          1397,
+          163,
+          2117,
+          639
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "4d88fd8d6238db4dd3d8733ac1beca02a19b2c1b8d320bc5bd77227f61453ee0"
+    },
+    {
+      "number": 118,
+      "id": "ravengaze",
+      "forms": [
+        "Ravenling",
+        "Ravengaze",
+        "Raven Exarch"
+      ],
+      "previousAtlas": "./assets/roster/ravengaze-v4.webp",
+      "atlas": "./assets/roster/ravengaze-v5.webp",
+      "libraryFileId": "libfile_7f70cd7128dc8191a83be862a532a3e9",
+      "sourceFilename": "Three-form celestial storm raven.png",
+      "sourceSha256": "09a1fc374ac163d2afc323d28645f9b922761a4a84fcfe3ea119509d014ced75",
+      "sourceBoxes": [
+        [
+          223,
+          354,
+          473,
+          651
+        ],
+        [
+          822,
+          219,
+          1350,
+          655
+        ],
+        [
+          1434,
+          113,
+          2125,
+          651
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "aa8204dad2999767ec309e6df01e6e7ea4ec6d95cc2ec97d4eeccb82f6525530"
+    },
+    {
+      "number": 120,
+      "id": "talonplume",
+      "forms": [
+        "Talonling",
+        "Talonplume",
+        "Talon Exarch"
+      ],
+      "previousAtlas": "./assets/roster/talonplume-v4.webp",
+      "atlas": "./assets/roster/talonplume-v5.webp",
+      "libraryFileId": "libfile_a449e35369c48191b5028ff9a9e27c90",
+      "sourceFilename": "Talonplume Three-Form Avian Guardian.png",
+      "sourceSha256": "6a681a1f01cf8899602f8aa63b637cbfdc787f50fc9156c9b083062bf83dcfd4",
+      "sourceBoxes": [
+        [
+          209,
+          302,
+          505,
+          646
+        ],
+        [
+          785,
+          102,
+          1307,
+          649
+        ],
+        [
+          1407,
+          101,
+          2141,
+          641
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "207855ce55ecfc2e8eb0ea6d87c42987021f8d0466f9b605a4ff7ae098c065c5"
+    },
+    {
+      "number": 124,
+      "id": "xanthjaw",
+      "forms": [
+        "Xanthling",
+        "Xanthjaw",
+        "Xanth Exarch"
+      ],
+      "previousAtlas": "./assets/roster/xanthjaw-v4.webp",
+      "atlas": "./assets/roster/xanthjaw-v5.webp",
+      "libraryFileId": "libfile_35dff587b0108191a35163b755f40df8",
+      "sourceFilename": "Three Forms of the Xanthjaw Giant.png",
+      "sourceSha256": "f4ee9a473ded4213a8a288f407e4409516e0091bf92f5f854597ad376d13e462",
+      "sourceBoxes": [
+        [
+          171,
+          324,
+          528,
+          665
+        ],
+        [
+          764,
+          58,
+          1326,
+          664
+        ],
+        [
+          1449,
+          96,
+          2128,
+          668
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "51b8e9b447e20b066d4ad835ea2caddb80e7a3077b0a908c5235102d5e878f70"
+    },
+    {
+      "number": 128,
+      "id": "brackengaze",
+      "forms": [
+        "Brackenling",
+        "Brackengaze",
+        "Bracken Exarch"
+      ],
+      "previousAtlas": "./assets/roster/brackengaze-v4.webp",
+      "atlas": "./assets/roster/brackengaze-v5.webp",
+      "libraryFileId": "libfile_262d2c0aa25481918c70ed8d90913faa",
+      "sourceFilename": "Bracken Boar-Tiger Evolution.png",
+      "sourceSha256": "177df27a22bdbec71e7ec2246cc3c99fc8f775c10f1c2449a177e5093451a46a",
+      "sourceBoxes": [
+        [
+          143,
+          438,
+          525,
+          700
+        ],
+        [
+          714,
+          342,
+          1388,
+          700
+        ],
+        [
+          1462,
+          144,
+          2139,
+          701
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "ffd60266b0bf3b67bf7668b56b7d15dcf3a412bf982da8bc160076af7d3c59d1"
+    },
+    {
+      "number": 129,
+      "id": "coralfang",
+      "forms": [
+        "Coralling",
+        "Coralfang",
+        "Coral Exarch"
+      ],
+      "previousAtlas": "./assets/roster/coralfang-v4.webp",
+      "atlas": "./assets/roster/coralfang-v5.webp",
+      "libraryFileId": "libfile_fd801a7f7f688191a3ef40290f4e72c6",
+      "sourceFilename": "Coral Ooze Evolution Trio.png",
+      "sourceSha256": "2975495161503f21c57d206aae1fe07f9f6bcf941c79fc6f157e90b068e82213",
+      "sourceBoxes": [
+        [
+          190,
+          293,
+          459,
+          627
+        ],
+        [
+          794,
+          106,
+          1296,
+          632
+        ],
+        [
+          1470,
+          92,
+          2102,
+          640
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "aa5ee0f5c2243e03519768786dc7f0acbc1b628a26f7016a5a0e02c83aee23eb"
+    },
+    {
+      "number": 130,
+      "id": "daggerplume",
+      "forms": [
+        "Daggerling",
+        "Daggerplume",
+        "Dagger Exarch"
+      ],
+      "previousAtlas": "./assets/roster/daggerplume-v4.webp",
+      "atlas": "./assets/roster/daggerplume-v5.webp",
+      "libraryFileId": "libfile_4449e9b8b73c8191b6e0a0ac9d78165c",
+      "sourceFilename": "Daggerplume ooze, three forms.png",
+      "sourceSha256": "eb9608c5070cf4171b3b85955935903d7d8f36995cc68842a9f721e15233646f",
+      "sourceBoxes": [
+        [
+          105,
+          419,
+          524,
+          659
+        ],
+        [
+          698,
+          119,
+          1306,
+          668
+        ],
+        [
+          1421,
+          56,
+          2117,
+          666
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "5c456a4fcda64daebb6d0a08f5155433edffdb377b983ad30d6a39b2ae69246c"
+    },
+    {
+      "number": 133,
+      "id": "gossamerwisp",
+      "forms": [
+        "Gossamerling",
+        "Gossamerwisp",
+        "Gossamer Exarch"
+      ],
+      "previousAtlas": "./assets/roster/gossamerwisp-v4.webp",
+      "atlas": "./assets/roster/gossamerwisp-v5.webp",
+      "libraryFileId": "libfile_6c2c8d344aac8191843b6232032ea793",
+      "sourceFilename": "Gossamer Moth's Three Forms.png",
+      "sourceSha256": "b9485526cba9068a04c043de07a4ffcbb1e6799c22c80a3e6f177315697d0273",
+      "sourceBoxes": [
+        [
+          173,
+          347,
+          466,
+          665
+        ],
+        [
+          663,
+          76,
+          1312,
+          665
+        ],
+        [
+          1401,
+          96,
+          2115,
+          671
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "9f52b1774381fbf45cdfeea050e1bb0ce01d4d6191fc41ba4024766cf0765911"
+    },
+    {
+      "number": 134,
+      "id": "hearthjaw",
+      "forms": [
+        "Hearthling",
+        "Hearthjaw",
+        "Hearth Exarch"
+      ],
+      "previousAtlas": "./assets/roster/hearthjaw-v4.webp",
+      "atlas": "./assets/roster/hearthjaw-v5.webp",
+      "libraryFileId": "libfile_9aaba283080c8191ad951f13a18fe4df",
+      "sourceFilename": "Hearthjaw: Three skeletal badger forms.png",
+      "sourceSha256": "85a1359be26ebbc3e49505531c4d56d0d29e5f795cf0b5e1a5a7dbac81f84139",
+      "sourceBoxes": [
+        [
+          199,
+          409,
+          501,
+          627
+        ],
+        [
+          753,
+          310,
+          1360,
+          628
+        ],
+        [
+          1467,
+          242,
+          2122,
+          630
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "e6b19e95d7fd56806cdd54189cbeced4f63baacf642dca2967f349be3aac9fe8"
+    },
+    {
+      "number": 135,
+      "id": "isletflare",
+      "forms": [
+        "Isletling",
+        "Isletflare",
+        "Islet Exarch"
+      ],
+      "previousAtlas": "./assets/roster/isletflare-v4.webp",
+      "atlas": "./assets/roster/isletflare-v5.webp",
+      "libraryFileId": "libfile_85ea6d7627208191bdd0775dc320b256",
+      "sourceFilename": "Three-form skeletal crocodile spirit.png",
+      "sourceSha256": "d8f8c76b31fc548648ee26855c229f6b30b9d300116fb85e6ff88032333c7753",
+      "sourceBoxes": [
+        [
+          214,
+          434,
+          531,
+          629
+        ],
+        [
+          716,
+          276,
+          1372,
+          628
+        ],
+        [
+          1468,
+          268,
+          2148,
+          640
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "31024d927441c8cf3cae6188ab5ada7c3212bc6c332554f05cfb9cb0e78f841a"
+    },
+    {
+      "number": 137,
+      "id": "kryptonshard",
+      "forms": [
+        "Kryptonling",
+        "Kryptonshard",
+        "Krypton Exarch"
+      ],
+      "previousAtlas": "./assets/roster/kryptonshard-v4.webp",
+      "atlas": "./assets/roster/kryptonshard-v5.webp",
+      "libraryFileId": "libfile_acd8c7688b50819186decc1280ce3a32",
+      "sourceFilename": "Kryptonshard\u2019s three-form stone evolution.png",
+      "sourceSha256": "496378fbb0df2838ed177ddb5717f1a7d794e978d3bbc3fd612c394d27857404",
+      "sourceBoxes": [
+        [
+          173,
+          322,
+          512,
+          682
+        ],
+        [
+          728,
+          19,
+          1363,
+          689
+        ],
+        [
+          1436,
+          29,
+          2146,
+          682
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "326b24356fe18870667285c3458f23efa4ded770b94a790c96c4fb2393d9b90d"
+    },
+    {
+      "number": 139,
+      "id": "miragefang",
+      "forms": [
+        "Mirageling",
+        "Miragefang",
+        "Mirage Exarch"
+      ],
+      "previousAtlas": "./assets/roster/miragefang-v4.webp",
+      "atlas": "./assets/roster/miragefang-v5.webp",
+      "libraryFileId": "libfile_28766c92282c8191af3c65b688560bf4",
+      "sourceFilename": "Miragefang\u2019s three-form evolution.png",
+      "sourceSha256": "21ef7b0b9f222f2b18227a704ce5a066f786522b8a0925b2088ee6140eabed3d",
+      "sourceBoxes": [
+        [
+          174,
+          337,
+          486,
+          645
+        ],
+        [
+          799,
+          75,
+          1291,
+          655
+        ],
+        [
+          1460,
+          94,
+          2107,
+          655
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "6fced8f8e6faf1f07bbca1503be98f7818fc84da44e43389f8834025075951b5"
+    },
+    {
+      "number": 140,
+      "id": "nectarplume",
+      "forms": [
+        "Nectarling",
+        "Nectarplume",
+        "Nectar Exarch"
+      ],
+      "previousAtlas": "./assets/roster/nectarplume-v4.webp",
+      "atlas": "./assets/roster/nectarplume-v5.webp",
+      "libraryFileId": "libfile_1888863b226c8191a245c9db6632f58a",
+      "sourceFilename": "Three Nectarplume forms with anteater snouts.png",
+      "sourceSha256": "27dd8146cde6832f2485d3d2009c7f5328eb81b0b1a933feb0a1c2a17b8e45c7",
+      "sourceBoxes": [
+        [
+          154,
+          330,
+          541,
+          616
+        ],
+        [
+          638,
+          303,
+          1395,
+          614
+        ],
+        [
+          1494,
+          120,
+          2141,
+          617
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "d0fd5d4f203dfe33a3dab45018ddbacc97802b8dfc1de2949c261fd3bf861fc5"
+    },
+    {
+      "number": 141,
+      "id": "oraclekin",
+      "forms": [
+        "Oracleling",
+        "Oraclekin",
+        "Oracle Exarch"
+      ],
+      "previousAtlas": "./assets/roster/oraclekin-v4.webp",
+      "atlas": "./assets/roster/oraclekin-v5.webp",
+      "libraryFileId": "libfile_ed19a83b78f48191bf67671f5d2d2a56",
+      "sourceFilename": "Oraclekin\u2019s Three-Form Owl-Bear Progression.png",
+      "sourceSha256": "9cc3c7b0173eee01e1116157730ce9199158592d798ad9052024459c0fc5ee07",
+      "sourceBoxes": [
+        [
+          158,
+          343,
+          518,
+          679
+        ],
+        [
+          628,
+          274,
+          1352,
+          679
+        ],
+        [
+          1436,
+          148,
+          2106,
+          685
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "b16f1b67a590a6b81210fe1a65aba7a81d45277f398b5a5ffcc66eddbb1bff4d"
+    },
+    {
+      "number": 142,
+      "id": "pewtergore",
+      "forms": [
+        "Pewterling",
+        "Pewtergore",
+        "Pewter Exarch"
+      ],
+      "previousAtlas": "./assets/roster/pewtergore-v4.webp",
+      "atlas": "./assets/roster/pewtergore-v5.webp",
+      "libraryFileId": "libfile_92574d02f74c8191b25df0937cd97284",
+      "sourceFilename": "Tusked Pewter Ooze Trio.png",
+      "sourceSha256": "d4a07bcc3ad118d9b13b24e62e4f1a8efce7c6b4313accbbc66436df05fa8762",
+      "sourceBoxes": [
+        [
+          137,
+          341,
+          556,
+          654
+        ],
+        [
+          771,
+          50,
+          1307,
+          653
+        ],
+        [
+          1416,
+          77,
+          2101,
+          660
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "5594b90b3ed4080b45d0be8adc73a6b8916457243d2c0794dec91c7495d1ea77"
+    },
+    {
+      "number": 144,
+      "id": "ripplejaw",
+      "forms": [
+        "Rippleling",
+        "Ripplejaw",
+        "Ripple Exarch"
+      ],
+      "previousAtlas": "./assets/roster/ripplejaw-v4.webp",
+      "atlas": "./assets/roster/ripplejaw-v5.webp",
+      "libraryFileId": "libfile_5026bd49bd90819190f18b3ed9b0f0c5",
+      "sourceFilename": "Three-form Ripplejaw water turtles.png",
+      "sourceSha256": "bb0e202554fd4ec0481f177440079c5514199981b9968fc7822d7e39246be3f7",
+      "sourceBoxes": [
+        [
+          190,
+          424,
+          452,
+          653
+        ],
+        [
+          774,
+          251,
+          1294,
+          656
+        ],
+        [
+          1463,
+          161,
+          2107,
+          661
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "307fb12676e6642ce016a2a9d67d25119b86c48569c230c7127d3b31a254232f"
+    },
+    {
+      "number": 146,
+      "id": "truffleroot",
+      "forms": [
+        "Truffleling",
+        "Truffleroot",
+        "Truffle Exarch"
+      ],
+      "previousAtlas": "./assets/roster/truffleroot-v4.webp",
+      "atlas": "./assets/roster/truffleroot-v5.webp",
+      "libraryFileId": "libfile_bc1dbf12e97081919f20b808329c765b",
+      "sourceFilename": "Truffleroot: Three Woodland Giant Forms.png",
+      "sourceSha256": "64034f037d23cf0e84914df5199b334a9a3c7f1e7f40d5057d5485ccc535cca1",
+      "sourceBoxes": [
+        [
+          207,
+          301,
+          533,
+          660
+        ],
+        [
+          814,
+          88,
+          1303,
+          663
+        ],
+        [
+          1478,
+          118,
+          2107,
+          662
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "5956d722e443b62baa9751202cc24af69218d98f29471bec38668e409d7db8fc"
+    },
+    {
+      "number": 148,
+      "id": "violetgaze",
+      "forms": [
+        "Violetling",
+        "Violetgaze",
+        "Violet Exarch"
+      ],
+      "previousAtlas": "./assets/roster/violetgaze-v4.webp",
+      "atlas": "./assets/roster/violetgaze-v5.webp",
+      "libraryFileId": "libfile_b9ec3f9789e88191bfda086561208070",
+      "sourceFilename": "Three-Form Violet Skeletal Panther.png",
+      "sourceSha256": "b382546f1ab3b5183015f2d807dbfaf0afe85ef91dbb93d208b07c4d45682dac",
+      "sourceBoxes": [
+        [
+          185,
+          385,
+          477,
+          613
+        ],
+        [
+          693,
+          220,
+          1341,
+          616
+        ],
+        [
+          1418,
+          213,
+          2127,
+          618
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "688ac674bd37fc63dd55608cecfec61a6d7ff69aba05de60856f75d5a25bfbd7"
+    },
+    {
+      "number": 149,
+      "id": "wardenfang",
+      "forms": [
+        "Wardenling",
+        "Wardenfang",
+        "Warden Exarch"
+      ],
+      "previousAtlas": "./assets/roster/wardenfang-v4.webp",
+      "atlas": "./assets/roster/wardenfang-v5.webp",
+      "libraryFileId": "libfile_f65cbd298f808191aa66f0eca5d6cf11",
+      "sourceFilename": "Three-form emerald eye warden.png",
+      "sourceSha256": "ccd22b872c32a6b2fd8990802d54db8ea330873d7e2dc99f6f8e6eada7a1c438",
+      "sourceBoxes": [
+        [
+          169,
+          269,
+          469,
+          684
+        ],
+        [
+          713,
+          66,
+          1339,
+          686
+        ],
+        [
+          1417,
+          95,
+          2126,
+          687
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "44cab357e18295d4c6d166f7220d305293e0acb4cf3db233bfee32fb49b15bdd"
+    },
+    {
+      "number": 150,
+      "id": "zodiacplume",
+      "forms": [
+        "Zodiacling",
+        "Zodiacplume",
+        "Zodiac Exarch"
+      ],
+      "previousAtlas": "./assets/roster/zodiacplume-v4.webp",
+      "atlas": "./assets/roster/zodiacplume-v5.webp",
+      "libraryFileId": "libfile_9ed1c3d794548191aaf3b96f25c13e50",
+      "sourceFilename": "Storm Giant\u2019s Three-Form Ascension.png",
+      "sourceSha256": "51bcd2d9b30591a6bd38d44b30cb95617febca5bdc577d77b10a424b66e021db",
+      "sourceBoxes": [
+        [
+          134,
+          303,
+          567,
+          655
+        ],
+        [
+          784,
+          37,
+          1337,
+          660
+        ],
+        [
+          1404,
+          50,
+          2148,
+          660
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "007f327590f9f706b02e3297d385ddcdc33c452379bba0e7051d7f009578ded4"
+    }
+  ]
+}

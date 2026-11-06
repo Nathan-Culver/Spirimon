@@ -54,94 +54,94 @@
     {
       "entry": 2,
       "id": "dewveil",
-      "atlas": "./assets/roster/dewveil-v4.webp",
+      "atlas": "./assets/roster/dewveil-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 81136,
-      "sha256": "dd29625e353c7a5124c3500979737809fdb09ec419ab7e4448d1035c1f32116f",
+      "bytes": 71038,
+      "sha256": "8b3870e457ccfef90a1d138ecc3acbe5ccfc52a592b3d6bc9298cee29effe675",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Dewbud",
           "bounds": [
-            66,
-            129,
-            190,
+            71,
+            128,
+            185,
             245
           ],
-          "visiblePixels": 8628,
-          "sha256": "d4ffb290cba7ae03bccb8682f40123ac7bb8059ad1b163e5492c4c6db695a44a"
+          "visiblePixels": 8620,
+          "sha256": "0003b51b72d6f268e023373a764bd8395aa2743728897065346a007394038cef"
         },
         {
           "name": "Dewveil",
           "bounds": [
-            42,
-            45,
-            213,
-            246
+            35,
+            40,
+            220,
+            245
           ],
-          "visiblePixels": 13710,
-          "sha256": "1c8c4bcf446fec8491859f46c038d6ef2d75a37ef9343d2f82d0feb963fb7af4"
+          "visiblePixels": 15071,
+          "sha256": "9c5a6429bf15bd669e6e3a2bfd63376594224a13885bbf1a5007a1400cf0017c"
         },
         {
           "name": "Sundew Regent",
           "bounds": [
             13,
-            48,
+            42,
             243,
             245
           ],
-          "visiblePixels": 19813,
-          "sha256": "92129c18e2d374d947cbbc9af0753c916212fe71149e5fc2c043a3f8f26dee18"
+          "visiblePixels": 20475,
+          "sha256": "59ea4878c2af54cdf19068f790b5b07f73e5ca892306a9017c5ae7e517249a5b"
         }
       ]
     },
     {
       "entry": 3,
       "id": "zephyrtap",
-      "atlas": "./assets/roster/zephyrtap-v4.webp",
+      "atlas": "./assets/roster/zephyrtap-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 82378,
-      "sha256": "cbd2cdd558288d3d79a970e1e153e6de1a1572a976c1de1ecdd036e74919d2fa",
+      "bytes": 68092,
+      "sha256": "5215a0b315d4cc48b988e13040c4191cb1ee8c2f4a4d59bb38245c32d19a07dc",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Gustling",
           "bounds": [
-            54,
-            116,
-            202,
+            43,
+            105,
+            212,
             246
           ],
-          "visiblePixels": 11360,
-          "sha256": "c051bb33e449d0ad49132b2ec9e669686d121cb324c3019ee928196de866b8e8"
+          "visiblePixels": 12876,
+          "sha256": "943b48922adc9ac9251d0ea3b56640978452780ef31a524ea8d8051dd25210bc"
         },
         {
           "name": "Zephyrtap",
           "bounds": [
             14,
-            88,
+            75,
             241,
-            245
+            246
           ],
-          "visiblePixels": 18824,
-          "sha256": "da08a121e957d949d6ec9df7f6fafa907c66d511b4cd0873b4b682923b13c9c0"
+          "visiblePixels": 20678,
+          "sha256": "9c84a39d8ff3cd43fa20d7b027add28c261e03704d2ba7b9ae475c63726e02f3"
         },
         {
           "name": "Tempest Treader",
           "bounds": [
-            12,
-            51,
-            243,
-            245
+            13,
+            33,
+            244,
+            246
           ],
-          "visiblePixels": 30645,
-          "sha256": "dd1fba12ad912004e41f0521e7ab0fd05aea1a63a7b39f321b1d9e78fa3b6918"
+          "visiblePixels": 31876,
+          "sha256": "8c4fbf7c24b353843e576bed7559a5f507936e26c76eaeb66ce6ce26a7da75a1"
         }
       ]
     },
@@ -430,47 +430,47 @@
     {
       "entry": 10,
       "id": "aurelattice",
-      "atlas": "./assets/roster/aurelattice-v4.webp",
+      "atlas": "./assets/roster/aurelattice-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 89942,
-      "sha256": "d8de25e5df38a986cdaa4171020079921fd9f3cde2721e1f920be2df99026c31",
+      "bytes": 77400,
+      "sha256": "1cd22503d96654695eaf4281b59180aa088a70d199df710fe94e86d9e0136c97",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Sparkwrit",
           "bounds": [
-            66,
+            62,
             125,
-            190,
+            194,
             245
           ],
-          "visiblePixels": 8690,
-          "sha256": "b3a04d028c63c44246b73cb1a5a795df5194ecc59a74d2f0646de16edd19ecc5"
+          "visiblePixels": 9971,
+          "sha256": "5a253fed03b8547f7dcedfe031e56900a0177232e7c3d44dbe76a42316ba9829"
         },
         {
           "name": "Aurelattice",
           "bounds": [
-            13,
-            52,
+            12,
+            42,
             244,
-            245
+            246
           ],
-          "visiblePixels": 20025,
-          "sha256": "9941aec83b329b11be5a0b699d9205f2cbc98d1328824ba05e842555c9dac466"
+          "visiblePixels": 23520,
+          "sha256": "07fae6f709e1baafe0beb38db36323a325942fa45e5d4ea365b498847deaf66d"
         },
         {
           "name": "Solar Mechanarch",
           "bounds": [
             23,
-            41,
+            35,
             231,
             245
           ],
-          "visiblePixels": 15829,
-          "sha256": "e4a17d3e5a336f5e9de9f0167948a4c00fdbcb17666abad46bb0fdafe0dfc141"
+          "visiblePixels": 17974,
+          "sha256": "393f5fb59332e6e6d2e656771b8e4c96063c0f04294fd2efe59cf3c4ec55f272"
         }
       ]
     },
@@ -618,94 +618,94 @@
     {
       "entry": 14,
       "id": "bronzewade",
-      "atlas": "./assets/roster/bronzewade-v4.webp",
+      "atlas": "./assets/roster/bronzewade-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 59186,
-      "sha256": "d74455b499287158c1317abc871d0cb19fc3bd3e11532ad78115d0bc815149ba",
+      "bytes": 55278,
+      "sha256": "cf7c71d2532ba63c57366f0f52f4d74c2e09dc7ed71d68c46a56d0d831e5b737",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Rivetreed",
           "bounds": [
-            70,
-            122,
-            186,
-            245
+            64,
+            113,
+            191,
+            246
           ],
-          "visiblePixels": 5777,
-          "sha256": "240a71a0341b73aa2c2f4321e5ab158aa251f0c9bb329f7257893c8570bafee1"
+          "visiblePixels": 7490,
+          "sha256": "118722490b8d87b639fa3dada00540a34f02287516176a323ca397417879e5c9"
         },
         {
           "name": "Bronzewade",
           "bounds": [
-            40,
             36,
-            216,
+            30,
+            219,
             245
           ],
-          "visiblePixels": 11336,
-          "sha256": "97a9e357e4a3b327fcc5ec5eba6bd771a51f7808d6a88563c42e3fcd3da2a105"
+          "visiblePixels": 13514,
+          "sha256": "bb0c134ce771e81a43f7839c2677a4b3812cf5037acc38157e37e3053e4e737a"
         },
         {
           "name": "Heron Magistrate",
           "bounds": [
-            13,
             23,
-            243,
+            14,
+            233,
             245
           ],
-          "visiblePixels": 22123,
-          "sha256": "d2d9ebcc14f9e26d8095008162a41648ace64b5b6a8adcb583ad63231acd8776"
+          "visiblePixels": 23505,
+          "sha256": "132911ad0eea99603e11c6940fdda36ecdfeb2e5761fe8ccef6b099b7ce2d965"
         }
       ]
     },
     {
       "entry": 15,
       "id": "jarjell",
-      "atlas": "./assets/roster/jarjell.webp",
+      "atlas": "./assets/roster/jarjell-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 88634,
-      "sha256": "406d3f1f97b4a87b26783d4e217d54f744f956e194642d4e6a06b86bbf7b5009",
+      "bytes": 61826,
+      "sha256": "2f3720b7454f308c67bc3e54cb843259d6cc48784ae9cb511c4d5ac67c8f8283",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Lacquib",
           "bounds": [
-            38,
-            108,
-            218,
-            248
+            37,
+            93,
+            217,
+            246
           ],
-          "visiblePixels": 13484,
-          "sha256": "1a9f18f141ab076a5f39b7eb7420f8761f5cd382ce320b97824661ebd45e735e"
+          "visiblePixels": 14438,
+          "sha256": "e21b2f4ce01a514c1beaaf32a236d168f3c15d37fdc10053ee9d07d2495af8ac"
         },
         {
           "name": "Jarjell",
           "bounds": [
-            22,
-            37,
-            234,
-            248
+            19,
+            23,
+            236,
+            245
           ],
-          "visiblePixels": 20423,
-          "sha256": "88adbd776ed21ff878515c6abdd4e29c7ea7881597ae95f9cbb88077f81d58ea"
+          "visiblePixels": 21794,
+          "sha256": "e9f34a7a1e9bb67b67e368a27166687eaa42aa74206f198f04b50e4b0bbe57d8"
         },
         {
           "name": "Lacquer Custodian",
           "bounds": [
-            8,
-            35,
-            248,
-            248
+            18,
+            15,
+            239,
+            246
           ],
-          "visiblePixels": 27539,
-          "sha256": "72fbc79b9f49f095a4e1f87f0378599131d2f81a530655892b2d152d2c5546df"
+          "visiblePixels": 24728,
+          "sha256": "2fe5366667af09ba4fc1f0e39e79ae8d03ee63d996fa5eeaa1f697ad8ec8a08c"
         }
       ]
     },
@@ -853,141 +853,141 @@
     {
       "entry": 19,
       "id": "cinerwraith",
-      "atlas": "./assets/roster/cinerwraith.webp",
+      "atlas": "./assets/roster/cinerwraith-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 107062,
-      "sha256": "6f5f88663115e5c2135ee673eea6074e99055f2f8c880adfac1179d0650a9c80",
+      "bytes": 79150,
+      "sha256": "87be1a3f869d232822a8b09cf0dab47e4a983553d3677cf39bdb70f41a5dfea9",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Ashwhisp",
           "bounds": [
-            62,
-            68,
-            194,
-            248
+            53,
+            67,
+            203,
+            246
           ],
-          "visiblePixels": 9442,
-          "sha256": "c2d863f96dd2a7091201f86d22d3678edc235c1839aa477c8f721b1f760bb035"
+          "visiblePixels": 11105,
+          "sha256": "e33b71e98593d5db1668a3cae538cab1815a751e616b0bd142ea4a465885e3fc"
         },
         {
           "name": "Cinerwraith",
           "bounds": [
-            22,
-            56,
-            234,
-            248
+            28,
+            40,
+            227,
+            245
           ],
-          "visiblePixels": 18400,
-          "sha256": "8e219c327ec41774262115b59c1c2be513f8d73c7266ff5f3d42d2af96e31c23"
+          "visiblePixels": 21721,
+          "sha256": "43dc86e1a424ddcd6f5526bb9e2622fe7887cf5bc9e12c0e95e70a498d63916a"
         },
         {
           "name": "Last Emberstorm",
           "bounds": [
-            8,
-            54,
-            248,
-            248
+            13,
+            28,
+            243,
+            245
           ],
-          "visiblePixels": 26480,
-          "sha256": "12e2a5fb73cd5f4179b9a953f277248c014e4194f909c79dbecb856c7e49ffb0"
+          "visiblePixels": 30305,
+          "sha256": "7dfe98d64e0fb72cf576bb192e67250188074beea79e564e6f480c35d42b2561"
         }
       ]
     },
     {
       "entry": 20,
       "id": "glasswhorl",
-      "atlas": "./assets/roster/glasswhorl.webp",
+      "atlas": "./assets/roster/glasswhorl-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 98836,
-      "sha256": "8ba06081671ec9bf26b42bee77580bcc16bc988b0b2126002ca01cfe2dc7c1c3",
+      "bytes": 94888,
+      "sha256": "300bef5403781defba07469285d88c6a7a70cc552e93bfd84df6b47b1d820ff2",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Sandsplin",
           "bounds": [
-            58,
-            68,
-            198,
-            248
+            54,
+            47,
+            202,
+            246
           ],
-          "visiblePixels": 12228,
-          "sha256": "9fcbfdc4f5e45b3cd95ead307d9b2e7ef629a7e2804114d9ba7ae7dec1507e77"
+          "visiblePixels": 17023,
+          "sha256": "fadcd65c749de5577d6f217a323fe6f3a200457867a8a2a0baf1da050c76c74c"
         },
         {
           "name": "Glasswhorl",
           "bounds": [
-            47,
-            36,
-            209,
-            248
+            35,
+            31,
+            219,
+            246
           ],
-          "visiblePixels": 17769,
-          "sha256": "71c8ee6dfff4467db0b4d04c0077763fce543b92e2b908912ddea4582fb96fcb"
+          "visiblePixels": 24810,
+          "sha256": "3585b8cdc72c23d253cb64efea4618efd315c03ffd92bcb28c45743e80fd7a30"
         },
         {
           "name": "Dune Orrery",
           "bounds": [
-            18,
-            8,
+            17,
+            14,
             238,
-            248
+            245
           ],
-          "visiblePixels": 24115,
-          "sha256": "48cb7efba28877efaa579b7348914f0c7d1f99f8d406a29de24fdbd7bbc89995"
+          "visiblePixels": 32321,
+          "sha256": "324b10513d48edd912598ccffd99ba2cad5a6cd845042067ff88c0a17efc8d73"
         }
       ]
     },
     {
       "entry": 21,
       "id": "resonara",
-      "atlas": "./assets/roster/resonara-v4.webp",
+      "atlas": "./assets/roster/resonara-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 90004,
-      "sha256": "9660ccc8c4fbc2ffd984422e16b267cdd5ac9cce279e35da2208875a9079f22b",
+      "bytes": 62000,
+      "sha256": "dbf51a535d834c8c8006df0899bd72b7944aa68b8e638ea74105dc231adda5f7",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Plasmote",
           "bounds": [
-            82,
-            108,
-            174,
-            245
+            87,
+            103,
+            170,
+            246
           ],
-          "visiblePixels": 6002,
-          "sha256": "6fe1d486af6cf6860c0cc3bb28c71e7b72a57ff3166f6a2dd6e85fb5cee57b4d"
+          "visiblePixels": 6409,
+          "sha256": "252cb22cbe94b91fc59905e0b473cde63d4a571e9032b497221c732583a11e7e"
         },
         {
           "name": "Resonara",
           "bounds": [
-            15,
-            34,
-            240,
+            12,
+            39,
+            244,
             245
           ],
-          "visiblePixels": 14430,
-          "sha256": "ca18999be8cc99f08a221ce250b7a3c9c8da6b31f8bf945a3a200b0a500e22d9"
+          "visiblePixels": 14777,
+          "sha256": "6ccbe02ac4169a7976708a70b57a3281e68bf3283dcd46e810d6ba12a6250545"
         },
         {
           "name": "Heavenly Resonance",
           "bounds": [
-            12,
-            46,
-            243,
-            246
+            19,
+            32,
+            237,
+            245
           ],
-          "visiblePixels": 25613,
-          "sha256": "5faa5dba39a1dbd9e9ae928a85818e2de48bc9e3e726e1be2ede61603b270e6d"
+          "visiblePixels": 22038,
+          "sha256": "13c020cc9835601dfddf8dd9cd4d41558b9d93719f661efa08eef3328ccfe009"
         }
       ]
     },
@@ -1088,47 +1088,47 @@
     {
       "entry": 24,
       "id": "silkvisage",
-      "atlas": "./assets/roster/silkvisage-v4.webp",
+      "atlas": "./assets/roster/silkvisage-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 53824,
-      "sha256": "08a499cdaeec215a45eba2cf3857342c6c0cd9f2cb045df2741d9f95b5ffc334",
+      "bytes": 60010,
+      "sha256": "fbbef336d82c61f660900e0c8011d510567fce58827771c9b320a687728b22f7",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Masklet",
           "bounds": [
-            77,
-            125,
-            179,
+            65,
+            106,
+            191,
             246
           ],
-          "visiblePixels": 6120,
-          "sha256": "e078019073d584b37e3652f4fca53f5236fd6d58627bb6fa72eb76488fbb5e0f"
+          "visiblePixels": 8970,
+          "sha256": "3a07ef090fdb1b66398699098c2e2837488a7869a065952599fe6a7e585c99bc"
         },
         {
           "name": "Silkvisage",
           "bounds": [
-            56,
-            65,
-            199,
-            245
+            46,
+            38,
+            209,
+            246
           ],
-          "visiblePixels": 10531,
-          "sha256": "39abe31b7e1280e6615fccffd561f4a3406e2b6f496ab13ea51c35bd2630bec6"
+          "visiblePixels": 15670,
+          "sha256": "350c5a8c1877a51705d2276c15bb93d11745b2ee0da99fc27cfcd8a21c5efd3b"
         },
         {
           "name": "Sixfinger Envoy",
           "bounds": [
-            12,
-            71,
+            13,
+            49,
             244,
             245
           ],
-          "visiblePixels": 19131,
-          "sha256": "cb61af86ecfa87c872087a77d29cae00767e07cc895a0f7fcb9532e92fe41d9f"
+          "visiblePixels": 23782,
+          "sha256": "e2d44d9e368a0aea07f21236259e39cc0e96f9647ed338c4c308f8e5d50bde07"
         }
       ]
     },
@@ -1558,94 +1558,94 @@
     {
       "entry": 34,
       "id": "silkclasp",
-      "atlas": "./assets/roster/silkclasp-v4.webp",
+      "atlas": "./assets/roster/silkclasp-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 68830,
-      "sha256": "9ac7532f0a26976059111bfe139ba4d6998057267c24321b3043419422b108bb",
+      "bytes": 66098,
+      "sha256": "b42c76829085ebad3f80b25b02d4540092a5c7659225fc6d5e77d6a6d82bf59a",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Mothling",
           "bounds": [
-            79,
-            88,
-            177,
+            76,
+            107,
+            178,
             245
           ],
-          "visiblePixels": 6618,
-          "sha256": "9e6488398193890422600a0292fa8c065c31e59ea5d0eb49b1b13a7046285735"
+          "visiblePixels": 6284,
+          "sha256": "546183b174096c3dee3cf377215cb7b7276dd913d9825e9dc0b5987c65fa8a6f"
         },
         {
           "name": "Silkclasp",
           "bounds": [
-            46,
-            18,
-            209,
+            28,
+            41,
+            227,
             245
           ],
-          "visiblePixels": 15743,
-          "sha256": "70b5b9b5f5762a865db88b0910778bae4e81806e73bfb3fb81a163c6ca4a1d4c"
+          "visiblePixels": 16435,
+          "sha256": "74edef2506e6667e51f47d44499ac581c62398743dbd791273b1ac1d59c2b36a"
         },
         {
           "name": "Mothmask Adept",
           "bounds": [
-            14,
-            14,
-            243,
+            12,
+            38,
+            244,
             245
           ],
-          "visiblePixels": 30206,
-          "sha256": "1bfe059ec6f063d6f18b20300cae8174f0583a99de19fcdd242ed12689b11304"
+          "visiblePixels": 26152,
+          "sha256": "f8fc81cd2aa9be177eacf6c7517bed49243f73126a6a269e9490cce121641abf"
         }
       ]
     },
     {
       "entry": 35,
       "id": "wickerstride",
-      "atlas": "./assets/roster/wickerstride-v4.webp",
+      "atlas": "./assets/roster/wickerstride-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 80328,
-      "sha256": "8a62e48154fafe4126d80f4f98169c3c9fd57211badc41bd596e8560c308bfca",
+      "bytes": 77124,
+      "sha256": "a6039abc84768f53301017835371f1f8f0830d3a5c5131fbf4a58f75aa284374",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Reedkin",
           "bounds": [
-            75,
-            106,
-            179,
+            71,
+            83,
+            183,
             245
           ],
-          "visiblePixels": 5939,
-          "sha256": "c9156ed84cdc0455bb36b7e98a262b13e79843d74dd76aaa065f4768ffdaecbf"
+          "visiblePixels": 7818,
+          "sha256": "0c671be3511432cefd42d0ba6073b59d39b8afa0ad7785c9f3a525063651a83e"
         },
         {
           "name": "Wickerstride",
           "bounds": [
-            54,
-            35,
-            201,
+            46,
+            16,
+            210,
             245
           ],
-          "visiblePixels": 11146,
-          "sha256": "6458d4438e0e0e8780745901ae459249ceadc52f1ede7177e403401546440ff3"
+          "visiblePixels": 14453,
+          "sha256": "a266ac8bfb76646977c90d7aa0db5901b12213351da5ecae17d862e46e4d6a65"
         },
         {
           "name": "Bamboo Wayfarer",
           "bounds": [
-            12,
-            31,
-            244,
-            246
+            13,
+            17,
+            243,
+            245
           ],
-          "visiblePixels": 27353,
-          "sha256": "b37d6f4738fffd1f50eb3580f11185bfc14a4ea41b05e608739a932e1da870e0"
+          "visiblePixels": 30612,
+          "sha256": "5cde17bf0e664f4ae60925b9ab0436adf7b68386231e212e296034b36ae7c61f"
         }
       ]
     },
@@ -1746,47 +1746,47 @@
     {
       "entry": 38,
       "id": "tempestrill",
-      "atlas": "./assets/roster/tempestrill-v4.webp",
+      "atlas": "./assets/roster/tempestrill-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 88698,
-      "sha256": "c62e2a1892330a4ba75b622cc43643bb59e456255ba34189a5365e1d085bbef3",
+      "bytes": 69074,
+      "sha256": "d83cdedd09a4f803f17598e82a54a09345bafb5941e020f13eb50d0c6d4e2e55",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Skyscale",
           "bounds": [
-            73,
-            136,
-            183,
-            245
+            76,
+            144,
+            179,
+            246
           ],
-          "visiblePixels": 7415,
-          "sha256": "1da4694ddf0e47eb71acbdb26cb4aba43fb9e1dbc5ba0d7906ac0de14f46811f"
+          "visiblePixels": 6359,
+          "sha256": "ddc8b0a0f6e36c306d3e0cb9977e8b5ee401b85a425c8d2e0fe65f5d7aaa7348"
         },
         {
           "name": "Tempestrill",
           "bounds": [
-            22,
-            77,
-            234,
-            245
+            25,
+            87,
+            231,
+            246
           ],
-          "visiblePixels": 15157,
-          "sha256": "7c1b07913bfdfae46f07c0c7ed3711eaa131590417f4318b5af34978417d4181"
+          "visiblePixels": 14258,
+          "sha256": "6c5dc56fa190af37a6ba33f06d32117b4d1b09eb0cce512b645aa1a84e84fec1"
         },
         {
           "name": "Storm Amphiptere",
           "bounds": [
             12,
-            49,
+            58,
             244,
             246
           ],
-          "visiblePixels": 27564,
-          "sha256": "5d2e5922a037badc5e490593b219cbcb4bfec395745cfeb1f0aea9add35b679a"
+          "visiblePixels": 24664,
+          "sha256": "668f62dc691e41337e6894dae0e9b869346593d6d438d7cfd0a1b864becbf262"
         }
       ]
     },
@@ -1887,94 +1887,94 @@
     {
       "entry": 41,
       "id": "vitrilisk",
-      "atlas": "./assets/roster/vitrilisk-v4.webp",
+      "atlas": "./assets/roster/vitrilisk-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 86170,
-      "sha256": "cdcafb8e8f35eb86ae3559d87f3078e4eb20f62f283b1fa8c852100d98da808e",
+      "bytes": 77824,
+      "sha256": "43c6b0c7deac884622ee39d6505f0c342c3329f55b42a30abdb58751d9933da2",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Slimescale",
           "bounds": [
-            60,
-            128,
-            195,
-            245
+            64,
+            140,
+            193,
+            246
           ],
-          "visiblePixels": 7911,
-          "sha256": "46edce841d2a36aabc0e4b4054df034157f2e79d1c6171501bfe0e1098b11142"
+          "visiblePixels": 6824,
+          "sha256": "57465020ce47f01e55bfd22dc169cba26c8fbecf1cb3ffb0169061a8aafb1ea6"
         },
         {
           "name": "Vitrilisk",
           "bounds": [
-            12,
-            40,
-            244,
+            13,
+            56,
+            242,
             246
           ],
-          "visiblePixels": 19816,
-          "sha256": "73f3b21a4721068e1b393234103ad70a6661bc78a11bd92d460f781673f7787b"
+          "visiblePixels": 18340,
+          "sha256": "83c941cecc355a5787cef5f42381f530d4bed03dea6ada772a5c0e47909140a4"
         },
         {
           "name": "Basilisk of Glass",
           "bounds": [
-            14,
-            21,
-            242,
-            246
+            13,
+            29,
+            243,
+            245
           ],
-          "visiblePixels": 31763,
-          "sha256": "7e4767e1083b685267aa7763045931040bf7f5deca83e60afeafc0dd3ab18b35"
+          "visiblePixels": 27707,
+          "sha256": "1b286b23d74102d3391646fd98ae540f20a92027aeddb81c6dfc3108fec8f123"
         }
       ]
     },
     {
       "entry": 42,
       "id": "amberwork",
-      "atlas": "./assets/roster/amberwork-v4.webp",
+      "atlas": "./assets/roster/amberwork-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 65864,
-      "sha256": "3c16964050fa4eb7289ba9f591d81af4d01921e590485850df6345a067571129",
+      "bytes": 58592,
+      "sha256": "fd0fff4895cee6643228c130e37ef82fc6b6cab093b9df489cd6a01c8ddcc30d",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Ambit",
           "bounds": [
-            47,
-            170,
-            208,
+            43,
+            166,
+            213,
             246
           ],
-          "visiblePixels": 6706,
-          "sha256": "3016f9c7ce040de039156b18ffa36dd629de63182241ff4a29d60a55d45cc9f6"
+          "visiblePixels": 7652,
+          "sha256": "316dabce60ba848c0e8cab83e9dc0e165b9cf58b63bfdd2b409461997db54b16"
         },
         {
           "name": "Amberwork",
           "bounds": [
-            39,
-            112,
-            216,
+            30,
+            103,
+            225,
             246
           ],
-          "visiblePixels": 13355,
-          "sha256": "6aa1139dd28cffece8070456f81d02fb722a16a626cad4b84050159f2822ea45"
+          "visiblePixels": 16923,
+          "sha256": "993008511331f07e79ede7240b9f33ea6f213880ca758b49bed06e5e00e55bf5"
         },
         {
           "name": "Living Reliquary",
           "bounds": [
             12,
-            62,
+            64,
             244,
             246
           ],
-          "visiblePixels": 24451,
-          "sha256": "e850593f412fb4d71d4929880af0804b3f9d075bf76c570312658fa7854983dd"
+          "visiblePixels": 25194,
+          "sha256": "c739f96d67816518e46496e475b0bf763e7122e7712408eebaa232dcb50d44fd"
         }
       ]
     },
@@ -2028,47 +2028,47 @@
     {
       "entry": 44,
       "id": "nepentide",
-      "atlas": "./assets/roster/nepentide-v4.webp",
+      "atlas": "./assets/roster/nepentide-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 70592,
-      "sha256": "c020f29a4c8d998e71388ebdd12cebc7f9c3a7e8d037089ae4336ea01477bb53",
+      "bytes": 62104,
+      "sha256": "76c122940d14f02d1f013191ab552b38e6f41380d5e2d6228ed1424334d13801",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Pitchdrop",
           "bounds": [
-            70,
-            151,
-            185,
+            74,
+            153,
+            183,
             246
           ],
-          "visiblePixels": 5614,
-          "sha256": "d141ebe72b36b3cf57c4ea070db3090e56019a85aab980378e7bb7c9fa6d3a67"
+          "visiblePixels": 5757,
+          "sha256": "498afac1f263cf47f0bf92cabb4f6d09c020a050b4009a8f72cfccd8714bb38f"
         },
         {
           "name": "Nepentide",
           "bounds": [
-            47,
+            45,
             74,
-            209,
+            210,
             246
           ],
-          "visiblePixels": 14988,
-          "sha256": "c8e5f178840f14c17e636c2d0f9f1903e7e92e810d4d370622de055b6761bee5"
+          "visiblePixels": 16458,
+          "sha256": "b58e8ec2b4d5e706c4e892bf76dde94e8796b84bc25d4f170e0118ca81b74a5d"
         },
         {
           "name": "Pitcher Deluge",
           "bounds": [
             12,
-            74,
+            81,
             244,
-            246
+            245
           ],
-          "visiblePixels": 24991,
-          "sha256": "6e75d20b8ae87cb197be58e57b36f14473220a14abf61ffbcc04672f18f7e88f"
+          "visiblePixels": 24926,
+          "sha256": "daceb30241e2cfe1afc1787f59cc3e7ff6864914d147f04312d4839d676d9650"
         }
       ]
     },
@@ -2122,94 +2122,94 @@
     {
       "entry": 46,
       "id": "strangleweld",
-      "atlas": "./assets/roster/strangleweld-v4.webp",
+      "atlas": "./assets/roster/strangleweld-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 76818,
-      "sha256": "8793239a2a8c17a27b400ce56993e4affb764076fe3274acd6e0dc9cc4f30f24",
+      "bytes": 66932,
+      "sha256": "fef024235cda09dbbe6d1fa0c6bd75dff5ab493a89a2308b336475a27b71f054",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Wirebud",
           "bounds": [
-            58,
-            120,
-            198,
+            68,
+            122,
+            187,
             245
           ],
-          "visiblePixels": 7449,
-          "sha256": "d68659390618c7c6c9aa732220a1e5c60e70a042e6b23c67441017beb1f6ba03"
+          "visiblePixels": 6831,
+          "sha256": "b44b2d2b752cf3c6dcebac2fa534c4300385dfa2195da9bacc8df5a235fbf9f6"
         },
         {
           "name": "Strangleweld",
           "bounds": [
-            35,
-            65,
-            220,
-            246
+            28,
+            58,
+            227,
+            245
           ],
-          "visiblePixels": 14271,
-          "sha256": "f7e465bf16c0a93b2f098653473a24d1b51f064cabce6d1e94ec3f0262df56a3"
+          "visiblePixels": 17815,
+          "sha256": "7bf593da20aa4d6cf1891bde59b82fbfe68446b6d3fdac292b7f9af2cfa85bb7"
         },
         {
           "name": "Ironwood Snare",
           "bounds": [
             12,
-            64,
+            50,
             244,
-            246
+            245
           ],
-          "visiblePixels": 26342,
-          "sha256": "bbccf6d17852af538cbfc9884711eb2483212be27206f23528cb41c3efe863ef"
+          "visiblePixels": 28158,
+          "sha256": "c5e48ce3b6408e3a7f9ec666757286cc2138bf02c5017b048adc24d06d3f945a"
         }
       ]
     },
     {
       "entry": 47,
       "id": "fumepitcher",
-      "atlas": "./assets/roster/fumepitcher-v4.webp",
+      "atlas": "./assets/roster/fumepitcher-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 80502,
-      "sha256": "61574e71429e9229178c99a29584387f1363db25b974c4f769941071b7cf4b4a",
+      "bytes": 64088,
+      "sha256": "463048716e8324bb6a75b74bd36b161463d4f444cf43fda2cee18f1b3f73a6f9",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Censerpod",
           "bounds": [
-            83,
-            79,
-            171,
+            89,
+            78,
+            166,
             245
           ],
-          "visiblePixels": 6616,
-          "sha256": "932d211056b714f8d78d473b3007ad12902222eb8c78d96aa1b3136d759f9044"
+          "visiblePixels": 6123,
+          "sha256": "5cdfa61494e11e1b24d1a8de2854727e9ede46bb7446a888c88806ab167e7569"
         },
         {
           "name": "Fumepitcher",
           "bounds": [
-            19,
-            59,
-            237,
-            245
+            21,
+            57,
+            234,
+            246
           ],
-          "visiblePixels": 19029,
-          "sha256": "8597e058a465fa15911641ea5c649c94cc8ba4cc2f3b84a5f6e9e4b23b05da55"
+          "visiblePixels": 18949,
+          "sha256": "a373635a13cdbf5b71dcb98e07936ff9d0ac1af7ba3404af6a55bf0736742d28"
         },
         {
           "name": "Censer Tyrant",
           "bounds": [
-            12,
-            19,
-            244,
+            16,
+            14,
+            241,
             245
           ],
-          "visiblePixels": 26727,
-          "sha256": "4069ba5b9edf9fdeeae7c6c33a38bb26464a52e6982ced721cf4bfe4cd49736c"
+          "visiblePixels": 25480,
+          "sha256": "f4ac7a75432e210a99226b99bfb3f578d7c99cf9572184e6ad394100f9b98768"
         }
       ]
     },
@@ -2263,47 +2263,47 @@
     {
       "entry": 49,
       "id": "jianglume",
-      "atlas": "./assets/roster/jianglume-v4.webp",
+      "atlas": "./assets/roster/jianglume-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 65650,
-      "sha256": "bc53abedccab2311ba1a1a62c12616f56818b4d78f6e2dac36bc8724846af728",
+      "bytes": 59168,
+      "sha256": "2f63ea525843e0a1e48b178413d18ec331ceea1219e853496ee326fa841ec151",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Hushwick",
           "bounds": [
-            82,
-            118,
-            174,
-            245
+            67,
+            120,
+            188,
+            246
           ],
-          "visiblePixels": 5181,
-          "sha256": "b02edb423081b2016934fd2d9a203c3c6e15d44a184691185316d0960bf7683a"
+          "visiblePixels": 6779,
+          "sha256": "9ecc89d08a2e17401764f4cf598e35cf58fb72a48e34ef360c94878c306498fa"
         },
         {
           "name": "Jianglume",
           "bounds": [
-            37,
-            65,
-            219,
+            33,
+            50,
+            223,
             246
           ],
-          "visiblePixels": 15830,
-          "sha256": "dcda692f0bf5fefb7495f88bb364ff3d341969abf9d7e57372d2f0b96d748f0e"
+          "visiblePixels": 19874,
+          "sha256": "dc7138481c18617553faaf444406f64151610ceb4e9686bcb02ba79463088a1f"
         },
         {
           "name": "Lantern Ancestor",
           "bounds": [
             12,
-            67,
-            243,
+            69,
+            244,
             246
           ],
-          "visiblePixels": 25575,
-          "sha256": "6e06cee69ced7e7d7031b4b699f16b8decba18aca71775ed4c536ddb58edd0f2"
+          "visiblePixels": 26322,
+          "sha256": "9f3da0317973d8d5e1b51027d5a7ace83eb495340b93f5b6090fb206ff049a19"
         }
       ]
     },
@@ -2545,47 +2545,47 @@
     {
       "entry": 55,
       "id": "embermoth",
-      "atlas": "./assets/roster/embermoth-v4.webp",
+      "atlas": "./assets/roster/embermoth-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 78544,
-      "sha256": "4c5f1b523b0a0480fc047957447b5b4b866ac1c5231e419ef5d981000e231b82",
+      "bytes": 54794,
+      "sha256": "4cb4453f5ae9720505b659f0b50f989608ee8923266d139ae0f8295aca085808",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Emberlet",
           "bounds": [
-            74,
-            142,
-            182,
-            245
+            77,
+            154,
+            178,
+            246
           ],
-          "visiblePixels": 4513,
-          "sha256": "bdef69b03c8cff1878e4331e0c5f00782fb6ba14538cc0e2a8ffdd5473a99f04"
+          "visiblePixels": 3714,
+          "sha256": "3025965b83a0e6527a22e13189014b4973ee53936233bb5eba6ee82596746c3a"
         },
         {
           "name": "Embermoth",
           "bounds": [
             33,
-            78,
-            224,
+            79,
+            222,
             246
           ],
-          "visiblePixels": 17156,
-          "sha256": "f94cde5665b01efa26adb0ca0b9d06c50b0d12df8cc2bfbd996def80551bd584"
+          "visiblePixels": 16571,
+          "sha256": "7fb4e0685908716d3d892b66fea9ba9fa684631b9a65c0b6d5ad8eabfb8fc581"
         },
         {
           "name": "Ember Sovereign",
           "bounds": [
             12,
-            32,
+            56,
             244,
             246
           ],
-          "visiblePixels": 30467,
-          "sha256": "bb5113e8fc09e7628a97a41a3cc4cfab61539415f35b240c43473fcd830c888a"
+          "visiblePixels": 27887,
+          "sha256": "7d1c9b5bb3a4e307762cf1c08f7684d157a73be828e322375c5274658af087c2"
         }
       ]
     },
@@ -2686,47 +2686,47 @@
     {
       "entry": 58,
       "id": "hollowbloom",
-      "atlas": "./assets/roster/hollowbloom-v4.webp",
+      "atlas": "./assets/roster/hollowbloom-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 46454,
-      "sha256": "76a79218de3f5649c218d453a0d749260343ebda038bb45e64ca74a745f21723",
+      "bytes": 50820,
+      "sha256": "9f5dde382bc0d69928512fc40ff0cfb8d7137cd013f55b2dd019e6cbc817da0c",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Hollowlet",
           "bounds": [
-            85,
-            177,
-            171,
+            74,
+            163,
+            181,
             246
           ],
-          "visiblePixels": 3835,
-          "sha256": "53273d8f53ac13bb9f325e7a943c0831067534311f859539b73aba0fa887d2fe"
+          "visiblePixels": 5586,
+          "sha256": "6a6e57c1699012867d575b2e861ed017de57409a6e593ec55ff6dff65849080f"
         },
         {
           "name": "Hollowbloom",
           "bounds": [
+            63,
             69,
-            94,
-            186,
+            193,
             246
           ],
-          "visiblePixels": 9755,
-          "sha256": "15a77d362b204cb06bffdba84fd2a80b321eb39611e461c87fee12de39f6d4af"
+          "visiblePixels": 14562,
+          "sha256": "f03250c674cbad1beab3ba00d1513846d80cf93ffd8253cd7f3d6e7c36fd90b2"
         },
         {
           "name": "Hollow Sovereign",
           "bounds": [
-            13,
-            94,
+            12,
+            70,
             244,
             246
           ],
-          "visiblePixels": 22833,
-          "sha256": "aa6297cbca30869e4472da32f813d2c6bbec527b4a1c95d05b93a1b579b86c82"
+          "visiblePixels": 26809,
+          "sha256": "9b2f356d45266dd6f4e12bb92c46b9564ceda5d7c4b9e1fe1287a0dc07f568f3"
         }
       ]
     },
@@ -2827,47 +2827,47 @@
     {
       "entry": 61,
       "id": "kelpveil",
-      "atlas": "./assets/roster/kelpveil-v4.webp",
+      "atlas": "./assets/roster/kelpveil-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 54090,
-      "sha256": "3c23f45278d93eb32a3bdd518ec2ff046f11cfb0435f7e0fe85a0b4391ecab88",
+      "bytes": 47662,
+      "sha256": "a277f41ad7c56418898ba9b669bcbd8bd51b9821e020c54d6a8b507faf48c089",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Kelplet",
           "bounds": [
-            84,
-            180,
-            173,
-            246
+            85,
+            178,
+            171,
+            245
           ],
-          "visiblePixels": 3896,
-          "sha256": "d1b9772eabaaac0335dee109bc132695f481aa654d12239c4232ae942488e57f"
+          "visiblePixels": 3796,
+          "sha256": "b68a29fbcc37408e25e6e5350c9fe1662fcec81e35dd00e4ddaab6172ec64ebf"
         },
         {
           "name": "Kelpveil",
           "bounds": [
-            30,
-            149,
+            31,
+            143,
             226,
             246
           ],
-          "visiblePixels": 10025,
-          "sha256": "af75d60cb7fd1598b185d1999fa5340a1ca9f9fe60ef60969d144a7b66125ba3"
+          "visiblePixels": 10464,
+          "sha256": "160005000a7b4d832f1ed0179e120096970f9fc9e514a9a37a4bbf1b0bc32c79"
         },
         {
           "name": "Kelp Sovereign",
           "bounds": [
-            12,
-            89,
-            244,
+            13,
+            85,
+            243,
             246
           ],
-          "visiblePixels": 22157,
-          "sha256": "d980b566d504970951ddce38a09161ecf943a5838716ed9f6136389fd85b47c6"
+          "visiblePixels": 22520,
+          "sha256": "bec6070635236e092ce76b6e79c9a11068fb6e4779baa6546914fa8e660f9c53"
         }
       ]
     },
@@ -3015,47 +3015,47 @@
     {
       "entry": 65,
       "id": "obsidhorn",
-      "atlas": "./assets/roster/obsidhorn-v4.webp",
+      "atlas": "./assets/roster/obsidhorn-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 50114,
-      "sha256": "183e9a6471edca4eadd448b77b410e6021f3f4da63ec8769b07263fa60a74c83",
+      "bytes": 44452,
+      "sha256": "e2f33ea88387379ced6443bb4a4bfe62e4691b506b96e448e609f8bb7c3efd74",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Obsidlet",
           "bounds": [
-            79,
-            136,
-            177,
-            246
+            80,
+            133,
+            174,
+            245
           ],
-          "visiblePixels": 5597,
-          "sha256": "6f104351e320d77f18b38156530df8cd5f9a08a381b6f22ddfdaf930a1b3277a"
+          "visiblePixels": 4727,
+          "sha256": "3a13818bfe1e252ca8d40b5cbd2015449c9e92a27159319f06f07367c45aca7c"
         },
         {
           "name": "Obsidhorn",
           "bounds": [
-            45,
-            67,
-            211,
+            37,
+            65,
+            219,
             245
           ],
-          "visiblePixels": 10959,
-          "sha256": "92456b74375dca880ee94c1956fdac4f02629f714b4a17d24beb7a111ae5c8cf"
+          "visiblePixels": 11854,
+          "sha256": "5f9f325cb5f6c0762981ec90a1a5503307b8440331a81ceaa8a5069b102ccda0"
         },
         {
           "name": "Obsid Sovereign",
           "bounds": [
-            12,
-            69,
+            13,
+            62,
             244,
-            246
+            245
           ],
-          "visiblePixels": 23931,
-          "sha256": "73d4e8b5a49ea5bf342dd28eb119af31c0c1459352a51af7ae2da50e56677cf1"
+          "visiblePixels": 23610,
+          "sha256": "8ae8079693f96704c28b478e07acfc32a088b05952ab2ee4140d26c9bef178d5"
         }
       ]
     },
@@ -3109,94 +3109,94 @@
     {
       "entry": 67,
       "id": "quillclaw",
-      "atlas": "./assets/roster/quillclaw-v4.webp",
+      "atlas": "./assets/roster/quillclaw-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 68094,
-      "sha256": "6bd471805b3cb8a0fd61fb0e7deda473f0b507d981ee8dd0591e583a13d20f65",
+      "bytes": 57772,
+      "sha256": "8130eddb11049a55999b12f6c00925398699fc68215c710d77d843776372b210",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Quilllet",
           "bounds": [
-            80,
-            141,
-            175,
-            246
+            71,
+            129,
+            186,
+            245
           ],
-          "visiblePixels": 6287,
-          "sha256": "7e021865ba96fbc0669f5bcf3abef64ec845f01f63830ff30e47d9405f3227c8"
+          "visiblePixels": 8067,
+          "sha256": "b90e4b1a4e396d2f53d59a970d7f7f0f2a2791cf03f54dd1a369e1e9da351316"
         },
         {
           "name": "Quillclaw",
           "bounds": [
             27,
-            89,
+            98,
             229,
             245
           ],
-          "visiblePixels": 16024,
-          "sha256": "f2759e271f62f9231109f68ea66467cfe5cb769672d3b906ef730639d061c4a7"
+          "visiblePixels": 17467,
+          "sha256": "6c887f5d2a74afbbca984dec2e8bc3306ad6102fd2189d9ad0020bd292b881ff"
         },
         {
           "name": "Quill Sovereign",
           "bounds": [
-            13,
-            54,
+            12,
+            52,
             243,
             245
           ],
-          "visiblePixels": 26442,
-          "sha256": "205e11536ef749419d862baeeb6eade4020e39075bb3a30fcac94c88f0b4c2e1"
+          "visiblePixels": 26871,
+          "sha256": "5ff4a7296e88f7bdd36cfee3e2db0bf4b7a70fe1663a7907ae123ba59b35d9da"
         }
       ]
     },
     {
       "entry": 68,
       "id": "runemoth",
-      "atlas": "./assets/roster/runemoth-v4.webp",
+      "atlas": "./assets/roster/runemoth-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 60218,
-      "sha256": "68115d935bdb30a073c53cae47be599b3fdeeaaa1be27521453c1224760ac1d3",
+      "bytes": 52870,
+      "sha256": "e9a0c14d39b943cf232267966f5f5a6e21a6e765cd08cc81f01c6ab3d646ab29",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Runelet",
           "bounds": [
-            84,
-            161,
-            171,
-            246
+            82,
+            156,
+            174,
+            245
           ],
-          "visiblePixels": 2978,
-          "sha256": "10e5a73acb68eb07b73e19f563a7ccea4ee17e111e493ac12ca2e82b3419afad"
+          "visiblePixels": 3420,
+          "sha256": "12575d7787774c257de0990ba352f5a9b2d1e8160dc29e7a38aa9dc08827e8cb"
         },
         {
           "name": "Runemoth",
           "bounds": [
-            45,
-            72,
-            210,
-            246
+            38,
+            48,
+            218,
+            245
           ],
-          "visiblePixels": 12018,
-          "sha256": "2730670957686fbacae0a3944807a62371ba48b62b5cb56be26477b1593b8890"
+          "visiblePixels": 14847,
+          "sha256": "955d0992dd001df67ebb8dde893642033167272d74124582b38e45d0a39080d2"
         },
         {
           "name": "Rune Sovereign",
           "bounds": [
             12,
-            71,
-            244,
-            246
+            106,
+            243,
+            245
           ],
-          "visiblePixels": 23347,
-          "sha256": "90981ef2c8fa7e53d4526a403c10e12e396a108a69c485d2a28487a3c085ab79"
+          "visiblePixels": 21150,
+          "sha256": "495d329ebd6c17e07cb325ea0ffa4e557ae4a4189605d3e10aca978b315f5a33"
         }
       ]
     },
@@ -3250,235 +3250,235 @@
     {
       "entry": 70,
       "id": "thornglen",
-      "atlas": "./assets/roster/thornglen-v4.webp",
+      "atlas": "./assets/roster/thornglen-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 50418,
-      "sha256": "9ddf8b444d8a01e54fbf9caf34b8dd944addfbc9f882cf64d7e9649b6a15b9c1",
+      "bytes": 49042,
+      "sha256": "21bc34eea8740976446bee5d89b09e26b7822d5aaf038fc97c27ae0fa36b8f2e",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Thornlet",
           "bounds": [
-            78,
-            169,
+            77,
+            168,
             178,
-            246
+            245
           ],
-          "visiblePixels": 4261,
-          "sha256": "44d7504ebf9288e4e737708974ff6eeea0cc9ab926d476dde32a9b99242726c4"
+          "visiblePixels": 4514,
+          "sha256": "c07eb1f5e5ba33025e61844f213177361a4b809f12a5d3e07630609a22901f74"
         },
         {
           "name": "Thornglen",
           "bounds": [
-            55,
-            127,
-            201,
-            246
+            47,
+            108,
+            210,
+            245
           ],
-          "visiblePixels": 9086,
-          "sha256": "218018a7f5d5b899dccc8b466e690ad49e53c3a7d57bd106ff107730227141de"
+          "visiblePixels": 11626,
+          "sha256": "f27d53365c8235e44faf5528de418b1430093ece8d641e9db7edd0e5a20d15d0"
         },
         {
           "name": "Thorn Sovereign",
           "bounds": [
-            12,
-            87,
+            13,
+            69,
             244,
             245
           ],
-          "visiblePixels": 21724,
-          "sha256": "f8d2431833aa99f463ce541b3cf73ca84a27aa8c85a965dbbcd0dc50e0cf11b7"
+          "visiblePixels": 23200,
+          "sha256": "b317a73a5a949173c243513c0d12cf2447f79f2a106251f5b32c074176ba1c32"
         }
       ]
     },
     {
       "entry": 71,
       "id": "umberbloom",
-      "atlas": "./assets/roster/umberbloom-v4.webp",
+      "atlas": "./assets/roster/umberbloom-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 67462,
-      "sha256": "726fd8347e352e3be6d17441dda61b2a6c47a2129a2c0b07456b00748ce7d931",
+      "bytes": 64456,
+      "sha256": "656c3e47bce94173addf3c5e8ac10256cd7ddbbe0ce8c8f335e32ca88f50d896",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Umberlet",
           "bounds": [
-            79,
-            143,
-            176,
-            246
+            74,
+            141,
+            181,
+            245
           ],
-          "visiblePixels": 4877,
-          "sha256": "cc49df92bbdb6f6ce46bdba27193c42a2519c13d7230ef9366ed189dedd9104c"
+          "visiblePixels": 5689,
+          "sha256": "da990bbaf723025139396c493d273b706902c42de334797cdd5e1ef269e65592"
         },
         {
           "name": "Umberbloom",
           "bounds": [
             52,
-            74,
-            204,
+            71,
+            205,
             246
           ],
-          "visiblePixels": 13827,
-          "sha256": "d3084cf2df732082fb17a77c570f64526be5bfbe032ebd98210772c51796a812"
+          "visiblePixels": 15570,
+          "sha256": "89b012796eeaeb126d6ba66432afdea3f4279fc2c7b5cfd999bbbaf0809bbf7f"
         },
         {
           "name": "Umber Sovereign",
           "bounds": [
             13,
-            62,
-            244,
-            246
+            64,
+            243,
+            245
           ],
-          "visiblePixels": 27216,
-          "sha256": "81cbcc5ff89ec346e5d1f57b04372253194b2dc637b244a80ebf2fdbf762bcb6"
+          "visiblePixels": 27295,
+          "sha256": "da6e7791189fbae8d52aa91301cbd1b18046714b6ced8836180cf393b422fa18"
         }
       ]
     },
     {
       "entry": 72,
       "id": "vesperspire",
-      "atlas": "./assets/roster/vesperspire-v4.webp",
+      "atlas": "./assets/roster/vesperspire-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 75856,
-      "sha256": "2d6a4fa3ce8cbfd7c97142a64b499d10b600eb780b1e7abf76a74ed9c8575715",
+      "bytes": 68130,
+      "sha256": "397e10f42731abb7180542566b0e031126b856aaee4d1e3ebb1b8e3edb3d5d95",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Vesperlet",
           "bounds": [
-            81,
-            123,
-            174,
+            67,
+            113,
+            189,
             245
           ],
-          "visiblePixels": 5591,
-          "sha256": "49379011c618d2246512db50669e006f4f608420ba30fd46f80010d2dbe72c51"
+          "visiblePixels": 7605,
+          "sha256": "32b70aeec7daf08bd8ce4adf3802189c521356e4a5f2f8189655a790f1fbd83d"
         },
         {
           "name": "Vesperspire",
           "bounds": [
-            42,
-            61,
-            213,
+            40,
+            48,
+            215,
             245
           ],
-          "visiblePixels": 13239,
-          "sha256": "4fb71a7070c3eaf5f8d9f705c168cd363daadfd5e20ae59b9188425f8080dd16"
+          "visiblePixels": 14071,
+          "sha256": "02db24b605d617d06f1937bd4282a1dfb520b4a8870e87e275bce0ce22b19725"
         },
         {
           "name": "Vesper Sovereign",
           "bounds": [
             12,
-            61,
+            46,
             244,
             245
           ],
-          "visiblePixels": 25381,
-          "sha256": "10e8167eb4a5f7920b0dee5fe711a59feb68533fcd3311908ee711b605eb60fa"
+          "visiblePixels": 24981,
+          "sha256": "85096d501e908e0230fc355ddc372500f910ac85819b1d5f62ee2f3161759d5c"
         }
       ]
     },
     {
       "entry": 73,
       "id": "willowmaw",
-      "atlas": "./assets/roster/willowmaw-v4.webp",
+      "atlas": "./assets/roster/willowmaw-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 69132,
-      "sha256": "adaf19034ebab1d2f3efa72464c761c716c118d80c134290a443f13cc7e40b27",
+      "bytes": 57774,
+      "sha256": "7f536df4027149b4e386ed5674f91afefb648561b9e6d024f0058ba27faeb363",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Willowlet",
           "bounds": [
-            78,
-            179,
-            178,
-            246
+            76,
+            175,
+            180,
+            245
           ],
-          "visiblePixels": 3889,
-          "sha256": "554f6a73ec13a42c850602d9d156acee56a20a1222e17dde13e5aa5640d1b3dd"
+          "visiblePixels": 4483,
+          "sha256": "4369052e560660cc39bf3288b9b5ce27c11108d0c061d821885304504d7dd247"
         },
         {
           "name": "Willowmaw",
           "bounds": [
-            51,
-            80,
-            205,
-            246
+            47,
+            76,
+            207,
+            245
           ],
-          "visiblePixels": 15706,
-          "sha256": "6b276fd08f58e1a3dd469b1e70cc3134d3c5f344db50954d11f73ca936b6f895"
+          "visiblePixels": 18369,
+          "sha256": "394b53b99c0f8ce68cd3d3cf5708c5146394b212eb701443075ed90953647714"
         },
         {
           "name": "Willow Sovereign",
           "bounds": [
-            12,
-            82,
-            244,
-            246
+            13,
+            77,
+            243,
+            245
           ],
-          "visiblePixels": 27569,
-          "sha256": "7966929532d488ba743f5104247eb49debd3037a7f7739b2102693e122f99a99"
+          "visiblePixels": 26622,
+          "sha256": "85a4f450032168315f14d66b6f0d4b0daf89f66ef133f2674cab4aa84af76031"
         }
       ]
     },
     {
       "entry": 74,
       "id": "xyloveil",
-      "atlas": "./assets/roster/xyloveil-v4.webp",
+      "atlas": "./assets/roster/xyloveil-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 48444,
-      "sha256": "bb0fc00cfc12228e23038dc1cbed4ed828d6873ff503d574dd9e6bb0bbc8f3c4",
+      "bytes": 35958,
+      "sha256": "bc0159e5739025f973ec039ac7f6a9e1f262992ad497ab31862e8bb5b1a45078",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Xylolet",
           "bounds": [
-            85,
-            181,
+            86,
+            188,
             170,
-            246
+            245
           ],
-          "visiblePixels": 3417,
-          "sha256": "d31caf2ddf8bbbd54e5ee0f3e7b5fd8c4a6d568c283ca8541fbf4026bf0a1096"
+          "visiblePixels": 3080,
+          "sha256": "78b0c6b121da6f168e4debfcdba079525ca54205492326d11faf34f73bab190b"
         },
         {
           "name": "Xyloveil",
           "bounds": [
-            45,
-            135,
-            210,
-            246
+            39,
+            157,
+            217,
+            245
           ],
-          "visiblePixels": 9392,
-          "sha256": "b02f7b123285455f6e2048938e753e530549f0a9c5cc39021307f7a0e0cb7d51"
+          "visiblePixels": 8987,
+          "sha256": "ad9a9d49936ae7260ce7b9f6683f60b3953e0ff2842c121b0481a43c20fe5d36"
         },
         {
           "name": "Xylo Sovereign",
           "bounds": [
             12,
-            107,
+            136,
             244,
-            246
+            245
           ],
-          "visiblePixels": 19355,
-          "sha256": "9aa597867ffe50c2814a2159e9e840206ddd9f51c5d98001c0ef46523395a5c5"
+          "visiblePixels": 14814,
+          "sha256": "d451d25d3e4246244331a31819838f011dbbff3ffbff49ccbb0aab3b8a75c957"
         }
       ]
     },
@@ -3532,141 +3532,141 @@
     {
       "entry": 76,
       "id": "zephyrfang",
-      "atlas": "./assets/roster/zephyrfang-v4.webp",
+      "atlas": "./assets/roster/zephyrfang-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 65834,
-      "sha256": "dfcb81e4832d0f683c1b5cc39b0fd3bdae24163e9826d3ca39a9b6d37e2beb17",
+      "bytes": 60386,
+      "sha256": "b90c8b3eb72635d87646c6a9df567d7e77c144fecb83627a11934291130785c5",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Zephyrlet",
           "bounds": [
-            87,
-            165,
-            169,
+            85,
+            163,
+            171,
             246
           ],
-          "visiblePixels": 3021,
-          "sha256": "83b1a5ce56b3bba8ed48f2e6c6db3f11e7c4f13fb52cdf2c53681cbfddda0932"
+          "visiblePixels": 3415,
+          "sha256": "6548e4c8006c1fe916a966ddcfb9585ed140ff14c2fb34d915a8e78f7067b295"
         },
         {
           "name": "Zephyrfang",
           "bounds": [
-            44,
-            112,
-            212,
+            41,
+            111,
+            215,
             245
           ],
-          "visiblePixels": 9791,
-          "sha256": "0dcc7890504b18fdfd16fa58672f5b1a4b22f68b07e85691e58360cf58ec6cf5"
+          "visiblePixels": 11660,
+          "sha256": "4b602be22bab576cae2b4b8bfbba54fabdcb2c7e1c17da705e853a6c0e2220f2"
         },
         {
           "name": "Zephyr Sovereign",
           "bounds": [
             12,
-            99,
-            244,
-            246
+            105,
+            243,
+            245
           ],
-          "visiblePixels": 19052,
-          "sha256": "291bc75882770dd00da53f44b9badeb0b93fcc60bdc94df988ab63b5095d46c6"
+          "visiblePixels": 16274,
+          "sha256": "c35f69ec4e96aa4a117745e98a9c94740439d1efb4a9d52f944a1d096f983376"
         }
       ]
     },
     {
       "entry": 77,
       "id": "ashenling",
-      "atlas": "./assets/roster/ashenling-v4.webp",
+      "atlas": "./assets/roster/ashenling-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 61634,
-      "sha256": "e675e8ea5adeb80bef40dcb3de18c81e4c3f02c600915d2ac0f2c635ce668bcb",
+      "bytes": 50066,
+      "sha256": "a2a9436eb518f962479c2f2da2f629ae39d6d548296e98d7a6571a5c6e95869c",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Ashenlet",
           "bounds": [
-            74,
-            162,
-            182,
+            60,
+            164,
+            196,
             245
           ],
-          "visiblePixels": 4248,
-          "sha256": "c271e0a9ffb3b5984c0e4e2c4ff06a135d19e8ea458c38f98a924d32969c336e"
+          "visiblePixels": 4565,
+          "sha256": "7c5e3a53139fc4352fc56b47bbdd116fdc79f6639716b94bd409cbf15086f433"
         },
         {
           "name": "Ashenling",
           "bounds": [
-            46,
-            96,
-            210,
-            246
+            38,
+            105,
+            217,
+            245
           ],
-          "visiblePixels": 11406,
-          "sha256": "65ae4ade497ec9ca5451f51080eb279109d0ecc23c01f3fa72ec20389709e869"
+          "visiblePixels": 9676,
+          "sha256": "1d0e9343263d6c5e18421ec7592556692ac96a26392ef091dbed193f0c312a80"
         },
         {
           "name": "Ashen Sovereign",
           "bounds": [
             12,
-            74,
-            244,
-            246
+            92,
+            243,
+            245
           ],
-          "visiblePixels": 23916,
-          "sha256": "3c0e4806e12081de84ee8a7d0f786c4041100898877f3bf783de6927be0b8a89"
+          "visiblePixels": 19598,
+          "sha256": "1bcf800b5d6405925b4a529e17e88d2b006be73c4bfe8173f6f64f75d2bd4b29"
         }
       ]
     },
     {
       "entry": 78,
       "id": "berylhorn",
-      "atlas": "./assets/roster/berylhorn-v4.webp",
+      "atlas": "./assets/roster/berylhorn-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 58962,
-      "sha256": "57ba2adef1bbebac6294ce3ce06cb50bcf3cf3491d21d554c3c02c2bf3468042",
+      "bytes": 57704,
+      "sha256": "6fd3072cc4cbfa34cd89797c48a0902d950bbba2f34f09254428deb16b5ff744",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Beryllet",
           "bounds": [
-            89,
-            142,
-            167,
-            246
+            73,
+            119,
+            183,
+            245
           ],
-          "visiblePixels": 4561,
-          "sha256": "76c5e29d28718a0152aaa00b5c40d9dd64d6392525ddbe152b2d7258b8e6b66e"
+          "visiblePixels": 6588,
+          "sha256": "5eef7fce25cdc42f9d2b7fc7617a33f44ba1fbd8eb27949f41935ffc2a4c59bd"
         },
         {
           "name": "Berylhorn",
           "bounds": [
-            51,
-            59,
-            205,
-            246
+            36,
+            15,
+            221,
+            245
           ],
-          "visiblePixels": 9899,
-          "sha256": "de7defc8cf794067c75089effb11b53d74b8293f5d5d99cd9299dc2daeb213f9"
+          "visiblePixels": 14498,
+          "sha256": "fd91dabb61c537cdcce7ab8562b1d05de952bf4b4ef594037036e5916cfa2198"
         },
         {
           "name": "Beryl Sovereign",
           "bounds": [
-            12,
-            62,
-            244,
-            246
+            14,
+            21,
+            242,
+            245
           ],
-          "visiblePixels": 24155,
-          "sha256": "476743166e844f28665512fb197babf4b981bcb2a9089bbac911a947dfaa7fd4"
+          "visiblePixels": 26686,
+          "sha256": "f3309bca7dafc7f61e6362e10b6be6ee4843384993a70ea9bc55115fd0facba2"
         }
       ]
     },
@@ -3767,47 +3767,47 @@
     {
       "entry": 81,
       "id": "eldermoth",
-      "atlas": "./assets/roster/eldermoth-v4.webp",
+      "atlas": "./assets/roster/eldermoth-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 64720,
-      "sha256": "f7d0c84283cdc62a9b92d70d219c5abf5026f15c0641e2deb10a72d2bc33d6be",
+      "bytes": 64312,
+      "sha256": "06d3ff7d67a56ceeb41d438ae03e1a76545a47e205bc3171b23995e9ee64142d",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Elderlet",
           "bounds": [
-            83,
-            156,
-            172,
-            246
+            80,
+            149,
+            176,
+            245
           ],
-          "visiblePixels": 3285,
-          "sha256": "95fa37f350bc829ca4491867c765b5bd8a23dbbb807e65d1b7b9d1f0a2f764c2"
+          "visiblePixels": 4138,
+          "sha256": "86da18eef8ba92df07c7fee38cfb795abd1763a50181cc71be413c5cb5844a53"
         },
         {
           "name": "Eldermoth",
           "bounds": [
-            36,
-            69,
-            219,
+            32,
+            56,
+            225,
             246
           ],
-          "visiblePixels": 12921,
-          "sha256": "f9764d214e08523a3b8b2978acb499c93e70d65722ea1a33fc82dfeafa8682ab"
+          "visiblePixels": 15567,
+          "sha256": "cf2f1604fb23dbddad737cf6ddada7c21f472c17cc39565dacfe25a13a36e5cb"
         },
         {
           "name": "Elder Sovereign",
           "bounds": [
-            12,
-            61,
-            244,
+            13,
+            51,
+            243,
             246
           ],
-          "visiblePixels": 24805,
-          "sha256": "c0bbdf0e3a8112d1f3b70dba09e12b1272d6e07763848bbc4f2f1d8c9bd6c3da"
+          "visiblePixels": 28301,
+          "sha256": "f9349f20f087b65c9935384d157568c7169669bce52c438a07c40fc62b0827bb"
         }
       ]
     },
@@ -3908,235 +3908,235 @@
     {
       "entry": 84,
       "id": "hazelbloom",
-      "atlas": "./assets/roster/hazelbloom-v4.webp",
+      "atlas": "./assets/roster/hazelbloom-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 67062,
-      "sha256": "740fc9c7084836f90f5c5b592034c41884b3de625be67b004c16259459f021bf",
+      "bytes": 58384,
+      "sha256": "962157e7c577891e41041a5187ad51df693b9e2518e8f9b8a68dca19fdb74666",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Hazellet",
           "bounds": [
-            83,
-            155,
-            173,
-            246
+            84,
+            151,
+            172,
+            245
           ],
-          "visiblePixels": 4719,
-          "sha256": "d8f4b7f63d2d092ba5172ca79290811610bbad42842e0a87594f03641240db6f"
+          "visiblePixels": 4454,
+          "sha256": "2f19448b0ae20b00b3a9fed498b1d5d057655fba7c8a26953bdbfb76f73faa6c"
         },
         {
           "name": "Hazelbloom",
           "bounds": [
-            41,
+            44,
             75,
-            214,
-            246
+            212,
+            245
           ],
-          "visiblePixels": 14032,
-          "sha256": "37350e86078b7816d7dd27382270ac11eb6accc1518c396eb05bcfc282654b98"
+          "visiblePixels": 13779,
+          "sha256": "35e5dc8074b5162e1f2eda83597ac94074755dd1161bce05c37d3c573ef82d21"
         },
         {
           "name": "Hazel Sovereign",
           "bounds": [
-            12,
-            70,
-            244,
+            13,
+            71,
+            243,
             246
           ],
-          "visiblePixels": 28420,
-          "sha256": "f4e487b83be13ce926096eba1d12b4bff68bfad3a49dd87b53fb4cc15d5fcbdd"
+          "visiblePixels": 25927,
+          "sha256": "5323c6d3086ae9d80f39eb25a157e474c370c8bb292f2f1d56ff45bcf7bbdad5"
         }
       ]
     },
     {
       "entry": 85,
       "id": "indigospire",
-      "atlas": "./assets/roster/indigospire-v4.webp",
+      "atlas": "./assets/roster/indigospire-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 85864,
-      "sha256": "2997c62ba6834f70ba57f7e8bfbd361b4d9692bee289b1ae852ee5c7694e6e0e",
+      "bytes": 69574,
+      "sha256": "4827982e00837a52079df6a25483c13c44794b40393d01e762e819ab6cb876fc",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Indigolet",
           "bounds": [
-            74,
-            133,
-            181,
-            246
+            77,
+            135,
+            178,
+            245
           ],
-          "visiblePixels": 6146,
-          "sha256": "3e72ae634ad18ab491eab8c461907094da63aa37c41dcdd19c77566a49a9facc"
+          "visiblePixels": 5492,
+          "sha256": "d9abb1cbf1a7fa7c3ae586cea3545ad45abc9e6a489b8e31cb8bf0c35bbe708d"
         },
         {
           "name": "Indigospire",
           "bounds": [
-            39,
-            69,
-            217,
+            35,
+            67,
+            220,
             246
           ],
-          "visiblePixels": 14001,
-          "sha256": "723eaa2c4af65351450f2b0cf582357d901326792133eed0fca535f8c152ecde"
+          "visiblePixels": 13649,
+          "sha256": "aabcf2f2ee08f521aa7b0464071fcecb1833fe89f39b578a5afcc84662f58025"
         },
         {
           "name": "Indigo Sovereign",
           "bounds": [
-            12,
-            71,
+            13,
+            69,
             244,
-            246
+            245
           ],
-          "visiblePixels": 27549,
-          "sha256": "b954a5bc3fb67f2b6914e4402f564ad73ea19f96a54ec6677560cce517d164ee"
+          "visiblePixels": 24747,
+          "sha256": "bda0e31167d6ce7fd2d1dd23b72d878d12377489434ab9e8f16835dc9b4ab173"
         }
       ]
     },
     {
       "entry": 86,
       "id": "junipermaw",
-      "atlas": "./assets/roster/junipermaw-v4.webp",
+      "atlas": "./assets/roster/junipermaw-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 52648,
-      "sha256": "b0cb01bec947d75c1e5b5b84889f7a6a5d85561b32f75339b4394a79170c6cb9",
+      "bytes": 43610,
+      "sha256": "7bb372e569c2689d66b8a77f6d9a29c98459e7fe505a6f09caf60dfe28f16082",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Juniperlet",
           "bounds": [
             99,
-            189,
-            156,
+            188,
+            158,
             246
           ],
-          "visiblePixels": 1460,
-          "sha256": "ce370d97627532a057ae129d136cb6751be41244d16e2da8fb7fa38b64512b7f"
+          "visiblePixels": 1672,
+          "sha256": "7a65c1e6d56f51ee35cb484b7c199445b9070d8f8fd84a13ee0dc8777dd5ca0a"
         },
         {
           "name": "Junipermaw",
           "bounds": [
-            57,
-            111,
-            199,
+            56,
+            107,
+            198,
             246
           ],
-          "visiblePixels": 9654,
-          "sha256": "10e56978b7fcb61bac7fa5a62e6b83d82420fc440dd005ee742a9b6f42f19fa7"
+          "visiblePixels": 11122,
+          "sha256": "b46cd7560ce35e7b7238c5abaf55639b928edb330dd21c8e96d53780fb866a44"
         },
         {
           "name": "Juniper Sovereign",
           "bounds": [
-            12,
-            95,
-            244,
-            246
+            13,
+            108,
+            243,
+            245
           ],
-          "visiblePixels": 18786,
-          "sha256": "a53a66b43c271c14cf109117cb3f09538cdf78478fcd01cc06d34a8a815715ed"
+          "visiblePixels": 17461,
+          "sha256": "8ef56da91a1950cb70fb0fa9d3201b18192b82dca8268abe5c19d327c0413207"
         }
       ]
     },
     {
       "entry": 87,
       "id": "kestrelveil",
-      "atlas": "./assets/roster/kestrelveil-v4.webp",
+      "atlas": "./assets/roster/kestrelveil-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 64064,
-      "sha256": "665d61c6f757a28bd7a53ae7d08d5b763d93386d1a691825ea441ea54f6ec8ff",
+      "bytes": 61864,
+      "sha256": "27f7bc237a018a99c4acdd6e2da45c92a1825e71d166eb7145042e685c478c09",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Kestrellet",
           "bounds": [
-            78,
-            165,
-            178,
+            82,
+            171,
+            174,
             245
           ],
-          "visiblePixels": 5267,
-          "sha256": "841037cd4bb0c95d903278bb04ba3957c985eb0d7d36162fa949c4f976d62fa6"
+          "visiblePixels": 4590,
+          "sha256": "9029f7eb2c07b1ce096cc48567988b62780798a54111c470cfe59555cda84ad4"
         },
         {
           "name": "Kestrelveil",
           "bounds": [
-            23,
-            119,
-            232,
-            246
+            32,
+            124,
+            222,
+            245
           ],
-          "visiblePixels": 15820,
-          "sha256": "7e98e4bab898892fb09d387c5e4b08eb2fe6a22cf2cf428a2b70ab1855979af5"
+          "visiblePixels": 13895,
+          "sha256": "8b272ab0ca35bab5e226d240656068c41108a241c164b697ecb23a6e407f86b0"
         },
         {
           "name": "Kestrel Sovereign",
           "bounds": [
             12,
-            63,
+            80,
             244,
             246
           ],
-          "visiblePixels": 24431,
-          "sha256": "ba2f78e2d296c5a7d827e040a965fbaeb4203d1c622208adecd837a0ffcb380d"
+          "visiblePixels": 22496,
+          "sha256": "2489f5ddb6e82f16da9070dc325c293509c980de68ce4ac0d7128ae56bd0c310"
         }
       ]
     },
     {
       "entry": 88,
       "id": "lichenwing",
-      "atlas": "./assets/roster/lichenwing-v4.webp",
+      "atlas": "./assets/roster/lichenwing-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 75060,
-      "sha256": "53d8d3688a9b2f14b3e257ad74d9bb3428eb25a682d47d78c3925df2502f3efa",
+      "bytes": 65940,
+      "sha256": "74964c3393d1cc75c78103bc2651b0b34534dba4458d714f7b4ef8ad901ba4b3",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Lichenlet",
           "bounds": [
-            85,
-            146,
-            172,
-            245
+            82,
+            133,
+            173,
+            246
           ],
-          "visiblePixels": 4812,
-          "sha256": "8a44f8acdb76d929ae3799c10f95eb46e046f58ee8d1d5858871bee46af5cc13"
+          "visiblePixels": 5566,
+          "sha256": "78e9b4113b741a6f9bb313fcbf8f691900c4662539323d6742918549d325ad0e"
         },
         {
           "name": "Lichenwing",
           "bounds": [
             13,
-            100,
-            244,
-            246
+            85,
+            243,
+            245
           ],
-          "visiblePixels": 17503,
-          "sha256": "179000dc0098af4423fc1208cbe28ad3c085202bdfc13100c3bb4baf08c0d5df"
+          "visiblePixels": 17988,
+          "sha256": "5d2ea0d6e065afb627e60565ed42e6ab0e74955c2dab6c15f0a6ed9ff365aad6"
         },
         {
           "name": "Lichen Sovereign",
           "bounds": [
-            18,
+            19,
             39,
-            238,
-            246
+            235,
+            245
           ],
-          "visiblePixels": 25124,
-          "sha256": "bbb6fe91d818f243801584c7d0782cedbafcbc28e2bf1f0106798150f9d23fc9"
+          "visiblePixels": 24392,
+          "sha256": "95e571328f1730990eed4e273ad710f8f1df9b21d7cbbad0e272197a9e593296"
         }
       ]
     },
@@ -4237,47 +4237,47 @@
     {
       "entry": 91,
       "id": "opalhorn",
-      "atlas": "./assets/roster/opalhorn-v4.webp",
+      "atlas": "./assets/roster/opalhorn-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 74120,
-      "sha256": "7d614cc8f54c6bd6a188ac92389e8cab8451a0911bfc58abfbeecdc5e5b2a1c8",
+      "bytes": 71626,
+      "sha256": "2e6cb6cf35c4a9fd58f480a07feca16170e46c1aafee6b62ff337bbac6b9d64f",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Opallet",
           "bounds": [
-            76,
-            123,
-            180,
+            72,
+            95,
+            184,
             245
           ],
-          "visiblePixels": 7539,
-          "sha256": "d15811bb3ad1328da28ccd6512ba582bf5a565602d3eef9c673defabe82cfbfa"
+          "visiblePixels": 9085,
+          "sha256": "fe6eeb19bf8f418b2c5e6272ceb93b15fd7280033639ca9a1bcf752454949290"
         },
         {
           "name": "Opalhorn",
           "bounds": [
-            38,
-            48,
-            216,
+            23,
+            22,
+            233,
             246
           ],
-          "visiblePixels": 17256,
-          "sha256": "bc2e39f949040e7fae9c8ebe8d636c60d172bdd15d7a8554e25eda8d0890fc3f"
+          "visiblePixels": 19314,
+          "sha256": "f03c644eb350df9607e6d58c07b551a10041037173f1309699d3dbeb1de47596"
         },
         {
           "name": "Opal Sovereign",
           "bounds": [
             13,
-            48,
+            16,
             244,
-            245
+            246
           ],
-          "visiblePixels": 30937,
-          "sha256": "08cb85a9d49dd92ce000af1667685be756fe5eb79793108fd6e85e1fd6662b97"
+          "visiblePixels": 34600,
+          "sha256": "8fde47ff680081113bb74ee6e1ee6c6b5fc8dbd8b77fdf0d29bf1ebeabac69e0"
         }
       ]
     },
@@ -4331,94 +4331,94 @@
     {
       "entry": 93,
       "id": "quartzclaw",
-      "atlas": "./assets/roster/quartzclaw-v4.webp",
+      "atlas": "./assets/roster/quartzclaw-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 80630,
-      "sha256": "b14eb35a47804fa0f762e2cd0b05573a1d8739566b4e78b4f0f29af275f766e7",
+      "bytes": 70480,
+      "sha256": "01bdb17fc04df603e8fa297e5748ff3aaf778d3a151d0eda0276905cc893401c",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Quartzlet",
           "bounds": [
             58,
-            129,
-            198,
+            119,
+            199,
             245
           ],
-          "visiblePixels": 9610,
-          "sha256": "1b1a4354a213015a260e846a62f0a23055d52f701c0b745f3eb007019eb94a92"
+          "visiblePixels": 10396,
+          "sha256": "940503695d8704b2eed8b8108aea5a99e61b20798b59c02fef7c9c08b79ef293"
         },
         {
           "name": "Quartzclaw",
           "bounds": [
-            21,
-            65,
-            234,
+            19,
+            57,
+            237,
             245
           ],
-          "visiblePixels": 15252,
-          "sha256": "197f9a57c621b982e4b172a9b0ff4adedc1a04b66fb9f6a1363b3ad0ff655752"
+          "visiblePixels": 17056,
+          "sha256": "6d69b6da5ea781b0852dec8c221e462573b575507ffe0bf7b4faa35804c3bd94"
         },
         {
           "name": "Quartz Sovereign",
           "bounds": [
-            12,
-            40,
-            244,
+            13,
+            36,
+            243,
             245
           ],
-          "visiblePixels": 27048,
-          "sha256": "a96cda4bd9216e230493a9ae43e789875ec7cffb2734dcc3513de494127bb692"
+          "visiblePixels": 23924,
+          "sha256": "3c6b002d8d1bd575bcc6ca975b85976316e30c6ff8edcb15119a4d1e58d3ec42"
         }
       ]
     },
     {
       "entry": 94,
       "id": "rimemoth",
-      "atlas": "./assets/roster/rimemoth-v4.webp",
+      "atlas": "./assets/roster/rimemoth-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 78368,
-      "sha256": "0b99938bc159f3df0845147d81b6aa65adb4d7151faf1300e2f13f745ad9b46f",
+      "bytes": 69172,
+      "sha256": "d356d23526c2fd967bad0e144c13def4b0e98ab4796e8a6de54b50e9087aea90",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Rimelet",
           "bounds": [
-            72,
-            143,
-            184,
+            73,
+            144,
+            182,
             246
           ],
-          "visiblePixels": 5094,
-          "sha256": "90fce04224144599dca269da037e7af4c49fe977f6e5bf0832dedb688f53faba"
+          "visiblePixels": 5098,
+          "sha256": "7e29bdc71cfddddf6941f923132b7a0157d2256ad8bd2257c14c280ccd0c9fb1"
         },
         {
           "name": "Rimemoth",
           "bounds": [
-            16,
-            63,
-            239,
-            246
+            20,
+            69,
+            235,
+            245
           ],
-          "visiblePixels": 17783,
-          "sha256": "974c74a87024d06bd63c7da10fb407c36d0cceb0acc508403eac5a0f9285c2e5"
+          "visiblePixels": 17320,
+          "sha256": "e59f55d06e966635a31d4d36d9adc4b58cbaff9919a63e7c12a9f063f7b262af"
         },
         {
           "name": "Rime Sovereign",
           "bounds": [
             12,
-            49,
+            51,
             244,
             246
           ],
-          "visiblePixels": 26204,
-          "sha256": "8c5deee6b54f753f87e7cff9f27ca924607e360f6b1c81d05e15e6167aae65ad"
+          "visiblePixels": 25954,
+          "sha256": "64b8e552589fc3d63ea747df212e699485f6ee1080c046f754b4b8d80d4f3e50"
         }
       ]
     },
@@ -4519,94 +4519,94 @@
     {
       "entry": 97,
       "id": "verdantbloom",
-      "atlas": "./assets/roster/verdantbloom-v4.webp",
+      "atlas": "./assets/roster/verdantbloom-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 69014,
-      "sha256": "36770cc4460488c4cdee232c6b0ae6ef1a9ea747eb9d17e03e11964127b05ed9",
+      "bytes": 72250,
+      "sha256": "afdc671d9b2688d9f698f085e1c3c3b59bf20ff2a935c5f8b7c33b028943e00c",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Verdantlet",
           "bounds": [
-            74,
-            121,
-            182,
+            68,
+            110,
+            187,
             246
           ],
-          "visiblePixels": 7044,
-          "sha256": "b231847c9a7bb09708393777cb40beb48eae18fb7be208c6ce32c026348de288"
+          "visiblePixels": 8909,
+          "sha256": "36538491bfde2b6df457d470a6459ed4bcfd069a6efefe70e4b06ac5c0a164f9"
         },
         {
           "name": "Verdantbloom",
           "bounds": [
-            40,
-            69,
-            216,
-            246
+            35,
+            57,
+            221,
+            245
           ],
-          "visiblePixels": 16627,
-          "sha256": "430dbf25c256ba5ec98555dc926f799691cb938686bf2e5f96cd0038230607c2"
+          "visiblePixels": 21341,
+          "sha256": "d5082fa7de7c2745d42811a3af3eefbd3f875716bcbe402ef361e7c9c3307138"
         },
         {
           "name": "Verdant Sovereign",
           "bounds": [
-            12,
-            60,
+            13,
+            53,
             244,
-            246
+            245
           ],
-          "visiblePixels": 31536,
-          "sha256": "802c45766305014e18c115559b58bec9d31179aaa03ea6278a257d53df9783ec"
+          "visiblePixels": 33465,
+          "sha256": "d72d6d5263b719349be78c2546ed997dde950a4d63d3bad2b26800870ddd6c1c"
         }
       ]
     },
     {
       "entry": 98,
       "id": "wraithspire",
-      "atlas": "./assets/roster/wraithspire-v4.webp",
+      "atlas": "./assets/roster/wraithspire-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 87920,
-      "sha256": "2cfbcd27d01f93921bf4338fb63de155414a2bc7ff4bebaae442b81fee1bae4b",
+      "bytes": 74316,
+      "sha256": "ae2a6abb34193b7380861a85720edc22b037f725c830f4dbcf97f0bad9fc2856",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Wraithlet",
           "bounds": [
-            74,
-            106,
-            181,
-            245
+            68,
+            120,
+            188,
+            246
           ],
-          "visiblePixels": 6319,
-          "sha256": "03becfdfba1405f5df491660d97e0b0a4df0a2a94b68352791bc7f9a7c3c511a"
+          "visiblePixels": 6613,
+          "sha256": "721fe23f5cc61c02f2d3e761a43fbccfcc471a7a98926a41530c7b6778892cf9"
         },
         {
           "name": "Wraithspire",
           "bounds": [
-            52,
-            46,
-            205,
+            45,
+            47,
+            212,
             245
           ],
-          "visiblePixels": 13277,
-          "sha256": "d721259e532432220d29d7c5165c1420b741088cc2594cc580100ebd7f9c67b0"
+          "visiblePixels": 12716,
+          "sha256": "e84330cb144237042077c5468d3e727ebb19bf7460124b2a858a47b79a84b319"
         },
         {
           "name": "Wraith Sovereign",
           "bounds": [
-            12,
-            45,
-            244,
+            13,
+            42,
+            243,
             245
           ],
-          "visiblePixels": 25398,
-          "sha256": "1180388394d6b365f9e6612df7ace0230cd7661d81a08c5e043a6d6a76d8b93a"
+          "visiblePixels": 22774,
+          "sha256": "9a9b75d14650dce918aa4177adbf9f4070c650cc1be28430e41798aac5856ab0"
         }
       ]
     },
@@ -4660,47 +4660,47 @@
     {
       "entry": 100,
       "id": "zirconveil",
-      "atlas": "./assets/roster/zirconveil-v4.webp",
+      "atlas": "./assets/roster/zirconveil-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 61232,
-      "sha256": "28e4fec631e12283cd81d114a0f1402b3a849a005431023e553cf6f3169c9c28",
+      "bytes": 47780,
+      "sha256": "a94be323007a965324c7a5c8b5c33bfe6828c98dc4cf11da3c7ef0b4c178119a",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Zirconlet",
           "bounds": [
-            77,
-            160,
-            179,
+            74,
+            155,
+            182,
             246
           ],
-          "visiblePixels": 5270,
-          "sha256": "c56803a5f5c2a27bd282926ff018f493892c0ca2fc0837c24b573d0f503beb35"
+          "visiblePixels": 6055,
+          "sha256": "a2024ba377ba76bcee140db16631a0781b03ed33bd1f232bf037e5975014e23b"
         },
         {
           "name": "Zirconveil",
           "bounds": [
             12,
-            131,
-            244,
-            246
+            128,
+            243,
+            245
           ],
-          "visiblePixels": 15563,
-          "sha256": "a085322eed024e4032b8fdca204c1794f437e9bc86f6210370c9a895cd1132df"
+          "visiblePixels": 16880,
+          "sha256": "dea947f46c9c6e12bd76ea7bfffa6cfe43f878ee905145ebfcf83bf33d1a1988"
         },
         {
           "name": "Zircon Sovereign",
           "bounds": [
-            18,
-            69,
-            238,
+            24,
+            58,
+            232,
             246
           ],
-          "visiblePixels": 22870,
-          "sha256": "582bd04a995df5839394409f890921dd2c0c63a982281837aa3a5012a8d1d422"
+          "visiblePixels": 22282,
+          "sha256": "351438958cdae565f4769a7e1daa8f3b0fa75ddb7d5efeb4fb581d7971d905ea"
         }
       ]
     },
@@ -4754,94 +4754,94 @@
     {
       "entry": 102,
       "id": "basilgore",
-      "atlas": "./assets/roster/basilgore-v4.webp",
+      "atlas": "./assets/roster/basilgore-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 60922,
-      "sha256": "8b311bf2c4a4db82ebc171dc551e62aa2365baac427e50896abe91e9b41798c5",
+      "bytes": 55698,
+      "sha256": "5794622e36e38c8fbc840eadb179e110c9188fdf4e580c47a06b1aca0b66a0c2",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Basilling",
           "bounds": [
             73,
-            160,
+            164,
             182,
             245
           ],
-          "visiblePixels": 5807,
-          "sha256": "3d9dbfcdb23cd978b3633bf1c09fb3746727767b09c17181b15ba156c86833c0"
+          "visiblePixels": 5198,
+          "sha256": "394273fce7490cd11ea7d52c4901e76de22e234a615b037b761a8df457ec8a09"
         },
         {
           "name": "Basilgore",
           "bounds": [
-            13,
+            18,
             128,
-            243,
-            246
+            239,
+            245
           ],
-          "visiblePixels": 16293,
-          "sha256": "ab2c5ec7117e0289b1fb5323247b72b61eb224439216d06444b3d5036ae98f51"
+          "visiblePixels": 15819,
+          "sha256": "462715d609531f977a8bba6f850142d094c53013d391380d62a13b6e972e6ec8"
         },
         {
           "name": "Basil Exarch",
           "bounds": [
-            12,
-            58,
+            13,
+            68,
             244,
             245
           ],
-          "visiblePixels": 27781,
-          "sha256": "7d1d5f13734e1db51c2cb8ffe54c687e50b5c31930ec7dfee8e4947abfcdb6e0"
+          "visiblePixels": 25995,
+          "sha256": "736a302e881bd74157dde1d14352799c9e7739ba7b6c1c54d549e5009339041a"
         }
       ]
     },
     {
       "entry": 103,
       "id": "cobaltwisp",
-      "atlas": "./assets/roster/cobaltwisp-v4.webp",
+      "atlas": "./assets/roster/cobaltwisp-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 58150,
-      "sha256": "0aadb5edbd7f9cc3f54f8f474d9fd597e9f37e6011d3eccc8d906d5b0fba72af",
+      "bytes": 48116,
+      "sha256": "e5e7ef5b2725ed2d4473fa7d10e64228f9b7d74bb0836fa0a4f855f7d54d4b23",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Cobaltling",
           "bounds": [
-            84,
-            166,
-            171,
-            246
+            85,
+            158,
+            170,
+            245
           ],
-          "visiblePixels": 3903,
-          "sha256": "1a8d8bc070c9b2202b83f91f9fff4671273bcf3835ea4653bef69f34f5e19286"
+          "visiblePixels": 5107,
+          "sha256": "9044f9b58ab3e62cf70e4e953190943bcc887a60fc048253b70763cb33a575dc"
         },
         {
           "name": "Cobaltwisp",
           "bounds": [
-            56,
-            86,
-            200,
+            52,
+            68,
+            203,
             246
           ],
-          "visiblePixels": 8831,
-          "sha256": "04b9accddf3060cacc380d334c4a54fdc6f8cad2b8b46dc86e245214425af440"
+          "visiblePixels": 10481,
+          "sha256": "41456f312ee86289eb0dc9ad4a7394231744b158769ca7e57789b24902fc30b2"
         },
         {
           "name": "Cobalt Exarch",
           "bounds": [
-            12,
-            78,
+            13,
+            71,
             244,
             246
           ],
-          "visiblePixels": 20317,
-          "sha256": "60fdad11a18ea00186ed4f833eb9bbe90b13a055644662233ef076c5f97927de"
+          "visiblePixels": 21488,
+          "sha256": "36f2c54ed119f154141494d32cdef5b72249cfaacc8b180410e626d33554c240"
         }
       ]
     },
@@ -4942,47 +4942,47 @@
     {
       "entry": 106,
       "id": "fableroot",
-      "atlas": "./assets/roster/fableroot-v4.webp",
+      "atlas": "./assets/roster/fableroot-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 79496,
-      "sha256": "1608e3952771c31b13728a4f8988cbf77fb297dcd21b7576503f1f7e40c73363",
+      "bytes": 78044,
+      "sha256": "384a8075d2242d8048213eb15bcabe5dc0aa37d58d7168cc4e5deb1dd58b7647",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Fableling",
           "bounds": [
-            81,
-            164,
-            175,
-            246
+            78,
+            149,
+            178,
+            245
           ],
-          "visiblePixels": 3456,
-          "sha256": "18da7b34e25347c68411cf8a4f1df6c305923ae4be74c94ae5d2d8f31fdd6d94"
+          "visiblePixels": 4488,
+          "sha256": "d8e64f2b628151739dc327bdde7e8d61093cc450685f1df8dd8dd673cdea302e"
         },
         {
           "name": "Fableroot",
           "bounds": [
-            50,
-            76,
-            206,
-            246
+            46,
+            59,
+            208,
+            245
           ],
-          "visiblePixels": 13210,
-          "sha256": "abc098b5fec5d41a249b55bba83e6a68ac3c4dd9a52191a5c1bb99e406efbc78"
+          "visiblePixels": 16915,
+          "sha256": "e77c8b9cc05065ea5c3196751dacda89d32b46af485822944c34f319cd0924fe"
         },
         {
           "name": "Fable Exarch",
           "bounds": [
-            13,
-            68,
-            244,
+            12,
+            43,
+            243,
             246
           ],
-          "visiblePixels": 25212,
-          "sha256": "5fc80f8ba93008a5759ecb8fa8bbeef902d64d08301cc73fc1759da70add0298"
+          "visiblePixels": 30638,
+          "sha256": "d4b6200b148ba51f08ef50a5f899d0974643e790eee3296a7f7b9f7e57b3f0ef"
         }
       ]
     },
@@ -5036,47 +5036,47 @@
     {
       "entry": 108,
       "id": "harborgaze",
-      "atlas": "./assets/roster/harborgaze-v4.webp",
+      "atlas": "./assets/roster/harborgaze-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 58788,
-      "sha256": "13f7e0a39b8d3b51a32b09b6cc7c7ce89d5b6dded2f893157f376ff161bd5e12",
+      "bytes": 51952,
+      "sha256": "3954d26dd6546f9c69f8a44c9892d4048447be90883aac2df1cbf0813fa1a31e",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Harborling",
           "bounds": [
             81,
-            147,
-            175,
-            246
+            143,
+            174,
+            245
           ],
-          "visiblePixels": 5236,
-          "sha256": "228460da6f611d704ad13296a42de4fe47c48fcb059b334d76e31c97c422709c"
+          "visiblePixels": 5552,
+          "sha256": "ad52b24ea061915d09e7ad27698bdc7420ad38de5dd01fc58dc1467b98a5fee7"
         },
         {
           "name": "Harborgaze",
           "bounds": [
-            33,
-            105,
-            222,
-            246
+            31,
+            100,
+            225,
+            245
           ],
-          "visiblePixels": 13852,
-          "sha256": "b245cfb9171fd77ae3b92bb7345f9e135b767c9d918faf5aaf2fa34f9f74ff77"
+          "visiblePixels": 15553,
+          "sha256": "de5df6cea8eb537ce66d54e2bcc89202acf60c4671a7d537d225d3ee192a5b52"
         },
         {
           "name": "Harbor Exarch",
           "bounds": [
             12,
-            76,
-            244,
-            246
+            114,
+            243,
+            245
           ],
-          "visiblePixels": 23784,
-          "sha256": "c4a667883fed0586cc1b0b0d5ffb95533ae13bc9eb32468a746733c2ba0131f1"
+          "visiblePixels": 22587,
+          "sha256": "51877770a82de7f9cdcd11a915072220080435f451a52d6e4180f87c4f1ad6cb"
         }
       ]
     },
@@ -5130,188 +5130,188 @@
     {
       "entry": 110,
       "id": "jasperplume",
-      "atlas": "./assets/roster/jasperplume-v4.webp",
+      "atlas": "./assets/roster/jasperplume-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 69832,
-      "sha256": "f3b296f28aff1aa6347fb8d86114639bd01b3dc3eaa53c663db3fc9df0c183d8",
+      "bytes": 66544,
+      "sha256": "02d4e7bdfdbeb5645abf07a9ad4ae90e9369748d0f6e43af6ef1812e4494b5d1",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Jasperling",
           "bounds": [
-            74,
-            148,
-            181,
+            73,
+            142,
+            183,
             245
           ],
-          "visiblePixels": 6108,
-          "sha256": "bef0a18c435feb9c9e5d9f28ab1a77104525d2b8b94f2fcb8ca8ed05e3753699"
+          "visiblePixels": 7436,
+          "sha256": "3b4b6bcb83105e60d0b0287a34be3dc052c9d2f544e32f4897ac8409d5c265de"
         },
         {
           "name": "Jasperplume",
           "bounds": [
-            55,
-            62,
-            201,
-            246
+            52,
+            51,
+            203,
+            245
           ],
-          "visiblePixels": 11625,
-          "sha256": "43ea9d07ad93f0618c7e3bffbd7f08c8d4db63ed0264ba564a3c23cbd74bcc2b"
+          "visiblePixels": 15107,
+          "sha256": "622d23b3152a3569584818570dbd188c9f2b5a163bdf02a17e9e27257e0c87a1"
         },
         {
           "name": "Jasper Exarch",
           "bounds": [
-            12,
-            58,
-            244,
-            246
+            13,
+            55,
+            243,
+            245
           ],
-          "visiblePixels": 29658,
-          "sha256": "28491d248c44de2e13057ca2550e82dabb86dd0c3980aa03cd571c612dbbc691"
+          "visiblePixels": 32402,
+          "sha256": "28ccd7d2f136f6c2ca3fa680ede8087eef7b4bfc53b61b3dc5a9e007297061e5"
         }
       ]
     },
     {
       "entry": 111,
       "id": "kindlekin",
-      "atlas": "./assets/roster/kindlekin-v4.webp",
+      "atlas": "./assets/roster/kindlekin-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 60690,
-      "sha256": "606a8e13e1652874510ef5de2841e8d3a3f6860538d02200a98cc8b8731be100",
+      "bytes": 57660,
+      "sha256": "43d732f3b006a3c0e4ea35953a0f55e56d5e9d25a25bc0c957f83057046331c3",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Kindleling",
           "bounds": [
-            65,
-            134,
-            190,
-            246
+            60,
+            130,
+            194,
+            245
           ],
-          "visiblePixels": 8832,
-          "sha256": "04774706dff5c65cb6694d5d53dfe19cd9d140f4e35a0e84243179b03a14df82"
+          "visiblePixels": 9351,
+          "sha256": "709ff453d8e9c868744bf26a25124cd3f2254b81e45ecafe91fc5095ac73cca7"
         },
         {
           "name": "Kindlekin",
           "bounds": [
-            36,
-            57,
-            219,
-            246
+            29,
+            48,
+            226,
+            245
           ],
-          "visiblePixels": 16395,
-          "sha256": "f42de4a3d8aefc2a80d8fc8e1349df828b4db52ea0a238e77eb8afcf28ccccf8"
+          "visiblePixels": 17751,
+          "sha256": "ce4245c563ae676fc9514ada9b79aa7cf7c814eb4fe84f2f340358a882d10df9"
         },
         {
           "name": "Kindle Exarch",
           "bounds": [
-            12,
-            64,
-            244,
-            246
+            13,
+            63,
+            243,
+            245
           ],
-          "visiblePixels": 29124,
-          "sha256": "f9747ad49ab861343eafae36ab4e4fdcc87fa416730a064429c356c8ed270ceb"
+          "visiblePixels": 27565,
+          "sha256": "7db0aee2d106af3c168ff1efd2805cbb1e26265f48d8681b30c9d7834dcccc70"
         }
       ]
     },
     {
       "entry": 112,
       "id": "lotusgore",
-      "atlas": "./assets/roster/lotusgore-v4.webp",
+      "atlas": "./assets/roster/lotusgore-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 87468,
-      "sha256": "3dda8a37fcfd56cc4e98ae6fcacef2d2d2abc852e5fdc872a8f2ff5e9827d924",
+      "bytes": 61306,
+      "sha256": "1ee38170b1b529f52535c3caaf5cc045e88f5f33363b2ae914efcd25e9d3cc08",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Lotusling",
           "bounds": [
-            67,
-            129,
-            188,
+            66,
+            128,
+            191,
             245
           ],
-          "visiblePixels": 8528,
-          "sha256": "3cd68c034f81b43dace06624c884248047cf780143bfde155e65e9650ed27c14"
+          "visiblePixels": 8860,
+          "sha256": "91f7e31e2a768a5cbc4e2e944361e4ed3c9c972cac7e5dd8c0f643416337f594"
         },
         {
           "name": "Lotusgore",
           "bounds": [
             13,
-            91,
-            244,
+            85,
+            243,
             246
           ],
-          "visiblePixels": 23061,
-          "sha256": "3dffdc3e98c1cd4c951cb8b8c1e8d944d4fd42aaa484105af926d82a46bfd766"
+          "visiblePixels": 24109,
+          "sha256": "e416feeb0022f7467cb3b9f794f87473b74c5b65721f96acfab9f04d6628999d"
         },
         {
           "name": "Lotus Exarch",
           "bounds": [
-            17,
-            40,
-            238,
+            15,
+            32,
+            240,
             245
           ],
-          "visiblePixels": 31951,
-          "sha256": "d4eae12bcab93801b6a173e09986afe28d85da9069dadf479259290ded44412d"
+          "visiblePixels": 32997,
+          "sha256": "d81bc85c0ce131d81e08f88c8658dd4f9fd6062268bcf62e6c19bcfcc61e7b0f"
         }
       ]
     },
     {
       "entry": 113,
       "id": "mistralwisp",
-      "atlas": "./assets/roster/mistralwisp-v4.webp",
+      "atlas": "./assets/roster/mistralwisp-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 101972,
-      "sha256": "9e43c2e97c1ff6f55d1e8dbe26dc893965980349c33c526bf38ce439bef5908b",
+      "bytes": 68148,
+      "sha256": "2c53219dbc730e639dd987e3864af8f0423834d7938510c36f034363c8a84acc",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Mistralling",
           "bounds": [
             60,
-            115,
-            195,
+            121,
+            194,
             245
           ],
-          "visiblePixels": 7959,
-          "sha256": "cb3c2677be9baf92659f491eee137700f98bfb2682f54f90d465b07451ae7da3"
+          "visiblePixels": 7857,
+          "sha256": "172b57982b099b57932663c628d724e906c7c54ec1b049d88ccb16ed66fc9f65"
         },
         {
           "name": "Mistralwisp",
           "bounds": [
-            12,
-            31,
-            243,
+            25,
+            49,
+            230,
             245
           ],
-          "visiblePixels": 20764,
-          "sha256": "572bcc21cbdb4167f4a36e7bc4cc8943f0a651cbb9a7a9057b8e2dd77ed069d9"
+          "visiblePixels": 17942,
+          "sha256": "5e8df6f7998583a8d4fd83c6dd7df9c86683569d44e9054312cc004bf92f00a1"
         },
         {
           "name": "Mistral Exarch",
           "bounds": [
-            13,
-            33,
-            242,
+            12,
+            51,
+            244,
             245
           ],
-          "visiblePixels": 30137,
-          "sha256": "338fbac24f6dda96a452ab4105f76a8eab3074abbcb0430b3204a032cc76470a"
+          "visiblePixels": 24703,
+          "sha256": "0d0dd79d235840967a36b2eddd803b4a0d4d67a30a464a69adbc94320a90eb30"
         }
       ]
     },
@@ -5365,188 +5365,188 @@
     {
       "entry": 115,
       "id": "onyxflare",
-      "atlas": "./assets/roster/onyxflare-v4.webp",
+      "atlas": "./assets/roster/onyxflare-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 54274,
-      "sha256": "2caa3dab73887c4063c0b54e312c98e84c8a1ad4fdb53b91941dfd2b6a8afb6f",
+      "bytes": 45942,
+      "sha256": "ff167852f0e2a5346db62e8548b5e56addc3f748b5935e2886b10ba0a68e587b",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Onyxling",
           "bounds": [
-            80,
-            165,
-            176,
-            245
+            81,
+            168,
+            174,
+            246
           ],
-          "visiblePixels": 4814,
-          "sha256": "3fcc01e7a6a402902146507e9e421a6ed758d3ccacebe7c51e399f6b338f6d74"
+          "visiblePixels": 4520,
+          "sha256": "70f55a6e53e8b599bfee309314a73a3c911beeaa4ef28b77a794dc887280c908"
         },
         {
           "name": "Onyxflare",
           "bounds": [
-            20,
-            113,
-            236,
-            246
+            25,
+            119,
+            231,
+            245
           ],
-          "visiblePixels": 15118,
-          "sha256": "9b88dbb7a18ebacd5322a04ac7e33345844a6bc5e7f926b61a62e6e857aca730"
+          "visiblePixels": 15114,
+          "sha256": "52f0854c8c39fb3faff4cebe8c3e334c55aa32e486f5cbc6d81d2799a1317070"
         },
         {
           "name": "Onyx Exarch",
           "bounds": [
-            12,
-            81,
-            244,
-            245
+            13,
+            91,
+            243,
+            246
           ],
-          "visiblePixels": 26209,
-          "sha256": "6529a5ad0f38c823fb35c2ad1e466a2af322e8075f7d2b4d61134ffbe0a32013"
+          "visiblePixels": 23880,
+          "sha256": "7a245c35f0d317b5467a94fcde6ebfc69a91868cfab923be2fed681f2cb88ef7"
         }
       ]
     },
     {
       "entry": 116,
       "id": "petalroot",
-      "atlas": "./assets/roster/petalroot-v4.webp",
+      "atlas": "./assets/roster/petalroot-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 63066,
-      "sha256": "baa03831e1e5ab56a1aa2f6e6b76bc90a4ebe4e9f16a75b78432c7fef0374e93",
+      "bytes": 66432,
+      "sha256": "958d7f0ab0469c76328f7fe3f87073090c239d90a6d5ae09217065115616be07",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Petalling",
           "bounds": [
-            86,
-            180,
-            170,
+            84,
+            177,
+            172,
             246
           ],
-          "visiblePixels": 2842,
-          "sha256": "3faaf9a4195c7aace96a732fcd16eae80d97bf542267ac58a67e5f5aa8c73431"
+          "visiblePixels": 3543,
+          "sha256": "d738baba602bc147bd16efe6c98f4eab230dc38f4dad35312dd3aba97577f590"
         },
         {
           "name": "Petalroot",
           "bounds": [
-            59,
-            91,
-            197,
-            246
+            56,
+            87,
+            198,
+            245
           ],
-          "visiblePixels": 9748,
-          "sha256": "f0d495945b8f525226ee4664cdfcaa3384be25f86077eef33802975d7c4f75fc"
+          "visiblePixels": 11468,
+          "sha256": "09addedbf54a416bd7fba8289d0e2a02ae6f2737f6957c0986c87c108d334ca5"
         },
         {
           "name": "Petal Exarch",
           "bounds": [
             12,
-            84,
+            82,
             244,
-            246
+            245
           ],
-          "visiblePixels": 20254,
-          "sha256": "c792c61fc1fbe1b57cce72f338e66601149280d229a0b4094adf56d878932cba"
+          "visiblePixels": 21155,
+          "sha256": "6389fb652b87a625d912ef627f14565226b428f65c3531cc39a1c74180929ef6"
         }
       ]
     },
     {
       "entry": 117,
       "id": "quasarshard",
-      "atlas": "./assets/roster/quasarshard-v4.webp",
+      "atlas": "./assets/roster/quasarshard-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 51156,
-      "sha256": "bf545571a11ec7f4fe438e018ff33eb74d3bb9b137a1dda0bc18e3105239d1df",
+      "bytes": 35714,
+      "sha256": "4d88fd8d6238db4dd3d8733ac1beca02a19b2c1b8d320bc5bd77227f61453ee0",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Quasarling",
           "bounds": [
-            90,
-            176,
-            165,
+            89,
+            171,
+            166,
             246
           ],
-          "visiblePixels": 2777,
-          "sha256": "cce5cfddee4e9873ace1233227bc7f89e95cd8c093e3dc3c974f85f88ef09fdd"
+          "visiblePixels": 3314,
+          "sha256": "18b1ff55c9156394901ee0c023df6b54ff9eae077787b5fb5fc77090c6b83155"
         },
         {
           "name": "Quasarshard",
           "bounds": [
-            58,
-            95,
-            198,
+            56,
+            85,
+            199,
             246
           ],
-          "visiblePixels": 10110,
-          "sha256": "5d922090fa57a66f55e438cb4cbfbf683ad9eb0ee83d0db1ae109b57f7abb73d"
+          "visiblePixels": 10875,
+          "sha256": "fd3912b083926898d6524e89426c77a622ef8b9e159e4fb44d84a1bcb0af6ac9"
         },
         {
           "name": "Quasar Exarch",
           "bounds": [
-            12,
-            98,
+            13,
+            94,
             244,
             246
           ],
-          "visiblePixels": 18515,
-          "sha256": "01a8509f7ea15277156ea759a5a238f5c7784c4d7eea59e04671d9b8c490fde8"
+          "visiblePixels": 17342,
+          "sha256": "474a8d1f40acb026a6582ea46502090ea2eef0a0d9a21ec7b762c3f93ef3c953"
         }
       ]
     },
     {
       "entry": 118,
       "id": "ravengaze",
-      "atlas": "./assets/roster/ravengaze-v4.webp",
+      "atlas": "./assets/roster/ravengaze-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 70684,
-      "sha256": "7e280025348b45e9e84b913867ea1ffb5789b44ffd449272121cd81d35d77dd9",
+      "bytes": 55014,
+      "sha256": "aa8204dad2999767ec309e6df01e6e7ea4ec6d95cc2ec97d4eeccb82f6525530",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Ravenling",
           "bounds": [
-            82,
-            146,
-            173,
+            86,
+            147,
+            169,
             245
           ],
-          "visiblePixels": 4700,
-          "sha256": "e7b73df3f814759dcf77ebec52d0faad750c73d9fe48bdf10ded826f8d054eae"
+          "visiblePixels": 4797,
+          "sha256": "49ea923d57be8c3bea72aaa72254f294dbd05b034a3516475ea9337294c6acd0"
         },
         {
           "name": "Ravengaze",
           "bounds": [
-            29,
-            95,
-            226,
+            40,
+            101,
+            215,
             245
           ],
-          "visiblePixels": 14167,
-          "sha256": "04e194a1bcdf98be01be5e7c641ba9c16f393f51186cbeefc879787362b4336b"
+          "visiblePixels": 14648,
+          "sha256": "e9e67c3a36474db12eab1594bdb8af5253a37b260961392aeadbe72ff5ed16aa"
         },
         {
           "name": "Raven Exarch",
           "bounds": [
             12,
-            57,
-            244,
+            66,
+            243,
             246
           ],
-          "visiblePixels": 24332,
-          "sha256": "ed57d662a628dba0fc7c903576ad5261fbceed7ac33085cb19fd2e9eaa14570f"
+          "visiblePixels": 24967,
+          "sha256": "b3783ee4cb1fae1a27d9896b8807c50536d17d9640a6fc6b2e538c851386d274"
         }
       ]
     },
@@ -5600,47 +5600,47 @@
     {
       "entry": 120,
       "id": "talonplume",
-      "atlas": "./assets/roster/talonplume-v4.webp",
+      "atlas": "./assets/roster/talonplume-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 63760,
-      "sha256": "af081a03aa827255547755c2f22c2f2e643ce256eba975f447e3bc1e8a2c9ff1",
+      "bytes": 59974,
+      "sha256": "207855ce55ecfc2e8eb0ea6d87c42987021f8d0466f9b605a4ff7ae098c065c5",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Talonling",
           "bounds": [
-            80,
-            143,
-            176,
-            246
+            81,
+            138,
+            174,
+            245
           ],
-          "visiblePixels": 4537,
-          "sha256": "136c52c14cc12e1d904a6c2b48f6502914f198c8326219ab66cefe2770f50c1e"
+          "visiblePixels": 5350,
+          "sha256": "a4e379bcc84d05d964a376ab39e062c89e2ca7ef051966a8d408a2906ad0feef"
         },
         {
           "name": "Talonplume",
           "bounds": [
-            55,
-            75,
-            200,
-            246
+            45,
+            73,
+            209,
+            245
           ],
-          "visiblePixels": 12411,
-          "sha256": "063f614ed800d93d5048fe2d984fcb1142781d82ae71011b39e790a6d0d712c4"
+          "visiblePixels": 15663,
+          "sha256": "7fa199dfc40bb8c22c2d53efbf50809f6e3a9a26b5d317b8246d166ff18e0e8b"
         },
         {
           "name": "Talon Exarch",
           "bounds": [
             12,
-            75,
+            76,
             244,
             245
           ],
-          "visiblePixels": 26885,
-          "sha256": "39e2e79f427b1352904ed355e9657f8585d58630008c764dcc8248e2e674b2af"
+          "visiblePixels": 26760,
+          "sha256": "e12ad43876e9a1fec21838dae89a7470ae6c808bd7406ccfdf990d22c8aedb4f"
         }
       ]
     },
@@ -5788,47 +5788,47 @@
     {
       "entry": 124,
       "id": "xanthjaw",
-      "atlas": "./assets/roster/xanthjaw-v4.webp",
+      "atlas": "./assets/roster/xanthjaw-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 77870,
-      "sha256": "063e4f8a55a4b80e06e2b0db3dd6ec599ca56bb935ad1b4094e0d361f58cc3d1",
+      "bytes": 70200,
+      "sha256": "51b8e9b447e20b066d4ad835ea2caddb80e7a3077b0a908c5235102d5e878f70",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Xanthling",
           "bounds": [
             68,
-            135,
-            188,
+            129,
+            189,
             246
           ],
-          "visiblePixels": 7163,
-          "sha256": "2be3fdc1ced622bf0f8365820c3d20e3e65bf51ae036edbc3cbc0bfdc63e5fdd"
+          "visiblePixels": 7862,
+          "sha256": "93fe8fa1b4759f85e563b4e9d133ef4b1653aa73195c7e7b97e0ce384d534270"
         },
         {
           "name": "Xanthjaw",
           "bounds": [
-            31,
-            51,
-            225,
+            32,
+            39,
+            224,
             246
           ],
-          "visiblePixels": 19751,
-          "sha256": "2f078350e04053b8f2c22911df5aae415c80d0e57854b08a60b4c3732627a0da"
+          "visiblePixels": 22314,
+          "sha256": "87fdfdfc17276b2e180e4419b963ccc4f95d30e845bdf5f21e8e8b899163b098"
         },
         {
           "name": "Xanth Exarch",
           "bounds": [
             12,
-            55,
-            244,
+            51,
+            243,
             246
           ],
-          "visiblePixels": 29192,
-          "sha256": "8323e8f3c14bb65c8aa7fba55556d7799d241ea8fad68bb39985325a05509689"
+          "visiblePixels": 29909,
+          "sha256": "3643e42fd7f75b8db5b61cc9059cd54dc40091b7131bdc9534cc1cb354ae7908"
         }
       ]
     },
@@ -5976,141 +5976,141 @@
     {
       "entry": 128,
       "id": "brackengaze",
-      "atlas": "./assets/roster/brackengaze-v4.webp",
+      "atlas": "./assets/roster/brackengaze-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 59646,
-      "sha256": "27a071a95df7e82f29dbcb33c9e97f777a3ee6bc2505613fc602f64b1972cffc",
+      "bytes": 57376,
+      "sha256": "ffd60266b0bf3b67bf7668b56b7d15dcf3a412bf982da8bc160076af7d3c59d1",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Brackenling",
           "bounds": [
-            66,
-            158,
-            189,
-            246
+            62,
+            156,
+            192,
+            245
           ],
-          "visiblePixels": 7057,
-          "sha256": "313c6b80421701ba3c462890897edcdc622fcbf9fcc2c4be654e301bf628f943"
+          "visiblePixels": 7807,
+          "sha256": "7a651e2cfaac0dc789178d4916c37f344674286dc6aa2ec00c339caad0af5406"
         },
         {
           "name": "Brackengaze",
           "bounds": [
-            12,
-            122,
-            243,
-            246
+            13,
+            124,
+            242,
+            245
           ],
-          "visiblePixels": 16027,
-          "sha256": "8e884d6c81baea1567bf89d0bf2e46bb4eb17cca868f3806f18b55c4756a0754"
+          "visiblePixels": 17204,
+          "sha256": "a03446bdd44fec81657c7a85040ef6d8650f84a2fa184ea8fbb1272e6680fec9"
         },
         {
           "name": "Bracken Exarch",
           "bounds": [
-            15,
-            55,
-            241,
+            12,
+            56,
+            243,
             245
           ],
-          "visiblePixels": 27689,
-          "sha256": "a70072c2b1f5c8339dd006a19b4d243891d19e62b0ea55a0b31859de4bfd852a"
+          "visiblePixels": 28563,
+          "sha256": "b24c25b7bfcc67fa85533a7c7b1ef09c53ffd9e7d0aa60497bc2927944ae9bd4"
         }
       ]
     },
     {
       "entry": 129,
       "id": "coralfang",
-      "atlas": "./assets/roster/coralfang-v4.webp",
+      "atlas": "./assets/roster/coralfang-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 73020,
-      "sha256": "63973d5630367392ef017309ae6095c022d64fa36e20cf4acd372d458cd19ad9",
+      "bytes": 69704,
+      "sha256": "aa5ee0f5c2243e03519768786dc7f0acbc1b628a26f7016a5a0e02c83aee23eb",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Coralling",
           "bounds": [
-            84,
-            142,
-            172,
-            246
+            79,
+            123,
+            177,
+            245
           ],
-          "visiblePixels": 4564,
-          "sha256": "13e05892c40d8e15389da270b0b31c9bd3bbd8b7d9ea09d5b1019bbba3ea35f5"
+          "visiblePixels": 6068,
+          "sha256": "5f7ccc9d9968e9b1954c30975f3e755a7ad49c748f85706e774eaa80ccf1ca8d"
         },
         {
           "name": "Coralfang",
           "bounds": [
-            45,
-            83,
-            211,
+            36,
+            54,
+            220,
             246
           ],
-          "visiblePixels": 15114,
-          "sha256": "d85fb1751485ec79d076bcb369bf6d6ab82117ca536ffb9f00cb64a191fe14ea"
+          "visiblePixels": 19387,
+          "sha256": "4998e92692be67fa0d373d18660e2f1b08651ecb96251758be06bd742f0119a4"
         },
         {
           "name": "Coral Exarch",
           "bounds": [
             12,
-            72,
-            244,
-            246
+            46,
+            243,
+            245
           ],
-          "visiblePixels": 26955,
-          "sha256": "612928fc79d95ca4046576b6923867fe8ecd05a4e44e9cede92656a2194ee4e6"
+          "visiblePixels": 28592,
+          "sha256": "466198522c8938b2a17022cc0e72ea0c91459febb222debe6e3376e1759b39c8"
         }
       ]
     },
     {
       "entry": 130,
       "id": "daggerplume",
-      "atlas": "./assets/roster/daggerplume-v4.webp",
+      "atlas": "./assets/roster/daggerplume-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 74412,
-      "sha256": "56da9414169ce613faa3a8b89c5c99aa7e9a35e7f5604bfeb2dec2413600243a",
+      "bytes": 52106,
+      "sha256": "5c456a4fcda64daebb6d0a08f5155433edffdb377b983ad30d6a39b2ae69246c",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Daggerling",
           "bounds": [
-            61,
-            168,
-            195,
+            58,
+            167,
+            197,
             246
           ],
-          "visiblePixels": 5291,
-          "sha256": "4e2dd86bb26ab752d3aab8f270ac7fea3fa9d7b470925c91e80860c993a3501c"
+          "visiblePixels": 5544,
+          "sha256": "b68cf24581a0e40bcc3ecfdd988e3a10e6b80d684617e715056159b45a125925"
         },
         {
           "name": "Daggerplume",
           "bounds": [
-            21,
-            65,
-            235,
+            26,
+            63,
+            229,
             245
           ],
-          "visiblePixels": 18114,
-          "sha256": "1158a426423819f872f0f0c9101f35d1560fceebe4f540743643e7a010767ef1"
+          "visiblePixels": 17284,
+          "sha256": "05ddd53b2e2511d9b390b4b4cda05ddc415cb36943453cde6ad030889b5745dc"
         },
         {
           "name": "Dagger Exarch",
           "bounds": [
-            12,
-            39,
-            244,
-            246
+            13,
+            43,
+            243,
+            245
           ],
-          "visiblePixels": 28960,
-          "sha256": "99031ceccf7d2d2a39ad2ea533419970d31194c89595b96e0fd64753e9867de1"
+          "visiblePixels": 25133,
+          "sha256": "fc11d99ceaf1dda367740fcc4970d4d012a326e77fded11985248d8335943697"
         }
       ]
     },
@@ -6211,141 +6211,141 @@
     {
       "entry": 133,
       "id": "gossamerwisp",
-      "atlas": "./assets/roster/gossamerwisp-v4.webp",
+      "atlas": "./assets/roster/gossamerwisp-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 78160,
-      "sha256": "267b40a8326fdf6f8bb6cd549b027f875a32f39428e8dbc82c3021f77c9d37a2",
+      "bytes": 63954,
+      "sha256": "9f52b1774381fbf45cdfeea050e1bb0ce01d4d6191fc41ba4024766cf0765911",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Gossamerling",
           "bounds": [
-            84,
-            145,
-            171,
-            246
+            80,
+            144,
+            175,
+            245
           ],
-          "visiblePixels": 5133,
-          "sha256": "dad0f42297968bb3a8cde32120067e802f1218d056f3c4193c0284e1d72adac1"
+          "visiblePixels": 5460,
+          "sha256": "e7af187bb754236540f62bbb97566a40edf70d70a52ce92c4b7bf76116d629ea"
         },
         {
           "name": "Gossamerwisp",
           "bounds": [
             22,
-            62,
-            234,
+            55,
+            233,
             246
           ],
-          "visiblePixels": 22133,
-          "sha256": "1d96fafed16322beeeaff79d4d71a3429d4882751299e2d2049de6bf780439e5"
+          "visiblePixels": 21475,
+          "sha256": "76dea344d4ac891fc2e6fc3d6a69bc8395405eb9171ac27897d8cdd2825ae5c2"
         },
         {
           "name": "Gossamer Exarch",
           "bounds": [
-            12,
-            63,
+            13,
+            59,
             244,
             246
           ],
-          "visiblePixels": 29385,
-          "sha256": "fb76cf175e2cdb2373f3085722ad74eb3e398b5920bbb6fa4243bd0c01499dee"
+          "visiblePixels": 28366,
+          "sha256": "00a51edc3be692887340cdc4a862d87d5ef25b0eb237e96a0f60a6e646069507"
         }
       ]
     },
     {
       "entry": 134,
       "id": "hearthjaw",
-      "atlas": "./assets/roster/hearthjaw-v4.webp",
+      "atlas": "./assets/roster/hearthjaw-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 49458,
-      "sha256": "d8b3bd6813432b70866a6edc0fa5619e1385e6b1c715f2482ed1c4a187355f38",
+      "bytes": 42194,
+      "sha256": "e6b19e95d7fd56806cdd54189cbeced4f63baacf642dca2967f349be3aac9fe8",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Hearthling",
           "bounds": [
-            73,
-            169,
-            183,
-            246
+            74,
+            170,
+            181,
+            245
           ],
-          "visiblePixels": 4962,
-          "sha256": "33bbe00b5d7464fd7c20bae29e4579eeef4f6d42e51f25276513c091b99e9b94"
+          "visiblePixels": 4745,
+          "sha256": "d1f9a25fb0e8152280bd72f06a9ff1daa5f3ebcbf0ae11d48794d4401c2218e5"
         },
         {
           "name": "Hearthjaw",
           "bounds": [
-            15,
-            120,
-            240,
+            21,
+            133,
+            234,
             245
           ],
-          "visiblePixels": 14382,
-          "sha256": "71c227232a9ead8fac58faa6ba10d811355f9934f3d4874a74c31d4b6d8ed797"
+          "visiblePixels": 13838,
+          "sha256": "ef05f2d0e4808493ff071081da292fb43e901d3b44c6837eedd1b525dfe5520f"
         },
         {
           "name": "Hearth Exarch",
           "bounds": [
             13,
-            63,
+            109,
             244,
-            246
+            245
           ],
-          "visiblePixels": 24021,
-          "sha256": "214a512b9591b2627b90510c9c570555bbe1575d8789347259c235194ff6cdd2"
+          "visiblePixels": 19477,
+          "sha256": "fea9ad19b35ec9e38f3c41eba7593fab44a29b943196ff374de4620bf0abaffd"
         }
       ]
     },
     {
       "entry": 135,
       "id": "isletflare",
-      "atlas": "./assets/roster/isletflare-v4.webp",
+      "atlas": "./assets/roster/isletflare-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 59866,
-      "sha256": "c1a214c60f8b5ec3361e98ada35bd63820c6156522f725c1df981c370dbf538a",
+      "bytes": 50908,
+      "sha256": "31024d927441c8cf3cae6188ab5ada7c3212bc6c332554f05cfb9cb0e78f841a",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Isletling",
           "bounds": [
-            76,
-            176,
-            180,
+            75,
+            179,
+            182,
             245
           ],
-          "visiblePixels": 4074,
-          "sha256": "5dec0d3e82b5db6c52ef8f26896fa6ce2132cb784e8e67eb31a6480cce474eca"
+          "visiblePixels": 3986,
+          "sha256": "80c0053e187bd8da5d594de412379b5444e6f540d5808957702a1a0abe3d75a9"
         },
         {
           "name": "Isletflare",
           "bounds": [
-            16,
-            120,
-            239,
+            17,
+            126,
+            240,
             245
           ],
-          "visiblePixels": 12144,
-          "sha256": "c479babb95f4d50a8b8e0b3d7633401916fa218bc8ce818af3469790ad264dd4"
+          "visiblePixels": 12363,
+          "sha256": "4a16cbaf80fa281d3d1abc96631b98ac3fcbb90a5639c7b9d81f910f8e95973b"
         },
         {
           "name": "Islet Exarch",
           "bounds": [
-            12,
-            99,
-            243,
+            13,
+            120,
+            244,
             245
           ],
-          "visiblePixels": 21095,
-          "sha256": "6c380879ac15fe222aaa81e8e48b6dcf9cb8bee6a7251595878ed1925fc62323"
+          "visiblePixels": 19009,
+          "sha256": "ea3b5568d16b3e523418877fc1ade4fd17bf7acb405339ca0cab33a7bd03c8bb"
         }
       ]
     },
@@ -6399,47 +6399,47 @@
     {
       "entry": 137,
       "id": "kryptonshard",
-      "atlas": "./assets/roster/kryptonshard-v4.webp",
+      "atlas": "./assets/roster/kryptonshard-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 66940,
-      "sha256": "3d7a65c67855e4c49682d542354e096d7f7f195be65fb24a75393d3ef140c457",
+      "bytes": 61226,
+      "sha256": "326b24356fe18870667285c3458f23efa4ded770b94a790c96c4fb2393d9b90d",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Kryptonling",
           "bounds": [
-            74,
-            137,
-            182,
-            246
+            73,
+            129,
+            183,
+            245
           ],
-          "visiblePixels": 6755,
-          "sha256": "2a1a0fbedea1f9b6ca9a289336fade2cbb08241fca151b5147c33372e835b404"
+          "visiblePixels": 7280,
+          "sha256": "095312c1278758d6c87d45e6d1d96ea3e3d70be28a0a1f9d112501ed872a1004"
         },
         {
           "name": "Kryptonshard",
           "bounds": [
-            27,
-            49,
-            229,
-            246
+            24,
+            28,
+            231,
+            245
           ],
-          "visiblePixels": 20093,
-          "sha256": "0202d9248630aaded53f80e6b28e88a721e28a7fa7bc9d7560f88818d816d2a4"
+          "visiblePixels": 21606,
+          "sha256": "5155868e401b8f779bb05a75ef3c773675608b0f82d89ea64cbc2b4dc81e8363"
         },
         {
           "name": "Krypton Exarch",
           "bounds": [
-            12,
-            48,
+            13,
+            33,
             244,
-            245
+            246
           ],
-          "visiblePixels": 30038,
-          "sha256": "fd1c1a99b36b65f56163ea1a6c21a44b098691c06f988172c9b2a3813aaee615"
+          "visiblePixels": 30634,
+          "sha256": "2d462a038364e82d85719a5d83385c358bc75a22b56450f31a2cb2e8821d3eb7"
         }
       ]
     },
@@ -6493,188 +6493,188 @@
     {
       "entry": 139,
       "id": "miragefang",
-      "atlas": "./assets/roster/miragefang-v4.webp",
+      "atlas": "./assets/roster/miragefang-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 82022,
-      "sha256": "b58cf952b51b2c6cd89aba202967076b1601868ee7143f1bd28c3e5dc59a6859",
+      "bytes": 59446,
+      "sha256": "6fced8f8e6faf1f07bbca1503be98f7818fc84da44e43389f8834025075951b5",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Mirageling",
           "bounds": [
-            70,
-            140,
-            186,
+            73,
+            137,
+            183,
             245
           ],
-          "visiblePixels": 4848,
-          "sha256": "7147ea01bf332e7077aed8fe611ab9edb0282ca8bef0d44df08ab129cb6195a4"
+          "visiblePixels": 5360,
+          "sha256": "b3e4b2954d0cb3cd8cf11d19cfcfd768b3df5c05af38c7de803a08ab9743d6cb"
         },
         {
           "name": "Miragefang",
           "bounds": [
+            41,
             39,
-            45,
-            217,
+            216,
             245
           ],
-          "visiblePixels": 13641,
-          "sha256": "6880f575c29a182a379c5b0d1e210567ee513477dce8c53f5cbda51696e1e1e8"
+          "visiblePixels": 13756,
+          "sha256": "23fe3670c903e9eb7460f5d2e8b2d967eaab1a093ebba1f44604f148775d5d01"
         },
         {
           "name": "Mirage Exarch",
           "bounds": [
             12,
-            44,
+            46,
             244,
             245
           ],
-          "visiblePixels": 29051,
-          "sha256": "16aa93cb73e1be2e90b28fa47eb2c5ceb8b446bc1229191e4ef0a407dadf7eb9"
+          "visiblePixels": 26832,
+          "sha256": "d32423113046810cd68c0ec426266f69ae7cca012367b40f2876c48c14738b4f"
         }
       ]
     },
     {
       "entry": 140,
       "id": "nectarplume",
-      "atlas": "./assets/roster/nectarplume-v4.webp",
+      "atlas": "./assets/roster/nectarplume-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 76758,
-      "sha256": "d16a9c051e1ffe123b066422dff7fff750874e799674919fe0760df66bdf33e2",
+      "bytes": 52114,
+      "sha256": "d0fd5d4f203dfe33a3dab45018ddbacc97802b8dfc1de2949c261fd3bf861fc5",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Nectarling",
           "bounds": [
-            76,
-            147,
-            179,
-            246
+            69,
+            159,
+            187,
+            245
           ],
-          "visiblePixels": 5903,
-          "sha256": "e748632bb9edd9366811d3b10d685ff3217b2dfcd0eed17739c123c1a6134085"
+          "visiblePixels": 5368,
+          "sha256": "f7e9a54a40116fee7f5e1baefbad9c965681a455e35428923e4e2ba4cd01bca9"
         },
         {
           "name": "Nectarplume",
           "bounds": [
-            12,
-            130,
+            13,
+            151,
             244,
             246
           ],
-          "visiblePixels": 16293,
-          "sha256": "49dd5c69a00e800fac79f115b08228979364f5820b157ac81cc57313c9a6900d"
+          "visiblePixels": 12514,
+          "sha256": "e5dc3b33661aaa39673110ed10a877d257a7ecb2b0976b12de082a9d43ebe08e"
         },
         {
           "name": "Nectar Exarch",
           "bounds": [
-            22,
-            62,
-            235,
+            30,
+            95,
+            227,
             246
           ],
-          "visiblePixels": 23795,
-          "sha256": "1b807ed32c63f6ef0ba77f72d275c9b5d19f199142dd11c4199d36a45dcf3f22"
+          "visiblePixels": 17449,
+          "sha256": "b04f2833eaee278b0964301a494ffa55c0a3a5d75ab1e8e22b20751b8c45efd3"
         }
       ]
     },
     {
       "entry": 141,
       "id": "oraclekin",
-      "atlas": "./assets/roster/oraclekin-v4.webp",
+      "atlas": "./assets/roster/oraclekin-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 57736,
-      "sha256": "764f481e658bf3e6a0b795258145947a46fac8d6d1abf620db680f10d3b5fe0b",
+      "bytes": 49440,
+      "sha256": "b16f1b67a590a6b81210fe1a65aba7a81d45277f398b5a5ffcc66eddbb1bff4d",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Oracleling",
           "bounds": [
-            72,
-            140,
-            184,
-            245
+            70,
+            139,
+            185,
+            246
           ],
-          "visiblePixels": 7602,
-          "sha256": "d70f9eb62c3872fa787218609acdbb8c5c250efbe84dde7eb81fd511709526f1"
+          "visiblePixels": 8065,
+          "sha256": "7afde6bb75808b462b520217027f26a89adce3aa8abd42100e3e6b488afcf1a5"
         },
         {
           "name": "Oraclekin",
           "bounds": [
             12,
-            121,
-            243,
+            117,
+            244,
             245
           ],
-          "visiblePixels": 17220,
-          "sha256": "20398ea95466122e289c7ee772c15e9a6d4e21aa7317eb4183b0df7370a1fc45"
+          "visiblePixels": 19273,
+          "sha256": "93aa0c8d9f1ee795c5cddd5bbb8d73d742862ac21103cc280e33380bc7958013"
         },
         {
           "name": "Oracle Exarch",
           "bounds": [
-            16,
-            54,
-            239,
-            246
+            21,
+            75,
+            235,
+            245
           ],
-          "visiblePixels": 25964,
-          "sha256": "4728e39c1d1683c87e2cb579dbd9f78c76d32bfbfa8ce4fbede3968dcdf96c94"
+          "visiblePixels": 25052,
+          "sha256": "48d129512b30dbbb2f9f17cd4e559a817befc7cd98a704f3e1ca5d5c5925bcee"
         }
       ]
     },
     {
       "entry": 142,
       "id": "pewtergore",
-      "atlas": "./assets/roster/pewtergore-v4.webp",
+      "atlas": "./assets/roster/pewtergore-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 65172,
-      "sha256": "61d9c634c5639226fab443ec86f2f4f2901af5e38bfb7a54f774a3673058e763",
+      "bytes": 47128,
+      "sha256": "5594b90b3ed4080b45d0be8adc73a6b8916457243d2c0794dec91c7495d1ea77",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Pewterling",
           "bounds": [
-            64,
-            155,
-            191,
+            57,
+            141,
+            198,
             246
           ],
-          "visiblePixels": 6186,
-          "sha256": "33b817117c25955aed4624ee8189c368891e626af6fbfb929aa2a7b520173518"
+          "visiblePixels": 8008,
+          "sha256": "4929c21db88eb5399c28ae4b10eab6844d2fde753b6b2e1376c645f0fe208df6"
         },
         {
           "name": "Pewtergore",
           "bounds": [
-            37,
-            60,
-            218,
+            38,
+            42,
+            219,
             246
           ],
-          "visiblePixels": 15511,
-          "sha256": "f70eb8a43489795d70dcd3c95aa120f849d71777fb3e73e8ffd178c2f5396eb1"
+          "visiblePixels": 18830,
+          "sha256": "ae4e81898f0937b12428d83d28efac97b20b46a9c7dfca24792237b21f19b12a"
         },
         {
           "name": "Pewter Exarch",
           "bounds": [
-            12,
-            55,
-            244,
+            13,
+            49,
+            243,
             246
           ],
-          "visiblePixels": 28319,
-          "sha256": "4624a33ccc613cad68675adaca2e0eebc909db58bf9eb9f924e67de0bc4d9e57"
+          "visiblePixels": 29795,
+          "sha256": "50bf51d5655de637b1f01d2856f711f85b4119db0a3dc265e5723d4bad24a804"
         }
       ]
     },
@@ -6728,47 +6728,47 @@
     {
       "entry": 144,
       "id": "ripplejaw",
-      "atlas": "./assets/roster/ripplejaw-v4.webp",
+      "atlas": "./assets/roster/ripplejaw-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 73572,
-      "sha256": "b832c81cb6dcd5f14cc71b2aafda5c8836d3ad661043f7419f4d97571e2ff218",
+      "bytes": 53070,
+      "sha256": "307fb12676e6642ce016a2a9d67d25119b86c48569c230c7127d3b31a254232f",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Rippleling",
           "bounds": [
-            77,
-            155,
-            178,
+            82,
+            165,
+            175,
             245
           ],
-          "visiblePixels": 5386,
-          "sha256": "f52672dcc1531bb5d0d0ebba3e90f97d209ea9f9ddce446683179c9bde66e07d"
+          "visiblePixels": 3939,
+          "sha256": "51c1e2ff123e6bbd619cd344877b92ca359e77891594de797c45d1ce1816c47a"
         },
         {
           "name": "Ripplejaw",
           "bounds": [
-            34,
-            96,
-            223,
+            35,
+            101,
+            221,
             245
           ],
-          "visiblePixels": 15754,
-          "sha256": "09f3ad2a29c0cd5523b510762daf18876bb1d2f0f91a7958d3f4a63906dd2cd6"
+          "visiblePixels": 13358,
+          "sha256": "ab1343d0dfcaa97885de59002fd99fa6bda0420d14467029b78c6d3e43d5e2de"
         },
         {
           "name": "Ripple Exarch",
           "bounds": [
             13,
-            55,
-            244,
+            67,
+            243,
             246
           ],
-          "visiblePixels": 27838,
-          "sha256": "f5ddd478264ea7dc157f4c26e2cd7928120e51e03e12c7b2835480e52a0b6597"
+          "visiblePixels": 21933,
+          "sha256": "95ed626486d5b2390ef71c0dc89172cbaa6e406a8085f0c75a233c6bc7bb3c9d"
         }
       ]
     },
@@ -6822,47 +6822,47 @@
     {
       "entry": 146,
       "id": "truffleroot",
-      "atlas": "./assets/roster/truffleroot-v4.webp",
+      "atlas": "./assets/roster/truffleroot-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 67368,
-      "sha256": "d93db3785725a2da5624117557880296fb65a30309dd78c8acd4c11080da42b8",
+      "bytes": 64094,
+      "sha256": "5956d722e443b62baa9751202cc24af69218d98f29471bec38668e409d7db8fc",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Truffleling",
           "bounds": [
-            76,
-            131,
-            180,
-            246
+            69,
+            114,
+            188,
+            245
           ],
-          "visiblePixels": 8055,
-          "sha256": "97485557d4449a7419af32efbe6a8467806276c7484c057410b79d0a5fd9dd3e"
+          "visiblePixels": 11839,
+          "sha256": "9837e4d5e2203cbec5d19c2a8ac1c030cf33f63665a72b0af62907919d2d4de9"
         },
         {
           "name": "Truffleroot",
           "bounds": [
-            47,
-            63,
-            208,
+            38,
+            35,
+            218,
             246
           ],
-          "visiblePixels": 18844,
-          "sha256": "70e5fa8e72573850634074af0fb4d21b809c720a974e6ee19a0120cd1187d94d"
+          "visiblePixels": 24967,
+          "sha256": "6c16c21cbfe8c506649e76b198d5f0e6923a87a4b92d40589460c15944ca94d2"
         },
         {
           "name": "Truffle Exarch",
           "bounds": [
-            12,
-            66,
-            244,
+            13,
+            46,
+            243,
             246
           ],
-          "visiblePixels": 30197,
-          "sha256": "d7ece4c0bee6d68ae348b28e4637dc6a64f1e53aa8313b65d7d2c04117f3bab4"
+          "visiblePixels": 33572,
+          "sha256": "50f3539fe79d8da531b2b464b65ba25f0623697409becdcefef9dc193e3b1daa"
         }
       ]
     },
@@ -6916,141 +6916,141 @@
     {
       "entry": 148,
       "id": "violetgaze",
-      "atlas": "./assets/roster/violetgaze-v4.webp",
+      "atlas": "./assets/roster/violetgaze-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 50794,
-      "sha256": "1f366fcdf8fdeba4e062be4f69f9d3300ae837db8dce4da7dcef34f2313a294b",
+      "bytes": 45396,
+      "sha256": "688ac674bd37fc63dd55608cecfec61a6d7ff69aba05de60856f75d5a25bfbd7",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Violetling",
           "bounds": [
-            79,
+            82,
             172,
             176,
-            246
+            245
           ],
-          "visiblePixels": 3559,
-          "sha256": "63d69bcaf85b7d139ad3920ca03c3c3b8f5e7e7560f0e6162ef1d0140122472d"
+          "visiblePixels": 3823,
+          "sha256": "cf095349c850673a9f1466c9988da2aa0f5a61eb637d5dc74a1f06e498c07365"
         },
         {
           "name": "Violetgaze",
           "bounds": [
-            29,
-            113,
-            227,
-            246
+            23,
+            116,
+            234,
+            245
           ],
-          "visiblePixels": 10147,
-          "sha256": "39dd6e26f555e65a2fc5be509b55b662a550e43e9c9f86be56cb1956564a344d"
+          "visiblePixels": 11758,
+          "sha256": "41195a4f9422fc96622bdb19e063ad8a55f1883acc90db61aa8b812753ee7c32"
         },
         {
           "name": "Violet Exarch",
           "bounds": [
             12,
-            93,
-            244,
-            246
+            114,
+            243,
+            245
           ],
-          "visiblePixels": 19323,
-          "sha256": "8a71be7bfd3220b9c5579c2e9138889a51122953c7c6d6a801760c37a773f5ee"
+          "visiblePixels": 16721,
+          "sha256": "fff03258f36ece9da72ed1ce50969159e3837a0aecdd412dac55e2579d24c5cf"
         }
       ]
     },
     {
       "entry": 149,
       "id": "wardenfang",
-      "atlas": "./assets/roster/wardenfang-v4.webp",
+      "atlas": "./assets/roster/wardenfang-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 80694,
-      "sha256": "3d2559d1eb8b8ff684d5ac848793c98d555d2a5b49da5d4d5398757390069943",
+      "bytes": 62882,
+      "sha256": "44cab357e18295d4c6d166f7220d305293e0acb4cf3db233bfee32fb49b15bdd",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Wardenling",
           "bounds": [
-            78,
-            113,
-            178,
+            79,
+            111,
+            177,
             245
           ],
-          "visiblePixels": 5736,
-          "sha256": "ad44377303f055627dd2c86b9c4928af391161ccf6ae94091589fd5f7afa37b9"
+          "visiblePixels": 6421,
+          "sha256": "874ed1aef40d7b36d04b58796fbafd6d46b8c7b2299440fa27b0444a054146ec"
         },
         {
           "name": "Wardenfang",
           "bounds": [
-            25,
-            41,
+            26,
+            44,
             230,
             245
           ],
-          "visiblePixels": 14899,
-          "sha256": "74235959ec0384c4482a4084d7644a72a066ecc9a324b68b76f0d6748c76bec0"
+          "visiblePixels": 17798,
+          "sha256": "f0853beab745335d4198ca206839720756102e92ccb2b0bcd98a5cef258c74af"
         },
         {
           "name": "Warden Exarch",
           "bounds": [
             12,
-            47,
+            52,
             244,
             246
           ],
-          "visiblePixels": 29679,
-          "sha256": "6b1d7a8b2904b7fef89dc66f5804aea9a896c3593a9cdb1f78505909ea015240"
+          "visiblePixels": 29198,
+          "sha256": "cd35b8b998769234da47bfa855d35607e258c1a02cd5db46792309581da8fb28"
         }
       ]
     },
     {
       "entry": 150,
       "id": "zodiacplume",
-      "atlas": "./assets/roster/zodiacplume-v4.webp",
+      "atlas": "./assets/roster/zodiacplume-v5.webp",
       "dimensions": [
         768,
         256
       ],
-      "bytes": 86048,
-      "sha256": "001c7ba388cd80b083f84ec8f772aff1cee2deb68d11bb5e84779617733c03fc",
+      "bytes": 71750,
+      "sha256": "007f327590f9f706b02e3297d385ddcdc33c452379bba0e7051d7f009578ded4",
       "transparentBorder": true,
       "forms": [
         {
           "name": "Zodiacling",
           "bounds": [
-            59,
-            139,
-            197,
-            246
+            60,
+            136,
+            195,
+            245
           ],
-          "visiblePixels": 7810,
-          "sha256": "4290cd1fd1611fedf861c4f14755f5a688ff33e523d2af859d077a29c63b9a03"
+          "visiblePixels": 8418,
+          "sha256": "d2dcc60ee94c046a8fac6b75f32b33bea39327a30275497e8b8c7923c9c09497"
         },
         {
           "name": "Zodiacplume",
           "bounds": [
-            37,
-            60,
-            219,
+            42,
+            53,
+            214,
             246
           ],
-          "visiblePixels": 17916,
-          "sha256": "5926f7d33c4abf4ef6cc2592e3b873e4d926ec621384f7ad52d8feffbe53ba33"
+          "visiblePixels": 19001,
+          "sha256": "102569d2575e6aed5a8d1a9f2f9283580b33571809e5151306641ab1c506be3d"
         },
         {
           "name": "Zodiac Exarch",
           "bounds": [
             12,
-            62,
+            57,
             244,
             246
           ],
-          "visiblePixels": 29907,
-          "sha256": "56885446c79b7da4aa52f745b2f9062f999ac7375980c52e60443f2959bd7918"
+          "visiblePixels": 30585,
+          "sha256": "f5a160570650dbbbe27dd89cf85c097eb7beb2adfdeea635000cfa6d56b27350"
         }
       ]
     }

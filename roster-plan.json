@@ -31,8 +31,8 @@
       "Sundew Regent"
     ],
     "description": "A carnivorous sundew with luminous amber nectar beads, delicate fan leaves, fine root feet, and faerie blossoms.",
-    "atlas": "./assets/roster/dewveil-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/dewveil-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "A squat sundew seedling with two cupped sticky leaves folded around a central bud and a compact knot of fine root feet",
@@ -52,8 +52,8 @@
       "Tempest Treader"
     ],
     "description": "A real tapir with a short trunk, living cloud curls, teal wind ribbons, and copper spiral markings.",
-    "atlas": "./assets/roster/zephyrtap-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/zephyrtap-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Stocky round tapir calf with short trunk and wisps at its ankles",
@@ -352,8 +352,8 @@
       "Solar Mechanarch"
     ],
     "description": "A luminous many-winged celestial guardian with ivory feathers, articulated golden wing frames, rotating crystal joints, and warm cyan light.",
-    "atlas": "./assets/roster/aurelattice-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/aurelattice-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "A small crouched ivory-and-gold celestial hatchling with folded mechanical wing plates and one turquoise chest lens",
@@ -677,8 +677,8 @@
       "Heron Magistrate"
     ],
     "description": "A bronze automaton shaped with long heron-like legs and a curved mechanical beak, with emerald patina and articulated wing plates.",
-    "atlas": "./assets/roster/bronzewade-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/bronzewade-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Squat short-legged bronze heron chick automaton with compact folded wing plates",
@@ -698,7 +698,9 @@
       "Lacquer Custodian"
     ],
     "description": "A walking black-and-vermilion lacquer vessel whose ceramic limbs are joined by clear amber jelly and floating brass fasteners.",
-    "atlas": "./assets/roster/jarjell.webp"
+    "atlas": "./assets/roster/jarjell-v5.webp",
+    "artRevision": 5,
+    "proceduralArt": false
   },
   {
     "index": 15,
@@ -760,7 +762,9 @@
       "Last Emberstorm"
     ],
     "description": "A living ash-and-ember whirlwind modified by spectral ribs and fading ancestral cloth, in charcoal, peach ember, and cold violet.",
-    "atlas": "./assets/roster/cinerwraith.webp"
+    "atlas": "./assets/roster/cinerwraith-v5.webp",
+    "artRevision": 5,
+    "proceduralArt": false
   },
   {
     "index": 19,
@@ -773,7 +777,9 @@
       "Dune Orrery"
     ],
     "description": "A spinning elemental sand creature with segmented glass rings and bronze pivot joints, using amber sand and teal glass highlights.",
-    "atlas": "./assets/roster/glasswhorl.webp"
+    "atlas": "./assets/roster/glasswhorl-v5.webp",
+    "artRevision": 5,
+    "proceduralArt": false
   },
   {
     "index": 20,
@@ -786,8 +792,8 @@
       "Heavenly Resonance"
     ],
     "description": "A creature of ringing blue plasma shaped into nested bell-like currents, altered by small feathered light arcs and a gold celestial crown.",
-    "atlas": "./assets/roster/resonara-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/resonara-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "A single small blue bell spirit with a golden clapper and two tiny folded white winglets",
@@ -935,8 +941,8 @@
       "Sixfinger Envoy"
     ],
     "description": "A slender faerie with a moth-wing cloak, smooth porcelain insect mask, six-fingered hands, and a bipedal but visibly nonhuman body.",
-    "atlas": "./assets/roster/silkvisage-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/silkvisage-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small hunched moth-masked faerie with simple close-folded wing cape and short grasping hands",
@@ -1139,8 +1145,8 @@
       "Mothmask Adept"
     ],
     "description": "A visibly nonhuman biped with a moth head, four delicate grasping forearms, soft fur cuffs, and broad patterned antennae; never a human.",
-    "atlas": "./assets/roster/silkclasp-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/silkclasp-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small fuzzy moth-headed biped with tiny four forearms and short antennae",
@@ -1160,8 +1166,8 @@
       "Bamboo Wayfarer"
     ],
     "description": "A visibly nonhuman human-shaped Spirimon with a reed-bundle head, hollow wooden face, two long legs, and living strangler-vine fingers; never a human.",
-    "atlas": "./assets/roster/wickerstride-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/wickerstride-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small uneven reed bundle with a narrow hollow wooden face, short root hands and bent legs",
@@ -1223,8 +1229,8 @@
       "Storm Amphiptere"
     ],
     "description": "An amphiptere from myth: a feather-winged serpent without walking legs, modified by swirling storm currents and blue-white feather sparks.",
-    "atlas": "./assets/roster/tempestrill-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/tempestrill-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Compact legless feathered serpent coiled tightly with two short wings",
@@ -1286,8 +1292,8 @@
       "Basilisk of Glass"
     ],
     "description": "A basilisk from myth with a crownlike crest and serpentine body, modified by translucent violet gel, floating scales, and dripping glassy edges.",
-    "atlas": "./assets/roster/vitrilisk-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/vitrilisk-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small low gel basilisk with blunt crest and short soft tail",
@@ -1307,8 +1313,8 @@
       "Living Reliquary"
     ],
     "description": "An amorphous amber ooze containing floating bronze mechanisms and broken porcelain charms, with pseudopod feet and a fluid silhouette.",
-    "atlas": "./assets/roster/amberwork-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/amberwork-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Low amber puddle holding a few disconnected bronze gears and a porcelain face charm",
@@ -1349,8 +1355,8 @@
       "Pitcher Deluge"
     ],
     "description": "An amorphous green jelly creature containing living carnivorous pitcher cups and red sundew tendrils, with soft gel feet and trapped seed pods.",
-    "atlas": "./assets/roster/nepentide-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/nepentide-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Low green gel droplet containing one young pitcher trap and short red sundew hairs",
@@ -1391,8 +1397,8 @@
       "Ironwood Snare"
     ],
     "description": "A dangerous strangler fig with mobile root legs, modified by bronze vine hinges, iron bark plates, and articulated trapping branches.",
-    "atlas": "./assets/roster/strangleweld-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/strangleweld-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small strangler fig with a simple woody trunk, two jointed branch arms and clustered root feet",
@@ -1412,8 +1418,8 @@
       "Censer Tyrant"
     ],
     "description": "A carnivorous pitcher plant with deep red trapping cups, hornlike leaf tips, black roots, and sulfurous orange lure vapor.",
-    "atlas": "./assets/roster/fumepitcher-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/fumepitcher-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Single upright red pitcher trap supported by thin thorn roots and small hornlike leaves",
@@ -1454,8 +1460,8 @@
       "Lantern Ancestor"
     ],
     "description": "A hopping ancestral undead faerie with a pale spectral moth head, luminous compound eyes, feathery antennae, exactly two ectoplasmic tendril arms emerging from silk sleeves, moth wings and warm antique lantern ornaments.",
-    "atlas": "./assets/roster/jianglume-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/jianglume-v5.webp",
+    "artRevision": 5,
     "proceduralArt": false,
     "evolutionRevision": 1,
     "formDescriptions": [
@@ -1585,8 +1591,8 @@
     ],
     "description": "An amorphous molten-amber ooze elemental whose flowing lobes suggest moth wings; ember veins and drifting liquid droplets, a soft translucent body with no rigid animal skeleton.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/embermoth-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/embermoth-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Single molten-amber droplet with tiny symmetrical winglike lobes",
@@ -1648,8 +1654,8 @@
     ],
     "description": "A hollow-bodied undead giant with weathered bone ribs, gray stone flesh, fungal funeral blossoms and torn burial wrappings. Bipedal, immensely broad shoulders and massive hands.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/hollowbloom-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/hollowbloom-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small hunched undead giant with a shallow hollow ribcage and sparse funeral fungi",
@@ -1715,8 +1721,8 @@
     ],
     "description": "A translucent sea-green ooze with the recognizable broad muzzle and muscular mass of a river otter, flowing kelp-shaped gel fringes, suspended river stones and soft pseudopod feet.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/kelpveil-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/kelpveil-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small round otter-faced sea-green jelly with short soft paddle lobes",
@@ -1799,8 +1805,8 @@
     ],
     "description": "A recognizable powerfully built black-furred kangaroo standing on two heavy hind legs, broad muscular forearms, glossy dark curling horns and faint faerie leaf runes. No human face.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/obsidhorn-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/obsidhorn-v5.webp",
+    "artRevision": 5,
     "legacyTypes": {
       "base": "Beast",
       "alter": "Humanoid"
@@ -1845,8 +1851,8 @@
     ],
     "description": "A quadruped clockwork porcupine made of bronze and pale wood, articulated quill plates, small faerie bellflowers and precise amethyst claws. Fine brass joint details.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/quillclaw-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/quillclaw-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Round wooden porcupine automaton with short brass feet and a few flat quill plates",
@@ -1866,8 +1872,8 @@
     ],
     "description": "An amorphous violet magic-and-ooze creature with fluid mothlike wing lobes, unreadable luminous rune-shaped marks beneath its gel skin, silver droplets and a soft core.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/runemoth-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/runemoth-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small round violet gel mote with two little winglike lobes",
@@ -1908,8 +1914,8 @@
     ],
     "description": "A hulking bipedal fiend giant with a thorn-crowned nonhuman face, heavy black-red limbs, a hooked tail and a dense crown of burgundy spines and moss-dark brambles.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/thornglen-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/thornglen-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Squat thorn-faced fiend juvenile with short hooked tail and small bramble collar",
@@ -1929,8 +1935,8 @@
     ],
     "description": "An undead bipedal earth giant with umber mummified skin, open stone-and-bone ribs, burial linen, dried lily blooms and a pale turquoise spirit glow.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/umberbloom-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/umberbloom-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small wrapped umber undead giant with narrow rib seams and a dried lily bud",
@@ -1950,8 +1956,8 @@
     ],
     "description": "A visibly nonhuman tall bipedal bat-eared twilight faerie with a long muzzle, amber eyes, flowing dusk-blue fur and thin ribbons of moving wind. No ordinary human anatomy.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/vesperspire-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/vesperspire-v5.webp",
+    "artRevision": 5,
     "legacyTypes": {
       "base": "Humanoid",
       "alter": "Elemental"
@@ -1975,8 +1981,8 @@
     ],
     "description": "An amorphous willow-green ooze monstrosity whose drooping liquid fronds conceal rows of long needle teeth, translucent sap lobes and an enormous hinged predatory mouth.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/willowmaw-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/willowmaw-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Low green sap blob with one small drooping tooth-lined frond",
@@ -1996,8 +2002,8 @@
     ],
     "description": "A broad-shouldered salamander-shaped living ooze, with amber wood-grain suspended in its translucent body, muscular animal-like mass, bright bead eyes and flexible gel pseudopods.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/xyloveil-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/xyloveil-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Round amber salamander-shaped jelly with short four soft paw lobes",
@@ -2038,8 +2044,8 @@
     ],
     "description": "A rooted undead plant with a wind-worn wolf skull, bleached thorn fangs, dead reed fronds, skeletal root legs and pale green spectral sap.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/zephyrfang-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/zephyrfang-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small rooted wolf-skull sprout with short dry reed fringe",
@@ -2059,8 +2065,8 @@
     ],
     "description": "A horrific four-legged ash-gray construct with burnt cedar plates, exposed brass ribs, many coal-like eyes, an asymmetrical split jaw and long cable-like tentacles.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/ashenling-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/ashenling-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small charred cedar quadruped with close brass ribs and short cable tail",
@@ -2080,8 +2086,8 @@
     ],
     "description": "A thickly muscled wallaby standing on two strong hind legs, warm gray fur, beryl-green branching horns, soft faerie ear fins and sparkling leaf-shaped markings. Clearly an animal.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/berylhorn-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/berylhorn-v5.webp",
+    "artRevision": 5,
     "legacyTypes": {
       "base": "Beast",
       "alter": "Humanoid"
@@ -2147,8 +2153,8 @@
     ],
     "description": "An amorphous old-gold resin ooze elemental with flowing moth-wing lobes, soft molten light, suspended ancient leaf patterns and tiny slow droplets. No hard limbs.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/eldermoth-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/eldermoth-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small suspended old-gold resin droplet with tiny leaf-patterned lobes",
@@ -2210,8 +2216,8 @@
     ],
     "description": "A hulking undead giant with hollow hazel-wood-colored stone flesh, skeletal hands, a crown of dead hazel branches, old burial fabric and pale amber ghostlight.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/hazelbloom-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/hazelbloom-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small hollow hazelwood undead figure with short skeletal hands and a few dead twigs",
@@ -2231,8 +2237,8 @@
     ],
     "description": "A visibly nonhuman indigo bipedal faerie with an axolotl-like face, frilled ears, long webbed fingers and flowing cobalt water ribbons. No ordinary human face.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/indigospire-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/indigospire-v5.webp",
+    "artRevision": 5,
     "legacyTypes": {
       "base": "Humanoid",
       "alter": "Elemental"
@@ -2256,8 +2262,8 @@
     ],
     "description": "An amorphous juniper-blue sap ooze monstrosity with floating berry-like nodules, jagged evergreen-colored fangs, several soft jaws and needle-frond gel tentacles.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/junipermaw-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/junipermaw-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Round juniper sap droplet with one small jagged maw and a berry nodule",
@@ -2277,8 +2283,8 @@
     ],
     "description": "An amorphous tawny-and-slate ooze with recognizable kestrel beak and feather-patterned gel fans, muscular beastlike core and flowing winglike pseudopods; no rigid skeleton.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/kestrelveil-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/kestrelveil-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small rounded kestrel-faced jelly with tiny gel feather fans",
@@ -2298,8 +2304,8 @@
     ],
     "description": "A rooted carnivorous lichen colony with tooth-edged trumpet traps, ember-red fruiting cups, leathery black leaf wings and hooked fiend-like thorn horns.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/lichenwing-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/lichenwing-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small tooth-edged lichen trumpet rooted on a dark stone-like fungal base",
@@ -2365,8 +2371,8 @@
       "base": "Beast",
       "alter": "Humanoid"
     },
-    "atlas": "./assets/roster/opalhorn-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/opalhorn-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Compact upright cape-hare juvenile with short opal horn nubs and a round fluffy chest",
@@ -2407,8 +2413,8 @@
     ],
     "description": "A quadrupedal quartz-and-bronze lynx automaton with segmented translucent claws, warm gray plates, faerie ear tassels and tiny copper leaf charms.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/quartzclaw-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/quartzclaw-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Compact quartz lynx kit with large mechanical paws and short ear tassels",
@@ -2428,8 +2434,8 @@
     ],
     "description": "An amorphous pale-blue frost elemental mixed with translucent gel, forming delicate moth-wing lobes, suspended icy droplets and softly glowing silver veins.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/rimemoth-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/rimemoth-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small round icy gel droplet with two short silver-veined lobes",
@@ -2491,8 +2497,8 @@
     ],
     "description": "A bipedal undead bog giant with moss-covered burial wrappings, dark exposed ribs, fern-fringed shoulders, huge stone-bone fists and cold green soul light.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/verdantbloom-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/verdantbloom-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small moss-wrapped bog revenant with narrow open ribs and compact stone-bone fists",
@@ -2516,8 +2522,8 @@
       "base": "Humanoid",
       "alter": "Elemental"
     },
-    "atlas": "./assets/roster/wraithspire-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/wraithspire-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small two-headed hollow-masked wind faerie with compact shared torso and short vapor hair",
@@ -2640,8 +2646,8 @@
     ],
     "description": "A heavy lynx-shaped translucent zircon-blue ooze with broad muscular animal-like mass, gel ear tufts, embedded pale mineral flecks and flowing soft paws.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/zirconveil-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/zirconveil-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small round lynx-faced zircon jelly with soft ear nubs and stubby gel paws",
@@ -2682,8 +2688,8 @@
     ],
     "description": "A recognizable enormous muscular monitor lizard transformed into a basilisk-like monstrosity, with exaggerated saber fangs, oversized claws, basil-green ridges and thick heavy limbs.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/basilgore-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/basilgore-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small stocky monitor-lizard juvenile with broad feet and short saber fangs",
@@ -2703,8 +2709,8 @@
     ],
     "description": "An amorphous cobalt-blue gel construct containing articulated silver cogwheels, floating porcelain joint pieces, a soft metal-mask core and fluid pseudopods.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/cobaltwisp-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/cobaltwisp-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small cobalt jelly holding a few floating silver cogs and a porcelain mask",
@@ -2766,8 +2772,8 @@
     ],
     "description": "A rooted undead carnivorous willow with scroll-like peeling bark, dead flower traps, bone twigs, hollow eye knots and pale parchment-colored spirit sap.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/fableroot-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/fableroot-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small peeling-bark carnivorous willow seedling with one dead flower trap",
@@ -2808,8 +2814,8 @@
     ],
     "description": "A reanimated four-legged harbor mastiff skeleton with tarnished bronze rib braces, sea-worn armor joints, porthole-like eyes and dark salt-stained burial cloth.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/harborgaze-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/harborgaze-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small mastiff skeleton with a few bronze braces and short burial cloth",
@@ -2854,8 +2860,8 @@
       "base": "Aberration",
       "alter": "Humanoid"
     },
-    "atlas": "./assets/roster/jasperplume-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/jasperplume-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small jasper moth-mask aberration with a round hunched torso and short asymmetric arms",
@@ -2875,8 +2881,8 @@
     ],
     "description": "A colossal bipedal ember giant with brick-gray craggy skin, a living coal beard, massive broad hands and volcanic orange seams; unmistakably a nonhuman giant.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/kindlekin-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/kindlekin-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Compact coal giant with rounded stone torso and short chunky hands",
@@ -2896,8 +2902,8 @@
     ],
     "description": "A recognizable enormously muscular hippopotamus aberration with horrific extra eyes, multiple impossible jaws and lotus-petal eye stalks emerging from its broad back.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/lotusgore-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/lotusgore-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small muscular hippo calf with one extra eye stalk and a short impossible cheek jaw",
@@ -2921,8 +2927,8 @@
       "base": "Humanoid",
       "alter": "Monstrosity"
     },
-    "atlas": "./assets/roster/mistralwisp-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/mistralwisp-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small four-armed raptor faerie with compact insect mask, short silver feather tufts and small hooked hand talons",
@@ -2941,11 +2947,11 @@
         ],
         "limbs": {
           "legs": 2,
-          "arms": 4,
+          "arms": 2,
           "wings": 2,
           "tentacles": 0
         },
-        "manipulators": 4,
+        "manipulators": 2,
         "strength": 1,
         "scale": "ordinary",
         "source": "image-analysis",
@@ -2962,11 +2968,11 @@
         ],
         "limbs": {
           "legs": 2,
-          "arms": 4,
+          "arms": 2,
           "wings": 2,
           "tentacles": 0
         },
-        "manipulators": 4,
+        "manipulators": 2,
         "strength": 1,
         "scale": "ordinary",
         "source": "image-analysis",
@@ -2983,11 +2989,11 @@
         ],
         "limbs": {
           "legs": 2,
-          "arms": 4,
+          "arms": 2,
           "wings": 2,
           "tentacles": 0
         },
-        "manipulators": 4,
+        "manipulators": 2,
         "strength": 1,
         "scale": "ordinary",
         "source": "image-analysis",
@@ -3049,8 +3055,8 @@
     ],
     "description": "A massively muscular black lion-crocodile monstrosity with oversized saber teeth, heavy reptilian shoulder plates, huge claws and pale gold spine ridges. Four sturdy legs.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/onyxflare-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/onyxflare-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small stocky lion-crocodile cub with short saber teeth and a low plated back",
@@ -3070,8 +3076,8 @@
     ],
     "description": "An amorphous pale-pink ooze construct with floating white porcelain petal plates, small bronze joint rings and a soft glowing seed-shaped core.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/petalroot-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/petalroot-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Low pink gel seed with a few disconnected porcelain petal plates",
@@ -3091,8 +3097,8 @@
     ],
     "description": "An amorphous deep-violet fiend ooze with dark obsidian horns, star-like glowing inner gel, serrated floating fragments and a low predatory mouth.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/quasarshard-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/quasarshard-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small violet star-speckled gel droplet with short obsidian horn fins",
@@ -3112,8 +3118,8 @@
     ],
     "description": "A recognizable raven whose body and one pair of wings are made of living storm wind and dark feathered plasma, with a white-gold celestial halo and two taloned feet.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/ravengaze-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/ravengaze-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Round raven chick made of dark plasma with tiny wings and a small halo arc",
@@ -3154,8 +3160,8 @@
     ],
     "description": "A towering nonhuman bipedal faerie giant with an avian head, huge feather-fringed forearms, hooked talons and a long cream-and-amber plumage mantle.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/talonplume-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/talonplume-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small avian-headed faerie giant with short cream feathers and compact hands",
@@ -3242,8 +3248,8 @@
     ],
     "description": "A colossal bipedal citrine-yellow elemental giant with lightning-filled jaws, angular stone brows, massive gold-gray limbs and branching electric fractures.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/xanthjaw-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/xanthjaw-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Compact yellow stone giant with a short angular jaw and small lightning seams",
@@ -3330,8 +3336,8 @@
     ],
     "description": "A heavily muscled boar-tiger monstrosity with massive forward tusks, huge claws, dark bracken-colored fur, armored ridges and a predatory low quadruped stance.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/brackengaze-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/brackengaze-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Stocky boar-tiger cub with small forward tusks and a short bristled back",
@@ -3351,8 +3357,8 @@
     ],
     "description": "An amorphous coral-pink ooze construct with floating carved coral-like porcelain jaws, small bronze gears, teal gel joints and fluid soft tentacles.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/coralfang-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/coralfang-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small coral jelly with one floating porcelain jaw and short bronze joint fragments",
@@ -3372,8 +3378,8 @@
     ],
     "description": "An amorphous burgundy fiend ooze with dagger-shaped horn fins, tooth-edged liquid wing lobes and a charcoal core, no rigid skeleton.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/daggerplume-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/daggerplume-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Low burgundy ooze with tiny dagger horn fins and a short soft charcoal core",
@@ -3435,8 +3441,8 @@
     ],
     "description": "A towering visibly nonhuman bipedal moth faerie giant with silver antennae, pale fur, broad powerful limbs and a billowing gossamer wing mantle.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/gossamerwisp-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/gossamerwisp-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Compact pale moth faerie juvenile with short antennae and close-folded gossamer mantle",
@@ -3456,8 +3462,8 @@
     ],
     "description": "A reanimated four-legged badger skeleton with dark red brick-and-bronze joint armor, exposed ash-white ribs and a faint coal glow behind its skull jaw.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/hearthjaw-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/hearthjaw-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small badger skeleton with sparse brick-red joint plates and short bronze claws",
@@ -3477,8 +3483,8 @@
     ],
     "description": "A four-legged skeletal devil crocodile with algae-dark hide, pale driftbone armor, hooked fiend horns and spectral sea-green light, without a living animal appearance.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/isletflare-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/isletflare-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small driftbone crocodile skeleton with short black horns and algae-dark hide scraps",
@@ -3523,8 +3529,8 @@
     ],
     "description": "A colossal bipedal green elemental stone giant with natural luminescent mineral shards, enormous craggy fists and dark charcoal skin fractured by emerald light.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/kryptonshard-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/kryptonshard-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Compact green stone giant with few short mineral shards and small heavy fists",
@@ -3569,8 +3575,8 @@
       "base": "Humanoid",
       "alter": "Monstrosity"
     },
-    "atlas": "./assets/roster/miragefang-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/miragefang-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small jackal-headed faerie with compact fanged muzzle, short claws and tiny mirage shards",
@@ -3590,8 +3596,8 @@
     ],
     "description": "A four-legged celestial faerie creature with an anteater-like long muzzle, cream feathers, gold nectar filaments, tiny flower-shaped lights and delicate halo rings.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/nectarplume-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/nectarplume-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small cream anteater-like celestial with short muzzle, tiny gold nectar filaments and close feather tufts",
@@ -3611,8 +3617,8 @@
     ],
     "description": "A huge muscular owl-bear monstrosity with oversized hooked beak fangs, massive bear claws, ochre feather ridges and a solid powerful quadrupedal body.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/oraclekin-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/oraclekin-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Round owl-bear cub with short hooked beak and broad soft paws",
@@ -3632,8 +3638,8 @@
     ],
     "description": "An amorphous smoke-gray ooze construct with floating ornate pewter armor pieces, articulated bronze cogs, black gel joints and a broad tusked mask core.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/pewtergore-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/pewtergore-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Low smoke-gray jelly with a small tusked pewter mask and a few bronze cogs",
@@ -3674,8 +3680,8 @@
     ],
     "description": "A four-legged elemental turtle-like creature made of flowing turquoise water, with a white foam shell, gold gill fronds and a delicate radiant celestial halo.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/ripplejaw-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/ripplejaw-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small round water turtle with a low foam dome and tiny gold gill buds",
@@ -3716,8 +3722,8 @@
     ],
     "description": "A towering nonhuman bipedal woodland faerie giant with a truffle-like textured crown, a broad piglike muzzle, mushroom ears, enormous strong limbs and mossy fur.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/truffleroot-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/truffleroot-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Compact pig-muzzled woodland faerie with a round truffle crown, short mushroom ears and thick hands",
@@ -3758,8 +3764,8 @@
     ],
     "description": "A four-legged undead fiend panther with dark violet hide remnants, exposed pale ribs, curved black brow horns and several luminous violet eye-like markings.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/violetgaze-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/violetgaze-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small violet skeletal panther cub with tiny horn nubs and small luminous eye markings",
@@ -3779,8 +3785,8 @@
     ],
     "description": "A horrific nonhuman bipedal faerie guardian aberration with an eye-stacked mask, mismatched fanged jaws, very long twisted arms and dark emerald silk fronds.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/wardenfang-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/wardenfang-v5.webp",
+    "artRevision": 5,
     "legacyTypes": {
       "base": "Aberration",
       "alter": "Humanoid"
@@ -3804,8 +3810,8 @@
     ],
     "description": "A colossal nonhuman bipedal storm giant with dark blue craggy skin, huge hands, feather-like flame and cloud plumes, and glowing gold circular star motifs without lettering.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/zodiacplume-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/zodiacplume-v5.webp",
+    "artRevision": 5,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Compact blue storm giant with small cloud shoulder tufts and subtle gold ring markings",
