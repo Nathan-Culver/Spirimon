@@ -189,7 +189,7 @@ export function damage(attacker,asp,defender,dsp,move,style='normal',r=Math.rand
  const same=matchingClassificationBonus(move,attacker,asp);
  const attackPassives=passiveEffects(asp,attacker,{maxHp:a.hp,move,target:defender,targetMaxHp:d.hp,weather:attacker.battlefield?.weather}),defensePassives=passiveEffects(dsp,defender,{maxHp:d.hp,incomingMove:move,weather:defender.battlefield?.weather});
  const passiveDamage=(1+(attackPassives[energy?'energyDamage':'physicalDamage']||0))*(1-Math.min(.5,defensePassives.damageReduction||0));
- let amount=((2*attacker.level/5+2)*move.power*(offense/Math.max(1,defense))/24+2)*(STYLES[style]||STYLES.normal).damage*effectiveness(move,dsp,defender)*(energy?dsp.spiritualRes??1:dsp.physicalRes??1)*same*passiveDamage*(.9+r()*.1)*(defender.ward?1-.45*(defender.wardStrength??1):1);
+ let amount=((2*attacker.level/5+2)*move.power*(offense/Math.max(1,defense))/24+2)*1.25*(STYLES[style]||STYLES.normal).damage*effectiveness(move,dsp,defender)*(energy?dsp.spiritualRes??1:dsp.physicalRes??1)*same*passiveDamage*(.9+r()*.1)*(defender.ward?1-.45*(defender.wardStrength??1):1);
  if(asp.ability==='Wildheart'&&!energy||asp.ability==='Soulweave'&&energy)amount*=1.12;
  if(dsp.ability==='Steadfast'&&(defender.commit??.5)<=.4)amount*=.9;
  if(attacker.status==='burn'&&!energy||attacker.status==='frostbite'&&energy)amount*=.5;
