@@ -39,3 +39,17 @@ test('standalone download embeds every built-in creature portrait without inflat
  for(const sp of portraits){const data=built.offlineArt[sp.atlas];assert.ok(data?.startsWith('data:image/webp;base64,'),sp.atlas);assert.equal(Buffer.from(data.split(',')[1],'base64').compare(readFileSync(new URL('../'+sp.atlas.slice(2),import.meta.url))),0);}
  assert.match(built.standaloneHtml,/window\.__spirimonOfflineArt=/);assert.doesNotMatch(built.pageScript,/window\.__spirimonOfflineArt=/);
 });
+
+test('packed roster anatomy preserves every form and independent mutable records',async()=>{
+ const {pageScript}=await buildPage(),{ROSTER}=await import('../roster.mjs'),anatomy=await import('../anatomy.mjs');
+ const begin=pageScript.indexOf('__modules["roster.mjs"]='),end=pageScript.indexOf('\n__modules[',begin+1);
+ const context={__modules:{'anatomy.mjs':anatomy},structuredClone};
+ vm.runInNewContext(pageScript.slice(begin,end),context);
+ const packed=context.__modules['roster.mjs'].ROSTER;
+ assert.deepEqual(JSON.parse(JSON.stringify(packed)),JSON.parse(JSON.stringify(ROSTER)));
+ const creature=packed.find(r=>r.id==='silkclasp');
+ assert.ok(creature.formAnatomy.every(a=>a.limbs.arms===4));
+ assert.notEqual(creature.formAnatomy[0],creature.formAnatomy[1]);
+ creature.formAnatomy[0].limbs.arms=0;
+ assert.equal(creature.formAnatomy[1].limbs.arms,4);
+});

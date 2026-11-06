@@ -25,7 +25,19 @@ export async function buildPage(directory=root){
  const sections=['(function(){"use strict";if(window.__spirimonStarted)return;window.__spirimonStarted=true;const __modules=Object.create(null);const __moduleURL=id=>new URL(id,/^(?:file:|content:)/.test(document.baseURI)?"https://nathan-culver.github.io/Spirimon/":document.baseURI).href;'];
  for(const id of ordered){
   const namespace=id==='app.mjs'?{}:await import(pathToFileURL(path.join(directory,id)).href),names=Object.keys(namespace);
-  let source=sources.get(id).replace(importPattern,(_,clause,specifier)=>{
+  let moduleSource=sources.get(id);
+  if(id==='roster.mjs'){
+   // Share repeated anatomy records in the download while giving every form
+   // its own mutable copy, as in the unbundled roster.
+   moduleSource=moduleSource.replace(/const SOURCE_ROSTER=(\[.*?\]);/s,(_,json)=>{
+    const rows=JSON.parse(json),records=[],ids=new Map();
+    for(const row of rows)if(row.formAnatomy)row.formAnatomy=row.formAnatomy.map(record=>{
+     const key=JSON.stringify(record);if(!ids.has(key)){ids.set(key,records.length);records.push(record);}return ids.get(key);
+    });
+    return 'const __atlasAnatomy='+JSON.stringify(records)+';const SOURCE_ROSTER='+JSON.stringify(rows)+'.map(row=>row.formAnatomy?{...row,formAnatomy:row.formAnatomy.map(id=>structuredClone(__atlasAnatomy[id]))}:row);';
+   });
+  }
+  let source=moduleSource.replace(importPattern,(_,clause,specifier)=>{
    const dep=path.posix.normalize(path.posix.join(path.posix.dirname(id),specifier)),value='__modules['+JSON.stringify(dep)+']';
    if(clause.startsWith('* as '))return 'const '+clause.slice(5)+'='+value+';';
    if(clause.startsWith('{'))return 'const '+clause.replace(/\bas\b/g,':')+'='+value+';';

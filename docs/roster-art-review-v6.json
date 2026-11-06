@@ -1,0 +1,1502 @@
+{
+  "revision": 6,
+  "approvedLineages": 58,
+  "approvedForms": 174,
+  "reviewFile": "Spirimon_Requested_Form_Adjustments_Review.pdf",
+  "lineages": [
+    {
+      "number": 3,
+      "id": "zephyrtap",
+      "atlas": "./assets/roster/zephyrtap-v4.webp",
+      "previousAtlas": "./assets/roster/zephyrtap-v5.webp",
+      "action": "restored",
+      "adjustment": "Restore all three previous forms without additional alterations.",
+      "sourceSha256": "243442a0a6222ee28dbadd3f66b3af7132630e8075d718b1ca08379721cea76a",
+      "sourceBoxes": null,
+      "extraction": "exact-prior-atlas",
+      "atlasSha256": "cbd2cdd558288d3d79a970e1e153e6de1a1572a976c1de1ecdd036e74919d2fa"
+    },
+    {
+      "number": 10,
+      "id": "aurelattice",
+      "atlas": "./assets/roster/aurelattice-v6.webp",
+      "previousAtlas": "./assets/roster/aurelattice-v5.webp",
+      "action": "revised",
+      "adjustment": "Keep forms 1 and 2. Form 3 uses form 2's body with the current form 3 wrapped around its neck as a mane.",
+      "sourceSha256": "fbdc9b652cf6a1d520763f0762dc3c3a4ed768c03fcc08b050f54d0644a7924d",
+      "sourceBoxes": [
+        [
+          89,
+          276,
+          523,
+          674
+        ],
+        [
+          634,
+          16,
+          1396,
+          687
+        ],
+        [
+          1434,
+          17,
+          2147,
+          688
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "6cf41a3a384527fc8cb511930a3d0b1b85818c301733864e222b7f0d0ed00fc4"
+    },
+    {
+      "number": 14,
+      "id": "bronzewade",
+      "atlas": "./assets/roster/bronzewade-v6.webp",
+      "previousAtlas": "./assets/roster/bronzewade-v5.webp",
+      "action": "revised",
+      "adjustment": "Floating metal feathers with a vertical eye in every feather; more feathers in each advanced form.",
+      "sourceSha256": "86c34880ec90e56f2b23ec45e1d7df72d63ec03063101d9ab93cf68fe127e8a4",
+      "sourceBoxes": [
+        [
+          155,
+          239,
+          558,
+          688
+        ],
+        [
+          764,
+          49,
+          1379,
+          696
+        ],
+        [
+          1431,
+          20,
+          2139,
+          706
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "8f6c3aefd8e1f01280b81cd50f3203f83339b55f562c18b7fc6909a5cebc87ec"
+    },
+    {
+      "number": 15,
+      "id": "jarjell",
+      "atlas": "./assets/roster/jarjell-v6.webp",
+      "previousAtlas": "./assets/roster/jarjell-v5.webp",
+      "action": "revised",
+      "adjustment": "Tentacles on every form, increasing with advancement. Every third-form tentacle ends in a mouth.",
+      "sourceSha256": "0867c8a9437f96c8abb87c4a769231f6821df25abdde02071d0436f87c9942df",
+      "sourceBoxes": [
+        [
+          69,
+          108,
+          531,
+          653
+        ],
+        [
+          621,
+          44,
+          1253,
+          661
+        ],
+        [
+          1326,
+          25,
+          2130,
+          670
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "c7d3a006ee9941990e4af48a5dd1aa417e11919848ba5f71c5d869fda235eee9"
+    },
+    {
+      "number": 19,
+      "id": "cinerwraith",
+      "atlas": "./assets/roster/cinerwraith.webp",
+      "previousAtlas": "./assets/roster/cinerwraith-v5.webp",
+      "action": "restored",
+      "adjustment": "Restore all three previous forms without additional alterations.",
+      "sourceSha256": "46c851b1db0bdfe8e8d9dc407eaa9651a0b404c5449248d00d47a57583551940",
+      "sourceBoxes": null,
+      "extraction": "exact-prior-atlas",
+      "atlasSha256": "6f5f88663115e5c2135ee673eea6074e99055f2f8c880adfac1179d0650a9c80"
+    },
+    {
+      "number": 20,
+      "id": "glasswhorl",
+      "atlas": "./assets/roster/glasswhorl.webp",
+      "previousAtlas": "./assets/roster/glasswhorl-v5.webp",
+      "action": "restored",
+      "adjustment": "Restore all three previous forms without additional alterations.",
+      "sourceSha256": "3f98334f082e1e7e4e8d56dab63ef7a80ec193b9139df8956f317b55dbac5f12",
+      "sourceBoxes": null,
+      "extraction": "exact-prior-atlas",
+      "atlasSha256": "8ba06081671ec9bf26b42bee77580bcc16bc988b0b2126002ca01cfe2dc7c1c3"
+    },
+    {
+      "number": 21,
+      "id": "resonara",
+      "atlas": "./assets/roster/resonara-v6.webp",
+      "previousAtlas": "./assets/roster/resonara-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; add six floating eyes per form with blue sclera, blue iris and blue vertical pupils.",
+      "sourceSha256": "92f6e70923d4e64996032305a8153f02b424d3874de1f218149855c3948e208c",
+      "sourceBoxes": [
+        [
+          113,
+          235,
+          609,
+          638
+        ],
+        [
+          731,
+          67,
+          1392,
+          632
+        ],
+        [
+          1440,
+          56,
+          2155,
+          641
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "c5099ca51b5df6087ada2fe1240ee166e08df4ab8b30a2d3fc946e05b81fd97b"
+    },
+    {
+      "number": 24,
+      "id": "silkvisage",
+      "atlas": "./assets/roster/silkvisage-v4.webp",
+      "previousAtlas": "./assets/roster/silkvisage-v5.webp",
+      "action": "restored",
+      "adjustment": "Restore all three previous forms without additional alterations.",
+      "sourceSha256": "eb9c4d89e5dcec8a26340f039b6f2195733917b825dac4447de67b1473a09cc3",
+      "sourceBoxes": null,
+      "extraction": "exact-prior-atlas",
+      "atlasSha256": "08a499cdaeec215a45eba2cf3857342c6c0cd9f2cb045df2741d9f95b5ffc334"
+    },
+    {
+      "number": 34,
+      "id": "silkclasp",
+      "atlas": "./assets/roster/silkclasp-v6.webp",
+      "previousAtlas": "./assets/roster/silkclasp-v5.webp",
+      "action": "revised",
+      "adjustment": "Four separate arms on every form.",
+      "sourceSha256": "7b553f3a3f59553d1f53dceb25fddfa5bd7213adc477ef1dd5b02d46234d349d",
+      "sourceBoxes": [
+        [
+          101,
+          238,
+          457,
+          705
+        ],
+        [
+          624,
+          16,
+          1301,
+          706
+        ],
+        [
+          1338,
+          15,
+          2120,
+          712
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "424855ad129423c68332704fca3bf2fd13ea1cdfe496a8d29d10401b3d06f0ec"
+    },
+    {
+      "number": 35,
+      "id": "wickerstride",
+      "atlas": "./assets/roster/wickerstride-v6.webp",
+      "previousAtlas": "./assets/roster/wickerstride-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; separate the arms and legs in forms 1 and 3, with two arms and two legs each.",
+      "sourceSha256": "5f37755d250b44ca61fb1248b5c0f03a074ef2a5eca95e7e7346e533ca56331b",
+      "sourceBoxes": [
+        [
+          218,
+          298,
+          495,
+          692
+        ],
+        [
+          875,
+          95,
+          1292,
+          693
+        ],
+        [
+          1493,
+          88,
+          2123,
+          693
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "af0074d0dc66ae09db2bb97999a9536aa4c039d0654dd8e1034fc367572954b3"
+    },
+    {
+      "number": 42,
+      "id": "amberwork",
+      "atlas": "./assets/roster/amberwork-v4.webp",
+      "previousAtlas": "./assets/roster/amberwork-v5.webp",
+      "action": "restored",
+      "adjustment": "Restore all three previous forms without additional alterations.",
+      "sourceSha256": "7f2de74c177fe6850f3d8a063b044bd54866d70f157614a3f66386d072df407a",
+      "sourceBoxes": null,
+      "extraction": "exact-prior-atlas",
+      "atlasSha256": "3c16964050fa4eb7289ba9f591d81af4d01921e590485850df6345a067571129"
+    },
+    {
+      "number": 44,
+      "id": "nepentide",
+      "atlas": "./assets/roster/nepentide-v4.webp",
+      "previousAtlas": "./assets/roster/nepentide-v5.webp",
+      "action": "restored",
+      "adjustment": "Restore all three previous forms without additional alterations.",
+      "sourceSha256": "d43348dc1fcb18d52e8e9d4a075780b61df8067c95c721886ce7ca877f4f71be",
+      "sourceBoxes": null,
+      "extraction": "exact-prior-atlas",
+      "atlasSha256": "c020f29a4c8d998e71388ebdd12cebc7f9c3a7e8d037089ae4336ea01477bb53"
+    },
+    {
+      "number": 47,
+      "id": "fumepitcher",
+      "atlas": "./assets/roster/fumepitcher-v6.webp",
+      "previousAtlas": "./assets/roster/fumepitcher-v5.webp",
+      "action": "revised",
+      "adjustment": "Viny tentacles on every form, increasing with advancement.",
+      "sourceSha256": "63e547aa095dcc234ae0c7820a8877e813629f35f37bf5d6ea8956b55200f35d",
+      "sourceBoxes": [
+        [
+          118,
+          185,
+          507,
+          687
+        ],
+        [
+          621,
+          121,
+          1363,
+          687
+        ],
+        [
+          1423,
+          11,
+          2147,
+          707
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "f6652008cfa022d9bf2f12a71a193308d81474a77588e4d5e215d088a2dc17a9"
+    },
+    {
+      "number": 49,
+      "id": "jianglume",
+      "atlas": "./assets/roster/jianglume-v6.webp",
+      "previousAtlas": "./assets/roster/jianglume-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; every lamp floats freely, with more floating lamps in advanced forms.",
+      "sourceSha256": "706f6b8060803566e603fb2cf3e1ebc91747342c0264ec9ef9a083541cac086d",
+      "sourceBoxes": [
+        [
+          233,
+          285,
+          478,
+          642
+        ],
+        [
+          795,
+          173,
+          1275,
+          640
+        ],
+        [
+          1455,
+          94,
+          2085,
+          653
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "366c9b3f32dba673805264917fe6f88d89356ad9839fb18d39ad1b2a242b31fe"
+    },
+    {
+      "number": 55,
+      "id": "embermoth",
+      "atlas": "./assets/roster/embermoth-v6.webp",
+      "previousAtlas": "./assets/roster/embermoth-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; add more wings to the first form.",
+      "sourceSha256": "a1343d963101f0216e99cbf48832a3d3638d1d9b1e2900cea0d46d5b6ec87171",
+      "sourceBoxes": [
+        [
+          165,
+          395,
+          536,
+          689
+        ],
+        [
+          815,
+          217,
+          1354,
+          693
+        ],
+        [
+          1481,
+          91,
+          2137,
+          693
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "7c80e43e1010daf1f3a9d089d594826b7bc864041c123bd6d6cf77259df7be8b"
+    },
+    {
+      "number": 61,
+      "id": "kelpveil",
+      "atlas": "./assets/roster/kelpveil-v6.webp",
+      "previousAtlas": "./assets/roster/kelpveil-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; give form 3 a more menacing pose.",
+      "sourceSha256": "2b26500323f6bb0cde377534e693a302cafcb8ff39bca2146c9d7f021175acbe",
+      "sourceBoxes": [
+        [
+          236,
+          511,
+          488,
+          694
+        ],
+        [
+          809,
+          424,
+          1350,
+          693
+        ],
+        [
+          1395,
+          195,
+          2132,
+          683
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "2d6c37199bc8c7d13d78d76443ed9a34bda2cd6146b4a154fc7deb6019a3f458"
+    },
+    {
+      "number": 65,
+      "id": "obsidhorn",
+      "atlas": "./assets/roster/obsidhorn-v6.webp",
+      "previousAtlas": "./assets/roster/obsidhorn-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; double tail length on every form.",
+      "sourceSha256": "d2de3ae840455fd4110e15e73b2844a6b414c1f6138140e804aff2efed735899",
+      "sourceBoxes": [
+        [
+          106,
+          371,
+          488,
+          638
+        ],
+        [
+          625,
+          191,
+          1230,
+          640
+        ],
+        [
+          1345,
+          194,
+          2132,
+          642
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "2a3a043808a6b9d7fe6e132085d506ba648baf9e14022cb4b6b7476deccd661c"
+    },
+    {
+      "number": 67,
+      "id": "quillclaw",
+      "atlas": "./assets/roster/quillclaw-v6.webp",
+      "previousAtlas": "./assets/roster/quillclaw-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; remove clockwork elements and give the creatures a sculpted golem construction.",
+      "sourceSha256": "b0fcce2cd93bde78bde2dd16239d2d013088fba19b9702c3bbf1cccf1ad9629d",
+      "sourceBoxes": [
+        [
+          224,
+          395,
+          495,
+          691
+        ],
+        [
+          803,
+          252,
+          1370,
+          694
+        ],
+        [
+          1479,
+          151,
+          2131,
+          695
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "a18a79f3a58e0789ba7189b7cdad65d74741f54d82e10a64eb7c78be9efcb5d4"
+    },
+    {
+      "number": 68,
+      "id": "runemoth",
+      "atlas": "./assets/roster/runemoth-v6.webp",
+      "previousAtlas": "./assets/roster/runemoth-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; carry over only the current eye motif.",
+      "sourceSha256": "df3575b09fe6d92d23a6d138db8177bbbc803ba4d239e26d03afb90464ecdc77",
+      "sourceBoxes": [
+        [
+          236,
+          392,
+          476,
+          619
+        ],
+        [
+          807,
+          133,
+          1279,
+          642
+        ],
+        [
+          1439,
+          100,
+          2110,
+          626
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "e1430b2ba7141f87292dcc78223f2e7a50757642a6b26cee5aae790e640d417c"
+    },
+    {
+      "number": 73,
+      "id": "willowmaw",
+      "atlas": "./assets/roster/willowmaw-v4.webp",
+      "previousAtlas": "./assets/roster/willowmaw-v5.webp",
+      "action": "restored",
+      "adjustment": "Restore all three previous forms without additional alterations.",
+      "sourceSha256": "bd42a6eced929fde8377c28d243dabd25fc8e149f277c98c6e11978ea8b786c0",
+      "sourceBoxes": null,
+      "extraction": "exact-prior-atlas",
+      "atlasSha256": "adaf19034ebab1d2f3efa72464c761c716c118d80c134290a443f13cc7e40b27"
+    },
+    {
+      "number": 74,
+      "id": "xyloveil",
+      "atlas": "./assets/roster/xyloveil-v6.webp",
+      "previousAtlas": "./assets/roster/xyloveil-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; add tentacles, increasing with advancement.",
+      "sourceSha256": "77026c384fe0a3278854b374d087eff41ed4f65037740925619064516884535c",
+      "sourceBoxes": [
+        [
+          241,
+          449,
+          482,
+          694
+        ],
+        [
+          852,
+          282,
+          1317,
+          694
+        ],
+        [
+          1481,
+          89,
+          2136,
+          695
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "afab66a258f9c9b22a6e0e109b43a9ef0d95783eaadf3a1075c00c1506d745e9"
+    },
+    {
+      "number": 76,
+      "id": "zephyrfang",
+      "atlas": "./assets/roster/zephyrfang-v4.webp",
+      "previousAtlas": "./assets/roster/zephyrfang-v5.webp",
+      "action": "restored",
+      "adjustment": "Restore all three previous forms without additional alterations.",
+      "sourceSha256": "4c9087991ae028f2653722b507591591375da062e700ebcbd2e1e82387b16918",
+      "sourceBoxes": null,
+      "extraction": "exact-prior-atlas",
+      "atlasSha256": "dfcb81e4832d0f683c1b5cc39b0fd3bdae24163e9826d3ca39a9b6d37e2beb17"
+    },
+    {
+      "number": 78,
+      "id": "berylhorn",
+      "atlas": "./assets/roster/berylhorn-v6.webp",
+      "previousAtlas": "./assets/roster/berylhorn-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; add floating leaves, increasing with advancement.",
+      "sourceSha256": "787da85ca587b27024467b0e2e0aeb804425b8a8ce5024cb3f3f8663e9c38a0a",
+      "sourceBoxes": [
+        [
+          142,
+          300,
+          492,
+          693
+        ],
+        [
+          769,
+          131,
+          1301,
+          692
+        ],
+        [
+          1425,
+          44,
+          2138,
+          693
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "db1ad92b91054f6b3dacc912c021d3bd49a2b33d8b509814807791d2781d78aa"
+    },
+    {
+      "number": 81,
+      "id": "eldermoth",
+      "atlas": "./assets/roster/eldermoth-v6.webp",
+      "previousAtlas": "./assets/roster/eldermoth-v5.webp",
+      "action": "revised",
+      "adjustment": "Tentacles tipped with barbed talons, increasing in number with advancement.",
+      "sourceSha256": "eb756da68ce5b8507ca0889dc22b08acf23778ac35a8c607421f8f9e533ca727",
+      "sourceBoxes": [
+        [
+          220,
+          341,
+          513,
+          693
+        ],
+        [
+          751,
+          85,
+          1341,
+          695
+        ],
+        [
+          1410,
+          66,
+          2137,
+          695
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "85728d761540fde696c6345b7f71312f305661fd5e63a89f4838f0801bc8a2cb"
+    },
+    {
+      "number": 84,
+      "id": "hazelbloom",
+      "atlas": "./assets/roster/hazelbloom-v4.webp",
+      "previousAtlas": "./assets/roster/hazelbloom-v5.webp",
+      "action": "restored",
+      "adjustment": "Restore all three previous forms without additional alterations.",
+      "sourceSha256": "1146d095f42e2c76395e2660460236a46c0521c375b34f198c09eee5726fe6d6",
+      "sourceBoxes": null,
+      "extraction": "exact-prior-atlas",
+      "atlasSha256": "740fc9c7084836f90f5c5b592034c41884b3de625be67b004c16259459f021bf"
+    },
+    {
+      "number": 87,
+      "id": "kestrelveil",
+      "atlas": "./assets/roster/kestrelveil-v6.webp",
+      "previousAtlas": "./assets/roster/kestrelveil-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; make form 3 a four-legged griffin with ooze features.",
+      "sourceSha256": "f3869875e53ee66bc28b9ca5fb9755e2218264db7f1e1170d10bc81cd4642720",
+      "sourceBoxes": [
+        [
+          230,
+          462,
+          496,
+          679
+        ],
+        [
+          762,
+          337,
+          1320,
+          679
+        ],
+        [
+          1359,
+          71,
+          2139,
+          675
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "1ee10afc90dfd8fcccab931f206dea515450acac7fe639a00057a94a72e2a816"
+    },
+    {
+      "number": 88,
+      "id": "lichenwing",
+      "atlas": "./assets/roster/lichenwing-v6.webp",
+      "previousAtlas": "./assets/roster/lichenwing-v5.webp",
+      "action": "revised",
+      "adjustment": "Viny tentacles with Venus flytrap mouths at every tip, increasing with advancement.",
+      "sourceSha256": "c71b921470395875bf79e59a38d6cbbaa0720260f2cfed25f9c8733f8d74fb91",
+      "sourceBoxes": [
+        [
+          110,
+          319,
+          569,
+          643
+        ],
+        [
+          633,
+          197,
+          1355,
+          657
+        ],
+        [
+          1385,
+          52,
+          2122,
+          649
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "6d6d389a0f2066d28073210b63969fb1b213aa9dc56ca3da8c8abaa3aaa22f4e"
+    },
+    {
+      "number": 91,
+      "id": "opalhorn",
+      "atlas": "./assets/roster/opalhorn-v6.webp",
+      "previousAtlas": "./assets/roster/opalhorn-v5.webp",
+      "action": "revised",
+      "adjustment": "Monstrous talons on fingers and toes; double-sized, wing-like ears on every form.",
+      "sourceSha256": "36dc2454c7068f31ed12065ca6418456efe02ba5ffaac1789be28b06ff6492eb",
+      "sourceBoxes": [
+        [
+          144,
+          197,
+          578,
+          690
+        ],
+        [
+          745,
+          16,
+          1461,
+          689
+        ],
+        [
+          1430,
+          47,
+          2164,
+          705
+        ]
+      ],
+      "extraction": "connected-bodies",
+      "atlasSha256": "58ac27c1e000fac2f02628914052f7dfaf2c5fb2b0e4dc71f239d5b8034a267a"
+    },
+    {
+      "number": 93,
+      "id": "quartzclaw",
+      "atlas": "./assets/roster/quartzclaw-v6.webp",
+      "previousAtlas": "./assets/roster/quartzclaw-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; add floating crystals, increasing with advancement.",
+      "sourceSha256": "77b13eb0f647b5069b79f2cfa1dd4712f794f9862b8e9baae23d5954cc46634c",
+      "sourceBoxes": [
+        [
+          92,
+          193,
+          565,
+          648
+        ],
+        [
+          711,
+          56,
+          1329,
+          649
+        ],
+        [
+          1410,
+          9,
+          2134,
+          651
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "e40a14d6a36443427cb1db4992e424d139a786fa8b853792047d26e3cc914409"
+    },
+    {
+      "number": 94,
+      "id": "rimemoth",
+      "atlas": "./assets/roster/rimemoth-v6.webp",
+      "previousAtlas": "./assets/roster/rimemoth-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; give each form two large wings.",
+      "sourceSha256": "b2025c557a28b0aeb11f0bf7eee8a72150d818881a53ebfedc13e6d6224931f6",
+      "sourceBoxes": [
+        [
+          36,
+          311,
+          590,
+          651
+        ],
+        [
+          646,
+          168,
+          1353,
+          654
+        ],
+        [
+          1384,
+          96,
+          2151,
+          662
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "8a815ffe287b04f4ff3fcdc5ca3c8ec024f949ef7cfab0cc1adfee36f14f01c6"
+    },
+    {
+      "number": 100,
+      "id": "zirconveil",
+      "atlas": "./assets/roster/zirconveil-v6.webp",
+      "previousAtlas": "./assets/roster/zirconveil-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; add floating blue orb eyes with vertical pupils, increasing with advancement.",
+      "sourceSha256": "2d3e7d02d22758d205c840a396200ed4384aa406840f4e84683c142d26f7066b",
+      "sourceBoxes": [
+        [
+          135,
+          296,
+          524,
+          630
+        ],
+        [
+          655,
+          188,
+          1405,
+          633
+        ],
+        [
+          1415,
+          17,
+          2160,
+          636
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "4d712d81a078729f2e1180a077092a6cf9d154388fb91e6c0d3ebe46be0e116e"
+    },
+    {
+      "number": 102,
+      "id": "basilgore",
+      "atlas": "./assets/roster/basilgore-v6.webp",
+      "previousAtlas": "./assets/roster/basilgore-v5.webp",
+      "action": "revised",
+      "adjustment": "Triple tail length on every form; double head size on form 3.",
+      "sourceSha256": "79c3b189a8d98f24b45ca31b11cae7ba6575552d5583aa5e692c0fa82595dc75",
+      "sourceBoxes": [
+        [
+          154,
+          270,
+          534,
+          656
+        ],
+        [
+          663,
+          105,
+          1311,
+          660
+        ],
+        [
+          1349,
+          25,
+          2146,
+          670
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "0548e2c83c323f42a7cafeb7e6bacab24f021e175ff3d13ba32020b6495d0fe1"
+    },
+    {
+      "number": 103,
+      "id": "cobaltwisp",
+      "atlas": "./assets/roster/cobaltwisp-v4.webp",
+      "previousAtlas": "./assets/roster/cobaltwisp-v5.webp",
+      "action": "restored",
+      "adjustment": "Restore all three previous forms without additional alterations.",
+      "sourceSha256": "fc4cee36da6b9923068042b33dd52658b60ce08e3ef1fcb910e2e38963da7d1a",
+      "sourceBoxes": null,
+      "extraction": "exact-prior-atlas",
+      "atlasSha256": "0aadb5edbd7f9cc3f54f8f474d9fd597e9f37e6011d3eccc8d906d5b0fba72af"
+    },
+    {
+      "number": 106,
+      "id": "fableroot",
+      "atlas": "./assets/roster/fableroot-v6.webp",
+      "previousAtlas": "./assets/roster/fableroot-v5.webp",
+      "action": "revised",
+      "adjustment": "Venus flytrap mouths at branch tips; additional viny tentacles with flytrap mouths, increasing with advancement.",
+      "sourceSha256": "0bd872606a5a0ac6e5ce33215f188095cfe7555f4efdd783a92a0eba719cdcf5",
+      "sourceBoxes": [
+        [
+          72,
+          317,
+          545,
+          661
+        ],
+        [
+          655,
+          24,
+          1339,
+          668
+        ],
+        [
+          1347,
+          6,
+          2154,
+          674
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "8177a1e79dc3e5ce8420c1886387dd41e3e4c67599218c37ae7c7f3a86ae6d65"
+    },
+    {
+      "number": 108,
+      "id": "harborgaze",
+      "atlas": "./assets/roster/harborgaze-v6.webp",
+      "previousAtlas": "./assets/roster/harborgaze-v5.webp",
+      "action": "revised",
+      "adjustment": "Full visual rework: skeletal harbor guardian progression with ship-hull armor and spectral surf imagery.",
+      "sourceSha256": "4caed8bd3641ee11aabb79795a415311744898c1df17b7b7056a55604eafe58f",
+      "sourceBoxes": [
+        [
+          134,
+          341,
+          413,
+          654
+        ],
+        [
+          518,
+          266,
+          1245,
+          654
+        ],
+        [
+          1273,
+          14,
+          2137,
+          664
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "2c3d830ef04e9cbb8af1763de774be9e64b253abb84e669ed792a631a2ed50af"
+    },
+    {
+      "number": 111,
+      "id": "kindlekin",
+      "atlas": "./assets/roster/kindlekin-v4.webp",
+      "previousAtlas": "./assets/roster/kindlekin-v5.webp",
+      "action": "restored",
+      "adjustment": "Restore all three previous forms without additional alterations.",
+      "sourceSha256": "927e1680782f626514af9f5878416f5e80160cd7999f51616b10f6ab10b78f4f",
+      "sourceBoxes": null,
+      "extraction": "exact-prior-atlas",
+      "atlasSha256": "606a8e13e1652874510ef5de2841e8d3a3f6860538d02200a98cc8b8731be100"
+    },
+    {
+      "number": 112,
+      "id": "lotusgore",
+      "atlas": "./assets/roster/lotusgore-v6.webp",
+      "previousAtlas": "./assets/roster/lotusgore-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; fleshy tentacles with mouth tips, increasing with advancement. Number confirmed as 112.",
+      "sourceSha256": "7399e92670ffa6f6c571341e16a757185af0dfc18af5921698d0035430dc837a",
+      "sourceBoxes": [
+        [
+          150,
+          300,
+          486,
+          650
+        ],
+        [
+          698,
+          180,
+          1354,
+          650
+        ],
+        [
+          1433,
+          28,
+          2142,
+          651
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "02ed61647574c5772109750193ea40ac175db1210ed8cc5e9c1d14482bb96a7a"
+    },
+    {
+      "number": 113,
+      "id": "mistralwisp",
+      "atlas": "./assets/roster/mistralwisp-v6.webp",
+      "previousAtlas": "./assets/roster/mistralwisp-v5.webp",
+      "action": "revised",
+      "adjustment": "More fey character through flowering sprigs, iridescent plumage and enchanted woodland details.",
+      "sourceSha256": "eb9f2eb27f5cf275d9317c57c94da9b23134a2064bcdb3b3f930149978164272",
+      "sourceBoxes": [
+        [
+          137,
+          268,
+          548,
+          668
+        ],
+        [
+          713,
+          29,
+          1335,
+          669
+        ],
+        [
+          1407,
+          19,
+          2138,
+          676
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "13904e2f1568826b2ea21f46d042ede07535ea0941f2f23dc84adb78277e9d6d"
+    },
+    {
+      "number": 115,
+      "id": "onyxflare",
+      "atlas": "./assets/roster/onyxflare-v6.webp",
+      "previousAtlas": "./assets/roster/onyxflare-v5.webp",
+      "action": "revised",
+      "adjustment": "Triple tail length on every form; double head size on form 3.",
+      "sourceSha256": "943b4a9d6fa82281d660b0b199e8adb390e0eb45fda0f08db0455ef572dc660a",
+      "sourceBoxes": [
+        [
+          162,
+          326,
+          509,
+          670
+        ],
+        [
+          641,
+          96,
+          1301,
+          672
+        ],
+        [
+          1378,
+          12,
+          2156,
+          676
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "e1164439f09ff78f621343e1261b676c0576b2f82d1db2f0b16d587f1c2b47fd"
+    },
+    {
+      "number": 116,
+      "id": "petalroot",
+      "atlas": "./assets/roster/petalroot-v6.webp",
+      "previousAtlas": "./assets/roster/petalroot-v5.webp",
+      "action": "revised",
+      "adjustment": "Free-floating glowing flesh-eye orbs and separate fleshy tentacles; both increase with advancement.",
+      "sourceSha256": "90c0fe2d109a76673baf4813b1acb9a71ed695acb6afe1ed83ca45403d284261",
+      "sourceBoxes": [
+        [
+          86,
+          307,
+          521,
+          640
+        ],
+        [
+          693,
+          92,
+          1305,
+          646
+        ],
+        [
+          1368,
+          22,
+          2154,
+          646
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "1dcf0c7ecab8e6426255dd898c096e8713ad7999ed902c20757bffad495eb9a6"
+    },
+    {
+      "number": 117,
+      "id": "quasarshard",
+      "atlas": "./assets/roster/quasarshard-v6.webp",
+      "previousAtlas": "./assets/roster/quasarshard-v5.webp",
+      "action": "revised",
+      "adjustment": "Threefold world-scale size increase for every form, with progressively more mouths on the body.",
+      "sourceSha256": "105905702e1f57e4434f57d43fe73f29795838400a081ae8482fa16cf3c69380",
+      "sourceBoxes": [
+        [
+          68,
+          365,
+          369,
+          676
+        ],
+        [
+          446,
+          36,
+          1066,
+          678
+        ],
+        [
+          1129,
+          19,
+          2140,
+          678
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "11ceb0b04d8d14d9293f235c962daacfedbdc032c98f01e01b9a4f5d191fe2b5"
+    },
+    {
+      "number": 118,
+      "id": "ravengaze",
+      "atlas": "./assets/roster/ravengaze-v4.webp",
+      "previousAtlas": "./assets/roster/ravengaze-v5.webp",
+      "action": "restored",
+      "adjustment": "Restore all three previous forms without additional alterations.",
+      "sourceSha256": "4c6f83b0736406cc5f0ebfe45315e30a072b14ebc65de35894e84834df55e2a1",
+      "sourceBoxes": null,
+      "extraction": "exact-prior-atlas",
+      "atlasSha256": "7e280025348b45e9e84b913867ea1ffb5789b44ffd449272121cd81d35d77dd9"
+    },
+    {
+      "number": 120,
+      "id": "talonplume",
+      "atlas": "./assets/roster/talonplume-v6.webp",
+      "previousAtlas": "./assets/roster/talonplume-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; two distinct arms on every form.",
+      "sourceSha256": "f673e742161b741428cffe4b7be97a443b13e8cbb5a11ac751014052146c849a",
+      "sourceBoxes": [
+        [
+          238,
+          385,
+          499,
+          677
+        ],
+        [
+          842,
+          201,
+          1282,
+          676
+        ],
+        [
+          1442,
+          184,
+          2127,
+          679
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "a373ce0b41605040613805bd8028d2a2d515628b9cc8a606d88d7477aabdaf32"
+    },
+    {
+      "number": 124,
+      "id": "xanthjaw",
+      "atlas": "./assets/roster/xanthjaw-v6.webp",
+      "previousAtlas": "./assets/roster/xanthjaw-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; two arms per form, tripled tail length, and a doubled head on form 3.",
+      "sourceSha256": "67bd88d06077fb8aba40a6406c1b02b00073a7ccfd0ba8f4f6f824ddf43ce9f8",
+      "sourceBoxes": [
+        [
+          84,
+          376,
+          529,
+          646
+        ],
+        [
+          617,
+          186,
+          1238,
+          645
+        ],
+        [
+          1302,
+          82,
+          2135,
+          649
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "10d8bad8d7a016a5dd90ab75fb72c889b48171fc3f1919a6675c598c3ef31959"
+    },
+    {
+      "number": 128,
+      "id": "brackengaze",
+      "atlas": "./assets/roster/brackengaze-v6.webp",
+      "previousAtlas": "./assets/roster/brackengaze-v5.webp",
+      "action": "revised",
+      "adjustment": "Two visible tusks on form 2.",
+      "sourceSha256": "55bda39e9037068cc80a07f6f4939db5b1f8c6ec17966736d2f044f55b86bb2a",
+      "sourceBoxes": [
+        [
+          144,
+          440,
+          523,
+          699
+        ],
+        [
+          716,
+          345,
+          1386,
+          698
+        ],
+        [
+          1464,
+          149,
+          2137,
+          699
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "5d9f157afcd024de67f37bab1ba66d097cb4f840334c91c71f22b96593be6bd3"
+    },
+    {
+      "number": 129,
+      "id": "coralfang",
+      "atlas": "./assets/roster/coralfang-v6.webp",
+      "previousAtlas": "./assets/roster/coralfang-v5.webp",
+      "action": "revised",
+      "adjustment": "Remove the cogs from every form.",
+      "sourceSha256": "fc48955133e9bad47a309bc7df637e8f962ec0c38d64e78ef110592e68219b40",
+      "sourceBoxes": [
+        [
+          192,
+          294,
+          458,
+          624
+        ],
+        [
+          795,
+          109,
+          1294,
+          630
+        ],
+        [
+          1471,
+          95,
+          2099,
+          637
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "6e4e8d03d832f9177d9826915b8e9ed0b989279370d9e206720069b52d269fc3"
+    },
+    {
+      "number": 130,
+      "id": "daggerplume",
+      "atlas": "./assets/roster/daggerplume-v4.webp",
+      "previousAtlas": "./assets/roster/daggerplume-v5.webp",
+      "action": "restored",
+      "adjustment": "Restore all three previous forms without additional alterations.",
+      "sourceSha256": "e680b3c2f82dd650e917ba3f0aa67dcb90888b4a6c4a14ec2bbde8f7916e1b98",
+      "sourceBoxes": null,
+      "extraction": "exact-prior-atlas",
+      "atlasSha256": "56da9414169ce613faa3a8b89c5c99aa7e9a35e7f5604bfeb2dec2413600243a"
+    },
+    {
+      "number": 133,
+      "id": "gossamerwisp",
+      "atlas": "./assets/roster/gossamerwisp-v6.webp",
+      "previousAtlas": "./assets/roster/gossamerwisp-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; two distinct arms on every form.",
+      "sourceSha256": "33c1b95f8134c2a675b1c57a2dc954de0b7beab1c9052cfee7ee4a192ccfe6e4",
+      "sourceBoxes": [
+        [
+          241,
+          413,
+          489,
+          695
+        ],
+        [
+          783,
+          175,
+          1369,
+          695
+        ],
+        [
+          1457,
+          169,
+          2136,
+          694
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "67a0c9ee393f2ac24c69a2cd0c9688ca3f6eab74bc3500c12591ec0c5e8b9c84"
+    },
+    {
+      "number": 135,
+      "id": "isletflare",
+      "atlas": "./assets/roster/isletflare-v6.webp",
+      "previousAtlas": "./assets/roster/isletflare-v5.webp",
+      "action": "revised",
+      "adjustment": "Triple torso length and tail length on every form; double head size on form 3.",
+      "sourceSha256": "b32d922fc7c9d2d25288addbae3954c9af863cd2789605ce1085e1af4f50f31b",
+      "sourceBoxes": [
+        [
+          31,
+          423,
+          512,
+          614
+        ],
+        [
+          530,
+          280,
+          1229,
+          616
+        ],
+        [
+          1227,
+          196,
+          2149,
+          617
+        ]
+      ],
+      "extraction": "connected-bodies",
+      "atlasSha256": "f7cedfa7e3e1709296f725be2fb7168e818c61e510d635dc2c2a2560e44a7463"
+    },
+    {
+      "number": 137,
+      "id": "kryptonshard",
+      "atlas": "./assets/roster/kryptonshard-v6.webp",
+      "previousAtlas": "./assets/roster/kryptonshard-v5.webp",
+      "action": "revised",
+      "adjustment": "Floating green crystals on every form, increasing with advancement.",
+      "sourceSha256": "ffd0e1a753be4c368f51637ee4a0eedfae892bdee69891acde798ca797935e0f",
+      "sourceBoxes": [
+        [
+          155,
+          248,
+          459,
+          658
+        ],
+        [
+          739,
+          7,
+          1285,
+          665
+        ],
+        [
+          1389,
+          3,
+          2136,
+          662
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "34717f1279490c37261a17be79d7af85f4dc0d28312926580426c34bfb55fde9"
+    },
+    {
+      "number": 139,
+      "id": "miragefang",
+      "atlas": "./assets/roster/miragefang-v6.webp",
+      "previousAtlas": "./assets/roster/miragefang-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; triple torso length and double arm length on every form.",
+      "sourceSha256": "8258e53ca672840a22e204e817a1b1dc7689cd96972e8f2f7efb1eccc64b6276",
+      "sourceBoxes": [
+        [
+          39,
+          363,
+          626,
+          629
+        ],
+        [
+          748,
+          54,
+          1262,
+          658
+        ],
+        [
+          1250,
+          137,
+          2137,
+          649
+        ]
+      ],
+      "extraction": "connected-bodies",
+      "atlasSha256": "81b924aa2f739ae17abcdedf5e84720af648bcd456e3209ac16983df97d247d3"
+    },
+    {
+      "number": 140,
+      "id": "nectarplume",
+      "atlas": "./assets/roster/nectarplume-v4.webp",
+      "previousAtlas": "./assets/roster/nectarplume-v5.webp",
+      "action": "restored",
+      "adjustment": "Restore all three previous forms without additional alterations.",
+      "sourceSha256": "f3a9a07382b055f1a43ed5dbefa4a58354224beef2a8d3a2df7900abbeca6d77",
+      "sourceBoxes": null,
+      "extraction": "exact-prior-atlas",
+      "atlasSha256": "d16a9c051e1ffe123b066422dff7fff750874e799674919fe0760df66bdf33e2"
+    },
+    {
+      "number": 141,
+      "id": "oraclekin",
+      "atlas": "./assets/roster/oraclekin-v6.webp",
+      "previousAtlas": "./assets/roster/oraclekin-v5.webp",
+      "action": "revised",
+      "adjustment": "Triple torso length on every form; large bird wings and a doubled head on form 3. First-form extra legs removed.",
+      "sourceSha256": "b64e421496d61458812b1649fa516985c55d891deb8522c211b413930362896e",
+      "sourceBoxes": [
+        [
+          34,
+          434,
+          489,
+          658
+        ],
+        [
+          517,
+          386,
+          1237,
+          665
+        ],
+        [
+          1245,
+          16,
+          2160,
+          673
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "1fb3ca7419eccef7f355ae33a42c4efe5cb9cc594ac145e9955c8f858a63ac47"
+    },
+    {
+      "number": 142,
+      "id": "pewtergore",
+      "atlas": "./assets/roster/pewtergore-v6.webp",
+      "previousAtlas": "./assets/roster/pewtergore-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; remove the cogs.",
+      "sourceSha256": "f230de03672151a69527611233aa964370d74015234409ce5e56a3eadf711dcc",
+      "sourceBoxes": [
+        [
+          181,
+          438,
+          542,
+          693
+        ],
+        [
+          828,
+          169,
+          1339,
+          693
+        ],
+        [
+          1481,
+          151,
+          2141,
+          693
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "65fb0cba6ad5c5120446cc4fea53c07eca9cd7b3ca2e624aca1598fd75e8f032"
+    },
+    {
+      "number": 144,
+      "id": "ripplejaw",
+      "atlas": "./assets/roster/ripplejaw-v6.webp",
+      "previousAtlas": "./assets/roster/ripplejaw-v5.webp",
+      "action": "revised",
+      "adjustment": "Restore previous forms; snapping-turtle head and face, with a doubled head on form 3.",
+      "sourceSha256": "02368512bd7ad8faa3128d3446c6659a758c3c152f1be087534759620e4c86c7",
+      "sourceBoxes": [
+        [
+          178,
+          431,
+          493,
+          692
+        ],
+        [
+          727,
+          255,
+          1284,
+          693
+        ],
+        [
+          1366,
+          19,
+          2133,
+          694
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "989d93e80ecb917279e59bdc15c3fa5f10a69b1fda86a50cfb8cebcbf8667a6e"
+    },
+    {
+      "number": 146,
+      "id": "truffleroot",
+      "atlas": "./assets/roster/truffleroot-v6.webp",
+      "previousAtlas": "./assets/roster/truffleroot-v5.webp",
+      "action": "revised",
+      "adjustment": "More fey character through faerie markings, woodland ornaments, mushrooms and glowing spores. Form 2 rests its foot on a separate wooden stump, with no toes on the stump.",
+      "sourceSha256": "8a3ac0c1eda1cb6b5a0bc617f3e5f19caa08eb5075331f8d069be0b002c9ff48",
+      "sourceBoxes": [
+        [
+          162,
+          244,
+          550,
+          657
+        ],
+        [
+          779,
+          38,
+          1322,
+          659
+        ],
+        [
+          1463,
+          83,
+          2120,
+          660
+        ]
+      ],
+      "extraction": "transparent-columns",
+      "atlasSha256": "f9fd56732d0d66006e0d2ef959956287015b502fd140014ac83eb5e8cd5733e2"
+    },
+    {
+      "number": 148,
+      "id": "violetgaze",
+      "atlas": "./assets/roster/violetgaze-v4.webp",
+      "previousAtlas": "./assets/roster/violetgaze-v5.webp",
+      "action": "restored",
+      "adjustment": "Restore all three previous forms without additional alterations.",
+      "sourceSha256": "a5a9f46a3d9507a4ea16490ec46555af22630a91531fda588c8026645e4eb11d",
+      "sourceBoxes": null,
+      "extraction": "exact-prior-atlas",
+      "atlasSha256": "1f366fcdf8fdeba4e062be4f69f9d3300ae837db8dce4da7dcef34f2313a294b"
+    },
+    {
+      "number": 149,
+      "id": "wardenfang",
+      "atlas": "./assets/roster/wardenfang-v4.webp",
+      "previousAtlas": "./assets/roster/wardenfang-v5.webp",
+      "action": "restored",
+      "adjustment": "Restore all three previous forms without additional alterations.",
+      "sourceSha256": "ced13a8642b9e3db9da184fbcf7f702efbd61b51309951ce5e1d7563315f376f",
+      "sourceBoxes": null,
+      "extraction": "exact-prior-atlas",
+      "atlasSha256": "3d2559d1eb8b8ff684d5ac848793c98d555d2a5b49da5d4d5398757390069943"
+    }
+  ]
+}
