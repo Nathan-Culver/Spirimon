@@ -25,7 +25,7 @@ test('procedural settlements vary without moving the established six services',(
  assert(signatures.size>=4);assert.equal(densities.size,3);
 });
 test('generated town buildings, streets and prop collisions keep every door reachable',()=>{
- let count=0;for(let cy=-5;cy<=5;cy++)for(let cx=-5;cx<=5;cx++){if(!E.region('opening',cx,cy).town)continue;count++;const bs=W.buildings(cx,cy),blocked=(x,y)=>W.featureFootprintBlocked(x,y,cx,cy)||bs.some(b=>x>=b.x&&x<b.x+b.w&&y>=b.y&&y<b.y+b.h&&!(x===b.x+b.dx&&y===b.y+b.h-1))||!E.walkable(E.tile('opening',cx*48+x,cy*36+y));const q=[[24,19]],seen=new Set();
+ let count=0;const radius=5*E.SETTLEMENT_SPACING;for(let cy=-radius;cy<=radius;cy++)for(let cx=-radius;cx<=radius;cx++){if(!E.region('opening',cx,cy).town)continue;count++;const bs=W.buildings(cx,cy),blocked=(x,y)=>W.featureFootprintBlocked(x,y,cx,cy)||bs.some(b=>x>=b.x&&x<b.x+b.w&&y>=b.y&&y<b.y+b.h&&!(x===b.x+b.dx&&y===b.y+b.h-1))||!E.walkable(E.tile('opening',cx*48+x,cy*36+y));const q=[[24,19]],seen=new Set();
  while(q.length){const [x,y]=q.shift(),key=x+','+y;if(x<0||x>47||y<0||y>35||seen.has(key)||blocked(x,y))continue;seen.add(key);for(const [dx,dy]of dirs)q.push([x+dx,y+dy]);}
  for(const b of bs)assert(seen.has((b.x+b.dx)+','+(b.y+b.h)),cx+','+cy+' '+b.name+' entrance unreachable');
  for(const n of E.npcs('opening',cx,cy)){assert(!W.featureFootprintBlocked(n.x-cx*48,n.y-cy*36,cx,cy),n.name+' inside prop');assert(dirs.some(([dx,dy])=>seen.has((n.x-cx*48+dx)+','+(n.y-cy*36+dy))),n.name+' unreachable');}

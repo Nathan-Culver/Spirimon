@@ -983,6 +983,7 @@ function releaseTouch(ev){if(ev.target.closest('[data-run]'))running=false;const
 document.addEventListener('pointerup',releaseTouch);document.addEventListener('pointercancel',()=>{keys.clear();running=false;document.querySelectorAll('.held').forEach(b=>b.classList.remove('held'));});window.addEventListener('resize',()=>{if(loaded)applyLayout();});
 
 function installRoster(){
+ E.useRegionHistory(s.seed,s.regions??={});
  s.rosterRevision=6;
  for(const row of ROSTER){const id='roster-'+row.id,old=s.species[id]||library[id];let sp;
   if(old)sp=E.migrateSpecies(old);
