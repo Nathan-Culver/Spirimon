@@ -58,10 +58,21 @@ export function assignSupport(save,memberId,techniqueId,{remove=false,floating=f
  if(q.floating===techniqueId)return {ok:false,reason:'Change the free-floating selection before assigning this technique.'};if(all.length>=6)return {ok:false,reason:'All six assigned slots are occupied. Remove an extra assignment first.'};if(list.includes(techniqueId))return {ok:false,reason:'This technique is already assigned to this member.'};list.push(techniqueId);return {ok:true};
 }
 export function learnSupport(save,key,source,{primary=null}={}){const q=ensureSealer(save),event='learn:'+key;if(q.discoveries[event])return null;const t=generateSupport(save.seed+'|'+key,{level:q.level,primary});if(!validateSupport(t))throw Error('Invalid generated support technique');t.source=source;q.known[t.id]=t;q.discoveries[event]=true;return t;}
-export function recoveryAvailable(save,kind,shrineId=null){const q=save.sealer||ensureSealer(save),phase=calendarPhase(save.playTime).key,key=(kind==='commune'?'shrine:'+shrineId:'meditate')+':'+phase;return {ok:!q.recoveryUses[key],key};}
+export function recoveryAvailable(save,kind,shrineId=null){
+ const q=save.sealer||ensureSealer(save),phase=calendarPhase(save.playTime).key,key='shrine:'+shrineId+':'+phase;
+ const valid=['restore','meditate','commune'].includes(kind)&&!!shrineId;
+ return {ok:valid&&!q.recoveryUses[key],key};
+}
 export function beginRecovery(save,kind,{shrineId=null,safe=false,random=Math.random}={}){
- const q=ensureSealer(save),check=recoveryAvailable(save,kind,shrineId);if(!check.ok)return {ok:false,reason:'This opportunity was used during the current day/night period.'};if(kind==='commune'&&!shrineId)return {ok:false,reason:'Approach a shrine to commune.'};
- q.recoveryUses[check.key]=true;const fraction=kind==='commune'?.5:.25,interrupted=!safe&&random()<.25;save.playTime=(save.playTime||0)+(kind==='commune'?90000:180000);
+ const q=ensureSealer(save);if(!shrineId)return {ok:false,reason:'Approach a Shrine to Restore, Meditate, or Commune.'};
+ if(!['restore','meditate','commune'].includes(kind))return {ok:false,reason:'Unknown Shrine action.'};
+ const check=recoveryAvailable(save,kind,shrineId);if(!check.ok)return {ok:false,reason:'This Shrine has been used. It resets at the next day/night transition.'};
+ q.recoveryUses[check.key]=kind;
+ if(kind==='restore'){
+  for(const id of save.party){const u=save.spirits.find(u=>u.id===id);if(u)E.heal(u,save.species[u.species]);}
+  const amount=restoreEnergy(q,q.maxEnergy);delete q.fieldTask;return {ok:true,amount,interrupted:false,key:check.key};
+ }
+ const fraction=kind==='commune'?.5:.25,interrupted=!safe&&random()<.25;save.playTime=(save.playTime||0)+(kind==='commune'?90000:180000);
  const amount=restoreEnergy(q,q.maxEnergy*fraction*(interrupted?.5:1));q.meditations=(q.meditations||0)+1;
  if([4,12,24,48].includes(q.meditations))trainSealer(save,'meditation-'+Math.floor(q.meditations/4));
  return {ok:true,amount,interrupted,key:check.key};

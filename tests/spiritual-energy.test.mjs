@@ -38,9 +38,19 @@ test('exhaustion lowers outgoing damage, raises incoming damage and lengthens ca
 test('automatic recovery takes two hours and pauses do not advance clocks or refill Energy',()=>{
  const f=fixture(),q=f.s.sealer;q.energy=0;for(let n=0;n<PASSIVE_RECOVERY_MS/1000;n++)SE.advanceSpiritualClock(f.s,1000,{exploring:true});assert.ok(Math.abs(q.energy-q.maxEnergy)<.001);assert.equal(q.clockMs,PASSIVE_RECOVERY_MS);q.energy=0;SE.advanceSpiritualClock(f.s,1000,{paused:true,exploring:true});assert.equal(q.energy,0);SE.advanceSpiritualClock(f.s,1000,{exploring:false});assert.equal(q.energy,0);
 });
-test('shrines have independent day/night allowances; meditation is separate and dangerous interruptions are recorded',()=>{
- const f=fixture(),q=f.s.sealer;q.energy=0;assert.equal(SE.beginRecovery(f.s,'commune',{shrineId:'one',safe:true}).amount,50);assert.equal(SE.beginRecovery(f.s,'commune',{shrineId:'one',safe:true}).ok,false);assert.ok(SE.beginRecovery(f.s,'commune',{shrineId:'two',safe:true}).ok);assert.ok(SE.beginRecovery(f.s,'meditate',{safe:true}).ok);assert.equal(SE.beginRecovery(f.s,'meditate',{safe:true}).ok,false);f.s.playTime=DAY_MS;assert.ok(SE.beginRecovery(f.s,'commune',{shrineId:'one',safe:true}).ok);f.s.playTime=CYCLE_MS;q.energy=0;const maxBefore=q.maxEnergy,interrupted=SE.beginRecovery(f.s,'meditate',{safe:false,random:()=>0});assert.ok(interrupted.interrupted);assert.equal(interrupted.amount,Math.round(maxBefore*.125));assert.equal(SE.beginRecovery(f.s,'meditate',{safe:false}).ok,false);
+test('Restore, Meditate and Commune share one Shrine use until day/night reset',()=>{
+ for(const kind of ['restore','meditate','commune']){
+  const f=fixture(),q=f.s.sealer;q.energy=0;f.a[0].hp=1;
+  assert.equal(SE.beginRecovery(f.s,kind,{safe:true}).ok,false);
+  assert.ok(SE.beginRecovery(f.s,kind,{shrineId:'one',safe:true}).ok);
+  for(const other of ['restore','meditate','commune'])assert.equal(SE.beginRecovery(f.s,other,{shrineId:'one',safe:true}).ok,false);
+  assert.ok(SE.beginRecovery(f.s,'meditate',{shrineId:'two',safe:true}).ok);
+  const reload=JSON.parse(JSON.stringify(f.s));assert.equal(SE.recoveryAvailable(reload,'restore','one').ok,false);
+  f.s.playTime=DAY_MS;assert.ok(SE.beginRecovery(f.s,'restore',{shrineId:'one',safe:true}).ok);assert.equal(f.a[0].hp,E.stats(f.a[0],f.sp).hp);
+  f.s.playTime=CYCLE_MS;assert.ok(SE.recoveryAvailable(f.s,'commune','one').ok);
+ }
 });
+
 test('bonding rewards cannot be repeatedly farmed in the same day/night period',()=>{
  const f=fixture();f.s.sealer.energy=0;assert.ok(SE.bondRecovery(f.s,f.a[0])>0);assert.equal(SE.bondRecovery(f.s,f.a[0]),0);f.s.playTime=DAY_MS;assert.ok(SE.bondRecovery(f.s,f.a[0])>0);
 });
@@ -97,9 +107,20 @@ test('advanced cooperation is discovered rather than granted by level, and field
 test('enemy Sealers use the same release, exhaustion and support rules without boss exceptions',()=>{
  const f=fixture(0),q=SE.enemySealer('enemy',f.a,()=>f.sp);f.context.teams.b=f.a;f.context.active.b=[];f.context.sealers.b=q;q.energy=0;assert.ok(RT.deploySpirimon(f.state,f.context,'b',f.a[0]).ok);assert.equal(RT.deploySpirimon(f.state,f.context,'b',f.a[1]).ok,false);assert.ok(f.a[0].spiritualEnergyEmpty.value>0);assert.ok(Object.values(q.assignments).flat().length<=6);
 });
-test('shrine placement is deterministic, traversable, distributed and has nearby restoration opportunities',()=>{
- let total=0,clustered=0;for(let x=-2;x<=2;x++)for(let y=-2;y<=2;y++){const list=SW.shrinesForRegion('shrines',x,y);assert.deepEqual(SW.shrinesForRegion('shrines',x,y),list);assert.ok(list.length>=2);for(const t of list){assert.ok(E.walkable(E.tile('shrines',t.x,t.y)));assert.equal(E.coord(t.x,t.y).cx,x);assert.equal(E.coord(t.x,t.y).cy,y);}total+=list.length;if(list.length>2)clustered++;}assert.ok(total>=50&&clustered>0);assert.notEqual(calendarPhase(0).key,calendarPhase(DAY_MS).key);
+test('shrines are deterministic, traversable, sparse and capped at one per region',()=>{
+ let total=0,previous=0,empty=0;
+ for(let x=-3;x<=3;x++)for(let y=-3;y<=3;y++){
+  const reg=E.region('shrines',x,y),list=SW.shrinesForRegion('shrines',x,y);
+  assert.deepEqual(SW.shrinesForRegion('shrines',x,y),list);assert.ok(list.length<=1);
+  previous+=reg.town?2:2+(E.hash('shrines',x,y,'pilgrimage')%3===0?1:0);
+  if(!list.length)empty++;
+  for(const t of list){assert.ok(E.walkable(E.tile('shrines',t.x,t.y)));assert.ok(E.walkable(E.tile('shrines',t.x,t.y+1)));assert.equal(E.coord(t.x,t.y).cx,x);assert.equal(E.coord(t.x,t.y).cy,y);if(reg.city)assert.equal(reg.key,reg.cityKey);}
+  total+=list.length;
+ }
+ assert.ok(empty>0);assert.ok(total/previous>.19&&total/previous<.29,total+'/'+previous);
+ const save=E.newGame('shrines');save.safe={x:999,y:-999};const shrine=SW.recoveryShrine(save);save.player={x:shrine.x,y:shrine.y+1};assert.equal(SW.nearbyShrine(save).id,shrine.id);
 });
+
 test('long Technique, GCD and support timers survive healing, save/load, and a new encounter',()=>{
  const f=fixture(),u=f.a[0],t=learn(f,'shield');RT.scheduleAction(f.state,f.context,u,{type:'move',move:hit});f.step(600);RT.scheduleAction(f.state,f.context,u,{type:'move',move:lcd});f.step(600);RT.usePlayerSupport(f.state,f.context,'a',t.id,u.id);const gcd=u.gcdReadyAt,local=u.moveCooldowns.independent,shared=f.s.sealer.supportCooldowns[t.id];
  E.heal(u,f.sp);SE.restoreEnergy(f.s.sealer,f.s.sealer.maxEnergy);const next=RT.createRealTimeState(f.state.elapsedMs),clock=RT.unitClock(next,u);assert.equal(clock.gcdReadyAt,gcd);assert.equal(clock.cooldowns.independent,local);assert.equal(f.s.sealer.supportCooldowns[t.id],shared);assert.equal(RT.actionAvailability(next,u,f.sp,{type:'move',move:lcd}).ok,false);

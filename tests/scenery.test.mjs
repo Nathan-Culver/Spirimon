@@ -64,7 +64,7 @@ test('the live movement collision uses one base row for buildings, props, shrine
   assert.equal(blocked(b.footX,b.footY),false,b.name+' roof');
   assert.equal(blocked(b.footX,b.doorY),true,b.name+' base');
  }
- const shrine=SW.shrinesForRegion(s.seed,0,0)[0];assert.ok(blocked(shrine.x,shrine.y));
+ const shrine=SW.recoveryShrine(s);assert.ok(blocked(shrine.x,shrine.y));
  let e;for(let cx=-5;cx<=5&&!e;cx++)e=E.caveEntrance(s.seed,cx,1);
  assert.ok(e);s.player={x:e.x,y:e.y};assert.equal(vm.runInContext('caveEntranceHere().id',h),e.id);
  s.player.x++;assert.equal(vm.runInContext('caveEntranceHere()',h),null);assert.equal(blocked(e.x+1,e.y),true);

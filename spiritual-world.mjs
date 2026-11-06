@@ -4,20 +4,35 @@ import {drawShrineArtwork} from './sacred-art.mjs';
 const cache=new Map();
 export function shrinesForRegion(seed,cx,cy){
  const key=seed+'|'+cx+'|'+cy;if(cache.has(key))return cache.get(key);
- const reg=E.region(seed,cx,cy),r=E.rng(E.hash(seed,'shrines',cx,cy)),count=reg.town?2:2+(E.hash(seed,cx,cy,'pilgrimage')%3===0?1:0),out=[];
+ const reg=E.region(seed,cx,cy),r=E.rng(E.hash(seed,'shrines',cx,cy)),oldCount=reg.town?2:2+(E.hash(seed,cx,cy,'pilgrimage')%3===0?1:0),out=[];
+ // One candidate, with one quarter of the previous expected shrine density.
+ const cityAnchor=reg.cityKey?.split(',').map(Number);
+ const count=(!cityAnchor||cx===cityAnchor[0]&&cy===cityAnchor[1])&&E.rng(E.hash(seed,'shrine-density',cx,cy))()<oldCount/4?1:0;
+ if(!count){cache.set(key,out);return out;}
  const buildings=reg.town?W.buildings(cx,cy):[],reachable=new Set(),queue=[[24,18]];
  const accessible=(lx,ly)=>{const x=cx*48+lx,y=cy*36+ly;return E.walkable(E.tile(seed,x,y))&&!buildings.some(b=>W.buildingFootprintBlocked(b,x,y))&&(!reg.town||!W.featureFootprintBlocked(lx,ly,cx,cy));};
  for(let n=0;n<queue.length;n++){const [x,y]=queue[n],k=x+','+y;if(x<0||y<0||x>=48||y>=36||reachable.has(k)||!accessible(x,y))continue;reachable.add(k);for(const [dx,dy]of [[1,0],[-1,0],[0,1],[0,-1]])queue.push([x+dx,y+dy]);}
  for(let n=0;n<count;n++)for(let attempt=0;attempt<180;attempt++){
   let lx=n===0&&attempt===0&&reg.town?21:Math.floor(4+r()*40),ly=n===0&&attempt===0&&reg.town?20:Math.floor(4+r()*28);
-  if(n===2&&attempt<70&&out.length){lx=Math.max(4,Math.min(43,out[0].x-cx*48+(r()<.5?-1:1)*(5+Math.floor(r()*4))));ly=Math.max(4,Math.min(31,out[0].y-cy*36+Math.floor(r()*5)-2));}
   const x=cx*48+lx,y=cy*36+ly;
-  if(!reachable.has(lx+','+ly)||buildings.some(b=>x>=b.footX-1&&x<=b.footX+b.w&&y>=b.footY-1&&y<=b.footY+b.h)||out.some(p=>Math.abs(p.x-x)+Math.abs(p.y-y)<5))continue;
+  if(!reachable.has(lx+','+ly)||!reachable.has(lx+','+(ly+1))||buildings.some(b=>x>=b.footX-1&&x<=b.footX+b.w&&y>=b.footY-1&&y<=b.footY+b.h)||out.some(p=>Math.abs(p.x-x)+Math.abs(p.y-y)<5))continue;
   const kind=E.hash(seed,cx,cy,n)%8;out.push({id:'shrine-'+cx+','+cy+'-'+n,x,y,kind,name:['Lantern','River','Wind','Stone','Dawn','Moon','Grove','Crystal'][kind]+' Shrine'});break;
  }
  cache.set(key,out);return out;
 }
 export function nearbyShrine(save){if(save.cave||save.interior)return null;const p=E.coord(save.player.x,save.player.y);return shrinesForRegion(save.seed,p.cx,p.cy).find(t=>Math.abs(t.x-save.player.x)+Math.abs(t.y-save.player.y)<=2)||null;}
+// Validate old recovery points against current shrine placement before using them.
+export function recoveryShrine(save,available=()=>true){
+ const origin=save.safe||save.player,p=E.coord(origin.x,origin.y);
+ for(let radius=0;;radius++){
+  const found=[];
+  for(let dy=-radius;dy<=radius;dy++)for(let dx=-radius;dx<=radius;dx++){
+   if(Math.max(Math.abs(dx),Math.abs(dy))!==radius)continue;
+   found.push(...shrinesForRegion(save.seed,p.cx+dx,p.cy+dy).filter(available));
+  }
+  if(found.length)return found.sort((a,b)=>Math.abs(a.x-origin.x)+Math.abs(a.y-origin.y)-Math.abs(b.x-origin.x)-Math.abs(b.y-origin.y))[0];
+ }
+}
 // Detailed, cached pixel-art shrine sprites. Each variant is painted once onto its
 // own offscreen atlas, then reused without allocating geometry during world frames.
 const shrineSprites=new Map();

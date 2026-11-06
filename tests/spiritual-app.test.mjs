@@ -53,3 +53,12 @@ test('clicking battle HUD targets selects a real opponent or allied recipient wi
  h.battle.multi.enemies.push(E.heal(E.makeIndividual(sp,11),sp));vm.runInContext("selectRealTimeTarget('enemy|1')",h);assert.equal(h.battle.enemyTargetSelection,1);assert.equal(h.battle.rt.paused,false);
  vm.runInContext("selectRealTimeTarget('enemy|9')",h);assert.equal(h.battle.enemyTargetSelection,1);
 });
+
+test('full restoration rejects towns, interiors and battle and succeeds beside a Shrine',()=>{
+ const h=harness();let nearby=null;h.SW={nearbyShrine:()=>nearby};h.questEvent=()=>{};vm.runInContext(extract('rest'),h);
+ const u=h.s.spirits[0];u.hp=1;h.s.sealer.energy=0;
+ vm.runInContext('rest()',h);assert.equal(u.hp,1);assert.equal(h.s.sealer.energy,0);
+ h.s.interior={kind:'inn'};vm.runInContext('rest()',h);assert.equal(u.hp,1);
+ delete h.s.interior;nearby={id:'shrine-test'};h.battle={};vm.runInContext('rest()',h);assert.equal(u.hp,1);
+ h.battle=null;vm.runInContext('rest()',h);assert.equal(u.hp,E.stats(u,h.s.species[u.species]).hp);assert.equal(h.s.sealer.energy,h.s.sealer.maxEnergy);
+});
