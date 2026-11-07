@@ -4,7 +4,7 @@ import * as SD from './sealer-disciplines.mjs';
 export const {ATTRIBUTES,VOWS,attribute,earnedPoints,ensureDisciplines,allocateAttribute,retrainingCost,retrainAttributes,awardAttribute,availableVows,selectVow,activeVow,vowViolation,breakVow,beginSealerBattle,endSealerBattle,controlReduction,energyCost,outputLimit,empowerment,supportQuote,perceptionProfile,concealmentProfile,encounterMultiplier,toggleSense,drainSenses,recoveryMultiplier,ritualQuote}=SD;
 import * as E from './engine.mjs';
 import {moveTiming} from './realtime-moves.mjs';
-import {newSealer,clamp,bondEfficiency,calendarPhase,PASSIVE_RECOVERY_MS,spiritualHash,setExhaustion} from './spiritual-core.mjs';
+import {newSealer,clamp,bondEfficiency,calendarPhase,DAY_MS,CYCLE_MS,PASSIVE_RECOVERY_MS,spiritualHash,setExhaustion} from './spiritual-core.mjs';
 import {startingSupport,generateSupport,validateSupport,supportFits} from './support-techniques.mjs';
 export {calendarPhase,setExhaustion};
 
@@ -79,6 +79,14 @@ export function beginRecovery(save,kind,{shrineId=null,safe=false,random=Math.ra
  const amount=restoreEnergy(q,q.maxEnergy*fraction*(interrupted?.5:1));q.meditations=(q.meditations||0)+1;
  if([4,12,24,48].includes(q.meditations))trainSealer(save,'meditation-'+Math.floor(q.meditations/4));
  return {ok:true,amount,interrupted,key:check.key};
+}
+export function blackoutRecovery(save,shrineId){
+ if(!shrineId)return {ok:false,reason:'A Shrine is required for blackout recovery.'};
+ const before=save.playTime||0;
+ if(!recoveryAvailable(save,'restore',shrineId).ok){
+  const phase=calendarPhase(before);save.playTime=phase.cycle*CYCLE_MS+(phase.night?CYCLE_MS:DAY_MS);
+ }
+ return {...beginRecovery(save,'restore',{shrineId,safe:true}),waitedMs:(save.playTime||0)-before};
 }
 export function sealInvestment(sealer,ind,sp,quality=1,extra=0){const rawBase=4,base=Math.ceil(SD.energyCost(sealer,rawBase,{kind:'seal'})),additional=SD.empowerment(sealer,extra).extra,cost=Math.ceil(SD.energyCost(sealer,rawBase+additional,{kind:'seal'})),trust=clamp(ind.trust??ind.bond??0,0,100)/100;
  return {base,extra:additional,cost,chance:clamp(E.sealChance(ind,sp,quality)+trust*.12+.28*(1-Math.exp(-additional/Math.max(1,rawBase*2)))+(additional===0?SD.activeVow(sealer)?.seal||0:0),.03,.98),ok:sealer.energy>=cost};}

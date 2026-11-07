@@ -4,7 +4,7 @@
 
 Battle rewards now total defeated individuals, including trainer reserves defeated later in the same battle. Living reserves and duplicate references grant nothing. Wild victories grant no Coin. Device files are authoritative at startup; corrupt or disconnected files open a valid recovery copy with writes paused, or stop loading if no recovery exists. Desktop and Android have independent folder-backed saves with a previous complete copy.
 
-The practice screen displays actual GCD/LCD timing. Startup markup omits an unresolved string expression; faction chapters keep their current objective in the map HUD; paid legendary stages refresh the Energy meter immediately. Perception reveals regional legendary disturbances independently of shrine placement. A simultaneous knockout now uses a real available Shrine, consuming its one recovery action until reset, just as defeat recovery does.
+The practice screen displays actual GCD/LCD timing. Startup markup omits an unresolved string expression; faction chapters keep their current objective in the map HUD; paid legendary stages refresh the Energy meter immediately. Perception reveals regional legendary disturbances independently of shrine placement. A simultaneous knockout uses the same last-visited Shrine checkpoint as defeat recovery, falling back to the guaranteed starting-town Shrine. A spent return Shrine advances the calendar to its next reset before consuming a new recovery action.
 
 The approved combat values remain in force: Spirimon maximum Health is halved after the original calculation, standard damage receives its final 1.25 multiplier, and Agile damage is 85% of Normal. Shrines retain their reduced density, at most one per region, and one Restore, Meditate, or Commune action per reset.
 

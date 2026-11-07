@@ -43,6 +43,6 @@ test('Temple entry clears a previous mount, queued step, and companion trail',()
 
 test('defeat recovery discards dungeon motion before returning to its consumed Shrine',()=>{
  const t=harness();t.s.cave={id:'faction-ashen-hand',faction:'ashen-hand',level:2,x:20,y:5};t.s.mountedSteed='old-mount';oldMotion(t);let recovery;
- t.h.SW={recoveryShrine:(_s,available)=>{assert.ok(available({id:'recovery-shrine'}));return {id:'recovery-shrine',x:75,y:56};}};t.h.SE={recoveryAvailable:()=>({ok:true}),beginRecovery:(_s,kind,options)=>{recovery={kind,...options};return {ok:true};}};
- vm.runInContext(extract('recoverAtShrine'),t.h);assert.equal(t.h.recoverAtShrine().ok,true);assertReset(t);assert.equal(t.s.cave,undefined);assert.equal(t.s.mountedSteed,null);assert.equal(t.s.player.x,75);assert.equal(t.s.player.y,57);assert.deepEqual(recovery,{kind:'restore',shrineId:'recovery-shrine',safe:true});
+ t.h.SW={blackoutShrine:()=>({id:'recovery-shrine',x:75,y:56})};t.h.SE={blackoutRecovery:(_s,shrineId)=>{recovery={shrineId};return {ok:true};}};
+ vm.runInContext(extract('recoverAtShrine'),t.h);assert.equal(t.h.recoverAtShrine().ok,true);assertReset(t);assert.equal(t.s.cave,undefined);assert.equal(t.s.mountedSteed,null);assert.equal(t.s.player.x,75);assert.equal(t.s.player.y,57);assert.deepEqual(recovery,{shrineId:'recovery-shrine'});assert.equal(t.s.lastShrine.id,'recovery-shrine');
 });

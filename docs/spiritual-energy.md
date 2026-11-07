@@ -23,18 +23,20 @@ At zero Energy, manifested creatures deal 15% less damage, receive 15% more dama
 | Recovery | Rule |
 | --- | --- |
 | Passive | One full reserve per two hours of active unpaused exploration; no battle/menu/offline recovery |
-| Shrine communion | 50%, once during each in-game day and night **per shrine** |
-| Meditation | 25%, once during each in-game day and night, separately from shrines |
+| Shrine communion | 50%; shares one action with Restore and Meditate per Shrine until day/night reset |
+| Shrine meditation | 25%; uses the same shared Shrine action |
 | Dangerous meditation | 25% interruption chance; interruption retains half of that session's restoration and starts an actual encounter |
-| Full safe rest | Restores creature resources and Sealer Energy |
+| Shrine restoration | Restores attuned creature Health/resources and Sealer Energy; uses the same shared Shrine action |
 | Spiritual draught | 35%; sold by merchants; can be used in battle with the Sealer utility timer |
 | Bonding | 4% once per individual per day/night period; consuming an offering or a meaningful companion interaction can trigger it |
 
 Energy is stored as whole points. Passive recovery accumulates partial progress until a full point is earned, so a hidden tiny fraction cannot bypass visible zero-Energy exhaustion. Percentage restoration rounds to the nearest point.
 
-The world day lasts 35 minutes and night 25 minutes. Cave darkness does not reset calendar allowances. Meditation/communion advance the calendar, but this does not fast-forward cooldowns. Recovery usage is saved before the interruption can begin. Shrines are deterministically placed on traversable tiles, with two or three in each region and nearby recovery opportunities in settlements.
+The world day lasts 35 minutes and night 25 minutes. Cave darkness does not reset calendar allowances. Meditation/communion advance the calendar, but this does not fast-forward cooldowns. Recovery usage is saved before the interruption can begin. Shrines are deterministically placed on traversable tiles at one quarter of their former density, with at most one per town or route region and many regions empty. The starting town, Mossveil Crossing, always has a reachable Shrine.
 
-No resting place, shrine, item, meditation, preparation change, recall, revival or new encounter resets a long cooldown. Timers use a saved unpaused-gameplay clock. Pausing, hiding the tab, closing the game, and offline time do not progress it.
+A full traveling-team defeat causes a blackout to the last Shrine approached, without requiring Restore, Meditate or Commune to register the visit. The checkpoint persists in saves. With no prior visit, return to Mossveil Crossing’s Shrine; valid legacy Shrine rest points remain usable. Spent return Shrines advance the calendar to the next day/night reset before restoring the team and consuming that phase’s shared use. Simultaneous knockouts and the last conscious Spirimon falling to an exploration affliction use the same return.
+
+No resting place, shrine, item, meditation, blackout, preparation change, recall, revival or new encounter resets a long cooldown. Timers use a saved unpaused-gameplay clock. Pausing, hiding the tab, closing the game, and offline time do not progress it.
 
 ## GCDs, LCDs and manual controls
 

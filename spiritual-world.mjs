@@ -7,7 +7,7 @@ export function shrinesForRegion(seed,cx,cy){
  const reg=E.region(seed,cx,cy),r=E.rng(E.hash(seed,'shrines',cx,cy)),oldCount=reg.town?2:2+(E.hash(seed,cx,cy,'pilgrimage')%3===0?1:0),out=[];
  // One candidate, with one quarter of the previous expected shrine density.
  const cityAnchor=reg.cityKey?.split(',').map(Number);
- const count=(!cityAnchor||cx===cityAnchor[0]&&cy===cityAnchor[1])&&E.rng(E.hash(seed,'shrine-density',cx,cy))()<oldCount/4?1:0;
+ const count=cx===0&&cy===0||(!cityAnchor||cx===cityAnchor[0]&&cy===cityAnchor[1])&&E.rng(E.hash(seed,'shrine-density',cx,cy))()<oldCount/4?1:0;
  if(!count){cache.set(key,out);return out;}
  const buildings=reg.town?W.buildings(cx,cy):[],reachable=new Set(),queue=[[24,18]];
  const accessible=(lx,ly)=>{const x=cx*48+lx,y=cy*36+ly;return E.walkable(E.tile(seed,x,y))&&!buildings.some(b=>W.buildingFootprintBlocked(b,x,y))&&(!reg.town||!W.featureFootprintBlocked(lx,ly,cx,cy));};
@@ -21,6 +21,24 @@ export function shrinesForRegion(seed,cx,cy){
  cache.set(key,out);return out;
 }
 export function nearbyShrine(save){if(save.cave||save.interior)return null;const p=E.coord(save.player.x,save.player.y);return shrinesForRegion(save.seed,p.cx,p.cy).find(t=>Math.abs(t.x-save.player.x)+Math.abs(t.y-save.player.y)<=2)||null;}
+// Approaching a Shrine counts as a visit, even if no recovery action is taken.
+export function rememberShrineVisit(save){
+ const shrine=nearbyShrine(save);if(shrine)save.lastShrine={id:shrine.id,x:shrine.x,y:shrine.y};return shrine;
+}
+export function blackoutShrine(save){
+ const last=save.lastShrine;
+ if(last&&Number.isFinite(last.x)&&Number.isFinite(last.y)){
+  const p=E.coord(last.x,last.y),shrine=shrinesForRegion(save.seed,p.cx,p.cy).find(t=>t.id===last.id&&t.x===last.x&&t.y===last.y);
+  if(shrine)return shrine;
+ }
+ // Older journeys stored a recovery position only after restoring at a Shrine.
+ const old=save.safe;
+ if(!last&&old&&Number.isFinite(old.x)&&Number.isFinite(old.y)&&(old.x!==24||old.y!==19)){
+  const p=E.coord(old.x,old.y),shrine=shrinesForRegion(save.seed,p.cx,p.cy).find(t=>Math.abs(t.x-old.x)+Math.abs(t.y-old.y)<=2);
+  if(shrine)return shrine;
+ }
+ return shrinesForRegion(save.seed,0,0)[0];
+}
 // Validate old recovery points against current shrine placement before using them.
 export function recoveryShrine(save,available=()=>true){
  const origin=save.safe||save.player,p=E.coord(origin.x,origin.y);
