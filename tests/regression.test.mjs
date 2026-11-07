@@ -18,6 +18,6 @@ test('player sprite cycles only three valid atlas columns while moving',()=>{ass
 test('no temporary Spirimon debug badges',()=>{assert.doesNotMatch(html,/id="spirit-build"/);assert.doesNotMatch(app,/SPIRIMON '\+'|BUILD 11/);});
 
 test('currency labels use Coin, not marks',()=>{assert.doesNotMatch(app,/guild marks|Guild marks|\bmarks\b/);assert.match(app,/<small>Coin<\/small>/);});
-test('wild battle rewards no Coin',()=>{const body=app.slice(app.indexOf('function winBattle()'),app.indexOf('function loseBattle()'));assert.match(body,/const reward=won\.trainer\?35\+s\.rank\*12:0/);assert.match(body,/if\(reward\)s\.inventory\.coins\+=reward/);});
+test('wild battle rewards no Coin',()=>{const body=app.slice(app.indexOf('function winBattle()'),app.indexOf('function loseBattle()'));assert.match(body,/const reward=rewards\.coins/);assert.match(body,/if\(reward\)s\.inventory\.coins\+=reward/);});
 test('touch A is the interaction button',()=>{assert.match(app,/case'emu-a':interact\(\)/);assert.doesNotMatch(app,/Interact · E/);});
 

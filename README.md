@@ -7,7 +7,7 @@ An original, local-first browser RPG about people who seal Spirimon into tattoo 
 - **Local companion:** install Node.js 20 or newer, then double-click Start-Spirimon.cmd, or run npm start and open http://127.0.0.1:4317.
 - No npm dependencies, API keys, subscriptions, or paid generation services are required.
 
-Saves and the species library live in this browser's IndexedDB. Hosted, local-server and standalone-file versions have separate storage origins. Use Settings → Export/Import to transfer a world. Export before clearing browser storage. Browser storage is not a substitute for a backup.
+Linked device files are the primary save and load source. Installed desktop and Android apps remember a chosen folder independently of browser storage, retain a previous complete copy, and recover interrupted writes. Browser recovery and the species library also use IndexedDB. Hosted, local-server and standalone-file versions have separate storage origins. Use Settings → Export/Import to transfer a world. Export before clearing browser storage. Browser storage is not a substitute for a backup.
 
 ## Controls
 WASD / arrows: move. E / Enter: interact. B: bag.
@@ -83,6 +83,8 @@ Append ?playtest to the hosted URL for a separate browser playtest save and spec
 npm test
 node build.mjs
 npm start
+
+Desktop and Android users can choose a save folder in Options. Browser folder linking is used when supported; other browsers retain manual export/import. A linked file is read before browser recovery, and unreadable files are protected from automatic overwriting.
 
 engine.mjs: deterministic generation and combat rules.
 sprites.mjs: atlas rendering, battle rear views and companion animation.

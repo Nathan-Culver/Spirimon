@@ -11,6 +11,7 @@ on:
       - '**.html'
       - 'assets/**'
       - 'desktop/**'
+      - 'native/**'
       - 'capacitor.config.json'
       - 'package*.json'
     tags: ['v*']
@@ -82,6 +83,7 @@ jobs:
         run: |
           npm install --no-save @capacitor/core@7 @capacitor/cli@7 @capacitor/android@7
           npx cap add android
+          node tools/prepare-android.mjs
           npx cap sync android
       - name: Compile installable APK
         working-directory: android
