@@ -12,3 +12,5 @@
 This follow-up preserves existing entry gates and the approved Health, damage and Shrine values. Recommended levels are guidance, not new locks. The former “Double Spirimon arena” label is now “Multi-Spirimon arena” to match its existing three-active combat format.
 
 Run `node build.mjs && npm test`: 577 tests pass, including browser/app bundle boot and independent native-save persistence checks. The release workflow also runs the complete expanded progression simulation.
+
+Live browser verification used an isolated rank-1, level-3 party. Guild trials showed the rank-2 and rank-3 locks and the level-12 first-trial recommendation; facilities displayed their actual next-match levels and restrictions; the championship requirements were accessible before qualification; and the multi arena previewed six level-8–13 opponents without beginning combat. Practice displayed GCD 3.4s separately from a 25.3s Technique recast. See `six-issue-live-practice.jpg`.
