@@ -13,11 +13,12 @@ test('distinct classifications combine additively and cap at 2x',()=>{
  assert.ok(effectiveness({type:'Elemental',domain:'Fire'},defender)>=.5);
 });
 test('one vulnerability and two independent resistances cancel additively',()=>{
- const defender={base:'Aberration',alter:'Aberration',domains:['Fire','Ice','Nature'],moves:[]};
- assert.equal(effectiveness({domain:'Water'},defender),1);
+ const defender={base:'Aberration',alter:'Aberration',domains:['Death','Nature','Spirit'],moves:[]};
+ assert.equal(effectiveness({domains:['Life','Void']},defender),1);
 });
 test('multiple classifications reach the shared caps without duplicate stacking',()=>{
- assert.equal(effectiveness({domain:'Water'},{base:'Aberration',alter:'Aberration',domains:['Fire','Earth'],moves:[]}),2);
- assert.equal(effectiveness({domain:'Water'},{base:'Aberration',alter:'Aberration',domains:['Ice','Nature'],moves:[]}),.5);
- assert.equal(effectiveness({domain:'Water',domains:['Water']},{base:'Aberration',alter:'Aberration',domains:['Fire','Fire'],moves:[]}),1.5);
+ const target=domains=>({base:'Aberration',alter:'Aberration',domains,moves:[]});
+ assert.equal(effectiveness({domains:['Life','Void']},target(['Death','Magic'])),2);
+ assert.equal(effectiveness({domains:['Life','Void']},target(['Nature','Spirit'])),.5);
+ assert.equal(effectiveness({domain:'Life',domains:['Life']},target(['Death','Death'])),1.5);
 });

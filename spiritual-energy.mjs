@@ -1,3 +1,4 @@
+import {canonicalDomain} from './domains.mjs';
 import * as SD from './sealer-disciplines.mjs';
 export const {ATTRIBUTES,VOWS,attribute,earnedPoints,ensureDisciplines,allocateAttribute,retrainingCost,retrainAttributes,awardAttribute,availableVows,selectVow,activeVow,vowViolation,breakVow,beginSealerBattle,endSealerBattle,controlReduction,energyCost,outputLimit,empowerment,supportQuote,perceptionProfile,concealmentProfile,encounterMultiplier,toggleSense,drainSenses,recoveryMultiplier,ritualQuote}=SD;
 import * as E from './engine.mjs';
@@ -21,6 +22,7 @@ export function ensureSealer(save){
  if(!Array.isArray(q.startingChosen))q.startingChosen=[];for(const [id,list]of Object.entries(q.assignments))if(!Array.isArray(list))delete q.assignments[id];
  if(!Array.isArray(q.startingChoices)||!q.startingChoices.every(validateSupport))q.startingChoices=startingSupport(save.seed||'Sealer');
  for(const [id,t]of Object.entries(q.known))if(!validateSupport(t)||t.id!==id)delete q.known[id];
+ for(const t of [...Object.values(q.known),...(q.startingChoices||[])]){if(t.requires?.domain)t.requires.domain=canonicalDomain(t.requires.domain);for(const e of t.effects||[])if(e.domain)e.domain=canonicalDomain(e.domain);}
  save.inventory??={};save.inventory.spiritDraughts??=3;
  return q;
 }

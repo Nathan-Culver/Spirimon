@@ -1,3 +1,4 @@
+import {DOMAINS,canonicalDomain,canonicalDomains,normalizeMoveDomains} from './domains.mjs';
 import {individualSpecies} from './anatomy.mjs';
 // Shared definitions: saved equipment IDs and aspects remain compatible with older worlds.
 export const CHARMS=[
@@ -99,14 +100,15 @@ export function generateHeldItem(seed,options={}){
  if(!ITEM_RARITIES.includes(rarity))rarity='Common';
  const templates=ITEM_TEMPLATES.filter(t=>(!options.category||t.category===options.category)&&(rarity!=='Relic'||!t.consumable||options.templateId===t.id)&&(!options.eligibleFor||canEquipHeldItem({requires:t.requires},options.eligibleFor).ok));
  const template=ITEM_TEMPLATES.find(t=>t.id===options.templateId)||choose(templates.length?templates:ITEM_TEMPLATES,r),tier=ITEM_RARITIES.indexOf(rarity),potency=[5,8,11,14,17][tier]+Math.floor(r()*3);
- const domain=template.domain||choose(['Fire','Water','Ice','Lightning','Light','Dark','Nature','Storm','Magic','Spirit'],r),stats=template.stat?{[template.stat]:potency}:{};
+ const domain=canonicalDomain(template.domain)||choose(DOMAINS,r),stats=template.stat?{[template.stat]:potency}:{};
  if(template.hook==='choiceLock'&&template.stat)stats[template.stat]=25+tier*2;if(template.drawback)stats[template.drawback]=-5-Math.floor(tier/2);
  const hookList=[template.hook];if(!template.consumable&&(rarity==='Relic'||tier>=2&&r()<.45)){const secondary=choose(['accuracy','statusGuard','survive','regenerator','screens','resourceSustain'].filter(h=>!hookList.includes(h)),r);hookList.push(secondary);if(rarity!=='Relic'&&template.stat)stats[template.stat]=Math.max(5,stats[template.stat]-2);}
  const [abilityName,category,power,effect,target]=ACTIVE[template.active],active={id:'item-'+itemHash(seed).toString(36)+'-ability',name:abilityName,category,kind:category==='Physical'?'physical':category==='Energy'?'spiritual':'status',power:power?Math.min(95,power+tier*5):0,effect,type:options.eligibleFor?.base||'Construct',domain,target,accuracy:.95,speed:0,baseUses:0};
+ normalizeMoveDomains(active);if(template.domain)active.element=String(template.domain).toLowerCase();
  if(template.active==='weather'){active.effect=choose(['weatherRain','weatherSun','weatherSand','weatherSnow'],r);active.name={weatherRain:'Rain Rite',weatherSun:'Sun Rite',weatherSand:'Sand Rite',weatherSnow:'Snow Rite'}[active.effect];}
  const material=choose(['Amber','Jade','Moonstone','Bronze','Willow','Obsidian','Silver','Pearl','Cloudglass','Dawnsteel'],r),epithet=choose(['of the Quiet Road','of Returning Dawn','of the Last Lantern','of Wandering Stars','of the Hidden Spring','of the First Oath'],r);
  const name=rarity==='Relic'?choose(['Covenant','Inheritance','Testament','Echo'],r)+' of '+choose(['the Unfallen','the Lost Sealer','the Silver Pilgrim','the First Flame','the Sleeping Sky'],r)+' '+itemHash(seed,'name').toString(36).slice(0,3).toUpperCase():material+' '+template.name+(tier>=2?' '+epithet:'');
- return {id:'held-v1-'+itemHash(seed,template.id,rarity,level).toString(36),generatorVersion:1,seed:String(seed),templateId:template.id,name,category:template.category,rarity,level,recovery:[.25,.30,.35,.40,.50][tier],resourceRecovery:[6,8,10,12,16][tier],stageRecovery:[1,1,2,2,3][tier],stats,hooks:hookList,active,cooldown:template.consumable?0:Math.max(2,4-Math.floor(tier/2)),consumable:!!template.consumable,requires:template.requires||null,domain,cost:Math.round((template.consumable?28:65)*(1+tier*.75)),source:options.source||'Discovered',lore:rarity==='Relic'?'An unfamiliar sigil rests beneath its surface, preserving the story of a Sealer whose name has slipped from memory.':'Fine '+material.toLowerCase()+' markings trace a quiet pattern around the '+template.name.toLowerCase()+'.'};
+ return {id:'held-v1-'+itemHash(seed,template.id,rarity,level).toString(36),generatorVersion:1,seed:String(seed),templateId:template.id,name,category:template.category,rarity,level,recovery:[.25,.30,.35,.40,.50][tier],resourceRecovery:[6,8,10,12,16][tier],stageRecovery:[1,1,2,2,3][tier],stats,hooks:hookList,active,cooldown:template.consumable?0:Math.max(2,4-Math.floor(tier/2)),consumable:!!template.consumable,requires:template.requires?{...template.requires,...(template.requires.domains?{domains:canonicalDomains(template.requires.domains)}:{})}:null,domain,cost:Math.round((template.consumable?28:65)*(1+tier*.75)),source:options.source||'Discovered',lore:rarity==='Relic'?'An unfamiliar sigil rests beneath its surface, preserving the story of a Sealer whose name has slipped from memory.':'Fine '+material.toLowerCase()+' markings trace a quiet pattern around the '+template.name.toLowerCase()+'.'};
 }
 export function canEquipHeldItem(item,sp){
  if(!item)return {ok:false,reason:'Unknown Held Item.'};const req=item.requires;if(!req)return {ok:true};if(!sp)return {ok:false,reason:'Choose a Spirimon.'};
@@ -114,7 +116,7 @@ export function canEquipHeldItem(item,sp){
  const required=[...(req.capabilities||[]),...((req.types||[]).includes('Humanoid')?['equipment']:[])];
  if(typeRequirements.length&&!typeRequirements.some(t=>[sp.base,sp.alter].includes(t)))return {ok:false,reason:'Requires '+typeRequirements.join(' or ')+' as either creature type.'};
  if(required.some(key=>!sp.capabilities?.[key]?.available))return {ok:false,reason:'Requires verified grasping anatomy for this equipment.'};
- if(req.domains?.length&&!req.domains.some(d=>(sp.domains||[]).includes(d)))return {ok:false,reason:'Requires the '+req.domains.join(' or ')+' Magical Domain.'};return {ok:true};
+ if(req.domains?.length&&!req.domains.some(d=>canonicalDomains(sp.domains).includes(canonicalDomain(d))))return {ok:false,reason:'Requires the '+req.domains.join(' or ')+' Magical Domain.'};return {ok:true};
 }
 export function heldEquipment(ind,sp=null){if(sp)sp=individualSpecies(sp,ind);const item=ind?.heldItem||equipment(ind?.heldCharm);return item&&(!sp||ind.legacyEquipmentIds?.includes(item.id)||canEquipHeldItem(item,sp).ok)?item:null;}
 export function itemHasHook(item,hook){return !!item&&(item.hook===hook||item.hooks?.includes(hook));}

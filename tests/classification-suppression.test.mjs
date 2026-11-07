@@ -6,17 +6,12 @@ import {statusChance,statusModifier,rebaseStatusTimer} from '../classification-s
 test('suppressed innate classifications do not grant passive effects',()=>{
  const sp={id:'passive-suppression',base:'Beast',alter:'Fey',domains:['Life']};
  ensurePassives(sp);
- sp.passives.Beast=passivePool('Beast').find(p=>p.kind==='accuracy'&&!p.condition).id;
- sp.passives.Fey=passivePool('Fey').find(p=>p.kind==='damageReduction'&&!p.condition).id;
- sp.passives.Life=passivePool('Life').find(p=>p.kind==='speed'&&!p.condition).id;
+ const hpChoice=c=>passivePool(c).find(p=>p.kind==='maxHp'&&!p.condition);
+ for(const c of ['Beast','Fey','Life'])sp.passives[c]=hpChoice(c).id;
  const all=passiveEffects(sp,{hp:100},{maxHp:100});
- assert.equal(all.accuracy,.05);
- assert.equal(all.damageReduction,.05);
- assert.equal(all.speed,.05);
+ assert.equal(all.maxHp,Math.min(.25,['Beast','Fey','Life'].reduce((n,c)=>n+hpChoice(c).amount,0)));
  const limited=passiveEffects(sp,{hp:100,suppressedTypes:['Beast'],suppressedDomains:['Life']},{maxHp:100});
- assert.equal(limited.accuracy||0,0);
- assert.equal(limited.speed||0,0);
- assert.equal(limited.damageReduction,.05);
+ assert.equal(limited.maxHp,hpChoice('Fey').amount);
 });
 
 test('temporary Domains modify status application without stacking with innate Domains',()=>{

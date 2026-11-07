@@ -1,3 +1,4 @@
+import {passiveEffects} from './classification-passives.mjs';
 import {heldEquipment,itemHasHook} from './equipment.mjs';
 import {stats} from './engine.mjs';
 import {exhaustion,spiritualMultiplier} from './spiritual-core.mjs';
@@ -39,12 +40,13 @@ export function moveTiming(move,actor={},sp={},style='normal'){
  const budgetSeconds=timing==='lcd'?clamp(work*.20*burstWeight,8,180):clamp(work/24,1.5,25);
  const localBase=move.cooldownMs??Math.round(budgetSeconds*1000);
  const cooldownMs=timing==='lcd'?Math.max(2000,Math.round(localBase/haste*styleTime*penalty)):gcdMs;
+ const traits=passiveEffects(sp,actor,{maxHp:actual.hp,move,weather:actor.battlefield?.weather});
  const charge=['twoTurn','chargeSun'].includes(effect)?1700:0;
  const baseCast=move.castMs??(timing==='lcd'?0:Math.round(clamp((rawPower-35)*17+charge,0,3000)));
- const castMs=Math.round(baseCast/haste*styleTime*penalty),animationLockMs=move.animationLockMs??(timing==='lcd'?550:450);
+ const castMs=Math.round(baseCast/haste*styleTime*penalty/(1+(traits.castSpeed||0))),animationLockMs=move.animationLockMs??(timing==='lcd'?550:450);
  const recoveryMs=animationLockMs,power=Math.round(rawPower*scale),healingFraction=effect==='teamHeal'?.18+tier*.01:effect==='heal'?.22+tier*.012:effect==='fullheal'?.65+tier*.01:effect==='rest'?.8+tier*.01:1;
  // Heavy GCDs need longer casts and/or their own recast to pay for burst strength.
  const localCooldownMs=timing==='gcd'?(move.cooldownMs!=null?Math.max(0,Math.round(move.cooldownMs/haste*styleTime*penalty)):work>65?Math.round(work*125/haste*styleTime*penalty):0):cooldownMs;
- return {tier,threshold:MOVE_LEVEL_THRESHOLDS[tier],nextThreshold:MOVE_LEVEL_THRESHOLDS[tier+1]||null,timing,power,basePower:rawPower,gcdMs,cooldownMs,localCooldownMs,castMs,animationLockMs,recoveryMs,work:Math.round(work*10)/10,accuracy,effect,healingFraction,durationScale:(1+tier*.035)*(1-exhaustion(actor))};
+ return {tier,threshold:MOVE_LEVEL_THRESHOLDS[tier],nextThreshold:MOVE_LEVEL_THRESHOLDS[tier+1]||null,timing,power,basePower:rawPower,gcdMs,cooldownMs:timing==='lcd'?Math.max(2000,Math.round(cooldownMs*(1-(traits.recastReduction||0)))):cooldownMs,localCooldownMs:timing==='lcd'?Math.max(2000,Math.round(localCooldownMs*(1-(traits.recastReduction||0)))):Math.round(localCooldownMs*(1-(traits.recastReduction||0))),castMs,animationLockMs,recoveryMs,work:Math.round(work*10)/10,accuracy,effect,healingFraction,durationScale:(1+tier*.035)*(1-exhaustion(actor))};
 }
 export function scaledMove(move,actor,sp,style='normal'){const profile=moveTiming(move,actor,sp,style);return {...move,power:profile.power,realTimeBasePower:profile.basePower,realTimeProfile:profile};}

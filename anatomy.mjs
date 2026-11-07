@@ -1,5 +1,6 @@
 import {ANATOMY_CATALOG,MODIFIER_CATALOG,NAME_FRAGMENTS,CREATURE_TYPES,CREATURE_DOMAINS} from './creature-catalog.mjs';
 import {canSteed} from './steed.mjs';
+import {canonicalDomain,canonicalDomains,normalizeSpeciesDomains,fieldAffinities} from './domains.mjs';
 import {domainSources} from './classifications.mjs';
 import {ensureIndividualPassives,ensurePassives} from './classification-passives.mjs';
 export function designHash(...parts){let h=2166136261;for(const c of parts.join('|')){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}return h>>>0;}
@@ -43,16 +44,16 @@ export function appropriateDomain(sp){
  const text=[sp.description,sp.body,sp.design?.reference?.name,...(sp.anatomy?.traits||[])].filter(Boolean).join(' ').toLowerCase(),score=new Map();
  for(const [domain,cues]of Object.entries(DOMAIN_CUES)){let n=0;for(const cue of cues)if(new RegExp('(^|[^a-z])'+cue.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'([^a-z]|$)').test(text))n+=2;if(n)score.set(domain,n);}
  score.set(BASE_DOMAIN[sp.base]||'Magic',(score.get(BASE_DOMAIN[sp.base])||0)+1);
- return [...score.keys()].sort((a,b)=>score.get(b)-score.get(a)||designHash(sp.id||sp.seed,a)-designHash(sp.id||sp.seed,b))[0];
+ return canonicalDomain([...score.keys()].sort((a,b)=>score.get(b)-score.get(a)||designHash(sp.id||sp.seed,a)-designHash(sp.id||sp.seed,b))[0]);
 }
 export function assignDomains(sp,r=()=>.5,additional=true){
- const previous=[...new Set((sp.domains||[]).map(d=>({Time:'Fate',Space:'Void',Mind:'Psionic'})[d]||d).filter(d=>CREATURE_DOMAINS.includes(d)))];
- if(sp.domainRevision===1&&previous.length){sp.domains=previous;return sp.domains;}
- const primary=previous[0]||appropriateDomain(sp),domains=[primary,...previous.filter(d=>d!==primary)];
+ const settled=sp.domainRevision===2;normalizeSpeciesDomains(sp);const previous=canonicalDomains(sp.domains);
+ if(settled&&previous.length){sp.domains=previous;return sp.domains;}
+ const primary=previous[0]||canonicalDomain(appropriateDomain(sp)),domains=[primary,...previous.filter(d=>d!==primary)];
  if(additional)while(domains.length<CREATURE_DOMAINS.length&&r()<.01){const choices=CREATURE_DOMAINS.filter(d=>!domains.includes(d));domains.push(choices[Math.min(choices.length-1,Math.floor(r()*choices.length))]);}
- sp.domains=domains;sp.domainRevision=1;return domains;
+ sp.domains=domains;sp.domainRevision=2;return domains;
 }
-export function capabilitiesFromAnatomy(anatomy,domains=[]){
+export function capabilitiesFromAnatomy(anatomy,domains=[],elements=[]){
  if(!anatomy)return {};const traits=new Set(anatomy.traits||[]),has=x=>traits.has(x),verified=['image-analysis','procedural-render'].includes(anatomy.source)&&anatomy.confidence>=.8;
  const hands=verified&&anatomy.manipulators>=2&&(has('hands')||has('grasp')||has('tentacles'));
  const psychic=domains.includes('Psionic')||has('psionic'),strength=anatomy.strength||1;
@@ -63,9 +64,9 @@ export function capabilitiesFromAnatomy(anatomy,domains=[]){
   crush:entry(strength>=2||psychic,psychic?'telekinesis':'impact','Strength '+strength+'; jaws, limbs or telekinetic force'),
   cleave:entry(['claws','talons','thorns','mandibles','fangs'].some(has)||psychic,psychic?'telekinetic edge':'natural cutting edge','Recorded cutting appendages'),
   steed:entry(['quadruped','serpentine','many-legged','winged'].includes(anatomy.bodyPlan)&&anatomy.scale==='colossal'||has('rideable'),'riding','Stable mount-capable body with sufficient size'),
-  swim:entry(has('swim')||has('water')||domains.includes('Water'),'aquatic propulsion','Fins, swimming body or Water Domain'),
-  fly:entry(has('fly')&&anatomy.limbs?.wings>=2||has('levitate')||domains.includes('Air'),has('levitate')?'levitation':'aerial lift','Wings, levitation or Air Domain'),
-  dig:entry(has('dig')||domains.includes('Earth'),'excavation','Burrowing anatomy or Earth Domain'),
+  swim:entry(has('swim')||has('water')||elements.includes('water'),'aquatic propulsion','Fins, swimming body or aquatic affinity'),
+  fly:entry(has('fly')&&anatomy.limbs?.wings>=2||has('levitate')||elements.includes('air'),has('levitate')?'levitation':'aerial lift','Wings, levitation or airborne affinity'),
+  dig:entry(has('dig')||elements.includes('earth'),'excavation','Burrowing anatomy or earthen affinity'),
   teleport:entry(domains.some(d=>['Void','Psionic'].includes(d)),'spatial passage','Void or Psionic Domain'),
   climb:entry(has('climb')||has('claws')||hands,'grip','Grasping appendages, claws or climbing anatomy')};
 }
@@ -73,12 +74,12 @@ export function capabilitiesFromAnatomy(anatomy,domains=[]){
 export function effectiveFieldDomains(sp,ind=null){return domainSources(sp,ind).all;}
 export function syncCapabilities(sp,ind=null){
  const anatomy=sp.formAnatomy?.[ind?.form]||sp.anatomy;
- sp.capabilities=capabilitiesFromAnatomy(anatomy,effectiveFieldDomains(sp,ind));
+ sp.capabilities=capabilitiesFromAnatomy(anatomy,effectiveFieldDomains(sp,ind),fieldAffinities(sp,ind));
  return sp;
 }
 export function fieldCapabilityAvailable(sp,capability,ind=null){
  const anatomy=sp.formAnatomy?.[ind?.form]||sp.anatomy;
- const result=capabilitiesFromAnatomy(anatomy,effectiveFieldDomains(sp,ind));
+ const result=capabilitiesFromAnatomy(anatomy,effectiveFieldDomains(sp,ind),fieldAffinities(sp,ind));
  const suppressed=new Set([...(sp?.suppressedCapabilities||[]),...(ind?.suppressedCapabilities||[])]);
  const restrictions={freeze:['fly','swim','steed','push','cleave','crush','dig'],paralysis:['fly','swim','steed','push','cleave','crush'],sleep:['fly','swim','steed','push','cleave','crush','dig','teleport'],trap:['fly','steed','dig','teleport']};
  const blocked=new Set([...(ind?.fieldStatusRestrictions||[]),...(restrictions[ind?.status]||[]),...Object.keys(ind?.conditions||{}).filter(k=>ind.conditions[k]).flatMap(k=>restrictions[k]||[])]);
@@ -108,7 +109,7 @@ export function applyLineageObservations(sp,observations){
 }
 export function individualSpecies(sp,ind){
  const anatomy=sp.formAnatomy?.[ind?.form||0]||sp.anatomy;
- return anatomy===sp.anatomy?sp:{...sp,anatomy,capabilities:capabilitiesFromAnatomy(anatomy,effectiveFieldDomains(sp,ind))};
+ return anatomy===sp.anatomy?sp:{...sp,anatomy,capabilities:capabilitiesFromAnatomy(anatomy,effectiveFieldDomains(sp,ind),fieldAffinities(sp,ind))};
 }
 export function legacyAnatomy(sp){
  const text=(sp.description||'').toLowerCase();let reference=Object.values(ANATOMY_CATALOG).flat().filter(r=>text.includes(r.name.toLowerCase())).sort((a,b)=>b.name.length-a.name.length)[0];
@@ -124,7 +125,7 @@ export function migrateSpecies(sp){
   if(sp.base==='Humanoid')sp.base=candidates.find(t=>t!==sp.alter);if(sp.alter==='Humanoid')sp.alter=candidates.find(t=>t!==sp.base);
  }
  if(!cleanTypes(sp.base,sp.alter))throw Error('Invalid saved creature types.');
- sp.anatomy??=legacyAnatomy(sp);assignDomains(sp,()=>.5,false);ensurePassives(sp);
+ sp.anatomy??=legacyAnatomy(sp);normalizeSpeciesDomains(sp);assignDomains(sp,()=>.5,false);ensurePassives(sp);
  for(const move of [...(sp.moves||[]),...(sp.learnset||[])])if(move.type==='Humanoid')move.type=sp.base;
  if(sp.capabilities?.revision!==1)syncCapabilities(sp);sp.taxonomyRevision=2;return sp;
 }

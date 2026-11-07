@@ -1,3 +1,5 @@
+import {philosophyMoveWeight,PHILOSOPHY_RULES} from './temple-philosophies.mjs';
+import {elementOf} from './domains.mjs';
 import {moveTiming,scaledMove} from './realtime-moves.mjs';
 import * as E from './engine.mjs';
 import {hasHook,heldEquipment,heldItemActivation,generateHeldItem} from './equipment.mjs';
@@ -10,12 +12,12 @@ export function expectedDamage(actor,asp,target,tsp,move,style='normal',commit=.
  if(!move?.power)return 0;
  const copy={...actor,commit},hits=move.effect==='multiHit'?3:move.effect==='doubleHit'?2:1;
  let damage=E.damage(copy,asp,target,tsp,move,style,()=>.5)*hits;
- const f=actor.battlefield||{};if(f.weather==='rain'&&move.domain==='Water'||f.weather==='sun'&&move.domain==='Fire')damage*=1.5;if(f.weather==='rain'&&move.domain==='Fire'||f.weather==='sun'&&move.domain==='Water')damage*=.5;
+ const f=actor.battlefield||{};if(f.weather==='rain'&&elementOf(move)==='water'||f.weather==='sun'&&elementOf(move)==='fire')damage*=1.5;if(f.weather==='rain'&&elementOf(move)==='fire'||f.weather==='sun'&&elementOf(move)==='water')damage*=.5;
  if(move.effect==='hexStrike'&&target.status||move.effect==='venomStrike'&&['poison','toxic'].includes(target.status))damage*=1.5;
  if(move.effect==='sleepStrike'&&target.status!=='sleep')return 0;
  if(move.effect==='counter'||move.effect==='mirrorCoat')return actor.lastHit?.source===target.id?actor.lastHit.amount*2:0;
  if(target.ward&&!['breakWard','struggle'].includes(move.effect)){if((target.wardStrength??1)>=1)return 0;damage*=1-(target.wardStrength??1);}
- return damage*E.hitChance(actor,target,move,style,asp);
+ return damage*E.hitChance(actor,target,move,style,asp,tsp);
 }
 function incomingThreat(actor,asp,opponents,speciesOf){return opponents.reduce((sum,u)=>sum+Math.max(0,...choices(u,speciesOf(u)).map(m=>expectedDamage(u,speciesOf(u),actor,asp,m))),0);}
 export function replacementScore(candidate,opponents,speciesOf){
@@ -50,7 +52,7 @@ function effectScore(actor,asp,target,tsp,move,context){
  if(e?.startsWith('lower'))return 18;
  if(['spikes','toxicSpikes','stealthRock','stickyWeb'].includes(e))return context.enemyReserves.length?18+context.enemyReserves.length*5-(h[e]||0)*20:-80;
  if(e==='clearHazards')return Object.values(field.sides?.[actor.battleSide]?.hazards||{}).some(Boolean)?45:-100;
- if(e?.startsWith('weather')){const kind=e.slice(7).toLowerCase();if(field.weather===kind)return -100;return E.equippedMoves(actor,asp).some(m=>kind==='rain'&&m.domain==='Water'||kind==='sun'&&m.domain==='Fire'||kind==='snow'&&m.effect==='auroraVeil')?30:8;}
+ if(e?.startsWith('weather')){const kind=e.slice(7).toLowerCase();if(field.weather===kind)return -100;return E.equippedMoves(actor,asp).some(m=>kind==='rain'&&elementOf(m)==='water'||kind==='sun'&&elementOf(m)==='fire'||kind==='snow'&&m.effect==='auroraVeil')?30:8;}
  if(e?.startsWith('terrain')&&move.power===0){const kind=e.slice(7).toLowerCase();if(field.terrain===kind)return -100;return context.allies.length>1?24:15;}
  if(e==='haze')return Object.values(target.stages||{}).reduce((n,x)=>n+Math.max(0,x),0)*16-Object.values(actor.stages||{}).reduce((n,x)=>n+Math.max(0,x),0)*16-10;
  if(e==='invertStats')return Object.values(target.stages||{}).reduce((n,x)=>n+x,0)*12-Object.values(actor.stages||{}).reduce((n,x)=>n+x,0)*12-10;
@@ -75,6 +77,7 @@ export function chooseBattleAction(actor,context,r=Math.random){
     if(move.power&&expected===0&&!['counter','mirrorCoat'].includes(move.effect))score-=20;
     if(move.target==='allOpponents')score+=opponents.filter(t=>t!==target).reduce((sum,t)=>sum+expectedDamage(actor,asp,t,speciesOf(t),move,style,commit)/Math.max(1,E.stats(t,speciesOf(t)).hp)*70,0);
     if(branch==='survive'&&friendly&&['heal','fullheal','ward','protect'].includes(move.effect))score+=20;
+    score+=philosophyMoveWeight(actor.battlePhilosophy,move,{actor,target,style,allies});
     score-=(context.claimedDamage?.[target.id]||0)>=target.hp?70:0;
     if(style==='strong'&&threat>=actor.hp)score-=20;if(style==='agile'&&move.power===0)score-=2;
     const borrow=source.type!=='heldItem'&&!friendly&&move.power>0&&expected<target.hp&&expected*2>=target.hp&&threat<actor.hp*.7&&Math.max(actor.pp||0,actor.willpower||0)>4?1:0;
@@ -93,10 +96,11 @@ export function chooseTeamOrders(allies,opponents,speciesOf,options={},r=Math.ra
 // the same four starting techniques. Wild creatures retain their natural builds.
 export function prepareOpponent(ind,sp,rank=1,r=Math.random){
  if(ind.npcPrepared)return ind;ind.npcPrepared=true;
- const learned=E.availableTechniques(ind,sp),attacks=learned.filter(m=>m.power>0).sort((a,b)=>b.power-a.power),support=learned.filter(m=>E.moveCategory(m)==='Status');
+ const learned=E.availableTechniques(ind,sp),preference=m=>philosophyMoveWeight(ind.battlePhilosophy,m,{actor:ind})*4,attacks=learned.filter(m=>m.power>0).sort((a,b)=>(b.power+preference(b))-(a.power+preference(a))),support=learned.filter(m=>E.moveCategory(m)==='Status').sort((a,b)=>preference(b)-preference(a));
+ if(PHILOSOPHY_RULES[ind.battlePhilosophy])ind.specialty=PHILOSOPHY_RULES[ind.battlePhilosophy].specialty;
  const selected=[];const add=m=>{if(m&&!selected.some(x=>x.id===m.id))selected.push(m);};
- add(attacks.find(m=>m.target==='allOpponents')||attacks[0]);
- add(support.find(m=>['heal','regenerate','reflect','lightscreen','ward'].includes(m.effect)));
+ add(ind.battlePhilosophy?attacks[0]:attacks.find(m=>m.target==='allOpponents')||attacks[0]);
+ add(ind.battlePhilosophy?support[0]:support.find(m=>['heal','regenerate','reflect','lightscreen','ward'].includes(m.effect)));
  add(attacks.find(m=>E.moveCategory(m)!==E.moveCategory(selected[0]||{})&&m.domain!==selected[0]?.domain)||attacks[1]);
  add(support.find(m=>['poison','burn','paralysis','boostSpeed','boostMight','boostPower','spikes','weatherRain'].includes(m.effect)));
  for(const m of E.equippedMoves(ind,sp))add(m);ind.moveIds=selected.slice(0,4).map(m=>m.id);

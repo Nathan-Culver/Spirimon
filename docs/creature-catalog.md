@@ -1,5 +1,7 @@
 # Creature reference catalog
 
+The active Domain catalog is Life, Death, Fate, Void, Spirit, Psionic, Nature, Storm and Magic. Elemental names describe motifs, not additional Domains. See [classification reconciliation](classification-reconciliation.md) for migration and the current relationship chart.
+
 This is the finite, curated reference pool used by the generator, not a claim to list every animal species. There is no animal mass cutoff. Individual records carry body plans and anatomical traits. The modifier layer can combine these into many more designs.
 
 ## Aberration (16)

@@ -5,6 +5,8 @@ import * as BAI from '../battle-ai.mjs';
 import * as Q from '../equipment.mjs';
 import {supportFits} from '../support-techniques.mjs';
 import * as A from '../adventure-systems.mjs';
+import * as TP from '../temple-philosophies.mjs';
+import {solveTempleFloor,approachFaction,walkTo} from './physical-playtest.mjs';
 import * as FC from '../faction-campaigns.mjs';
 import {LEGENDS,applyLegendArtwork} from '../legendary-roster.mjs';
 import * as SW from '../spiritual-world.mjs';
@@ -18,7 +20,7 @@ import {writeFile} from 'node:fs/promises';
 import path from 'node:path';
 
 export function simulateProgression(seed='progression-1',{expanded=false}={}){
- let save=E.newGame(seed),serial=0;const random=E.rng(seed),matches=[],recoveries=[];
+ let save=E.newGame(seed),serial=0;const random=E.rng(seed),matches=[],recoveries=[],templeTrials=[];
  const catalog=ROSTER.map(row=>{const sp={...E.makeSpecies('roster-'+row.id,row.base,row.alter,row.domains),...row,id:'roster-'+row.id};sp.learnset=[];sp.moveRevision=0;E.refreshTechniques(sp);return sp;});
  for(const sp of catalog)save.species[sp.id]=sp;
  // Six early level-3 bonds are the preparation assumption; at most three manifest. All later levels come from XP.
@@ -58,11 +60,11 @@ export function simulateProgression(seed='progression-1',{expanded=false}={}){
   while(save.inventory.spiritDraughts<3&&save.inventory.coins>=20){save.inventory.coins-=20;save.inventory.spiritDraughts++;}
   while(save.inventory.ethers<3&&save.inventory.coins>=16){save.inventory.coins-=16;save.inventory.ethers++;}
  }
- function battle({name,enemyLevel,count=2,maxActive=3,trainer=true,kind=null,eventId=name,opponentSpecies=null,types=null}){
-  prepare();const q=sealer(),initialEnergy=q.energy,enemies=Array.from({length:count},()=>{const pool=types?catalog.filter(sp=>types.some(t=>sp.base===t||sp.alter===t)):catalog,sp=opponentSpecies||pool[Math.floor(random()*pool.length)],u=E.heal(E.makeIndividual(sp,enemyLevel,enemyLevel>=36?2:enemyLevel>=16?1:0,random),sp);u.id='enemy-'+serial++;if(trainer)BAI.prepareOpponent(u,sp,save.rank,random);return u;});
+ function battle({name,enemyLevel,count=2,maxActive=3,trainer=true,kind=null,eventId=name,opponentSpecies=null,types=null,philosophy=null}){
+  prepare();const q=sealer(),initialEnergy=q.energy,enemies=Array.from({length:count},()=>{const pool=types?catalog.filter(sp=>types.some(t=>sp.base===t||sp.alter===t)):catalog,sp=opponentSpecies||pool[Math.floor(random()*pool.length)],u=E.heal(E.makeIndividual(sp,enemyLevel,philosophy==='Transformation'?0:enemyLevel>=36?2:enemyLevel>=16?1:0,random),sp);u.id='enemy-'+serial++;if(philosophy)u.battlePhilosophy=philosophy;if(trainer)BAI.prepareOpponent(u,sp,save.rank,random);return u;});
   const foe=trainer?SE.enemySealer(seed+'|'+serial,enemies,speciesOf):null,state=RT.createRealTimeState(q.clockMs),ctx={active:{a:[],b:[]},teams:{a:[...party()].sort((a,b)=>name==='Preparation'?a.level-b.level:b.level-a.level),b:enemies},speciesOf,sealers:{a:q,b:foe},inventory:{a:save.inventory,b:{}},rules:{maxActive}};
   SE.beginSealerBattle(q);if(foe){foe.clockMs=state.elapsedMs;SE.beginSealerBattle(foe);}E.bindBattlefield(ctx.teams.a,enemies);
-  const start=state.elapsedMs,log=[],participants=new Set();let ticks=0,bossPhase=0;
+  const start=state.elapsedMs,log=[],participants=new Set();let ticks=0,bossPhase=0,philosophyActions=0;
   function deploy(side){
    ctx.active[side]=ctx.active[side].filter(u=>u.hp>0);for(const u of ctx.teams[side])if(ctx.active[side].length<maxActive&&u.hp>0&&!ctx.active[side].includes(u)){
     const result=RT.deploySpirimon(state,ctx,side,u);if(result.ok&&side==='a')participants.add(u.id);
@@ -86,13 +88,13 @@ export function simulateProgression(seed='progression-1',{expanded=false}={}){
      const sp=speciesOf(actor),clock=RT.unitClock(state,actor);if(clock.aiAt>state.elapsedMs)continue;clock.aiAt=state.elapsedMs+200;
      if(side==='a'&&actor.hp<E.stats(actor,sp).hp*.35&&save.inventory.tonics>0&&RT.scheduleAction(state,ctx,actor,{type:'item',item:'tonic',targetIndex:ctx.active.a.indexOf(actor)}).ok)continue;
      const decision=BAI.chooseBattleAction(actor,{realTime:true,speciesOf,opponents,allies:ctx.active[side],team:ctx.teams[side],reserves:[],enemyReserves:[],canUse:c=>RT.actionAvailability(state,actor,sp,c,speciesOf(opponents[0])).ok},random);
-     if(decision)RT.scheduleAction(state,ctx,actor,decision);
+     if(decision){const scheduled=RT.scheduleAction(state,ctx,actor,decision);if(scheduled.ok&&side==='b'&&philosophy&&TP.philosophyMoveWeight(philosophy,decision.move||{},{actor,style:decision.style,allies:ctx.active.b,target:opponents[decision.targetIndex]})>0)philosophyActions++;}
     }
    }
-   const result=RT.advanceRealTime(state,200,ctx,random);if((['clan','temple-trainer','legend','faction'].includes(kind)||kind==='championship'&&name==='Final')&&enemies[0].hp>0){const u=enemies[0],max=E.stats(u,speciesOf(u)),ratio=u.hp/max.hp;if(bossPhase===0&&ratio<=.65){bossPhase=1;u.ward=true;u.pp=Math.min(max.pp,u.pp+15);}else if(bossPhase===1&&ratio<=.3){bossPhase=2;u.battleStyle='strong';u.status=null;}}log.push(...result.log);if(log.length>20)log.splice(0,log.length-20);
+   const result=RT.advanceRealTime(state,200,ctx,random);for(const u of enemies)TP.transformTempleCombatant(u,speciesOf(u),E.stats,E.normalizeResources);if((['clan','temple-trainer','legend','faction'].includes(kind)||kind==='championship'&&name==='Final')&&enemies[0].hp>0){const u=enemies[0],max=E.stats(u,speciesOf(u)),ratio=u.hp/max.hp;if(bossPhase===0&&ratio<=.65){bossPhase=1;u.ward=true;u.pp=Math.min(max.pp,u.pp+15);}else if(bossPhase===1&&ratio<=.3){bossPhase=2;u.battleStyle='strong';u.status=null;}}log.push(...result.log);if(log.length>20)log.splice(0,log.length-20);
    if(!enemies.some(u=>u.hp>0)||!party().some(u=>u.hp>0)||(state.undefendedb||0)>6000||(state.undefendeda||0)>6000)break;
   }
-  const victory=enemies.every(u=>u.hp<=0)||(state.undefendedb||0)>6000,record={name,partyLevel:level(),enemyLevel,enemies:count,victory,seconds:Math.round((state.elapsedMs-start)/1000),energySpent:Math.round(initialEnergy-q.energy),survivors:party().filter(u=>u.hp>0).length};
+  const victory=enemies.every(u=>u.hp<=0)||(state.undefendedb||0)>6000,record={name,...(philosophy?{philosophy,philosophyActions}:{}),partyLevel:level(),enemyLevel,enemies:count,victory,seconds:Math.round((state.elapsedMs-start)/1000),energySpent:Math.round(initialEnergy-q.energy),survivors:party().filter(u=>u.hp>0).length};
   q.clockMs=state.elapsedMs;save.playTime+=state.elapsedMs-start;SE.endSealerBattle(q);if(foe)SE.endSealerBattle(foe);
   for(const u of [...party(),...enemies])RT.preserveAfflictions(state,u);
   if(!victory){const items={};for(const key of ['seals','offerings','tonics','ethers','spiritDraughts']){items[key]=Math.floor((save.inventory[key]||0)/3);save.inventory[key]=(save.inventory[key]||0)-items[key];}save.drops.push({x:save.player.x,y:save.player.y,items});save.inventory.coins-=Math.min(save.inventory.coins,20+save.rank*5);record.log=log;matches.push(record);return false;}
@@ -105,22 +107,30 @@ export function simulateProgression(seed='progression-1',{expanded=false}={}){
  for(let crest=0;crest<8;crest++){
   const templeLevel=()=>Math.max(6+crest*7,save.rank*3+crest*5+5);let target=templeLevel();for(let n=0;n<4&&level()<templeLevel()+3;n++){if(!train(templeLevel()+3))break;target=templeLevel();}if(level()<target+3)return {seed,complete:false,stage:'preparation-'+crest,matches,recoveries};
   const temple=A.templeAt(seed,crest+1,0),trial=A.templeTrial(temple);if(!A.validateTempleTrial(trial))throw Error('Unsolvable temple');
-  for(let floor=0;floor<6;floor++){const map=E.caveMap(seed,'temple-'+crest,floor),features=EP.dungeonFeatures(map,seed,'temple-'+crest+'|'+floor,E.hash,floor);if(!EP.validateDungeonMechanisms(map,features))throw Error('Inaccessible temple mechanism');const objects=EP.puzzleObjects(map,seed,'temple-'+crest+'|'+floor,E.hash);if(!EP.reachableExits(map,objects))throw Error('Blocked temple exit');}
-  for(let encounter=0;encounter<3;encounter++)if(!challenge({name:'Temple '+(crest+1)+' '+(encounter===2?'Master':'Sealer'),enemyLevel:encounter===2?templeLevel():Math.max(3,templeLevel()-3),count:encounter===2?Math.min(6,3+Math.floor(crest/3)):2,maxActive:3,kind:encounter===2?'clan':'temple-trainer',eventId:'clan-'+crest+'|'+encounter}))return {seed,complete:false,stage:'temple-'+crest,matches,recoveries};
+  const room={id:'temple-clan-'+crest,temple:'clan-'+crest,philosophy:temple.philosophy,templeSeed:temple.seed,depth:6,level:0,x:1,y:1};
+  for(let floor=0;floor<6;floor++){
+   room.level=floor;room.x=room.y=1;save.cave=room;
+   if(floor<3){const before=save.steps;solveTempleFloor(save,room);templeTrials.push({crest:crest+1,floor:floor+1,philosophy:room.philosophy,steps:save.steps-before});continue;}
+   const layout=TP.trialLayout(room),feature=layout.features[0];walkTo(save,room,feature,TP.trialMap(save,room));if(!TP.interactTrial(save,room,feature).battle)throw Error('Physical Temple defender inaccessible');
+   const kind=floor===5?'clan':'temple-trainer',eventId=floor===5?room.temple:room.temple+'|'+floor;
+   if(!challenge({name:'Temple '+(crest+1)+' '+(floor===5?'Master':'Sealer'),enemyLevel:floor===5?templeLevel():Math.max(3,templeLevel()-3),count:floor===5?Math.min(6,3+Math.floor(crest/3)):2,maxActive:3,kind,eventId,philosophy:room.philosophy}))return {seed,complete:false,stage:'temple-'+crest,matches,recoveries};
+   TP.recordTrialVictory(save,kind,eventId);if(!TP.canAdvanceTrial(save,room))throw Error('Temple battle did not open the physical stairs');
+  }
+  delete save.cave;
   adventure.crests.push(A.CLANS[crest].id);Q.awardHeldItem(Q.heldItemState(save),seed+'|boss-item-clan-'+crest,'boss-item-clan-'+crest,{source:'clan victory',level:target,rarity:'Epic'});
   if(expanded)for(const faction of A.FACTIONS)if(adventure.crests.length>=Math.floor(faction.level/14)&&!adventure.bosses.includes(faction.id)){
    if(!train(faction.level+3))return {seed,complete:false,stage:'faction-preparation',matches,recoveries};
    FC.site(save,faction.id);
    for(let floor=0;floor<4;floor++){
-    const features=FC.layout(seed,faction.id,floor).features;
-    for(const feature of features.filter(f=>!['faction-guard','faction-leader'].includes(f.kind)))FC.interact(save,faction.id,floor,feature);
-    const feature=features.find(f=>['faction-guard','faction-leader'].includes(f.kind)),profile=FC.interact(save,faction.id,floor,feature).battle;
+    save.cave={id:'faction-'+faction.id,faction:faction.id,level:floor,x:1,y:1};const features=FC.layout(seed,faction.id,floor).features;
+    for(const feature of features.filter(f=>!['faction-guard','faction-leader'].includes(f.kind)))approachFaction(save,faction.id,floor,feature);
+    const feature=features.find(f=>['faction-guard','faction-leader'].includes(f.kind)),profile=approachFaction(save,faction.id,floor,feature).battle;
     if(!profile)throw Error('Physical faction objective did not unlock the guard');
     const types={'ashen-hand':['Fiend','Construct','Elemental'],'hollow-choir':['Undead','Fey'],'veil-conclave':['Aberration','Ooze','Celestial']}[faction.id];
     if(!challenge({name:faction.name+' · '+FC.CHAPTERS[floor],enemyLevel:profile.level,count:profile.teamSize,maxActive:profile.maxActive,kind:profile.kind,eventId:profile.id,types}))return {seed,complete:false,stage:faction.id+'-'+floor,matches,recoveries};
     FC.recordVictory(save,profile.kind,profile.id);if(!FC.canAdvance(save,faction.id,floor))throw Error('Faction stair remained sealed');FC.campaign(save,faction.id).furthest=Math.min(3,floor+1);
    }
-   adventure.bosses.push(faction.id);save.inventory.coins+=200;
+   delete save.cave;adventure.bosses.push(faction.id);save.inventory.coins+=200;
   }
   // Round-trip the same format used by device files at every Crest milestone.
   save=decodeSavePayload(JSON.stringify({format:'spirimon-backup',version:1,save,library:[]})).save;adventure=save.adventure;
@@ -144,7 +154,7 @@ export function simulateProgression(seed='progression-1',{expanded=false}={}){
  while(save.adventure.championship.status==='active'){
   const match=A.championshipMatch(save.adventure,level(),1);if(!battle({name:match.name,enemyLevel:match.level,count:match.teamSize,maxActive:match.maxActive,kind:'championship',eventId:match.id})){A.recordChampionshipResult(save.adventure,false);if(attempts++>=8||!train(match.level+6))return {seed,complete:false,stage:'championship-'+match.stage,matches,recoveries};restore('championship defeat');A.beginChampionship(save.adventure,{rank:save.rank,seed});}else A.recordChampionshipResult(save.adventure,true);
  }
- return {seed,complete:save.adventure.champion,finalLevel:level(),battles:matches.length,crests:save.adventure.crests.length,guildTrials:save.adventure.guildTrials.length,championshipWins:save.adventure.championship.wins,championshipAttempts:attempts,factions:save.adventure.bosses.length,legends:save.adventure.legends.length,expanded,restorations:recoveries.length,matches,recoveries};
+ return {seed,complete:save.adventure.champion,finalLevel:level(),battles:matches.length,crests:save.adventure.crests.length,guildTrials:save.adventure.guildTrials.length,championshipWins:save.adventure.championship.wins,championshipAttempts:attempts,factions:save.adventure.bosses.length,legends:save.adventure.legends.length,expanded,templeTrials,physicalSteps:save.steps,restorations:recoveries.length,matches,recoveries};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const expanded=process.argv.includes('--expanded'),seeds=process.argv.slice(2).filter(v=>v!=='--expanded'),reports=[];for(const seed of seeds.length?seeds:['progression-1']){const r=simulateProgression(seed,{expanded});reports.push(r);console.log(JSON.stringify({seed:r.seed,complete:r.complete,stage:r.stage,battles:r.battles||r.matches.length,last:r.matches.at(-1)}));}

@@ -1,7 +1,7 @@
 import {CREATURE_TYPES,CREATURE_DOMAINS} from './creature-catalog.mjs';
 
-export const DOMAIN_ALIASES={Time:'Fate',Space:'Void',Mind:'Psionic',Plant:'Nature'};
-export const canonicalDomain=value=>DOMAIN_ALIASES[value]||value;
+import {DOMAIN_ALIASES,canonicalDomain} from './domains.mjs';
+export {DOMAIN_ALIASES,canonicalDomain};
 const unique=values=>[...new Set(values)];
 export function innateClassifications(sp={}){return unique([sp.base,sp.alter,...(sp.domains||[]).map(canonicalDomain)].filter(v=>CREATURE_TYPES.includes(v)||CREATURE_DOMAINS.includes(v)));}
 export function activeTypes(sp={},ind={}){

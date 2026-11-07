@@ -1,7 +1,8 @@
+import {DOMAINS} from './domains.mjs';
 // Curated generative references, not an exhaustive zoological taxonomy. No mass cutoff.
 // Trait values describe the adult reference; magic is layered on separately.
 export const CREATURE_TYPES=['Aberration','Beast','Celestial','Construct','Elemental','Fey','Fiend','Giant','Monstrosity','Ooze','Plant','Undead'];
-export const CREATURE_DOMAINS=['Air','Earth','Fire','Water','Light','Dark','Sun','Moon','Lightning','Ice','Metal','Chaos','Law','Good','Evil','Creation','Destruction','War','Peace','Fear','Wrath','Love','Hope','Despair','Sorrow','Fate','Dreams','Nightmares','Life','Death','Spirit','Psionic','Nature','Void','Storm','Magic'];
+export const CREATURE_DOMAINS=DOMAINS;
 const records=[];
 function group(type,plan,traits,names){for(const name of names.split('|'))records.push({id:name.toLowerCase().replace(/[^a-z0-9]+/g,'-'),family:names.split('|')[0],name,type,plan,traits:traits.split(' ').filter(Boolean)});}
 group('Beast','quadruped','fur claws dig','red fox|arctic fox|fennec fox|gray wolf|dhole|African wild dog|coyote|golden jackal|bush dog|raccoon dog|maned wolf|dire wolf|thylacine');

@@ -4,11 +4,12 @@ import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
 import * as E from '../engine.mjs';
 import * as A from '../adventure-systems.mjs';
+import * as TP from '../temple-philosophies.mjs';
 const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
 const extract=name=>{const a=source.indexOf('function '+name+'('),b=source.slice(a+1).search(/\n(?:async )?function /);assert.ok(a>=0,name);return source.slice(a,b<0?source.length:a+1+b);};
 function harness(){
  const s=E.newGame('entry-conditions');s.adventure={crests:[],bosses:[],legends:[],champion:false};A.competitionState(s.adventure);let html='',title='',started=0;const toasts=[];
- const h=vm.createContext({E,A,s,battle:null,Date,party:()=>s.spirits.filter(u=>s.party.includes(u.id)),adventureState:()=>s.adventure,currentTemple:()=>({name:'First Temple',philosophy:'Patience',sequence:0,level:8}),esc:String,action:(name,label,value='')=>'<button data-action="'+name+'" data-value="'+value+'">'+label+'</button>',showModal:(t,body)=>{title=t;html=body;},toast:t=>toasts.push(t),prepareCompetitionBattle:()=>started++,save(){},render(){}});
+ const h=vm.createContext({E,A,TP,s,battle:null,Date,party:()=>s.spirits.filter(u=>s.party.includes(u.id)),adventureState:()=>s.adventure,currentTemple:()=>({name:'First Temple',philosophy:'Attrition',sequence:0,level:8}),esc:String,action:(name,label,value='')=>'<button data-action="'+name+'" data-value="'+value+'">'+label+'</button>',showModal:(t,body)=>{title=t;html=body;},toast:t=>toasts.push(t),prepareCompetitionBattle:()=>started++,save(){},render(){}});
  vm.runInContext(['competitionPartyLevel','battleFacility','guildTrialsMenu','templeInterior','multiArenaMenu','startGuildTrial','startFacilityMatch'].map(extract).join('\n'),h);
  return {h,s,toasts,html:()=>html,title:()=>title,started:()=>started,add(level=3,hp=10){const u={id:'party-'+s.spirits.length,level,hp};s.spirits.push(u);s.party.push(u.id);return u;}};
 }

@@ -29,11 +29,7 @@ const PROFILE={
  Storm:{shock:-.5},
  Void:{spirit:-.25,mental:-.25},
  Magic:{spirit:-.25},
- Fire:{heat:-.5,cold:.25},
- Ice:{cold:-.5,heat:.25},
- Water:{heat:-.25},
- Lightning:{shock:-.5},
- Earth:{shock:-.25,control:-.25}
+ Fate:{control:-.25}
 };
 export const STATUS_PROFILE=PROFILE;
 export const PERIODIC_RATES={burn:1/32,poison:1/32,toxic:1/96,frostbite:1/32,leechSeed:1/32,curse:1/48,trap:1/48,nightmare:1/24};

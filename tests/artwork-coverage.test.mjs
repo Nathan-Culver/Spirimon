@@ -47,7 +47,7 @@ test('artwork admission rejects sparse, empty and incomplete form arrays and int
  assert.equal(t.h.hasFinishedArtwork({atlas:' '}),false);assert.equal(t.h.hasFinishedArtwork({sprites:['a','b','c']}),true);
 });
 test('an unfinished legendary encounter reports its state before starting a mystery-sprite battle',()=>{
- const t=harness(),sp=E.makeSpecies('legend','Celestial','Undead');sp.legendary=true;t.h.adventureState=()=>({legends:[]});t.h.legendSite=()=>({...t.state.player});t.h.legendarySpecies=()=>sp;t.h.party=()=>[{}];t.h.currentRegion=()=>({});t.h.toast=()=>{};t.h.artworkStatusHTML=()=>'<p>Artwork unavailable</p>';let started=0,message='';t.h.startBattle=()=>started++;t.h.showModal=(_title,html)=>message=html;
+ const t=harness(),sp=E.makeSpecies('legend','Celestial','Undead');sp.legendary=true;t.h.adventureState=()=>({legends:[]});t.h.legendSite=()=>({...t.state.player});t.h.legendarySpecies=()=>sp;t.h.party=()=>[{hp:1}];t.h.currentRegion=()=>({});t.h.toast=()=>{};t.h.artworkStatusHTML=()=>'<p>Artwork unavailable</p>';let started=0,message='';t.h.startBattle=()=>started++;t.h.showModal=(_title,html)=>message=html;
  vm.runInContext(extract('adventureBattle'),t.h);t.eval("adventureBattle('legend','legend-test',40)");assert.equal(started,0);assert.match(message,/available when its finished artwork is ready/);assert.equal(t.h.battle,null);
 });
 test('a missing-art legendary binding rite does not offer an Energy-spending ritual stage',()=>{

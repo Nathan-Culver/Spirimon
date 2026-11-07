@@ -12,6 +12,7 @@ import {regionalLegendSite} from '../legend-sites.mjs';
 import {battleBackSource} from '../battle-art.mjs';
 import {decodeSavePayload} from '../save-files.mjs';
 import {capabilitiesFromAnatomy,syncCapabilities} from '../anatomy.mjs';
+import {approachFaction} from '../tools/physical-playtest.mjs';
 const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
 function extract(name){const a=source.indexOf('function '+name+'('),b=source.slice(a+1).search(/\nfunction /);assert.ok(a>=0);return source.slice(a,b<0?source.length:a+1+b);}
 const key=(x,y)=>x+','+y;
@@ -26,22 +27,22 @@ test('all three four-floor compounds have reachable clues, guards, mechanisms an
 test('physical objectives gate every descent; cache rewards and guard wins persist across reload',()=>{
  let save=E.newGame('factions');save.adventure={bosses:[]};
  for(const faction of A.FACTIONS)for(let floor=0;floor<4;floor++){
-  const features=FC.layout(save.seed,faction.id,floor).features;assert.ok(!FC.canAdvance(save,faction.id,floor));
+  save.cave={id:'faction-'+faction.id,faction:faction.id,level:floor,x:1,y:1};const features=FC.layout(save.seed,faction.id,floor).features;assert.ok(!FC.canAdvance(save,faction.id,floor));
   const guard=features.find(f=>f.kind==='faction-guard'||f.kind==='faction-leader');
-  if(floor===0||floor===2)assert.ok(!FC.interact(save,faction.id,floor,guard).battle);
-  const supplies=features.filter(f=>f.kind==='faction-supply');if(supplies.length)assert.match(FC.interact(save,faction.id,floor,supplies[0]).message,/locked/);
-  if(floor===2){const sigil=features.find(f=>f.kind==='faction-sigil');assert.match(FC.interact(save,faction.id,floor,sigil).message,/inscription/);}
-  for(const f of features.filter(f=>!['faction-guard','faction-leader'].includes(f.kind)))FC.interact(save,faction.id,floor,f);
-  const encounter=FC.interact(save,faction.id,floor,guard).battle;assert.ok(encounter);assert.ok(encounter.maxActive<=3);FC.recordVictory(save,encounter.kind,encounter.id);
-  assert.ok(FC.canAdvance(save,faction.id,floor));const before=JSON.stringify(save.inventory);for(const f of supplies)FC.interact(save,faction.id,floor,f);assert.equal(JSON.stringify(save.inventory),before);
+  if(floor===0||floor===2)assert.ok(!approachFaction(save,faction.id,floor,guard).battle);
+  const supplies=features.filter(f=>f.kind==='faction-supply');if(supplies.length)assert.match(approachFaction(save,faction.id,floor,supplies[0]).message,/locked/);
+  if(floor===2){const sigil=features.find(f=>f.kind==='faction-sigil');assert.match(approachFaction(save,faction.id,floor,sigil).message,/inscription/);}
+  for(const f of features.filter(f=>!['faction-guard','faction-leader'].includes(f.kind)))approachFaction(save,faction.id,floor,f);
+  const encounter=approachFaction(save,faction.id,floor,guard).battle;assert.ok(encounter);assert.ok(encounter.maxActive<=3);FC.recordVictory(save,encounter.kind,encounter.id);
+  assert.ok(FC.canAdvance(save,faction.id,floor));const before=JSON.stringify(save.inventory);for(const f of supplies)approachFaction(save,faction.id,floor,f);assert.equal(JSON.stringify(save.inventory),before);
   save=decodeSavePayload({format:'spirimon-backup',version:1,save,library:[]}).save;assert.ok(FC.canAdvance(save,faction.id,floor));
  }
  assert.ok(A.FACTIONS.every(f=>FC.campaign(save,f.id).complete));
 });
 test('incorrect sigil order resets the array; completed legacy campaigns remain completed',()=>{
- const s=E.newGame('sigils'),id=A.FACTIONS[0].id,features=FC.layout(s.seed,id,2).features;
- FC.interact(s,id,2,features.find(f=>f.kind==='faction-inscription'));const sigils=features.filter(f=>f.kind==='faction-sigil');
- FC.interact(s,id,2,sigils[0]);FC.interact(s,id,2,sigils[2]);assert.equal(FC.floorState(s,id,2).sigilStep,0);assert.equal(FC.canAdvance(s,id,2),false);
+ const s=E.newGame('sigils'),id=A.FACTIONS[0].id,features=FC.layout(s.seed,id,2).features;s.cave={id:'faction-'+id,faction:id,level:2,x:1,y:1};
+ approachFaction(s,id,2,features.find(f=>f.kind==='faction-inscription'));const sigils=features.filter(f=>f.kind==='faction-sigil');
+ approachFaction(s,id,2,sigils[0]);approachFaction(s,id,2,sigils[2]);assert.equal(FC.floorState(s,id,2).sigilStep,0);assert.equal(FC.canAdvance(s,id,2),false);
  s.adventure={bosses:[id]};assert.equal(FC.campaign(s,id).complete,true);
 });
 test('camp sites are stable, separated and leave an accessible approach outside Shrine interaction range',()=>{
@@ -89,4 +90,16 @@ test('the actual default legendary rite uses bundled artwork without requiring a
  const {save,h}=ritualHarness();save.settings.aiEnabled=false;let html='';
  Object.assign(h,{legendProfile,applyLegendArtwork,syncCapabilities,register:sp=>{E.refreshTechniques(sp);save.species[sp.id]=sp;return sp;},hasFinishedArtwork:sp=>!!sp.atlas,queueFresh:()=>{throw Error('Default legends must not request generated artwork');},action:(_a,label)=>label,showModal:(_title,body)=>html=body});
  vm.runInContext(['legendarySpecies','legendaryRitual'].map(extract).join('\n'),h);h.legendaryRitual();assert.match(html,/Complete ritual stage/);assert.doesNotMatch(html,/artwork is ready/);const sp=Object.values(save.species)[0];assert.ok(sp.atlas.startsWith('./assets/legends/'));assert.ok(sp.battleBackAtlas);
+});
+
+test('investigation clicks outside the compound cannot advance clues or open encounters',()=>{
+ const save=E.newGame('no-menu-scouting'),id=A.FACTIONS[0].id,f=FC.layout(save.seed,id,0).features[0];FC.interact(save,id,0,f);assert.deepEqual(FC.floorState(save,id,0).clues,[]);
+ save.cave={id:'faction-'+id,faction:id,level:0,x:1,y:1};FC.interact(save,id,0,f);assert.deepEqual(FC.floorState(save,id,0).clues,[]);approachFaction(save,id,0,f);assert.equal(FC.floorState(save,id,0).clues.length,1);assert.doesNotMatch(source,/case'faction-scene'/);
+});
+test('tripwire alerts strengthen guards and persist; captive rescues weaken the leader and cannot be farmed',()=>{
+ for(const faction of A.FACTIONS){const save=E.newGame('consequences'),id=faction.id;save.cave={id:'faction-'+id,faction:id,level:1,x:1,y:1};const layout=FC.layout(save.seed,id,1),trap=layout.features.find(f=>f.kind==='faction-tripwire');save.cave.x=trap.x;save.cave.y=trap.y;assert.ok(FC.step(save));assert.equal(FC.alertLevel(save,id),1);assert.equal(FC.step(save),null);
+ const guard=layout.features.find(f=>f.kind==='faction-guard');const alarmed=approachFaction(save,id,1,guard).battle;assert.equal(alarmed.level,faction.level-3+2*FC.alertLevel(save,id));
+ approachFaction(save,id,1,layout.features.find(f=>f.kind==='faction-control'));approachFaction(save,id,1,layout.features.find(f=>f.kind==='faction-supply'));const rescues=layout.features.filter(f=>f.kind==='faction-prison');for(const f of rescues)approachFaction(save,id,1,f);const coins=save.inventory.coins;for(const f of rescues)approachFaction(save,id,1,f);assert.equal(save.inventory.coins,coins);
+ const reload=JSON.parse(JSON.stringify(save));assert.ok(FC.alertLevel(reload,id)>0);reload.cave={id:'faction-'+id,faction:id,level:3,x:1,y:1};const boss=FC.layout(reload.seed,id,3).features.find(f=>f.kind==='faction-leader');assert.equal(approachFaction(reload,id,3,boss).battle.level,faction.level+2*FC.alertLevel(reload,id)-4);
+ }
 });

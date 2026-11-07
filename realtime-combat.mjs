@@ -1,3 +1,4 @@
+import {fieldAffinities} from './domains.mjs';
 import * as E from './engine.mjs';
 import * as SE from './spiritual-energy.mjs';
 import {bondEfficiency,clamp,spiritualBonus,spiritualMultiplier} from './spiritual-core.mjs';
@@ -172,13 +173,13 @@ function pulseEffects(state,context,log){
  const suffer=amount=>{if(amount<=0||u.hp<=0)return;const hp=u.hp;u.hp=Math.max(0,u.hp-amount);loss+=hp-u.hp;reportDamage(state,context,u,{amount:hp-u.hp,periodic:true});};
  if(['poison','burn','frostbite'].includes(u.status))suffer(periodicDamage(max/32,u.status,sp,u));
  if(u.status==='toxic'){u.toxicTurns=(u.toxicTurns||0)+1;suffer(periodicDamage(max*Math.min(6,u.toxicTurns)/96,'toxic',sp,u));}
- if(c.leechSeed){const amount=periodicDamage(max/32,'leechSeed',sp,u),hp=u.hp;suffer(amount);const source=live.find(a=>a.id===u.conditionSources?.leechSeed);if(source)source.hp=Math.min(E.stats(source,context.speciesOf(source)).hp,source.hp+Math.min(amount,hp));}
+ if(c.leechSeed){const amount=periodicDamage(max/32,'leechSeed',sp,u),hp=u.hp;suffer(amount);const source=live.find(a=>a.id===u.conditionSources?.leechSeed);if(source)E.healHP(source,context.speciesOf(source),Math.min(amount,hp));}
  if(c.curse)suffer(periodicDamage(max/48,'curse',sp,u));if(c.trap)suffer(periodicDamage(max/48,'trap',sp,u));if(c.nightmare&&u.status==='sleep')suffer(periodicDamage(max/24,'nightmare',sp,u));
- const domains=E.activeDomains(sp,u);if(u.aspect!=='Stormbound'&&(field.weather==='snow'&&!domains.includes('Ice')||field.weather==='sand'&&![sp.base,sp.alter].some(t=>['Construct','Giant','Elemental'].includes(t))&&!domains.some(d=>['Earth','Metal'].includes(d))))suffer(Math.max(1,Math.floor(max/32)));
+ const domains=E.activeDomains(sp,u);if(u.aspect!=='Stormbound'&&(field.weather==='snow'&&!fieldAffinities(sp,u).includes('ice')||field.weather==='sand'&&![sp.base,sp.alter].some(t=>['Construct','Giant','Elemental'].includes(t))&&!fieldAffinities(sp,u).some(e=>['earth','metal'].includes(e))))suffer(Math.max(1,Math.floor(max/32)));
  if(loss)log.push(name(u,sp)+' suffers '+loss+' ongoing damage.');
- if(u.hp>0){const healing=(passiveEffects(sp,u,{maxHp:max,weather:field.weather}).regeneration||0)+(c.regenerate?(1-(u.spiritualEnergyEmpty?.value||0))/20:0)+(field.terrain==='grass'?1/48:0)+(u.aspect==='Verdant'&&field.terrain==='grass'?1/32:0)+(hasHook(u,'leftovers',sp)?1/32:0);if(healing)u.hp=Math.min(max,u.hp+Math.max(1,Math.floor(max*healing)));
+ if(u.hp>0){const healing=(passiveEffects(sp,u,{maxHp:max,weather:field.weather}).regeneration||0)+(c.regenerate?(1-(u.spiritualEnergyEmpty?.value||0))/20:0)+(field.terrain==='grass'?1/48:0)+(u.aspect==='Verdant'&&field.terrain==='grass'?1/32:0)+(hasHook(u,'leftovers',sp)?1/32:0);if(healing)E.healHP(u,sp,Math.max(1,Math.floor(max*healing)));
  u.itemRounds=(u.itemRounds||0)+1;if(hasHook(u,'resourceSustain',sp)&&u.itemRounds%3===0){const caps=E.resourceMaximums(u,sp);u.pp=Math.min(caps.pp,(u.pp||0)+1);u.willpower=Math.min(caps.willpower,(u.willpower||0)+1);}
- if(sp.ability==='Second Wind'&&!u.secondWindUsed&&u.hp<max*.3){u.hp=Math.min(max,u.hp+Math.floor(max*.15));u.secondWindUsed=true;}
+ if(sp.ability==='Second Wind'&&!u.secondWindUsed&&u.hp<max*.3){E.healHP(u,sp,Math.floor(max*.15));u.secondWindUsed=true;}
  E.refreshCombatEquipment(u,sp,log);
  }
  }
@@ -190,14 +191,14 @@ function resolvePending(state,context,actor,clock,log,events,r){
  const other=side==='a'?'b':'a',allies=context.active[side],opponents=context.active[other];
  let target=[...allies,...opponents].find(u=>u.id===pending.targetId&&u.hp>0);
  if(!target)target=(pending.targetSide===side?allies:opponents).find(u=>u.hp>0);if(!target)return;
- const ctx={onDamage:(unit,options)=>reportDamage(state,context,unit,options),realTime:true,speciesOf:context.speciesOf,actorTeam:context.teams[side],alliedActive:allies,targetActive:opponents,activeUnits:activeUnits(context),targetTeam:context.teams[other],funded:false};
+ const ctx={passiveChain:new Set(),onDamage:(unit,options)=>reportDamage(state,context,unit,options),realTime:true,speciesOf:context.speciesOf,actorTeam:context.teams[side],alliedActive:allies,targetActive:opponents,activeUnits:activeUnits(context),targetTeam:context.teams[other],funded:false};
  if(actor.lastHit&&state.elapsedMs-(actor.lastHit.at??state.elapsedMs)>8000)actor.lastHit=null;
  if(choice.type==='switch'){
   const incoming=context.teams[side].find(u=>u.id===choice.switchId&&u.hp>0),index=allies.findIndex(u=>u.id===actor.id);if(!incoming||allies.includes(incoming))return;
   const q=context.sealers?.[side],cost=q?SE.manifestationCost(q,incoming,context.speciesOf(incoming)):0;if(q&&q.energy<cost){log.push('Insufficient Spiritual Energy to complete the release.');return;}const result=E.switchUnits(actor,incoming,context.speciesOf(incoming),{outSpecies:sp,forced:choice.forced,onDamage:ctx.onDamage});if(result.ok&&q)SE.spendEnergy(q,cost);log.push(...result.log);if(result.ok){allies[index]=incoming;const entry=unitClock(state,incoming);entry.readyAt=Math.max(entry.readyAt,state.elapsedMs+1800);entry.pending=null;}
  }else if(choice.type==='item'){
   const key=choice.item==='tonic'?'tonics':'ethers',inventory=context.inventory?.[side];if(!inventory?.[key]){log.push('No supplies remaining.');return;}
-  const caps=E.stats(target,context.speciesOf(target));if(choice.item==='tonic'){if(target.hp>=caps.hp)return;target.hp=Math.min(caps.hp,target.hp+Math.ceil(caps.hp/2));}else{if(target.pp>=caps.pp&&target.willpower>=caps.willpower)return;target.pp=Math.min(caps.pp,(target.pp||0)+Math.ceil(caps.pp*.6));target.willpower=Math.min(caps.willpower,(target.willpower||0)+Math.ceil(caps.willpower*.6));}
+  const caps=E.stats(target,context.speciesOf(target));if(choice.item==='tonic'){if(target.hp>=caps.hp)return;E.healHP(target,context.speciesOf(target),Math.ceil(caps.hp/2));}else{if(target.pp>=caps.pp&&target.willpower>=caps.willpower)return;target.pp=Math.min(caps.pp,(target.pp||0)+Math.ceil(caps.pp*.6));target.willpower=Math.min(caps.willpower,(target.willpower||0)+Math.ceil(caps.willpower*.6));}
   inventory[key]--;log.push(name(actor,sp)+' uses '+(key==='tonics'?'a tonic.':'a soul draught.'));
  }else if(choice.type==='support'){actor.ward=true;actor.wardTurns=3;log.push('The Sealer raises a ward.');}
  else{
@@ -215,10 +216,10 @@ function resolvePending(state,context,actor,clock,log,events,r){
    for(let repeat=0;repeat<repeats;repeat++){
     if(actor.hp<=0||!context.active[side].includes(actor))break;
     const victims=E.moveTarget(move)==='allOpponents'?opponents.filter(u=>u.hp>0):[target].filter(u=>u.hp>0);
-    if(!victims.length)break;
+    if(!victims.length)break;const repeatChain=new Set();
     if(move.id!=='struggle'&&!E.canUseMove(actor,sp,move,context.speciesOf(victims[0])))break;
     for(let n=0;n<victims.length;n++){
-     const victim=victims[n],hp=victim.hp,repeatCtx={...ctx,funded:false,prepaid:n>0,pressure:ctx.pressure};
+     const victim=victims[n],hp=victim.hp,repeatCtx={...ctx,passiveChain:repeatChain,funded:false,prepaid:n>0,pressure:ctx.pressure};
      log.push(...E.executeAction(actor,sp,victim,context.speciesOf(victim),move,choice.style||'normal',choice.commit??0,r,1,repeatCtx));
      if(victim.lastHit&&victim.hp<hp)victim.lastHit.at=state.elapsedMs;
      if(n===0&&!repeatCtx.funded)break;
@@ -238,7 +239,7 @@ function resolvePending(state,context,actor,clock,log,events,r){
     if(!retaliate)continue;
     const freeMove=scaledMove(retaliate,enemy,enemySp,enemy.battleStyle||'normal');
     for(let counter=0;counter<2&&enemy.hp>0&&actor.hp>0;counter++){
-     const counterCtx={...ctx,actorTeam:context.teams[other],alliedActive:opponents,targetActive:allies,targetTeam:context.teams[side],prepaid:true,funded:false,friendly:false,pressure:false};
+     const counterCtx={...ctx,passiveChain:new Set(),actorTeam:context.teams[other],alliedActive:opponents,targetActive:allies,targetTeam:context.teams[side],prepaid:true,funded:false,friendly:false,pressure:false};
      log.push(...E.executeAction(enemy,enemySp,actor,sp,freeMove,enemy.battleStyle||'normal',0,r,1,counterCtx));
      events.push({actor:enemy.id,target:actor.id,side:other,move:freeMove,at:state.elapsedMs+counter*55+120});
     }
@@ -335,7 +336,7 @@ function applySupportEffects(state,context,side,result){
   if(t.sacrifice?.kind==='hp')u.hp-=Math.ceil(max.hp*t.sacrifice.amount);
   if(t.sacrifice?.kind==='defense'){u.spiritualBuffs??=[];u.spiritualBuffs.push({kind:'guard',amount:-t.sacrifice.amount,until});}
   for(const effect of t.effects){const amount=effect.amount*efficiency;
-   if(effect.kind==='heal')u.hp=Math.min(max.hp,u.hp+Math.ceil(max.hp*amount));
+   if(effect.kind==='heal')u.hp=Math.min(max.hp,u.hp+Math.ceil(max.hp*amount*(1+(passiveEffects(sp,u,{maxHp:max.hp,weather:u.battlefield?.weather}).healingReceived||0))));
    if(effect.kind==='willpower')u.willpower=Math.min(max.willpower,(u.willpower||0)+Math.max(1,Math.ceil(max.willpower*amount)));
    if(effect.kind==='shield'){u.spiritualShields??=[];const existing=u.spiritualShields.filter(s=>s.until>now).reduce((n,s)=>n+s.hp,0);u.spiritualShields.push({hp:Math.max(0,Math.min(Math.ceil(max.hp*amount),Math.ceil(max.hp*.45)-existing)),until});}
    if(effect.kind==='cleanse'&&['poison','toxic','burn','freeze','frostbite','paralysis'].includes(u.status)){u.status=null;u.statusTurns=0;clock.status=null;}

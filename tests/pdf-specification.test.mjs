@@ -12,7 +12,7 @@ import {effectiveFieldDomains,fieldCapabilityAvailable} from '../anatomy.mjs';
 const hit={id:'hit',name:'Strike',type:'Beast',power:30,category:'Physical',accuracy:1,baseUses:30};
 function fixture(types=['Beast','Giant'],domains=[]){
  const sp={id:'pdf-rules',forms:['Test','Elder','Ancient'],base:types[0],alter:types[1],domains,health:150,power:50,speed:40,physicalRes:1,spiritualRes:1,moves:[hit],learnset:[hit]};
- const unit=n=>{const u=E.heal(E.makeIndividual(sp,20,0,E.rng(n)),sp);u.id='unit-'+n;for(const key of Object.keys(u.passives))u.passives[key]=CP.passivePool(key).find(p=>p.kind==='physicalDamage'&&!p.condition).id;u.hp=E.stats(u,sp).hp;return u;};
+ const unit=n=>{const u=E.heal(E.makeIndividual(sp,20,0,E.rng(n)),sp);u.id='unit-'+n;for(const key of Object.keys(u.passives))u.passives[key]=CP.passivePool(key).find(p=>p.kind==='maxHp'&&!p.condition).id;u.hp=E.stats(u,sp).hp;return u;};
  const a=unit(1),b=unit(2),reserve=unit(3),save={...E.newGame('pdf-spec'),species:{[sp.id]:sp},spirits:[a,reserve],party:[a.id,reserve.id]},q=SE.ensureSealer(save),state=RT.createRealTimeState();
  const context={teams:{a:[a,reserve],b:[b]},active:{a:[a],b:[b]},speciesOf:()=>sp,sealers:{a:q},inventory:{a:save.inventory}};
  const step=ms=>{while(ms>0){const delta=Math.min(ms,1000);RT.advanceRealTime(state,delta,context,()=>.5);ms-=delta;}};
@@ -26,7 +26,7 @@ test('all classification pools offer sixteen distinct disciplines and Type Plant
   assert.ok(pool.every(p=>p.classification===classification&&p.description.length>20));
  }
  assert.ok(CP.passivePool('Plant').every(p=>p.id.startsWith('plant-')));
- assert.notEqual(CP.passivePool('Life')[0].group,CP.passivePool('Fire')[0].group);
+ assert.notDeepEqual(CP.passivePool('Life').map(p=>[p.kind,p.condition]),CP.passivePool('Nature').map(p=>[p.kind,p.condition]));
 });
 test('individual passive retraining persists without modifying another member of the species',()=>{
  const f=fixture(),spBefore=structuredClone(f.sp.passives),otherBefore=structuredClone(f.reserve.passives),selected=CP.passivePool('Beast').find(p=>p.kind==='maxHp');
@@ -37,9 +37,9 @@ test('individual passive retraining persists without modifying another member of
  const restored=JSON.parse(JSON.stringify(f.a));CP.ensureIndividualPassives(f.sp,restored);assert.equal(restored.passives.Beast,selected.id);
 });
 test('maximum HP and Speed passives change actual health and Technique cooldowns',()=>{
- const f=fixture();f.a.passives.Beast=CP.passivePool('Beast').find(p=>p.kind==='maxHp').id;f.a.passives.Giant=CP.passivePool('Giant').find(p=>p.kind==='speed'&&!p.condition).id;
+ const f=fixture();f.a.passives.Beast=CP.passivePool('Beast').find(p=>p.kind==='maxHp').id;f.a.passives.Giant=CP.passivePool('Giant').find(p=>p.kind==='speed'&&p.condition==='healthy').id;
  const suppressed={...f.a,suppressedTypes:['Beast','Giant']},before=E.stats(suppressed,f.sp),after=E.stats(f.a,f.sp);
- assert.equal(after.hp,Math.floor(before.hp*1.05));assert.equal(after.speed,Math.floor(before.speed*1.05));
+ const hpBonus=CP.passiveEffects(f.sp,f.a,{maxHp:E.stats(f.a,f.sp).hp}).maxHp;assert.equal(after.hp,Math.floor(before.hp*(1+hpBonus)));assert.equal(after.speed,Math.floor(before.speed*(1+CP.passiveEffects(f.sp,f.a,{maxHp:E.stats(f.a,f.sp).hp}).speed)));
  assert.ok(RT.moveTiming(hit,f.a,f.sp).gcdMs<RT.moveTiming(hit,suppressed,f.sp).gcdMs);
 });
 test('aliases, duplicate sources, expiry and suppression agree for combat and field Domains',()=>{
@@ -147,7 +147,7 @@ test('legacy derived Domain caches cannot keep an unequipped status resistance a
 });
 test('canonicalizing saved individual passive choices preserves their discipline and unlock',()=>{
  const sp={id:'old-passives',base:'Beast',alter:'Fey',domains:['Time']},u={id:'old',passives:{Time:'time-clarity'},unlockedPassives:['time-clarity']};
- CP.ensureIndividualPassives(sp,u);assert.equal(u.passives.Fate,'fate-clarity');assert.ok(u.unlockedPassives.includes('fate-clarity'));assert.equal(u.passives.Time,undefined);
+ CP.ensureIndividualPassives(sp,u);assert.equal(CP.passivePool('Fate').find(p=>p.id===u.passives.Fate)?.kind,'accuracy');assert.ok(u.unlockedPassives.includes(u.passives.Fate));const id=u.passives.Fate;CP.ensureIndividualPassives(sp,u);assert.equal(u.passives.Fate,id);assert.equal(u.passives.Time,undefined);
 });
 test('observation games have an inferable pattern and rhythm rewards depend on timing',()=>{
  const a=A.observationChallenge('skill',4);assert.deepEqual(a.pattern.slice(0,2),a.pattern.slice(3,5));assert.equal(a.answer,a.pattern[2]);assert.ok(a.choices.includes(a.answer));assert.equal(A.rhythmScore(800),1);assert.equal(A.rhythmScore(0),0);assert.equal(A.rhythmScore(2400),1);

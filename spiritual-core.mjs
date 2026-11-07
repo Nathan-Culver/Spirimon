@@ -1,3 +1,4 @@
+import {canonicalDomain} from './domains.mjs';
 // Pure shared rules. This module deliberately does not import the battle engine.
 export const SPIRITUAL_VERSION=1;
 export const PASSIVE_RECOVERY_MS=2*60*60*1000;
@@ -11,6 +12,6 @@ export function exhaustion(ind){return ind?.spiritualEnergyEmpty?.value||0;}
 export function setExhaustion(ind,sealer){const penalty=sealer&&sealer.energy<=0?.15*(1-clamp((ind.bond||0)/100,0,1)*.5):0;ind.spiritualEnergyEmpty={value:penalty};return penalty;}
 export function spiritualBonus(ind,key,now=ind?.realtimeNow||0){return (ind?.spiritualBuffs||[]).filter(b=>b.until>now&&b.kind===key);}
 export function spiritualMultiplier(ind,key,now){const bonuses=spiritualBonus(ind,key,now);return 1+Math.min(.45,bonuses.reduce((n,b)=>n+(b.amount||0),0));}
-export function spiritualDefense(ind,move,category,now){const buffs=(ind.spiritualBuffs||[]).filter(b=>b.until>(now??ind.realtimeNow??0));return Math.max(.45,buffs.reduce((v,b)=>b.kind==='guard'&&(!b.domain||b.domain===move.domain)&&(!b.category||b.category===category)?v*(1-b.amount):v,1));}
+export function spiritualDefense(ind,move,category,now){const buffs=(ind.spiritualBuffs||[]).filter(b=>b.until>(now??ind.realtimeNow??0));return Math.max(.45,buffs.reduce((v,b)=>b.kind==='guard'&&(!b.domain||canonicalDomain(b.domain)===canonicalDomain(move.domain))&&(!b.category||b.category===category)?v*(1-b.amount):v,1));}
 export function shieldDamage(ind,amount,now=ind?.realtimeNow||0){let remaining=Math.max(0,amount);for(const shield of (ind.spiritualShields||[]).filter(s=>s.until>now&&s.hp>0)){const absorbed=Math.min(shield.hp,remaining);shield.hp-=absorbed;remaining-=absorbed;}ind.spiritualShields=(ind.spiritualShields||[]).filter(s=>s.until>now&&s.hp>0);return remaining;}
 export function calendarPhase(playTime=0){const cycle=Math.floor(playTime/CYCLE_MS),night=playTime%CYCLE_MS>=DAY_MS;return {cycle,night,key:cycle+':'+(night?'night':'day')};}

@@ -1,7 +1,9 @@
+import {TEMPLE_PHILOSOPHIES,PHILOSOPHY_RULES,trialLayout} from './temple-philosophies.mjs';
+export {TEMPLE_PHILOSOPHIES};
 // Long-form world progression and persistent strategic equipment.
 export const CLANS=[
  ['Verdant Circle','Plant',6],['Ember Covenant','Elemental',12],['Stoneward Clan','Giant',18],['Moonlit Court','Fey',25],['Iron Concord','Construct',32],['Duskbound Order','Undead',40],['Astral Synod','Celestial',50],['Abyssal Watch','Aberration',60]
-].map(([name,type,level],index)=>({id:'clan-'+index,name,type,level,domain:['Nature','Fire','Earth','Moon','Metal','Death','Light','Void'][index],crest:name.split(' ')[0]+' Crest',index}));
+].map(([name,type,level],index)=>({id:'clan-'+index,name,type,level,domain:['Nature','Nature','Nature','Spirit','Nature','Death','Spirit','Void'][index],crest:name.split(' ')[0]+' Crest',index}));
 export const FACTIONS=[
  {id:'ashen-hand',name:'The Ashen Hand',leader:'Marshal Veyra',motive:'Bind wild Spirimon into weapons',level:22},
  {id:'hollow-choir',name:'The Hollow Choir',leader:'Cantor Morcant',motive:'Awaken the buried voices beneath the world',level:38},
@@ -18,7 +20,7 @@ export function playerLooks(){return {colors:['#7f4a36','#d4a57a','#e9c8a3','#65
 
 
 /** Deterministic, save-safe procedural temple identity and validated puzzle sequence. */
-export const TEMPLE_PHILOSOPHIES=['Attrition','Counterplay','Tempo','Resilience','Control','Transformation','Synergy','Prediction'];
+
 export function templeAt(seed,cx,cy){
  const n=String(seed)+'|'+cx+'|'+cy;
  let h=2166136261;for(const ch of n){h^=ch.charCodeAt(0);h=Math.imul(h,16777619);}h>>>=0;
@@ -26,19 +28,17 @@ export function templeAt(seed,cx,cy){
  const clan=CLANS[h%CLANS.length];
  return {...clan,id:'temple-'+cx+','+cy,originClan:clan.id,region:{cx,cy},philosophy:TEMPLE_PHILOSOPHIES[(h>>>5)%TEMPLE_PHILOSOPHIES.length],level:Math.max(6,6+tier*5),crest:clan.name.split(' ')[0]+' Crest of '+cx+','+cy,seed:h};
 }
+// Preview the same physical floors used by exploration, rather than a separate menu puzzle.
 export function templeTrial(temple){
- const seed=temple.seed>>>0,shift=seed%4;
- const symbols=['Sun','Moon','Star','Wave','Root','Flame','Stone','Wind'];
- const solution=[symbols[shift],symbols[(shift+3)%8],symbols[(shift+6)%8]];
- const chambers=['Entrance','Hall of Signs','Ward Chamber','Hidden Reliquary','Master Arena'];
- const edges=[[0,1],[1,2],[2,3],[3,4],[1,3]];
- return {chambers,edges,solution,clues:['First: '+solution[0],'Second: '+solution[1],'Third: '+solution[2]],requiredBattles:2};
+ const rooms=Array.from({length:6},(_,level)=>({id:'temple-'+temple.id,temple:temple.id,philosophy:temple.philosophy,templeSeed:temple.seed,level}));
+ return {philosophy:temple.philosophy,puzzle:PHILOSOPHY_RULES[temple.philosophy].puzzle,combat:PHILOSOPHY_RULES[temple.philosophy].combat,floors:rooms.map(trialLayout),requiredBattles:3};
 }
 export function validateTempleTrial(trial){
- if(!trial||!Array.isArray(trial.chambers)||!Array.isArray(trial.edges)||trial.solution?.length!==3)return false;
- const seen=new Set([0]),queue=[0];
- while(queue.length){const n=queue.shift();for(const [a,b] of trial.edges){const other=a===n?b:b===n?a:-1;if(other>=0&&!seen.has(other)){seen.add(other);queue.push(other);}}}
- return seen.size===trial.chambers.length&&trial.solution.every(v=>typeof v==='string'&&v.length>0);
+ if(!PHILOSOPHY_RULES[trial?.philosophy]||trial.floors?.length!==6)return false;
+ return trial.floors.every(({map,features,objects})=>{const blocked=new Set(objects.map(o=>o.x+','+o.y)),seen=new Set(),queue=[[1,1]];
+  for(let i=0;i<queue.length;i++){const [x,y]=queue[i],k=x+','+y;if(seen.has(k)||!map.grid[y]?.[x]||map.grid[y][x]==='wall'||blocked.has(k))continue;seen.add(k);for(const [dx,dy]of [[1,0],[-1,0],[0,1],[0,-1]])queue.push([x+dx,y+dy]);}
+  return seen.has('23,17')&&features.every(f=>[[1,0],[-1,0],[0,1],[0,-1]].some(([dx,dy])=>seen.has((f.x+dx)+','+(f.y+dy))));
+ });
 }
 export const FACILITY_TYPES=[
  {id:'arena',name:'Arena',rounds:3,rule:'Standard consecutive matches'},
