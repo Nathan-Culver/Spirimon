@@ -6,7 +6,7 @@ Battle rewards now total defeated individuals, including trainer reserves defeat
 
 The practice screen displays actual GCD/LCD timing. Startup markup omits an unresolved string expression; faction chapters keep their current objective in the map HUD; paid legendary stages refresh the Energy meter immediately. Perception reveals regional legendary disturbances independently of shrine placement. A simultaneous knockout uses the same last-visited Shrine checkpoint as defeat recovery, falling back to the guaranteed starting-town Shrine. A spent return Shrine advances the calendar to its next reset before consuming a new recovery action.
 
-The approved combat values remain in force: Spirimon maximum Health is halved after the original calculation, standard damage receives its final 1.25 multiplier, and Agile damage is 85% of Normal. Shrines retain their reduced density, at most one per region, and one Restore, Meditate, or Commune action per reset.
+Difficulty now controls these values: Normal is the original Health/damage baseline; Hard retains the half-Health, 1.25× damage and sparse Shrine rules for both sides; Easy applies player benefits and enemy penalties. Agile remains 85% of Normal-style damage in every mode. All modes share one Restore, Meditate, or Commune action per Shrine per reset. See [the current joint balance and learning review](difficulty-tutorial-dialogue.md).
 
 ## Physical content
 
@@ -20,9 +20,9 @@ All 450 general-roster forms were visually reviewed and bound to authored moveme
 
 The same renderer serves field followers, caves, interiors, and mounts. A 24-canvas LRU bounds the baked walking cache to 6 MiB. `tools/render-companion-audit.mjs` rendered 7,392 frames across 462 forms: zero empty frames and zero silhouettes touching a cell border. See the JSON report and contact sheet in this directory. This is texture-rig animation, not independently drawn side-profile sheets.
 
-## Progression results
+## Prior Hard-baseline progression results
 
-The current audit walks collision-valid paths through actual Temple/faction rooms, solves their mechanisms, and uses the same enemy deployment, Sealer support and cooperation controller as the live game. Transformation thresholds run in the real scheduler; the audit no longer injects those form changes.
+The audit walks collision-valid paths through actual Temple/faction rooms, solves their mechanisms, and uses the same enemy deployment, Sealer support and cooperation controller as the live game. Transformation thresholds run in the real scheduler; the audit no longer injects those form changes.
 
 | Run | Battles | Final level | Shrine restorations | Championship attempts | Enemy support | Enemy cooperation | Enemy form changes |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -37,7 +37,7 @@ The second roster needed multiple Championship attempts and substantially more t
 
 ## Reproducing checks
 
-- `node build.mjs && npm test`: 641 passing regression tests at this revision.
+- `node build.mjs && npm test`: 670 passing regression tests at this revision.
 - `node tools/audit-progression.mjs progression-1 progression-2 progression-3`: main path.
 - `node tools/audit-progression.mjs --expanded progression-1 progression-2 progression-3`: expanded path.
 - `node tools/render-companion-audit.mjs`: optional Canvas2D visual audit (requires `@napi-rs/canvas`).
@@ -51,7 +51,7 @@ The published game loaded an isolated backup through its normal Import backup co
 
 ## Follow-up: six reported issues
 
-See `six-issue-regression.md` for the entry-preview corrections, read-only primary-file handling, and integration checks of all six reported issues. The current report above includes the subsequent philosophy and enemy-controller work; the six-issue follow-up itself did not change combat values or progression gates.
+See `six-issue-regression.md` for the entry-preview corrections, read-only primary-file handling, and integration checks of all six reported issues. The historical report above includes the subsequent philosophy and enemy-controller work; the six-issue follow-up itself did not change combat values or progression gates.
 
 ## Follow-up: quest credit and exploration transitions
 
@@ -60,3 +60,7 @@ Rowan's guild matches and roadside challenges now both increment the rival-victo
 Cave, Temple, faction and building transitions discard movement queued in the previous scene and clear the old follower trail. Moving between dungeon floors and returning to a Shrine after defeat use the same reset. Temple entry also dismounts the player. A step onto locked Temple or faction stairs now saves and refreshes the actual position without advancing the floor or losing trial progress.
 
 The follow-up checked 240 generated legendary/camp sites across 60 seeded regions for a walking connection to the main path, with no inaccessible placements in that sample. This is a sampled generation check, not an exhaustive proof over all seeds. Eleven regression cases exercise the actual victory and movement controllers, including persistent faction objectives and consumed Shrine recovery. The full suite has 641 passing tests; web and installed-app builds pass. Combat values, rewards and Shrine availability are unchanged by this follow-up.
+
+## Current difficulty and learning update
+
+Normal is now the default; the universal Hard values in older reports are historical. See [difficulty-tutorial-dialogue.md](difficulty-tutorial-dialogue.md) for three complete current mode simulations (930 battles total), exact healing/timing reference budgets, the retained Normal defensive-match outlier, commitment teaching, first-battle practice, role dialogue and persistent sight challenges. Mode-specific reports are `easy-expanded-progression-audit.json`, `normal-expanded-progression-audit.json` and `hard-expanded-progression-audit.json`. All 36 established Domains and custom discovery are documented in `classification-reconciliation.md`.

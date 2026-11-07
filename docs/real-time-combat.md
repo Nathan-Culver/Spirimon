@@ -34,4 +34,9 @@ The Seal button is available directly in the action dock and Bag. Tap for the ba
 
 ### Styles and gesture controls
 
-Strong uses the normal 5% base critical chance and increases critical damage from 1.5× to 1.65×. Agile retains its +10 percentage point critical chance bonus. All diagonals add one or two extra Technique uses based on drag distance. Upward diagonals also increase attack commitment with distance; downward diagonals use zero commitment. Incoming damage cannot extend GCD or local cooldown timers started by instant-cast Techniques, even while another Technique is being cast. Cast-time Technique timers retain their existing delay limits.
+Strong uses the normal 5% base critical chance and increases critical damage from 1.5× to 1.65×. Agile retains its +10 percentage point critical chance bonus. All diagonals add one or two extra Technique uses based on drag distance. Upward diagonals also increase attack commitment with distance; downward diagonals use defensive zero attack commitment. Ordinary taps use 50% attack and 50% defense. Incoming damage cannot extend GCD or local cooldown timers started by instant-cast Techniques, even while another Technique is being cast. Cast-time Technique timers retain their existing delay limits.
+
+
+## Difficulty and learning
+
+See [the combined difficulty and learning update](difficulty-tutorial-dialogue.md). Normal is the default original Health/damage baseline; Hard applies the previous half-Health and 1.25× damage rules to both sides, while Easy applies asymmetric player benefits and enemy penalties. Percentage healing scales from the affected individual’s actual maximum. Normalized manifestation strength prevents difficulty benefits from raising Energy costs. Shared GCD and support timing rules are unchanged; support cards now expose effect, cast and recast directly.

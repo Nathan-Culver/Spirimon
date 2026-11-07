@@ -22,7 +22,7 @@ Rebuilding removes obsolete generated bundles and replaces the output asset
 directory; repository source assets are never pruned by the build.
 
 Current guardrails are 40 MiB of runtime artwork, 55 MiB for the single-file
-download, and 1,100,000 bytes for the online game bundle. The JavaScript allowance includes the nine-Domain migration, 336 curated passives and eight physical Temple philosophies. Further expansion requires an explicit budget review. They measure distribution size, not decoded-image memory
+download, and 1,100,000 bytes for the online game bundle. The JavaScript allowance includes the restored/custom Domain registry, difficulty modes, learning systems, curated passive variations and eight physical Temple philosophies. Further expansion requires an explicit budget review. They measure distribution size, not decoded-image memory
 or frame rate; actual Android hardware still needs runtime profiling.
 
 ## Combat boundaries

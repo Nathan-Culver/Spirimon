@@ -1,3 +1,6 @@
+import * as TUTORIAL from '../tutorials.mjs';
+import {restoreDomainRegistry,discoverCustomDomain} from '../domains.mjs';
+import {enemySpeech} from '../npc-dialogue.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
@@ -8,7 +11,7 @@ const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
 const extract=name=>{const start=source.search(new RegExp('(?:async )?function '+name+'\\(')),end=source.slice(start+1).search(/\n(?:async )?function /);assert.ok(start>=0,name);return source.slice(start,end<0?source.length:start+1+end);};
 function harness(){
  const state=E.newGame('artwork-coverage'),library=Object.fromEntries(ROSTER.map(row=>{const sp={...E.makeSpecies(row.id,row.base,row.alter,row.domains),...row,id:'roster-'+row.id,proceduralArt:false};return [sp.id,sp];}));state.species={...library};
- const h=vm.createContext({E,ROSTER,s:state,library,structuredClone,battle:null,queue:[],queued:[],buildingSpriteBlocked:()=>false,equipWildItem:u=>u,save(){},register:sp=>{state.species[sp.id]=sp;return sp;},queueFresh:(_reg,_r,_force,sp)=>h.queued.push(sp?.id||'future'),syncCapabilities(){},certifyRenderedAnatomy(){}});
+ const h=vm.createContext({TUTORIAL,restoreDomainRegistry,discoverCustomDomain,enemySpeech,encounterAftermath:()=>'',E,ROSTER,s:state,library,structuredClone,battle:null,queue:[],queued:[],buildingSpriteBlocked:()=>false,equipWildItem:u=>u,save(){},register:sp=>{state.species[sp.id]=sp;return sp;},queueFresh:(_reg,_r,_force,sp)=>h.queued.push(sp?.id||'future'),syncCapabilities(){},certifyRenderedAnatomy(){}});
  vm.runInContext(['hasFinishedArtwork','speciesFor','roamerArtworkReady','normalizeWildPopulation','installRoster'].map(extract).join('\n'),h);
  return {h,state,library,eval:code=>vm.runInContext(code,h)};
 }
@@ -39,7 +42,7 @@ test('saved unfinished roamers retain their IDs and progress while completed enc
 test('finished images recover from the species library without changing owned gameplay records',()=>{
  const t=harness(),sp=E.makeSpecies('same-species','Beast','Elemental'),ind=E.makeIndividual(sp,32);ind.xp=81;ind.bond=91;ind.heldItem={id:'saved-item'};t.state.species[sp.id]=sp;t.state.spirits=[ind];
  t.library[sp.id]={...structuredClone(sp),proceduralArt:false,sprites:['finished0','finished1','finished2'],visualValidation:{status:'vision-verified'}};
- const before=structuredClone(ind),moves=structuredClone(sp.moves),forms=[...sp.forms];t.eval('installRoster()');assert.deepEqual(ind,before);assert.deepEqual(sp.moves,moves);assert.deepEqual(sp.forms,forms);assert.equal(t.h.hasFinishedArtwork(sp),true);assert.deepEqual(sp.sprites,['finished0','finished1','finished2']);
+ const before=structuredClone(ind),moves=structuredClone(sp.moves),forms=[...sp.forms];t.eval('installRoster()');const {difficulty,difficultySide,lastMaxHp,...preserved}=ind;assert.deepEqual(preserved,before);assert.deepEqual(sp.moves,moves);assert.deepEqual(sp.forms,forms);assert.equal(t.h.hasFinishedArtwork(sp),true);assert.deepEqual(sp.sprites,['finished0','finished1','finished2']);
 });
 test('artwork admission rejects sparse, empty and incomplete form arrays and internal diagrams',()=>{
  const t=harness();for(const sprites of [['a','b'],['a','b',''],['a','b',' '],Object.assign(new Array(3),{0:'a'})])assert.equal(t.h.hasFinishedArtwork({sprites}),false);

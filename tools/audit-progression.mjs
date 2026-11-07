@@ -20,13 +20,13 @@ import {fileURLToPath} from 'node:url';
 import {writeFile} from 'node:fs/promises';
 import path from 'node:path';
 
-export function simulateProgression(seed='progression-1',{expanded=false}={}){
- let save=E.newGame(seed),serial=0;const random=E.rng(seed),matches=[],recoveries=[],templeTrials=[];
+export function simulateProgression(seed='progression-1',{expanded=false,difficulty='normal'}={}){
+ let save=E.newGame(seed),serial=0;save.settings.difficulty=difficulty;E.applyWorldDifficulty(save,difficulty);const random=E.rng(seed),matches=[],recoveries=[],templeTrials=[];
  const catalog=ROSTER.map(row=>{const sp={...E.makeSpecies('roster-'+row.id,row.base,row.alter,row.domains),...row,id:'roster-'+row.id};sp.learnset=[];sp.moveRevision=0;E.refreshTechniques(sp);return sp;});
  for(const sp of catalog)save.species[sp.id]=sp;
  // Six early level-3 bonds are the preparation assumption; at most three manifest. All later levels come from XP.
  const picks=[catalog.find(s=>s.base==='Beast'&&s.alter==='Construct'),catalog.find(s=>s.base==='Plant'&&s.alter==='Fey'),catalog.find(s=>s.base==='Elemental'&&s.alter==='Plant'),catalog.find(s=>s.base==='Undead'&&s.alter==='Elemental'),catalog.find(s=>s.base==='Fey'&&s.alter==='Elemental'),catalog.find(s=>s.base==='Celestial'&&s.alter==='Undead')];
- save.spirits=picks.map(sp=>({...E.heal(E.makeIndividual(sp,3,0,random),sp),id:'player-'+serial++,bond:25}));save.party=save.spirits.map(u=>u.id);save.starter=true;save.inventory.tonics=5;save.inventory.ethers=3;
+ save.spirits=picks.map(sp=>({...E.heal(E.makeIndividual(sp,3,0,random),sp),id:'player-'+serial++,bond:25}));save.party=save.spirits.map(u=>u.id);E.applyWorldDifficulty(save,difficulty);save.starter=true;save.inventory.tonics=5;save.inventory.ethers=3;
  const sealer=()=>SE.ensureSealer(save),party=()=>save.party.map(id=>save.spirits.find(u=>u.id===id));
  const speciesOf=u=>{const sp=individualSpecies(save.species[u.species],u);E.ensureIndividualPassives(sp,u);E.migrateResources(u,sp);return sp;};
  const allocate=()=>{const q=sealer();let n=0;while(q.unspentPoints)SE.allocateAttribute(q,['reserve','control','output'][n++%3]);SE.ensureSealer(save);};
@@ -34,9 +34,9 @@ export function simulateProgression(seed='progression-1',{expanded=false}={}){
  const level=()=>Math.floor(party().reduce((n,u)=>n+u.level,0)/party().length);
  const travel=()=>{const ms=60000;save.playTime+=ms;sealer().clockMs+=ms;SE.passiveRecovery(sealer(),ms);};
  function restore(reason){
-  const shrine=SW.recoveryShrine(save,t=>SE.recoveryAvailable(save,'restore',t.id).ok),before=sealer().energy;
-  save.player.x=shrine.x;save.player.y=shrine.y+1;
-  const result=SE.beginRecovery(save,'restore',{shrineId:shrine.id,safe:true});if(!result.ok)throw Error('Recovery failed: '+result.reason);
+  const blackout=/defeat/.test(reason),shrine=blackout?SW.blackoutShrine(save):SW.recoveryShrine(save,t=>SE.recoveryAvailable(save,'restore',t.id).ok),before=sealer().energy;
+  save.player.x=shrine.x;save.player.y=shrine.y+1;SW.rememberShrineVisit(save);
+  const result=blackout?SE.blackoutRecovery(save,shrine.id):SE.beginRecovery(save,'restore',{shrineId:shrine.id,safe:true});if(!result.ok)throw Error('Recovery failed: '+result.reason);
   if(SE.recoveryAvailable(save,'meditate',shrine.id).ok||SE.recoveryAvailable(save,'commune',shrine.id).ok)throw Error('Shrine granted a second action');
   recoveries.push({reason,shrine:shrine.id,phase:SE.calendarPhase(save.playTime).key,energyBefore:Math.floor(before)});
  }
@@ -62,7 +62,7 @@ export function simulateProgression(seed='progression-1',{expanded=false}={}){
   while(save.inventory.ethers<3&&save.inventory.coins>=16){save.inventory.coins-=16;save.inventory.ethers++;}
  }
  function battle({name,enemyLevel,count=2,maxActive=3,trainer=true,kind=null,eventId=name,opponentSpecies=null,types=null,philosophy=null}){
-  prepare();const q=sealer(),initialEnergy=q.energy,enemies=Array.from({length:count},()=>{const pool=types?catalog.filter(sp=>types.some(t=>sp.base===t||sp.alter===t)):catalog,sp=opponentSpecies||pool[Math.floor(random()*pool.length)],u=E.heal(E.makeIndividual(sp,enemyLevel,philosophy==='Transformation'?0:enemyLevel>=36?2:enemyLevel>=16?1:0,random),sp);u.id='enemy-'+serial++;if(philosophy)u.battlePhilosophy=philosophy;if(trainer)BAI.prepareOpponent(u,sp,save.rank,random);return u;});
+  prepare();const q=sealer(),initialEnergy=q.energy,enemies=Array.from({length:count},()=>{const pool=types?catalog.filter(sp=>types.some(t=>sp.base===t||sp.alter===t)):catalog,sp=opponentSpecies||pool[Math.floor(random()*pool.length)],u=E.heal(E.makeIndividual(sp,enemyLevel,philosophy==='Transformation'?0:enemyLevel>=36?2:enemyLevel>=16?1:0,random),sp);E.applyUnitDifficulty(u,sp,difficulty,'enemy');u.id='enemy-'+serial++;if(philosophy)u.battlePhilosophy=philosophy;if(trainer)BAI.prepareOpponent(u,sp,save.rank,random);return u;});
   const foe=trainer?SE.enemySealer(seed+'|'+serial,enemies,speciesOf):null,state=RT.createRealTimeState(q.clockMs),ctx={active:{a:[],b:[]},teams:{a:[...party()].sort((a,b)=>name==='Preparation'?a.level-b.level:b.level-a.level),b:enemies},speciesOf,sealers:{a:q,b:foe},inventory:{a:save.inventory,b:{}},rules:{maxActive}};
   SE.beginSealerBattle(q);if(foe){SE.configureEnemyVow(foe,/clan|faction|championship/.test(kind||''));foe.clockMs=state.elapsedMs;SE.beginSealerBattle(foe);}E.bindBattlefield(ctx.teams.a,enemies);
   const start=state.elapsedMs,log=[],participants=new Set();let ticks=0,bossPhase=0,philosophyActions=0,enemySupports=0,enemyCooperatives=0,enemyTransformations=0;
@@ -156,10 +156,10 @@ export function simulateProgression(seed='progression-1',{expanded=false}={}){
  while(save.adventure.championship.status==='active'){
   const match=A.championshipMatch(save.adventure,level(),1);if(!battle({name:match.name,enemyLevel:match.level,count:match.teamSize,maxActive:match.maxActive,kind:'championship',eventId:match.id})){A.recordChampionshipResult(save.adventure,false);if(attempts++>=8||!train(match.level+6))return {seed,complete:false,stage:'championship-'+match.stage,matches,recoveries};restore('championship defeat');A.beginChampionship(save.adventure,{rank:save.rank,seed});}else A.recordChampionshipResult(save.adventure,true);
  }
- return {seed,complete:save.adventure.champion,finalLevel:level(),battles:matches.length,crests:save.adventure.crests.length,guildTrials:save.adventure.guildTrials.length,championshipWins:save.adventure.championship.wins,championshipAttempts:attempts,factions:save.adventure.bosses.length,legends:save.adventure.legends.length,expanded,templeTrials,physicalSteps:save.steps,restorations:recoveries.length,matches,recoveries};
+ return {seed,difficulty,complete:save.adventure.champion,finalLevel:level(),battles:matches.length,crests:save.adventure.crests.length,guildTrials:save.adventure.guildTrials.length,championshipWins:save.adventure.championship.wins,championshipAttempts:attempts,factions:save.adventure.bosses.length,legends:save.adventure.legends.length,expanded,templeTrials,physicalSteps:save.steps,restorations:recoveries.length,matches,recoveries};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
- const expanded=process.argv.includes('--expanded'),seeds=process.argv.slice(2).filter(v=>v!=='--expanded'),reports=[];for(const seed of seeds.length?seeds:['progression-1']){const r=simulateProgression(seed,{expanded});reports.push(r);console.log(JSON.stringify({seed:r.seed,complete:r.complete,stage:r.stage,battles:r.battles||r.matches.length,last:r.matches.at(-1)}));}
- await writeFile(new URL(expanded?'../docs/expanded-progression-audit.json':'../docs/progression-audit.json',import.meta.url),JSON.stringify(reports,null,2)+'\n');
+ const expanded=process.argv.includes('--expanded'),difficulty=process.argv.find(v=>v.startsWith('--difficulty='))?.split('=')[1]||'normal',seeds=process.argv.slice(2).filter(v=>!v.startsWith('--')),reports=[];for(const seed of seeds.length?seeds:['progression-1']){const r=simulateProgression(seed,{expanded,difficulty});reports.push(r);console.log(JSON.stringify({seed:r.seed,complete:r.complete,stage:r.stage,battles:r.battles||r.matches.length,last:r.matches.at(-1)}));}
+ await writeFile(new URL('../docs/'+difficulty+(expanded?'-expanded-progression-audit.json':'-progression-audit.json'),import.meta.url),JSON.stringify(reports,null,2)+'\n');
  if(reports.some(r=>!r.complete))process.exitCode=1;
 }

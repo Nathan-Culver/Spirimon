@@ -11,7 +11,7 @@ const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
 const extract=name=>{const a=source.indexOf('function '+name+'('),n=source.slice(a+1).search(/\n(?:async )?function /);assert.ok(a>=0,name);return source.slice(a,n<0?source.length:a+1+n);};
 function harness(){
  const s=E.newGame('scene-transitions'),saves=[],messages=[];let renders=0;
- const h=vm.createContext({s,E,A,FC,TP,W,modal:null,battle:null,view:'explore',walkAnim:null,queuedStep:[1,0],companionTrail:[{x:900,y:-300}],keys:new Set(['arrowdown']),running:false,lastStep:0,performance:{now:()=>10000},save:()=>saves.push(structuredClone(s)),render:()=>renders++,toast:message=>messages.push(message),closeModal(){},currentDungeonFeatures:()=>[],caveObstacle:()=>false,dungeonTileEvent(){},party:()=>[],dungeonMap:room=>room.faction?FC.layout(s.seed,room.faction,room.level).map:TP.trialLayout(room).map});
+ const h=vm.createContext({s,E,A,FC,TP,W,dungeonApproach:null,modal:null,battle:null,view:'explore',walkAnim:null,queuedStep:[1,0],companionTrail:[{x:900,y:-300}],keys:new Set(['arrowdown']),running:false,lastStep:0,performance:{now:()=>10000},save:()=>saves.push(structuredClone(s)),render:()=>renders++,toast:message=>messages.push(message),closeModal(){},currentDungeonFeatures:()=>[],caveObstacle:()=>false,dungeonTileEvent(){},party:()=>[],dungeonMap:room=>room.faction?FC.layout(s.seed,room.faction,room.level).map:TP.trialLayout(room).map});
  vm.runInContext(['resetExplorationMotion','caveEnter','caveLeave','caveMove','enterFactionCamp','enterBuilding','moveInside'].map(extract).join('\n'),h);
  return {h,s,saves,messages,renders:()=>renders};
 }

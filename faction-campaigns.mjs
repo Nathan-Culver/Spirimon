@@ -1,3 +1,4 @@
+import {guardPosition} from './npc-dialogue.mjs';
 import * as E from './engine.mjs';
 import * as A from './adventure-systems.mjs';
 import * as W from './world.mjs';
@@ -15,7 +16,7 @@ export function floorState(save,id,floor){const state=campaign(save,id);return s
 export function site(save,id){
  const state=campaign(save,id);if(state.site)return state.site;
  const p=E.coord(save.player.x,save.player.y),index=A.FACTIONS.findIndex(f=>f.id===id),reg=E.region(save.seed,p.cx,p.cy),buildings=reg.town?W.buildings(p.cx,p.cy):[],sx=12+index*11,sy=24-index*5;
- const reserved=[...shrinesForRegion(save.seed,p.cx,p.cy),regionalLegendSite(save.seed,p.cx,p.cy),...[E.caveEntrance(save.seed,p.cx,p.cy)].filter(Boolean)];
+ const reserved=[...Object.values(save.waitingEnemies||{}).flat(),...shrinesForRegion(save.seed,p.cx,p.cy),regionalLegendSite(save.seed,p.cx,p.cy),...[E.caveEntrance(save.seed,p.cx,p.cy)].filter(Boolean)];
  const terrainOpen=(x,y)=>x>=0&&x<48&&y>=0&&y<36&&E.walkable(E.tile(save.seed,p.cx*48+x,p.cy*36+y))&&!buildings.some(b=>W.buildingFootprintBlocked(b,p.cx*48+x,p.cy*36+y))&&(!reg.town||!W.featureFootprintBlocked(x,y,p.cx,p.cy));
  const reachable=new Set(),queue=[[p.lx,p.ly],[24,18]];for(let i=0;i<queue.length;i++){const [x,y]=queue[i],key=x+','+y;if(reachable.has(key)||!terrainOpen(x,y))continue;reachable.add(key);for(const [dx,dy]of [[1,0],[-1,0],[0,1],[0,-1]])queue.push([x+dx,y+dy]);}
  const open=(x,y)=>{const wx=p.cx*48+x,wy=p.cy*36+y;return reachable.has(x+','+y)&&!reserved.some(t=>Math.abs(t.x-wx)+Math.abs(t.y-wy)<5)&&x>2&&x<45&&y>2&&y<33&&E.walkable(E.tile(save.seed,wx,wy))&&!buildings.some(b=>W.buildingFootprintBlocked(b,wx,wy))&&(!reg.town||!W.featureFootprintBlocked(x,y,p.cx,p.cy));};
@@ -55,7 +56,7 @@ export function objective(save,id,floor){
 }
 export function canAdvance(save,id,floor){const s=floorState(save,id,floor);return floor===0?s.clues.filter(n=>n<3).length===3&&s.guard:floor===1?s.lever&&s.supplies.length===3&&s.guard:floor===2?s.arrayDisabled&&s.guard:campaign(save,id).complete;}
 export function interact(save,id,floor,feature){
- const room=save.cave,actual=layout(save.seed,id,floor).features.find(f=>f.id===feature?.id);if(room?.faction!==id||room.level!==floor||!actual||Math.abs(room.x-actual.x)+Math.abs(room.y-actual.y)>1)return {message:'Reach the physical objective and interact beside it. No investigation progress was changed.'};feature=actual;
+ const room=save.cave,actual=guardPosition(save,room,layout(save.seed,id,floor).features.find(f=>f.id===feature?.id));if(room?.faction!==id||room.level!==floor||!actual||Math.abs(room.x-actual.x)+Math.abs(room.y-actual.y)>1)return {message:'Reach the physical objective and interact beside it. No investigation progress was changed.'};feature=actual;
  const s=floorState(save,id,floor);s.rescues??=[];s.tripped??=[];s.alarm??=0;const faction=A.FACTIONS.find(f=>f.id===id);let message='';
  if(feature.kind==='faction-clue'){if(!s.clues.includes(feature.clue))s.clues.push(feature.clue);message=feature.clue===3?'The archive records the faction’s binding plans.':feature.name+' reveals a route toward '+faction.name+'’s inner compound.';}
  if(feature.kind==='faction-control'){s.lever=true;message='The counterweight opens the supply gate and silences the remaining tripwires. Barriers can also be moved or cleared with field capabilities.';}

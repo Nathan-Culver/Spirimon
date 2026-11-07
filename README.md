@@ -43,14 +43,14 @@ The base global cooldown is **3.5 seconds**, with a **1-second minimum**. Speed 
 
 | Gesture | Style | Commitment | Extra Technique uses |
 | --- | --- | --- | --- |
-| Tap | Normal | Current allocation | None |
-| Up / down | Strong / Agile | No extra drag commitment | None |
+| Tap | Normal | Equal attack / defense (50% / 50%) | None |
+| Up / down | Strong / Agile | Defensive (0% attack / 100% defense) | None |
 | Left / right | Agile / Strong | Increases with drag distance | None |
 | Up-left / up-right | Agile / Strong | Increases with drag distance | One or two |
-| Down-left / down-right | Agile / Strong | No extra drag commitment | One or two |
-| Double tap | Saved preset | Saved allocation | Saved choice |
+| Down-left / down-right | Agile / Strong | Defensive (0% attack / 100% defense) | One or two |
+| Double tap | Saved preset | Saved allocation, balanced if unset | Saved choice |
 
-Agile deals **85% of Normal damage** and improves accuracy, evasiveness and critical chance. Strong raises ordinary damage and adds **15 percentage points to critical damage**, keeping the ordinary critical chance. Extra uses pay resources and expose the actor to successive enemy retaliations. Health uses the original stat formula divided by two before later modifiers; standard damage applies the original calculation with a 1.25 multiplier.
+Agile deals **85% of Normal damage** and improves accuracy, evasiveness and critical chance. Strong raises ordinary damage and adds **15 percentage points to critical damage**, keeping the ordinary critical chance. Extra uses pay resources and expose the actor to successive enemy retaliations. Normal is the default and uses the original Health and damage formulas. Hard halves Health and multiplies damage by 1.25 for both sides. Easy gives owned Spirimon double Health and 1.25× damage; enemies have half Health and 0.75× damage. Difficulty does not change manifestation Energy costs. Switch outside battle without restoring Health percentages or cooldowns.
 
 Physical Techniques spend Stamina; Energy and Status Techniques spend Willpower. Pressure increases costs, shortages can convert the other pool at two-for-one, and Struggle is available when no equipped Technique can be funded. Techniques scale at levels 1, 16, 36, 60, 85 and 100. Each individual has four equipped Techniques, learned alternatives, genetics, nature, bonds, training, one Held Item and optional aspects.
 
@@ -58,11 +58,11 @@ See [live combat rules](docs/real-time-combat.md), [Held Items](docs/held-items.
 
 ## Classifications and passives
 
-There are twelve Types and **exactly nine Domains: Life, Death, Fate, Void, Spirit, Psionic, Nature, Storm and Magic**. Innate and equipped-Technique Domains combine without duplicates; replacing a Technique removes only its acquired affinity. Suppression applies immediately. Acquired Domains do not create passive slots.
+There are twelve Types and **36 established Domains**, including distinct Fire, Water, Air, Earth, Light, Dark and conceptual affinities. A first encounter has a 2% chance to document a new custom Domain, which persists with the journey and lineage. Innate and equipped-Technique Domains combine without duplicates; replacing a Technique removes only its acquired affinity. Suppression applies immediately. Acquired Domains do not create passive slots.
 
-Each Type and Domain has its own curated pool of sixteen passives: **21 distinct pools, 336 choices**. Their mechanical distributions and triggers differ: Beast emphasizes pursuit and finishing, Plant roots and weather, Fate anticipation and rhythm, Psionic mental control and casting, and so on. Effects include conditional accuracy/evasion, criticals, drain, thorns, regeneration, casting, recasts and healing. Each innate classification supplies one prepared passive. Study alternatives and prepare unlocked choices at safe places. Matching percentage effects cap at 25%; reactive passives cannot recursively trigger themselves or multiply by hit count.
+Each innate Type and Domain has sixteen passive choices. The 21 core pools retain their curated identities; restored and custom Domains receive thematic variations from a related pool, with their own names, selections and bounded values. Their mechanical distributions and triggers differ: Beast emphasizes pursuit and finishing, Plant roots and weather, Fate anticipation and rhythm, Psionic mental control and casting, and so on. Effects include conditional accuracy/evasion, criticals, drain, thorns, regeneration, casting, recasts and healing. Each innate classification supplies one prepared passive. Study alternatives and prepare unlocked choices at safe places. Matching percentage effects cap at 25%; reactive passives cannot recursively trigger themselves or multiply by hit count.
 
-Old Domains migrate into the nine classifications. Fire, Water, Ice and similar names survive as elemental motifs where needed for weather, artwork and field capabilities. Learned IDs, equipped slots, trained choices and cooldowns are preserved; merged passive slots migrate deterministically. See [classification rules and the exact migration table](docs/classification-reconciliation.md) and [all curated passives](docs/curated-passives.csv).
+The previous many-to-nine merge has been reversed. Retained original motifs restore their Domain identities, while Time/Fate, Space/Void, Mind/Psionic and Plant/Nature spelling aliases remain supported. Learned IDs, equipped slots, trained choices and cooldowns are preserved. See [classification rules](docs/classification-reconciliation.md), the [core passive catalog](docs/curated-passives.csv), and [difficulty, tutorials and dialogue](docs/difficulty-tutorial-dialogue.md).
 
 ## Progression and exploration
 
@@ -102,3 +102,11 @@ The progression audit walks the real Temple and faction maps, solves mechanisms,
 `engine.mjs` owns generation/combat rules; `realtime-combat.mjs` owns scheduling; `battle-session.mjs` owns live rosters, `enemy-tactics.mjs` owns shared enemy Sealer decisions; `battle-view.mjs` owns the battle interface. `temple-philosophies.mjs`, `faction-campaigns.mjs`, `domains.mjs` and `passive-catalog.mjs` hold the systems described above. `app.mjs` connects input, drawing and persistence.
 
 Pushes to main trigger the Pages build/tests/deployment workflow and standalone validation/packaging. The web build has one versioned JavaScript bundle and lazy artwork; the standalone HTML embeds built-in assets. Installed-app builds use bundled local assets without duplicating the HTML download. See [maintenance and release architecture](docs/maintenance.md) for budgets and workflow details. Older design documents may describe superseded behavior; the README and linked live-rule documents describe the current implementation.
+
+## Learning and difficulty
+
+Menu → Tutorial opens a sixteen-topic handbook. After your first seal, only your first real battle receives a guided lesson: explanations pause combat; the practice step resumes it for a real Technique command. Skip ends the lesson and resumes battle. Other battles retain real-time combat while browsing. Ordinary taps use balanced commitment; dragging previews the offensive and defensive split and stat multipliers. A semi-transparent Spirimon shortcut sits between Menu and Bag.
+
+NPC introductions rotate gameplay advice, world lore and Spirimon observations related to their roles. Road lookouts and eligible dungeon defenders detect an unobstructed forward line, approach the player and issue a mandatory challenge. Faction prerequisites remain enforced. Dialogue chains have distinct pre-battle and victory/defeat/retreat responses; defeated lookouts remain defeated in saves.
+
+Normal restores classic Shrine density (two per town, two or three per route). Hard keeps sparse Shrines and at most one per region. Easy guarantees one per town or route, with one across a city. All modes keep the shared one-action-per-Shrine reset rule. Cave encounter chance per step is 6.5% in Normal, 13% in Hard and 4% in Easy. Random encounters have an eight-step respite after battle; sight challenges still apply.

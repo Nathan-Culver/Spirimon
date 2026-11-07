@@ -1,3 +1,4 @@
+import {DOMAIN_DEFINITIONS} from './domains.mjs';
 import {spiritualHash} from './spiritual-core.mjs';
 import {innateClassifications,activeTypes,domainSources,canonicalDomain} from './classifications.mjs';
 import {CURATED_PASSIVES} from './passive-catalog.mjs';
@@ -7,7 +8,7 @@ const POOLS=new Map();
 export function passivePool(classification){
  classification=classification==='Plant'?'Plant':canonicalDomain(classification);
  if(POOLS.has(classification))return POOLS.get(classification);
- const rows=CURATED_PASSIVES[classification];if(!rows)return [];
+ let rows=CURATED_PASSIVES[classification];if(!rows){const family={Air:'Fey',Earth:'Giant',Fire:'Elemental',Water:'Ooze',Light:'Celestial',Dark:'Undead',Sun:'Life',Moon:'Spirit',Lightning:'Storm',Ice:'Construct',Metal:'Construct',Chaos:'Aberration',Law:'Fate',Good:'Life',Evil:'Fiend',Creation:'Life',Destruction:'Void',War:'Monstrosity',Peace:'Spirit',Fear:'Psionic',Wrath:'Fiend',Love:'Fey',Hope:'Celestial',Despair:'Death',Sorrow:'Spirit',Dreams:'Psionic',Nightmares:'Aberration'},affinity=DOMAIN_DEFINITIONS.get(classification)?.affinity,base=family[classification]||family[affinity]||affinity||'Magic';if(!DOMAIN_DEFINITIONS.has(classification))return [];rows=(CURATED_PASSIVES[base]||CURATED_PASSIVES.Magic).map((p,i)=>({...p,name:classification+' '+p.name,amount:Math.max(.01,Math.min(.25,p.amount+((spiritualHash(classification,i)%3)-1)*.01))}));}
  const pool=rows.map((row,index)=>({...row,id:classification.toLowerCase()+'-'+row.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/-$/,''),classification,index,description:'Provides '+Math.round(row.amount*100)+'% '+LABELS[row.kind]+(row.condition?' '+WHEN[row.condition]:''),revision:2}));
  POOLS.set(classification,pool);return pool;
 }

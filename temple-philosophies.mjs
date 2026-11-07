@@ -1,3 +1,4 @@
+import {guardPosition} from './npc-dialogue.mjs';
 import {spiritualHash} from './spiritual-core.mjs';
 export const TEMPLE_PHILOSOPHIES=['Attrition','Counterplay','Tempo','Resilience','Control','Transformation','Synergy','Prediction'];
 export const PHILOSOPHY_RULES={
@@ -76,7 +77,7 @@ export function trialObjective(save,room){
 }
 function nearby(room,f){return Math.abs(room.x-f.x)+Math.abs(room.y-f.y)<=1;}
 export function interactTrial(save,room,feature){
- const actual=trialLayout(room).features.find(f=>f.id===feature?.id);if(save.cave?.id!==room.id||save.cave.level!==room.level||!actual||!nearby(save.cave,actual))return {ok:false,message:'Approach the trial mechanism before interacting.'};
+ const actual=guardPosition(save,room,trialLayout(room).features.find(f=>f.id===feature?.id));if(save.cave?.id!==room.id||save.cave.level!==room.level||!actual||!nearby(save.cave,actual))return {ok:false,message:'Approach the trial mechanism before interacting.'};
  const s=trialState(save,room),p=plan(room),n=actual.order;
  if(actual.kind==='temple-inscription'){s.observed=true;return {ok:true,message:trialClue(save,room)};}
  if(actual.kind==='temple-reset'){if(!s.solved)Object.assign(s,{progress:0,completed:[],pairs:[],mask:0,phase:0,linkStart:null,deadline:0});return {ok:true,message:s.solved?'The completed trial remains open.':'The mechanisms reset. '+trialClue(save,room)};}

@@ -33,7 +33,7 @@ function applyRealTimeContext(ctx){
 }
 function configureEnemyRoster(team){
  const battle=getBattle(),s=getState();
- if(!battle)return;battle.enemyRoster=[...new Map(team.map(u=>[u.id,u])).values()].slice(0,6);for(const u of battle.enemyRoster)BAI.prepareOpponent(u,spOf(u),s.rank,E.rng(E.hash(s.seed,u.id,'loadout')));
+ if(!battle)return;battle.enemyRoster=[...new Map(team.map(u=>[u.id,u])).values()].slice(0,6);for(const u of battle.enemyRoster){E.applyUnitDifficulty(u,spOf(u),s.settings?.difficulty||'normal','enemy');BAI.prepareOpponent(u,spOf(u),s.rank,E.rng(E.hash(s.seed,u.id,'loadout')));}
  battle.enemySealer=persistentEnemySealer(battle.sealerKey,battle.enemyRoster);battle.enemySealer.clockMs=battle.rt.elapsedMs;
  const ids=battle.multi.enemies.map(u=>u.id);battle.multi.enemies=battle.enemyRoster.filter(u=>ids.includes(u.id)&&u.hp>0).slice(0,3);if(!battle.multi.enemies.length&&battle.enemyRoster[0])battle.multi.enemies=[battle.enemyRoster[0]];battle.enemy=battle.multi.enemies[0]||battle.enemy;battle.multi.reserves=battle.enemyRoster.filter(u=>!battle.multi.enemies.includes(u));E.bindBattlefield(party(),battle.enemyRoster);
 }

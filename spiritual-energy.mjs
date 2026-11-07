@@ -1,3 +1,4 @@
+import {difficultyFactor} from './difficulty.mjs';
 import {PHILOSOPHY_SUPPORT} from './temple-philosophies.mjs';
 import {canonicalDomain} from './domains.mjs';
 import * as SD from './sealer-disciplines.mjs';
@@ -35,7 +36,8 @@ export function gainSealerXP(save,amount,eventId=null){const q=save.sealer||ensu
 export function trainSealer(save,eventId,{ritual=false}={}){const q=save.sealer||ensureSealer(save);const key='training:'+eventId;if(q.discoveries[key])return false;q.discoveries[key]=true;if(ritual)q.rituals.push(eventId);else q.training=Math.min(20,q.training+1);SD.awardAttribute(q,key,{attribute:ritual?'output':'reserve',points:ritual?2:1});gainSealerXP(save,30);q.maxEnergy=maximumEnergy(q,save.spirits||[]);return true;}
 export function bondRecovery(save,ind){const q=save.sealer||ensureSealer(save),key=ind.id+':'+calendarPhase(save.playTime).key;if(q.bondRewards[key])return 0;q.bondRewards[key]=true;gainSealerXP(save,5);return restoreEnergy(q,q.maxEnergy*.04);}
 export function combatStrength(ind,sp){
- const st=E.stats(ind,sp),moves=E.equippedMoves(ind,sp),durability=Math.sqrt(st.hp*Math.sqrt(st.defense*st.resistance));
+ // Difficulty changes survivability, not the spiritual price of the same lineage.
+ const st=E.stats(ind,sp),moves=E.equippedMoves(ind,sp),durability=Math.sqrt(st.hp/difficultyFactor(ind,'health')*.5*Math.sqrt(st.defense*st.resistance));
  const offense=Math.max(1,...moves.filter(m=>m.power>0).map(m=>{const p=moveTiming(m,ind,sp),hits=m.effect==='multiHit'?3.5:m.effect==='doubleHit'?2:1,stat=E.moveCategory(m)==='Energy'?st.power:st.might;return ((2*ind.level/5+2)*p.power*(stat/Math.max(50,45+ind.level*2.2))/24+2)*hits*(m.accuracy??.9)/(Math.max(p.castMs,p.timing==='gcd'?p.gcdMs:p.cooldownMs)/1000); }));
  const utility=moves.reduce((sum,m)=>sum+(moveTiming(m,ind,sp).work-Math.max(0,m.power||0))*.03,0);
  const passive=sp.ability==='Pressure'?1.12:sp.ability==='Second Wind'?1.08:1.05;

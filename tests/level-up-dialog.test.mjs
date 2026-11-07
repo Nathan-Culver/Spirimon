@@ -1,3 +1,6 @@
+import * as TUTORIAL from '../tutorials.mjs';
+import {restoreDomainRegistry,discoverCustomDomain} from '../domains.mjs';
+import {enemySpeech} from '../npc-dialogue.mjs';
 import {battleRewards} from '../battle-rewards.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -12,7 +15,7 @@ function harness(){
  const units=species.map((sp,n)=>({...E.heal(E.makeIndividual(sp,4,0,E.rng(n)),sp),id:'ally-'+n,xp:71}));state.spirits=units;state.party=units.map(u=>u.id);
  const dialogs=[],toasts=[],details=[],transforms=[];let saves=0;
  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- const h=vm.createContext({E,battleRewards,s:state,battle:{ally:units[0].id,enemy:{level:10},participants:units.map(u=>u.id),trainer:false},SE:{gainSealerXP(){},bondRecovery(){}},esc,spOf:ind=>state.species[ind.species],sprite:(sp,form)=>'<canvas data-species="'+sp.id+'" data-form="'+form+'"></canvas>',action:(type,text,value='')=>'<button data-action="'+type+'" data-value="'+value+'">'+text+'</button>',safe:()=>true,showModal:(title,html,options)=>dialogs.push({title,html,options}),toast:text=>toasts.push(text),detail:id=>details.push(id),transformSpirit:(...args)=>transforms.push(args),save:()=>saves++,render(){},endCombatState(){},questState:()=>({}),renown(){},awardBattleEquipment(){},removeRoamer(){},ensurePlayerOnPath(){},note(){}});
+ const h=vm.createContext({TUTORIAL,restoreDomainRegistry,discoverCustomDomain,enemySpeech,encounterAftermath:()=>'',E,battleRewards,s:state,battle:{ally:units[0].id,enemy:{level:10},participants:units.map(u=>u.id),trainer:false},SE:{gainSealerXP(){},bondRecovery(){}},esc,spOf:ind=>state.species[ind.species],sprite:(sp,form)=>'<canvas data-species="'+sp.id+'" data-form="'+form+'"></canvas>',action:(type,text,value='')=>'<button data-action="'+type+'" data-value="'+value+'">'+text+'</button>',safe:()=>true,showModal:(title,html,options)=>dialogs.push({title,html,options}),toast:text=>toasts.push(text),detail:id=>details.push(id),transformSpirit:(...args)=>transforms.push(args),save:()=>saves++,render(){},endCombatState(){},questState:()=>({}),renown(){},awardBattleEquipment(){},removeRoamer(){},ensurePlayerOnPath(){},note(){}});
  vm.runInContext(['gainSpirimonXP','levelUpHTML','showTrainingAdvancement','training','shareOffering','recordBattleQuestProgress','winBattle'].map(extract).join('\n'),h);
  return {h,state,species,units,dialogs,toasts,details,transforms,saves:()=>saves,eval:code=>vm.runInContext(code,h)};
 }

@@ -1,13 +1,15 @@
+import {difficultyKey,currentDifficulty} from './difficulty.mjs';
 import * as E from './engine.mjs';
 import * as W from './world.mjs';
 import {drawShrineArtwork} from './sacred-art.mjs';
 const cache=new Map();
-export function shrinesForRegion(seed,cx,cy){
- const key=seed+'|'+cx+'|'+cy;if(cache.has(key))return cache.get(key);
+export function shrinesForRegion(seed,cx,cy,mode=currentDifficulty()){
+ mode=difficultyKey(mode);
+ const key=mode+'|'+seed+'|'+cx+'|'+cy;if(cache.has(key))return cache.get(key);
  const reg=E.region(seed,cx,cy),r=E.rng(E.hash(seed,'shrines',cx,cy)),oldCount=reg.town?2:2+(E.hash(seed,cx,cy,'pilgrimage')%3===0?1:0),out=[];
  // One candidate, with one quarter of the previous expected shrine density.
  const cityAnchor=reg.cityKey?.split(',').map(Number);
- const count=cx===0&&cy===0||(!cityAnchor||cx===cityAnchor[0]&&cy===cityAnchor[1])&&E.rng(E.hash(seed,'shrine-density',cx,cy))()<oldCount/4?1:0;
+ const anchor=!cityAnchor||cx===cityAnchor[0]&&cy===cityAnchor[1],count=mode==='normal'?oldCount:cx===0&&cy===0||anchor&&(mode==='easy'||E.rng(E.hash(seed,'shrine-density',cx,cy))()<oldCount/4)?1:0;
  if(!count){cache.set(key,out);return out;}
  const buildings=reg.town?W.buildings(cx,cy):[],reachable=new Set(),queue=[[24,18]];
  const accessible=(lx,ly)=>{const x=cx*48+lx,y=cy*36+ly;return E.walkable(E.tile(seed,x,y))&&!buildings.some(b=>W.buildingFootprintBlocked(b,x,y))&&(!reg.town||!W.featureFootprintBlocked(lx,ly,cx,cy));};

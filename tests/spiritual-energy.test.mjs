@@ -110,8 +110,8 @@ test('enemy Sealers use the same release, exhaustion and support rules without b
 test('shrines are deterministic, traversable, sparse and capped at one per region',()=>{
  let total=0,previous=0,empty=0;
  for(let x=-3;x<=3;x++)for(let y=-3;y<=3;y++){
-  const reg=E.region('shrines',x,y),list=SW.shrinesForRegion('shrines',x,y);
-  assert.deepEqual(SW.shrinesForRegion('shrines',x,y),list);assert.ok(list.length<=1);
+  const reg=E.region('shrines',x,y),list=SW.shrinesForRegion('shrines',x,y,'hard');
+  assert.deepEqual(SW.shrinesForRegion('shrines',x,y,'hard'),list);assert.ok(list.length<=1);
   previous+=reg.town?2:2+(E.hash('shrines',x,y,'pilgrimage')%3===0?1:0);
   if(!list.length)empty++;
   for(const t of list){assert.ok(E.walkable(E.tile('shrines',t.x,t.y)));assert.ok(E.walkable(E.tile('shrines',t.x,t.y+1)));assert.equal(E.coord(t.x,t.y).cx,x);assert.equal(E.coord(t.x,t.y).cy,y);if(reg.city)assert.equal(reg.key,reg.cityKey);}

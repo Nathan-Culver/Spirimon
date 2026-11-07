@@ -21,7 +21,7 @@ const directions=[
 ];
 for(const [name,dx,dy,arrow,style,commit,extra,detail] of directions)test(name+' previews and submits the same gesture',()=>{
  const f=harness();f.emit('pointerdown');f.emit('pointermove',{clientX:dx,clientY:dy});
- assert.equal(f.button.dataset.gesturePreview,arrow+' '+style.toUpperCase()+'\n'+detail);
+ assert.ok(f.button.dataset.gesturePreview.startsWith(arrow+' '+style.toUpperCase()+'\n'));assert.ok(f.button.dataset.gesturePreview.includes('ATK '+Math.round(commit*100)+'% / DEF '+Math.round((1-commit)*100)+'%'));assert.match(f.button.dataset.gesturePreview,/stats [0-9.]+× \/ [0-9.]+×/);if(extra)assert.ok(f.button.dataset.gesturePreview.includes('+'+extra+' extra Technique'));
  assert.equal(f.lines.length,1);assert.equal(f.lines[0].style.width,Math.hypot(dx,dy)+'px');assert.equal(f.lines[0].style.transform,'rotate('+Math.atan2(dy,dx)+'rad)');assert.equal(f.calls.length,0);
  f.emit('pointerup',{clientX:dx,clientY:dy});assert.deepEqual(f.calls,[['ally|0',style,commit,extra]]);
  assert.equal(f.button.dataset.gesturePreview,undefined);assert.equal(f.lines.length,0);

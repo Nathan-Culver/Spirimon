@@ -47,11 +47,11 @@ export function appropriateDomain(sp){
  return canonicalDomain([...score.keys()].sort((a,b)=>score.get(b)-score.get(a)||designHash(sp.id||sp.seed,a)-designHash(sp.id||sp.seed,b))[0]);
 }
 export function assignDomains(sp,r=()=>.5,additional=true){
- const settled=sp.domainRevision===2;normalizeSpeciesDomains(sp);const previous=canonicalDomains(sp.domains);
+ const settled=sp.domainRevision===3;normalizeSpeciesDomains(sp);const previous=canonicalDomains(sp.domains);
  if(settled&&previous.length){sp.domains=previous;return sp.domains;}
  const primary=previous[0]||canonicalDomain(appropriateDomain(sp)),domains=[primary,...previous.filter(d=>d!==primary)];
  if(additional)while(domains.length<CREATURE_DOMAINS.length&&r()<.01){const choices=CREATURE_DOMAINS.filter(d=>!domains.includes(d));domains.push(choices[Math.min(choices.length-1,Math.floor(r()*choices.length))]);}
- sp.domains=domains;sp.domainRevision=2;return domains;
+ sp.domains=domains;sp.domainRevision=3;return domains;
 }
 export function capabilitiesFromAnatomy(anatomy,domains=[],elements=[]){
  if(!anatomy)return {};const traits=new Set(anatomy.traits||[]),has=x=>traits.has(x),verified=['image-analysis','procedural-render'].includes(anatomy.source)&&anatomy.confidence>=.8;

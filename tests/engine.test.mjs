@@ -35,12 +35,12 @@ test('Strong keeps normal critical chance and adds fifteen percentage points to 
 });
 
 test('maximum Health halves the starting formula after form scaling and before later modifiers',()=>{
- const sp={...a,health:60},u={...ind(sp,10),ivs:{hp:20},evs:{hp:40},rareVariant:false,aspect:'Natural'};
+ const sp={...a,health:60},u={difficulty:'hard',difficultySide:'player',...ind(sp,10),ivs:{hp:20},evs:{hp:40},rareVariant:false,aspect:'Natural'};
  for(const [form,expected] of [[0,70],[1,87],[2,105]]){u.form=form;const max=E.stats(u,sp).hp;const passiveFree={...sp,passives:{}};assert.ok(max>=expected);assert.equal(E.stats(u,passiveFree).hp,expected);}
  const base={...sp,passives:{}};u.form=0;u.rareVariant=true;assert.equal(E.stats(u,base).hp,72);u.rareVariant=false;u.aspect='Titan';assert.equal(E.stats(u,base).hp,82);
 });
 test('save migration clamps owned, roaming and saved enemy Health to the new maximum without restoring damage or reviving',()=>{
  const sp=E.makeSpecies('health-migration','Beast','Fey'),u=ind(sp),hurt=ind(sp),fainted=ind(sp),wild=ind(sp),enemy=ind(sp),incoming=ind(sp);u.hp=wild.hp=enemy.hp=incoming.hp=10000;hurt.hp=1;fainted.hp=0;
- const save={species:{[sp.id]:sp},spirits:[u,hurt,fainted],roamers:{one:[{ind:wild}]},battle:{enemy,enemyRoster:[enemy]},trade:{incoming},party:[u.id]};E.migrateSaveCreatures(save);
+ const save={settings:{difficulty:'hard'},species:{[sp.id]:sp},spirits:[u,hurt,fainted],roamers:{one:[{ind:wild}]},battle:{enemy,enemyRoster:[enemy]},trade:{incoming},party:[u.id]};E.migrateSaveCreatures(save);
  for(const unit of [u,wild,enemy,incoming])assert.equal(unit.hp,E.stats(unit,sp).hp);assert.equal(hurt.hp,1);assert.equal(fainted.hp,0);const once=JSON.stringify(save);E.migrateSaveCreatures(save);assert.equal(JSON.stringify(save),once);
 });

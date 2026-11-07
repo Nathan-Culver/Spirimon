@@ -1,3 +1,7 @@
+import * as E from '../engine.mjs';
+import * as TUTORIAL from '../tutorials.mjs';
+import {restoreDomainRegistry,discoverCustomDomain} from '../domains.mjs';
+import {enemySpeech} from '../npc-dialogue.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -63,7 +67,7 @@ test('imported species and encounter-place text is escaped in the guide',()=>{
 });
 test('the real menu and discovery hook expose the guide and record an encountered higher form',()=>{
  const app=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');const start=app.indexOf('function discover('),end=app.indexOf('\nconst npcWander',start);
- const s=journey(),notes=[];const h=vm.createContext({DEX,s,currentRegion:()=>({name:'Highland'}),note:m=>notes.push(m),save(){},sp:species[0]});vm.runInContext(app.slice(start,end)+'\ndiscover(sp,2);discover(sp,2);',h);
+ const s=journey(),notes=[];const h=vm.createContext({TUTORIAL,restoreDomainRegistry,discoverCustomDomain,enemySpeech,encounterAftermath:()=>'',E,DEX,s,currentRegion:()=>({name:'Highland'}),note:m=>notes.push(m),save(){},sp:species[0]});vm.runInContext(app.slice(start,end)+'\ndiscover(sp,2);discover(sp,2);',h);
  assert.deepEqual(s.spiridex.entries[species[0].id].seenForms,[2]);assert.equal(notes.length,1);
  assert.match(app,/action\('view','SPIRIDEX','spiridex'\)/);assert.match(app,/view==='spiridex'\?spiridexHTML\(\)/);assert.match(app,/discover\(spOf\(enemy\),enemy.appearance\)/);
 });

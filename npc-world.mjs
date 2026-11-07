@@ -1,0 +1,7 @@
+import {shrinesForRegion} from './spiritual-world.mjs';
+import * as E from './engine.mjs';
+import * as W from './world.mjs';
+const factions=['ashen-hand','hollow-choir','veil-conclave'];
+export function waitingEnemies(save,cx,cy){if(!cx&&!cy)return [];save.waitingEnemies??={};const key=cx+','+cy;if(save.waitingEnemies[key])return save.waitingEnemies[key];const r=E.rng(E.hash(save.seed,'waiting-enemy',cx,cy));if(r()>.4)return save.waitingEnemies[key]=[];const town=E.region(save.seed,cx,cy).town,buildings=town?W.buildings(cx,cy):[],axis=r()<.5,side=r()<.5?-1:1,reserved=[...shrinesForRegion(save.seed,cx,cy,'normal'),E.caveEntrance(save.seed,cx,cy),...Object.values(save.factionCampaigns||{}).map(c=>c.site)].filter(Boolean);
+ for(let offset=8;offset<=14;offset++){const lx=axis?24+side*offset:24,ly=axis?19:18+side*offset,x=cx*48+lx,y=cy*36+ly;if(reserved.some(p=>Math.abs(p.x-x)+Math.abs(p.y-y)<4)||!E.walkable(E.tile(save.seed,x,y))||buildings.some(b=>W.buildingFootprintBlocked(b,x,y))||town&&W.featureFootprintBlocked(lx,ly,cx,cy))continue;const faction=factions[Math.floor(r()*factions.length)];return save.waitingEnemies[key]=[{id:'watcher-'+key,name:{'ashen-hand':'Ashen Hand lookout','hollow-choir':'Hollow Choir cantor','veil-conclave':'Veil Conclave observer'}[faction],role:'villain',faction,x,y,face:axis?(side<0?'right':'left'):(side<0?'down':'up')}];}return save.waitingEnemies[key]=[];
+}

@@ -46,9 +46,14 @@ test('item restrictions hide consumables without disabling ready attacks',()=>{
  const t=harness();t.allies[0].hp-=5;assert.match(t.actions(),/Tonic ×2/);t.battle.rules.noItems=true;assert.doesNotMatch(t.actions(),/Tonic ×2/);assert.match(t.actions(),/data-unified-move=/);
 });
 test('Technique action tooltips keep the narrative description',()=>{
- const t=harness();assert.ok(t.actions().includes('title="'+E.moveLore(t.hit).description+'"'));
+ const t=harness();assert.ok(t.actions().includes(E.moveLore(t.hit).description+'"'));assert.match(t.actions(),/50% attack/);
 });
 test('legacy battles migrate to the current view and never expose the old round UI',()=>{
  const t=harness();delete t.battle.rt;t.battle.credits={a:2,b:1};t.battle.multi.orders={one:{move:t.hit}};
  const html=vm.runInContext('battleHTML()',t.h);assert.equal(t.battle.rt.version,2);assert.equal(t.battle.credits,undefined);assert.deepEqual(Object.keys(t.battle.multi.orders),[]);assert.match(html,/unified-action-grid/);assert.doesNotMatch(html,/ROUND |YOUR BONUS|USE Test Strike/);
+});
+
+test('guided practice keeps time paused while exposing a real Technique command, with other lessons disabled',()=>{
+ const t=harness();t.battle.rt.paused=true;t.battle.lesson={stage:5,practice:true};assert.match(t.actions(),/data-unified-move/);assert.doesNotMatch(t.actions(),/<button disabled class="unified-action ua-move/);assert.equal(t.battle.rt.paused,true);
+ t.battle.lesson={stage:2,practice:false};assert.match(t.actions(),/<button disabled class="unified-action ua-move/);assert.equal(t.battle.rt.paused,true);
 });
