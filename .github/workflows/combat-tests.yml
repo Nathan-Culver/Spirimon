@@ -28,3 +28,11 @@ jobs:
         run: for file in *.mjs; do node --check "$file" || exit 1; done
       - run: npm test
 
+      - name: Simulate complete progression and expanded campaigns
+        run: node tools/audit-progression.mjs --expanded progression-1
+      - name: Preserve progression evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: progression-audit
+          path: docs/*progression-audit.json

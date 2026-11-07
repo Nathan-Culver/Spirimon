@@ -1,3 +1,4 @@
+import {companionRig,companionFrame,drawRigFrame} from './companion-animation.mjs';
 import {readyImage} from './asset-loader.mjs';
 import {MYSTERY_STATIC,MYSTERY_WALK} from './placeholder-art.mjs';
 import {townFeatures} from './towns.mjs';
@@ -18,56 +19,30 @@ export function creatureArtworkSource(sp,form=0){
 export function shade(hex,n){const v=parseInt(hex.slice(1),16);return'#'+[v>>16,(v>>8)&255,v&255].map(x=>Math.max(0,Math.min(255,x+n)).toString(16).padStart(2,'0')).join('');}
 function ellipse(c,x,y,rx,ry,color){c.fillStyle=color;for(let yy=-ry;yy<=ry;yy++){const w=Math.round(rx*Math.sqrt(Math.max(0,1-yy*yy/(ry*ry))));c.fillRect(Math.round(x-w),Math.round(y+yy),w*2+1,1);}}
 function poly(c,pts,color){c.fillStyle=color;c.beginPath();pts.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.closePath();c.fill();}
-// Companion sheets use four rows (north,south,west,east), four frames each,
-// and one sheet per evolution form. Missing sheets fall back to roster artwork.
-// Each species and evolution has its own cached 4x4 walking atlas.
-// Source art remains the authoritative creature image. Dedicated authored
-// direction sheets in assets/companions take precedence when supplied.
-const companionSheets=new Map();
+// Four directions, four articulated poses per form. Keep at most 24 baked
+// canvases (6 MiB), including mounts and followers in caves and interiors.
+const companionSheets=new Map(),COMPANION_CACHE_LIMIT=24;
+export function companionCacheSize(){return companionSheets.size;}
 function generatedCompanionSheet(sp,form){
  const artwork=creatureArtworkSource(sp,form);if(!artwork)return null;
- const key=sp.id+':'+form+':'+artwork;
- const existing=companionSheets.get(key);
- if(existing)return existing;
- const source=readyImage(artwork);
- if(!source)return null;
- const cell=64,canvas=document.createElement('canvas');
- canvas.width=cell*4;canvas.height=cell*4;
+ const rear=battleBackSource(sp,form),key=[sp.id,form,artwork,rear?.source,JSON.stringify(rear?.frame),sp.artRevision].join(':');
+ const existing=companionSheets.get(key);if(existing){companionSheets.delete(key);companionSheets.set(key,existing);return existing;}
+ const front=readyImage(artwork),back=rear&&readyImage(rear.source);if(!front||rear&&!back)return null;
+ const cell=64,canvas=document.createElement('canvas');canvas.width=canvas.height=cell*4;
  const g=canvas.getContext('2d');g.imageSmoothingEnabled=false;
- const srcX=sp.atlas?Math.max(0,Math.min(2,form))*256:0;
- const srcW=sp.atlas?256:source.naturalWidth||source.width;
- const srcH=sp.atlas?256:source.naturalHeight||source.height;
+ const fw=front.naturalWidth||front.width,fh=front.naturalHeight||front.height,frontRect=sp.atlas?[Math.max(0,Math.min(2,form))*256,0,256,256]:[0,0,fw,fh];
+ const bw=back&&(back.naturalWidth||back.width),bh=back&&(back.naturalHeight||back.height),backRect=rear&&(rear.frame||[rear.atlas?rear.form*bw/3:0,0,rear.atlas?bw/3:bw,bh]);
+ const rig=companionRig(sp,form);
  for(let direction=0;direction<4;direction++)for(let frame=0;frame<4;frame++){
-  const cx=frame*cell+cell/2,cy=direction*cell+cell/2;
-  const step=[0,-2,0,2][frame],stride=[0,1,0,-1][frame];
-  g.save();g.translate(cx,cy+step);
-  // Preserve the original creature design; the horizontal directions
-  // use mirrored source art, while vertical directions use foreshortening.
-  if(direction===2)g.scale(-1,1);
-  if(direction===0||direction===1){
-   g.scale(direction===0?.84:.94,direction===0?.88:1);
-  }
-  g.rotate(stride*.035);
-  g.drawImage(source,srcX,0,srcW,srcH,-cell/2,-cell/2,cell,cell);
-  g.restore();
+  const image=direction===0&&back?back:front,rect=direction===0&&back?backRect:frontRect;
+  g.save();g.translate(frame*cell,direction*cell);g.beginPath();g.rect(0,0,cell,cell);g.clip();drawRigFrame(g,image,rect,rig,frame,direction,cell);g.restore();
  }
- companionSheets.set(key,canvas);
+ companionSheets.set(key,canvas);if(companionSheets.size>COMPANION_CACHE_LIMIT)companionSheets.delete(companionSheets.keys().next().value);
  return canvas;
 }
 export function drawCompanion(ctx,sp,form,x,y,size=36,face='down',moving=false,progress=0){
- if(!sp)return;
- const row={up:0,down:1,left:3,right:2}[face]??1;
- const frame=moving?Math.min(3,Math.floor(Math.max(0,progress)*4)):0;
- // Avoid requesting hundreds of nonexistent files: explicit authored
- // sheets are opt-in; generated sheets cover all existing roster forms.
- const authored=sp.companionSheets?.[form];
- const sheet=authored?readyImage(authored):generatedCompanionSheet(sp,form);
- if(sheet){
-  const sw=sheet.width/4,sh=sheet.height/4;
-  ctx.save();ctx.imageSmoothingEnabled=false;
-  ctx.drawImage(sheet,frame*sw,row*sh,sw,sh,x,y,size,size);
-  ctx.restore();return;
- }
+ if(!sp)return;const {row,frame}=companionFrame(face,moving,progress),authored=sp.companionSheets?.[form],sheet=authored?readyImage(authored):generatedCompanionSheet(sp,form);
+ if(sheet){const sw=sheet.width/4,sh=sheet.height/4;ctx.save();ctx.imageSmoothingEnabled=false;ctx.drawImage(sheet,frame*sw,row*sh,sw,sh,x,y,size,size);ctx.restore();return;}
  drawMysteryPlaceholder(ctx,x,y,size,{face,moving,progress});
 }
 // Atlas rows are up, down, left, right; each contains one looping four-frame walk.

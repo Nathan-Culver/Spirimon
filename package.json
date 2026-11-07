@@ -10,6 +10,7 @@
     "build": "node build.mjs",
     "build:font": "node tools/build-font.cjs",
     "audit:moves": "node tools/audit-real-time-moves.mjs",
+    "audit:progression": "node tools/audit-progression.mjs --expanded progression-1",
     "audit:energy": "node tools/audit-spiritual-economy.mjs"
   },
   "engines": {

@@ -73,7 +73,7 @@ test('the live movement collision uses one base row for buildings, props, shrine
 
 test('world renderer covers actors behind each building and draws actors in front of its base',()=>{
  const s=E.newGame('opening'),order=[],canvas={width:240,height:160,getBoundingClientRect:()=>({width:480,height:320}),getContext:()=>({fillRect(){}})};
- const h=vm.createContext({E,W,SW:{shrinesForRegion:()=>[]},s,view:'explore',battle:null,walkAnim:null,mapCamera:null,
+ const h=vm.createContext({E,W,FC:{knownSites:()=>[]},drawAdventureWaypoint(){},SW:{shrinesForRegion:()=>[]},s,view:'explore',battle:null,walkAnim:null,mapCamera:null,
   sceneryDepth,caveFootprint,document:{body:{classList:{contains:()=>false}}},$:id=>id==='#world'?canvas:null,
   ART:{terrain:'terrain',world:'world',sealer:'sealer'},TOWN_ATLAS:'town',readyImage:()=>true,
   updateMapCamera:()=>({left:(s.player.x-3)*32,top:(s.player.y-2)*32}),townNPCs:()=>[],drawTile(){},drawTallGrass(){},

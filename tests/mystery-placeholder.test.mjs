@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
+import {companionRig,companionFrame,drawRigFrame} from '../companion-animation.mjs';
+import {battleBackSource} from '../battle-art.mjs';
 import {MYSTERY_STATIC,MYSTERY_WALK,PLACEHOLDER_ART} from '../placeholder-art.mjs';
 import {createImageLoader,preloadImages} from '../asset-loader.mjs';
 
@@ -10,8 +12,8 @@ const still={id:'mystery-still',width:256,height:171},walk={id:'mystery-walk',wi
 function harness(){
  const images=new Map([[MYSTERY_STATIC,still],[MYSTERY_WALK,walk]]),draws=[],requests=[];
  let made=0;
- const ctx={save(){},restore(){},translate(){},scale(){},rotate(){},clearRect(){},drawImage(...args){draws.push(args);}};
- const context=vm.createContext({MYSTERY_STATIC,MYSTERY_WALK,readyImage(path){requests.push(path);return images.get(path)||null;},document:{createElement(){made++;return {width:0,height:0,getContext:()=>ctx};}}});
+ const ctx={save(){},restore(){},translate(){},scale(){},rotate(){},beginPath(){},rect(){},clip(){},moveTo(){},lineTo(){},closePath(){},transform(){},clearRect(){},drawImage(...args){draws.push(args);}};
+ const context=vm.createContext({companionRig,companionFrame,drawRigFrame,battleBackSource,MYSTERY_STATIC,MYSTERY_WALK,readyImage(path){requests.push(path);return images.get(path)||null;},document:{createElement(){made++;return {width:0,height:0,getContext:()=>ctx};}}});
  vm.runInContext(source,context);return {context,ctx,draws,images,requests,created:()=>made,call:expression=>vm.runInContext(expression,context)};
 }
 test('every missing species and evolution uses the same supplied mystery creature',()=>{

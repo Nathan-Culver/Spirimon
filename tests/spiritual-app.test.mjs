@@ -63,3 +63,11 @@ test('full restoration rejects towns, interiors and battle and succeeds beside a
  delete h.s.interior;nearby={id:'shrine-test'};h.battle={};vm.runInContext('rest()',h);assert.equal(u.hp,1);
  h.battle=null;vm.runInContext('rest()',h);assert.equal(u.hp,E.stats(u,h.s.species[u.species]).hp);assert.equal(h.s.sealer.energy,h.s.sealer.maxEnergy);
 });
+
+test('physical faction leaders use themed ordinary species, retain boss phases, and show a complete opponent name',()=>{
+ const h=harness(),ordinary=Object.values(h.s.species)[0];ordinary.atlas='finished.webp';h.hasFinishedArtwork=sp=>!!sp.atlas;
+ const legend={...structuredClone(ordinary),id:'legendary-test',legendary:true};h.s.species[legend.id]=legend;
+ h.profile={types:[ordinary.base],level:22,teamSize:3,maxActive:3,opponent:'Marshal Veyra'};
+ vm.runInContext("prepareCompetitionBattle('faction','ashen-hand',profile)",h);
+ assert.equal(h.battle.enemyRoster.length,3);assert.ok(h.battle.enemyRoster.every(u=>!h.s.species[u.species].legendary));assert.equal(h.battle.message,'Marshal Veyra');assert.equal(h.battle.boss.phase,0);assert.equal(h.battle.boss.shield,1);
+});

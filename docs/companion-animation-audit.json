@@ -1,0 +1,16 @@
+{
+  "forms": 462,
+  "frames": 7392,
+  "empty": [],
+  "clipped": [],
+  "rigs": {
+    "flow": 45,
+    "quadruped": 188,
+    "biped": 64,
+    "rooted": 50,
+    "hover": 31,
+    "winged": 65,
+    "scuttle": 13,
+    "serpentine": 6
+  }
+}
