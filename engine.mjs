@@ -576,8 +576,8 @@ export function resolveMultiSpiritRound(allies,enemies,allyChoices,enemyChoices,
 
 const terrainMemo=new Map();export function tile(seed,x,y){const key=seed+'|'+x+'|'+y;if(terrainMemo.has(key))return terrainMemo.get(key);const value=rawTile(seed,x,y);if(terrainMemo.size>100000)terrainMemo.clear();terrainMemo.set(key,value);return value;}
 
-export function encounterRange(seed,cx,cy,towns=0){const distance=Math.max(Math.abs(cx),Math.abs(cy));if(distance===0)return{minLevel:1,maxLevel:5};if(distance===1)return{minLevel:6,maxLevel:8};let min=6,left=Math.max(0,towns),tier=0;while(left>0){const span=1+hash(seed,'town-span',tier)%3;if(left<span)break;left-=span;min+=1+hash(seed,'town-rise',tier)%3;tier++;}return{minLevel:min,maxLevel:min+2};}
-export function encounterLevel(reg,r=Math.random){const min=reg.minLevel??reg.danger??1,max=reg.maxLevel??min+2;return min+Math.floor(r()*(max-min+1));}
+export function encounterRange(seed,cx,cy,towns=0){const distance=Math.max(Math.abs(cx),Math.abs(cy));if(distance===0)return{minLevel:1,maxLevel:3};if(distance===1)return{minLevel:3,maxLevel:5};let min=6,left=Math.max(0,towns),tier=0;while(left>0){const span=1+hash(seed,'town-span',tier)%3;if(left<span)break;left-=span;min+=1+hash(seed,'town-rise',tier)%3;tier++;}return{minLevel:min,maxLevel:min+2};}
+export function encounterLevel(reg,r=Math.random){const min=reg.minLevel??reg.danger??1,max=reg.maxLevel??min+2;const roll=r();if(min===1&&max===3)return roll<.9?1:roll<.98?2:3;return min+Math.floor(roll*(max-min+1));}
 export function refreshTechniques(sp){
  for(const move of [...(sp.moves||[]),...(sp.learnset||[])])normalizeMoveDomains(move);
  migrateSpecies(sp);
