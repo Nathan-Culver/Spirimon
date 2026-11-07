@@ -37,7 +37,7 @@ The second roster needed multiple Championship attempts and substantially more t
 
 ## Reproducing checks
 
-- `node build.mjs && npm test`: 629 passing regression tests at this revision.
+- `node build.mjs && npm test`: 630 passing regression tests at this revision.
 - `node tools/audit-progression.mjs progression-1 progression-2 progression-3`: main path.
 - `node tools/audit-progression.mjs --expanded progression-1 progression-2 progression-3`: expanded path.
 - `node tools/render-companion-audit.mjs`: optional Canvas2D visual audit (requires `@napi-rs/canvas`).

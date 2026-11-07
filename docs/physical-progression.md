@@ -68,3 +68,7 @@ Transformation thresholds run inside the real-time scheduler. They work in ordin
 Tempo's expired sequence now resets as soon as its objective is displayed, without requiring another mechanism interaction. Timeout tracking does not repeatedly count the same expired window.
 
 The battle log identifies **Your Sealer** and **Enemy Sealer** for support casts and cooperative actions. Progression reports record actual enemy support, cooperative and transformation activity, instead of emulating those effects with separate audit-only code.
+
+## Published rematch verification
+
+An isolated backup built with the actual rematch entry functions resumed a legacy Form I defender below 75% Health, with no boss UI metadata. The published scheduler immediately changed its form and recorded the transition. The same battle showed enemy support channeling and Energy expenditure. This is a saved-rematch regression check, not a manual victory over the Master. Player-facing and accessible target names refresh with the current form. See [the captured battle record](temple-rematch-live.jpg).

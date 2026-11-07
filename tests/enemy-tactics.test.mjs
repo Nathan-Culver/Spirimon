@@ -1,3 +1,5 @@
+import vm from 'node:vm';
+import {readFileSync} from 'node:fs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as E from '../engine.mjs';
@@ -94,4 +96,9 @@ test('a Sealer channeling support cannot commit a cooperative action or spend it
 
 test('the shared enemy profile grants the same advanced releases used by live named opponents',()=>{
  const f=fixture();for(const [level,expected]of [[5,[]],[12,['united']],[25,['triune','united']]]){f.team[0].level=level;assert.deepEqual(SE.enemySealer('advanced',f.team,()=>f.sp).advanced,expected);}
+});
+
+test('a transformed target immediately refreshes its accessible name without replacing the selected HUD',()=>{
+ const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8'),start=source.indexOf('function refreshSpiritualBattleUI(){'),end=source.indexOf('\nfunction ',start+1),f=fixture(),u=f.team[0],attrs={},box={dataset:{spiritualHud:u.id},setAttribute:(k,v)=>attrs[k]=v};
+ const h=vm.createContext({battle:{rt:f.state},realTimeContext:()=>f.context,document:{querySelector:()=>null,querySelectorAll:selector=>selector==='[data-spiritual-hud]'?[box]:[]},compactBattleHUD:u=>f.sp.forms[u.appearance],spOf:()=>f.sp,refreshExplorationEnergy(){}});vm.runInContext(source.slice(start,end),h);h.refreshSpiritualBattleUI();assert.equal(attrs['aria-label'],'Select enemy First');u.appearance=1;h.refreshSpiritualBattleUI();assert.equal(attrs['aria-label'],'Select enemy Second');assert.equal(box.innerHTML,'Second');
 });
