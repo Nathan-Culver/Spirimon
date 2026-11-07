@@ -37,3 +37,10 @@ test('ordinary XP gains keep normal results and never announce a false level-up'
 test('a bond transformation also shows its new form without claiming a level was gained',()=>{
  const t=harness(),ind=t.units[0],sp=t.species[0];t.h.battle=null;sp.evolution='bond';ind.level=16;ind.xp=0;ind.bond=55;t.eval("shareOffering('ally-0')");assert.equal(t.dialogs.at(-1).title,'A new form awakens.');assert.match(t.dialogs.at(-1).html,/Transformed:/);assert.doesNotMatch(t.dialogs.at(-1).html,/Level 16 → 16/);assert.equal(ind.level,16);
 });
+
+test('actual victory grants every participant the full defeated-team XP total and reports it in the dialog',()=>{
+ const t=harness();for(const u of t.units){u.level=20;u.form=u.appearance=1;u.xp=0;}
+ const foes=[10,20,30].map((level,n)=>({id:'defeated-'+n,level,hp:0}));t.h.battle.trainer=true;t.h.battle.enemyRoster=foes;t.h.battle.enemy=foes[2];
+ const reward=battleRewards(t.h.battle,t.state.rank),expected=t.units.map((u,n)=>{const copy=structuredClone(u);E.gainXP(copy,t.species[n],reward.xp);return copy;}),coins=t.state.inventory.coins;let sealerXP=0;t.h.SE.gainSealerXP=(_s,xp)=>sealerXP=xp;
+ t.eval('winBattle()');for(const [n,u]of t.units.entries()){assert.equal(u.level,expected[n].level);assert.equal(u.xp,expected[n].xp);}assert.equal(t.state.inventory.coins,coins+reward.coins);assert.equal(sealerXP,330);assert.match(t.dialogs.at(-1).html,/524 experience/);
+});

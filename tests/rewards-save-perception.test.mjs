@@ -63,3 +63,23 @@ test('perception reveals a regional legendary presence without any shrine',()=>{
  const h=vm.createContext({s:{seed,player:point,sealer,roamers:{},drops:[]},E,A,SE,SW:{shrinesForRegion:()=>[]},legendSite:(x,y)=>regionalLegendSite(seed,x,y),isNight:()=>true,mapWeather:()=>({kind:'rain'}),townNPCs:()=>[],npcWander:new Map(),challengerApproach:null});
  vm.runInContext(extract('spiritualDiscoveries'),h);const discoveries=h.spiritualDiscoveries();assert.ok(discoveries.some(d=>d.kind==='rare'&&d.label.includes('The Last Dawn')));
 });
+
+test('actual browser startup selects the linked file without reading a conflicting browser journey',async()=>{
+ const linked=handle(payload('authoritative-file'));let recoveryReads=0;let h;
+ h=vm.createContext({window:{},nativeSaveAPI:()=>null,db:null,openDB:async()=>({}),nativeSaveLinked:false,deviceSaveHandle:null,restoreDeviceSaveHandle:async()=>h.deviceSaveHandle=linked.file,selectStartupSave,dbGet:async()=>{recoveryReads++;return payload('stale-browser').save;},dbAll:async()=>{recoveryReads++;return [];}});
+ const a=source.indexOf('async function loadInitialJourney('),b=source.indexOf('\nwindow.spirimonReconnectSave=',a);vm.runInContext(source.slice(a,b),h);
+ const result=await h.loadInitialJourney();assert.equal(result.save.seed,'authoritative-file');assert.equal(recoveryReads,0);assert.equal(result.source,'file');assert.equal(linked.writes(),0);
+});
+test('perception still reveals a legendary disturbance before its required time or weather',()=>{
+ const seed='SP-461998',cx=-7,cy=-4,point=regionalLegendSite(seed,cx,cy),q=newSealer();q.senses={perception:true};
+ const h=vm.createContext({s:{seed,player:point,sealer:q,roamers:{},drops:[]},E,A,SE,SW:{shrinesForRegion:()=>[]},legendSite:(x,y)=>regionalLegendSite(seed,x,y),isNight:()=>false,mapWeather:()=>({kind:'clear'}),townNPCs:()=>[],npcWander:new Map(),challengerApproach:null});
+ vm.runInContext(extract('spiritualDiscoveries'),h);assert.ok(h.spiritualDiscoveries().some(d=>d.kind==='rare'&&d.x===point.x&&d.y===point.y));
+});
+
+test('a readable linked file stays authoritative when only write permission has expired',async()=>{
+ for(const writeFailure of ['prompt','throw']){
+  const h=handle(payload('readable-primary'));h.file.queryPermission=async({mode})=>{if(mode==='read')return 'granted';if(writeFailure==='throw')throw Error('Write permission unavailable');return 'prompt';};let browserReads=0;
+  const result=await selectStartupSave({handle:h.file,readBrowser:async()=>{browserReads++;return {save:payload('stale-recovery').save};}});
+  assert.equal(result.save.seed,'readable-primary');assert.equal(result.source,'file');assert.equal(result.writeBlocked,true);assert.match(result.warning,/loaded/);assert.equal(browserReads,0);assert.equal(h.writes(),0);
+ }
+});

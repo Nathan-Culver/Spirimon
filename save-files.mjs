@@ -16,7 +16,7 @@ export function decodeSavePayload(input){
 
 export async function readLinkedSave(handle){
  if(!handle)return null;
- const permission=await handle.queryPermission({mode:'readwrite'});
+ const permission=await handle.queryPermission({mode:'read'});
  if(permission!=='granted')throw Object.assign(Error('Reconnect your device save to grant file access. The linked file has not been changed.'),{code:'SAVE_PERMISSION'});
  const file=handle.kind==='directory'?await handle.getFileHandle('spirimon-save.json'):handle;
  const contents=await file.getFile();if(contents.size>150*1024*1024)throw Error('The linked save is too large.');
@@ -34,9 +34,14 @@ export async function writeLinkedSave(handle,payload){
 // A linked file is authoritative. Never silently replace it with a new journey.
 export async function selectStartupSave({handle,browserSave,browserLibrary=[],readFile=readLinkedSave,readBrowser=async()=>({save:browserSave,library:browserLibrary})}){
  if(!handle)return {...await readBrowser(),source:'browser'};
- try{const payload=await readFile(handle);return {...payload,source:'file'};}
+ let payload;
+ try{payload=await readFile(handle);}
  catch(error){
   const recovery=await readBrowser();if(!recovery.save)throw error;
   return {...recovery,source:'recovery',warning:'The linked file could not load: '+error.message+' Browser recovery was opened; file writing is paused.',writeBlocked:true,error};
  }
+ // Reading an authoritative file does not require permission to overwrite it.
+ // A failed write-permission check must never switch to a different journey.
+ let writable=false;try{writable=await handle.queryPermission({mode:'readwrite'})==='granted';}catch{}
+ return {...payload,source:'file',...(!writable?{writeBlocked:true,warning:'Your linked device file was loaded. Reconnect the file to enable automatic saving; writing is paused.'}:{})};
 }

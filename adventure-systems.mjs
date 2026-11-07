@@ -109,6 +109,16 @@ export function facilityMatch(adventure,type,partyLevel=1){
  const rules={maxActive:type==='arena'?1:type==='draft'?3:Math.min(3,1+Math.floor(run.round/2)),noItems:type==='survival'||type==='challenge'&&rotating===0,noSupport:type==='challenge'&&rotating===1};
  return {...challenge,level:Math.max(challenge.level,Math.ceil(partyLevel)+run.round*2),teamSize:Math.min(6,2+run.round),rules,round:run.round,modifier:challenge.modifier};
 }
+// Preview the same next match as entry without opening or advancing a run.
+export function previewFacilityMatch(adventure,type,partyLevel=1,seed='spirimon',season=0){
+ const preview=structuredClone(adventure);const check=beginFacilityRun(preview,type,seed,season);
+ return check.ok?facilityMatch(preview,type,partyLevel):null;
+}
+export function multiArenaProfile(rank=1){
+ const levels=Array.from({length:6},(_,n)=>Math.max(5,rank*3+5+n));
+ return {levels,teamSize:levels.length,maxActive:3,minLevel:levels[0],maxLevel:levels.at(-1)};
+}
+
 export function recordFacilityResult(adventure,type,victory){
  competitionState(adventure);const run=adventure.facilityRuns[type],facility=FACILITY_TYPES.find(f=>f.id===type);if(!run||run.status!=='active'||!facility)return {ok:false};
  if(victory){run.wins++;run.round++;if(run.round>=facility.rounds)run.status='complete';}else run.status='eliminated';

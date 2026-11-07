@@ -36,7 +36,7 @@ These are automated rules simulations with map reachability checks, not manually
 
 ## Reproducing checks
 
-- `node build.mjs && npm test`: 564 passing regression tests.
+- `node build.mjs && npm test`: 576 passing regression tests.
 - `node tools/audit-progression.mjs progression-1 progression-2 progression-3`: main path.
 - `node tools/audit-progression.mjs --expanded progression-1 progression-2 progression-3`: expanded path.
 - `node tools/render-companion-audit.mjs`: optional Canvas2D visual audit (requires `@napi-rs/canvas`).
@@ -47,3 +47,7 @@ The combat workflow now runs an expanded progression seed and preserves the repo
 ## Live browser check
 
 The published game loaded an isolated backup through its normal Import backup control, entered the Ashen Hand compound from its physical entrance, walked to the first clue, and recorded 1/3 clues. A separate isolated backup reached the Last Dawn disturbance at night, paid all three rite stages (22 Energy after Control), entered a level-44 legendary battle with finished front/rear art, and successfully retreated. The browser test caught the startup text and faction HUD issues addressed by the final display patch. The screenshot is `legendary-live-smoke.jpg`. These fixtures are separate from the player's ordinary save.
+
+## Follow-up: six reported issues
+
+See `six-issue-regression.md` for the entry-preview corrections, read-only primary-file handling, and integration checks of all six reported issues. The original progression outcomes above remain unchanged; this follow-up does not change combat values or progression gates.

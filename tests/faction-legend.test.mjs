@@ -7,11 +7,11 @@ import * as A from '../adventure-systems.mjs';
 import * as FC from '../faction-campaigns.mjs';
 import * as SE from '../spiritual-energy.mjs';
 import * as SW from '../spiritual-world.mjs';
-import {LEGENDS,applyLegendArtwork} from '../legendary-roster.mjs';
+import {LEGENDS,applyLegendArtwork,legendProfile} from '../legendary-roster.mjs';
 import {regionalLegendSite} from '../legend-sites.mjs';
 import {battleBackSource} from '../battle-art.mjs';
 import {decodeSavePayload} from '../save-files.mjs';
-import {capabilitiesFromAnatomy} from '../anatomy.mjs';
+import {capabilitiesFromAnatomy,syncCapabilities} from '../anatomy.mjs';
 const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
 function extract(name){const a=source.indexOf('function '+name+'('),b=source.slice(a+1).search(/\nfunction /);assert.ok(a>=0);return source.slice(a,b<0?source.length:a+1+b);}
 const key=(x,y)=>x+','+y;
@@ -82,4 +82,11 @@ test('the cave renderer keeps faction chapter names and current clue progress in
  const s=E.newGame('labels'),room={faction:'ashen-hand',level:0,depth:4},h=vm.createContext({FC,A,s});vm.runInContext(extract('dungeonInfo'),h);
  assert.match(h.dungeonInfo(room).label,/Scout trail/);assert.match(h.dungeonInfo(room).biome,/ASHEN HAND/);assert.match(h.dungeonInfo(room).hint,/0\/3/);
  FC.floorState(s,'ashen-hand',0).clues.push(0);assert.match(h.dungeonInfo(room).hint,/1\/3/);assert.match(h.dungeonInfo({level:1,depth:3}).label,/Cave/);
+});
+
+
+test('the actual default legendary rite uses bundled artwork without requiring an image provider',()=>{
+ const {save,h}=ritualHarness();save.settings.aiEnabled=false;let html='';
+ Object.assign(h,{legendProfile,applyLegendArtwork,syncCapabilities,register:sp=>{E.refreshTechniques(sp);save.species[sp.id]=sp;return sp;},hasFinishedArtwork:sp=>!!sp.atlas,queueFresh:()=>{throw Error('Default legends must not request generated artwork');},action:(_a,label)=>label,showModal:(_title,body)=>html=body});
+ vm.runInContext(['legendarySpecies','legendaryRitual'].map(extract).join('\n'),h);h.legendaryRitual();assert.match(html,/Complete ritual stage/);assert.doesNotMatch(html,/artwork is ready/);const sp=Object.values(save.species)[0];assert.ok(sp.atlas.startsWith('./assets/legends/'));assert.ok(sp.battleBackAtlas);
 });
