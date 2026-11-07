@@ -46,7 +46,7 @@ function unifiedBattleActionsHTML(){
   items.push('<button class="unified-action ua-utility" data-action="battle-switch"><span class="ua-icon">↻</span><b>Switch / Recall</b></button>');
  if(!battle.trainer&&utilityReady&&(s.inventory.seals||0)>0)items.push(sealButtonHTML());
  if(!battle.rt.paused&&(battle.utilityReadyAt||0)<=now)items.push('<button class="unified-action ua-run" data-action="flee"><span class="ua-icon">➜</span><b>Run</b></button>');
- if(battle.trainer)items.push('<button class="unified-action ua-run" data-action="yield"><b>Concede</b></button>');
+ if(battle.trainer&&!battle.encounterNPC&&battle.challenger!=='villain'&&!String(battle.adventure?.kind||'').startsWith('faction'))items.push('<button class="unified-action ua-run" data-action="yield"><b>Concede</b></button>');
  return items.join('')||'<p class="ua-wait">Waiting for an available action…</p>';
 }
 function realTimeBattleHTML(){

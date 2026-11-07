@@ -57,3 +57,5 @@ test('guided practice keeps time paused while exposing a real Technique command,
  const t=harness();t.battle.rt.paused=true;t.battle.lesson={stage:5,practice:true};assert.match(t.actions(),/data-unified-move/);assert.doesNotMatch(t.actions(),/<button disabled class="unified-action ua-move/);assert.equal(t.battle.rt.paused,true);
  t.battle.lesson={stage:2,practice:false};assert.match(t.actions(),/<button disabled class="unified-action ua-move/);assert.equal(t.battle.rt.paused,true);
 });
+
+test('hostile sight challenges cannot be bypassed using the friendly Concede action',()=>{const t=harness();t.battle.trainer=true;assert.match(t.actions(),/Concede/);t.battle.encounterNPC={id:'watcher-1,0'};assert.doesNotMatch(t.actions(),/Concede/);delete t.battle.encounterNPC;t.battle.challenger='villain';assert.doesNotMatch(t.actions(),/Concede/);delete t.battle.challenger;t.battle.adventure={kind:'faction-guard'};assert.doesNotMatch(t.actions(),/Concede/);});

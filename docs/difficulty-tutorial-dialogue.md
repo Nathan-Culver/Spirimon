@@ -57,3 +57,7 @@ All 36 established Domains and their original effectiveness chart return. The pr
 ## Live lesson correction
 
 The live browser check caught a deployment animation lock frozen by the teaching pause. Entering practice now settles only that initial manifestation lock, leaving GCDs and all Technique recasts intact. A saved lesson already at practice receives the same correction on resume. The full suite includes both regressions.
+
+Hostile map/faction challenges do not expose the friendly Concede shortcut. Run still uses the normal escape rules. Conceding a friendly match produces its appropriate closing dialogue and records a short dungeon rematch grace where relevant.
+
+Forced challenge dialogs also resist backdrop taps and Escape until the player faces the challenger. Ordinary dialogs keep their normal dismissal behavior. Validated with 674 passing tests.
