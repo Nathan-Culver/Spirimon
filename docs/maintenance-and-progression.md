@@ -37,7 +37,7 @@ The second roster needed multiple Championship attempts and substantially more t
 
 ## Reproducing checks
 
-- `node build.mjs && npm test`: 630 passing regression tests at this revision.
+- `node build.mjs && npm test`: 641 passing regression tests at this revision.
 - `node tools/audit-progression.mjs progression-1 progression-2 progression-3`: main path.
 - `node tools/audit-progression.mjs --expanded progression-1 progression-2 progression-3`: expanded path.
 - `node tools/render-companion-audit.mjs`: optional Canvas2D visual audit (requires `@napi-rs/canvas`).
@@ -52,3 +52,11 @@ The published game loaded an isolated backup through its normal Import backup co
 ## Follow-up: six reported issues
 
 See `six-issue-regression.md` for the entry-preview corrections, read-only primary-file handling, and integration checks of all six reported issues. The current report above includes the subsequent philosophy and enemy-controller work; the six-issue follow-up itself did not change combat values or progression gates.
+
+## Follow-up: quest credit and exploration transitions
+
+Rowan's guild matches and roadside challenges now both increment the rival-victory counter. Other trainers, faction defenders and competitive opponents cannot complete the Rowan notice or award his friendship. Rival and hostile-agent counters update before accepted quests are advanced, so their final objective is recognized immediately after the correct victory. The journal displays Rowan victories instead of the total battle-win count. Already completed notices are retained for existing saves.
+
+Cave, Temple, faction and building transitions discard movement queued in the previous scene and clear the old follower trail. Moving between dungeon floors and returning to a Shrine after defeat use the same reset. Temple entry also dismounts the player. A step onto locked Temple or faction stairs now saves and refreshes the actual position without advancing the floor or losing trial progress.
+
+The follow-up checked 240 generated legendary/camp sites across 60 seeded regions for a walking connection to the main path, with no inaccessible placements in that sample. This is a sampled generation check, not an exhaustive proof over all seeds. Eleven regression cases exercise the actual victory and movement controllers, including persistent faction objectives and consumed Shrine recovery. The full suite has 641 passing tests; web and installed-app builds pass. Combat values, rewards and Shrine availability are unchanged by this follow-up.

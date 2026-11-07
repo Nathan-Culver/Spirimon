@@ -70,7 +70,7 @@ test('legendary Energy and battle access require the physical site, matching rit
 });
 test('a simultaneous knockout restores at a real, consumed Shrine and awards no victory rewards',()=>{
  const save=E.newGame('draw-recovery'),sp=E.makeSpecies(1,'Beast','Construct'),u=E.makeIndividual(sp,3,0);save.species[sp.id]=sp;save.spirits=[u];save.party=[u.id];SE.ensureSealer(save);u.hp=0;save.cave={id:'old-cave'};let dialog='';
- const h=vm.createContext({s:save,SW,SE,battle:{},recordCompetitionDefeat(){},endCombatState(){SE.endSealerBattle(save.sealer);},save(){},render(){},showModal:(_title,body)=>dialog=body,action:()=>''});vm.runInContext(['recoverAtShrine','drawnBattle'].map(extract).join('\n'),h);h.drawnBattle();assert.ok(u.hp>0);const shrine=SW.nearbyShrine(save);assert.ok(shrine);assert.equal(SE.recoveryAvailable(save,'restore',shrine.id).ok,false);assert.equal(save.cave,undefined);assert.match(dialog,/no victory reward/);
+ const h=vm.createContext({s:save,SW,SE,battle:{},resetExplorationMotion(){},recordCompetitionDefeat(){},endCombatState(){SE.endSealerBattle(save.sealer);},save(){},render(){},showModal:(_title,body)=>dialog=body,action:()=>''});vm.runInContext(['recoverAtShrine','drawnBattle'].map(extract).join('\n'),h);h.drawnBattle();assert.ok(u.hp>0);const shrine=SW.nearbyShrine(save);assert.ok(shrine);assert.equal(SE.recoveryAvailable(save,'restore',shrine.id).ok,false);assert.equal(save.cave,undefined);assert.match(dialog,/no victory reward/);
 });
 
 test('an overcome legend can be retried for sealing; a bonded regional legend cannot be duplicated',()=>{

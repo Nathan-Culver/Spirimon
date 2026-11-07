@@ -13,7 +13,7 @@ function harness(){
  const dialogs=[],toasts=[],details=[],transforms=[];let saves=0;
  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const h=vm.createContext({E,battleRewards,s:state,battle:{ally:units[0].id,enemy:{level:10},participants:units.map(u=>u.id),trainer:false},SE:{gainSealerXP(){},bondRecovery(){}},esc,spOf:ind=>state.species[ind.species],sprite:(sp,form)=>'<canvas data-species="'+sp.id+'" data-form="'+form+'"></canvas>',action:(type,text,value='')=>'<button data-action="'+type+'" data-value="'+value+'">'+text+'</button>',safe:()=>true,showModal:(title,html,options)=>dialogs.push({title,html,options}),toast:text=>toasts.push(text),detail:id=>details.push(id),transformSpirit:(...args)=>transforms.push(args),save:()=>saves++,render(){},endCombatState(){},questState:()=>({}),renown(){},awardBattleEquipment(){},removeRoamer(){},ensurePlayerOnPath(){},note(){}});
- vm.runInContext(['gainSpirimonXP','levelUpHTML','showTrainingAdvancement','training','shareOffering','winBattle'].map(extract).join('\n'),h);
+ vm.runInContext(['gainSpirimonXP','levelUpHTML','showTrainingAdvancement','training','shareOffering','recordBattleQuestProgress','winBattle'].map(extract).join('\n'),h);
  return {h,state,species,units,dialogs,toasts,details,transforms,saves:()=>saves,eval:code=>vm.runInContext(code,h)};
 }
 test('battle level-up dialog includes teammates even when the lead does not level',()=>{
@@ -43,4 +43,27 @@ test('actual victory grants every participant the full defeated-team XP total an
  const foes=[10,20,30].map((level,n)=>({id:'defeated-'+n,level,hp:0}));t.h.battle.trainer=true;t.h.battle.enemyRoster=foes;t.h.battle.enemy=foes[2];
  const reward=battleRewards(t.h.battle,t.state.rank),expected=t.units.map((u,n)=>{const copy=structuredClone(u);E.gainXP(copy,t.species[n],reward.xp);return copy;}),coins=t.state.inventory.coins;let sealerXP=0;t.h.SE.gainSealerXP=(_s,xp)=>sealerXP=xp;
  t.eval('winBattle()');for(const [n,u]of t.units.entries()){assert.equal(u.level,expected[n].level);assert.equal(u.xp,expected[n].xp);}assert.equal(t.state.inventory.coins,coins+reward.coins);assert.equal(sealerXP,330);assert.match(t.dialogs.at(-1).html,/524 experience/);
+});
+
+test('unrelated trainer wins cannot complete Rowan’s quest or award his friendship',()=>{
+ for(const sealerKey of ['trainer:ordinary','faction:ashen-hand','clan:verdant-circle','facility:arena']){
+  const t=harness();Object.assign(t.h.battle,{trainer:true,sealerKey});t.eval('winBattle()');
+  assert.equal(t.state.quests.rival,false);assert.equal(t.state.friendships['rival-0,0'],undefined);assert.equal(t.state.challengers,undefined);
+ }
+});
+test('guild and approaching Rowan victories update rival objectives before quest advancement and award friendship once',()=>{
+ for(const identity of [{sealerKey:'rowan'},{sealerKey:'challenger:rival'},{challenger:'rival'}]){
+  const t=harness(),quest=E.questTemplates().find(q=>q.id==='rival-training');t.state.questLog={[quest.id]:{stage:1,baseline:0}};
+  t.h.questState=()=>t.state.questLog;t.h.challengerState=()=>t.state.challengers??={};Object.assign(t.h.battle,{trainer:true,...identity});const match=structuredClone(t.h.battle);
+  t.eval('winBattle()');assert.equal(t.state.challengers.rivalWins,1);assert.equal(t.state.questLog[quest.id].stage,quest.steps.length);assert.equal(t.state.quests.rival,true);assert.equal(t.state.friendships['rival-0,0'],8);
+  t.h.battle=match;t.eval('winBattle()');assert.equal(t.state.challengers.rivalWins,2);assert.equal(t.state.friendships['rival-0,0'],8);
+ }
+});
+test('hostile agent victory completes an accepted quest immediately without counting as Rowan',()=>{
+ const t=harness(),quest=E.questTemplates().find(q=>q.id==='safe-trails');t.state.questLog={[quest.id]:{stage:0,baseline:0}};t.h.questState=()=>t.state.questLog;t.h.challengerState=()=>t.state.challengers??={};Object.assign(t.h.battle,{trainer:true,challenger:'villain'});
+ t.eval('winBattle()');assert.equal(t.state.challengers.villainWins,1);assert.equal(t.state.questLog[quest.id].stage,1);assert.equal(t.state.quests.rival,false);
+});
+test('rival journal shows Rowan progress rather than unrelated total wins and retains earned legacy completion',()=>{
+ const t=harness();t.state.wins=57;t.h.challengerState=()=>t.state.challengers??={};vm.runInContext(extract('journalHTML'),t.h);
+ assert.match(t.eval('journalHTML()'),/0 Rowan victories/);assert.doesNotMatch(t.eval('journalHTML()'),/57 victories/);t.state.quests.rival=true;assert.match(t.eval('journalHTML()'),/quest-complete[^]*A friendly rivalry[^]*Completed/);
 });
