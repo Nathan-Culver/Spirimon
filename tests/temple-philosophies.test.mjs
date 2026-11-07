@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
 import * as TP from '../temple-philosophies.mjs';
 import * as E from '../engine.mjs';
@@ -53,4 +54,10 @@ test('Transformation changes form at Health thresholds while preserving percenta
  const sp=E.makeSpecies('transformation','Beast','Fey'),u=E.heal(E.makeIndividual(sp,40,0,E.rng(7)),sp);u.battlePhilosophy='Transformation';u.moveIds=sp.moves.map(m=>m.id);E.normalizeResources(u,sp);u.moveCooldowns={a:9000};const moves=[...u.moveIds],max=E.stats(u,sp);u.hp=Math.floor(max.hp*.7);u.pp=Math.floor(max.pp*.5);const ratio=u.hp/max.hp;
  assert.equal(TP.transformTempleCombatant(u,sp,E.stats,E.normalizeResources),true);assert.equal(u.form,1);assert.ok(Math.abs(u.hp/E.stats(u,sp).hp-ratio)<.02);assert.deepEqual(u.moveCooldowns,{a:9000});assert.deepEqual(u.moveIds,moves);assert.equal(TP.transformTempleCombatant(u,sp,E.stats,E.normalizeResources),false);
  u.hp=Math.floor(E.stats(u,sp).hp*.3);assert.ok(TP.transformTempleCombatant(u,sp,E.stats,E.normalizeResources));assert.equal(u.form,2);
+});
+
+test('Temple hints and initial labels immediately show live physical objectives between canvas frames',()=>{
+ const s=E.newGame('immediate-hints'),r=room('Control');s.cave=r;TP.trialState(s,r).observed=true;
+ const a=source.indexOf('function hint(){'),b=source.indexOf('\nfunction ',a+1),h=vm.createContext({s,TP});vm.runInContext(source.slice(a,b),h);assert.match(h.hint(),/Current lamps: OFF \/ OFF \/ OFF/);TP.trialState(s,r).mask=3;assert.match(h.hint(),/Current lamps: ON \/ ON \/ OFF/);
+ const html=source.slice(source.indexOf('function exploreHTML(){'),source.indexOf('\nfunction ',source.indexOf('function exploreHTML(){')+1));assert.match(html,/s.cave\?dungeonInfo\(s.cave\)/);assert.match(html,/esc\(location.label\)/);
 });
