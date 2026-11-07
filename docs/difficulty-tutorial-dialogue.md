@@ -53,3 +53,7 @@ Role-specific introductions mix practical advice with world lore and Spirimon ob
 ## Domains
 
 All 36 established Domains and their original effectiveness chart return. The previous reduction is undone using retained motif metadata. First encounters have a remembered 2% chance to document a custom Domain, which gains generated Techniques, passive choices, compatibility and matching bonuses. Definitions persist with both the journey and lineage. See `classification-reconciliation.md` for exact restoration and the limits of reconstructing erased metadata.
+
+## Live lesson correction
+
+The live browser check caught a deployment animation lock frozen by the teaching pause. Entering practice now settles only that initial manifestation lock, leaving GCDs and all Technique recasts intact. A saved lesson already at practice receives the same correction on resume. The full suite includes both regressions.
