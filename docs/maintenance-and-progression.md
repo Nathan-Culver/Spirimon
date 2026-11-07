@@ -4,7 +4,7 @@
 
 Battle rewards now total defeated individuals, including trainer reserves defeated later in the same battle. Living reserves and duplicate references grant nothing. Wild victories grant no Coin. Device files are authoritative at startup; corrupt or disconnected files open a valid recovery copy with writes paused, or stop loading if no recovery exists. Desktop and Android have independent folder-backed saves with a previous complete copy.
 
-The practice screen displays actual GCD/LCD timing. Perception reveals regional legendary disturbances independently of shrine placement. A simultaneous knockout now uses a real available Shrine, consuming its one recovery action until reset, just as defeat recovery does.
+The practice screen displays actual GCD/LCD timing. Startup markup omits an unresolved string expression; faction chapters keep their current objective in the map HUD; paid legendary stages refresh the Energy meter immediately. Perception reveals regional legendary disturbances independently of shrine placement. A simultaneous knockout now uses a real available Shrine, consuming its one recovery action until reset, just as defeat recovery does.
 
 The approved combat values remain in force: Spirimon maximum Health is halved after the original calculation, standard damage receives its final 1.25 multiplier, and Agile damage is 85% of Normal. Shrines retain their reduced density, at most one per region, and one Restore, Meditate, or Commune action per reset.
 
@@ -36,10 +36,14 @@ These are automated rules simulations with map reachability checks, not manually
 
 ## Reproducing checks
 
-- `node build.mjs && npm test`: 562 passing regression tests.
+- `node build.mjs && npm test`: 564 passing regression tests.
 - `node tools/audit-progression.mjs progression-1 progression-2 progression-3`: main path.
 - `node tools/audit-progression.mjs --expanded progression-1 progression-2 progression-3`: expanded path.
 - `node tools/render-companion-audit.mjs`: optional Canvas2D visual audit (requires `@napi-rs/canvas`).
 - `python tools/pack-legends.py`: reproduce the eight runtime atlases from the lossless source sheets (Pillow and NumPy).
 
 The combat workflow now runs an expanded progression seed and preserves the report as an artifact. The web and native builds share the tested source and runtime asset inventory; source-art sheets are excluded from downloads.
+
+## Live browser check
+
+The published game loaded an isolated backup through its normal Import backup control, entered the Ashen Hand compound from its physical entrance, walked to the first clue, and recorded 1/3 clues. A separate isolated backup reached the Last Dawn disturbance at night, paid all three rite stages (22 Energy after Control), entered a level-44 legendary battle with finished front/rear art, and successfully retreated. The browser test caught the startup text and faction HUD issues addressed by the final display patch. The screenshot is `legendary-live-smoke.jpg`. These fixtures are separate from the player's ordinary save.

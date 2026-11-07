@@ -54,3 +54,9 @@ test('packed roster anatomy preserves every form and independent mutable records
  creature.formAnatomy[0].limbs.arms=0;
  assert.equal(creature.formAnatomy[1].limbs.arms,4);
 });
+
+test('initial loading markup contains no string concatenation or premature reconnect button',()=>{
+ const template=readFileSync(new URL('../index.template.html',import.meta.url),'utf8'),panel=template.match(/<main id="main">([\s\S]*?)<\/main>/)[1];
+ assert.doesNotMatch(panel,/spirimonCanReconnectSave|spirimonReconnectSave|'\s*\+/);assert.match(panel,/id="startup-retry"[^>]*hidden/);
+ assert.match(template,/main\.innerHTML=[^\n]*window\.spirimonCanReconnectSave/,'The actual error screen still exposes reconnect when a device save is available');
+});

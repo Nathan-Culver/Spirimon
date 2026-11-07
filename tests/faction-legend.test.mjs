@@ -56,7 +56,7 @@ test('all four legendary lineages have three finished front/rear forms with veri
 function ritualHarness(){
  const save=E.newGame('SP-461998'),cx=-7,cy=-4,site=regionalLegendSite(save.seed,cx,cy);save.player={...save.player,...site};SE.ensureSealer(save);save.sealer.energy=save.sealer.maxEnergy;save.adventure={legends:[],encounters:{}};
  const legend=A.legendAt(save.seed,cx,cy,true,'rain');assert.ok(legend);const events=[];
- const h=vm.createContext({E,A,SE,s:save,battle:null,party:()=>[{hp:1}],isNight:()=>true,mapWeather:()=>({kind:'rain'}),legendSite:(x,y)=>regionalLegendSite(save.seed,x,y),adventureState:()=>save.adventure,encounterState:()=>save.adventure.encounters,legendaryRitual:()=>events.push('rite'),adventureBattle:(...args)=>events.push(args),toast:t=>events.push(t),save(){}});
+ const h=vm.createContext({E,A,SE,s:save,battle:null,party:()=>[{hp:1}],isNight:()=>true,mapWeather:()=>({kind:'rain'}),legendSite:(x,y)=>regionalLegendSite(save.seed,x,y),adventureState:()=>save.adventure,encounterState:()=>save.adventure.encounters,legendaryRitual:()=>events.push('rite'),adventureBattle:(...args)=>events.push(args),toast:t=>events.push(t),render(){events.push('refreshed');},save(){}});
  vm.runInContext(['legendChallenge','performLegendaryRitualStage'].map(extract).join('\n'),h);return {save,h,events,legend};
 }
 test('legendary Energy and battle access require the physical site, matching rite and current conditions',()=>{
@@ -64,7 +64,7 @@ test('legendary Energy and battle access require the physical site, matching rit
  h.performLegendaryRitualStage('ritual-wrong');assert.equal(save.sealer.energy,before);
  save.player.x+=10;h.performLegendaryRitualStage(id);assert.equal(save.sealer.energy,before);h.legendChallenge();assert.equal(events.at(-1),'rite');save.player.x-=10;
  h.legendChallenge();assert.equal(events.at(-1),'rite');
- for(let n=0;n<3;n++)h.performLegendaryRitualStage(id);assert.equal(save.adventure.encounters[id],3);assert.ok(save.sealer.energy<before);const paid=save.sealer.energy;h.performLegendaryRitualStage(id);assert.equal(save.sealer.energy,paid);
+ for(let n=0;n<3;n++)h.performLegendaryRitualStage(id);assert.equal(save.adventure.encounters[id],3);assert.ok(save.sealer.energy<before);assert.equal(events.filter(e=>e==='refreshed').length,3);const paid=save.sealer.energy;h.performLegendaryRitualStage(id);assert.equal(save.sealer.energy,paid);
  h.mapWeather=()=>({kind:'clear'});if(legend.requiresWeather)h.legendChallenge();h.mapWeather=()=>({kind:'rain'});h.legendChallenge();assert.deepEqual(Array.from(events.at(-1)),['legend',legend.id,legend.level]);
 });
 test('a simultaneous knockout restores at a real, consumed Shrine and awards no victory rewards',()=>{
@@ -76,4 +76,10 @@ test('an overcome legend can be retried for sealing; a bonded regional legend ca
  const {save,h,events,legend}=ritualHarness();save.adventure.encounters['ritual-'+legend.id]=3;save.adventure.legends.push(legend.id);
  h.legendChallenge();assert.deepEqual(Array.from(events.at(-1)),['legend',legend.id,legend.level]);
  save.spirits.push({species:'legendary-'+legend.id});h.legendChallenge();assert.match(events.at(-1),/already formed/);
+});
+
+test('the cave renderer keeps faction chapter names and current clue progress instead of overwriting them',()=>{
+ const s=E.newGame('labels'),room={faction:'ashen-hand',level:0,depth:4},h=vm.createContext({FC,A,s});vm.runInContext(extract('dungeonInfo'),h);
+ assert.match(h.dungeonInfo(room).label,/Scout trail/);assert.match(h.dungeonInfo(room).biome,/ASHEN HAND/);assert.match(h.dungeonInfo(room).hint,/0\/3/);
+ FC.floorState(s,'ashen-hand',0).clues.push(0);assert.match(h.dungeonInfo(room).hint,/1\/3/);assert.match(h.dungeonInfo({level:1,depth:3}).label,/Cave/);
 });
