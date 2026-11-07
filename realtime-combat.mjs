@@ -1,3 +1,4 @@
+import {transformTempleCombatant} from './temple-philosophies.mjs';
 import {fieldAffinities} from './domains.mjs';
 import * as E from './engine.mjs';
 import * as SE from './spiritual-energy.mjs';
@@ -262,14 +263,17 @@ function resolvePending(state,context,actor,clock,log,events,r){
  if(actor.recallAfterCast){delete actor.recallAfterCast;const index=context.active[side].indexOf(actor);if(index>=0)context.active[side].splice(index,1);}
  state.actionCount++;synchronizeTimers(state,{...context,durationScale:choice.move?moveTiming(choice.move,actor,sp,choice.style).durationScale:1});
 }
+function updateTransformations(context,log){
+ for(const u of activeUnits(context)){if(u.battlePhilosophy!=='Transformation')continue;const sp=context.speciesOf(u);if(transformTempleCombatant(u,sp,E.stats,E.normalizeResources))log.push(name(u,sp)+' changes form, preserving Health, resources and running Technique timers.');}
+}
 export function advanceRealTime(state,deltaMs,context,r=Math.random){
  const log=[],events=[];if(state.paused||!Number.isFinite(deltaMs)||deltaMs<=0)return {log,events};
- synchronizeTimers(state,context);for(const u of allUnits(context)){const clock=unitClock(state,u);if(clock.interrupted){log.push(name(u,context.speciesOf(u))+' is interrupted while casting '+clock.interrupted+'.');delete clock.interrupted;}}let remaining=Math.min(5000,deltaMs);
+ synchronizeTimers(state,context);updateTransformations(context,log);for(const u of allUnits(context)){const clock=unitClock(state,u);if(clock.interrupted){log.push(name(u,context.speciesOf(u))+' is interrupted while casting '+clock.interrupted+'.');delete clock.interrupted;}}let remaining=Math.min(5000,deltaMs);
  while(remaining>0){const step=Math.min(50,remaining);state.elapsedMs+=step;remaining-=step;pauseSealedAfflictions(state,context,step);for(const side of ['a','b'])for(const u of [...context.active[side]])if(u.recallAfterCast&&!unitClock(state,u).pending){delete u.recallAfterCast;context.active[side]=context.active[side].filter(v=>v!==u);}expireTimers(state,context,log);
  for(const pending of (state.supportCasts||[]).filter(p=>p.resolveAt<=state.elapsedMs)){state.supportCasts=state.supportCasts.filter(p=>p!==pending);const team=context.teams[pending.side],targets=pending.targets.map(id=>team.find(u=>u.id===id)).filter(Boolean),recipient=team.find(u=>u.id===pending.recipient);if(recipient){const resolved=applySupportEffects(state,context,pending.side,{technique:pending.technique,targets,recipient,cost:pending.cost,gcdStarted:true});log.push(...resolved.log);}}
  const due=activeUnits(context).map(actor=>({actor,clock:unitClock(state,actor)})).filter(x=>x.clock.pending&&x.clock.pending.resolveAt<=state.elapsedMs).sort((a,b)=>a.clock.pending.resolveAt-b.clock.pending.resolveAt||a.clock.pending.sequence-b.clock.pending.sequence);
- for(const {actor,clock}of due)if(clock.pending&&clock.pending.resolveAt<=state.elapsedMs)resolvePending(state,context,actor,clock,log,events,r);
- if(state.elapsedMs>=state.nextPulseAt){pulseEffects(state,context,log);state.nextPulseAt+=EFFECT_PULSE_MS;synchronizeTimers(state,context);}
+ for(const {actor,clock}of due)if(clock.pending&&clock.pending.resolveAt<=state.elapsedMs){resolvePending(state,context,actor,clock,log,events,r);updateTransformations(context,log);}
+ if(state.elapsedMs>=state.nextPulseAt){pulseEffects(state,context,log);state.nextPulseAt+=EFFECT_PULSE_MS;synchronizeTimers(state,context);updateTransformations(context,log);}
  for(const side of ['a','b'])if(!context.active[side].some(u=>u.hp>0))state['undefended'+side]=(state['undefended'+side]||0)+step;else state['undefended'+side]=0;
  }
  return {log,events};
@@ -322,7 +326,7 @@ export function usePlayerSupport(state,context,side,techniqueId,recipientId,opti
  if(t.castMs>0){
   for(const u of result.targets)if(t.timing==='gcd'){const c=unitClock(state,u);c.gcdReadyAt=state.elapsedMs+moveTiming({id:'support-gcd',timing:'gcd',power:0},u,context.speciesOf(u)).gcdMs;u.gcdReadyAt=c.gcdReadyAt;resetDamageBudget(c,'gcd',c.gcdReadyAt-state.elapsedMs,false);}
   state.supportCasts??=[];state.supportCasts.push({side,technique:t,targets:result.targets.map(u=>u.id),recipient:result.recipient.id,cost:result.cost,resolveAt:state.elapsedMs+t.castMs});
-  return {ok:true,cost:result.cost,log:['The Sealer channels '+t.name+' for '+(t.castMs/1000).toFixed(2)+'s ('+result.cost+' Energy).'],targets:result.targets.map(u=>u.id)};
+  return {ok:true,cost:result.cost,log:[(side==='a'?'Your Sealer':'Enemy Sealer')+' channels '+t.name+' for '+(t.castMs/1000).toFixed(2)+'s ('+result.cost+' Energy).'],targets:result.targets.map(u=>u.id)};
  }
  return applySupportEffects(state,context,side,result);
 }
@@ -356,7 +360,7 @@ function applySupportEffects(state,context,side,result){
    }
   }
  }
- synchronizeTimers(state,context);log.unshift('The Sealer uses '+t.name+' ('+result.cost+' Energy): '+supportDescription(t)+'.');
+ synchronizeTimers(state,context);log.unshift((side==='a'?'Your Sealer':'Enemy Sealer')+' uses '+t.name+' ('+result.cost+' Energy): '+supportDescription(t)+'.');
  return {ok:true,cost:result.cost,log,targets:targets.map(u=>u.id)};
 }
 

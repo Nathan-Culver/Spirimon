@@ -41,3 +41,30 @@ Menus can track camps and describe objectives; they cannot remotely advance an i
 `tests/temple-philosophies.test.mjs` solves all eight philosophies over multiple seeds/floors, checks dynamic-gate traversal, timing, hazards, misreads, battle gates, AI preferences and transformation preservation. `tests/faction-legend.test.mjs` checks all compounds, distant-interaction rejection, persistent rewards and alert/rescue consequences.
 
 `tools/physical-playtest.mjs` is an offline test controller, not shipped game code. It finds collision-valid walking paths and interacts at actual reachable locations. The expanded progression audit uses that controller, the real philosophy/faction resolvers, real combat, consumed Shrine recovery and save round-trips, then records results in `expanded-progression-audit.json`. It automates the player's commands under preparation assumptions; it does not enable allied automation in the game.
+
+## Live combat follow-up
+
+Enemy Sealer decisions now share `enemy-tactics.mjs` between the live session and the progression audit. The controller scores useful effects across the whole support Technique: a heal with a cleansing component can still be useful at full Health if its recipient is poisoned. It avoids ineffective healing, already-covered protections and incompatible guard effects. Urgent recovery takes priority over ordinary buffs and Synergy combinations. Nonurgent support preserves enough Energy for the cheapest conscious sealed reserve.
+
+| Philosophy | Sealer preparation emphasis |
+| --- | --- |
+| Attrition | Willpower recovery, healing and guard |
+| Counterplay | Shields, Reprise and mental relief |
+| Tempo | Quickening, Reprise and Resonance |
+| Resilience | Healing, shields and guard |
+| Control | Reprise, Quickening and guard |
+| Transformation | Resonance, healing and guard |
+| Synergy | Soulbridge, shields, healing and cooperative actions |
+| Prediction | Sanctuary, Resonance and Quickening |
+
+These are generated, compatible, learned support Techniques under the same six assigned slots plus one floating slot as the player. All normal Energy costs, shared recasts, Output limits, optional empowerment timing, assignments, vows and target restrictions apply. The controller does not queue actions or reset cooldowns. Synergy manifests its affordable opening team and can wait up to 750ms for a compatible shared ready window before individual attacks spend it. It retains emergency-healing priority. The wait reserves no action, resources or cooldown; missed windows release individual actors. A channeling Sealer cannot begin a cooperative action.
+
+Open Hand forbids offensive support and attack combinations, so it is no longer automatically assigned to philosophies that depend on those actions. Existing incompatible legacy defaults on those enemy profiles are migrated once. Defensive Temple defaults and other saved enemy vows remain; player vows are unchanged.
+
+Counterplay uses a received hit of the matching category, from the actual target, within the preceding eight active seconds. The AI no longer schedules a counter merely because a future attack seems likely. Damage sharing and periodic effects cannot refresh an old counter opportunity. Prediction's wounded-target preference uses the target's fraction of maximum Health, rather than comparing raw Health between differently sized Spirimon.
+
+Transformation thresholds run inside the real-time scheduler. They work in ordinary Temple battles and Master rematches, including after save/load, independently of boss interface metadata. Pending casts, equipped Techniques and cooldown deadlines survive the form change. Sealed reserves do not change form until manifested, and paused combat does not advance transformations.
+
+Tempo's expired sequence now resets as soon as its objective is displayed, without requiring another mechanism interaction. Timeout tracking does not repeatedly count the same expired window.
+
+The battle log identifies **Your Sealer** and **Enemy Sealer** for support casts and cooperative actions. Progression reports record actual enemy support, cooperative and transformation activity, instead of emulating those effects with separate audit-only code.

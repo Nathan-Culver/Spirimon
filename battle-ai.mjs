@@ -15,7 +15,7 @@ export function expectedDamage(actor,asp,target,tsp,move,style='normal',commit=.
  const f=actor.battlefield||{};if(f.weather==='rain'&&elementOf(move)==='water'||f.weather==='sun'&&elementOf(move)==='fire')damage*=1.5;if(f.weather==='rain'&&elementOf(move)==='fire'||f.weather==='sun'&&elementOf(move)==='water')damage*=.5;
  if(move.effect==='hexStrike'&&target.status||move.effect==='venomStrike'&&['poison','toxic'].includes(target.status))damage*=1.5;
  if(move.effect==='sleepStrike'&&target.status!=='sleep')return 0;
- if(move.effect==='counter'||move.effect==='mirrorCoat')return actor.lastHit?.source===target.id?actor.lastHit.amount*2:0;
+ if(move.effect==='counter'||move.effect==='mirrorCoat')damage=E.counterDamage(actor,target,move);
  if(target.ward&&!['breakWard','struggle'].includes(move.effect)){if((target.wardStrength??1)>=1)return 0;damage*=1-(target.wardStrength??1);}
  return damage*E.hitChance(actor,target,move,style,asp,tsp);
 }
@@ -58,7 +58,7 @@ function effectScore(actor,asp,target,tsp,move,context){
  if(e==='invertStats')return Object.values(target.stages||{}).reduce((n,x)=>n+x,0)*12-Object.values(actor.stages||{}).reduce((n,x)=>n+x,0)*12-10;
  if(e==='swapStats')return Object.values(target.stages||{}).reduce((n,x)=>n+x,0)*10-Object.values(actor.stages||{}).reduce((n,x)=>n+x,0)*10-10;
  if(e==='forceSwitch')return context.enemyReserves.length?(Object.values(target.stages||{}).some(n=>n>0)?30:8):-10;
- if(e==='counter'||e==='mirrorCoat'){const category=e==='counter'?'Physical':'Energy';const predicted=Math.max(0,...choices(target,tsp).filter(m=>E.moveCategory(m)===category).map(m=>expectedDamage(target,tsp,actor,asp,m)));return predicted?Math.min(60,predicted*2/Math.max(1,target.hp)*100):-60;}
+ if(e==='counter'||e==='mirrorCoat'){if(context.realTime)return E.counterDamage(actor,target,move)>0?12:-100;const category=e==='counter'?'Physical':'Energy';const predicted=Math.max(0,...choices(target,tsp).filter(m=>E.moveCategory(m)===category).map(m=>expectedDamage(target,tsp,actor,asp,m)));return predicted?Math.min(60,predicted*2/Math.max(1,target.hp)*100):-60;}
  if(e==='pivot')return context.reserves.length&&ratio(actor,asp)<.4?20:-8;
  return e==='drain'&&ratio(actor,asp)<.7?20:e==='recharge'?-22:e==='twoTurn'?-14:e==='delayedStrike'?-12:e==='recoil'?-8:0;
 }
@@ -69,7 +69,7 @@ export function chooseBattleAction(actor,context,r=Math.random){
  const moves=choices(actor,asp).filter(m=>!context.realTime||(['self','ally','allAllies'].includes(E.moveTarget(m))?allies:opponents).some(t=>E.canUseMove(actor,asp,m,speciesOf(t)))),usable=moves.length?moves:[{...E.STRUGGLE,type:asp.base}],candidates=[];
  const activation=heldItemActivation(actor,asp),sources=usable.filter(move=>!context.canUse||context.canUse({move,type:'move'})).map(move=>({move,type:'move'}));if(activation.ok&&(activation.consumable||E.canUseMove(actor,asp,activation.move))&&(!context.canUse||context.canUse({type:'heldItem',move:activation.move})))sources.push({move:activation.move,type:'heldItem',itemId:activation.item.id});
  for(const source of sources){const {move}=source;const kind=E.moveTarget(move),friendly=['ally','self','allAllies'].includes(kind),targets=kind==='ally'?allies:kind==='self'||kind==='allAllies'?[actor]:opponents;
-  for(const target of targets){if(target.hp<=0||context.realTime&&move.id!=='struggle'&&!source.itemId&&!E.canUseMove(actor,asp,move,speciesOf(target)))continue;const tsp=speciesOf(target),targetIndex=(friendly?allies:opponents).indexOf(target);
+  for(const target of targets){if(target.hp<=0||context.realTime&&move.id!=='struggle'&&!source.itemId&&!E.canUseMove(actor,asp,move,speciesOf(target)))continue;const tsp=speciesOf(target);if(context.realTime&&['counter','mirrorCoat'].includes(move.effect)&&!E.counterDamage(actor,target,move,{realTime:true}))continue;const targetIndex=(friendly?allies:opponents).indexOf(target);
    for(const style of source.type==='heldItem'?['normal']:['normal','agile','strong']){const commit=branch==='survive'?.35:branch==='finish'?.7:.55,expected=expectedDamage(actor,asp,target,tsp,context.realTime?scaledMove(move,actor,asp,style):move,style,commit),support=friendly?supportScore(actor,asp,target,tsp,move,context):0;
     let score=move.power?Math.min(expected,target.hp)/Math.max(1,E.stats(target,tsp).hp)*100:support;
     if(!friendly)score+=effectScore(actor,asp,target,tsp,move,context);
@@ -77,7 +77,7 @@ export function chooseBattleAction(actor,context,r=Math.random){
     if(move.power&&expected===0&&!['counter','mirrorCoat'].includes(move.effect))score-=20;
     if(move.target==='allOpponents')score+=opponents.filter(t=>t!==target).reduce((sum,t)=>sum+expectedDamage(actor,asp,t,speciesOf(t),move,style,commit)/Math.max(1,E.stats(t,speciesOf(t)).hp)*70,0);
     if(branch==='survive'&&friendly&&['heal','fullheal','ward','protect'].includes(move.effect))score+=20;
-    score+=philosophyMoveWeight(actor.battlePhilosophy,move,{actor,target,style,allies});
+    score+=philosophyMoveWeight(actor.battlePhilosophy,move,{actor,target,style,allies,targetMaxHp:E.stats(target,tsp).hp});
     score-=(context.claimedDamage?.[target.id]||0)>=target.hp?70:0;
     if(style==='strong'&&threat>=actor.hp)score-=20;if(style==='agile'&&move.power===0)score-=2;
     const borrow=source.type!=='heldItem'&&!friendly&&move.power>0&&expected<target.hp&&expected*2>=target.hp&&threat<actor.hp*.7&&Math.max(actor.pp||0,actor.willpower||0)>4?1:0;

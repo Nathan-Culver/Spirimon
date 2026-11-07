@@ -1,14 +1,24 @@
 import {spiritualHash} from './spiritual-core.mjs';
 export const TEMPLE_PHILOSOPHIES=['Attrition','Counterplay','Tempo','Resilience','Control','Transformation','Synergy','Prediction'];
 export const PHILOSOPHY_RULES={
- Attrition:{puzzle:'Close three miasma vents; exposed channels drain Stamina and Willpower.',combat:'Defenders favor lingering afflictions, draining attacks and recovery.',effects:['poison','toxic','burn','leechSeed','curse','drain','regenerate'],specialty:'Guardian'},
- Counterplay:{puzzle:'Read each projected attack and activate its opposing mirror.',combat:'Defenders react with counters, wards and interruption.',effects:['counter','mirrorCoat','ward','protect','disable','flinch'],specialty:'Mystic'},
- Tempo:{puzzle:'Activate three beat seals in order within 60 active seconds; a timeout resets the sequence.',combat:'Defenders favor Agile, priority, Speed control and short casts.',effects:['priority','boostSpeed','slow','paralysis'],specialty:'Sprinter'},
- Resilience:{puzzle:'Brace three supports to stabilize their marked tremor zones.',combat:'Defenders favor protective screens, regeneration and healing.',effects:['heal','regenerate','ward','reflect','lightscreen','teamWard'],specialty:'Guardian'},
- Control:{puzzle:'Use the switches to match the inscribed lamp pattern to open the exit seal and shortcuts.',combat:'Defenders favor binding, silencing, disabling and removing advantages.',effects:['trap','taunt','disable','sleep','haze','lowerSpeed'],specialty:'Mystic'},
- Transformation:{puzzle:'Turn the form regulator and bind each seal in its matching phase.',combat:'Defenders begin in Form I and transform at 75% and 35% Health, retaining percentages and Techniques.',effects:['boostMight','boostPower','omniBoost','swapStats','invertStats'],specialty:'Striker'},
- Synergy:{puzzle:'Link all three pairs of resonance wells. Each pair requires visiting both physical wells.',combat:'Defenders favor team wards, team healing and coordinated support.',effects:['teamHeal','teamWard','partyCleanse','reflect','lightscreen','partyStrike'],specialty:'Guardian'},
- Prediction:{puzzle:'Observe the repeating five-symbol pattern and activate its predicted answer; solve three patterns.',combat:'Defenders favor precise attacks and punish already exposed targets.',effects:['sureHit','focus','critical','delayedStrike','revenge'],specialty:'Mystic'}
+ Attrition:{puzzle:'Close three miasma vents; exposed channels drain Stamina and Willpower.',combat:'Defenders favor lingering afflictions, draining attacks and recovery. Their Sealer sustains Willpower and healing.',effects:['poison','toxic','burn','leechSeed','curse','drain','regenerate'],specialty:'Guardian'},
+ Counterplay:{puzzle:'Read each projected attack and activate its opposing mirror.',combat:'Defenders react with counters, wards and interruption. Their Sealer favors wards, Reprise and mental relief.',effects:['counter','mirrorCoat','ward','protect','disable','flinch'],specialty:'Mystic'},
+ Tempo:{puzzle:'Activate three beat seals in order within 60 active seconds; a timeout resets the sequence.',combat:'Defenders favor Agile, priority, Speed control and short casts. Their Sealer favors Quickening and Reprise.',effects:['priority','boostSpeed','slow','paralysis'],specialty:'Sprinter'},
+ Resilience:{puzzle:'Brace three supports to stabilize their marked tremor zones.',combat:'Defenders favor protective screens, regeneration and healing. Their Sealer prioritizes healing and protection.',effects:['heal','regenerate','ward','reflect','lightscreen','teamWard'],specialty:'Guardian'},
+ Control:{puzzle:'Use the switches to match the inscribed lamp pattern to open the exit seal and shortcuts.',combat:'Defenders favor binding, silencing, disabling and removing advantages. Their Sealer favors Reprise and Quickening.',effects:['trap','taunt','disable','sleep','haze','lowerSpeed'],specialty:'Mystic'},
+ Transformation:{puzzle:'Turn the form regulator and bind each seal in its matching phase.',combat:'Defenders begin in Form I and transform at 75% and 35% Health, retaining percentages and Techniques. Their Sealer favors Resonance and healing.',effects:['boostMight','boostPower','omniBoost','swapStats','invertStats'],specialty:'Striker'},
+ Synergy:{puzzle:'Link all three pairs of resonance wells. Each pair requires visiting both physical wells.',combat:'Defenders favor team wards, team healing and coordinated support. Their Sealer favors Soulbridge and cooperation, with emergency healing first.',effects:['teamHeal','teamWard','partyCleanse','reflect','lightscreen','partyStrike'],specialty:'Guardian'},
+ Prediction:{puzzle:'Observe the repeating five-symbol pattern and activate its predicted answer; solve three patterns.',combat:'Defenders favor precise attacks and punish already exposed targets. Their Sealer favors Sanctuary and Resonance.',effects:['sureHit','focus','critical','delayedStrike','revenge'],specialty:'Mystic'}
+};
+export const PHILOSOPHY_SUPPORT={
+ Attrition:['willpower','heal','guard','cleanse','empower','shield','revive'],
+ Counterplay:['shield','cooldown','calm','guard','cleanse','heal','revive'],
+ Tempo:['haste','cooldown','empower','heal','willpower','shield','revive'],
+ Resilience:['heal','shield','guard','cleanse','calm','willpower','revive'],
+ Control:['cooldown','haste','guard','empower','cleanse','heal','revive'],
+ Transformation:['empower','heal','guard','haste','cleanse','shield','revive'],
+ Synergy:['link','shield','heal','guard','calm','empower','revive'],
+ Prediction:['immunity','empower','haste','calm','heal','shield','revive']
 };
 const POSITIONS=[[4,5],[12,5],[20,13]],SYMBOLS=['Root','Moon','Star'],COUNTERS=['Wave','Root','Stone'],ATTACKS=['Flame','Wave','Wind'];
 const plan=room=>TEMPLE_PHILOSOPHIES.includes(room.philosophy)?room.philosophy:'Attrition';
@@ -16,6 +26,7 @@ const key=room=>room.id+'|'+room.level;
 export function trialState(save,room){
  save.dungeonState??={};const s=save.dungeonState[key(room)]??={};
  if(s.trialRevision!==2){Object.assign(s,{trialRevision:2,observed:false,progress:0,completed:[],pairs:[],mask:0,phase:0,mistakes:0,deadline:0,solved:false,victory:false});}
+ if(plan(room)==='Tempo'&&!s.solved&&s.deadline&&(save.sealer?.clockMs||0)>=s.deadline){s.progress=0;s.deadline=0;s.timeouts=(s.timeouts||0)+1;}
  return s;
 }
 function seed(room){return spiritualHash(room.templeSeed||room.id,room.level,plan(room));}
@@ -60,7 +71,7 @@ export function trialObjective(save,room){
  const p=plan(room);if(p==='Synergy')return 'Linked resonance pairs: '+s.pairs.length+'/3.';
  if(p==='Transformation')return 'Regulator phase '+(s.phase+1)+' · Bound forms '+s.completed.length+'/3.';
  if(p==='Control')return 'Current lamps: '+[1,2,4].map(bit=>s.mask&bit?'ON':'OFF').join(' / ')+'. '+trialClue(save,room);
- if(p==='Tempo')return 'Beats '+s.progress+'/3'+(s.deadline?' · '+Math.max(0,Math.ceil((s.deadline-(save.sealer?.clockMs||0))/1000))+'s remaining':'')+'. '+trialClue(save,room);
+ if(p==='Tempo')return (s.timeouts&&!s.progress?'Beat window expired. Restart at the first seal. ':'')+'Beats '+s.progress+'/3'+(s.deadline?' · '+Math.max(0,Math.ceil((s.deadline-(save.sealer?.clockMs||0))/1000))+'s remaining':'')+'. '+trialClue(save,room);
  return (['Attrition','Resilience'].includes(p)?s.completed.length:s.progress)+'/3 · '+trialClue(save,room);
 }
 function nearby(room,f){return Math.abs(room.x-f.x)+Math.abs(room.y-f.y)<=1;}
@@ -98,12 +109,12 @@ export function trialSprite(feature,state){
  if(feature.kind==='temple-inscription')return 'tablet';if(feature.kind==='temple-reset')return 'lever-up';if(feature.kind==='temple-phase')return 'rune-violet';if(feature.kind==='temple-hazard')return state.completed.includes(feature.order)?'rubble':'torch';
  return state.completed.includes(feature.order)||state.mask&(1<<feature.order)?'rune-blue':['rune-amber','rune-blue','rune-violet'][feature.order||0];
 }
-export function philosophyMoveWeight(philosophy,move,{actor={},target={},style='normal',allies=[]}={}){
+export function philosophyMoveWeight(philosophy,move,{actor={},target={},style='normal',allies=[],targetMaxHp=0}={}){
  const p=PHILOSOPHY_RULES[philosophy];if(!p)return 0;let weight=p.effects.includes(move.effect)?20:0;
  if(philosophy==='Tempo'){if(style==='agile')weight+=9;if((move.power||0)>85)weight-=8;}
  if(philosophy==='Counterplay'&&target.lastMove&&['counter','mirrorCoat','ward','protect'].includes(move.effect))weight+=12;
  if(philosophy==='Synergy'&&allies.filter(u=>u.hp>0).length>=2&&['teamHeal','teamWard','partyStrike','partyCleanse'].includes(move.effect))weight+=20;
- if(philosophy==='Prediction'&&(target.status||target.hp<actor.hp)&&['sureHit','critical','delayedStrike'].includes(move.effect))weight+=10;
+ if(philosophy==='Prediction'&&(target.status||targetMaxHp>0&&target.hp<targetMaxHp*.5)&&['sureHit','critical','delayedStrike'].includes(move.effect))weight+=10;
  if(philosophy==='Transformation'&&actor.form>0&&style==='strong')weight+=8;
  return weight;
 }

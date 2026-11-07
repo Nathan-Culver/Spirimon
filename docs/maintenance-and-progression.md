@@ -22,21 +22,22 @@ The same renderer serves field followers, caves, interiors, and mounts. A 24-can
 
 ## Progression results
 
-`tools/audit-progression.mjs` uses the real combat, AI, rewards, XP, equipment, Energy, shrine, puzzle, and save modules. It includes current rank-scaled Temple levels and growing Master teams, boss threshold behavior, level-scaled Guild trials, elimination/retry, and the eight-match championship.
+The current audit walks collision-valid paths through actual Temple/faction rooms, solves their mechanisms, and uses the same enemy deployment, Sealer support and cooperation controller as the live game. Transformation thresholds run in the real scheduler; the audit no longer injects those form changes.
 
-| Run | Battles | Final level | Shrine restorations | Championship attempts |
-|---|---:|---:|---:|---:|
-| progression-1 | 427 | 152 | 217 | 6 |
-| progression-2 | 281 | 89 | 139 | 1 |
-| progression-3 | 285 | 89 | 162 | 1 |
+| Run | Battles | Final level | Shrine restorations | Championship attempts | Enemy support | Enemy cooperation | Enemy form changes |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| progression-1 | 286 | 87 | 176 | 1 | 595 | 5 | 1 |
+| progression-2 | 396 | 135 | 218 | 5 | 844 | 5 | 9 |
 
-All three expanded runs completed eight Crests, all three four-floor faction campaigns, all four legendary encounters, all three Guild trials, and the championship. The first roster required championship retries; the other two completed without a battle loss. Detailed matches and recoveries are in `expanded-progression-audit.json`. The Final's actual boss thresholds are included. The initial three-attempt audit limit was too short for the first roster; the game permits unlimited retries, and the audit now allows eight attempts. Approved Health and damage values were not changed to force completion.
+Both expanded runs completed eight Crests, all three four-floor faction campaigns, all four legendary encounters, the three Guild trials and the championship. Together they solve 48 physical Temple trials. The detailed matches and consumed Shrine uses are in `expanded-progression-audit.json`. Existing Health, damage, Agile and Shrine values were not changed to force completion.
 
-These are automated rules simulations with map reachability checks, not manually walked device playthroughs. Preparation assumes six early level-3 bonds, only three manifested at once, eligible learned Techniques, purchased supplies and training, earned equipment, and one minute of abstract travel between encounters. All later levels come from battle XP; healing uses available Shrines and real inventory. Defeat deducts Coin and drops one third of carried supplies. The script round-trips the device-file format at each Crest. It does not model every overworld step, initial acquisition of those six bonds, the full UI's scheduling or cooperative policy, human reaction time, or Android hardware performance. The first roster's repeated championship losses and much higher final level are a pacing/balance concern for further manual playtests, not evidence that extra leveling guarantees an easy championship.
+These are automated rules simulations, not manually completed device playthroughs. Preparation assumes six early level-3 bonds, at most three manifested at once, eligible learned Techniques, purchased supplies/training and earned equipment. One minute of abstract travel separates encounters; trial rooms use actual collision-valid walking. All later levels come from battle XP. Defeat deducts Coin and drops one third of carried supplies, while recovery consumes a real Shrine use. The script round-trips the device-file format at each Crest. It does not model initial acquisition of all six bonds, every overworld step, human reactions or Android hardware performance. Player commands use an automated scoring policy; the live game still requires manual allied commands.
+
+The second roster needed multiple Championship attempts and substantially more training. That variation remains a pacing concern for player testing; passing these simulations does not establish production balance.
 
 ## Reproducing checks
 
-- `node build.mjs && npm test`: 577 passing regression tests.
+- `node build.mjs && npm test`: 629 passing regression tests at this revision.
 - `node tools/audit-progression.mjs progression-1 progression-2 progression-3`: main path.
 - `node tools/audit-progression.mjs --expanded progression-1 progression-2 progression-3`: expanded path.
 - `node tools/render-companion-audit.mjs`: optional Canvas2D visual audit (requires `@napi-rs/canvas`).
@@ -50,4 +51,4 @@ The published game loaded an isolated backup through its normal Import backup co
 
 ## Follow-up: six reported issues
 
-See `six-issue-regression.md` for the entry-preview corrections, read-only primary-file handling, and integration checks of all six reported issues. The original progression outcomes above remain unchanged; this follow-up does not change combat values or progression gates.
+See `six-issue-regression.md` for the entry-preview corrections, read-only primary-file handling, and integration checks of all six reported issues. The current report above includes the subsequent philosophy and enemy-controller work; the six-issue follow-up itself did not change combat values or progression gates.

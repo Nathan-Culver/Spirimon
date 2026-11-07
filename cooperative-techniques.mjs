@@ -20,6 +20,7 @@ export function cooperativePlans(active,speciesOf,sealer){
  return plans.map(p=>({...p,cost:Math.ceil(energyCost(sealer,p.cost,{kind:'cooperative'}))}));
 }
 export function commitCooperative(plan,state,context,side,availability,schedule,options={}){
+ if((state.supportCasts||[]).some(p=>p.side===side))return {ok:false,reason:'The Sealer is channeling support.'};
  const q=context.sealers[side],current=cooperativePlans(context.active[side],context.speciesOf,q).find(p=>p.id===plan.id);if(!current)return {ok:false,reason:'The equipped Techniques, Domains, or participants no longer fit.'};
  if((q.cooperativeCooldowns[current.id]||0)>state.elapsedMs)return {ok:false,reason:'Cooperative technique is cooling down.'};
  for(const part of current.participants){const u=context.active[side].find(u=>u.id===part.id),friendly=['self','ally','allAllies'].includes(E.moveTarget(part.move)),target=friendly?u:context.active[side==='a'?'b':'a'].find(v=>v.hp>0),pressure=E.moveTarget(part.move)==='allOpponents'&&context.active[side==='a'?'b':'a'].some(v=>v.hp>0&&context.speciesOf(v).ability==='Pressure'),check=availability(state,u,context.speciesOf(u),{type:'move',move:part.move},pressure?{ability:'Pressure'}:target?context.speciesOf(target):null);if(!check.ok)return {ok:false,reason:context.speciesOf(u).forms[u.appearance]+': '+check.reason};}
@@ -30,7 +31,7 @@ export function commitCooperative(plan,state,context,side,availability,schedule,
   const result=schedule(state,context,u,{type:'move',move:boosted,cooldownKey:move.id,style:'normal',targetIndex:0});if(!result.ok)throw Error('Cooperative scheduling changed after validation: '+result.reason);
  }
  if(current.kind==='shelter')for(const u of context.active[side]){const max=E.stats(u,context.speciesOf(u)).hp;E.healHP(u,context.speciesOf(u),Math.ceil(max*.08));u.spiritualShields??=[];u.spiritualShields.push({hp:Math.ceil(max*.08),until:state.elapsedMs+6000});}
- q.cooperativeCooldowns[current.id]=state.elapsedMs+(current.advanced?90000:45000);return {ok:true,log:['The Sealer commits '+current.cost+' Energy to '+current.name+'.']};
+ q.cooperativeCooldowns[current.id]=state.elapsedMs+(current.advanced?90000:45000);return {ok:true,log:[(side==='a'?'Your Sealer':'Enemy Sealer')+' commits '+current.cost+' Energy to '+current.name+'.']};
 }
 export const FIELD_RITUALS=[
  {id:'purify',name:'Purification Circle',domains:['Light','Life','Good','Spirit','Water'],cost:8,description:'Cleanse physical afflictions from the traveling team.'},

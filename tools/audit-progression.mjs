@@ -1,3 +1,4 @@
+import {runEnemyTactics} from '../enemy-tactics.mjs';
 import * as E from '../engine.mjs';
 import * as RT from '../realtime-combat.mjs';
 import * as SE from '../spiritual-energy.mjs';
@@ -63,8 +64,8 @@ export function simulateProgression(seed='progression-1',{expanded=false}={}){
  function battle({name,enemyLevel,count=2,maxActive=3,trainer=true,kind=null,eventId=name,opponentSpecies=null,types=null,philosophy=null}){
   prepare();const q=sealer(),initialEnergy=q.energy,enemies=Array.from({length:count},()=>{const pool=types?catalog.filter(sp=>types.some(t=>sp.base===t||sp.alter===t)):catalog,sp=opponentSpecies||pool[Math.floor(random()*pool.length)],u=E.heal(E.makeIndividual(sp,enemyLevel,philosophy==='Transformation'?0:enemyLevel>=36?2:enemyLevel>=16?1:0,random),sp);u.id='enemy-'+serial++;if(philosophy)u.battlePhilosophy=philosophy;if(trainer)BAI.prepareOpponent(u,sp,save.rank,random);return u;});
   const foe=trainer?SE.enemySealer(seed+'|'+serial,enemies,speciesOf):null,state=RT.createRealTimeState(q.clockMs),ctx={active:{a:[],b:[]},teams:{a:[...party()].sort((a,b)=>name==='Preparation'?a.level-b.level:b.level-a.level),b:enemies},speciesOf,sealers:{a:q,b:foe},inventory:{a:save.inventory,b:{}},rules:{maxActive}};
-  SE.beginSealerBattle(q);if(foe){foe.clockMs=state.elapsedMs;SE.beginSealerBattle(foe);}E.bindBattlefield(ctx.teams.a,enemies);
-  const start=state.elapsedMs,log=[],participants=new Set();let ticks=0,bossPhase=0,philosophyActions=0;
+  SE.beginSealerBattle(q);if(foe){SE.configureEnemyVow(foe,/clan|faction|championship/.test(kind||''));foe.clockMs=state.elapsedMs;SE.beginSealerBattle(foe);}E.bindBattlefield(ctx.teams.a,enemies);
+  const start=state.elapsedMs,log=[],participants=new Set();let ticks=0,bossPhase=0,philosophyActions=0,enemySupports=0,enemyCooperatives=0,enemyTransformations=0;
   function deploy(side){
    ctx.active[side]=ctx.active[side].filter(u=>u.hp>0);for(const u of ctx.teams[side])if(ctx.active[side].length<maxActive&&u.hp>0&&!ctx.active[side].includes(u)){
     const result=RT.deploySpirimon(state,ctx,side,u);if(result.ok&&side==='a')participants.add(u.id);
@@ -80,21 +81,22 @@ export function simulateProgression(seed='progression-1',{expanded=false}={}){
   }
   while(ticks++<1800){
    if(q.energy<q.maxEnergy*.2&&save.inventory.spiritDraughts>0&&(state.utilityReadyAt||0)<=state.elapsedMs){save.inventory.spiritDraughts--;SE.restoreEnergy(q,q.maxEnergy*.35);state.utilityReadyAt=state.elapsedMs+3500;}
-   deploy('a');deploy('b');
+   deploy('a');const tactics=runEnemyTactics(state,ctx);log.push(...tactics.log);if(tactics.kind==='support')enemySupports++;if(tactics.kind==='cooperative')enemyCooperatives++;
    for(const side of ['a','b']){
     const opponents=ctx.active[side==='a'?'b':'a'].filter(u=>u.hp>0);if(!opponents.length)continue;
-    if(ticks%6===0)support(side);
+    if(side==='a'&&ticks%6===0)support(side);
     for(const actor of ctx.active[side]){
+     if(side==='b'&&tactics.hold?.includes(actor.id))continue;
      const sp=speciesOf(actor),clock=RT.unitClock(state,actor);if(clock.aiAt>state.elapsedMs)continue;clock.aiAt=state.elapsedMs+200;
      if(side==='a'&&actor.hp<E.stats(actor,sp).hp*.35&&save.inventory.tonics>0&&RT.scheduleAction(state,ctx,actor,{type:'item',item:'tonic',targetIndex:ctx.active.a.indexOf(actor)}).ok)continue;
      const decision=BAI.chooseBattleAction(actor,{realTime:true,speciesOf,opponents,allies:ctx.active[side],team:ctx.teams[side],reserves:[],enemyReserves:[],canUse:c=>RT.actionAvailability(state,actor,sp,c,speciesOf(opponents[0])).ok},random);
      if(decision){const scheduled=RT.scheduleAction(state,ctx,actor,decision);if(scheduled.ok&&side==='b'&&philosophy&&TP.philosophyMoveWeight(philosophy,decision.move||{},{actor,style:decision.style,allies:ctx.active.b,target:opponents[decision.targetIndex]})>0)philosophyActions++;}
     }
    }
-   const result=RT.advanceRealTime(state,200,ctx,random);for(const u of enemies)TP.transformTempleCombatant(u,speciesOf(u),E.stats,E.normalizeResources);if((['clan','temple-trainer','legend','faction'].includes(kind)||kind==='championship'&&name==='Final')&&enemies[0].hp>0){const u=enemies[0],max=E.stats(u,speciesOf(u)),ratio=u.hp/max.hp;if(bossPhase===0&&ratio<=.65){bossPhase=1;u.ward=true;u.pp=Math.min(max.pp,u.pp+15);}else if(bossPhase===1&&ratio<=.3){bossPhase=2;u.battleStyle='strong';u.status=null;}}log.push(...result.log);if(log.length>20)log.splice(0,log.length-20);
+   const result=RT.advanceRealTime(state,200,ctx,random);enemyTransformations+=result.log.filter(l=>l.includes('changes form, preserving')).length;if((['clan','temple-trainer','legend','faction'].includes(kind)||kind==='championship'&&name==='Final')&&enemies[0].hp>0){const u=enemies[0],max=E.stats(u,speciesOf(u)),ratio=u.hp/max.hp;if(bossPhase===0&&ratio<=.65){bossPhase=1;u.ward=true;u.pp=Math.min(max.pp,u.pp+15);}else if(bossPhase===1&&ratio<=.3){bossPhase=2;u.battleStyle='strong';u.status=null;}}log.push(...result.log);if(log.length>20)log.splice(0,log.length-20);
    if(!enemies.some(u=>u.hp>0)||!party().some(u=>u.hp>0)||(state.undefendedb||0)>6000||(state.undefendeda||0)>6000)break;
   }
-  const victory=enemies.every(u=>u.hp<=0)||(state.undefendedb||0)>6000,record={name,...(philosophy?{philosophy,philosophyActions}:{}),partyLevel:level(),enemyLevel,enemies:count,victory,seconds:Math.round((state.elapsedMs-start)/1000),energySpent:Math.round(initialEnergy-q.energy),survivors:party().filter(u=>u.hp>0).length};
+  const victory=enemies.every(u=>u.hp<=0)||(state.undefendedb||0)>6000,record={name,enemySupports,enemyCooperatives,enemyTransformations,...(philosophy?{philosophy,philosophyActions}:{}),partyLevel:level(),enemyLevel,enemies:count,victory,seconds:Math.round((state.elapsedMs-start)/1000),energySpent:Math.round(initialEnergy-q.energy),survivors:party().filter(u=>u.hp>0).length};
   q.clockMs=state.elapsedMs;save.playTime+=state.elapsedMs-start;SE.endSealerBattle(q);if(foe)SE.endSealerBattle(foe);
   for(const u of [...party(),...enemies])RT.preserveAfflictions(state,u);
   if(!victory){const items={};for(const key of ['seals','offerings','tonics','ethers','spiritDraughts']){items[key]=Math.floor((save.inventory[key]||0)/3);save.inventory[key]=(save.inventory[key]||0)-items[key];}save.drops.push({x:save.player.x,y:save.player.y,items});save.inventory.coins-=Math.min(save.inventory.coins,20+save.rank*5);record.log=log;matches.push(record);return false;}

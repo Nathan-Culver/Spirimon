@@ -236,6 +236,13 @@ export function moveTarget(move){
  if(move.power===0&&(move.effect?.startsWith('weather')||move.effect?.startsWith('terrain'))||['haze','invertStats'].includes(move.effect))return 'field';
  return 'opponent';
 }
+// Counters use the actual recent matching hit, never an unsubmitted enemy order.
+export function counterDamage(actor,target,move,{realTime=Number.isFinite(actor.realtimeNow),now=actor.realtimeNow}={}){
+ const category=move?.effect==='counter'?'Physical':move?.effect==='mirrorCoat'?'Energy':null,hit=actor.lastHit;
+ if(!category||!hit||hit.source!==target?.id||hit.category!==category||!Number.isFinite(hit.amount)||hit.amount<=0)return 0;
+ if(realTime&&(!Number.isFinite(hit.at)||!Number.isFinite(now)||hit.at>now||now-hit.at>8000))return 0;
+ return hit.amount*2;
+}
 export function executeAction(actor,asp,target,tsp,move,style='normal',commit=.5,r=Math.random,costScale=1,context={}){
  const previous=actor.lastMove;actor.passivePreviousMove=previous;
  try{return executeActionImplementation(actor,asp,target,tsp,move,style,commit,r,costScale,context);}
@@ -308,7 +315,7 @@ function executeActionImplementation(actor,asp,target,tsp,move,style='normal',co
  if(effect==='unburdened'&&!heldEquipment(actor,asp))amount*=2;
  if(effect==='revenge'&&actor.tookDamageThisRound)amount*=2;
  if(effect==='partyStrike')amount=Math.floor(amount*(1+.15*Math.min(5,living(context.actorTeam||[actor]).length-1)));
- if(effect==='counter'||effect==='mirrorCoat'){const hit=actor.lastHit;if(!hit||hit.source!==target.id||hit.category!==(effect==='counter'?'Physical':'Energy')){log.push(name+' has nothing to retaliate against.');return log;}amount=hit.amount*2;}
+ if(effect==='counter'||effect==='mirrorCoat'){amount=counterDamage(actor,target,move,{realTime:!!context.realTime});if(!amount){log.push(name+' has nothing to retaliate against.');return log;}}
  if(actor.focused){amount=Math.floor(amount*1.5);actor.focused=false;}
  if(effect==='delayedStrike'){target.delayedDamage={amount:amount/directProtection(target,move,category),turns:2,category,source:actor.id,move:{id:move.id,domain:move.domain}};log.push(name+' sets a delayed thunder omen.');return log;}
  amount=Math.max(1,Math.floor(amount*partialWard));const before=target.hp;if(hasHook(target,'survive',tsp)&&!itemOnceUsed(target,'survive')&&before>=stats(target,tsp).hp&&amount>=before){amount=before-1;markItemUsed(target,'survive');log.push('Last-light Band holds '+targetName+' at 1 HP.');}
@@ -317,7 +324,7 @@ function executeActionImplementation(actor,asp,target,tsp,move,style='normal',co
  amount=remaining;
  const link=(target.spiritualLinks||[]).find(l=>l.until>(target.realtimeNow||0));
  if(link&&context.activeUnits){const partner=context.activeUnits.find(u=>u.id===link.partner&&u.hp>0&&u!==target);if(partner){const shared=Math.min(Math.floor(amount*link.amount),Math.max(0,partner.hp-1));partner.hp-=shared;amount-=shared;if(shared>0)context.onDamage?.(partner,{amount:shared,hits:Math.min(damagingHits,shared)});}}
- target.hp=Math.max(0,target.hp-amount);const dealt=before-target.hp;target.tookDamageThisRound=true;target.lastHit={amount:dealt,category,source:actor.id};target.ward=false;
+ target.hp=Math.max(0,target.hp-amount);const dealt=before-target.hp;target.tookDamageThisRound=true;target.lastHit={amount:dealt,category,source:actor.id,...(context.realTime?{at:actor.realtimeNow}:{})};target.ward=false;
  if(dealt>0)context.onDamage?.(target,{amount:dealt,hits:Math.min(damagingHits,dealt),disruption:moveCooldownDisruption(move)});
  log.push(name+' uses '+move.name+': '+dealt+' damage'+(critical?' — critical hit!':'')+(hits>1?' ('+hits+' hits)':'')+'.');
  const chain=context.passiveChain||new Set(),drainKey=actor.id+':drain',thornsKey=target.id+':thorns';
