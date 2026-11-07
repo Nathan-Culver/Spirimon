@@ -83,3 +83,10 @@ test('a readable linked file stays authoritative when only write permission has 
   assert.equal(result.save.seed,'readable-primary');assert.equal(result.source,'file');assert.equal(result.writeBlocked,true);assert.match(result.warning,/loaded/);assert.equal(browserReads,0);assert.equal(h.writes(),0);
  }
 });
+
+test('practice keeps the shared GCD distinct from a longer Technique recast and labels LCDs once',()=>{
+ const data=payload(),u=data.save.spirits[0],sp=data.save.species[u.species],move={id:'practice-timing',name:'Long ward',type:'Beast',power:0,accuracy:1,effect:'heal',timing:'gcd',cooldownMs:25000};let html='';const seconds=ms=>(ms/1000).toFixed(1)+'s';
+ const h=vm.createContext({s:data.save,E:{...E,availableTechniques:()=>[move]},RT,safe:()=>true,spOf:()=>sp,seconds,esc:String,action:(_a,label)=>label,showModal:(_title,body)=>html=body});vm.runInContext(extract('learnMenu'),h);
+ h.learnMenu(u.id,0);const timing=RT.moveTiming(move,u,sp);assert.ok(timing.localCooldownMs>timing.cooldownMs);assert.ok(html.includes('GCD '+seconds(timing.cooldownMs)));assert.ok(html.includes('Technique recast '+seconds(timing.localCooldownMs)));assert.doesNotMatch(html,/undefined/);
+ move.timing='lcd';h.learnMenu(u.id,0);assert.match(html,/LCD/);assert.doesNotMatch(html,/Technique recast/);
+});

@@ -1102,8 +1102,13 @@ function queueFresh(reg,r=Math.random,force=false,prototype=null){
  const base=E.pick(reg.biome.types,r),alter=E.pick(E.TYPES.filter(t=>t!==base),r),plan=E.makeSpecies(E.hash(s.seed,'ai-plan',Date.now(),r()),base,alter);s.generationPlans[plan.id]=plan;queue.push(plan.id);save();return true;
 }
 
-function learnMenu(id,slot=null){if(!safe())return toast('Practice at a safe place.');const i=s.spirits.find(x=>x.id===id);if(!i)return;const sp=spOf(i),available=E.availableTechniques(i,sp);showModal('Practice a technique.',slot===null?'<p>Choose the technique slot to replace.</p><div class="btn-row">'+E.equippedMoves(i,sp).map((m,n)=>action('learn-slot',esc(m.name),id+':'+n)).join('')+'</div>':'<p>Choose a technique learned through levels, transformation, or earlier practice.</p><div class="learn-grid">'+available.map(m=>action('learn-move',esc(m.name)+'<small>'+m.type+(m.domain?' · '+m.domain:'')+' · Power '+m.power+' · '+RT.moveTiming(m,i,sp).timing.toUpperCase()+' '+seconds(RT.moveTiming(m,i,sp).localCooldownMs||RT.moveTiming(m,i,sp).cooldownMs)+' CD'+'</small>',id+'|'+slot+'|'+m.id)).join('')+'</div>');}
-
+function learnMenu(id,slot=null){
+ if(!safe())return toast('Practice at a safe place.');const i=s.spirits.find(x=>x.id===id);if(!i)return;const sp=spOf(i),available=E.availableTechniques(i,sp);
+ showModal('Practice a technique.',slot===null?'<p>Choose the technique slot to replace.</p><div class="btn-row">'+E.equippedMoves(i,sp).map((m,n)=>action('learn-slot',esc(m.name),id+':'+n)).join('')+'</div>':'<p>Choose a technique learned through levels, transformation, or earlier practice.</p><div class="learn-grid">'+available.map(m=>{
+  const timing=RT.moveTiming(m,i,sp),recast=timing.timing==='gcd'&&timing.localCooldownMs>0?' · Technique recast '+seconds(timing.localCooldownMs):'';
+  return action('learn-move',esc(m.name)+'<small>'+m.type+(m.domain?' · '+m.domain:'')+' · Power '+m.power+' · '+timing.timing.toUpperCase()+' '+seconds(timing.cooldownMs)+' CD'+recast+'</small>',id+'|'+slot+'|'+m.id);
+ }).join('')+'</div>');
+}
 function upgradeWildLevels(){if(s.levelRevision===2)return;s.townsVisited??=Object.values(s.regions).filter(r=>r.visited&&r.town&&r.key!=='0,0').map(r=>r.key);for(const reg of Object.values(s.regions)){Object.assign(reg,E.encounterRange(s.seed,reg.cx,reg.cy,s.townsVisited.length));reg.danger=reg.minLevel;for(const r of s.roamers[reg.key]||[]){r.ind.level=E.encounterLevel(reg,E.rng(E.hash(s.seed,r.id,'rebalance')));E.heal(r.ind,spOf(r.ind));}}s.levelRevision=2;}
 
 document.addEventListener('pointerdown',()=>audio.unlock().catch(()=>{}),{once:true});document.addEventListener('keydown',()=>audio.unlock().catch(()=>{}),{once:true});

@@ -36,7 +36,7 @@ These are automated rules simulations with map reachability checks, not manually
 
 ## Reproducing checks
 
-- `node build.mjs && npm test`: 576 passing regression tests.
+- `node build.mjs && npm test`: 577 passing regression tests.
 - `node tools/audit-progression.mjs progression-1 progression-2 progression-3`: main path.
 - `node tools/audit-progression.mjs --expanded progression-1 progression-2 progression-3`: expanded path.
 - `node tools/render-companion-audit.mjs`: optional Canvas2D visual audit (requires `@napi-rs/canvas`).
