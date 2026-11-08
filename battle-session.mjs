@@ -27,7 +27,7 @@ function ensureRealTimeBattle(){
 }
 function applyRealTimeContext(ctx){
  const battle=getBattle(),s=getState();
- if(!battle)return;battle.multi.allies=ctx.active.a.map(u=>u.id);battle.multi.enemies=ctx.active.b;battle.multi.reserves=ctx.teams.b.filter(u=>!ctx.active.b.includes(u));
+ if(!battle)return;SE.ensureSealer(s);battle.multi.allies=ctx.active.a.map(u=>u.id);battle.multi.enemies=ctx.active.b;battle.multi.reserves=ctx.teams.b.filter(u=>!ctx.active.b.includes(u));
  battle.ally=ctx.active.a.find(u=>u.hp>0)?.id||battle.ally;battle.enemy=ctx.active.b.find(u=>u.hp>0)||battle.enemy;
  if(!battle.multi.allies.includes(battle.controlledAlly))battle.controlledAlly=ctx.active.a.find(u=>u.hp>0)?.id||battle.ally;
 }

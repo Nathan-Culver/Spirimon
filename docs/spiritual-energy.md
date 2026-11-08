@@ -6,7 +6,7 @@ This is the implemented rule reference for the two design questionnaires. Save d
 
 Energy is spent at release, never continuously drained or reserved. Recalling a creature refunds nothing. Every subsequent release is charged again. Each side can manifest up to three creatures. There is no additional deployment-capacity restriction.
 
-The designated lead is free to release, including at zero Energy. Lead changes and attunement are available only at safe places, including shrine surroundings. A healthy fallback creature does not automatically inherit the free-lead exception. The traveling party can contain six members; creatures in storage do not require support assignments.
+The designated lead is free to release, including at zero Energy. Voluntary Lead changes and attunement are available only at safe places, including shrine surroundings. When the Lead is knocked out, the first conscious member in traveling-party order automatically becomes the saved Lead, inherits free manifestation, and follows outdoors, in dungeons, and inside buildings. Reviving the former Lead does not switch the role back. If the entire party is defeated, the last Lead is retained through normal Shrine blackout recovery and no unconscious companion is drawn. The traveling party can contain six members; creatures in storage do not require support assignments.
 
 All surviving manifested creatures return to their seals at battle end. An ordinary following companion is free. Releasing another creature for a field task spends Energy; repeated physical actions within that task do not. Push/Cleave/Crush barriers retain their alternate physical solutions when the appropriate release is unaffordable. Field capabilities continue to require actual anatomy.
 

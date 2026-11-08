@@ -158,3 +158,25 @@ test('restoration rejects defeated targets, invalid selections and insufficient 
  for(const [pool,amount]of [['all',1],['bad',.25],['hp',-1],['hp',NaN]]){const before=JSON.stringify(u);assert.equal(SE.restoreSpirimon(q,u,f.sp,pool,amount).ok,false);assert.equal(JSON.stringify(u),before);assert.equal(q.energy,0);}
  q.energy=q.maxEnergy;u.hp=0;const energy=q.energy;assert.equal(SE.restoreSpirimon(q,u,f.sp,'hp',1).ok,false);assert.equal(u.hp,0);assert.equal(q.energy,energy);
 });
+
+test('a knocked-out Lead passes to the first conscious traveling member and stays replaced after revival and reload',()=>{
+ const f=fixture(),q=f.s.sealer;q.energy=0;f.a[0].hp=0;f.a[1].hp=0;
+ // A healthy stored spirit must never become Lead ahead of the traveling party.
+ f.s.spirits=[{...f.a[3],id:'stored'},...f.a];
+ SE.ensureSealer(f.s);assert.equal(q.leadId,f.a[2].id);
+ assert.equal(SE.manifestationCost(q,f.a[2],f.sp),0);assert.equal(q.energy,0);
+ f.a[0].hp=10;SE.ensureSealer(f.s);assert.equal(q.leadId,f.a[2].id);
+ const saved=JSON.parse(JSON.stringify(f.s));assert.equal(SE.ensureSealer(saved).leadId,f.a[2].id);
+ f.a[2].hp=0;SE.ensureSealer(f.s);assert.equal(q.leadId,f.a[0].id);
+});
+test('full-party blackout retains the last Lead through Shrine recovery without choosing storage',()=>{
+ const f=fixture(),q=f.s.sealer;q.leadId=f.a[3].id;for(const u of f.a)u.hp=0;
+ SE.ensureSealer(f.s);assert.equal(q.leadId,f.a[3].id);
+ assert.ok(SE.blackoutRecovery(f.s,'blackout-shrine').ok);SE.ensureSealer(f.s);
+ assert.equal(q.leadId,f.a[3].id);assert.ok(f.a.every(u=>u.hp>0));
+});
+test('a knocked-out Spirimon cannot be manually chosen as Lead',()=>{
+ const f=fixture();f.a[1].hp=0;
+ assert.equal(SE.changeLead(f.s,f.a[1].id,{safe:true}).ok,false);
+ assert.equal(f.s.sealer.leadId,f.a[0].id);
+});

@@ -19,7 +19,10 @@ export function ensureSealer(save){
  if(first&&(save.wins||0)>0){q.xp=Math.min(100000,(save.wins||0)*42);while(q.xp>=80+q.level*20){q.xp-=80+q.level*20;q.level++;}}
  q.level=Math.max(1,Math.floor(Number(q.level)||1));q.clockMs=Number.isFinite(q.clockMs)?Math.max(0,q.clockMs):0;q.xp=Number.isFinite(q.xp)?Math.max(0,q.xp):0;q.training=clamp(Number(q.training)||0,0,20);
  q.advanced=Array.isArray(q.advanced)?q.advanced:[];q.rituals=Array.isArray(q.rituals)?q.rituals:[];
- if(!save.party?.includes(q.leadId))q.leadId=save.party?.[0]||null;
+ // A knockout passes the Lead to the next conscious traveling companion.
+ // Keep the last Lead during a full-party blackout so Shrine recovery is stable.
+ const team=(save.party||[]).map(id=>save.spirits?.find(u=>u.id===id)).filter(Boolean);
+ if(!team.some(u=>u.id===q.leadId&&u.hp>0))q.leadId=team.find(u=>u.hp>0)?.id||(save.party?.includes(q.leadId)?q.leadId:save.party?.[0]||null);
  SD.ensureDisciplines(q);q.maxEnergy=maximumEnergy(q,save.spirits||[]);q.energy=first?q.maxEnergy:clamp(Number(q.energy)||0,0,q.maxEnergy);
  if(!Array.isArray(q.startingChosen))q.startingChosen=[];for(const [id,list]of Object.entries(q.assignments))if(!Array.isArray(list))delete q.assignments[id];
  if(!Array.isArray(q.startingChoices)||!q.startingChoices.every(validateSupport))q.startingChoices=startingSupport(save.seed||'Sealer');
@@ -44,7 +47,7 @@ export function combatStrength(ind,sp){
  return Math.max(10,Math.sqrt(durability*(offense*8+utility))*passive*(sp.physicalRes<1||sp.spiritualRes<1?1.06:1));
 }
 export function manifestationCost(sealer,ind,sp,{ignoreLead=false}={}){if(!ignoreLead&&ind.id===sealer.leadId)return 0;const raw=6*Math.pow(combatStrength(ind,sp)/70,.8)*(1+Math.max(0,ind.level-15)*.004)/(1+(Math.max(1,sealer.level)-1)*.018);return Math.max(1,Math.ceil(SD.energyCost(sealer,raw,{kind:'manifest',bond:bondEfficiency(ind)})));}
-export function changeLead(save,id,{safe=false,battle=false}={}){const q=ensureSealer(save);if(battle||!safe)return {ok:false,reason:'Change your lead at a safe place.'};if(!save.party.includes(id))return {ok:false,reason:'The lead must be in your active traveling team.'};q.leadId=id;return {ok:true};}
+export function changeLead(save,id,{safe=false,battle=false}={}){const q=ensureSealer(save);if(battle||!safe)return {ok:false,reason:'Change your lead at a safe place.'};if(!save.party.includes(id))return {ok:false,reason:'The lead must be in your active traveling team.'};if(!save.spirits.some(u=>u.id===id&&u.hp>0))return {ok:false,reason:'Choose a conscious Spirimon as your lead.'};q.leadId=id;return {ok:true};}
 export function chooseStartingSupport(save,id){const q=ensureSealer(save);if(q.startingChosen.length>=3)return {ok:false,reason:'Three starting techniques have already been chosen.'};const t=q.startingChoices.find(t=>t.id===id);if(!t||q.startingChosen.includes(id))return {ok:false,reason:'Choose a different starting technique.'};q.startingChosen.push(id);q.known[id]=t;if(q.startingChosen.length===3)autoAssignSupport(save);return {ok:true,complete:q.startingChosen.length===3};}
 export function autoAssignSupport(save){
  const q=save.sealer||ensureSealer(save),known=Object.values(q.known),ids=save.party||[];if(!known.length)return;

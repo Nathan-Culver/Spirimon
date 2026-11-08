@@ -74,3 +74,17 @@ test('physical faction leaders use themed ordinary species, retain boss phases, 
  vm.runInContext("prepareCompetitionBattle('faction','ashen-hand',profile)",h);
  assert.equal(h.battle.enemyRoster.length,3);assert.ok(h.battle.enemyRoster.every(u=>!h.s.species[u.species].legendary));assert.equal(h.battle.message,'Marshal Veyra');assert.equal(h.battle.boss.phase,0);assert.equal(h.battle.boss.shield,1);
 });
+
+test('battle knockouts promote the saved Lead and let its replacement manifest at zero Energy',()=>{
+ const h=harness(),sp=Object.values(h.s.species)[0];h.enemy=E.heal(E.makeIndividual(sp,10),sp);
+ vm.runInContext('startBattle(enemy)',h);const original=h.s.spirits[0],replacement=h.s.spirits[1];
+ h.s.sealer.energy=0;original.hp=0;
+ vm.runInContext('applyRealTimeContext(realTimeContext())',h);
+ assert.equal(h.s.sealer.leadId,replacement.id);
+ const ctx=vm.runInContext('realTimeContext()',h);
+ const result=RT.deploySpirimon(h.battle.rt,ctx,'a',replacement);
+ assert.ok(result.ok);assert.equal(result.cost,0);assert.equal(h.s.sealer.energy,0);
+ vm.runInContext('finishRealTimeEncounter()',h);
+ assert.equal(h.s.sealer.leadId,replacement.id);
+ assert.equal(vm.runInContext('lead().id',h),replacement.id);
+});
