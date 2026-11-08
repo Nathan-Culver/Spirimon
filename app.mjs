@@ -138,12 +138,12 @@ async function loadInitialJourney(){
 }
 window.spirimonReconnectSave=async()=>{try{if(nativeSaveAPI()){await chooseDeviceSave();if(nativeSaveLinked&&!deviceSaveBlocked)location.reload();}else if(deviceSaveHandle&&await deviceSaveHandle.requestPermission({mode:'readwrite'})==='granted')location.reload();}catch(error){toast(error.message);}};
 async function persist(){
- if(!loaded||persisting)return;persisting=true;saveError='';
- try{DEX.syncSpiridex(s);s.battle=battle;s.generationQueue=queue;const wrote=await writeDeviceSave();fileSaveFailed=!!(deviceSaveHandle||nativeSaveLinked)&&!wrote;s.lastSuccessfulSave=Date.now();s.lastSave=s.lastSuccessfulSave;if(wrote)s.lastDeviceSave=s.lastSuccessfulSave;
- await dbPut('saves',structuredClone(s),'main');for(const id of [...libraryDirty]){await dbPut('library',structuredClone(library[id]));libraryDirty.delete(id);}
+ if(!loaded||persisting)return;persisting=true;saveError='';const previousSuccess=s.lastSuccessfulSave,previousLast=s.lastSave;let recoverySaved=false,wrote=false;
+ try{DEX.syncSpiridex(s);s.battle=battle;s.generationQueue=queue;wrote=await writeDeviceSave();fileSaveFailed=!!(deviceSaveHandle||nativeSaveLinked)&&!wrote;s.lastSuccessfulSave=Date.now();s.lastSave=s.lastSuccessfulSave;if(wrote)s.lastDeviceSave=s.lastSuccessfulSave;
+ await dbPut('saves',structuredClone(s),'main');recoverySaved=true;for(const id of [...libraryDirty]){await dbPut('library',structuredClone(library[id]));libraryDirty.delete(id);}
  if(!lastRecoveryAt||Date.now()-lastRecoveryAt>=300000){const ring=(await dbGet('saves','recovery-ring'))||[];ring.unshift({id:'recovery-'+Date.now(),at:Date.now(),save:structuredClone(s)});await dbPut('saves',ring.slice(0,5),'recovery-ring');lastRecoveryAt=Date.now();}
  const status=$('#save-status');if(status)status.innerHTML='<i></i> '+(wrote?'Saved to device file':fileSaveFailed||deviceSaveBlocked?'Browser recovery · reconnect device file':'Browser recovery saved');
- }catch(err){saveError='Save failed · export a backup';const status=$('#save-status');if(status)status.textContent=saveError;console.error(err);}finally{persisting=false;refreshSaveFeedback();}
+ }catch(err){if(!recoverySaved&&!wrote){s.lastSuccessfulSave=previousSuccess;s.lastSave=previousLast;}saveError='Save failed · export a backup';const status=$('#save-status');if(status)status.textContent=saveError;console.error(err);}finally{persisting=false;refreshSaveFeedback();}
 }
 
 function save(){DEX.syncSpiridex(s);clearTimeout(saveTimer);const status=$('#save-status');if(status)status.textContent='Saving…';saveTimer=setTimeout(persist,350);}
