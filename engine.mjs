@@ -10,7 +10,7 @@ import {statusChance} from './classification-status.mjs';
 import {equipment,hasHook,ASPECTS,heldEquipment,itemHasHook,itemOnceUsed,markItemUsed,consumeHeldItem,heldItemActivation} from './equipment.mjs';
 import {townLayout,townFeatures,townPath,townGround} from './towns.mjs';
 import {sceneryBaseRow} from './scenery.mjs';
-import {buildLearnset,startingMoves,validateGeneratedMoves,moveBaseValue as baseMoveValue,moveLore as narrativeLore,moveCooldownDisruption} from './moves.mjs';
+import {lineageMoves,buildLearnset,startingMoves,validateGeneratedMoves,moveBaseValue as baseMoveValue,moveLore as narrativeLore,moveCooldownDisruption} from './moves.mjs';
 export function moveBaseValue(move){return baseMoveValue(move);}
 export function moveLore(move){return narrativeLore(move);}
 export const VERSION=1;
@@ -39,7 +39,7 @@ export function makeSpecies(seed,base,alter,domains){
  if(!TYPES.includes(base)||!TYPES.includes(alter)||base===alter)throw Error('Two distinct valid types required.');
  const design=buildDesign(seed,base,alter),anatomy=design.anatomy;
  const sp={id:'sp-'+hash(seed,base,alter).toString(36),seed,base,alter,domains:domains||[],name:design.name,forms:design.forms,description:design.description,body:design.reference.name,identity:hash(seed,'identity'),design,anatomy,power:45+Math.floor(r()*18)+anatomy.strength*3,health:43+Math.floor(r()*18)+(anatomy.strength-1)*5,speed:30+Math.floor(r()*35)-(anatomy.strength-1)*3,physicalRes:r()<.4?.85:1,spiritualRes:r()<.4?.85:1,ability:pick(['Steadfast','Wildheart','Second Wind','Soulweave','Pressure'],r),temperament:pick(['Watchful','Curious','Proud','Gentle','Restless'],r),evolution:r()<.18?'bond':'level',moveRevision:3,source:'procedural',proceduralArt:true,sprites:[],taxonomyRevision:2};
- assignDomains(sp,r);ensurePassives(sp);syncCapabilities(sp);sp.learnset=buildLearnset(base,alter,sp.domains,anatomy);sp.moves=startingMoves(base,alter,sp.domains,hash(seed),anatomy);return sp;
+ assignDomains(sp,r);ensurePassives(sp);syncCapabilities(sp);sp.learnset=[...buildLearnset(base,alter,sp.domains,anatomy),...lineageMoves(sp)];sp.moves=startingMoves(base,alter,sp.domains,hash(seed),anatomy);return sp;
 }
 export {migrateSpecies};
 export function migrateSaveCreatures(save){
@@ -396,7 +396,7 @@ export function endBattleRound(units,speciesOf,log=[],teams=units){for(const u o
 }
 export function resolveRound(a,asp,b,bsp,aChoice,bChoice,r=Math.random){return resolveTempoRound(a,asp,b,bsp,{...aChoice,borrow:0},{...bChoice,borrow:0},{a:0,b:0},r).log;}
 export function sealChance(ind,sp,quality=1){return clamp((ind.catchRate??sp.catchRate??150)/150*.12+(1-ind.hp/stats(ind,sp).hp)*.55+(ind.status?.15:0)+(quality-1)*.12-ind.form*.1,.05,.92);}
-export function techniqueMilestones(sp){const pool=sp.learnset||buildLearnset(sp.base,sp.alter,sp.domains||[],sp.anatomy);const original=new Set(startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id),sp.anatomy).map(m=>m.id));const extra=pool.filter(m=>!original.has(m.id));return extra.map((m,n)=>({id:m.id,level:m.learnLevel??Math.min(90,6+n*2),form:m.learnLevel?0:n<5?0:n<12?1:2}));}
+export function techniqueMilestones(sp){const pool=sp.learnset||buildLearnset(sp.base,sp.alter,sp.domains||[],sp.anatomy);const original=new Set(startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id),sp.anatomy).map(m=>m.id));const extra=pool.filter(m=>!original.has(m.id));let ordinary=0;return extra.map(m=>{const n=m.learnLevel==null?ordinary++:0;return {id:m.id,level:m.learnLevel??Math.min(90,6+n*2),form:m.learnForm??(m.learnLevel?0:n<5?0:n<12?1:2)};});}
 export function availableTechniques(ind,sp){
  const pool=sp.learnset||buildLearnset(sp.base,sp.alter,sp.domains||[],sp.anatomy);
  const initial=startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id),sp.anatomy).map(m=>m.id);
@@ -588,8 +588,9 @@ export function refreshTechniques(sp){
  migrateSpecies(sp);
  const rename=value=>typeof value==='string'?value.replace(/\bspirits?\b/gi,'Spirimon'):value;
  for(const key of ['name','description','body'])sp[key]=rename(sp[key]);if(sp.forms)sp.forms=sp.forms.map(rename);
- if(![2,3,4,5,6].includes(sp.moveRevision))sp.moves=startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id),sp.anatomy);
- if(sp.moveRevision!==6){const current=buildLearnset(sp.base,sp.alter,sp.domains||[],sp.anatomy),old=[...(sp.learnset||[]),...(sp.moves||[]).filter(m=>!(sp.learnset||[]).some(known=>known.id===m.id))],seen=new Set(old.map(m=>m.id));sp.learnset=[...old,...current.filter(m=>!seen.has(m.id))];sp.moves??=startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id),sp.anatomy);sp.moveRevision=6;}
+ if(![2,3,4,5,6,7].includes(sp.moveRevision))sp.moves=startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id),sp.anatomy);
+ const techniqueKey=JSON.stringify([sp.id,sp.base,sp.alter,sp.domains]);
+ if(sp.moveRevision!==7||sp.techniqueKey!==techniqueKey){const current=[...buildLearnset(sp.base,sp.alter,sp.domains||[],sp.anatomy),...lineageMoves(sp)],old=[...(sp.learnset||[]),...(sp.moves||[]).filter(m=>!(sp.learnset||[]).some(known=>known.id===m.id))],seen=new Set(old.map(m=>m.id));sp.learnset=[...old,...current.filter(m=>!seen.has(m.id))];sp.moves??=startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id),sp.anatomy);sp.moveRevision=7;sp.techniqueKey=techniqueKey;}
  for(const move of [...(sp.moves||[]),...(sp.learnset||[])]){delete move.speed;move.name=rename(move.name);if(move.domain)move.domain=canonicalDomain(move.domain);if(moveCooldownDisruption(move))move.cooldownDisruption=moveCooldownDisruption(move);move.desc=moveLore(move).description;move.baseUses=moveBaseValue(move);}return sp;
 }
 

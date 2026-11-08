@@ -53,7 +53,7 @@ test('practice eligibility excludes locked techniques and unlocks with progressi
  E.refreshTechniques(sp);
  const i=spirit();i.level=5;i.form=0;
  const start=E.availableTechniques(i,sp);
- assert.equal(start.length,4);
+ assert.equal(start.length,6);assert.equal(start.filter(m=>m.techniqueSource?.scope==='type').length,2);
  const all=sp.learnset;
  assert.ok(all.length>start.length);
  const locked=all.find(m=>!start.some(x=>x.id===m.id));
