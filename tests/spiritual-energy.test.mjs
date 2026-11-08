@@ -144,3 +144,17 @@ test('a funded rampage blocks unrelated Techniques, but exhausted locked Techniq
 test('exhausted wards allow a weakened portion of damage through instead of blocking it fully',()=>{
  const f=fixture(),u=f.a[0],enemy=f.b[0],ward={...hit,id:'ward',power:0,effect:'ward',target:'self'};u.hp=E.stats(u,f.sp).hp;E.executeAction(u,f.sp,u,f.sp,ward,'normal',.5,()=>.5,1,{realTime:true});const full=u.hp;E.executeAction(enemy,f.sp,u,f.sp,hit,'normal',.5,()=>.5,1,{realTime:true});assert.equal(u.hp,full);f.s.sealer.energy=0;setExhaustion(u,f.s.sealer);E.executeAction(u,f.sp,u,f.sp,ward,'normal',.5,()=>.5,1,{realTime:true});E.executeAction(enemy,f.sp,u,f.sp,hit,'normal',.5,()=>.5,1,{realTime:true});assert.ok(u.hp<full);
 });
+
+test('direct restoration spends quoted Energy on only the selected missing resources',()=>{
+ const f=fixture(),u=f.a[0],q=f.s.sealer,caps=E.stats(u,f.sp);q.maxEnergy=q.energy=100;
+ u.hp=caps.hp-1;u.pp=0;u.willpower=0;u.status='poison';u.moveCooldowns={strike:9000};
+ const quote=SE.restorationQuote(q,u,f.sp,'hp',1),result=SE.restoreSpirimon(q,u,f.sp,'hp',1);
+ assert.equal(result.ok,true);assert.equal(q.energy,100-quote.cost);assert.equal(u.hp,caps.hp);assert.equal(u.pp,0);assert.equal(u.willpower,0);assert.equal(u.status,'poison');assert.equal(u.moveCooldowns.strike,9000);
+ const before=q.energy,r=SE.restoreSpirimon(q,u,f.sp,'all',1);assert.ok(r.ok);assert.equal(r.cost,60);assert.equal(q.energy,before-60);assert.equal(u.pp,caps.pp);assert.equal(u.willpower,caps.willpower);
+ const energy=q.energy;assert.equal(SE.restoreSpirimon(q,u,f.sp,'all',1).ok,false);assert.equal(q.energy,energy);
+});
+test('restoration rejects defeated targets, invalid selections and insufficient Energy without mutation',()=>{
+ const f=fixture(),u=f.a[0],q=f.s.sealer;u.hp=1;u.pp=0;q.energy=0;
+ for(const [pool,amount]of [['all',1],['bad',.25],['hp',-1],['hp',NaN]]){const before=JSON.stringify(u);assert.equal(SE.restoreSpirimon(q,u,f.sp,pool,amount).ok,false);assert.equal(JSON.stringify(u),before);assert.equal(q.energy,0);}
+ q.energy=q.maxEnergy;u.hp=0;const energy=q.energy;assert.equal(SE.restoreSpirimon(q,u,f.sp,'hp',1).ok,false);assert.equal(u.hp,0);assert.equal(q.energy,energy);
+});

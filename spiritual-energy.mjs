@@ -104,3 +104,20 @@ export function configureEnemyVow(q,notable=false){
 export function enemySealer(seed,team,speciesOf){const level=Math.max(1,Math.round(team.reduce((n,u)=>n+u.level,0)/Math.max(1,team.length))),q=newSealer(team[0]?.id);q.level=level;q.advanced=level>=25?['triune','united']:level>=12?['united']:[];SD.ensureDisciplines(q);const points=q.unspentPoints;for(const [n,key] of SD.ATTRIBUTES.entries())q.attributes[key]=Math.floor(points/3)+(n<points%3?1:0);SD.ensureDisciplines(q);q.maxEnergy=maximumEnergy(q,team);q.energy=q.maxEnergy;q.philosophy=team.find(u=>PHILOSOPHY_SUPPORT[u.battlePhilosophy])?.battlePhilosophy;const families=PHILOSOPHY_SUPPORT[q.philosophy]||['shield','heal','calm','cleanse','empower','guard','revive'];for(let n=0;n<7;n++){let t;for(let attempt=0;attempt<8;attempt++){t=generateSupport(seed+'|npc|'+n+(attempt?'|fit|'+attempt:''),{level,primary:families[n]});if(!q.philosophy||team.some(u=>supportFits(t,u,speciesOf(u),E.activeDomains(speciesOf(u),u))))break;}q.known[t.id]=t;}const techs=Object.values(q.known);q.floating=techs.at(-1).id;let left=6;for(const [index,u] of team.slice(0,6).entries()){q.assignments[u.id]=[];const matches=techs.slice(0,-1).filter(t=>supportFits(t,u,speciesOf(u),E.activeDomains(speciesOf(u),u)));if(matches.length&&left){q.assignments[u.id].push(matches[(q.philosophy?index:spiritualHash(u.id))%matches.length].id);left--;}}for(const u of team.slice(0,6)){for(const t of techs.slice(0,-1)){if(!left)break;if(!q.assignments[u.id].includes(t.id)&&supportFits(t,u,speciesOf(u),E.activeDomains(speciesOf(u),u))){q.assignments[u.id].push(t.id);left--;}}}return q;}
 
 export function fieldReleaseCost(q,ind,sp){return Math.max(1,Math.ceil(SD.energyCost(q,Math.max(2,Math.min(6,combatStrength(ind,sp)/25)),{kind:'field',bond:bondEfficiency(ind)})));}
+
+// Direct Sealer restoration is separate from Shrine recovery and learned support.
+export function restorationQuote(sealer,unit,species,pool='all',fraction=.25){
+ const weights={hp:.4,pp:.3,willpower:.3},keys=pool==='all'?Object.keys(weights):Object.hasOwn(weights,pool)?[pool]:[];
+ if(!keys.length||![.25,.5,1].includes(fraction))return {ok:false,reason:'Choose a restoration amount.',cost:0,gains:{}};
+ if(!unit||unit.hp<=0)return {ok:false,reason:'Defeated Spirimon need revival or Shrine recovery.',cost:0,gains:{}};
+ const caps=E.stats(unit,species),gains={};let price=0;
+ for(const key of keys){const cap=caps[key]||0,missing=Math.max(0,cap-(unit[key]??cap)),gain=Math.min(missing,Math.ceil(cap*fraction));if(gain>0){gains[key]=gain;price+=gain/cap*weights[key]*sealer.maxEnergy;}}
+ const cost=Math.ceil(price-1e-9);
+ return {ok:cost>0&&sealer.energy>=cost,cost,gains,reason:cost===0?'These resources are already full.':sealer.energy<cost?'Not enough Spiritual Energy.':''};
+}
+export function restoreSpirimon(sealer,unit,species,pool='all',fraction=.25){
+ const quote=restorationQuote(sealer,unit,species,pool,fraction);if(!quote.ok)return quote;
+ if(!spendEnergy(sealer,quote.cost))return {...quote,ok:false,reason:'Not enough Spiritual Energy.'};
+ for(const [key,gain]of Object.entries(quote.gains))unit[key]=(unit[key]??E.stats(unit,species)[key])+gain;
+ return quote;
+}

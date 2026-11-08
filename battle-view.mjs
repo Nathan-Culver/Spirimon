@@ -39,6 +39,7 @@ function unifiedBattleActionsHTML(){
   if((s.inventory.ethers||0)>0&&active.some(u=>{const max=E.stats(u,spOf(u));return (u.pp<max.pp||u.willpower<max.willpower)&&RT.actionAvailability(quoteState,u,spOf(u),{type:'item'}).ok;}))items.push('<button class="unified-action ua-item" data-action="ether"><span class="ua-icon">◈</span><b>Soul Draught ×'+s.inventory.ethers+'</b></button>');
   if((s.inventory.spiritDraughts||0)>0&&s.sealer.energy<s.sealer.maxEnergy)items.push('<button class="unified-action ua-item" data-action="spiritual-draught"><span class="ua-icon">◉</span><b>Spiritual Draught ×'+s.inventory.spiritDraughts+'</b></button>');
  }
+ if(utilityReady&&!battle.lesson&&!ctx.rules?.noSupport&&ctx.teams.a.some(u=>u.hp>0&&['hp','pp','willpower'].some(pool=>SE.restorationQuote(s.sealer,u,spOf(u),pool,.25).ok)))items.push('<button class="unified-action ua-support" data-action="energy-restore-menu"><b>Restore with Energy</b><small>Health · Stamina · Willpower</small></button>');
  const reserves=ctx.teams.a.filter(u=>u.hp>0&&!active.some(a=>a.id===u.id));
  if(active.length<(ctx.rules?.maxActive||3)&&reserves.some(u=>SE.manifestationCost(s.sealer,u,spOf(u))<=s.sealer.energy))
   items.push('<button class="unified-action ua-utility" data-action="battle-switch"><span class="ua-icon">✧</span><b>Release</b></button>');
