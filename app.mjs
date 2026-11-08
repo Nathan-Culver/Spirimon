@@ -540,13 +540,15 @@ function questAction(id,claim=false){
 function questEvent(goal){s.questCounters??={};s.questCounters[goal]=(s.questCounters[goal]||0)+1;for(const q of E.questTemplates()){const record=questState()[q.id];if(record&&typeof record==='object')s.questLog[q.id]=E.advanceQuest(s,q,record);}}
 function challengerState(){s.challengers??={rivalMatches:0,villainMatches:0,rivalLevel:0,villainLevel:0,villainWins:0,firstTriggered:false,lastTransition:''};return s.challengers;}
 function challengeAtTransition(oldRegion,newRegion){if(!s.spirits.length||battle||s.interior||modal)return false;const state=challengerState();const oldTown=oldRegion?.town,newTown=newRegion?.town;if(!oldTown&&!newTown)return false;const transition=oldRegion.key+'>'+newRegion.key;if(state.lastTransition===transition)return false;state.lastTransition=transition;const kind=E.challengerRoll(s.seed,s.steps,transition,state.rivalMatches+state.villainMatches);if(!kind)return false;if(kind==='villain'&&Math.random()>SE.encounterMultiplier(s.sealer,newRegion.danger))return false;startChallenger(kind);return true;}
+function firstRivalMatch(){const q=challengerState();return !(q.rivalMatches||q.rivalWins||s.npcSealers?.rowan||s.npcSealers?.['challenger:rival']);}
 function challengerTeam(kind,level,count,reg){
- const size=E.challengerTeamSize(count,level);
+ const introductory=kind==='rival'&&firstRivalMatch();
+ const size=introductory?1:E.challengerTeamSize(count,level);
  const team=[];
  for(let n=0;n<size;n++){
   const r=E.rng(E.hash(s.seed,'challenger-team',kind,n,Math.floor(count/2)));
   const sp=speciesFor(reg,r);
-  const lv=Math.max(reg.minLevel||reg.danger||1,level+(n%3===0?1:0));
+  const lv=introductory?1:Math.max(reg.minLevel||reg.danger||1,level+(n%3===0?1:0));
   const form=lv>=36?2:lv>=16?1:0;
   team.push(E.heal(E.makeIndividual(sp,lv,form,r),sp));
  }
@@ -578,9 +580,9 @@ function challengerPath(from,to){
 }
 function startChallenger(kind){
  if(!lead()||battle||challengerApproach||challengerState().pending)return;
- const state=challengerState(),reg=currentRegion(),levels=party().map(i=>i.level),average=levels.reduce((a,b)=>a+b,0)/Math.max(1,levels.length),previous=state[kind+'Level']||0,level=E.challengerLevel(average,reg.minLevel||reg.danger||1,previous),count=state[kind+'Matches']||0,team=challengerTeam(kind,level,count,reg),dialogue=E.CHALLENGER_DIALOGUE[kind],speech=dialogue[E.hash(s.seed,kind,count,reg.key)%dialogue.length];
+ const state=challengerState(),reg=currentRegion(),levels=party().map(i=>i.level),average=levels.reduce((a,b)=>a+b,0)/Math.max(1,levels.length),previous=state[kind+'Level']||0,introductory=kind==='rival'&&firstRivalMatch(),level=introductory?1:E.challengerLevel(average,reg.minLevel||reg.danger||1,previous),count=state[kind+'Matches']||0,team=challengerTeam(kind,level,count,reg),dialogue=E.CHALLENGER_DIALOGUE[kind],speech=dialogue[E.hash(s.seed,kind,count,reg.key)%dialogue.length];
  state[kind+'Matches']=count+1;state[kind+'Level']=level;
- state.pending={kind,team,enemy:team[0],dialogue:speech};
+ state.pending={kind,team,enemy:team[0],introductory,dialogue:introductory?'Let’s start gently. My Spirimon is level one—I’ll hold back while you get used to battling.':speech};
  const entry=approachEntry(kind),path=challengerPath(entry,s.player);
  challengerApproach={kind,x:entry.x,y:entry.y,path,stepAt:performance.now()+350,started:performance.now(),face:'down'};
  queuedStep=null;keys.clear();save();render();
@@ -600,7 +602,7 @@ function advanceChallenger(time){
  const pending=challengerState().pending;if(!pending)return;
  showModal(a.kind==='rival'?'Rowan challenges you!':'An enemy agent confronts you!','<p>'+esc(pending.dialogue)+'</p><p>'+pending.team.length+' Spirimon · Levels '+pending.team.map(i=>i.level).join(', ')+'</p><div class="btn-row">'+action('challenger-fight','Face the challenge','','btn primary')+'</div>',{lock:true,kind:'challenge'});
 }
-function beginChallenger(){const pending=challengerState().pending;if(!pending)return;challengerState().pending=null;challengerApproach=null;startBattle(pending.team[0],null,true,{sealerId:'challenger:'+pending.kind,npc:pending.npc});if(battle){battle.challenger=pending.kind;battle.encounterNPC=pending.npc;if(pending.npc)battle.dialogueIdentity=pending.npc;configureEnemyRoster(pending.team);battle.teamTotal=pending.team.length;battle.log=[pending.kind==='rival'?'Rowan challenges you!':'An enemy agent challenges you!',...battle.log];save();render();}}
+function beginChallenger(){const pending=challengerState().pending;if(!pending)return;challengerState().pending=null;challengerApproach=null;startBattle(pending.team[0],null,true,{sealerId:'challenger:'+pending.kind,npc:pending.npc});if(battle){battle.challenger=pending.kind;battle.encounterNPC=pending.npc;if(pending.npc)battle.dialogueIdentity=pending.npc;configureEnemyRoster(pending.team);if(pending.introductory){battle.introductoryRival=true;for(const u of battle.enemyRoster)u.introductoryRival=true;}battle.teamTotal=pending.team.length;battle.log=[pending.kind==='rival'?'Rowan challenges you!':'An enemy agent challenges you!',...battle.log];save();render();}}
 function startBattle(enemy,roamer=null,trainer=false,options={}){
  const mapSnapshot=trainer?cloneScene():null;
  s.mountedSteed=null;
@@ -614,7 +616,7 @@ function startBattle(enemy,roamer=null,trainer=false,options={}){
  if(first){const result=RT.deploySpirimon(battle.rt,ctx,'a',first);if(result.ok)battle.participants.push(first.id);}
  applyRealTimeContext(ctx);ensureRealTimeBattle();commit=first?.commit??.5;style='normal';selectedMove=0;movePreviewKey=null;battleMode=ctx.active.a.length?'main':'deploy';view='explore';TUTORIAL.beginBattleLesson(s,battle);if(trainer)battle.dialogueGate=true;save();render();if(trainer)queueBattleIntroduction(battle,mapSnapshot);
 }
-function trainerBattle(){const r=E.rng(E.hash(s.seed,'rowan',s.rank,s.wins)),sp=speciesFor(currentRegion(),r);startBattle(E.heal(E.makeIndividual(sp,4+s.rank*3,0,r),sp),null,true,{sealerId:'rowan'});}
+function trainerBattle(){if(firstRivalMatch()){closeModal();startChallenger('rival');return;}const r=E.rng(E.hash(s.seed,'rowan',s.rank,s.wins)),sp=speciesFor(currentRegion(),r);startBattle(E.heal(E.makeIndividual(sp,4+s.rank*3,0,r),sp),null,true,{sealerId:'rowan'});}
 
 function combatTagsHTML(i){return battleView.combatTagsHTML(...arguments);}
 function doubleHUDsHTML(){return battleView.doubleHUDsHTML(...arguments);}
@@ -1419,7 +1421,9 @@ function drawRealTimeEffects(){
  if(!battle?.rt)return;const canvas=$('#battle-canvas');if(!canvas)return;const c=canvas.getContext('2d'),ctx=realTimeContext();
  for(const event of battle.rtAnimations||[]){const age=(battle.damageVisualMs??battle.rt.elapsedMs)-event.at;if(age<0||age>600)continue;const side=event.side,index=Math.max(0,ctx.active[side].findIndex(u=>u.id===event.actor)),targetSide=ctx.active[side].some(u=>u.id===event.target)?side:side==='a'?'b':'a',targetIndex=Math.max(0,ctx.active[targetSide].findIndex(u=>u.id===event.target));
  const layout=currentBattleLayout(canvas),point=(team,n)=>layout[team].find(p=>p.slot===n)?.effect||layout[team][0]?.effect||{x:500,y:canvas.height/2};
- c.save();drawTechnique(c,event.move,Math.min(1,age/600),point(side,index),point(targetSide,targetIndex),canvas.width,canvas.height);c.restore();}
+ const move={...event.move,target:E.moveTarget(event.move)},recipients=move.target==='allAllies'?ctx.active[side]:move.target==='allOpponents'?ctx.active[targetSide]:null;
+ if(recipients){for(const u of recipients){const slot=Math.max(0,ctx.active[move.target==='allAllies'?side:targetSide].indexOf(u));drawTechnique(c,{...move,target:'ally'},Math.min(1,age/600),point(side,index),point(move.target==='allAllies'?side:targetSide,slot),canvas.width,canvas.height);}}
+ else drawTechnique(c,move,Math.min(1,age/600),point(side,index),point(targetSide,targetIndex),canvas.width,canvas.height);}
  drawDamageNumbers(c,battle.damageNumbers,battle.damageVisualMs??battle.rt.elapsedMs,canvas.width,canvas.height);
  const layout=currentBattleLayout(canvas),now=battle.rt.elapsedMs;
  for(const side of ['a','b'])for(const point of layout[side]){

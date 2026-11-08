@@ -7,7 +7,7 @@ const fate={...plain,id:'fate',domain:'Fate'},spirit={...plain,id:'spirit',domai
 const species=domains=>({id:'test',forms:['Test'],base:'Beast',alter:'Fey',domains,health:100,power:50,speed:40,physicalRes:1,spiritualRes:1,moves:[plain],learnset:[plain,fate,spirit,ice]});
 const individual=sp=>E.heal(E.makeIndividual(sp,25,0,E.rng(7)),sp);
 test('innate Domains survive empty slots and elemental Domains retain their own identities',()=>{
- const sp=species(['Water']);assert.deepEqual(E.activeDomains(sp),['Water']);assert.deepEqual(E.activeDomains(sp,{moveIds:[]}),['Water']);assert.equal(E.effectiveness({domain:'Storm'},sp),1.5);assert.equal(E.effectiveness({domain:'Earth'},sp),.75);
+ const sp=species(['Water']);assert.deepEqual(E.activeDomains(sp),['Water']);assert.deepEqual(E.activeDomains(sp,{moveIds:[]}),['Water']);assert.equal(E.effectiveness({domain:'Storm'},sp),2);assert.equal(E.effectiveness({domain:'Earth'},sp),.75);
 });
 test('equipped Domains appear and disappear per individual without mutating the species',()=>{
  const sp=species(['Nature']),ind={moveIds:['plain','fate']},before=structuredClone(sp);assert.deepEqual(E.activeDomains(sp,ind),['Nature','Fate']);

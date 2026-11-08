@@ -118,14 +118,14 @@ export function effectiveness(move,defender,ind=null){
  const defenseTypes=new Set(activeTypes(defender,ind));
  const defenseDomains=new Set(activeDomains(defender,ind));
  for(const attackType of attackTypes)for(const t of defenseTypes){
-  if(ADVANTAGE[attackType]?.includes(t))modifier+=.5;
+  if(ADVANTAGE[attackType]?.includes(t))modifier+=1;
   if(RESIST[t]?.includes(attackType))modifier-=.25;
  }
  for(const domain of attackDomains)for(const d of defenseDomains){
-  if(DOMAIN_ADVANTAGE[domain]?.includes(d))modifier+=.5;
+  if(DOMAIN_ADVANTAGE[domain]?.includes(d))modifier+=1;
   if(DOMAIN_RESIST[d]?.includes(domain))modifier-=.25;
  }
- if(elementOf(move)==='fire'&&defenseTypes.has('Plant'))modifier+=.5;
+ if(elementOf(move)==='fire'&&defenseTypes.has('Plant'))modifier+=1;
  return clamp(1+modifier,.5,2);
 }
 export function matchingClassificationBonus(move,attacker,sp){
@@ -133,9 +133,11 @@ export function matchingClassificationBonus(move,attacker,sp){
  const domains=new Set([move.domain,...(move.domains||[])].filter(Boolean).map(canonicalDomain));
  const matchedTypes=activeTypes(sp,attacker).filter(t=>types.has(t)).length;
  const matchedDomains=[...domains].filter(d=>activeDomains(sp,attacker).includes(d)).length;
- let bonus=(matchedTypes>=1?.10:0)+(matchedTypes>=2?.05:0);
+ // The usual same-Type bonus is separate from the capped supplemental matches.
+ const sameType=matchedTypes>=1?.5:0;
+ let bonus=matchedTypes>=2?.05:0;
  for(let i=0;i<matchedDomains;i++)bonus+=.10/(2**i);
- return 1+Math.min(.25,bonus);
+ return 1+sameType+Math.min(.25,bonus);
 }
 export const STYLES={normal:{damage:1,speed:0},agile:{damage:.85,speed:22},strong:{damage:1.25,speed:-22}};
 export const STATUS_EFFECTS=['burn','freeze','paralysis','poison','toxic','sleep','confusion','infatuation','flinch','frostbite','nightmare','trap','leechSeed','curse','perish','disable','taunt','slow'];
@@ -207,6 +209,9 @@ export function damage(attacker,asp,defender,dsp,move,style='normal',r=Math.rand
  const field=attacker.battlefield||{};
  if(attacker.aspect==='Stormbound'&&['rain','snow'].includes(field.weather)&&(move.domain==='Storm'||['water','lightning','ice'].includes(elementOf(move))))amount*=1.15;
  amount*=(1-exhaustion(attacker))*(1+exhaustion(defender))*spiritualMultiplier(attacker,'empower')/spiritualMultiplier(defender,'empower')*spiritualDefense(defender,move,energy?'Energy':'Physical');
+ // Rowan holds back only in the one-time introductory match.
+ if(attacker.introductoryRival)amount*=.1;
+ if(defender.introductoryRival)amount*=4;
  return Math.max(1,Math.floor(amount));
 }
 function applyCondition(target,effect,r=Math.random,sp=null,log=[],source=null){

@@ -38,7 +38,7 @@ function configureEnemyRoster(team){
  const ids=battle.multi.enemies.map(u=>u.id);battle.multi.enemies=battle.enemyRoster.filter(u=>ids.includes(u.id)&&u.hp>0).slice(0,3);if(!battle.multi.enemies.length&&battle.enemyRoster[0])battle.multi.enemies=[battle.enemyRoster[0]];battle.enemy=battle.multi.enemies[0]||battle.enemy;battle.multi.reserves=battle.enemyRoster.filter(u=>!battle.multi.enemies.includes(u));E.bindBattlefield(party(),battle.enemyRoster);
 }
 function runEnemySealer(ctx){
- const battle=getBattle();if(!battle?.rt)return;const result=runEnemyTactics(battle.rt,ctx);battle.log.push(...result.log);return result;
+ const battle=getBattle();if(!battle?.rt)return;if(battle.introductoryRival)return {log:[],hold:[]};const result=runEnemyTactics(battle.rt,ctx);battle.log.push(...result.log);return result;
 }
 
  return {battleTeams,realTimeContext,ensureRealTimeBattle,applyRealTimeContext,configureEnemyRoster,runEnemySealer};

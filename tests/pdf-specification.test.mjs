@@ -52,9 +52,9 @@ test('aliases, duplicate sources, expiry and suppression agree for combat and fi
 });
 test('suppressed Types stop contributing to matching damage and defensive effectiveness',()=>{
  const f=fixture(['Celestial','Beast']);f.a.moveIds=[];
- assert.equal(E.matchingClassificationBonus({type:'Celestial'},f.a,f.sp),1.1);
+ assert.equal(E.matchingClassificationBonus({type:'Celestial'},f.a,f.sp),1.5);
  f.a.suppressedTypes=['Celestial'];assert.equal(E.matchingClassificationBonus({type:'Celestial'},f.a,f.sp),1);
- assert.equal(E.effectiveness({type:'Fiend'},f.sp),1.5);assert.equal(E.effectiveness({type:'Fiend'},f.sp,f.a),1);
+ assert.equal(E.effectiveness({type:'Fiend'},f.sp),2);assert.equal(E.effectiveness({type:'Fiend'},f.sp,f.a),1);
 });
 test('status resistance uses equipped Domains immediately and does not retain an unequipped affinity',()=>{
  const f=fixture();f.sp.learnset=[hit,{...hit,id:'psychic',domain:'Psionic'}];f.a.moveIds=['hit'];

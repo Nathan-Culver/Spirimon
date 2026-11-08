@@ -276,6 +276,7 @@ export function advanceRealTime(state,deltaMs,context,r=Math.random){
  if(state.elapsedMs>=state.nextPulseAt){pulseEffects(state,context,log);state.nextPulseAt+=EFFECT_PULSE_MS;synchronizeTimers(state,context);updateTransformations(context,log);}
  for(const side of ['a','b'])if(!context.active[side].some(u=>u.hp>0))state['undefended'+side]=(state['undefended'+side]||0)+step;else state['undefended'+side]=0;
  }
+ events.push(...(state.techniqueEvents||[]));state.techniqueEvents=[];
  return {log,events};
 }
 
@@ -334,6 +335,8 @@ function applySupportEffects(state,context,side,result){
  const {technique:t,targets,recipient}=result,q=context.sealers[side],now=state.elapsedMs,log=[];
  for(const u of targets){if(u.hp<=0&&!t.effects.some(e=>e.kind==='revive')||u.hp>0&&t.effects.some(e=>e.kind==='revive'))continue;
   if(u.hp>0&&!context.active[side].includes(u))continue;
+  state.techniqueEvents??=[];const visualEffect=t.effects.some(e=>['heal','revive','willpower','cleanse'].includes(e.kind))?'heal':t.effects.some(e=>['shield','guard','immunity'].includes(e.kind))?'ward':'boostPower';
+  state.techniqueEvents.push({actor:u.id,target:u.id,side,move:{id:t.id,name:t.name,power:0,category:'Status',effect:visualEffect,target:'ally',domain:t.domain||'Spirit'},at:now});state.techniqueEvents=state.techniqueEvents.slice(-24);
   const sp=context.speciesOf(u),max=E.stats(u,sp),clock=unitClock(state,u),efficiency=(1+Math.min(.1,(u.bond||0)/1000))*(1-SE.setExhaustion(u,q)),until=now+t.durationMs;
   if(t.sacrifice?.kind==='hp'&&u.hp<=Math.ceil(max.hp*t.sacrifice.amount))continue;
   if(t.timing==='gcd'&&!result.gcdStarted){clock.gcdReadyAt=now+moveTiming({id:'support-gcd',timing:'gcd',power:0},u,sp).gcdMs;resetDamageBudget(clock,'gcd',clock.gcdReadyAt-now,!t.castMs);}u.gcdReadyAt=clock.gcdReadyAt;
