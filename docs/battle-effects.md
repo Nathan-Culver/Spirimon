@@ -17,10 +17,28 @@ Rendering order:
    emitter with emission times, lifetimes, trajectories, turbulence and gravity.
 6. A brief, low-opacity impact flash, followed by readable damage numbers/timers.
 
-Illustrations are shared thematic assets, not individually hand-drawn animation
-frames for every technique. The existing per-technique score supplies distinct
-choreography, motifs and timing. Two 8-by-8 atlases are packaged as optimized
-WebP assets and included in web, desktop, Android and standalone HTML builds.
+All 1,046 supplied illustrations are assigned individually: one for each of the
+1,045 established technique IDs and one for Struggle. Sixteen full 8-by-8
+atlases and a final 22-piece sheet ship in web, desktop, Android and standalone
+HTML builds. The final sheet uses its actual, taller row boundaries to avoid
+cropping. These are animated illustrations, combined with the existing
+per-technique choreography, rather than separate frame-by-frame drawings.
+
+Assignments are frozen by technique ID in `technique-artwork.mjs`, with source
+names, hashes and ordering in `docs/technique-art-sources.json`. The complete
+name-to-cell table is `docs/technique-artwork.csv`. Adding a technique never
+shifts existing artwork. Unknown generated techniques and support variants
+use a thematic fallback. All established techniques use their dedicated art.
+
+Only the atlases required by active battlers are warmed at battle entry; other
+artwork loads on demand. The complete illustrations occupy less than 8 MiB,
+alongside the unchanged 40 MiB core artwork budget. The complete standalone
+download remains below 66 MiB. No extra startup download is required.
+
+Run `node tools/build-technique-art.mjs --check` to verify the frozen registry
+and CSV. Run `python3 tools/audit-technique-art.py` (Pillow required) to check
+every runtime source rectangle for visible, distinct pixel content. The
+regression suite checks the audit against the exact shipped file hashes.
 
 Full-screen flashes/inversion share a 900 ms gate. Overlapping attacks use
 maximum dim/flash intensity rather than adding brightness; camera displacement

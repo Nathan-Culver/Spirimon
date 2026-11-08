@@ -1,18 +1,33 @@
 import {animationProfile} from './move-animations.mjs';
 import {readyImage} from './asset-loader.mjs';
 import {BATTLE_EFFECT_MS} from './battle-sprite-animation.mjs';
-export const EFFECT_ATLASES=Object.freeze(['./assets/battle-effects/techniques.webp','./assets/battle-effects/arcane.webp']);
+import {EFFECT_ATLASES,EFFECT_ART_COUNTS,EFFECT_ATLAS_LAYOUTS,TECHNIQUE_ARTWORK} from './technique-artwork.mjs';
+export {EFFECT_ATLASES};
 const clamp=(n,a=0,b=1)=>Math.max(a,Math.min(b,n)),pulse=(age,start,end)=>age<start||age>end?0:Math.sin((age-start)/(end-start)*Math.PI);
 const random=(seed,n)=>{let x=(seed^Math.imul(n+1,2654435761))>>>0;x=Math.imul(x^(x>>>16),2246822507);return ((x^(x>>>13))>>>0)/4294967296;};
-// Atlas cells are illustrations, not claimed to be bespoke animation frames.
-// Delivery, orbit, deformation and impact animate them alongside legacy effects.
+// Established techniques use their dedicated illustration. Unknown generated
+// techniques inherit thematic artwork without shifting any authored assignment.
 export function effectArtwork(move){
+ if(Object.hasOwn(TECHNIQUE_ARTWORK,move?.id))return TECHNIQUE_ARTWORK[move.id];
  const a=animationProfile(move),family=a.family,m=a.motif;
- const arcane={crystal:[3,4,5,6,7,8,9],clock:[1,2,11],blade:[10,14],shield:[13,15,27,29,30],petal:[36,45,46,47,48,50,51],vine:[45,46,49],flame:[33,40,61],bolt:[0,28,31],portal:[39,41,44,53],chain:[42],rune:[24,25,26,27],star:[32,34,35,37],heart:[36],dream:[17,18,19,20,21,22,23]};
- const base={fang:[12,13,14,16],claw:[11,19],feather:[17,22],gear:[34,38,41],note:[26,33],eye:[0,1,4,8,9],bone:[2,3],drop:[46,47,51],rock:[18,42,45,50],crescent:[62],wind:[46,47],heart:[61]};
- const choices=arcane[m]||base[m]||[27,30,63],atlas=arcane[m]?1:0;
- const cell=family==='healing'?57:family==='barrier'&&atlas===0?28:choices[a.hash%choices.length];
- return {atlas,cell:family==='healing'&&atlas===1?36:cell};
+ const motifs={fang:['beast-1','beast-4','beast-5'],claw:['beast-0','themed-type-beast-0'],feather:['celestial-0','monstrosity-5'],gear:['construct-0','construct-1','construct-5'],
+  note:['celestial-4','domain-death-2'],eye:['aberration-4','themed-type-aberration-1'],bone:['undead-0','undead-3'],drop:['domain-water-0','ooze-5'],rock:['giant-1','giant-5','domain-earth-0'],
+  crescent:['domain-moon-0','domain-moon-2'],wind:['domain-air-0','domain-air-2'],crystal:['domain-ice-0','domain-ice-2'],clock:['themed-domain-fate-0','themed-domain-fate-2'],
+  blade:['celestial-0','domain-sun-0'],shield:['ward','domain-magic-3'],petal:['fey-2','fey-6'],vine:['plant-1','plant-5'],flame:['domain-fire-0','domain-fire-2','fiend-7'],
+  bolt:['domain-lightning-0','domain-storm-0'],portal:['aberration-3','domain-void-2'],chain:['fiend-1','undead-1'],rune:['domain-magic-0','domain-magic-2'],star:['celestial-5','celestial-7'],heart:['tech-10'],dream:['tech-8','domain-moon-1']};
+ const choices=family==='healing'?['tech-15','mend','tech-16']:family==='barrier'?['ward','tech-18','tech-19']:motifs[m]||motifs.rune;
+ return TECHNIQUE_ARTWORK[choices[a.hash%choices.length]];
+}
+export function artworkFrame(art,image){
+ if(!art||!Number.isInteger(art.atlas)||art.atlas<0||art.atlas>=EFFECT_ART_COUNTS.length||!Number.isInteger(art.cell)||art.cell<0||art.cell>=EFFECT_ART_COUNTS[art.atlas])return null;
+ const width=image.naturalWidth||image.width,height=image.naturalHeight||image.height,row=Math.floor(art.cell/8),cw=width/8,layout=EFFECT_ATLAS_LAYOUTS[art.atlas];
+ const top=layout?layout.rowBounds[row]*height:row*height/8,bottom=layout?layout.rowBounds[row+1]*height:(row+1)*height/8;
+ return [(art.cell%8)*cw,top,cw,bottom-top];
+}
+const warmedBattles=new WeakMap();
+export function warmTechniqueArtwork(battle,unitId,provideMoves,load=readyImage){
+ let units=warmedBattles.get(battle);if(!units){units=new Set();warmedBattles.set(battle,units);}if(units.has(unitId))return;units.add(unitId);
+ for(const source of new Set(provideMoves().map(move=>EFFECT_ATLASES[effectArtwork(move).atlas])))load(source);
 }
 export function effectCue(move){
  const a=animationProfile(move),power=Math.max(0,Number(move?.power)||0),heavy=['quake','impact'].includes(a.family),energy=['beam','projectile','barrage'].includes(a.family);
@@ -65,11 +80,11 @@ export function drawIllustratedEffect(c,move,age,from,to,width,height,{reduced=f
  const p=age/BATTLE_EFFECT_MS,travel=clamp((age-70)/270),friendly=['healing','barrier','aura'].includes(a.family),field=a.family==='weather';
  const dest=a.recipient==='caster'?from:to,projectile=['projectile','beam','barrage','drain'].includes(a.family),anchor=field?{x:width/2,y:height*.47}:projectile?{x:from.x+(dest.x-from.x)*travel,y:from.y+(dest.y-from.y)*travel}:dest;
  const unit=Math.min(width/1000,height/550),size=(field?210:friendly?115:125)*Math.max(.65,unit),growth=reduced?1:.45+Math.sin(p*Math.PI)*.7;
- const iw=image.naturalWidth||image.width,ih=image.naturalHeight||image.height,cw=iw/8,ch=ih/8;
+ const rect=artworkFrame(art,image);if(!rect)return false;const artHeight=size*rect[3]/rect[2];
  c.save();c.globalAlpha=Math.sin(p*Math.PI)*(field?.35:.65);c.translate(anchor.x,anchor.y-18);
  const rotating=['gear','portal','clock','wind'].includes(a.motif);c.rotate(reduced?0:rotating?p*a.spin*.8:a.family==='slash'?(p-.5)*.5:0);
  c.scale(growth*(from.x>to.x&&projectile?-1:1),growth);
- c.drawImage(image,(art.cell%8)*cw+2,Math.floor(art.cell/8)*ch+2,cw-4,ch-4,-size/2,-size/2,size,size);c.restore();return true;
+ c.drawImage(image,...rect,-size/2,-artHeight/2,size,artHeight);c.restore();return true;
 }
 export function drawEmitter(c,move,age,from,to,width,height,options={}){
  const particles=particleEmitter(move,age,from,to,options),unit=Math.max(.65,Math.min(width/1000,height/550));
