@@ -1,4 +1,4 @@
-import {stableActionPosition} from './qol.mjs';
+import {commandMetrics,actorCommandSlots,commandIdentity,commandGroup,commandPosition,commandPage} from './battle-commands.mjs';
 import * as E from './engine.mjs';
 import * as RT from './realtime-combat.mjs';
 import * as SE from './spiritual-energy.mjs';
@@ -16,13 +16,19 @@ function doubleHUDsHTML(){
 function unifiedBattleActionsHTML(){
  const battle=getBattle(),s=getState(),battleMode=getMode();
  const ctx=realTimeContext(),now=battle.rt.elapsedMs,quoteState=battle.lesson?{...battle.rt,paused:false}:battle.rt,items=[],active=ctx.active.a.filter(u=>u?.hp>0);
+ battle.commandActorSlots=actorCommandSlots(battle.commandActorSlots,active.map(u=>u.id));
+ const catalogs={moves:[],support:[],items:[],utility:['battle-switch||release','battle-switch||switch','seal','flee||','yield||']};
+ for(const [slot,id] of battle.commandActorSlots.entries())if(id)for(let n=0;n<4;n++)catalogs.moves[slot*4+n]='unified-move|'+esc(id)+'|'+n+'|';
+ for(let n=0;n<catalogs.moves.length;n++)catalogs.moves[n]??='empty-move-'+n;
+ for(const u of ctx.rules?.noSupport?[]:ctx.teams.a)for(const id of [...(s.sealer.assignments[u.id]||[]),s.sealer.floating].filter(Boolean)){const key='support-use|'+esc(id)+'|'+esc(u.id)+'|';if(!catalogs.support.includes(key))catalogs.support.push(key);}
+ catalogs.items=active.map(u=>'unified-held|'+esc(u.id)+'|').concat(['tonic||','ether||','spiritual-draught||']);
  for(const u of active){const sp=spOf(u);battleMoves(u).forEach((m,index)=>{
   const friendly=['self','ally','allAllies'].includes(E.moveTarget(m)),target=friendly?(ctx.active.a[battle.allyTargetSelection??ctx.active.a.indexOf(u)]||u):(battle.multi.enemies[battle.enemyTargetSelection||0]||battle.enemy);if(!RT.actionAvailability(quoteState,u,sp,{type:'move',move:m,style:'normal'},spOf(target)).ok)return;
   const p=RT.moveTiming(m,u,sp,'normal');
-  items.push('<button '+(battle.lesson&&!battle.lesson.practice?'disabled ':'')+'class="unified-action ua-move ua-actor-'+active.indexOf(u)+'" data-action="unified-move" data-value="'+esc(u.id)+'|'+index+'" data-unified-move="'+esc(u.id)+'|'+index+'" title="Tap: Normal, 50% attack / 50% defense. Drag to trade offense for defense. '+esc(E.moveLore(m).description)+'"><span class="ua-icon">✦</span><span class="ua-kind">Technique</span><b>'+esc(m.name)+'</b><small>'+esc(sp.forms[u.appearance])+' · '+p.timing.toUpperCase()+' · '+seconds(p.localCooldownMs||p.gcdMs)+' CD</small><small>Target: '+esc(E.moveTarget(m)==='self'?sp.forms[u.appearance]:['allAllies','allOpponents','field'].includes(E.moveTarget(m))?E.moveTarget(m)==='allAllies'?'All allies':E.moveTarget(m)==='allOpponents'?'All opponents':'Battlefield':spOf(target).forms[target.appearance])+'</small><small>'+(E.moveCategory(m)==='Physical'?'STA ':'WIL ')+E.moveCost(m,spOf(target))+' · '+(E.moveCategory(m)==='Status'?'Support':E.effectiveness(m,spOf(target),target).toFixed(2)+'×')+' · '+esc(m.effect||'Direct damage')+'</small></button>');
+  items.push('<button '+(battle.lesson&&!battle.lesson.practice?'disabled ':'')+'class="unified-action ua-move ua-actor-'+battle.commandActorSlots.indexOf(u.id)+'" data-action="unified-move" data-value="'+esc(u.id)+'|'+index+'" data-unified-move="'+esc(u.id)+'|'+index+'" title="Tap: Normal, 50% attack / 50% defense. Drag to trade offense for defense. '+esc(E.moveLore(m).description)+'"><span class="ua-icon">✦</span><span class="ua-kind">Technique</span><b>'+esc(m.name)+'</b><small>'+esc(sp.forms[u.appearance])+' · '+p.timing.toUpperCase()+' · '+seconds(p.localCooldownMs||p.gcdMs)+' CD</small><small>Target: '+esc(E.moveTarget(m)==='self'?sp.forms[u.appearance]:['allAllies','allOpponents','field'].includes(E.moveTarget(m))?E.moveTarget(m)==='allAllies'?'All allies':E.moveTarget(m)==='allOpponents'?'All opponents':'Battlefield':spOf(target).forms[target.appearance])+'</small><small>'+(E.moveCategory(m)==='Physical'?'STA ':'WIL ')+E.moveCost(m,spOf(target))+' · '+(E.moveCategory(m)==='Status'?'Support':E.effectiveness(m,spOf(target),target).toFixed(2)+'×')+' · '+esc(m.effect||'Direct damage')+'</small></button>');
  });}
  const plans=active.length>1&&!ctx.rules?.noSupport?CO.cooperativePlans(active,spOf,s.sealer):[];
- for(const plan of plans){if(plan.cost>s.sealer.energy)continue;
+ for(const plan of plans){catalogs.support.push('cooperative-use|'+esc(plan.id)+'|');if(plan.cost>s.sealer.energy)continue;
   const ready=plan.participants.every(p=>{const u=active.find(u=>u.id===p.id);return u&&RT.actionAvailability(quoteState,u,spOf(u),{type:'move',move:p.move}).ok;});
   if(ready)items.push('<button class="unified-action ua-coop" data-action="cooperative-use" data-value="'+esc(plan.id)+'"><span class="ua-icon">✧</span><b>'+esc(plan.name)+'</b><small>'+plan.cost+' SE · Cooperation</small></button>');
  }
@@ -30,10 +36,11 @@ function unifiedBattleActionsHTML(){
  for(const u of ctx.rules?.noSupport?[]:ctx.teams.a){const ids=[...(s.sealer.assignments[u.id]||[]),s.sealer.floating].filter(Boolean);
   for(const id of ids){const t=s.sealer.known[id];if(!t||supportSeen.has(id+'|'+u.id))continue;supportSeen.add(id+'|'+u.id);
    const availability=RT.supportAvailability(quoteState,ctx,'a',id,u.id);if(!availability.ok&&!availability.requiresVowBreak)continue;
-   items.push('<button '+(battle.lesson?'disabled ':'')+'class="unified-action ua-support" data-energy-gesture="support" data-action="support-use" data-value="'+esc(id)+'|'+esc(u.id)+'" title="'+esc(ST.supportDescription(t))+' · Tap for normal strength; drag right to empower; drag up to cancel."><span class="ua-icon">✚</span><b>Support · '+esc(t.name)+'</b><small>Recipient: '+esc(spOf(u).forms[u.appearance])+' · '+(availability.cost??t.energyCost)+' SE · '+t.timing.toUpperCase()+' · '+(availability.castMs?seconds(availability.castMs)+' cast':'Instant')+'</small><small>'+esc(ST.supportDescription(availability.technique||t))+' · '+seconds(availability.cooldownMs||t.cooldownMs)+' recast</small></button>');
+   items.push('<button '+(battle.lesson?'disabled ':'')+'class="unified-action ua-support" data-energy-gesture="support" data-action="support-use" data-value="'+esc(id)+'|'+esc(u.id)+'" title="'+esc(ST.supportDescription(t))+' · Tap for normal strength; drag right to empower; drag up to cancel."><span class="ua-icon">✚</span><b>'+esc(t.name)+'</b><small>Recipient: '+esc(spOf(u).forms[u.appearance])+' · '+(availability.cost??t.energyCost)+' SE · '+t.timing.toUpperCase()+' · '+(availability.castMs?seconds(availability.castMs)+' cast':'Instant')+'</small><small>'+esc(ST.supportDescription(availability.technique||t))+' · '+seconds(availability.cooldownMs||t.cooldownMs)+' recast</small></button>');
   }
  }
- for(const u of active){const item=Q.heldItemActivation(u,spOf(u));if(!ctx.rules?.noItems&&item.ok&&RT.actionAvailability(quoteState,u,spOf(u),{type:'heldItem',move:item.move}).ok)items.push('<button class="unified-action ua-item" data-action="unified-held" data-value="'+esc(u.id)+'"><b>Item · '+esc(item.item.name)+'</b><small>'+esc(spOf(u).forms[u.appearance])+' · '+esc(item.move.name)+'</small></button>');}
+ for(const u of active){const item=Q.heldItemActivation(u,spOf(u));if(!ctx.rules?.noItems&&item.ok&&RT.actionAvailability(quoteState,u,spOf(u),{type:'heldItem',move:item.move}).ok)items.push('<button class="unified-action ua-item" data-action="unified-held" data-value="'+esc(u.id)+'"><b>'+esc(item.item.name)+'</b><small>'+esc(spOf(u).forms[u.appearance])+' · '+esc(item.move.name)+'</small></button>');}
+ catalogs.support.push('energy-restore-menu||');
  const utilityReady=!battle.rt.paused&&(battle.utilityReadyAt||0)<=now;
  if(utilityReady&&!ctx.rules?.noItems){
   if((s.inventory.tonics||0)>0&&active.some(u=>u.hp<E.stats(u,spOf(u)).hp&&RT.actionAvailability(quoteState,u,spOf(u),{type:'item'}).ok))items.push('<button class="unified-action ua-item" data-action="tonic"><span class="ua-icon">♥</span><b>Tonic ×'+s.inventory.tonics+'</b></button>');
@@ -49,15 +56,29 @@ function unifiedBattleActionsHTML(){
  if(!battle.trainer&&utilityReady&&(s.inventory.seals||0)>0)items.push(sealButtonHTML());
  if(!battle.rt.paused&&(battle.utilityReadyAt||0)<=now)items.push('<button class="unified-action ua-run" data-action="flee"><span class="ua-icon">➜</span><b>Run</b></button>');
  if(battle.trainer&&!battle.encounterNPC&&battle.challenger!=='villain'&&!String(battle.adventure?.kind||'').startsWith('faction'))items.push('<button class="unified-action ua-run" data-action="yield"><b>Concede</b></button>');
- battle.uiActionSlots??=[];const columns=(globalThis.innerWidth||1000)<560?2:4;
- return items.join('').replace(/<button\b([^>]*)>/g,(tag,attrs)=>{const a=attrs.match(/data-action="([^"]+)"/)?.[1]||'',v=attrs.match(/data-value="([^"]*)"/)?.[1]||'',key=a==='unified-seal'?'seal':a+'|'+v+'|'+(attrs.match(/data-slot-key="([^"]+)"/)?.[1]||''),p=stableActionPosition(battle.uiActionSlots,key,columns);return '<button'+attrs+' style="grid-row:'+p.row+';grid-column:'+p.column+'">';})||'<p class="ua-wait">Waiting for an available action…</p>';
+ const metrics=commandMetrics(globalThis.visualViewport?.width||globalThis.innerWidth||1000,globalThis.visualViewport?.height||globalThis.innerHeight||700,s.settings?.textScale||1),tab=['moves','support','items'].includes(battle.commandTab)?battle.commandTab:'moves';
+ battle.commandPages??={};const paging=commandPage(catalogs[tab],battle.commandPages[tab],metrics.capacity);battle.commandPages[tab]=paging.page;
+ const rows=Math.max(1,Math.ceil(Math.min(metrics.capacity,Math.max(0,catalogs[tab].length-paging.start))/metrics.columns));
+ const counts={moves:0,support:0,items:0};let selectedCount=0;
+ const html=items.join('').replace(/<button\b([^>]*)>/g,(tag,attrs)=>{
+  const a=attrs.match(/data-action="([^"]+)"/)?.[1]||'',key=commandIdentity(attrs),group=commandGroup(a),catalog=catalogs[group];let index=catalog.indexOf(key);if(index<0){index=catalog.length;catalog.push(key);}
+  if(group!=='utility')counts[group]++;
+  const shown=group==='utility'||group===tab&&index>=paging.start&&index<paging.start+metrics.capacity;if(shown&&group!=='utility')selectedCount++;
+  const p=commandPosition(group==='utility'?index:index%metrics.capacity,group==='utility'?5:metrics.columns);
+  return '<button'+attrs+' data-command-group="'+group+'" '+(shown?'':'hidden ')+'style="grid-row:'+p.row+';grid-column:'+p.column+'">';
+ });
+ battle.commandLayout={...metrics,rows,tab,pages:paging.pages,page:paging.page,counts};
+ const buttons=html.match(/<button\b[\s\S]*?<\/button>/g)||[],utility=buttons.filter(b=>b.includes('data-command-group="utility"')),commands=buttons.filter(b=>!b.includes('data-command-group="utility"'));
+ return '<div class="command-deck" style="--command-columns:'+metrics.columns+';--command-rows:'+rows+';--command-cell:'+metrics.cellHeight+'px">'+commands.join('')+(!selectedCount?'<p class="ua-wait">'+(tab==='moves'?'Waiting for Techniques to recover.':tab==='support'?'No support ready.':'No usable items.')+'</p>':'')+'</div><div class="command-utilities">'+utility.join('')+'</div>';
+
 }
+function commandTabsHTML(){const battle=getBattle(),s=getState(),m=battle.commandLayout||{},tab=m.tab||'moves';return '<div class="command-tabs" role="tablist" aria-label="Battle commands">'+[['moves','Techniques'],['support','Support'],['items','Items']].map(([id,title])=>'<button role="tab" aria-selected="'+(tab===id)+'" data-action="battle-command-tab" data-value="'+id+'">'+title+'</button>').join('')+'</div><div class="command-paging">'+(m.pages>1?'<button data-action="battle-command-page" data-value="-1" aria-label="Previous command page">◀</button><span>'+(m.page+1)+'/'+m.pages+'</span><button data-action="battle-command-page" data-value="1" aria-label="Next command page">▶</button>':'')+'</div>'+(s.settings?.instantTap?'<button class="preset-toggle" data-action="preset-mode" aria-pressed="'+!!battle.useSavedPreset+'">'+(battle.useSavedPreset?'★ Preset':'Normal')+'</button>':'');}
 function realTimeBattleHTML(){
  const battle=getBattle(),s=getState(),battleMode=getMode();
  const state=battle.rt,ctx=realTimeContext(),emergency=!ctx.active.a.some(u=>u.hp>0);
  const speech=battle.message?esc(battle.message):'Select an available action. Each Spirimon acts independently.';
  const controls=battleMode==='deploy'?deploymentHTML():battleMode==='support'?battleSupportHTML():battleMode==='coop'?cooperativeBattleHTML():battleMode==='bag'?'<div class="spiritual-options">'+action('tonic','TONIC ×'+s.inventory.tonics)+action('ether','SOUL DRAUGHT ×'+s.inventory.ethers)+action('spiritual-draught','SPIRITUAL DRAUGHT ×'+s.inventory.spiritDraughts)+(!battle.trainer?sealButtonHTML():'')+action('battle-main','BACK')+'</div>':'<div class="unified-action-grid" id="unified-action-grid">'+unifiedBattleActionsHTML()+'</div>';
- return '<section class="classic-battle realtime-battle unified-battle triple-battle double-battle"><div class="battle-sealers">'+spiritualEnergyHTML(s.sealer)+(battle.enemySealer?spiritualEnergyHTML(battle.enemySealer,'Enemy'):'')+'</div><div class="classic-stage"><canvas id="battle-canvas" width="1000" height="550" aria-label="Real-time Spirimon battle"></canvas>'+doubleHUDsHTML()+'<div class="battle-corner">'+action('battle-record','LOG')+'</div>'+(state.paused&&!battle.damageEnding?'<div class="rt-paused">PAUSED</div>':'')+'</div><div class="classic-bottom"><div class="classic-dialogue"><p id="battle-speech" role="status">'+speech+'</p><p class="energy-emergency" data-emergency>'+(emergency?'Emergency recovery · '+seconds(6000-(state.undefendeda||0)):'')+'</p></div><div class="classic-control"><h3 class="unified-title">Available Actions</h3><p id="target-feedback" class="target-feedback" role="status"></p>'+(s.settings?.instantTap?action('preset-mode',battle.useSavedPreset?'★ Saved presets active · tap to switch':'Normal taps · tap to use saved presets','','btn small preset-toggle'):'')+'<p class="commitment-help">Tap: 50% attack / 50% defense · Drag trades offense for defense · Menu → Tutorial</p>'+(!['main','moves'].includes(battleMode)?action('battle-main','Back','','btn battle-dock-back'):'')+controls+'</div></div></section>';
+ return '<section class="classic-battle realtime-battle unified-battle triple-battle double-battle"><div class="battle-sealers">'+spiritualEnergyHTML(s.sealer)+(battle.enemySealer?spiritualEnergyHTML(battle.enemySealer,'Enemy'):'')+'</div><div class="classic-stage"><canvas id="battle-canvas" width="1000" height="550" aria-label="Real-time Spirimon battle"></canvas>'+doubleHUDsHTML()+'<div class="battle-corner">'+action('battle-record','LOG')+'</div>'+(state.paused&&!battle.damageEnding?'<div class="rt-paused">PAUSED</div>':'')+'</div><div class="classic-bottom"><div class="classic-dialogue"><p id="battle-speech" role="status">'+speech+'</p><p class="energy-emergency" data-emergency>'+(emergency?'Emergency recovery · '+seconds(6000-(state.undefendeda||0)):'')+'</p></div><div class="classic-control"><div class="battle-command-header"><p id="target-feedback" class="target-feedback" role="status"></p>'+commandTabsHTML()+'</div>'+(!['main','moves'].includes(battleMode)?action('battle-main','Back','','btn battle-dock-back'):'')+controls+'</div></div></section>';
 }
 function spiritualEnergyHTML(q,label='Sealer'){
  const battle=getBattle(),s=getState(),battleMode=getMode();
@@ -78,5 +99,5 @@ function cooperativeBattleHTML(){
  const battle=getBattle(),s=getState(),battleMode=getMode();
  const ctx=realTimeContext(),plans=CO.cooperativePlans(ctx.active.a,spOf,s.sealer);return '<div class="spiritual-options"><p>Compatible equipped Techniques form basic combinations. Learn advanced releases through instruction.</p>'+plans.map(p=>action('cooperative-use',esc(p.name)+' · '+p.cost+' SE',p.id)).join('')+(!plans.length?'<p>No compatible combination is currently manifested.</p>':'')+action('battle-main','Techniques')+'</div>';
 }
- return {combatTagsHTML,doubleHUDsHTML,unifiedBattleActionsHTML,realTimeBattleHTML,spiritualEnergyHTML,compactBattleHUD,deploymentHTML,battleSupportHTML,cooperativeBattleHTML};
+ return {commandTabsHTML,combatTagsHTML,doubleHUDsHTML,unifiedBattleActionsHTML,realTimeBattleHTML,spiritualEnergyHTML,compactBattleHUD,deploymentHTML,battleSupportHTML,cooperativeBattleHTML};
 }

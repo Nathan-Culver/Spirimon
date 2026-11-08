@@ -121,3 +121,7 @@ Normal restores classic Shrine density (two per town, two or three per route). H
 - Spirit details show upcoming technique level/form requirements and transformation progress. Merchants support quantities, owned counts and total-price previews, and stay open after buying.
 - The menu shows save destination, last successful recovery/file saves and reconnect warnings. Five recovery checkpoints rotate at five-minute save intervals; choose Options → Recovery backups to load one. These checkpoints use the browser recovery database; linked device saves remain authoritative on startup.
 - Phone options include size, independent pad/A-B offsets, opacity, gesture distance, left-handed layout and toggle-to-run. Readability options include text scaling and independent music/effects volume. Action icons and category labels supplement colors.
+
+### Battle and menu layout correction
+
+The main menu fits the current viewport: four columns in landscape, two in portrait, with compact save status and all sixteen choices visible. The battle dock uses bounded Technique, Support and Item panels, discrete pages for large support lists, and a fixed five-position utility row. All twelve Techniques from three active Spirimon fit in two landscape rows on phones at least 640 CSS pixels wide. Cooldowns hide actions without shifting the other buttons; recalling a Spirimon reuses its cells instead of growing the command grid. Battle commands and HUDs never scroll. Resizing or rotating recomputes the battle layout.

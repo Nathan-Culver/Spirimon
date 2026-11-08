@@ -514,23 +514,62 @@ body .modal,body.emulator-mode .modal,body.emulator-mode.exploring .modal,body .
 }
 .spiritual-meter>span{min-width:0;flex-wrap:wrap;gap:2px 5px}
 
-/* Long command lists scroll inside the battle dock instead of pushing actions off screen. */
-body.battling main,body.emulator-mode.battling main,body.battling .classic-battle{height:var(--game-vh);min-height:0;max-height:var(--game-vh)}
-body.battling .unified-battle .classic-stage{flex:1 1 auto;min-height:0;overflow:hidden}
-body.battling .unified-battle.triple-battle .classic-bottom{flex:0 1 auto;height:auto;min-height:0;max-height:62%;overflow:hidden}
-body.battling .unified-battle .classic-control{flex:1 1 auto;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:auto;scrollbar-gutter:stable;touch-action:pan-y;scroll-padding:8px}
-body.battling .unified-battle .unified-action-grid{flex:0 0 auto;min-width:0;grid-template-columns:repeat(auto-fit,minmax(min(124px,100%),1fr))}
-@media(orientation:landscape) and (max-height:600px){body.battling .unified-battle .unified-action-grid{grid-template-columns:repeat(auto-fit,minmax(min(94px,100%),1fr))}}
-/* Very short battle views keep secondary HUD details reachable instead of clipping them. */
-body.battling .compact-battle-scene .classic-hud{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
-
-/* Focus the battlefield without moving controls or obscuring their text. */
+/* Command positions live inside a bounded deck; combat never requires scrolling. */
+body.battling main,body.emulator-mode.battling main,body.battling .classic-battle{height:var(--game-vh);min-height:0;max-height:var(--game-vh);overflow:hidden}
 .classic-stage .classic-hud{opacity:var(--battle-focus-opacity,1)}
-/* Quality of life panels preserve touch targets and leave unavailable action slots empty. */
-body.battling .unified-battle .unified-action-grid{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(64px,auto);min-height:68px;align-items:stretch}
-@media(max-width:559px){body.battling .unified-battle .unified-action-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .target-feedback{font:600 calc(12px * var(--textScale,1))/1.4 system-ui,sans-serif;white-space:normal;margin:4px 0;padding:5px;background:#e5edcf;color:#263f32;border-radius:4px}
 .classic-hud.target-highlight{outline:3px solid #ffcf55!important;box-shadow:0 0 0 5px #16393988!important}
 .preset-toggle{min-height:32px}.recipient-list{display:grid;gap:8px;margin:12px 0}.recipient-card{display:grid;gap:6px;padding:12px;text-align:left;border:2px solid #809475;background:#edf0d5;color:#243e33}.recipient-card.selected{border-color:#9c681f;outline:2px solid #d6b45d}.recipient-card small{display:block;white-space:normal}.comparison{width:100%;border-collapse:collapse;margin:12px 0}.comparison th,.comparison td{text-align:left;padding:5px;border-bottom:1px solid #9baa89}.qol-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:end}.qol-toolbar label{display:grid;gap:4px;flex:1;min-width:130px}.qol-toolbar input,.qol-toolbar select{width:100%;min-height:40px}.shop-supplies{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.shop-supplies article{padding:12px;border:1px solid #91a27e;border-radius:5px}.shop-supplies input,[data-held-quantity]{max-width:110px}.save-feedback{padding:12px;margin:12px 0;background:#dfe8ca;color:#2e4536;border:2px solid #8da17c;border-radius:5px;font:calc(14px * var(--textScale,1))/1.5 system-ui,sans-serif}.qol-settings label{display:block;margin:14px 0}.qol-settings input[type=range]{display:block;width:100%}.qol-settings output{float:right}.qol-settings input[type=checkbox]{width:auto;margin-right:8px}.progression-preview{margin:14px 0;padding:10px;border:1px solid #8da17c}.atlas-viewport{max-width:100%;overflow:auto;touch-action:pan-y}.atlas-viewport .atlas-grid{gap:5px;min-width:max-content}.atlas-viewport .atlas-cell{min-width:70px;max-width:150px;min-height:92px;height:auto;padding:7px;overflow-wrap:anywhere}.atlas-viewport .atlas-cell strong{font-size:calc(12px * var(--textScale,1))}.atlas-viewport .atlas-cell small{font-size:calc(10px * var(--textScale,1))}
 body .modal p,body .modal label,body .modal .btn,body .journal-entry,body .quest p,body .quest li{font-size:calc(15px * var(--textScale,1))}body .unified-battle .unified-action b{font-size:calc(11px * var(--textScale,1))}body .unified-battle .unified-action small{font-size:calc(9px * var(--textScale,1))}.emulator-mode .emulator-controls .emu-pad{transform:translate(var(--padX,0px),var(--padY,0px)) scale(var(--controlSize,1));transform-origin:bottom left;opacity:var(--controlOpacity,1)}.emulator-mode .emulator-controls .emu-ab{transform:translate(var(--buttonsX,0px),var(--buttonsY,0px)) scale(var(--controlSize,1));transform-origin:bottom right;opacity:var(--controlOpacity,1)}.emulator-mode.left-handed .emu-pad{left:auto;right:max(18px,env(safe-area-inset-right));transform-origin:bottom right}.emulator-mode.left-handed .emu-ab{right:auto;left:max(18px,env(safe-area-inset-left));transform-origin:bottom left}
 .ua-kind{font:10px/1.2 system-ui,sans-serif;opacity:.8}.qol-settings input[type=range]{min-height:32px}.qol-toolbar input{min-width:160px}.preset-toggle:focus-visible,.recipient-card:focus-visible{outline:3px solid #9f6d24}
+
+/* Quick battle dock: one compact header, fixed command cells and a fixed utility rail. */
+body.battling .unified-battle .classic-stage{flex:1 1 auto;min-height:0;overflow:hidden}
+body.battling .unified-battle.triple-battle .classic-bottom{flex:0 0 auto;max-height:none;height:auto;min-height:0;overflow:hidden;padding:4px;gap:3px;border-width:2px;border-radius:10px 10px 0 0;box-shadow:none}
+body.battling .unified-battle .classic-dialogue{height:19px;max-height:19px;min-height:0;flex:0 0 19px;padding:1px 7px;overflow:hidden}
+body.battling .unified-battle .classic-dialogue p{margin:0;font:10px/15px "Spirimon Pixel",monospace;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+body.battling .unified-battle .classic-control{display:flex;flex-direction:column;flex:0 0 auto;gap:3px;padding:0;min-height:0;overflow:hidden;scrollbar-gutter:auto;touch-action:manipulation;border:0;background:transparent}
+.battle-command-header{display:flex;align-items:center;gap:5px;min-height:28px;flex:0 0 auto;overflow:hidden}
+body.battling .target-feedback{flex:1;min-width:0;padding:0 4px;margin:0;font:600 10px/1.2 system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:transparent}
+.command-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;flex:0 0 auto}
+.command-tabs button,.command-paging button,body.battling .preset-toggle{min-height:28px;max-height:32px;padding:3px 7px;border:1px solid #64785c;border-radius:4px;background:#edf0d5;color:#263f32;font:11px/1.1 system-ui,sans-serif;white-space:nowrap;touch-action:manipulation}
+.command-tabs [aria-selected=true]{background:#395e48;color:#fff8dc;border-color:#263f32}.command-paging{display:flex;align-items:center;gap:3px;font-size:10px}.command-paging:empty{display:none}
+body.battling .unified-battle .unified-action-grid{display:flex;flex-direction:column;gap:4px;flex:0 0 auto;width:100%;min-height:0;max-height:none;overflow:hidden;padding:0;touch-action:manipulation}
+.command-deck{display:grid;grid-template-columns:repeat(var(--command-columns),minmax(0,1fr));grid-template-rows:repeat(var(--command-rows),var(--command-cell));gap:3px;min-width:0;overflow:hidden;position:relative}
+.command-utilities{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:32px;gap:3px;min-width:0;overflow:hidden}
+body.battling .unified-battle .unified-action{height:100%;min-height:0;max-height:100%;min-width:0;padding:3px 5px;gap:1px;display:flex;flex-direction:column;justify-content:center;align-items:center;border-width:1px;border-radius:5px;overflow:hidden;touch-action:none}
+body.battling .unified-battle .unified-action[hidden]{display:none!important}
+body.battling .unified-battle .unified-action :is(.ua-icon,.ua-kind){display:none}
+body.battling .unified-battle .unified-action b{font-size:clamp(10px,calc(10px * var(--textScale,1)),13px);line-height:1.12;text-align:center;max-width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+body.battling .unified-battle .unified-action small{font-size:clamp(8px,calc(8px * var(--textScale,1)),10px);line-height:1.1;max-width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.command-deck .ua-move small:nth-of-type(2){display:none}
+.command-deck .ua-support small:last-child{display:none}
+.command-deck .ua-wait{position:absolute;inset:0;display:grid;place-items:center;margin:0;pointer-events:none;font-size:11px;color:#586a52}
+.command-utilities .unified-action small{display:none}
+body.battling .compact-battle-scene .classic-hud{overflow:hidden;scrollbar-width:none}
+.short-battle-stage .classic-hud :is(.compact-resources,.combat-tags,.xp-meter,.xp-label){display:none}
+.short-battle-stage .classic-hud[data-battle-count="3"] .health-label{display:none}
+body.battling .short-battle-stage .classic-hud .hud-name{font-size:9px;line-height:1.1}
+body.battling .short-battle-stage .classic-hud .health-label,body.battling .short-battle-stage .classic-hud>small{font-size:8px;line-height:1.1;margin:0}
+body.battling .short-battle-stage .classic-hud .health{height:3px;margin:2px 0}
+body.battling .unified-battle .spiritual-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;overflow:hidden;font-size:10px}
+body.battling .spiritual-options>p{grid-column:1/-1;margin:0;font-size:10px;line-height:1.2}
+body.battling .spiritual-options article{padding:3px;font-size:10px;line-height:1.25}
+body.battling .spiritual-options button{padding:4px;min-height:28px;font-size:10px;line-height:1.2}
+@media(orientation:portrait){.battle-command-header{flex-wrap:wrap}.battle-command-header .target-feedback{flex:1 0 100%;min-height:14px}.command-tabs{flex:1}.command-utilities{grid-template-rows:38px}.command-utilities .unified-action b{font-size:9px!important}}
+@media(max-height:360px) and (orientation:landscape){body.battling .unified-battle .classic-dialogue{height:16px;max-height:16px;flex-basis:16px}.battle-command-header{min-height:25px}.command-tabs button,.command-paging button,body.battling .preset-toggle{min-height:25px;padding:2px 6px;font-size:10px}.command-utilities{grid-template-rows:29px}body.battling .unified-battle .battle-sealers{max-height:27px}body.battling .unified-battle .battle-sealers .spiritual-meter{padding:2px 6px;font-size:9px;min-height:0}}
+/* The main menu is a complete screen, with no scrolling or oversized blank panels. */
+body .modal-overlay:has(.game-menu){padding:max(8px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}
+body .modal.game-menu,body.emulator-mode .modal.game-menu,body.emulator-mode.exploring .modal.game-menu{width:min(100%,1100px);height:min(100%,580px);max-height:100%;max-width:none;padding:12px 16px;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto minmax(0,1fr) auto;gap:6px;overflow:hidden;scrollbar-width:none}
+.game-menu>.eyebrow{display:none}.game-menu h2{font-size:20px;line-height:1.15;padding-right:45px;margin:0}.game-menu .modal-close{position:absolute;top:8px;right:10px;min-width:32px;min-height:32px;width:32px;height:32px;padding:0;line-height:1}
+body .modal.game-menu .menu-player{margin:0;font-size:12px;line-height:1.2}
+body .modal.game-menu .save-feedback{margin:0;padding:4px 8px;font:11px/1.3 system-ui,sans-serif;border-width:1px;border-radius:4px}
+.game-menu .menu-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr));gap:6px;min-height:0;margin:0;overflow:hidden}
+body .modal.game-menu .menu-grid .btn{min-width:0;min-height:0;height:100%;margin:0;padding:4px 6px;display:grid;place-items:center;border-width:1px;font-size:clamp(11px,calc(12px * var(--textScale,1)),16px);line-height:1.15;letter-spacing:0;white-space:normal}
+body .modal.game-menu>.help-line{margin:0;font-size:9px;line-height:1.2}.game-menu>.help-line br{display:none}
+@media(orientation:portrait){.game-menu .menu-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(8,minmax(0,1fr))}body .modal.game-menu{padding:12px;gap:7px}}
+@media(max-height:360px) and (orientation:landscape){body .modal.game-menu{padding:8px 10px;gap:4px}.game-menu h2{font-size:16px}body .modal.game-menu .save-feedback{font-size:10px;padding:3px 6px}body .modal.game-menu .menu-player{font-size:10px}body .modal.game-menu .menu-grid .btn{font-size:clamp(10px,calc(10px * var(--textScale,1)),14px);padding:3px}.game-menu .menu-grid{gap:4px}body .modal.game-menu>.help-line{font-size:8px}}
+body.battling .modal.item-recipient{max-width:min(100%,960px);padding:10px;overflow:hidden}
+.item-recipient .recipient-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:5px 0}.item-recipient .recipient-card{padding:6px;gap:3px;min-height:40px}.item-recipient .recipient-card small{font-size:9px}.item-recipient .recipient-card b{font-size:11px}body.battling .modal.item-recipient p{font-size:11px;margin:5px 0}.item-recipient h2{font-size:17px;margin:0}
+.game-menu .menu-save{display:flex;align-items:center;gap:6px;min-width:0}.game-menu .menu-save .save-feedback{flex:1;min-width:0}.game-menu .menu-save>.btn{flex:0 0 auto;font-size:10px!important;min-height:30px;padding:4px!important}
+body.emulator-mode.exploring .modal-overlay:has(.game-menu){padding:max(8px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}

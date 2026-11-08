@@ -22,6 +22,7 @@ screens.push(['offering-prepare',`O.prepareOffering({roamer:{id:'ui-offering',in
 const inspectLayout=()=>{
  const scrollParents=new Map(),issues=[],W=innerWidth,H=innerHeight,visible=e=>!!e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden'&&getComputedStyle(e).display!=='none';
  const dialog=document.querySelector('.modal'),close=dialog?.querySelector('.modal-close');
+ for(const e of document.querySelectorAll('.modal.game-menu,.classic-control,.command-deck,.command-utilities'))if(visible(e)&&e.scrollHeight>e.clientHeight+2)issues.push({kind:'quick-screen-overflow',element:e.className,content:e.scrollHeight,available:e.clientHeight});
  for(const [name,e]of [['dialog',dialog],['close',close]])if(e){const r=e.getBoundingClientRect();if(r.top<-.5||r.left<-.5||r.right>W+.5||r.bottom>H+.5)issues.push({kind:name+'-outside',rect:{x:r.x,y:r.y,w:r.width,h:r.height}});}
  if(dialog&&dialog.scrollWidth>dialog.clientWidth+2)issues.push({kind:'dialog-horizontal-scroll',width:dialog.scrollWidth,available:dialog.clientWidth});
  if(!dialog&&document.documentElement.scrollWidth>W+2)issues.push({kind:'page-horizontal-scroll',width:document.documentElement.scrollWidth,available:W});
