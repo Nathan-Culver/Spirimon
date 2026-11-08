@@ -6,7 +6,7 @@ const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
 function extract(name){const start=source.indexOf('function '+name+'('),next=source.slice(start+1).search(/\n(?:async )?function /);return source.slice(start,next<0?source.length:start+1+next).split("\ndocument.addEventListener(")[0];}
 function harness(){
  const handlers={},properties={},calls=[],lines=[],button={dataset:{unifiedMove:'ally|0'},style:{setProperty:(k,v)=>properties[k]=v,removeProperty:k=>delete properties[k]},setPointerCapture(){},hasPointerCapture:()=>false};
- const h=vm.createContext({unifiedGesture:null,unifiedSuppressClick:false,unifiedTap:null,clearTimeout,button,
+ const h=vm.createContext({s:{settings:{}},unifiedGesture:null,unifiedSuppressClick:false,unifiedTap:null,clearTimeout,button,
   document:{hidden:true,body:{append:node=>lines.push(node)},createElement:()=>({style:{},setAttribute(k,v){this[k]=v;},remove(){const i=lines.indexOf(this);if(i>=0)lines.splice(i,1);}}),addEventListener:(name,fn)=>(handlers[name]??=[]).push(fn)},window:{addEventListener:(name,fn)=>(handlers[name]??=[]).push(fn)},useUnifiedMove:(...args)=>calls.push(args)});
  const start=source.indexOf("document.addEventListener('pointerdown',ev=>{",source.indexOf('function previewSeal')),end=source.indexOf('\nfunction advanceRealTimeBattle',start);
  vm.runInContext(['unifiedGestureChoice','previewUnifiedMove','drawGestureLine','clearUnifiedGesture'].map(extract).join('\n')+'\n'+source.slice(start,end),h);

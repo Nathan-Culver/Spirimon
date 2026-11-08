@@ -191,6 +191,7 @@ function resolvePending(state,context,actor,clock,log,events,r){
  if(statusBadges(state,actor).some(s=>STATUS_RULES[s.effect]?.control)){log.push(name(actor,sp)+' is interrupted.');return;}
  const other=side==='a'?'b':'a',allies=context.active[side],opponents=context.active[other];
  let target=[...allies,...opponents].find(u=>u.id===pending.targetId&&u.hp>0);
+ if(!target&&choice.type==='item'){log.push('The selected recipient is unavailable; no item was spent.');return;}
  if(!target)target=(pending.targetSide===side?allies:opponents).find(u=>u.hp>0);if(!target)return;
  const ctx={passiveChain:new Set(),onDamage:(unit,options)=>reportDamage(state,context,unit,options),realTime:true,speciesOf:context.speciesOf,actorTeam:context.teams[side],alliedActive:allies,targetActive:opponents,activeUnits:activeUnits(context),targetTeam:context.teams[other],funded:false};
  if(actor.lastHit&&state.elapsedMs-(actor.lastHit.at??state.elapsedMs)>8000)actor.lastHit=null;

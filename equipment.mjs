@@ -153,7 +153,7 @@ export function heldShop(state,worldSeed,regionKey,rank=1,specialist='general'){
  const offers=Array.from({length:8},(_,n)=>{const item=generateHeldItem(worldSeed+'|shop|'+key+'|'+n,{level:Math.min(90,rank*12),rarity:n===7&&rank>=4?'Epic':n%3===0?'Rare':n%2?'Uncommon':'Common',category,source:specialist+' merchant in '+regionKey});return {item,remaining:item.consumable?3:1};});state.shops[key]=offers;return offers;
 }
 export function buyHeldItem(state,offers,id,purse){const offer=offers.find(o=>o.item.id===id);if(!offer||offer.remaining<1)return {ok:false,reason:'This offer is sold out.'};if(purse.coins<offer.item.cost)return {ok:false,reason:'Not enough Coin.'};purse.coins-=offer.item.cost;offer.remaining--;addHeldItem(state,offer.item);return {ok:true,item:offer.item};}
-export function sellHeldItem(state,id,purse){const record=state.inventory[id];if(!record||record.count<1)return {ok:false,reason:'No unequipped copy to sell.'};record.count--;const value=Math.max(1,Math.floor((record.item.cost||50)*.35));purse.coins+=value;return {ok:true,value};}
+export function sellHeldItem(state,id,purse){if(state.favorites?.includes(id))return {ok:false,reason:'Unfavorite this item before selling it.'};const record=state.inventory[id];if(!record||record.count<1)return {ok:false,reason:'No unequipped copy to sell.'};record.count--;const value=Math.max(1,Math.floor((record.item.cost||50)*.35));purse.coins+=value;return {ok:true,value};}
 
 // Imported item snapshots are validated before replacing an existing world.
 export function validateHeldItems(save){

@@ -34,7 +34,7 @@ test('approaching a Shrine updates the persisted visit without consuming its act
 test('normal region discovery records a nearby Shrine before saving, without requiring interaction',()=>{
  const {s}=fixture(),[shrine]=remoteShrines(s);s.player={...s.player,x:shrine.x,y:shrine.y+1};let saved;
  const h=vm.createContext({battleClosingDialogue:()=>false,cloneScene:()=>null,queueBattleIntroduction(){},requestStartupFullscreen(){},sceneFadeUntil:0,performance,encounterAftermath:()=>'',s,E,SW,ensureRegion(cx,cy){s.regions[cx+','+cy]={...E.region(s.seed,cx,cy),visited:true};},save(){saved=JSON.parse(JSON.stringify(s));}});
- vm.runInContext(extract('discoverRegion'),h);h.discoverRegion();assert.equal(saved.lastShrine.id,shrine.id);
+ h.rememberVisibleShrines=()=>{};vm.runInContext(extract('discoverRegion'),h);h.discoverRegion();assert.equal(saved.lastShrine.id,shrine.id);
 });
 test('blackout uses the last visited Shrine even when spent and a closer unused Shrine exists',()=>{
  const {s}=fixture(),[a,b]=remoteShrines(s);s.player={...s.player,x:a.x,y:a.y+1};SW.rememberShrineVisit(s);SE.beginRecovery(s,'commune',{shrineId:a.id,safe:true});s.player={...s.player,x:b.x,y:b.y+1};

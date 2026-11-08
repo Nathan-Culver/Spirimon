@@ -1,0 +1,15 @@
+import * as E from './engine.mjs';
+import * as SE from './spiritual-energy.mjs';
+export const SUPPLIES={seals:['Seal catalyst',12],offerings:['Offering',8],tonics:['Tonic',10],ethers:['Soul draught',16],spiritDraughts:['Spiritual draught',20],herbs:['Herbs',5],incense:['Incense',8],ore:['Ore',6],quality:['Improve seals',100]};
+export function itemPreview(unit,species,kind){
+ const max=E.stats(unit,species),pools=kind==='tonic'?['hp']:['pp','willpower'];
+ const changes=pools.map(pool=>{const before=unit[pool]??max[pool],after=kind==='tonic'?before+E.healHP({...structuredClone(unit)},species,Math.ceil(max.hp*.5)):Math.min(max[pool],before+Math.ceil(max[pool]*.6));return {pool,before,after,max:max[pool],gain:after-before};});
+ return {ok:unit.hp>0&&changes.some(c=>c.gain>0),changes};
+}
+export function purchaseQuote(inventory,key,quantity=1){const price=SUPPLIES[key]?.[1],count=key==='quality'?1:Math.max(1,Math.min(999,Math.floor(Number(quantity)||1))),total=(price||0)*count;return {count,total,ok:!!price&&inventory.coins>=total&&(key!=='quality'||inventory.quality<3)};}
+export function shrineRenewal(save){const phase=SE.calendarPhase(save.playTime),elapsed=(save.playTime||0)%3600000;return (phase.night?3600000:2100000)-elapsed;}
+export function stableActionPosition(slots,key,columns){if(!slots.includes(key))slots.push(key);const index=slots.indexOf(key);return {row:Math.floor(index/columns)+1,column:index%columns+1};}
+export function equipmentComparison(unit,species,item){const before=E.stats(unit,species),after=E.stats({...unit,heldCharm:null,heldItem:item},species);return ['hp','might','defense','power','resistance','speed','pp','willpower'].filter(k=>Number.isFinite(before[k])&&Number.isFinite(after[k])).map(key=>({key,before:before[key],after:after[key],delta:after[key]-before[key]}));}
+export function applyTeam(save,team,{safe=false,battle=false}={}){if(!safe||battle)return {ok:false,reason:'Change saved teams at a safe place outside battle.'};if(!Array.isArray(team)||!team.length||team.length>6||new Set(team).size!==team.length||team.some(id=>!save.spirits.some(u=>u.id===id)))return {ok:false,reason:'This arrangement contains missing Spirimon.'};const previous=[...save.party];save.party=[...team];const result=SE.changeLead(save,team[0],{safe:true,battle:false});if(!result.ok){save.party=previous;return result;}return {ok:true};}
+export function journalRequests(save){return E.questTemplates().filter(q=>save.questLog?.[q.id]).map(q=>{const record=E.advanceQuest(save,q,save.questLog[q.id]);save.questLog[q.id]=record;return {...q,record,stage:E.questStage(save,q,record),giver:save.questGivers?.[q.id]};});}
+export function progression(unit,species){const known=new Set(E.availableTechniques(unit,species).map(m=>m.id));return E.techniqueMilestones(species).filter(m=>!known.has(m.id)).sort((a,b)=>a.level-b.level||a.form-b.form).map(m=>({...m,name:species.learnset?.find(move=>move.id===m.id)?.name||m.id,levelRemaining:Math.max(0,m.level-unit.level),formRemaining:Math.max(0,m.form-unit.form)}));}
