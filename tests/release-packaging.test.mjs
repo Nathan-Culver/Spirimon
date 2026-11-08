@@ -7,11 +7,13 @@ import vm from 'node:vm';
 import {buildPage,writeRelease} from '../build.mjs';
 import {ROSTER} from '../roster.mjs';
 import {BATTLE_BACK_ART} from '../battle-art.mjs';
+import {EFFECT_ATLASES} from '../battle-effects.mjs';
 
 test('release inventory includes every current front and rear atlas and excludes superseded art',async()=>{
  const built=await buildPage(undefined,{standalone:false}),files=new Set(built.assets.map(a=>a.path));
  for(const sp of ROSTER){assert.ok(files.has(sp.atlas),sp.id+' front');assert.ok(files.has(BATTLE_BACK_ART[sp.id]),sp.id+' rear');}
  assert.ok(files.has('./assets/shrine-atlas.png'));assert.ok(files.has('./assets/cave-entrance-atlas.png'));
+ for(const atlas of EFFECT_ATLASES)assert.ok(files.has(atlas),'Battle artwork must ship in every release');
  assert.ok(!files.has('./assets/roster/kilnscale.webp'),'Obsolete revisions must not inflate releases');
  assert.ok(built.assets.reduce((sum,a)=>sum+a.bytes,0)<40*1024*1024,'Investigate asset growth beyond the 40 MiB budget');
 });
@@ -44,6 +46,7 @@ test('installer output contains one copy of current assets and replaces stale ge
 test('web releases retain a fully embedded download within its size budget',async()=>{
  const built=await buildPage();assert.ok(Buffer.byteLength(built.standaloneHtml)<55*1024*1024);
  for(const rear of Object.values(BATTLE_BACK_ART))assert.ok(built.offlineArt[rear]?.startsWith('data:image/webp;base64,'),rear);
+ for(const atlas of EFFECT_ATLASES)assert.equal(Buffer.from(built.offlineArt[atlas].split(',')[1],'base64').compare(await readFile(new URL('../'+atlas.slice(2),import.meta.url))),0,atlas);
  assert.doesNotMatch(built.html,/__spirimonPackaged=true/);
 });
 test('one Pages workflow deploys and standalone filters cover gameplay, styling and artwork',async()=>{

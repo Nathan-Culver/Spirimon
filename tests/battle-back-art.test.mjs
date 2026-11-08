@@ -1,3 +1,4 @@
+import {battleVisuals} from './helpers/battle-visuals.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -11,7 +12,7 @@ const source=readFileSync(new URL('../sprites.mjs',import.meta.url),'utf8').repl
 function harness(){
  const images=new Map(),draws=[],scales=[];
  const ctx={save(){},restore(){},translate(){},scale(...args){scales.push(args);},drawImage(...args){draws.push(args);}};
- const h=vm.createContext({battleBackSource,readyImage:path=>images.get(path)||null,MYSTERY_STATIC:'mystery.webp',MYSTERY_WALK:'walk.webp'});
+ const h=vm.createContext({...battleVisuals,battleBackSource,readyImage:path=>images.get(path)||null,MYSTERY_STATIC:'mystery.webp',MYSTERY_WALK:'walk.webp'});
  vm.runInContext(source,h);return {images,draws,scales,ctx,draw:h.drawBattleSpirit,portrait:h.drawSpirit};
 }
 test('all 150 rear atlases select their audited form rectangle and preserve aspect ratio',()=>{
@@ -56,8 +57,8 @@ test('single, double and triple battle stages route every unit and appearance th
  for(const count of [1,2,3]){
   const calls=[],allies=ROSTER.slice(0,count).map((sp,n)=>({id:'a'+n,species:sp.id,appearance:n})),enemies=ROSTER.slice(3,3+count).map((sp,n)=>({id:'b'+n,species:sp.id,appearance:2-n}));
   const points=units=>units.map((u,n)=>({slot:n,x:100+n*100,ground:300,size:96,rx:40,ry:12}));
-  const ctx={fillRect(){},beginPath(){},ellipse(){},fill(){}},canvas={height:550,getBoundingClientRect:()=>({height:550,width:1000}),getContext:()=>ctx};
-  const h=vm.createContext({$:()=>canvas,battle:{ally:allies[0].id,enemy:enemies[0],...(count>1?{multi:{allies:allies.map(u=>u.id),enemies}}:{})},s:{spirits:allies},currentRegion:()=>({biome:{kind:'forest'}}),E:{rng:()=>()=>.5,hash:()=>0},currentBattleLayout:()=>({a:points(allies),b:points(enemies)}),positionBattleHUDs(){},drawAspectAura(){},spOf:u=>({id:u.species}),drawBattleSpirit:(c,sp,form,x,y,size,side)=>calls.push({sp:sp.id,form,side})});
+  const ctx={save(){},restore(){},translate(){},fillRect(){},beginPath(){},ellipse(){},fill(){}},canvas={height:550,getBoundingClientRect:()=>({height:550,width:1000}),getContext:()=>ctx};
+  const h=vm.createContext({...battleVisuals,$:()=>canvas,battle:{ally:allies[0].id,enemy:enemies[0],...(count>1?{multi:{allies:allies.map(u=>u.id),enemies}}:{})},s:{spirits:allies},currentRegion:()=>({biome:{kind:'forest'}}),E:{rng:()=>()=>.5,hash:()=>0},currentBattleLayout:()=>({a:points(allies),b:points(enemies)}),positionBattleHUDs(){},drawAspectAura(){},spOf:u=>({id:u.species}),drawBattleSpirit:(c,sp,form,x,y,size,side)=>calls.push({sp:sp.id,form,side})});
   vm.runInContext(body,h);h.drawBattle();assert.equal(calls.length,count*2);
   assert.deepEqual(calls.filter(c=>c.side==='a').map(c=>c.form),allies.map(u=>u.appearance));
   assert.deepEqual(calls.filter(c=>c.side==='b').map(c=>c.form),enemies.map(u=>u.appearance));

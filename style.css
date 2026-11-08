@@ -523,3 +523,6 @@ body.battling .unified-battle .unified-action-grid{flex:0 0 auto;min-width:0;gri
 @media(orientation:landscape) and (max-height:600px){body.battling .unified-battle .unified-action-grid{grid-template-columns:repeat(auto-fit,minmax(min(94px,100%),1fr))}}
 /* Very short battle views keep secondary HUD details reachable instead of clipping them. */
 body.battling .compact-battle-scene .classic-hud{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+
+/* Focus the battlefield without moving controls or obscuring their text. */
+.classic-stage .classic-hud{opacity:var(--battle-focus-opacity,1)}
