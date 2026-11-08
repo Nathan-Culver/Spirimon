@@ -33,7 +33,7 @@ test('approaching a Shrine updates the persisted visit without consuming its act
 });
 test('normal region discovery records a nearby Shrine before saving, without requiring interaction',()=>{
  const {s}=fixture(),[shrine]=remoteShrines(s);s.player={...s.player,x:shrine.x,y:shrine.y+1};let saved;
- const h=vm.createContext({encounterAftermath:()=>'',s,E,SW,ensureRegion(cx,cy){s.regions[cx+','+cy]={...E.region(s.seed,cx,cy),visited:true};},save(){saved=JSON.parse(JSON.stringify(s));}});
+ const h=vm.createContext({battleClosingDialogue:()=>false,cloneScene:()=>null,queueBattleIntroduction(){},requestStartupFullscreen(){},sceneFadeUntil:0,performance,encounterAftermath:()=>'',s,E,SW,ensureRegion(cx,cy){s.regions[cx+','+cy]={...E.region(s.seed,cx,cy),visited:true};},save(){saved=JSON.parse(JSON.stringify(s));}});
  vm.runInContext(extract('discoverRegion'),h);h.discoverRegion();assert.equal(saved.lastShrine.id,shrine.id);
 });
 test('blackout uses the last visited Shrine even when spent and a closer unused Shrine exists',()=>{
@@ -60,21 +60,21 @@ test('spent Shrine blackouts wait for the next reset, restore the party, and pre
 test('the actual defeat handler restores at the last Shrine and preserves defeat costs and dropped supplies',()=>{
  const {s,sp,u}=fixture(),[shrine]=remoteShrines(s);s.player={...s.player,x:shrine.x,y:shrine.y+1};SW.rememberShrineVisit(s);SE.beginRecovery(s,'restore',{shrineId:shrine.id,safe:true});
  s.player={...s.player,x:400,y:-90};s.interior={kind:'inn'};s.cave={id:'temple',x:5,y:5};s.mountedSteed=u.id;u.hp=0;const coins=s.inventory.coins,clock=s.sealer.clockMs;let title,saved;
- const h=vm.createContext({encounterAftermath:()=>'',s,E,SE,SW,battle:{},view:'spirits',challengerApproach:{},resetExplorationMotion(){},recordCompetitionDefeat(){},endCombatState(){},save(){saved=JSON.parse(JSON.stringify(s));},render(){},showModal(t){title=t;},esc:String,action:()=>''});
+ const h=vm.createContext({battleClosingDialogue:()=>false,cloneScene:()=>null,queueBattleIntroduction(){},requestStartupFullscreen(){},sceneFadeUntil:0,performance,encounterAftermath:()=>'',s,E,SE,SW,battle:{},view:'spirits',challengerApproach:{},resetExplorationMotion(){},recordCompetitionDefeat(){},endCombatState(){},save(){saved=JSON.parse(JSON.stringify(s));},render(){},showModal(t){title=t;},esc:String,action:()=>''});
  vm.runInContext(['recoverAtShrine','loseBattle'].map(extract).join('\n'),h);h.loseBattle();assert.equal(h.battle,null);assert.equal(h.view,'explore');assert.equal(h.challengerApproach,null);assert.equal(title,'You blacked out.');assert.equal(saved.lastShrine.id,shrine.id);assert.equal(SW.nearbyShrine(s).id,shrine.id);assert.equal(s.cave,undefined);assert.equal(s.interior,undefined);assert.equal(s.mountedSteed,null);assert.equal(u.hp,E.stats(u,sp).hp);assert.equal(s.sealer.clockMs,clock);assert.equal(s.inventory.coins,coins-25);assert.deepEqual([s.drops[0].x,s.drops[0].y],[400,-90]);assert.equal(s.drops[0].items.seals,2);
 });
 test('battle wipeout blacks out immediately, while a conscious reserve keeps deployment available and a tie stays a draw',()=>{
  for(const mode of ['wipeout','reserve','draw']){
   let losses=0,draws=0;const team=[{id:'a',hp:0},...(mode==='reserve'?[{id:'reserve',hp:2}]:[])],enemy={id:'enemy',hp:mode==='draw'?0:3};
   const ctx={active:{a:[],b:enemy.hp?[enemy]:[]},teams:{a:team,b:[enemy]}};
-  const h=vm.createContext({encounterAftermath:()=>'',battle:{rt:{elapsedMs:1,undefendeda:0},multi:{allies:[],enemies:[enemy]},damageNumbers:[]},realTimeContext:()=>ctx,applyRealTimeContext(){},loseBattle:()=>losses++,drawnBattle:()=>draws++,winBattle(){throw Error('Unexpected victory');},save(){},render(){},DAMAGE_NUMBER_MS:1000});
+  const h=vm.createContext({battleClosingDialogue:()=>false,cloneScene:()=>null,queueBattleIntroduction(){},requestStartupFullscreen(){},sceneFadeUntil:0,performance,encounterAftermath:()=>'',battle:{rt:{elapsedMs:1,undefendeda:0},multi:{allies:[],enemies:[enemy]},damageNumbers:[]},realTimeContext:()=>ctx,applyRealTimeContext(){},loseBattle:()=>losses++,drawnBattle:()=>draws++,winBattle(){throw Error('Unexpected victory');},save(){},render(){},DAMAGE_NUMBER_MS:1000});
   vm.runInContext(extract('finishRealTimeEncounter'),h);h.finishRealTimeEncounter();assert.equal(losses,mode==='wipeout'?1:0);assert.equal(draws,mode==='draw'?1:0);if(mode==='reserve')assert.equal(h.battleMode,'deploy');
  }
 });
 test('the last conscious Spirimon falling to an exploration affliction triggers blackout; an empty starting roster does not',()=>{
  for(const size of [0,1,2]){
   let losses=0;const team=Array.from({length:size},()=>({hp:1}));
-  const h=vm.createContext({encounterAftermath:()=>'',s:{sealer:{clockMs:10}},party:()=>team,lead:()=>team[0],spOf:()=>({}),RT:{advanceExplorationAfflictions(u){u.hp=0;return {damage:1};}},loseBattle:()=>losses++,toast(){}});
+  const h=vm.createContext({battleClosingDialogue:()=>false,cloneScene:()=>null,queueBattleIntroduction(){},requestStartupFullscreen(){},sceneFadeUntil:0,performance,encounterAftermath:()=>'',s:{sealer:{clockMs:10}},party:()=>team,lead:()=>team[0],spOf:()=>({}),RT:{advanceExplorationAfflictions(u){u.hp=0;return {damage:1};}},loseBattle:()=>losses++,toast(){}});
   vm.runInContext(extract('explorationStatusPulse'),h);h.explorationStatusPulse(1000);assert.equal(losses,size===1?1:0);
  }
 });

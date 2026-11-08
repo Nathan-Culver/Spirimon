@@ -57,7 +57,7 @@ test('all four legendary lineages have three finished front/rear forms with veri
 function ritualHarness(){
  const save=E.newGame('SP-461998'),cx=-7,cy=-4,site=regionalLegendSite(save.seed,cx,cy);save.player={...save.player,...site};SE.ensureSealer(save);save.sealer.energy=save.sealer.maxEnergy;save.adventure={legends:[],encounters:{}};
  const legend=A.legendAt(save.seed,cx,cy,true,'rain');assert.ok(legend);const events=[];
- const h=vm.createContext({E,A,SE,s:save,battle:null,party:()=>[{hp:1}],isNight:()=>true,mapWeather:()=>({kind:'rain'}),legendSite:(x,y)=>regionalLegendSite(save.seed,x,y),adventureState:()=>save.adventure,encounterState:()=>save.adventure.encounters,legendaryRitual:()=>events.push('rite'),adventureBattle:(...args)=>events.push(args),toast:t=>events.push(t),render(){events.push('refreshed');},save(){}});
+ const h=vm.createContext({battleClosingDialogue:()=>false,cloneScene:()=>null,queueBattleIntroduction(){},requestStartupFullscreen(){},sceneFadeUntil:0,performance,E,A,SE,s:save,battle:null,party:()=>[{hp:1}],isNight:()=>true,mapWeather:()=>({kind:'rain'}),legendSite:(x,y)=>regionalLegendSite(save.seed,x,y),adventureState:()=>save.adventure,encounterState:()=>save.adventure.encounters,legendaryRitual:()=>events.push('rite'),adventureBattle:(...args)=>events.push(args),toast:t=>events.push(t),render(){events.push('refreshed');},save(){}});
  vm.runInContext(['legendChallenge','performLegendaryRitualStage'].map(extract).join('\n'),h);return {save,h,events,legend};
 }
 test('legendary Energy and battle access require the physical site, matching rite and current conditions',()=>{
@@ -70,7 +70,7 @@ test('legendary Energy and battle access require the physical site, matching rit
 });
 test('a simultaneous knockout restores at a real, consumed Shrine and awards no victory rewards',()=>{
  const save=E.newGame('draw-recovery'),sp=E.makeSpecies(1,'Beast','Construct'),u=E.makeIndividual(sp,3,0);save.species[sp.id]=sp;save.spirits=[u];save.party=[u.id];SE.ensureSealer(save);u.hp=0;save.cave={id:'old-cave'};let dialog='';
- const h=vm.createContext({s:save,SW,SE,battle:{},resetExplorationMotion(){},recordCompetitionDefeat(){},endCombatState(){SE.endSealerBattle(save.sealer);},save(){},render(){},showModal:(_title,body)=>dialog=body,esc:String,action:()=>''});vm.runInContext(['recoverAtShrine','drawnBattle'].map(extract).join('\n'),h);h.drawnBattle();assert.ok(u.hp>0);const shrine=SW.nearbyShrine(save);assert.ok(shrine);assert.equal(SE.recoveryAvailable(save,'restore',shrine.id).ok,false);assert.equal(save.cave,undefined);assert.match(dialog,/no victory reward/);
+ const h=vm.createContext({battleClosingDialogue:()=>false,cloneScene:()=>null,queueBattleIntroduction(){},requestStartupFullscreen(){},sceneFadeUntil:0,performance,s:save,SW,SE,battle:{},resetExplorationMotion(){},recordCompetitionDefeat(){},endCombatState(){SE.endSealerBattle(save.sealer);},save(){},render(){},showModal:(_title,body)=>dialog=body,esc:String,action:()=>''});vm.runInContext(['recoverAtShrine','drawnBattle'].map(extract).join('\n'),h);h.drawnBattle();assert.ok(u.hp>0);const shrine=SW.nearbyShrine(save);assert.ok(shrine);assert.equal(SE.recoveryAvailable(save,'restore',shrine.id).ok,false);assert.equal(save.cave,undefined);assert.match(dialog,/no victory reward/);
 });
 
 test('an overcome legend can be retried for sealing; a bonded regional legend cannot be duplicated',()=>{
@@ -80,7 +80,7 @@ test('an overcome legend can be retried for sealing; a bonded regional legend ca
 });
 
 test('the cave renderer keeps faction chapter names and current clue progress instead of overwriting them',()=>{
- const s=E.newGame('labels'),room={faction:'ashen-hand',level:0,depth:4},h=vm.createContext({FC,A,s});vm.runInContext(extract('dungeonInfo'),h);
+ const s=E.newGame('labels'),room={faction:'ashen-hand',level:0,depth:4},h=vm.createContext({battleClosingDialogue:()=>false,cloneScene:()=>null,queueBattleIntroduction(){},requestStartupFullscreen(){},sceneFadeUntil:0,performance,FC,A,s});vm.runInContext(extract('dungeonInfo'),h);
  assert.match(h.dungeonInfo(room).label,/Scout trail/);assert.match(h.dungeonInfo(room).biome,/ASHEN HAND/);assert.match(h.dungeonInfo(room).hint,/0\/3/);
  FC.floorState(s,'ashen-hand',0).clues.push(0);assert.match(h.dungeonInfo(room).hint,/1\/3/);assert.match(h.dungeonInfo({level:1,depth:3}).label,/Cave/);
 });

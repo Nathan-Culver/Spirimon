@@ -23,7 +23,46 @@ FACTION_LINES.temple=[{before:['Our philosophy is something we practice, not mer
 FACTION_LINES.competitive=[{before:['The officials are ready. Let our Spirimon settle the result.','I will give this match everything I have prepared.'],won:['A clear victory. I will study that exchange.','Good luck in your next challenge.'],lost:['Your team has promise. Today, my preparation held.','I look forward to a rematch.'],fled:['The match ends here, then.','Return when your team is ready for the full contest.']}];
 const hash=value=>{let h=2166136261;for(const c of String(value)){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}return h>>>0;};
 export function npcOpening(save,n){save.npcConversations??={};const count=save.npcConversations[n.id]||0;save.npcConversations[n.id]=count+1;const role=n.id?.startsWith('smith-')?'smith':n.id?.startsWith('herbalist-')?'herbalist':n.role,pool=ROLE_LINES[role]||ROLE_LINES.resident;return pool[(hash(n.id)+count)%pool.length];}
-export function enemySpeech(save,identity,phase='before',outcome='won'){const faction=Object.keys(FACTION_LINES).find(id=>String(identity.faction||identity.id||'').includes(id))||(/rowan|rival/.test(identity.id||'')?'rival':/temple|clan/.test(identity.id||'')?'temple':'competitive');save.enemyConversations??={};const key=identity.id||faction;let record=save.enemyConversations[key];if(!record||phase==='before'){const count=(record?.count||0)+(phase==='before'?1:0);record=save.enemyConversations[key]={count,chain:(hash(key)+Math.max(0,count-1))%FACTION_LINES[faction].length,faction};}const chain=FACTION_LINES[record.faction||faction][record.chain%FACTION_LINES[record.faction||faction].length];return [...(phase==='before'?chain.before:chain[outcome]||chain.won)];}
+function legacyEnemySpeech(save,identity,phase='before',outcome='won'){const faction=Object.keys(FACTION_LINES).find(id=>String(identity.faction||identity.id||'').includes(id))||(/rowan|rival/.test(identity.id||'')?'rival':/temple|clan/.test(identity.id||'')?'temple':'competitive');save.enemyConversations??={};const key=identity.id||faction;let record=save.enemyConversations[key];if(!record||phase==='before'){const count=(record?.count||0)+(phase==='before'?1:0);record=save.enemyConversations[key]={count,chain:(hash(key)+Math.max(0,count-1))%FACTION_LINES[faction].length,faction};}const chain=FACTION_LINES[record.faction||faction][record.chain%FACTION_LINES[record.faction||faction].length];return [...(phase==='before'?chain.before:chain[outcome]||chain.won)];}
 export function lineOfSight(n,player,blocked,range=6){const d={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]}[n.face||'down'];const dx=player.x-n.x,dy=player.y-n.y,distance=Math.abs(dx)+Math.abs(dy);if(distance<1||distance>range||dx*d[0]+dy*d[1]!==distance)return false;for(let k=1;k<distance;k++)if(blocked(n.x+d[0]*k,n.y+d[1]*k))return false;return true;}
 
 export function guardPosition(save,room,feature){if(!room||!['faction-guard','faction-leader','temple-guard','temple-master'].includes(feature?.kind))return feature;const p=save.dungeonGuards?.[room.id+'|'+room.level]?.[feature.id];return p&&Number.isInteger(p.x)&&Number.isInteger(p.y)&&p.x>0&&p.x<24&&p.y>0&&p.y<18?{...feature,x:p.x,y:p.y,face:p.face||'down',walk:p.walk}:feature;}
+
+// A persistent encounter arc ties all four scenes together. Branches reflect
+// the player's answer, prior results, and the opponent's own philosophy.
+const BATTLE_ARCS=[
+ ['patience','Every road teaches patience. Shall we see what yours taught you?','I will leave you an opening. The question is whether you can wait for it.','You waited until the opening mattered.','You hurried past the opening I left.','I will remember the moment you chose to act.'],
+ ['trust','My companion chose this road beside me. What brought yours here?','Watch how they answer us. That is where this match begins.','Your companions answered with complete trust.','Your bond held even when your plan faltered.','Look after the one who trusted you with that last command.'],
+ ['defense','The road ahead punishes anyone who forgets to defend.','Let us see what you protect when you reach for an attack.','You defended what mattered and still found room to strike.','I found the defense you gave up to attack.','A guarded bond can survive a long journey.'],
+ ['rhythm','I hear a different rhythm in every team’s footsteps. Let me hear yours.','A ready Technique is an opportunity, not an obligation.','You changed the rhythm before I could follow.','I learned your rhythm and caught the next beat.','Next time I will listen for a different cadence.'],
+ ['adaptation','The weather changed my plans today. Can you change yours?','My first approach will not be my last.','You adapted faster than I could change the field.','You stayed with a plan after its opening had gone.','A rematch should never be a copy of the last encounter.'],
+ ['restraint','Power leaves a mark. I want to see how carefully you use it.','Every commitment leaves something unguarded.','You knew exactly how much power the moment needed.','I waited for you to commit more than you could protect.','Restraint is a skill I am still practicing too.'],
+ ['recovery','The next Shrine is a long walk. Do you know your team’s limits?','I will be watching how you manage a tiring companion.','You kept enough in reserve to finish together.','Your reserves ran dry before your courage did.','Give your companions a quiet moment before the next road.'],
+ ['curiosity','I have never seen a team travel quite like yours. May I test a theory?','I have a question that only this match can answer.','That answer overturns my theory. I am glad I asked.','My theory held this time. It may not hold next time.','There is more to learn from this than a name on a result board.'],
+ ['courage','Courage brought you this far. What will you do when it asks for judgment?','A brave attack still needs the right moment.','You kept your judgment when the pressure rose.','You were brave. I found the moment bravery left exposed.','Keep that courage; give it a patient plan to follow.'],
+ ['teamwork','A team is more than its strongest companion. Show me how yours fits together.','While one acts, another may have the answer.','Your companions covered one another’s openings.','I separated your plans before they could support one another.','I will practice that exchange with my own companions.'],
+ ['perception','There is always more happening than the first glance reveals.','Look past the first Technique. Consider what follows it.','You saw the next exchange before I did.','You answered the first threat and missed the next.','I wonder what each of us failed to notice today.'],
+ ['journey','We met on this stretch of road for a reason. Let us leave it wiser.','Show me one thing your journey taught you.','You brought a lesson I had not learned yet.','Today my experience carried the exchange.','If our paths cross again, bring me a new lesson.']
+];
+const TEMPERAMENTS=[
+ 'I prefer an honest challenge to a loud boast.', 'We have time to make this a good match.',
+ 'The road has been quiet. A worthy challenge will wake us up.', 'I keep notes after every match; yours will earn a page.',
+ 'My companions have been eager to test their practice.', 'Win or lose, we carry the lesson forward.',
+ 'I recognize the look of someone with a long road ahead.', 'There is a story behind every tattoo. Let yours speak.'
+];
+const BRANCH_REPLIES={resolve:['Then take your place. I will meet that resolve.','You kept your word and faced the whole exchange.'],curiosity:['A fair question. I am testing {topic}; watch my choices and you will see why.','You asked about {topic}. Now we both have an answer to study.'],respect:['Then let us give both teams a lesson worth keeping.','Thank you for treating my companions as partners in this lesson.']};
+export function enemySpeech(save,identity={},phase='before',outcome='won'){
+ identity=identity||{};const key=identity.id||'opposing-sealer';
+ if(phase==='before'){
+  const previous=save.enemyConversations?.[key],anchors=legacyEnemySpeech(save,identity,'before',outcome),record=save.enemyConversations[key];record.lastOutcome=previous?.lastOutcome;
+  record.arc=(hash(key+'|arc')+record.count-1)%BATTLE_ARCS.length;record.temperament=hash(key+'|voice')%TEMPERAMENTS.length;
+  const arc=BATTLE_ARCS[record.arc],memory=record.lastOutcome==='won'?'Last time you overcame my team. I have practiced since then.':record.lastOutcome==='lost'?'We have crossed Techniques before. Show me what changed.':null;
+  return [anchors[0],memory||TEMPERAMENTS[record.temperament],arc[1]];
+ }
+ const record=save.enemyConversations?.[key];if(!record){legacyEnemySpeech(save,identity,'before');return enemySpeech(save,identity,phase,outcome);}
+ const arc=BATTLE_ARCS[record.arc??hash(key)%BATTLE_ARCS.length],reply=BRANCH_REPLIES[record.branch]||BRANCH_REPLIES.resolve;
+ const replace=line=>line.replace('{topic}',arc[0]);
+ if(phase==='start')return [replace(reply[0]),arc[2]];
+ if(phase==='end'){record.lastOutcome=outcome;return [outcome==='won'?arc[3]:outcome==='lost'?arc[4]:outcome==='fled'?'You chose to withdraw. Keep your companions safe on the road.':'Neither team has an answer left to give. Let us call this even.',replace(reply[1])];}
+ const anchors=legacyEnemySpeech(save,identity,'after',outcome);return [arc[5],anchors.at(-1),record.branch==='curiosity'?'Bring another question when we meet again.':record.branch==='respect'?'Safe travels to you and your companions.':'I will be ready when our paths cross again.'];
+}

@@ -60,7 +60,7 @@ const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
 function extract(name){const start=source.indexOf('function '+name+'('),next=source.slice(start+1).search(/\n(?:async )?function /);return source.slice(start,next<0?source.length:start+1+next);}
 test('collection pins a knockout number to the damaged enemy, survives compaction and consumes each event once',()=>{
  const canvas={width:1000,height:550},enemy={id:'victim',hp:0,appearance:0},battle={rt:{elapsedMs:100,damageEvents:[{target:'victim',side:'b',amount:17,at:100}]}};
- const h=vm.createContext({battle,DAMAGE_NUMBER_MS,document:{querySelector:()=>canvas},battleTeams:()=>({enemies:[enemy]}),spOf:()=>({}),damageNumberAnchor:(sp,f,p)=>({x:p.x,y:80,headSize:60})});
+ const h=vm.createContext({battleClosingDialogue:()=>false,cloneScene:()=>null,queueBattleIntroduction(){},requestStartupFullscreen(){},sceneFadeUntil:0,performance,battle,DAMAGE_NUMBER_MS,document:{querySelector:()=>canvas},battleTeams:()=>({enemies:[enemy]}),spOf:()=>({}),damageNumberAnchor:(sp,f,p)=>({x:p.x,y:80,headSize:60})});
  vm.runInContext(extract('collectDamageNumbers'),h);h.layout={b:[{id:'other',x:200},{id:'victim',x:800}]};vm.runInContext('collectDamageNumbers(layout)',h);
  assert.equal(battle.damageNumbers[0].amount,17);assert.equal(battle.damageNumbers[0].x,800);assert.equal(battle.rt.damageEvents.length,0);
  h.layout={b:[{id:'other',x:500}]};vm.runInContext('collectDamageNumbers(layout)',h);assert.equal(battle.damageNumbers.length,1);assert.equal(battle.damageNumbers[0].x,800);
@@ -68,7 +68,7 @@ test('collection pins a knockout number to the damaged enemy, survives compactio
 test('a final hit finishes its animation with combat frozen before awarding victory once',()=>{
  const f=fixture(),enemy=f.b[0];enemy.hp=0;f.state.elapsedMs=100;
  const battle={rt:f.state,multi:{allies:[f.a.id],enemies:[enemy]},damageNumbers:[{amount:1,at:100}],damageEnding:null};let wins=0,draws=0;
- const h=vm.createContext({battle,RT,DAMAGE_NUMBER_MS,document:{hidden:false},realTimeContext:()=>f.context,applyRealTimeContext(ctx){battle.multi.allies=ctx.active.a.map(u=>u.id);battle.multi.enemies=ctx.active.b;},drawBattle(){draws++;},drawRealTimeEffects(){},winBattle(){wins++;h.battle=null;},drawnBattle(){},render(){},save(){}});
+ const h=vm.createContext({battleClosingDialogue:()=>false,cloneScene:()=>null,queueBattleIntroduction(){},requestStartupFullscreen(){},sceneFadeUntil:0,performance,battle,RT,DAMAGE_NUMBER_MS,document:{hidden:false},realTimeContext:()=>f.context,applyRealTimeContext(ctx){battle.multi.allies=ctx.active.a.map(u=>u.id);battle.multi.enemies=ctx.active.b;},drawBattle(){draws++;},drawRealTimeEffects(){},winBattle(){wins++;h.battle=null;},drawnBattle(){},render(){},save(){}});
  vm.runInContext(extract('finishRealTimeEncounter')+'\n'+extract('advanceRealTimeBattle'),h);vm.runInContext('finishRealTimeEncounter()',h);
  assert.equal(wins,0);assert.equal(battle.rt.paused,true);assert.equal(battle.damageEnding,2700);
  vm.runInContext('advanceRealTimeBattle(1300,0)',h);assert.equal(wins,0);assert.equal(battle.rt.elapsedMs,100);assert.ok(draws>0);
