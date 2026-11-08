@@ -1,19 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {battlePose,battleMeshPoint,drawAnimatedBattleSprite,BATTLE_EFFECT_MS} from '../battle-sprite-animation.mjs';
-import {screenEffects,particleEmitter,effectArtwork,drawIllustratedEffect,drawEmitter,prepareBattleEvents} from '../battle-effects.mjs';
+import {screenEffects,particleEmitter,effectArtwork,artworkFrame,drawIllustratedEffect,drawEmitter,prepareBattleEvents,warmTechniqueArtwork} from '../battle-effects.mjs';
+import {EFFECT_ATLASES,EFFECT_ART_COUNTS,TECHNIQUE_ARTWORK} from '../technique-artwork.mjs';
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
 import {allMoveTemplates} from '../moves.mjs';
-import {MOVE_CATALOG} from '../engine.mjs';
+import {MOVE_CATALOG,STRUGGLE} from '../engine.mjs';
 const from={x:100,y:330},to={x:760,y:160};
 const ctx=()=>{const calls=[];return {calls,c:new Proxy({},{
  get:(_,name)=>(...args)=>{assert.ok(args.every(v=>typeof v!=='number'||Number.isFinite(v)),String(name));calls.push([name,...args]);},
  set:(_,key,value)=>{calls.push([key,value]);return true;}
 })};};
 test('every catalog technique has valid artwork, finite layered effects, and bounded deterministic particles',()=>{
- const moves=[...new Map([...allMoveTemplates(),...MOVE_CATALOG].map(m=>[m.id,m])).values()];
+ const moves=[...new Map([...allMoveTemplates(),...MOVE_CATALOG,STRUGGLE].map(m=>[m.id,m])).values()];
  assert.ok(moves.length>300);
  for(const move of moves){
-  const art=effectArtwork(move);assert.ok(art.atlas===0||art.atlas===1);assert.ok(art.cell>=0&&art.cell<64);
+  const art=effectArtwork(move);assert.ok(art.atlas>=0&&art.atlas<EFFECT_ATLASES.length);assert.ok(art.cell>=0&&art.cell<EFFECT_ART_COUNTS[art.atlas]);
   for(const age of [0,100,300,500,750,900]){
    const particles=particleEmitter(move,age,from,to);assert.ok(particles.length<=40);
    assert.deepEqual(particles,particleEmitter(move,age,from,to));
@@ -21,6 +24,46 @@ test('every catalog technique has valid artwork, finite layered effects, and bou
    const {c}=ctx();drawIllustratedEffect(c,move,age,from,to,1000,550,{image:{width:1254,height:1254}});drawEmitter(c,move,age,from,to,1000,550);
   }
  }
+});
+test('all 1046 established techniques have a distinct authored cell with no unused drawings',()=>{
+ const moves=[...new Map([...allMoveTemplates(),...MOVE_CATALOG,STRUGGLE].map(m=>[m.id,m])).values()];
+ const used=new Set(moves.map(m=>{const a=effectArtwork(m);return a.atlas+':'+a.cell;}));
+ assert.equal(moves.length,1046);assert.equal(used.size,1046);assert.equal(Object.keys(TECHNIQUE_ARTWORK).length,1046);
+ assert.equal(EFFECT_ATLASES.length,17);
+ EFFECT_ART_COUNTS.forEach((count,atlas)=>{for(let cell=0;cell<count;cell++)assert.ok(used.has(atlas+':'+cell));});
+ for(const [id,expected]of [['aberration-0',[0,0]],['themed-type-fey-1',[1,0]],['themed-lineage-truffleroot-2',[16,0]],['strike',[16,13]],['struggle',[16,21]]]){
+  assert.deepEqual(effectArtwork({id}),{atlas:expected[0],cell:expected[1]});
+ }
+});
+test('the frozen source manifest agrees with every shipped technique assignment',()=>{
+ const source=JSON.parse(readFileSync(new URL('../docs/technique-art-sources.json',import.meta.url)));
+ source.atlases.forEach((a,atlas)=>a.techniqueIds.forEach((id,cell)=>assert.deepEqual(effectArtwork({id}),{atlas,cell})));
+});
+test('the complete pixel audit matches the exact shipped atlas bytes and registry',()=>{
+ const audit=JSON.parse(readFileSync(new URL('../docs/technique-art-audit.json',import.meta.url)));
+ const sha=path=>createHash('sha256').update(readFileSync(new URL('../'+path,import.meta.url))).digest('hex');
+ assert.equal(audit.assignedPieces,1046);assert.equal(audit.distinctPieceHashes,1046);assert.equal(audit.emptyAssignments,0);assert.ok(audit.minimumVisiblePixels>=50);
+ assert.equal(audit.registrySHA256,sha('technique-artwork.mjs'));
+ for(const path of EFFECT_ATLASES)assert.equal(audit.assetSHA256[path],sha(path));
+});
+test('the final partial sheet uses its actual row boundaries and never samples blank cells',()=>{
+ const image={width:768,height:768};
+ for(let cell=0;cell<22;cell++){const [x,y,w,h]=artworkFrame({atlas:16,cell},image);assert.ok(x>=0&&y>=0&&x+w<=768&&y+h<=314);}
+ assert.equal(artworkFrame({atlas:16,cell:22},image),null);
+ assert.equal(artworkFrame({atlas:17,cell:0},image),null);
+ assert.deepEqual(artworkFrame({atlas:0,cell:63},image),[672,672,96,96]);
+ assert.ok(artworkFrame({atlas:16,cell:8},image)[1]>96,'Second row must not include a strip of the first drawing');
+});
+test('uncatalogued support and generated techniques retain deterministic thematic artwork',()=>{
+ for(const m of [{id:'toString',name:'New Manifest',power:55},{name:'Cinder Hex',domain:'Fire',power:40},{name:'Silver Antenna',domain:'Fate',power:60},{name:'Custom Healing',power:0,effect:'heal'},{name:'New Guard',power:0,effect:'ward'},{name:'Unwritten Manifest',power:55}]){
+  const a=effectArtwork(m);assert.ok(a&&a.cell<EFFECT_ART_COUNTS[a.atlas]);assert.deepEqual(a,effectArtwork(m));
+ }
+});
+test('battle warmup requests only the active units’ required atlases once',()=>{
+ const requested=[],battle={},load=path=>requested.push(path),moves=[{id:'aberration-0'},{id:'beast-0'},{id:'struggle'}];
+ warmTechniqueArtwork(battle,'first',()=>moves,load);assert.deepEqual(requested,[EFFECT_ATLASES[0],EFFECT_ATLASES[16]]);
+ warmTechniqueArtwork(battle,'first',()=>{throw Error('Do not recompute moves every frame');},load);assert.equal(requested.length,2);
+ warmTechniqueArtwork(battle,'reserve',()=>[{id:'themed-type-fey-1'}],load);assert.equal(requested.at(-1),EFFECT_ATLASES[1]);
 });
 test('screen effects remain bounded under overlapping attacks and reset completely',()=>{
  const events=Array.from({length:30},(_,n)=>({move:{id:'quake'+n,name:'Fault Quake',power:120,category:'Physical'},at:0,flashAllowed:n===0}));

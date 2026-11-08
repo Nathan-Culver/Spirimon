@@ -1,0 +1,27 @@
+{
+  "atlases": 17,
+  "assignedPieces": 1046,
+  "distinctPieceHashes": 1046,
+  "minimumVisiblePixels": 1085,
+  "emptyAssignments": 0,
+  "registrySHA256": "3e4fcf69831db23969fda6b219e9d8ed4c8162af0f0f43a233b8a430d4e06e66",
+  "assetSHA256": {
+    "./assets/battle-effects/catalog-00.webp": "d513dd9e982ae892b2001a575b7582f8dc3bbe870d120dfb7bda49238f54f448",
+    "./assets/battle-effects/catalog-01.webp": "fe2609bbf0e135f49b7f9531880a636b99e2bee2b3599a70105c36c2191b3807",
+    "./assets/battle-effects/catalog-02.webp": "558f6d3540d94e3168366a1bfa1b8ee5275e07f91fcef7c779da497d0677a61a",
+    "./assets/battle-effects/catalog-03.webp": "14c6f1693a27c6f6f44b97501de9ea08553ec20bce14f6c5b2427c5e8f92f92d",
+    "./assets/battle-effects/catalog-04.webp": "c8b3b2a45bd81b9d8a20655993daf51eb8f9e5e4110ac039936bf7b3dfb42f06",
+    "./assets/battle-effects/catalog-05.webp": "f1d2b18ac9970ac6ff74753f2b4e7e270dbb8b3afb91fb414678c4499b72f9e0",
+    "./assets/battle-effects/catalog-06.webp": "cbe93a5907d61f680a90fa6426e3cbcfe22d929ba1163694be117f5c12f9ec45",
+    "./assets/battle-effects/catalog-07.webp": "e18cc8ba1d57e775b204022c97cbaa6695ced5e85cefdc79cb94d545082e1556",
+    "./assets/battle-effects/catalog-08.webp": "570d39e44b62bcef93be1e6c80c8e9a7ec9d492ba5bae005125193d90975ce43",
+    "./assets/battle-effects/catalog-09.webp": "1c1e3dab005d089f61d6b200d33595f7bff3b0986ddb99fe7d657a136fd56706",
+    "./assets/battle-effects/catalog-10.webp": "a792967752f625d8537a91f9f6fc37cd9005e57fcf8b7c7c872d9e15a18c503d",
+    "./assets/battle-effects/catalog-11.webp": "8ae75c359ed57fed40f44ea148204534a4e6c879f34b43b5cc0d5133c1098a88",
+    "./assets/battle-effects/catalog-12.webp": "0b364c6f185207017524207612b1ee87ceeed59f1a11b4730371b0d838049333",
+    "./assets/battle-effects/catalog-13.webp": "873ce67c2f2b46cd632ea690d8e41bd44cd21aa6b192bcf3f30eb24e89e56b3a",
+    "./assets/battle-effects/catalog-14.webp": "5f6ac0a95aea3a9a0f8d14f27af3c0cb481c21e8ed8a7bb14ff214e8a12eaf02",
+    "./assets/battle-effects/catalog-15.webp": "d3f163f968fb465c3816eac12fe2f83bada54858ce3d825a290e56ed43a80a83",
+    "./assets/battle-effects/catalog-16.webp": "050980211b0ad1045c556c0bae4588b54209e1cfc4e1e712b286e4d1e1421092"
+  }
+}
