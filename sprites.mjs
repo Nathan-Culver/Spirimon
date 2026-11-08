@@ -1,4 +1,5 @@
 import {companionRig,companionFrame,drawRigFrame} from './companion-animation.mjs';
+import {drawAnimatedBattleSprite} from './battle-sprite-animation.mjs';
 import {readyImage} from './asset-loader.mjs';
 import {MYSTERY_STATIC,MYSTERY_WALK} from './placeholder-art.mjs';
 import {townFeatures} from './towns.mjs';
@@ -66,9 +67,14 @@ export function drawSpirit(ctx,sp,form,x,y,size=96,flip=false,motion=null){
  const artwork=creatureArtworkSource(sp,form),image=artwork?readyImage(artwork):null;
  if(!image){drawMysteryPlaceholder(ctx,x,y,size,motion?{...motion,flip}:{flip});return;}
  ctx.save();ctx.imageSmoothingEnabled=false;if(flip){ctx.translate(x+size,y);ctx.scale(-1,1);}else ctx.translate(x,y);if(sp.atlas){ctx.drawImage(image,form*256,0,256,256,0,0,size,size);}else{const h=size*image.height/image.width;ctx.drawImage(image,0,size-Math.min(size,h),size,Math.min(size,h));}ctx.restore();}
-export function drawBattleSpirit(ctx,sp,form,x,y,size=96,side='a'){
+export function drawBattleSpirit(ctx,sp,form,x,y,size=96,side='a',pose=null){
  if(!sp)return;
- if(side!=='a'){drawSpirit(ctx,sp,form,x,y,size);return;}
+ if(side!=='a'){
+  const artwork=creatureArtworkSource(sp,form),front=artwork&&readyImage(artwork);
+  if(!front||!pose){drawSpirit(ctx,sp,form,x,y,size);return;}
+  const fw=front.naturalWidth||front.width,fh=front.naturalHeight||front.height,h=sp.atlas?size:Math.min(size,size*fh/fw);
+  drawAnimatedBattleSprite(ctx,front,sp.atlas?[form*256,0,256,256]:[0,0,fw,fh],sp,form,x,y+size-h,size,h,pose);return;
+ }
  const rear=battleBackSource(sp,form),image=rear&&readyImage(rear.source);
  if(!image){drawMysteryPlaceholder(ctx,x,y,size,{face:'up'});return;}
  const width=image.naturalWidth||image.width,height=image.naturalHeight||image.height;
@@ -79,7 +85,8 @@ export function drawBattleSpirit(ctx,sp,form,x,y,size=96,side='a'){
  // Wide final forms fit inside the slot without clipping or horizontal squeezing.
  const scale=size/Math.max(height,sw,sh),dw=sw*scale,dh=sh*scale;
  ctx.save();ctx.imageSmoothingEnabled=false;
- ctx.drawImage(image,sx,sy,sw,sh,x+(size-dw)/2,y+size-dh,dw,dh);
+ if(pose)drawAnimatedBattleSprite(ctx,image,frame,sp,form,x+(size-dw)/2,y+size-dh,dw,dh,pose);
+ else ctx.drawImage(image,sx,sy,sw,sh,x+(size-dw)/2,y+size-dh,dw,dh);
  ctx.restore();
 }
 function prop(ctx,index,x,y,w,h){const image=readyImage(ART.world);if(!image)return;ctx.imageSmoothingEnabled=false;ctx.drawImage(image,(index%3)*256,Math.floor(index/3)*256,256,256,Math.round(x),Math.round(y),w,h);}
