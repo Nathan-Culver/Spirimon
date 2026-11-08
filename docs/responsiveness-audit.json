@@ -1,0 +1,270 @@
+{
+  "browser": "Chromium 151.0.7922.34 (headless)",
+  "states": 87,
+  "viewport_profiles": 26,
+  "layout_checks": 4529,
+  "failures": 0,
+  "browser_errors": 0,
+  "input_modes": [
+    "emulator touch",
+    "desktop mouse"
+  ],
+  "screens": [
+    "adventureMenu",
+    "appearanceMenu",
+    "arcadeMenu",
+    "atlas",
+    "bag",
+    "battle-bag",
+    "battle-coop",
+    "battle-deploy",
+    "battle-dialogue",
+    "battle-ending",
+    "battle-full-roster",
+    "battle-lesson",
+    "battle-main",
+    "battle-single",
+    "battle-support",
+    "battleFacility",
+    "championshipMenu",
+    "detail",
+    "energyRestorationMenu",
+    "equipmentMenu",
+    "factionCampaign",
+    "fieldMenu",
+    "fieldRitualMenu",
+    "gameMenu",
+    "guildTrialsMenu",
+    "heldItemMenu",
+    "heldShopMenu",
+    "interiorMenu",
+    "journal",
+    "legendaryRitual",
+    "map",
+    "move-info",
+    "multiArenaMenu",
+    "npc-aftermath",
+    "npc-keeper",
+    "npc-merchant",
+    "npc-resident",
+    "npc-rival",
+    "npc-scholar",
+    "npc-villain",
+    "observation",
+    "offering-dance",
+    "offering-prepare",
+    "offering-riddle",
+    "offering-sing",
+    "passives",
+    "portrait-prompt",
+    "practice",
+    "profile",
+    "quests-keeper",
+    "quests-merchant",
+    "quests-resident",
+    "quests-rival",
+    "quests-scholar",
+    "rareVariantMenu",
+    "regionalJobMenu",
+    "rhythm",
+    "settings",
+    "specialtyMenu",
+    "spiridex",
+    "spirits",
+    "spiritualArtsMenu",
+    "spiritualRecoveryMenu",
+    "starters",
+    "startingSupportMenu",
+    "supportPreparation",
+    "supportTrainerMenu",
+    "templeInterior",
+    "templeRematches",
+    "transformation",
+    "tutorial-battle",
+    "tutorial-commitment",
+    "tutorial-energy",
+    "tutorial-field",
+    "tutorial-gestures",
+    "tutorial-healing",
+    "tutorial-path",
+    "tutorial-resources",
+    "tutorial-restoration",
+    "tutorial-saving",
+    "tutorial-sealing",
+    "tutorial-start",
+    "tutorial-team",
+    "tutorial-timers",
+    "tutorial-training",
+    "tutorial-types",
+    "tutorial-world"
+  ],
+  "profiles": [
+    {
+      "width": 280,
+      "height": 640,
+      "scenario": "default"
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "scenario": "default"
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "scenario": "open-menu-resize"
+    },
+    {
+      "width": 360,
+      "height": 640,
+      "scenario": "default"
+    },
+    {
+      "width": 390,
+      "height": 330,
+      "scenario": "keyboard"
+    },
+    {
+      "width": 390,
+      "height": 330,
+      "scenario": "open-menu-resize"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "scenario": "default"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "scenario": "safe-area"
+    },
+    {
+      "width": 412,
+      "height": 915,
+      "scenario": "default"
+    },
+    {
+      "width": 480,
+      "height": 240,
+      "scenario": "default"
+    },
+    {
+      "width": 568,
+      "height": 320,
+      "scenario": "default"
+    },
+    {
+      "width": 568,
+      "height": 320,
+      "scenario": "open-menu-resize"
+    },
+    {
+      "width": 600,
+      "height": 960,
+      "scenario": "default"
+    },
+    {
+      "width": 640,
+      "height": 280,
+      "scenario": "keyboard"
+    },
+    {
+      "width": 640,
+      "height": 360,
+      "scenario": "default"
+    },
+    {
+      "width": 740,
+      "height": 360,
+      "scenario": "default"
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "scenario": "default"
+    },
+    {
+      "width": 800,
+      "height": 400,
+      "scenario": "default"
+    },
+    {
+      "width": 800,
+      "height": 1280,
+      "scenario": "default"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "scenario": "safe-area"
+    },
+    {
+      "width": 922,
+      "height": 1536,
+      "scenario": "open-menu-resize"
+    },
+    {
+      "width": 1024,
+      "height": 600,
+      "scenario": "default"
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "scenario": "default"
+    },
+    {
+      "width": 1280,
+      "height": 600,
+      "scenario": "default"
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "scenario": "default"
+    },
+    {
+      "width": 1366,
+      "height": 768,
+      "scenario": "default"
+    },
+    {
+      "width": 1536,
+      "height": 922,
+      "scenario": "default"
+    },
+    {
+      "width": 1536,
+      "height": 922,
+      "scenario": "open-menu-resize"
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "scenario": "default"
+    },
+    {
+      "width": 2560,
+      "height": 1440,
+      "scenario": "default"
+    },
+    {
+      "width": 3840,
+      "height": 2160,
+      "scenario": "default"
+    }
+  ],
+  "checks": [
+    "dialog and close-button viewport containment",
+    "unobstructed close control",
+    "horizontal page and dialog overflow",
+    "button label and width overflow",
+    "fixed map control containment",
+    "movement and A/B control overlap",
+    "battle action reachability through scrolling",
+    "dialog final-control and sticky close reachability",
+    "orientation changes while Menu stays open"
+  ],
+  "regression_tests": 709
+}

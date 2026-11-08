@@ -121,3 +121,9 @@ export function restoreSpirimon(sealer,unit,species,pool='all',fraction=.25){
  for(const [key,gain]of Object.entries(quote.gains))unit[key]=(unit[key]??E.stats(unit,species)[key])+gain;
  return quote;
 }
+
+// Failures are penalties, so an insufficient reserve still drains down to zero.
+export function trialFailurePenalty(sealer,kind='trial'){
+ const fraction=kind==='riddle'?.05:.1,requested=Math.ceil(Math.max(0,sealer.maxEnergy||0)*fraction),amount=Math.min(Math.max(0,sealer.energy||0),requested);
+ sealer.energy=Math.max(0,(sealer.energy||0)-amount);return {fraction,requested,amount};
+}

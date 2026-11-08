@@ -96,7 +96,7 @@ export function interactTrial(save,room,feature){
  if(p==='Synergy'){if(s.linkStart==null)s.linkStart=n;else if(s.linkStart!==n){const pair=[s.linkStart,n].sort().join('-');if(!s.pairs.includes(pair))s.pairs.push(pair);s.linkStart=null;}s.solved=s.pairs.length===3;}
  if(p==='Prediction'){correct=n===(seed(room)+s.progress+2)%3;if(correct){s.progress++;s.solved=s.progress===3;}}
  if(!correct)s.mistakes=Math.min(3,s.mistakes+1);
- return {ok:true,message:(s.solved?'The '+p+' trial opens its stair seal.':correct?trialObjective(save,room):'The mechanism rejects that response. Misreads strengthen later defenders by up to two levels. '+trialClue(save,room))};
+ return {ok:true,failed:!correct,message:(s.solved?'The '+p+' trial opens its stair seal.':correct?trialObjective(save,room):'The mechanism rejects that response. Misreads strengthen later defenders by up to two levels. '+trialClue(save,room))};
 }
 export function trialStep(save,room,lead,maxHp){
  if(room.level>=3)return null;const s=trialState(save,room),hazard=trialLayout(room).features.find(f=>f.kind==='temple-hazard'&&f.x===room.x&&f.y===room.y);if(!hazard||s.completed.includes(hazard.order)||!lead||lead.hp<=0)return null;

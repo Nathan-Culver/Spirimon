@@ -442,3 +442,84 @@ body{font-size:18px}h1{font-size:30px}h2{font-size:25px}h3{font-size:22px}.btn{f
 .commitment-help{font:11px/1.4 system-ui,sans-serif;color:#365846;text-align:center;margin:2px 0 6px} .tutorial-tabs [role="tab"]{font-family:system-ui,sans-serif;font-size:13px} .tutorial-page{font-family:system-ui,sans-serif}.tutorial-page p{font-family:system-ui,sans-serif!important;font-size:16px!important}
 
 .scene-dissolve,.battle-map-dialogue{position:fixed;inset:0;z-index:1400;margin:0!important;overflow:hidden;background:var(--bg,#11221c);pointer-events:auto} .scene-dissolve{z-index:1450} body:has(.battle-map-dialogue) #modal-root{position:relative;z-index:1500}
+
+/* Viewport containment shared by every dialog and page, including a visible soft keyboard. */
+:root{--game-vh:100dvh;--game-vw:100vw;--game-top:0px;--game-left:0px}
+body .modal-overlay,body.emulator-mode .modal-overlay,body.emulator-mode.exploring .modal-overlay{
+ position:fixed;inset:auto;top:var(--game-top);left:var(--game-left);width:var(--game-vw);height:var(--game-vh);
+ display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);place-items:center;
+ padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));overflow:hidden
+}
+body.emulator-mode.exploring .modal-overlay{padding-bottom:max(68px,env(safe-area-inset-bottom))}
+body .modal,body.emulator-mode .modal,body.emulator-mode.exploring .modal,body .modal:has(.rhythm-trial){
+ width:100%;min-width:0;min-height:0;max-height:100%;margin:0;overflow:auto;overscroll-behavior:contain;scroll-padding:56px 8px 12px;overflow-wrap:anywhere
+}
+.modal>*,.modal :is(.btn-row,.support-card,.support-member,.form-row,.detail-top,.detail-stats,.menu-grid){min-width:0}
+.modal-close{min-width:44px;min-height:44px;flex-shrink:0;z-index:6}
+.modal h2{padding-inline-end:44px;overflow-wrap:anywhere}
+.modal :is(button,input,select){min-width:0;max-width:100%}
+.modal button{white-space:normal;overflow-wrap:anywhere}
+.menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.modal :is(.form-row,.starter-grid){grid-template-columns:repeat(3,minmax(0,1fr))}
+.modal :is(canvas,img,video){max-width:100%}
+.modal .dance-panels{width:100%;min-width:0}
+.modal .dance-panels button{min-width:0}
+.modal .tutorial-page table{table-layout:fixed;width:100%;overflow-wrap:anywhere}
+.modal-open .emu-pad,.modal-open .emu-ab{visibility:hidden;pointer-events:none}
+.tattoo-heading{flex-wrap:wrap;gap:8px}
+.tattoo-heading h1{min-width:0;flex:1 1 160px;overflow-wrap:anywhere}
+.tattoo-row{grid-template-columns:112px minmax(0,1fr) 90px}
+.tattoo-row>div{min-width:0;overflow-wrap:anywhere}
+.collection-toolbar>*{min-width:0;max-width:100%}
+.collection-toolbar input{flex:1 1 160px;width:0}
+.portrait-prompt{overflow:auto;max-height:var(--game-vh);padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom))}
+#battle-tutorial{max-width:calc(var(--game-vw) - 24px);max-height:min(65vh,calc(var(--game-vh) - 24px));overflow:auto;overflow-wrap:anywhere}
+@media(max-width:420px){
+ .menu-grid{grid-template-columns:minmax(0,1fr)}
+ .tattoo-row{grid-template-columns:58px minmax(0,1fr) 48px;gap:6px;padding:4px}
+ .tattoo-row canvas{width:58px;height:58px}
+ .tattoo-row strong{font-size:14px;overflow-wrap:anywhere}
+ .tattoo-row p{font-size:10px;overflow-wrap:anywhere}
+ .modal .detail-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+ .modal .detail-stats strong{font-size:19px}
+ .modal .detail-stats small{font-size:10px}
+ .modal h2{font-size:21px}
+}
+@media(max-height:500px) and (min-width:480px){
+ .modal .rhythm-trial{display:grid;grid-template-columns:minmax(80px,.7fr) minmax(0,1.3fr);grid-template-areas:"clock prompt" "pose panels" "feedback panels" "score meter";gap:4px 8px;align-items:center}
+ .rhythm-trial #trial-clock{grid-area:clock;font-size:13px}
+ .rhythm-trial #trial-prompt{grid-area:prompt;font-size:14px}
+ .rhythm-trial #dance-pose{grid-area:pose;width:85px;height:91px;justify-self:center}
+ .rhythm-trial #trial-feedback{grid-area:feedback;font-size:11px}
+ .rhythm-trial :is(.dance-panels,.rhythm-tap){grid-area:panels;margin:0;justify-self:center}
+ .rhythm-trial .dance-panels button{min-height:36px;padding:2px}
+ .rhythm-trial #trial-score{grid-area:score;font-size:11px}
+ .rhythm-trial .trial-meter{grid-area:meter;margin:0}
+}
+@media(max-width:420px){
+ .modal .rhythm-trial{grid-template-columns:minmax(0,1fr);grid-template-areas:"clock" "prompt" "pose" "feedback" "panels" "score" "meter"}
+ .rhythm-trial #trial-clock{grid-area:clock}.rhythm-trial #trial-prompt{grid-area:prompt;font-size:22px}
+ .rhythm-trial #dance-pose{grid-area:pose;justify-self:center;width:80px;height:86px}
+ .rhythm-trial #trial-feedback{grid-area:feedback}.rhythm-trial :is(.dance-panels,.rhythm-tap){grid-area:panels}
+ .rhythm-trial #trial-score{grid-area:score}.rhythm-trial .trial-meter{grid-area:meter}
+ .modal .dance-panels button{min-height:44px;padding:2px}
+ .emulator-mode .emu-ab{width:64px;height:140px;right:12px;bottom:24px;transform:none}
+ .emulator-mode .emu-ab button{width:58px;height:58px}
+ .emulator-mode .emu-pad{left:12px}
+ .emulator-mode .emu-menu{top:8px;right:12px;width:calc(50vw - 18px);flex-wrap:wrap;justify-content:flex-end}
+ .emulator-mode .emu-menu button{min-height:32px;font-size:11px;padding:5px;letter-spacing:0}
+ .emulator-mode.exploring .mini-map{top:150px}
+ .emulator-mode.exploring .map-location{top:64px}
+ .emulator-mode.exploring .map-hint{bottom:208px;max-width:calc(100% - 24px)}
+}
+.spiritual-meter>span{min-width:0;flex-wrap:wrap;gap:2px 5px}
+
+/* Long command lists scroll inside the battle dock instead of pushing actions off screen. */
+body.battling main,body.emulator-mode.battling main,body.battling .classic-battle{height:var(--game-vh);min-height:0;max-height:var(--game-vh)}
+body.battling .unified-battle .classic-stage{flex:1 1 auto;min-height:0;overflow:hidden}
+body.battling .unified-battle.triple-battle .classic-bottom{flex:0 1 auto;height:auto;min-height:0;max-height:62%;overflow:hidden}
+body.battling .unified-battle .classic-control{flex:1 1 auto;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:auto;scrollbar-gutter:stable;touch-action:pan-y;scroll-padding:8px}
+body.battling .unified-battle .unified-action-grid{flex:0 0 auto;min-width:0;grid-template-columns:repeat(auto-fit,minmax(min(124px,100%),1fr))}
+@media(orientation:landscape) and (max-height:600px){body.battling .unified-battle .unified-action-grid{grid-template-columns:repeat(auto-fit,minmax(min(94px,100%),1fr))}}
+/* Very short battle views keep secondary HUD details reachable instead of clipping them. */
+body.battling .compact-battle-scene .classic-hud{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
