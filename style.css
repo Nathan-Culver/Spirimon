@@ -582,6 +582,24 @@ body.battling .command-deck[data-compact="true"] .unified-action small{display:n
 body.battling .battle-command-header{min-height:18px}
 body.battling .battle-command-header .target-feedback{margin:0;min-height:0}
 
+/* Battle commands occupy no more than two rows in a third-height dock. */
+body.battling .unified-battle.triple-battle .classic-bottom{max-height:calc(100dvh / 3);padding:3px;gap:2px;border-width:1px}
+body.battling .unified-battle .classic-dialogue{height:18px;max-height:18px;flex-basis:18px;border-width:1px;outline:0;border-radius:3px}
+body.battling .unified-battle .classic-dialogue p{line-height:14px}
+body.battling .unified-battle .classic-control{gap:2px}
+body.battling .battle-command-header{height:16px;min-height:16px;max-height:16px;flex-wrap:nowrap}
+body.battling .battle-command-header .target-feedback{flex:1 1 auto;white-space:nowrap;font-size:10px;line-height:14px}
+body.battling .battle-command-header :is(.preset-toggle,.battle-dock-back){height:16px;min-height:16px;max-height:16px;padding:0 5px;border-width:1px;font:10px/14px system-ui,sans-serif;flex:0 0 auto}
+body.battling .command-deck{padding:2px}
+body.battling .command-deck .unified-action b{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+body.battling .command-deck[data-tiny="true"] .unified-action b{display:block;white-space:nowrap;text-overflow:ellipsis}
+body.battling .battle-command-header .battle-dock-back{position:static;top:auto;right:auto}
+body.battling .unified-battle .compact-secondary{grid-template-columns:repeat(var(--command-columns),minmax(0,1fr));grid-template-rows:repeat(var(--command-rows),var(--command-cell));gap:3px;padding:2px;min-width:0}
+body.battling .unified-battle .compact-secondary>:is(button,p,label,.deployment-unavailable){grid-column:auto;min-height:0;min-width:0;height:100%;margin:0;padding:2px 3px;overflow:hidden;box-sizing:border-box;font-size:10px;line-height:1.1;display:flex;flex-direction:column;justify-content:center;gap:2px}
+body.battling .unified-battle .compact-secondary :is(b,small){min-width:0;font-size:10px;line-height:1.1;overflow:hidden;text-overflow:ellipsis}
+body.battling .unified-battle .compact-secondary small{margin:0}
+body.battling .unified-battle .compact-secondary select{min-width:0;max-width:100%;min-height:0;margin:0;padding:1px;font-size:10px}
+
 /* All six growth stats receive equal-size cards and visible names. */
 .modal .battle-stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .modal .battle-stat-grid>div{min-width:0;padding:10px 4px;text-align:center}

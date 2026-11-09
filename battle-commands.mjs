@@ -1,9 +1,14 @@
 // The command dock has a bounded number of cells. Cooldowns never reflow it.
 export function commandMetrics(width=1000,height=700,textScale=1,slots=54){
- const landscape=width>height,columns=width>=1100?12:width>=640?10:width>=480?8:5,rows=Math.max(1,Math.ceil(slots/columns));
- const budget=Math.max(96,Math.floor(height*(landscape?.52:.55))),cellHeight=Math.max(16,Math.min(Math.round(40*Math.min(1.35,Math.max(1,textScale))),Math.floor((budget-(rows-1)*3)/rows)));
- return {columns,rows,capacity:columns*rows,cellHeight,landscape};
+ const landscape=width>height,count=Math.max(1,slots),scale=Math.min(1.35,Math.max(1,textScale));
+ // Fit at most two rows. The budget includes dialogue, targeting and borders,
+ // so hidden actions cannot leave a dock taller than a third of the screen.
+ const columns=Math.max(Math.ceil(count/2),Math.min(count,Math.floor((width-16)/(104*scale))||1)),rows=Math.ceil(count/columns);
+ const budget=Math.floor(height/3),chromeHeight=52,gap=3,cellHeight=Math.max(1,Math.min(Math.round(52*scale),Math.floor((budget-chromeHeight-(rows-1)*gap)/rows)));
+ const cellWidth=Math.max(1,(width-16-(columns-1)*gap)/columns);
+ return {columns,rows,capacity:columns*rows,cellHeight,cellWidth,budget,chromeHeight,gap,landscape};
 }
+export function reserveCommandCells(previous=[],keys=[]){return [...new Set([...previous,...keys])];}
 export function actorCommandSlots(previous=[],ids=[]){
  const slots=Array.from({length:3},(_,n)=>ids.includes(previous[n])?previous[n]:null);
  for(const id of ids)if(!slots.includes(id)){const n=slots.indexOf(null);if(n>=0)slots[n]=id;}
