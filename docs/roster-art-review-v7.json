@@ -1,0 +1,439 @@
+{
+  "revision": 7,
+  "sourcePdfSha256": "2faab70e8c91846e23e280d53adf01ece112f006d36d393dcaf264cee104b438",
+  "approvedForms": 47,
+  "lineages": [
+    {
+      "number": 8,
+      "id": "veilstripe",
+      "forms": [
+        3
+      ],
+      "atlas": "./assets/roster/veilstripe-v7.webp",
+      "previousAtlas": "./assets/roster/veilstripe-v4.webp",
+      "pdfPage": 3,
+      "action": "revised",
+      "adjustment": "Repair Pale Tracker's underdeveloped rear leg with a complete skeletal hind limb and clearly formed paw.",
+      "atlasSha256": "7e7e5b18945ef9f32490618afa150b61712ee344a29d42d4f98ae5aefc3c2544",
+      "unchangedCellsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "number": 10,
+      "id": "aurelattice",
+      "forms": [
+        3
+      ],
+      "atlas": "./assets/roster/aurelattice-v7.webp",
+      "previousAtlas": "./assets/roster/aurelattice-v6.webp",
+      "pdfPage": 4,
+      "action": "revised",
+      "adjustment": "Elongate Solar Mechanarch's neck and wrap the central eye and surrounding feather wings into a lion-like neck mane.",
+      "atlasSha256": "4a9a2e7ace932a0cce02c967b693abd33806566e47efa9116768f66f5c1d5fa6",
+      "unchangedCellsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "number": 11,
+      "id": "seralotus",
+      "forms": [
+        3
+      ],
+      "atlas": "./assets/roster/seralotus-v7.webp",
+      "previousAtlas": "./assets/roster/seralotus-v4.webp",
+      "pdfPage": 5,
+      "action": "revised",
+      "adjustment": "Give Blossom Seraph the second Form's quadruped body and a long neck; turn its former floral body into a lion-like petal mane around that neck.",
+      "atlasSha256": "ae9a1b5664e61ec48f0806b2113e5c1a13146ebc00db4ae6b4100701d56beee2",
+      "unchangedCellsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "number": 13,
+      "id": "auroriel",
+      "forms": [
+        3
+      ],
+      "atlas": "./assets/roster/auroriel-v7.webp",
+      "previousAtlas": "./assets/roster/auroriel-v4.webp",
+      "pdfPage": 6,
+      "action": "revised",
+      "adjustment": "Elongate Crown of Dawn's neck and the torso-to-hip section into a flowing Chinese-dragon silhouette.",
+      "atlasSha256": "7e7dcbfc0dfc797adcfa6aa21980aa5992e654790706fed253cfe6de6d01e56e",
+      "unchangedCellsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "number": 17,
+      "id": "kilnwarden",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "atlas": "./assets/roster/kilnwarden-v7.webp",
+      "previousAtlas": "./assets/roster/kilnwarden-v3.webp",
+      "pdfPage": 7,
+      "action": "revised",
+      "adjustment": "Per your direction, replace industrial bodies with molten rock, magma and increasingly abundant natural metal: sparse veins, broad metal deposits, then a metal-dominant final body. Preserve the enormous fiery eye and distinct Forms.",
+      "atlasSha256": "f40d8f85e4b8b64b8752603b96bef3d64001b72eb279c7d016aa094c2bfe77fe",
+      "unchangedCellsVerified": []
+    },
+    {
+      "number": 21,
+      "id": "resonara",
+      "forms": [
+        3
+      ],
+      "atlas": "./assets/roster/resonara-v7.webp",
+      "previousAtlas": "./assets/roster/resonara-v6.webp",
+      "pdfPage": 8,
+      "action": "revised",
+      "adjustment": "Place a blue eye in Heavenly Resonance's central golden circle between its bells.",
+      "atlasSha256": "5dce72f993d89dc4e06c232cc70e56c99ad07ff28f133b2caecc49a6e42b540a",
+      "unchangedCellsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "number": 22,
+      "id": "whiskerfey",
+      "forms": [
+        3
+      ],
+      "atlas": "./assets/roster/whiskerfey-v7.webp",
+      "previousAtlas": "./assets/roster/whiskerfey-v4.webp",
+      "pdfPage": 9,
+      "action": "revised",
+      "adjustment": "Repair Velvet Regent's underdeveloped leg with a fully articulated feline limb and paw.",
+      "atlasSha256": "aa622d59346ea350c8876171b1f0d36f71cc668e6db2c7d05ce1ed9df73de02d",
+      "unchangedCellsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "number": 27,
+      "id": "chainhorn",
+      "forms": [
+        3
+      ],
+      "atlas": "./assets/roster/chainhorn-v7.webp",
+      "previousAtlas": "./assets/roster/chainhorn-v4.webp",
+      "pdfPage": 10,
+      "action": "revised",
+      "adjustment": "Correct Furnace Bailiff's malformed right horn and give it massive paired bat wings.",
+      "atlasSha256": "d991440e39633c4a692332d434747bd603e7fd8dae65c48e9e057f9710457684",
+      "unchangedCellsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "number": 30,
+      "id": "bonsaitor",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "atlas": "./assets/roster/bonsaitor-v7.webp",
+      "previousAtlas": "./assets/roster/bonsaitor-v4.webp",
+      "pdfPage": 11,
+      "action": "revised",
+      "adjustment": "Replace the repeated crouching bodies with a compact seated sapling, a tall walking grove giant, and a broad root-arched terrace guardian.",
+      "atlasSha256": "dcef86cc41573f0010fdeb8ee49f6b56bcfc2fe7fc39fa5f40d60fbe94f60673",
+      "unchangedCellsVerified": []
+    },
+    {
+      "number": 32,
+      "id": "lacquertor",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "atlas": "./assets/roster/lacquertor-v7.webp",
+      "previousAtlas": "./assets/roster/lacquertor-v3.webp",
+      "pdfPage": 12,
+      "action": "revised",
+      "adjustment": "Replace the repeated hunched bodies with three distinct stone architectures and arm functions, retaining four arms in every Form.",
+      "atlasSha256": "43fa86a0f21d44d165ffb158729008ee757a9ef6516b18964ba07f8f74811849",
+      "unchangedCellsVerified": []
+    },
+    {
+      "number": 55,
+      "id": "embermoth",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "atlas": "./assets/roster/embermoth-v7.webp",
+      "previousAtlas": "./assets/roster/embermoth-v6.webp",
+      "pdfPage": 13,
+      "action": "revised",
+      "adjustment": "Give all stages unmistakable expressive eyes, and replace the enlarged final moth with a hollow suspended molten mantle.",
+      "atlasSha256": "be8b0baad45ae533d147243cd96908ae79d57f52695046d1bab259df09c14930",
+      "unchangedCellsVerified": []
+    },
+    {
+      "number": 63,
+      "id": "morrowfang",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "atlas": "./assets/roster/morrowfang-v7.webp",
+      "previousAtlas": "./assets/roster/morrowfang-v4.webp",
+      "pdfPage": 14,
+      "action": "revised",
+      "adjustment": "Differentiate Morrowfang as a lavender graveflower becoming a tall walking tree and a broad weeping grave-tree; change architecture and posture across Forms.",
+      "atlasSha256": "5cb1c5ffe5bae815f3842bde304061b5a72ae9dcba8a47c25e21b2d131d6396d",
+      "unchangedCellsVerified": []
+    },
+    {
+      "number": 68,
+      "id": "runemoth",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "atlas": "./assets/roster/runemoth-v7.webp",
+      "previousAtlas": "./assets/roster/runemoth-v6.webp",
+      "pdfPage": 15,
+      "action": "revised",
+      "adjustment": "All three Forms now have horizontal octopus-like slit pupils within the original violet eyes. The final Form retains its new hollow architecture; the rest of the lineage design is preserved.",
+      "atlasSha256": "24735f8ec43f593104d8c1c762b48a4bc7c6b5565237772b4f5e1e091a7249f1",
+      "unchangedCellsVerified": []
+    },
+    {
+      "number": 76,
+      "id": "zephyrfang",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "atlas": "./assets/roster/zephyrfang-v7.webp",
+      "previousAtlas": "./assets/roster/zephyrfang-v4.webp",
+      "pdfPage": 16,
+      "action": "revised",
+      "adjustment": "Differentiate Zephyrfang through curled seedpod, narrow stilt-root reed spirit and broad wind-swept reed fan, with open negative space and pale green sap.",
+      "atlasSha256": "d9af130796e395e18961500503e2245f76e85ccb1a238ad880b000c225b4d089",
+      "unchangedCellsVerified": []
+    },
+    {
+      "number": 81,
+      "id": "eldermoth",
+      "forms": [
+        3
+      ],
+      "atlas": "./assets/roster/eldermoth-v7.webp",
+      "previousAtlas": "./assets/roster/eldermoth-v6.webp",
+      "pdfPage": 17,
+      "action": "revised",
+      "adjustment": "Keep the barbed talon tentacles and introduce a functional wind-filled canopy and open central body.",
+      "atlasSha256": "791889817b1a9d63e2d5ace92cd6cb181844e229a042a35fa4e241e21ca304de",
+      "unchangedCellsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "number": 89,
+      "id": "marrowfang",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "atlas": "./assets/roster/marrowfang-v7.webp",
+      "previousAtlas": "./assets/roster/marrowfang-v4.webp",
+      "pdfPage": 18,
+      "action": "revised",
+      "adjustment": "Differentiate Marrowfang as an ivory marrow-root trap with a low creeping clamp and broad open bone-root cage; remove the repeated tall skull-on-stalk silhouette.",
+      "atlasSha256": "ca8ee6e3198fa08a498b2bdd4ff6c2c26d394b54eb94417b522afbf8409fd77b",
+      "unchangedCellsVerified": []
+    },
+    {
+      "number": 94,
+      "id": "rimemoth",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "atlas": "./assets/roster/rimemoth-v7.webp",
+      "previousAtlas": "./assets/roster/rimemoth-v6.webp",
+      "pdfPage": 19,
+      "action": "revised",
+      "adjustment": "Make personhood readable through the frost and separate the final Form's architecture from the middle stage while retaining exactly two large wings per Form.",
+      "atlasSha256": "8b12ccf7909d6d9aad1743b2eb7d26981dadaf42a4f1e95778e496ae4fe18cf9",
+      "unchangedCellsVerified": []
+    },
+    {
+      "number": 97,
+      "id": "verdantbloom",
+      "forms": [
+        2,
+        3
+      ],
+      "atlas": "./assets/roster/verdantbloom-v7.webp",
+      "previousAtlas": "./assets/roster/verdantbloom-v5.webp",
+      "pdfPage": 20,
+      "action": "revised",
+      "adjustment": "The middle and last Forms were both seated burial giants. Separate a walking revenant from an anchored open-torso guardian.",
+      "atlasSha256": "dbbff392b72f08b831ab84117cb869b85bd2f656050d328b0040447e20081d9f",
+      "unchangedCellsVerified": [
+        1
+      ]
+    },
+    {
+      "number": 102,
+      "id": "basilgore",
+      "forms": [
+        3
+      ],
+      "atlas": "./assets/roster/basilgore-v7.webp",
+      "previousAtlas": "./assets/roster/basilgore-v6.webp",
+      "pdfPage": 21,
+      "action": "revised",
+      "adjustment": "Final Form gains a long muscular monitor-lizard torso, strong shoulders, hips and four complete weight-bearing legs while preserving the large head and long tail.",
+      "atlasSha256": "84fd4eff74ac1e1d77100cd2e1fa2e9d80675b4462546064a2c603593e07d0e5",
+      "unchangedCellsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "number": 115,
+      "id": "onyxflare",
+      "forms": [
+        3
+      ],
+      "atlas": "./assets/roster/onyxflare-v7.webp",
+      "previousAtlas": "./assets/roster/onyxflare-v6.webp",
+      "pdfPage": 22,
+      "action": "revised",
+      "adjustment": "Final Form gains an elongated broad-chested lion-crocodile body with powerful hips and four sturdy legs; retain the large saber-toothed head and long tail.",
+      "atlasSha256": "105ba83b8958090cc69ef184ce0132f8bd2a18df19fe5c414044780d0b60dbfd",
+      "unchangedCellsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "number": 124,
+      "id": "xanthjaw",
+      "forms": [
+        3
+      ],
+      "atlas": "./assets/roster/xanthjaw-v7.webp",
+      "previousAtlas": "./assets/roster/xanthjaw-v6.webp",
+      "pdfPage": 23,
+      "action": "revised",
+      "adjustment": "Final Form gains an elongated powerful giant torso, broad chest, muscular hips and longer hind legs; preserve two arms, two legs, the large lightning-filled head and long tail.",
+      "atlasSha256": "82bdc73f52c5ffe68c7b156d7620c2a8ab7e816898277311855c25784572642a",
+      "unchangedCellsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "number": 129,
+      "id": "coralfang",
+      "forms": [
+        3
+      ],
+      "atlas": "./assets/roster/coralfang-v7.webp",
+      "previousAtlas": "./assets/roster/coralfang-v6.webp",
+      "pdfPage": 24,
+      "action": "revised",
+      "adjustment": "The last stage repeated the middle jaw-on-gel-neck structure. Reorganize the porcelain jaws into a suspended arch, without restoring rejected cogs.",
+      "atlasSha256": "86d4d2b8c75db6ad2e36d46dcf7266b24ec379b171b680c1eb5589e9e67ab2a0",
+      "unchangedCellsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "number": 133,
+      "id": "gossamerwisp",
+      "forms": [
+        3
+      ],
+      "atlas": "./assets/roster/gossamerwisp-v7.webp",
+      "previousAtlas": "./assets/roster/gossamerwisp-v6.webp",
+      "pdfPage": 25,
+      "action": "revised",
+      "adjustment": "Gossamer Exarch now has four distinct complete arms, two legs and a visible pair of spider fangs while preserving its moth identity and gossamer mantle.",
+      "atlasSha256": "8ef7b8eb6c2ea22afee8b6a9dc0beb1a799595fa263cb4b137f114431a1fb2a4",
+      "unchangedCellsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "number": 137,
+      "id": "kryptonshard",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "atlas": "./assets/roster/kryptonshard-v7.webp",
+      "previousAtlas": "./assets/roster/kryptonshard-v6.webp",
+      "pdfPage": 26,
+      "action": "revised",
+      "adjustment": "The dark mineral head loses its face at sprite scale. Give each Form a clear paired-eye mineral mask while retaining the approved floating green crystals.",
+      "atlasSha256": "8d79e8f1512054067881f1e982dbd18107d9160bddfbd06b701c067680b58638",
+      "unchangedCellsVerified": []
+    },
+    {
+      "number": 141,
+      "id": "oraclekin",
+      "forms": [
+        3
+      ],
+      "atlas": "./assets/roster/oraclekin-v7.webp",
+      "previousAtlas": "./assets/roster/oraclekin-v6.webp",
+      "pdfPage": 27,
+      "action": "revised",
+      "adjustment": "Oracle Exarch gains a deep broad chest, high muscular shoulders and four longer powerful legs; preserve its elongated owl-bear body and large feathered wings.",
+      "atlasSha256": "19f3c8028b8885a1992333de9e4f111873a8cc385ce6a7966e43576639e24723",
+      "unchangedCellsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "number": 144,
+      "id": "ripplejaw",
+      "forms": [
+        3
+      ],
+      "atlas": "./assets/roster/ripplejaw-v7.webp",
+      "previousAtlas": "./assets/roster/ripplejaw-v6.webp",
+      "pdfPage": 28,
+      "action": "revised",
+      "adjustment": "Final Form gains an elongated powerful current-turtle body and shell, deep shoulders, substantial hips and four strong legs while retaining its large snapping-turtle head.",
+      "atlasSha256": "4dcdfc6b802cbe4059858034c1270c6eba962f87093b730def18689354930172",
+      "unchangedCellsVerified": [
+        1,
+        2
+      ]
+    }
+  ]
+}

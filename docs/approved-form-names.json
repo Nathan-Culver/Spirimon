@@ -1,0 +1,954 @@
+{
+  "general": [
+    {
+      "number": 1,
+      "id": "kilnscale",
+      "before": "Porcelain Sentinel",
+      "after": "Porcelarch"
+    },
+    {
+      "number": 2,
+      "id": "dewveil",
+      "before": "Sundew Regent",
+      "after": "Drosire"
+    },
+    {
+      "number": 3,
+      "id": "zephyrtap",
+      "before": "Tempest Treader",
+      "after": "Tempestride"
+    },
+    {
+      "number": 4,
+      "id": "oculume",
+      "before": "Thousand Vigil",
+      "after": "Oculigil"
+    },
+    {
+      "number": 5,
+      "id": "mycogaze",
+      "before": "Verdant Witness",
+      "after": "Mycelseer"
+    },
+    {
+      "number": 6,
+      "id": "vellifold",
+      "before": "Paradox Tide",
+      "after": "Velluvium"
+    },
+    {
+      "number": 7,
+      "id": "lanterglide",
+      "before": "Gossamer Courier",
+      "after": "Luminopter"
+    },
+    {
+      "number": 8,
+      "id": "veilstripe",
+      "before": "Pale Tracker",
+      "after": "Veilacine"
+    },
+    {
+      "number": 9,
+      "id": "megalorn",
+      "before": "Valley Colossus",
+      "after": "Megalossus"
+    },
+    {
+      "number": 10,
+      "id": "aurelattice",
+      "before": "Solar Mechanarch",
+      "after": "Aurelmane"
+    },
+    {
+      "number": 11,
+      "id": "seralotus",
+      "before": "Blossom Seraph",
+      "after": "Lotoseraph"
+    },
+    {
+      "number": 12,
+      "id": "astraveil",
+      "before": "Ancestral Radiance",
+      "after": "Astralume"
+    },
+    {
+      "number": 13,
+      "id": "auroriel",
+      "before": "Crown of Dawn",
+      "after": "Aurorion"
+    },
+    {
+      "number": 14,
+      "id": "bronzewade",
+      "before": "Heron Magistrate",
+      "after": "Ardearch"
+    },
+    {
+      "number": 15,
+      "id": "jarjell",
+      "before": "Lacquer Custodian",
+      "after": "Urnwarden"
+    },
+    {
+      "number": 16,
+      "id": "puppetide",
+      "before": "Woodland Puppeteer",
+      "after": "Sylveteer"
+    },
+    {
+      "number": 17,
+      "id": "kilnwarden",
+      "before": "Iron Hellkeeper",
+      "after": "Ferrarden"
+    },
+    {
+      "number": 18,
+      "id": "torrentreed",
+      "before": "Riverbloom Torrent",
+      "after": "Reedstrom"
+    },
+    {
+      "number": 19,
+      "id": "cinerwraith",
+      "before": "Last Emberstorm",
+      "after": "Cinerstorm"
+    },
+    {
+      "number": 20,
+      "id": "glasswhorl",
+      "before": "Dune Orrery",
+      "after": "Vitrovolve"
+    },
+    {
+      "number": 21,
+      "id": "resonara",
+      "before": "Heavenly Resonance",
+      "after": "Resonarch"
+    },
+    {
+      "number": 22,
+      "id": "whiskerfey",
+      "before": "Velvet Regent",
+      "after": "Velvarch"
+    },
+    {
+      "number": 23,
+      "id": "gelmirth",
+      "before": "Gossamer Gelcourt",
+      "after": "Gelamour"
+    },
+    {
+      "number": 24,
+      "id": "silkvisage",
+      "before": "Sixfinger Envoy",
+      "after": "Hexavoy"
+    },
+    {
+      "number": 25,
+      "id": "jesthorn",
+      "before": "Thorn Court Jester",
+      "after": "Thornjape"
+    },
+    {
+      "number": 26,
+      "id": "bramblefiend",
+      "before": "Infernal Briar",
+      "after": "Briarabol"
+    },
+    {
+      "number": 27,
+      "id": "chainhorn",
+      "before": "Furnace Bailiff",
+      "after": "Catenarch"
+    },
+    {
+      "number": 28,
+      "id": "crownscar",
+      "before": "Eclipsed Herald",
+      "after": "Umbrarald"
+    },
+    {
+      "number": 29,
+      "id": "pitchmaw",
+      "before": "Obsidian Mirefiend",
+      "after": "Obsimire"
+    },
+    {
+      "number": 30,
+      "id": "bonsaitor",
+      "before": "Terrace Patriarch",
+      "after": "Bonsaiarch"
+    },
+    {
+      "number": 31,
+      "id": "cloudgron",
+      "before": "Monsoon Grandfather",
+      "after": "Cumulgron"
+    },
+    {
+      "number": 32,
+      "id": "lacquertor",
+      "before": "Living Fortress",
+      "after": "Lacquerith"
+    },
+    {
+      "number": 33,
+      "id": "barrowgron",
+      "before": "Sepulcher Titan",
+      "after": "Sepulgron"
+    },
+    {
+      "number": 34,
+      "id": "silkclasp",
+      "before": "Mothmask Adept",
+      "after": "Lepidact"
+    },
+    {
+      "number": 35,
+      "id": "wickerstride",
+      "before": "Bamboo Wayfarer",
+      "after": "Wickerroam"
+    },
+    {
+      "number": 36,
+      "id": "mirrorkin",
+      "before": "Manyhand Reflection",
+      "after": "Mirroryx"
+    },
+    {
+      "number": 37,
+      "id": "prismonk",
+      "before": "Iridescent Envoy",
+      "after": "Iridavian"
+    },
+    {
+      "number": 38,
+      "id": "tempestrill",
+      "before": "Storm Amphiptere",
+      "after": "Tempestrel"
+    },
+    {
+      "number": 39,
+      "id": "reinroot",
+      "before": "Strangler Kelpie",
+      "after": "Strangallop"
+    },
+    {
+      "number": 40,
+      "id": "fengweave",
+      "before": "Bronze Fenghuang",
+      "after": "Bronzhuang"
+    },
+    {
+      "number": 41,
+      "id": "vitrilisk",
+      "before": "Basilisk of Glass",
+      "after": "Vitrilord"
+    },
+    {
+      "number": 42,
+      "id": "amberwork",
+      "before": "Living Reliquary",
+      "after": "Amberelique"
+    },
+    {
+      "number": 43,
+      "id": "halojell",
+      "before": "Celestial Tidelight",
+      "after": "Halolume"
+    },
+    {
+      "number": 44,
+      "id": "nepentide",
+      "before": "Pitcher Deluge",
+      "after": "Nepenturge"
+    },
+    {
+      "number": 45,
+      "id": "ossigel",
+      "before": "Ossuary Drift",
+      "after": "Ossivane"
+    },
+    {
+      "number": 46,
+      "id": "strangleweld",
+      "before": "Ironwood Snare",
+      "after": "Strangliron"
+    },
+    {
+      "number": 47,
+      "id": "fumepitcher",
+      "before": "Censer Tyrant",
+      "after": "Fumetyr"
+    },
+    {
+      "number": 48,
+      "id": "needlebristle",
+      "before": "Stinging Grovebeast",
+      "after": "Nettlequill"
+    },
+    {
+      "number": 49,
+      "id": "jianglume",
+      "before": "Lantern Ancestor",
+      "after": "Jiangtern"
+    },
+    {
+      "number": 50,
+      "id": "draugale",
+      "before": "Tempest Revenant",
+      "after": "Draugast"
+    },
+    {
+      "number": 51,
+      "id": "aetherling",
+      "before": "Aether Sovereign",
+      "after": "Aethergnath"
+    },
+    {
+      "number": 52,
+      "id": "bramblehorn",
+      "before": "Bramble Sovereign",
+      "after": "Bramblethane"
+    },
+    {
+      "number": 53,
+      "id": "cindershade",
+      "before": "Cinder Sovereign",
+      "after": "Cindrakirin"
+    },
+    {
+      "number": 54,
+      "id": "duskclaw",
+      "before": "Dusk Sovereign",
+      "after": "Duskivett"
+    },
+    {
+      "number": 55,
+      "id": "embermoth",
+      "before": "Ember Sovereign",
+      "after": "Embermelt"
+    },
+    {
+      "number": 56,
+      "id": "frostwyrm",
+      "before": "Frost Sovereign",
+      "after": "Frostrake"
+    },
+    {
+      "number": 57,
+      "id": "gloomglen",
+      "before": "Gloom Sovereign",
+      "after": "Gloomtusk"
+    },
+    {
+      "number": 58,
+      "id": "hollowbloom",
+      "before": "Hollow Sovereign",
+      "after": "Hollowgraven"
+    },
+    {
+      "number": 59,
+      "id": "ivoryspire",
+      "before": "Ivory Sovereign",
+      "after": "Ivorygale"
+    },
+    {
+      "number": 60,
+      "id": "jademaw",
+      "before": "Jade Sovereign",
+      "after": "Jadengorge"
+    },
+    {
+      "number": 61,
+      "id": "kelpveil",
+      "before": "Kelp Sovereign",
+      "after": "Kelplutra"
+    },
+    {
+      "number": 62,
+      "id": "lumenwing",
+      "before": "Lumen Sovereign",
+      "after": "Lumenvore"
+    },
+    {
+      "number": 63,
+      "id": "morrowfang",
+      "before": "Morrow Sovereign",
+      "after": "Morrowskull"
+    },
+    {
+      "number": 64,
+      "id": "nacreling",
+      "before": "Nacre Sovereign",
+      "after": "Nacreculus"
+    },
+    {
+      "number": 65,
+      "id": "obsidhorn",
+      "before": "Obsid Sovereign",
+      "after": "Obsidaroo"
+    },
+    {
+      "number": 66,
+      "id": "pollenshade",
+      "before": "Pollen Sovereign",
+      "after": "Pollenoceros"
+    },
+    {
+      "number": 67,
+      "id": "quillclaw",
+      "before": "Quill Sovereign",
+      "after": "Quillforge"
+    },
+    {
+      "number": 68,
+      "id": "runemoth",
+      "before": "Rune Sovereign",
+      "after": "Runemorph"
+    },
+    {
+      "number": 69,
+      "id": "sablewyrm",
+      "before": "Sable Sovereign",
+      "after": "Sablelune"
+    },
+    {
+      "number": 70,
+      "id": "thornglen",
+      "before": "Thorn Sovereign",
+      "after": "Thornogre"
+    },
+    {
+      "number": 71,
+      "id": "umberbloom",
+      "before": "Umber Sovereign",
+      "after": "Umbertomb"
+    },
+    {
+      "number": 72,
+      "id": "vesperspire",
+      "before": "Vesper Sovereign",
+      "after": "Vespertil"
+    },
+    {
+      "number": 73,
+      "id": "willowmaw",
+      "before": "Willow Sovereign",
+      "after": "Willogullet"
+    },
+    {
+      "number": 74,
+      "id": "xyloveil",
+      "before": "Xylo Sovereign",
+      "after": "Xylotriton"
+    },
+    {
+      "number": 75,
+      "id": "yarrowwing",
+      "before": "Yarrow Sovereign",
+      "after": "Yarrovore"
+    },
+    {
+      "number": 76,
+      "id": "zephyrfang",
+      "before": "Zephyr Sovereign",
+      "after": "Zephyrwarg"
+    },
+    {
+      "number": 77,
+      "id": "ashenling",
+      "before": "Ashen Sovereign",
+      "after": "Ashenoclast"
+    },
+    {
+      "number": 78,
+      "id": "berylhorn",
+      "before": "Beryl Sovereign",
+      "after": "Beryllaby"
+    },
+    {
+      "number": 79,
+      "id": "coppershade",
+      "before": "Copper Sovereign",
+      "after": "Cupryphon"
+    },
+    {
+      "number": 80,
+      "id": "driftclaw",
+      "before": "Drift Sovereign",
+      "after": "Driftomaton"
+    },
+    {
+      "number": 81,
+      "id": "eldermoth",
+      "before": "Elder Sovereign",
+      "after": "Elderesin"
+    },
+    {
+      "number": 82,
+      "id": "flintwyrm",
+      "before": "Flint Sovereign",
+      "after": "Flintdrake"
+    },
+    {
+      "number": 83,
+      "id": "garnetglen",
+      "before": "Garnet Sovereign",
+      "after": "Garnetyr"
+    },
+    {
+      "number": 84,
+      "id": "hazelbloom",
+      "before": "Hazel Sovereign",
+      "after": "Hazelgrave"
+    },
+    {
+      "number": 85,
+      "id": "indigospire",
+      "before": "Indigo Sovereign",
+      "after": "Indigotl"
+    },
+    {
+      "number": 86,
+      "id": "junipermaw",
+      "before": "Juniper Sovereign",
+      "after": "Junivora"
+    },
+    {
+      "number": 87,
+      "id": "kestrelveil",
+      "before": "Kestrel Sovereign",
+      "after": "Kestregel"
+    },
+    {
+      "number": 88,
+      "id": "lichenwing",
+      "before": "Lichen Sovereign",
+      "after": "Lichenfer"
+    },
+    {
+      "number": 89,
+      "id": "marrowfang",
+      "before": "Marrow Sovereign",
+      "after": "Marrowtrap"
+    },
+    {
+      "number": 90,
+      "id": "nimbusling",
+      "before": "Nimbus Sovereign",
+      "after": "Nimbuloc"
+    },
+    {
+      "number": 91,
+      "id": "opalhorn",
+      "before": "Opal Sovereign",
+      "after": "Opalepus"
+    },
+    {
+      "number": 92,
+      "id": "pyreshade",
+      "before": "Pyre Sovereign",
+      "after": "Pyreleon"
+    },
+    {
+      "number": 93,
+      "id": "quartzclaw",
+      "before": "Quartz Sovereign",
+      "after": "Quartzlynx"
+    },
+    {
+      "number": 94,
+      "id": "rimemoth",
+      "before": "Rime Sovereign",
+      "after": "Rimelique"
+    },
+    {
+      "number": 95,
+      "id": "saffronwyrm",
+      "before": "Saffron Sovereign",
+      "after": "Saffrolutra"
+    },
+    {
+      "number": 96,
+      "id": "tundraglen",
+      "before": "Tundra Sovereign",
+      "after": "Tundravor"
+    },
+    {
+      "number": 97,
+      "id": "verdantbloom",
+      "before": "Verdant Sovereign",
+      "after": "Verdantomb"
+    },
+    {
+      "number": 98,
+      "id": "wraithspire",
+      "before": "Wraith Sovereign",
+      "after": "Wraithwail"
+    },
+    {
+      "number": 99,
+      "id": "yewmaw",
+      "before": "Yew Sovereign",
+      "after": "Yewgullet"
+    },
+    {
+      "number": 100,
+      "id": "zirconveil",
+      "before": "Zircon Sovereign",
+      "after": "Zirconyx"
+    },
+    {
+      "number": 101,
+      "id": "arborkin",
+      "before": "Arbor Exarch",
+      "after": "Arboriel"
+    },
+    {
+      "number": 102,
+      "id": "basilgore",
+      "before": "Basil Exarch",
+      "after": "Basilith"
+    },
+    {
+      "number": 103,
+      "id": "cobaltwisp",
+      "before": "Cobalt Exarch",
+      "after": "Cobalgear"
+    },
+    {
+      "number": 104,
+      "id": "dapplejaw",
+      "before": "Dapple Exarch",
+      "after": "Dapplivore"
+    },
+    {
+      "number": 105,
+      "id": "ebonflare",
+      "before": "Ebon Exarch",
+      "after": "Ebonpyre"
+    },
+    {
+      "number": 106,
+      "id": "fableroot",
+      "before": "Fable Exarch",
+      "after": "Fablewither"
+    },
+    {
+      "number": 107,
+      "id": "glaciershard",
+      "before": "Glacier Exarch",
+      "after": "Glacervan"
+    },
+    {
+      "number": 108,
+      "id": "harborgaze",
+      "before": "Harbor Exarch",
+      "after": "Harborwight"
+    },
+    {
+      "number": 109,
+      "id": "ichorfang",
+      "before": "Ichor Exarch",
+      "after": "Ichorhowl"
+    },
+    {
+      "number": 110,
+      "id": "jasperplume",
+      "before": "Jasper Exarch",
+      "after": "Jaspermor"
+    },
+    {
+      "number": 111,
+      "id": "kindlekin",
+      "before": "Kindle Exarch",
+      "after": "Kindletan"
+    },
+    {
+      "number": 112,
+      "id": "lotusgore",
+      "before": "Lotus Exarch",
+      "after": "Lotopotamus"
+    },
+    {
+      "number": 113,
+      "id": "mistralwisp",
+      "before": "Mistral Exarch",
+      "after": "Mistraptor"
+    },
+    {
+      "number": 114,
+      "id": "nettlejaw",
+      "before": "Nettle Exarch",
+      "after": "Nettelume"
+    },
+    {
+      "number": 115,
+      "id": "onyxflare",
+      "before": "Onyx Exarch",
+      "after": "Onyxodon"
+    },
+    {
+      "number": 116,
+      "id": "petalroot",
+      "before": "Petal Exarch",
+      "after": "Petalith"
+    },
+    {
+      "number": 117,
+      "id": "quasarshard",
+      "before": "Quasar Exarch",
+      "after": "Quasarmire"
+    },
+    {
+      "number": 118,
+      "id": "ravengaze",
+      "before": "Raven Exarch",
+      "after": "Raventempest"
+    },
+    {
+      "number": 119,
+      "id": "solacefang",
+      "before": "Solace Exarch",
+      "after": "Solacrypt"
+    },
+    {
+      "number": 120,
+      "id": "talonplume",
+      "before": "Talon Exarch",
+      "after": "Talonarch"
+    },
+    {
+      "number": 121,
+      "id": "ulmarkin",
+      "before": "Ulmar Exarch",
+      "after": "Ulmarillo"
+    },
+    {
+      "number": 122,
+      "id": "velvetgore",
+      "before": "Velvet Exarch",
+      "after": "Velvetrage"
+    },
+    {
+      "number": 123,
+      "id": "whisperwisp",
+      "before": "Whisper Exarch",
+      "after": "Whispermaw"
+    },
+    {
+      "number": 124,
+      "id": "xanthjaw",
+      "before": "Xanth Exarch",
+      "after": "Xanthunder"
+    },
+    {
+      "number": 125,
+      "id": "yonderflare",
+      "before": "Yonder Exarch",
+      "after": "Yondergnath"
+    },
+    {
+      "number": 126,
+      "id": "zinniaroot",
+      "before": "Zinnia Exarch",
+      "after": "Zinniantis"
+    },
+    {
+      "number": 127,
+      "id": "aurumshard",
+      "before": "Aurum Exarch",
+      "after": "Aurumbex"
+    },
+    {
+      "number": 128,
+      "id": "brackengaze",
+      "before": "Bracken Exarch",
+      "after": "Brackentusk"
+    },
+    {
+      "number": 129,
+      "id": "coralfang",
+      "before": "Coral Exarch",
+      "after": "Coralloy"
+    },
+    {
+      "number": 130,
+      "id": "daggerplume",
+      "before": "Dagger Exarch",
+      "after": "Daggerflux"
+    },
+    {
+      "number": 131,
+      "id": "eclipsekin",
+      "before": "Eclipse Exarch",
+      "after": "Eclipstag"
+    },
+    {
+      "number": 132,
+      "id": "fennelgore",
+      "before": "Fennel Exarch",
+      "after": "Fennelwraith"
+    },
+    {
+      "number": 133,
+      "id": "gossamerwisp",
+      "before": "Gossamer Exarch",
+      "after": "Gossarach"
+    },
+    {
+      "number": 134,
+      "id": "hearthjaw",
+      "before": "Hearth Exarch",
+      "after": "Hearthgeist"
+    },
+    {
+      "number": 135,
+      "id": "isletflare",
+      "before": "Islet Exarch",
+      "after": "Isledraug"
+    },
+    {
+      "number": 136,
+      "id": "jubilroot",
+      "before": "Jubil Exarch",
+      "after": "Jubilgrim"
+    },
+    {
+      "number": 137,
+      "id": "kryptonshard",
+      "before": "Krypton Exarch",
+      "after": "Kryptolith"
+    },
+    {
+      "number": 138,
+      "id": "larchgaze",
+      "before": "Larch Exarch",
+      "after": "Larchoceros"
+    },
+    {
+      "number": 139,
+      "id": "miragefang",
+      "before": "Mirage Exarch",
+      "after": "Miragnath"
+    },
+    {
+      "number": 140,
+      "id": "nectarplume",
+      "before": "Nectar Exarch",
+      "after": "Nectarostrum"
+    },
+    {
+      "number": 141,
+      "id": "oraclekin",
+      "before": "Oracle Exarch",
+      "after": "Strigursa"
+    },
+    {
+      "number": 142,
+      "id": "pewtergore",
+      "before": "Pewter Exarch",
+      "after": "Pewtermelt"
+    },
+    {
+      "number": 143,
+      "id": "quiverwisp",
+      "before": "Quiver Exarch",
+      "after": "Quiverbarb"
+    },
+    {
+      "number": 144,
+      "id": "ripplejaw",
+      "before": "Ripple Exarch",
+      "after": "Ripplastron"
+    },
+    {
+      "number": 145,
+      "id": "starlingflare",
+      "before": "Starling Exarch",
+      "after": "Astercrypt"
+    },
+    {
+      "number": 146,
+      "id": "truffleroot",
+      "before": "Truffle Exarch",
+      "after": "Truffletan"
+    },
+    {
+      "number": 147,
+      "id": "uplandshard",
+      "before": "Upland Exarch",
+      "after": "Uplandrelic"
+    },
+    {
+      "number": 148,
+      "id": "violetgaze",
+      "before": "Violet Exarch",
+      "after": "Violetfang"
+    },
+    {
+      "number": 149,
+      "id": "wardenfang",
+      "before": "Warden Exarch",
+      "after": "Wardenoculus"
+    },
+    {
+      "number": 150,
+      "id": "zodiacplume",
+      "before": "Zodiac Exarch",
+      "after": "Zodiarch"
+    }
+  ],
+  "legendary": [
+    {
+      "before": "The Starved Star Echo",
+      "after": "Astralet"
+    },
+    {
+      "before": "The Starved Star Awakened",
+      "after": "Astranox"
+    },
+    {
+      "before": "The Starved Star",
+      "after": "Astravore"
+    },
+    {
+      "before": "The Sleeping Crown Echo",
+      "after": "Dozeling"
+    },
+    {
+      "before": "The Sleeping Crown Awakened",
+      "after": "Somnursa"
+    },
+    {
+      "before": "The Sleeping Crown",
+      "after": "Somnarch"
+    },
+    {
+      "before": "The Last Dawn Echo",
+      "after": "Dawnlet"
+    },
+    {
+      "before": "The Last Dawn Awakened",
+      "after": "Solacrane"
+    },
+    {
+      "before": "The Last Dawn",
+      "after": "Ultirora"
+    },
+    {
+      "before": "The Deep Listener Echo",
+      "after": "Echoling"
+    },
+    {
+      "before": "The Deep Listener Awakened",
+      "after": "Nautilurk"
+    },
+    {
+      "before": "The Deep Listener",
+      "after": "Bathyecho"
+    }
+  ]
+}

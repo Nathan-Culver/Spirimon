@@ -1,7 +1,7 @@
 import {readFile,writeFile} from 'node:fs/promises';
 import {ROSTER} from '../roster.mjs';
 const source=await readFile(new URL('../roster.mjs',import.meta.url),'utf8'),raw=JSON.parse(source.match(/const SOURCE_ROSTER=(\[.*?\]);/s)[1]);
-const revisions=await Promise.all(['roster-art-review-v6.json','roster-art-review-v5.json','roster-evolution-review.json'].map(async name=>JSON.parse(await readFile(new URL('../docs/'+name,import.meta.url),'utf8'))));
+const revisions=await Promise.all(['roster-art-review-v7.json','roster-art-review-v6.json','roster-art-review-v5.json','roster-evolution-review.json'].map(async name=>JSON.parse(await readFile(new URL('../docs/'+name,import.meta.url),'utf8'))));
 const plans=JSON.parse(await readFile(new URL('../roster-plan.json',import.meta.url),'utf8'));
 const references=ROSTER.map(row=>{
  const original=raw.find(r=>r.id===row.id),current=revisions.flatMap(d=>d.lineages||[]).find(r=>r.id===row.id&&r.atlas===row.atlas),plan=plans.find(r=>r.id===row.id&&r.atlas===row.atlas);

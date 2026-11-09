@@ -1,6 +1,6 @@
 import {AUTHORED_COMPANIONS,RIG_KIND,EXTRA_ARMS} from './companion-rigs.mjs';
 // Hand-authored deformation rigs, retargeted to each form's observed anatomy.
-// The texture is always the finished roster image; north uses its actual rear art.
+// The texture is always finished roster art; reviewed front-only forms also use it northward.
 const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
 const smooth=(a,b,x)=>{const t=clamp((x-a)/(b-a));return t*t*(3-2*t);};
 export const COMPANION_RIGS=Object.freeze({
@@ -17,7 +17,7 @@ export function companionRig(sp,form=0){
  const anatomy=sp.formAnatomy?.[form]||sp.anatomy||{},traits=new Set(anatomy.traits||[]),plan=anatomy.bodyPlan;
  let kind=({quadruped:'quadruped',biped:'biped','many-legged':'scuttle',winged:'winged',aquatic:'serpentine',serpentine:'serpentine',rooted:'rooted',tentacled:'flow',amorphous:'flow',radial:'hover'})[plan]||'hover';
  if(traits.has('levitate')&&!(anatomy.limbs?.legs>0))kind=traits.has('tentacles')?'flow':'hover';
- const id=String(sp.id||'').replace(/^roster-/,''),binding=AUTHORED_COMPANIONS[id];if(binding)kind=RIG_KIND[binding[Math.max(0,Math.min(2,form))]];
+ const id=String(sp.id||'').replace(/^roster-/,''),binding=anatomy.source==='reviewed-pdf'?null:AUTHORED_COMPANIONS[id];if(binding)kind=RIG_KIND[binding[Math.max(0,Math.min(2,form))]];
  return {kind,...COMPANION_RIGS[kind],wings:binding?(kind==='winged'?2:0):anatomy.limbs?.wings||0,arms:binding?(EXTRA_ARMS[id]||(kind==='biped'?2:0)):anatomy.limbs?.arms||0,legs:anatomy.limbs?.legs||0,tentacles:anatomy.limbs?.tentacles||0,tail:traits.has('tail')||/tail|trunk/.test(sp.description||''),phaseOffset:0};
 }
 export function companionFrame(face='down',moving=false,progress=0){

@@ -7,7 +7,7 @@
     "forms": [
       "Kilnkit",
       "Kilnscale",
-      "Porcelain Sentinel"
+      "Porcelarch"
     ],
     "description": "A real pangolin with articulated cobalt-and-ivory porcelain scales, brass hinges, and a temple-bell tail.",
     "atlas": "./assets/roster/kilnscale-v4.webp",
@@ -28,7 +28,7 @@
     "forms": [
       "Dewbud",
       "Dewveil",
-      "Sundew Regent"
+      "Drosire"
     ],
     "description": "A carnivorous sundew with luminous amber nectar beads, delicate fan leaves, fine root feet, and faerie blossoms.",
     "atlas": "./assets/roster/dewveil-v5.webp",
@@ -49,7 +49,7 @@
     "forms": [
       "Gustling",
       "Zephyrtap",
-      "Tempest Treader"
+      "Tempestride"
     ],
     "description": "A real tapir with a short trunk, living cloud curls, teal wind ribbons, and copper spiral markings.",
     "atlas": "./assets/roster/zephyrtap-v4.webp",
@@ -70,7 +70,7 @@
     "forms": [
       "Oculit",
       "Oculume",
-      "Thousand Vigil"
+      "Oculigil"
     ],
     "description": "A non-animal floating spiral mantle with asymmetrical eyes, orbiting gold feather-shaped lights, and a pearl-and-indigo body.",
     "atlas": "./assets/roster/oculume-v4.webp",
@@ -169,7 +169,7 @@
     "forms": [
       "Sporblink",
       "Mycogaze",
-      "Verdant Witness"
+      "Mycelseer"
     ],
     "description": "A walking ring of watchful eyes and branching mycelial tendrils, modified by predatory moss and tiny violet spore cups.",
     "atlas": "./assets/roster/mycogaze-v4.webp",
@@ -190,7 +190,7 @@
     "forms": [
       "Foldrop",
       "Vellifold",
-      "Paradox Tide"
+      "Velluvium"
     ],
     "description": "An impossible folded ribbon creature with recursive limbs and aperture eyes, softened by translucent turquoise gel and droplet edges.",
     "atlas": "./assets/roster/vellifold-v4.webp",
@@ -286,7 +286,7 @@
     "forms": [
       "Liltuft",
       "Lanterglide",
-      "Gossamer Courier"
+      "Luminopter"
     ],
     "description": "A real sugar glider with a cream-and-chestnut body, faerie membrane patterns, tiny lantern-like nectar lights, and long silk ear tufts.",
     "atlas": "./assets/roster/lanterglide-v4.webp",
@@ -307,18 +307,121 @@
     "forms": [
       "Hushpup",
       "Veilstripe",
-      "Pale Tracker"
+      "Veilacine"
     ],
     "description": "An extinct thylacine with charcoal stripes, bone-white markings, spectral lavender breath, and a translucent tail.",
-    "atlas": "./assets/roster/veilstripe-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/veilstripe-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small thylacine cub with dark stripes and faint translucent tail tip",
       "Lean stalking thylacine with angular shoulders and spectral mist escaping visible rib-shaped markings",
-      "Weathered ancestral thylacine with a long spectral mane, interrupted fading hindquarters and elongated ghostly tail; recognizable animal remains"
+      "Veilacine: Repair Pale Tracker's underdeveloped rear leg with a complete skeletal hind limb and clearly formed paw."
     ],
-    "proceduralArt": false
+    "proceduralArt": false,
+    "previousAtlas": "./assets/roster/veilstripe-v4.webp",
+    "updatedForms": [
+      3
+    ],
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "fur",
+          "claws",
+          "dig",
+          "bone",
+          "spectral"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "reference": "thylacine",
+        "evidence": "updated-forms-page-3"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "fur",
+          "claws",
+          "dig",
+          "bone",
+          "spectral"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "reference": "thylacine",
+        "evidence": "updated-forms-page-3"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "fur",
+          "claws",
+          "dig",
+          "bone",
+          "spectral"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "reference": "thylacine",
+        "evidence": "updated-forms-page-3"
+      }
+    ],
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "quadruped",
+      "traits": [
+        "fur",
+        "claws",
+        "dig",
+        "bone",
+        "spectral"
+      ],
+      "limbs": {
+        "legs": 4,
+        "arms": 0,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 0,
+      "strength": 1,
+      "scale": "ordinary",
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "reference": "thylacine",
+      "evidence": "updated-forms-page-3"
+    },
+    "artNotes": "Repair Pale Tracker's underdeveloped rear leg with a complete skeletal hind limb and clearly formed paw."
   },
   {
     "index": 8,
@@ -328,7 +431,7 @@
     "forms": [
       "Megalow",
       "Megalorn",
-      "Valley Colossus"
+      "Megalossus"
     ],
     "description": "An extinct giant ground sloth with massive curved claws, sandy shaggy fur, slate-gray calluses, and increasingly colossal proportions.",
     "atlas": "./assets/roster/megalorn-v4.webp",
@@ -349,16 +452,16 @@
     "forms": [
       "Sparkwrit",
       "Aurelattice",
-      "Solar Mechanarch"
+      "Aurelmane"
     ],
     "description": "A luminous many-winged celestial guardian with ivory feathers, articulated golden wing frames, rotating crystal joints, and warm cyan light.",
-    "atlas": "./assets/roster/aurelattice-v6.webp",
-    "artRevision": 6,
+    "atlas": "./assets/roster/aurelattice-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
       "A small crouched ivory-and-gold celestial hatchling with folded mechanical wing plates and one turquoise chest lens",
       "A tall long-necked gryphonlike guardian on four slender articulated legs with two open golden wing frames and a narrow flowing feather tail",
-      "A levitating celestial gyroscope with a luminous core surrounded by six radial ivory feather wings on golden articulated frames, a turquoise central lens and dangling feather tail; the quadruped body has unfolded into the wing mechanism"
+      "Aurelmane: Elongate Solar Mechanarch's neck and wrap the central eye and surrounding feather wings into a lion-like neck mane."
     ],
     "proceduralArt": false,
     "formAnatomy": [
@@ -419,8 +522,9 @@
         "manipulators": 0,
         "strength": 1,
         "scale": "ordinary",
-        "source": "image-analysis",
-        "confidence": 0.92
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-4"
       }
     ],
     "anatomy": {
@@ -443,7 +547,11 @@
       "source": "image-analysis",
       "confidence": 0.92
     },
-    "artNotes": "Keep forms 1 and 2. Form 3 uses form 2's body with the current form 3 wrapped around its neck as a mane."
+    "artNotes": "Elongate Solar Mechanarch's neck and wrap the central eye and surrounding feather wings into a lion-like neck mane.",
+    "previousAtlas": "./assets/roster/aurelattice-v6.webp",
+    "updatedForms": [
+      3
+    ]
   },
   {
     "index": 10,
@@ -453,16 +561,16 @@
     "forms": [
       "Lotulume",
       "Seralotus",
-      "Blossom Seraph"
+      "Lotoseraph"
     ],
-    "description": "A six-winged celestial guardian whose feather fans become layered white lotus petals and living green tendrils around a radiant core.",
-    "atlas": "./assets/roster/seralotus-v4.webp",
-    "artRevision": 4,
+    "description": "A long-necked ivory-and-green celestial quadruped with living lotus-petal wings and a radial petal-and-vine mane around the neck, carrying a radiant golden heart and halo.",
+    "atlas": "./assets/roster/seralotus-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
       "A compact four-legged ivory celestial lotus cub with tightly cupped green-tipped petal wings and a bud-shaped tail",
       "A slender long-necked striding lotus guardian with four long legs, swept-back opened petal wings and a trailing vine tail",
-      "A floating open lotus entity whose layered ivory-and-green petals surround the recognizable guardian head, gold heart light and coiled vine center; legs fully withdrawn into the bloom, broad radial silhouette"
+      "Lotoseraph: Give Blossom Seraph the second Form's quadruped body and a long neck; turn its former floral body into a lion-like petal mane around that neck."
     ],
     "proceduralArt": false,
     "formAnatomy": [
@@ -506,14 +614,14 @@
       },
       {
         "version": 1,
-        "bodyPlan": "radial",
+        "bodyPlan": "quadruped",
         "traits": [
           "petals",
           "vines",
           "levitate"
         ],
         "limbs": {
-          "legs": 0,
+          "legs": 4,
           "arms": 0,
           "wings": 0,
           "tentacles": 0
@@ -521,8 +629,9 @@
         "manipulators": 0,
         "strength": 1,
         "scale": "ordinary",
-        "source": "image-analysis",
-        "confidence": 0.92
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-5"
       }
     ],
     "anatomy": {
@@ -543,7 +652,12 @@
       "scale": "ordinary",
       "source": "image-analysis",
       "confidence": 0.92
-    }
+    },
+    "previousAtlas": "./assets/roster/seralotus-v4.webp",
+    "updatedForms": [
+      3
+    ],
+    "artNotes": "Give Blossom Seraph the second Form's quadruped body and a long neck; turn its former floral body into a lion-like petal mane around that neck."
   },
   {
     "index": 11,
@@ -553,7 +667,7 @@
     "forms": [
       "Glimbone",
       "Astraveil",
-      "Ancestral Radiance"
+      "Astralume"
     ],
     "description": "An otherworldly halo-bearing celestial whose pearl armor reveals elegant ancestral bone and trails of pale blue soul light.",
     "atlas": "./assets/roster/astraveil-v4.webp",
@@ -574,16 +688,16 @@
     "forms": [
       "Flarecho",
       "Auroriel",
-      "Crown of Dawn"
+      "Aurorion"
     ],
-    "description": "A wing-ring celestial composed of soft aurora ribbons, opaline feathers, and a brilliant coral-and-gold elemental heart.",
-    "atlas": "./assets/roster/auroriel-v4.webp",
-    "artRevision": 4,
+    "description": "A long serpentine Chinese-dragon-like celestial of opaline feathers, flowing aurora ribbons and a brilliant coral-and-gold heart. Its elongated neck leads to a wing-fanned thorax, a long sinuous lower body, distant hips and two clawed hind legs.",
+    "atlas": "./assets/roster/auroriel-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
       "A small curled sun-spark creature with an ivory head, short paired flame fins and one peach-gold halo fragment",
       "A long airborne solar serpent with an arched ivory neck, broad paired pastel flame wings and a narrow streaming ribbon tail",
-      "An upright sun-phoenix elemental with an open radiant chest, six layered dawn-flame fans arranged around its central body, two ivory talons and an enormous circular solar corona"
+      "Aurorion: Elongate Crown of Dawn's neck and the torso-to-hip section into a flowing Chinese-dragon silhouette."
     ],
     "proceduralArt": false,
     "formAnatomy": [
@@ -627,7 +741,7 @@
       },
       {
         "version": 1,
-        "bodyPlan": "winged",
+        "bodyPlan": "serpentine",
         "traits": [
           "wings",
           "talons",
@@ -642,8 +756,9 @@
         "manipulators": 0,
         "strength": 1,
         "scale": "ordinary",
-        "source": "image-analysis",
-        "confidence": 0.92
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-6"
       }
     ],
     "anatomy": {
@@ -664,7 +779,12 @@
       "scale": "ordinary",
       "source": "image-analysis",
       "confidence": 0.92
-    }
+    },
+    "previousAtlas": "./assets/roster/auroriel-v4.webp",
+    "updatedForms": [
+      3
+    ],
+    "artNotes": "Elongate Crown of Dawn's neck and the torso-to-hip section into a flowing Chinese-dragon silhouette."
   },
   {
     "index": 13,
@@ -674,7 +794,7 @@
     "forms": [
       "Rivetreed",
       "Bronzewade",
-      "Heron Magistrate"
+      "Ardearch"
     ],
     "description": "A bronze automaton shaped with long heron-like legs and a curved mechanical beak, with emerald patina and articulated wing plates.",
     "atlas": "./assets/roster/bronzewade-v6.webp",
@@ -696,7 +816,7 @@
     "forms": [
       "Lacquib",
       "Jarjell",
-      "Lacquer Custodian"
+      "Urnwarden"
     ],
     "description": "A walking black-and-vermilion lacquer vessel whose ceramic limbs are joined by clear amber jelly and floating brass fasteners.",
     "atlas": "./assets/roster/jarjell-v6.webp",
@@ -792,7 +912,8 @@
       "source": "image-analysis",
       "confidence": 0.92,
       "reference": "lion"
-    }
+    },
+    "formDescriptions": []
   },
   {
     "index": 15,
@@ -802,7 +923,7 @@
     "forms": [
       "Twigknock",
       "Puppetide",
-      "Woodland Puppeteer"
+      "Sylveteer"
     ],
     "description": "A carved wooden marionette with a lacquered nonhuman mask, jointed branch limbs, faerie silk cords, and small luminous bell flowers.",
     "atlas": "./assets/roster/puppetide-v4.webp",
@@ -823,12 +944,114 @@
     "forms": [
       "Cinderbolt",
       "Kilnwarden",
-      "Iron Hellkeeper"
+      "Ferrarden"
     ],
-    "description": "An iron furnace construct animated by one large vertical eye made of fire and darkness. It transforms from a round little brazier into a barrel-chested furnace warden and an angular forge sentinel.",
-    "atlas": "./assets/roster/kilnwarden-v3.webp",
-    "artRevision": 3,
-    "proceduralArt": false
+    "description": "A volcanic mineral construct animated by one enormous vertical eye of fire and darkness. Cooling basalt and magma acquire increasingly abundant natural iron and nickel: light veining in Form 1, broad deposits in Form 2, and a mostly metallic final body with glowing magma seams. No industrial machinery.",
+    "atlas": "./assets/roster/kilnwarden-v7.webp",
+    "artRevision": 7,
+    "proceduralArt": false,
+    "previousAtlas": "./assets/roster/kilnwarden-v3.webp",
+    "updatedForms": [
+      1,
+      2,
+      3
+    ],
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "traits": [
+          "hands",
+          "armor",
+          "fire",
+          "strong"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "ordinary",
+        "evidence": "updated-forms-page-7"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "traits": [
+          "hands",
+          "armor",
+          "fire",
+          "strong"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "ordinary",
+        "evidence": "updated-forms-page-7"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "traits": [
+          "hands",
+          "armor",
+          "fire",
+          "strong"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "ordinary",
+        "evidence": "updated-forms-page-7"
+      }
+    ],
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "biped",
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "traits": [
+        "hands",
+        "armor",
+        "fire",
+        "strong"
+      ],
+      "limbs": {
+        "legs": 2,
+        "arms": 2,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 2,
+      "strength": 3,
+      "scale": "ordinary",
+      "evidence": "updated-forms-page-7"
+    },
+    "artNotes": "Per your direction, replace industrial bodies with molten rock, magma and increasingly abundant natural metal: sparse veins, broad metal deposits, then a metal-dominant final body. Preserve the enormous fiery eye and distinct Forms.",
+    "formDescriptions": [
+      "Cinderbolt: Per your direction, replace industrial bodies with molten rock, magma and increasingly abundant natural metal: sparse veins, broad metal deposits, then a metal-dominant final body. Preserve the enormous fiery eye and distinct Forms.",
+      "Kilnwarden: Per your direction, replace industrial bodies with molten rock, magma and increasingly abundant natural metal: sparse veins, broad metal deposits, then a metal-dominant final body. Preserve the enormous fiery eye and distinct Forms.",
+      "Ferrarden: Per your direction, replace industrial bodies with molten rock, magma and increasingly abundant natural metal: sparse veins, broad metal deposits, then a metal-dominant final body. Preserve the enormous fiery eye and distinct Forms."
+    ]
   },
   {
     "index": 17,
@@ -838,10 +1061,11 @@
     "forms": [
       "Rillbud",
       "Torrentreed",
-      "Riverbloom Torrent"
+      "Reedstrom"
     ],
     "description": "A living swirl of river water with curling current limbs, carnivorous reed fronds, floating seed pods, and jade ripples.",
-    "atlas": "./assets/roster/torrentreed.webp"
+    "atlas": "./assets/roster/torrentreed.webp",
+    "formDescriptions": []
   },
   {
     "index": 18,
@@ -851,12 +1075,13 @@
     "forms": [
       "Ashwhisp",
       "Cinerwraith",
-      "Last Emberstorm"
+      "Cinerstorm"
     ],
     "description": "A living ash-and-ember whirlwind modified by spectral ribs and fading ancestral cloth, in charcoal, peach ember, and cold violet.",
     "atlas": "./assets/roster/cinerwraith.webp",
     "artRevision": 6,
-    "proceduralArt": false
+    "proceduralArt": false,
+    "formDescriptions": []
   },
   {
     "index": 19,
@@ -866,12 +1091,13 @@
     "forms": [
       "Sandsplin",
       "Glasswhorl",
-      "Dune Orrery"
+      "Vitrovolve"
     ],
     "description": "A spinning elemental sand creature with segmented glass rings and bronze pivot joints, using amber sand and teal glass highlights.",
     "atlas": "./assets/roster/glasswhorl.webp",
     "artRevision": 6,
-    "proceduralArt": false
+    "proceduralArt": false,
+    "formDescriptions": []
   },
   {
     "index": 20,
@@ -881,16 +1107,16 @@
     "forms": [
       "Plasmote",
       "Resonara",
-      "Heavenly Resonance"
+      "Resonarch"
     ],
     "description": "A creature of ringing blue plasma shaped into nested bell-like currents, altered by small feathered light arcs and a gold celestial crown.",
-    "atlas": "./assets/roster/resonara-v6.webp",
-    "artRevision": 6,
+    "atlas": "./assets/roster/resonara-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
       "A single small blue bell spirit with a golden clapper and two tiny folded white winglets",
       "A long suspended paired-bell creature with a narrow articulated gold spine, wings spread horizontally and two separate glowing clappers",
-      "A hovering radial carillon seraph with three open bells facing different directions around a bright gold core, six curved white feather lobes and one broad orbital halo; reorganized body, no conventional legs"
+      "Resonarch: Place a blue eye in Heavenly Resonance's central golden circle between its bells."
     ],
     "proceduralArt": false,
     "formAnatomy": [
@@ -953,9 +1179,10 @@
         "manipulators": 0,
         "strength": 1,
         "scale": "ordinary",
-        "source": "image-analysis",
-        "confidence": 0.92,
-        "reference": "crow"
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "reference": "crow",
+        "evidence": "updated-forms-page-8"
       }
     ],
     "anatomy": {
@@ -979,7 +1206,11 @@
       "confidence": 0.92,
       "reference": "crow"
     },
-    "artNotes": "add six floating eyes per form with blue sclera, blue iris and blue vertical pupils."
+    "artNotes": "Place a blue eye in Heavenly Resonance's central golden circle between its bells.",
+    "previousAtlas": "./assets/roster/resonara-v6.webp",
+    "updatedForms": [
+      3
+    ]
   },
   {
     "index": 21,
@@ -989,18 +1220,101 @@
     "forms": [
       "Velvetip",
       "Whiskerfey",
-      "Velvet Regent"
+      "Velvarch"
     ],
     "description": "A small nonhuman woodland faerie with velvet mothlike wings, dormouse whiskers, nimble paws, and a plum-and-cream tufted tail.",
-    "atlas": "./assets/roster/whiskerfey-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/whiskerfey-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Round dormouse faerie with tucked small moth wings and a short fluffy tail",
       "Nimble long-bodied faerie glider with wide functional moth wings and long whiskers",
-      "Poised woodland faerie courier with elongated hindlegs, broad scalloped moth wings and a large sweeping tufted tail; no human face"
+      "Velvarch: Repair Velvet Regent's underdeveloped leg with a fully articulated feline limb and paw."
     ],
-    "proceduralArt": false
+    "proceduralArt": false,
+    "previousAtlas": "./assets/roster/whiskerfey-v4.webp",
+    "updatedForms": [
+      3
+    ],
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "wings"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 2,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-9"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "wings"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 2,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-9"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "wings"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 2,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-9"
+      }
+    ],
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "quadruped",
+      "traits": [
+        "wings"
+      ],
+      "limbs": {
+        "legs": 4,
+        "arms": 0,
+        "wings": 2,
+        "tentacles": 0
+      },
+      "manipulators": 0,
+      "strength": 1,
+      "scale": "ordinary",
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "evidence": "updated-forms-page-9"
+    },
+    "artNotes": "Repair Velvet Regent's underdeveloped leg with a fully articulated feline limb and paw."
   },
   {
     "index": 22,
@@ -1010,7 +1324,7 @@
     "forms": [
       "Dewglee",
       "Gelmirth",
-      "Gossamer Gelcourt"
+      "Gelamour"
     ],
     "description": "A faerie with curled fernlike ears and delicate insect wings whose mint-colored body flows into transparent gel skirts and dew beads.",
     "atlas": "./assets/roster/gelmirth-v4.webp",
@@ -1031,7 +1345,7 @@
     "forms": [
       "Masklet",
       "Silkvisage",
-      "Sixfinger Envoy"
+      "Hexavoy"
     ],
     "description": "A slender faerie with a moth-wing cloak, smooth porcelain insect mask, six-fingered hands, and a bipedal but visibly nonhuman body.",
     "atlas": "./assets/roster/silkvisage-v4.webp",
@@ -1052,7 +1366,7 @@
     "forms": [
       "Prankcoal",
       "Jesthorn",
-      "Thorn Court Jester"
+      "Thornjape"
     ],
     "description": "A mischievous faerie with curled leaf wings, a striped violet tail, little infernal antlers, and ember-red thorn tips.",
     "atlas": "./assets/roster/jesthorn-v4.webp",
@@ -1073,7 +1387,7 @@
     "forms": [
       "Burrimp",
       "Bramblefiend",
-      "Infernal Briar"
+      "Briarabol"
     ],
     "description": "A horned fiend with a barbed tail and folded membrane wings, overgrown by burgundy pitcher plants and hooked olive thorns.",
     "atlas": "./assets/roster/bramblefiend-v4.webp",
@@ -1094,18 +1408,105 @@
     "forms": [
       "Linkimp",
       "Chainhorn",
-      "Furnace Bailiff"
+      "Catenarch"
     ],
-    "description": "A long-armed horned fiend with brass jaw plates, dark iron chain loops, riveted shoulder guards, and red-hot joint seams.",
-    "atlas": "./assets/roster/chainhorn-v4.webp",
-    "artRevision": 4,
+    "description": "A horned chain-bound fiend with a matched pair of swept black horns, two massive bat wings, dark metal restraints and ember-lit red skin. Two enormous clawed arms brace its body above two sturdy legs.",
+    "atlas": "./assets/roster/chainhorn-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Crouched chain imp with disproportionately large hands and a few loose brass links",
       "Lean high-shouldered chain fiend with very long articulated forearms and linked shoulder chains",
-      "Massive stooping furnace bailiff with deep plated chest, heavy dragging chain loops and enormous grasping gauntlets; two arms and two legs"
+      "Catenarch: Correct Furnace Bailiff's malformed right horn and give it massive paired bat wings."
     ],
-    "proceduralArt": false
+    "proceduralArt": false,
+    "previousAtlas": "./assets/roster/chainhorn-v4.webp",
+    "updatedForms": [
+      3
+    ],
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "fly",
+          "wings"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 2,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-10"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "fly",
+          "wings"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 2,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-10"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "fly",
+          "wings"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 2,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-10"
+      }
+    ],
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "quadruped",
+      "traits": [
+        "fly",
+        "wings"
+      ],
+      "limbs": {
+        "legs": 4,
+        "arms": 0,
+        "wings": 2,
+        "tentacles": 0
+      },
+      "manipulators": 0,
+      "strength": 1,
+      "scale": "ordinary",
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "evidence": "updated-forms-page-10"
+    },
+    "artNotes": "Correct Furnace Bailiff's malformed right horn and give it massive paired bat wings."
   },
   {
     "index": 27,
@@ -1115,7 +1516,7 @@
     "forms": [
       "Ashhalo",
       "Crownscar",
-      "Eclipsed Herald"
+      "Umbrarald"
     ],
     "description": "A charcoal-skinned winged fiend with curling ivory horns, a fractured luminous feather halo, and silver celestial markings; no moral alignment implied.",
     "atlas": "./assets/roster/crownscar-v4.webp",
@@ -1136,7 +1537,7 @@
     "forms": [
       "Tarpip",
       "Pitchmaw",
-      "Obsidian Mirefiend"
+      "Obsimire"
     ],
     "description": "A crouching horned fiend whose glossy black body drips into viscous oil-like gel, with ochre eyes and amber-lit cracks.",
     "atlas": "./assets/roster/pitchmaw-v4.webp",
@@ -1157,18 +1558,115 @@
     "forms": [
       "Terralow",
       "Bonsaitor",
-      "Terrace Patriarch"
+      "Bonsaiarch"
     ],
     "description": "A sandstone and living-wood giant with an elephant head, a moss-covered trunk, bark-textured tusks, enormous hands and terraced bonsai trees growing across its back.",
-    "atlas": "./assets/roster/bonsaitor-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/bonsaitor-v7.webp",
+    "artRevision": 7,
     "proceduralArt": false,
     "evolutionRevision": 1,
     "formDescriptions": [
-      "Small hunched elephant-headed woodland giant with a short mossy trunk, stubby tusks and one sapling growing from a rounded back",
-      "Broad forward-leaning elephant giant with longer trunk, reinforced root-covered forearms and several separate bonsai ledges",
-      "Ancient low-slung elephant titan supporting a wide terraced grove across a high craggy back, huge root-braced arms and sweeping mossy trunk; two arms and legs"
-    ]
+      "Terralow: Replace the repeated crouching bodies with a compact seated sapling, a tall walking grove giant, and a broad root-arched terrace guardian.",
+      "Bonsaitor: Replace the repeated crouching bodies with a compact seated sapling, a tall walking grove giant, and a broad root-arched terrace guardian.",
+      "Bonsaiarch: Replace the repeated crouching bodies with a compact seated sapling, a tall walking grove giant, and a broad root-arched terrace guardian."
+    ],
+    "previousAtlas": "./assets/roster/bonsaitor-v4.webp",
+    "updatedForms": [
+      1,
+      2,
+      3
+    ],
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "traits": [
+          "hands",
+          "strong",
+          "large",
+          "roots"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "colossal",
+        "evidence": "updated-forms-page-11"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "traits": [
+          "hands",
+          "strong",
+          "large",
+          "roots"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "colossal",
+        "evidence": "updated-forms-page-11"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "traits": [
+          "hands",
+          "strong",
+          "large",
+          "roots"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 3,
+        "scale": "colossal",
+        "evidence": "updated-forms-page-11"
+      }
+    ],
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "biped",
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "traits": [
+        "hands",
+        "strong",
+        "large",
+        "roots"
+      ],
+      "limbs": {
+        "legs": 2,
+        "arms": 2,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 2,
+      "strength": 3,
+      "scale": "colossal",
+      "evidence": "updated-forms-page-11"
+    },
+    "artNotes": "Replace the repeated crouching bodies with a compact seated sapling, a tall walking grove giant, and a broad root-arched terrace guardian."
   },
   {
     "index": 30,
@@ -1178,7 +1676,7 @@
     "forms": [
       "Rumblekin",
       "Cloudgron",
-      "Monsoon Grandfather"
+      "Cumulgron"
     ],
     "description": "A slate-blue storm giant with a ram head, curling horns, a white cloud mane and beard, digitigrade legs and cloven hooves, bronze bracers and electric-blue lightning accents.",
     "atlas": "./assets/roster/cloudgron-v4.webp",
@@ -1199,12 +1697,114 @@
     "forms": [
       "Plinthkin",
       "Lacquertor",
-      "Living Fortress"
+      "Lacquerith"
     ],
     "description": "A hunchbacked stone giant with four long bulky arms and red lacquer armor edged in antique gold. A rough boulder juvenile becomes an arch-backed guardian and a broad ancient titan with a ridged natural stone mantle; never architectural shoulders.",
-    "atlas": "./assets/roster/lacquertor-v3.webp",
-    "artRevision": 3,
-    "proceduralArt": false
+    "atlas": "./assets/roster/lacquertor-v7.webp",
+    "artRevision": 7,
+    "proceduralArt": false,
+    "previousAtlas": "./assets/roster/lacquertor-v3.webp",
+    "updatedForms": [
+      1,
+      2,
+      3
+    ],
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "traits": [
+          "hands",
+          "strong",
+          "large",
+          "armor"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 4,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 4,
+        "strength": 3,
+        "scale": "colossal",
+        "evidence": "updated-forms-page-12"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "traits": [
+          "hands",
+          "strong",
+          "large",
+          "armor"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 4,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 4,
+        "strength": 3,
+        "scale": "colossal",
+        "evidence": "updated-forms-page-12"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "traits": [
+          "hands",
+          "strong",
+          "large",
+          "armor"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 4,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 4,
+        "strength": 3,
+        "scale": "colossal",
+        "evidence": "updated-forms-page-12"
+      }
+    ],
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "biped",
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "traits": [
+        "hands",
+        "strong",
+        "large",
+        "armor"
+      ],
+      "limbs": {
+        "legs": 2,
+        "arms": 4,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 4,
+      "strength": 3,
+      "scale": "colossal",
+      "evidence": "updated-forms-page-12"
+    },
+    "artNotes": "Replace the repeated hunched bodies with three distinct stone architectures and arm functions, retaining four arms in every Form.",
+    "formDescriptions": [
+      "Plinthkin: Replace the repeated hunched bodies with three distinct stone architectures and arm functions, retaining four arms in every Form.",
+      "Lacquertor: Replace the repeated hunched bodies with three distinct stone architectures and arm functions, retaining four arms in every Form.",
+      "Lacquerith: Replace the repeated hunched bodies with three distinct stone architectures and arm functions, retaining four arms in every Form."
+    ]
   },
   {
     "index": 32,
@@ -1214,7 +1814,7 @@
     "forms": [
       "Graveltot",
       "Barrowgron",
-      "Sepulcher Titan"
+      "Sepulgron"
     ],
     "description": "An undead slate giant with greatly elongated arms and ground-reaching knuckles, weathered burial wraps, a shadowed stone mask, cyan-glowing exposed ribs and a tombstone mantle.",
     "atlas": "./assets/roster/barrowgron-v4.webp",
@@ -1235,7 +1835,7 @@
     "forms": [
       "Mothling",
       "Silkclasp",
-      "Mothmask Adept"
+      "Lepidact"
     ],
     "description": "A visibly nonhuman biped with a moth head, four delicate grasping forearms, soft fur cuffs, and broad patterned antennae; never a human.",
     "atlas": "./assets/roster/silkclasp-v6.webp",
@@ -1331,7 +1931,7 @@
     "forms": [
       "Reedkin",
       "Wickerstride",
-      "Bamboo Wayfarer"
+      "Wickerroam"
     ],
     "description": "A visibly nonhuman human-shaped Spirimon with a reed-bundle head, hollow wooden face, two long legs, and living strangler-vine fingers; never a human.",
     "atlas": "./assets/roster/wickerstride-v6.webp",
@@ -1431,7 +2031,7 @@
     "forms": [
       "Shiverglass",
       "Mirrorkin",
-      "Manyhand Reflection"
+      "Mirroryx"
     ],
     "description": "A visibly nonhuman four-armed biped with a shifting mirrored face, offset eyes, ribbon joints, and asymmetric turquoise glass skin; never a human.",
     "atlas": "./assets/roster/mirrorkin-v4.webp",
@@ -1452,7 +2052,7 @@
     "forms": [
       "Plumask",
       "Prismonk",
-      "Iridescent Envoy"
+      "Iridavian"
     ],
     "description": "A visibly nonhuman avian-headed biped with taloned hands, opaline feather crests, long ceremonial-looking plumage, and a small radiant wing mantle.",
     "atlas": "./assets/roster/prismonk-v4.webp",
@@ -1473,7 +2073,7 @@
     "forms": [
       "Skyscale",
       "Tempestrill",
-      "Storm Amphiptere"
+      "Tempestrel"
     ],
     "description": "An amphiptere from myth: a feather-winged serpent without walking legs, modified by swirling storm currents and blue-white feather sparks.",
     "atlas": "./assets/roster/tempestrill-v5.webp",
@@ -1494,7 +2094,7 @@
     "forms": [
       "Kelpfoal",
       "Reinroot",
-      "Strangler Kelpie"
+      "Strangallop"
     ],
     "description": "A kelpie from Celtic myth: an eerie long-maned water horse modified by carnivorous aquatic vines, reed fins, and hooked green tendrils.",
     "atlas": "./assets/roster/reinroot-v4.webp",
@@ -1515,7 +2115,7 @@
     "forms": [
       "Cogspark",
       "Fengweave",
-      "Bronze Fenghuang"
+      "Bronzhuang"
     ],
     "description": "A fenghuang from Chinese myth with elaborate tail plumes, modified by bronze feather joints, jade inlays, and articulated golden crest plates.",
     "atlas": "./assets/roster/fengweave-v4.webp",
@@ -1536,7 +2136,7 @@
     "forms": [
       "Slimescale",
       "Vitrilisk",
-      "Basilisk of Glass"
+      "Vitrilord"
     ],
     "description": "A basilisk from myth with a crownlike crest and serpentine body, modified by translucent violet gel, floating scales, and dripping glassy edges.",
     "atlas": "./assets/roster/vitrilisk-v5.webp",
@@ -1557,7 +2157,7 @@
     "forms": [
       "Ambit",
       "Amberwork",
-      "Living Reliquary"
+      "Amberelique"
     ],
     "description": "An amorphous amber ooze containing floating bronze mechanisms and broken porcelain charms, with pseudopod feet and a fluid silhouette.",
     "atlas": "./assets/roster/amberwork-v4.webp",
@@ -1578,7 +2178,7 @@
     "forms": [
       "Glimdrop",
       "Halojell",
-      "Celestial Tidelight"
+      "Halolume"
     ],
     "description": "A translucent pearlescent ooze with floating feather-shaped lights, small golden ring arcs, and luminous blue pseudopods.",
     "atlas": "./assets/roster/halojell-v4.webp",
@@ -1599,7 +2199,7 @@
     "forms": [
       "Pitchdrop",
       "Nepentide",
-      "Pitcher Deluge"
+      "Nepenturge"
     ],
     "description": "An amorphous green jelly creature containing living carnivorous pitcher cups and red sundew tendrils, with soft gel feet and trapped seed pods.",
     "atlas": "./assets/roster/nepentide-v4.webp",
@@ -1620,7 +2220,7 @@
     "forms": [
       "Ectobit",
       "Ossigel",
-      "Ossuary Drift"
+      "Ossivane"
     ],
     "description": "An ectoplasmic ooze with pale lavender gel, drifting small bones, skull-like bubbles, and wispy trailing pseudopods.",
     "atlas": "./assets/roster/ossigel-v4.webp",
@@ -1641,7 +2241,7 @@
     "forms": [
       "Wirebud",
       "Strangleweld",
-      "Ironwood Snare"
+      "Strangliron"
     ],
     "description": "A dangerous strangler fig with mobile root legs, modified by bronze vine hinges, iron bark plates, and articulated trapping branches.",
     "atlas": "./assets/roster/strangleweld-v5.webp",
@@ -1662,7 +2262,7 @@
     "forms": [
       "Censerpod",
       "Fumepitcher",
-      "Censer Tyrant"
+      "Fumetyr"
     ],
     "description": "A carnivorous pitcher plant with deep red trapping cups, hornlike leaf tips, black roots, and sulfurous orange lure vapor.",
     "atlas": "./assets/roster/fumepitcher-v6.webp",
@@ -1758,7 +2358,7 @@
     "forms": [
       "Stingbud",
       "Needlebristle",
-      "Stinging Grovebeast"
+      "Nettlequill"
     ],
     "description": "A dangerous gympie-gympie stinging plant with dense needle hairs, modified by hedgehog-like leaf spines and quick root paws.",
     "atlas": "./assets/roster/needlebristle-v4.webp",
@@ -1779,7 +2379,7 @@
     "forms": [
       "Hushwick",
       "Jianglume",
-      "Lantern Ancestor"
+      "Jiangtern"
     ],
     "description": "A hopping ancestral undead faerie with a pale spectral moth head, luminous compound eyes, feathery antennae, exactly two ectoplasmic tendril arms emerging from silk sleeves, moth wings and warm antique lantern ornaments.",
     "atlas": "./assets/roster/jianglume-v6.webp",
@@ -1801,7 +2401,7 @@
     "forms": [
       "Barrowick",
       "Draugale",
-      "Tempest Revenant"
+      "Draugast"
     ],
     "description": "A draugr from Norse undead folklore with weathered burial armor and a skeletal sea-worn face, altered by swirling salt wind and turquoise storm mist.",
     "atlas": "./assets/roster/draugale-v4.webp",
@@ -1822,7 +2422,7 @@
     "forms": [
       "Aetherlet",
       "Aetherling",
-      "Aether Sovereign"
+      "Aethergnath"
     ],
     "description": "A horrific four-legged aether hound built from pale ceramic ribs and bronze clockwork, with six asymmetrical eyes, jointed tentacles instead of a tail, and impossible floating jaw plates.",
     "proceduralArt": false,
@@ -1843,7 +2443,7 @@
     "forms": [
       "Bramblelet",
       "Bramblehorn",
-      "Bramble Sovereign"
+      "Bramblethane"
     ],
     "description": "A recognizable massively muscular takin with thick fur, curling horns grown into flowering thorn branches, tiny faerie lantern seedpods and moss-gold markings. Four sturdy hooved legs.",
     "proceduralArt": false,
@@ -1868,7 +2468,7 @@
     "forms": [
       "Cinderlet",
       "Cindershade",
-      "Cinder Sovereign"
+      "Cindrakirin"
     ],
     "description": "A radiant four-hoofed kirin with charcoal feathers, molten pearl halo rings and a hollow chest containing misplaced watchful eyes. Beautiful celestial light disturbed by horrific asymmetry.",
     "proceduralArt": false,
@@ -1889,7 +2489,7 @@
     "forms": [
       "Dusklet",
       "Duskclaw",
-      "Dusk Sovereign"
+      "Duskivett"
     ],
     "description": "A four-legged automaton civet made of dark cedar, articulated brass claws and violet glass eyes, with dusk-colored faerie silk tails and tiny luminous leaf charms.",
     "proceduralArt": false,
@@ -1910,19 +2510,19 @@
     "forms": [
       "Emberlet",
       "Embermoth",
-      "Ember Sovereign"
+      "Embermelt"
     ],
     "description": "An amorphous molten-amber ooze elemental whose flowing lobes suggest moth wings; ember veins and drifting liquid droplets, a soft translucent body with no rigid animal skeleton.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/embermoth-v6.webp",
-    "artRevision": 6,
+    "atlas": "./assets/roster/embermoth-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
-      "Single molten-amber droplet with tiny symmetrical winglike lobes",
-      "Flowing mothlike ooze with a raised soft core and broad liquid wings",
-      "Tall molten gel elemental with deeply scalloped cascading wing lobes and a hanging amber droplet abdomen; amorphous, no hard moth skeleton"
+      "Emberlet: Give all stages unmistakable expressive eyes, and replace the enlarged final moth with a hollow suspended molten mantle.",
+      "Embermoth: Give all stages unmistakable expressive eyes, and replace the enlarged final moth with a hollow suspended molten mantle.",
+      "Embermelt: Give all stages unmistakable expressive eyes, and replace the enlarged final moth with a hollow suspended molten mantle."
     ],
-    "artNotes": "add more wings to the first form.",
+    "artNotes": "Give all stages unmistakable expressive eyes, and replace the enlarged final moth with a hollow suspended molten mantle.",
     "formAnatomy": [
       {
         "version": 1,
@@ -1941,8 +2541,9 @@
         "manipulators": 0,
         "strength": 1,
         "scale": "ordinary",
-        "source": "image-analysis",
-        "confidence": 0.92
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-13"
       },
       {
         "version": 1,
@@ -1961,8 +2562,9 @@
         "manipulators": 0,
         "strength": 1,
         "scale": "ordinary",
-        "source": "image-analysis",
-        "confidence": 0.92
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-13"
       },
       {
         "version": 1,
@@ -1981,8 +2583,9 @@
         "manipulators": 0,
         "strength": 1,
         "scale": "ordinary",
-        "source": "image-analysis",
-        "confidence": 0.92
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-13"
       }
     ],
     "anatomy": {
@@ -2002,9 +2605,16 @@
       "manipulators": 0,
       "strength": 1,
       "scale": "ordinary",
-      "source": "image-analysis",
-      "confidence": 0.92
-    }
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "evidence": "updated-forms-page-13"
+    },
+    "previousAtlas": "./assets/roster/embermoth-v6.webp",
+    "updatedForms": [
+      1,
+      2,
+      3
+    ]
   },
   {
     "index": 55,
@@ -2014,7 +2624,7 @@
     "forms": [
       "Frostlet",
       "Frostwyrm",
-      "Frost Sovereign"
+      "Frostrake"
     ],
     "description": "A four-legged frost faerie dragon with snow-gecko features, fernlike ice ears, opaline scale tufts and delicate golden celestial halo arcs. Nonhuman, long-bodied, four paws.",
     "proceduralArt": false,
@@ -2035,7 +2645,7 @@
     "forms": [
       "Gloomlet",
       "Gloomglen",
-      "Gloom Sovereign"
+      "Gloomtusk"
     ],
     "description": "A colossal boar-headed basalt fiend giant with heavy moss-dark limbs, olive lichen beard, sweeping tusks, enormous clawed hands and dim green cracks; two arms and two legs.",
     "proceduralArt": false,
@@ -2056,7 +2666,7 @@
     "forms": [
       "Hollowlet",
       "Hollowbloom",
-      "Hollow Sovereign"
+      "Hollowgraven"
     ],
     "description": "A hollow-bodied undead giant with weathered bone ribs, gray stone flesh, fungal funeral blossoms and torn burial wrappings. Bipedal, immensely broad shoulders and massive hands.",
     "proceduralArt": false,
@@ -2077,7 +2687,7 @@
     "forms": [
       "Ivorylet",
       "Ivoryspire",
-      "Ivory Sovereign"
+      "Ivorygale"
     ],
     "description": "A visibly nonhuman bipedal ivory faerie with an antelope-like porcelain face, branching ears, slender elongated limbs and ribbons of pale wind and gold dust. No human face.",
     "proceduralArt": false,
@@ -2102,7 +2712,7 @@
     "forms": [
       "Jadelet",
       "Jademaw",
-      "Jade Sovereign"
+      "Jadengorge"
     ],
     "description": "An amorphous jade gel monstrosity with a huge split predatory maw, oversized curved fangs, floating jade scutes and several flowing rootlike pseudopods. No rigid legs.",
     "proceduralArt": false,
@@ -2123,7 +2733,7 @@
     "forms": [
       "Kelplet",
       "Kelpveil",
-      "Kelp Sovereign"
+      "Kelplutra"
     ],
     "description": "A translucent sea-green ooze with the recognizable broad muzzle and muscular mass of a river otter, flowing kelp-shaped gel fringes, suspended river stones and soft pseudopod feet.",
     "proceduralArt": false,
@@ -2145,7 +2755,7 @@
     "forms": [
       "Lumenlet",
       "Lumenwing",
-      "Lumen Sovereign"
+      "Lumenvore"
     ],
     "description": "A rooted carnivorous plant with luminous pitcher-cup wings, black thorn roots, hooked infernal leaf tips and orange nectar lures. Remains unmistakably a plant.",
     "proceduralArt": false,
@@ -2166,18 +2776,111 @@
     "forms": [
       "Morrowlet",
       "Morrowfang",
-      "Morrow Sovereign"
+      "Morrowskull"
     ],
-    "description": "A reanimated carnivorous grave-root plant with a cracked jackal skull caught in its trunk, skeletal root fingers, dead lavender petals and pale soul light.",
+    "description": "A jackal-skull graveflower becomes a hollow walking tree and an ancient weeping grave-tree, with lavender funeral petals, skeletal roots and pale soul light.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/morrowfang-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/morrowfang-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
-      "Low grave-root seedling carrying a small jackal skull trap",
-      "Tall bowed skeletal root plant with an open jackal-skull trap and hanging dead petals",
-      "Arched grave-root predator with a large low jackal skull, dense bone-root scaffold and several secondary leaf traps; plant, not skeletal animal"
-    ]
+      "Morrowlet: Differentiate Morrowfang as a lavender graveflower becoming a tall walking tree and a broad weeping grave-tree; change architecture and posture across Forms.",
+      "Morrowfang: Differentiate Morrowfang as a lavender graveflower becoming a tall walking tree and a broad weeping grave-tree; change architecture and posture across Forms.",
+      "Morrowskull: Differentiate Morrowfang as a lavender graveflower becoming a tall walking tree and a broad weeping grave-tree; change architecture and posture across Forms."
+    ],
+    "previousAtlas": "./assets/roster/morrowfang-v4.webp",
+    "updatedForms": [
+      1,
+      2,
+      3
+    ],
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "rooted",
+        "traits": [
+          "bone",
+          "hands",
+          "roots"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-14"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "rooted",
+        "traits": [
+          "bone",
+          "hands",
+          "roots"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-14"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "rooted",
+        "traits": [
+          "bone",
+          "hands",
+          "roots"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 2,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-14"
+      }
+    ],
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "rooted",
+      "traits": [
+        "bone",
+        "hands",
+        "roots"
+      ],
+      "limbs": {
+        "legs": 0,
+        "arms": 0,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 2,
+      "strength": 1,
+      "scale": "ordinary",
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "evidence": "updated-forms-page-14"
+    },
+    "artNotes": "Differentiate Morrowfang as a lavender graveflower becoming a tall walking tree and a broad weeping grave-tree; change architecture and posture across Forms."
   },
   {
     "index": 63,
@@ -2187,7 +2890,7 @@
     "forms": [
       "Nacrelet",
       "Nacreling",
-      "Nacre Sovereign"
+      "Nacreculus"
     ],
     "description": "A horrific four-legged pearlescent construct with a mollusk-like layered body, articulated nacre plates, aperture mouths, extra mismatched eyes and twitching bronze feelers.",
     "proceduralArt": false,
@@ -2208,7 +2911,7 @@
     "forms": [
       "Obsidlet",
       "Obsidhorn",
-      "Obsid Sovereign"
+      "Obsidaroo"
     ],
     "description": "A recognizable powerfully built black-furred kangaroo standing on two heavy hind legs, broad muscular forearms, glossy dark curling horns and faint faerie leaf runes. No human face.",
     "proceduralArt": false,
@@ -2234,7 +2937,7 @@
     "forms": [
       "Pollenlet",
       "Pollenshade",
-      "Pollen Sovereign"
+      "Pollenoceros"
     ],
     "description": "A celestial deer-like quadruped with layered ivory pollen plumes, gold halo motes and multiple mismatched eye-bearing tendrils branching from its mane, eerie and anatomically unnatural.",
     "proceduralArt": false,
@@ -2255,7 +2958,7 @@
     "forms": [
       "Quilllet",
       "Quillclaw",
-      "Quill Sovereign"
+      "Quillforge"
     ],
     "description": "A quadruped clockwork porcupine made of bronze and pale wood, articulated quill plates, small faerie bellflowers and precise amethyst claws. Fine brass joint details.",
     "proceduralArt": false,
@@ -2277,19 +2980,103 @@
     "forms": [
       "Runelet",
       "Runemoth",
-      "Rune Sovereign"
+      "Runemorph"
     ],
     "description": "An amorphous violet magic-and-ooze creature with fluid mothlike wing lobes, unreadable luminous rune-shaped marks beneath its gel skin, silver droplets and a soft core.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/runemoth-v6.webp",
-    "artRevision": 6,
+    "atlas": "./assets/roster/runemoth-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
-      "Small round violet gel mote with two little winglike lobes",
-      "Tall soft winged ooze with translucent veined wing fans and an elongated floating abdomen",
-      "Wide flowing violet rune-ooze mantle with several distinct cascading liquid wing panels and suspended silver droplets; amorphous, no hard limbs"
+      "Runelet: All three Forms now have horizontal octopus-like slit pupils within the original violet eyes. The final Form retains its new hollow architecture; the rest of the lineage design is preserved.",
+      "Runemoth: All three Forms now have horizontal octopus-like slit pupils within the original violet eyes. The final Form retains its new hollow architecture; the rest of the lineage design is preserved.",
+      "Runemorph: All three Forms now have horizontal octopus-like slit pupils within the original violet eyes. The final Form retains its new hollow architecture; the rest of the lineage design is preserved."
     ],
-    "artNotes": "carry over only the current eye motif."
+    "artNotes": "All three Forms now have horizontal octopus-like slit pupils within the original violet eyes. The final Form retains its new hollow architecture; the rest of the lineage design is preserved.",
+    "previousAtlas": "./assets/roster/runemoth-v6.webp",
+    "updatedForms": [
+      1,
+      2,
+      3
+    ],
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "amorphous",
+        "traits": [
+          "wings"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 0,
+          "wings": 2,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-15"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "amorphous",
+        "traits": [
+          "wings"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 0,
+          "wings": 2,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-15"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "amorphous",
+        "traits": [
+          "wings"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 0,
+          "wings": 2,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-15"
+      }
+    ],
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "amorphous",
+      "traits": [
+        "wings"
+      ],
+      "limbs": {
+        "legs": 0,
+        "arms": 0,
+        "wings": 2,
+        "tentacles": 0
+      },
+      "manipulators": 0,
+      "strength": 1,
+      "scale": "ordinary",
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "evidence": "updated-forms-page-15"
+    }
   },
   {
     "index": 68,
@@ -2299,7 +3086,7 @@
     "forms": [
       "Sablelet",
       "Sablewyrm",
-      "Sable Sovereign"
+      "Sablelune"
     ],
     "description": "A recognizable long-bodied sable marten with four paws, silver velvet fur, faerie whisker filaments and small gold celestial rings woven around its flowing tail.",
     "proceduralArt": false,
@@ -2320,7 +3107,7 @@
     "forms": [
       "Thornlet",
       "Thornglen",
-      "Thorn Sovereign"
+      "Thornogre"
     ],
     "description": "A hulking bipedal fiend giant with a thorn-crowned nonhuman face, heavy black-red limbs, a hooked tail and a dense crown of burgundy spines and moss-dark brambles.",
     "proceduralArt": false,
@@ -2341,7 +3128,7 @@
     "forms": [
       "Umberlet",
       "Umberbloom",
-      "Umber Sovereign"
+      "Umbertomb"
     ],
     "description": "An undead bipedal earth giant with umber mummified skin, open stone-and-bone ribs, burial linen, dried lily blooms and a pale turquoise spirit glow.",
     "proceduralArt": false,
@@ -2362,7 +3149,7 @@
     "forms": [
       "Vesperlet",
       "Vesperspire",
-      "Vesper Sovereign"
+      "Vespertil"
     ],
     "description": "A visibly nonhuman tall bipedal bat-eared twilight faerie with a long muzzle, amber eyes, flowing dusk-blue fur and thin ribbons of moving wind. No ordinary human anatomy.",
     "proceduralArt": false,
@@ -2387,7 +3174,7 @@
     "forms": [
       "Willowlet",
       "Willowmaw",
-      "Willow Sovereign"
+      "Willogullet"
     ],
     "description": "An amorphous willow-green ooze monstrosity whose drooping liquid fronds conceal rows of long needle teeth, translucent sap lobes and an enormous hinged predatory mouth.",
     "proceduralArt": false,
@@ -2408,7 +3195,7 @@
     "forms": [
       "Xylolet",
       "Xyloveil",
-      "Xylo Sovereign"
+      "Xylotriton"
     ],
     "description": "A broad-shouldered salamander-shaped living ooze, with amber wood-grain suspended in its translucent body, muscular animal-like mass, bright bead eyes and flexible gel pseudopods.",
     "proceduralArt": false,
@@ -2504,7 +3291,7 @@
     "forms": [
       "Yarrowlet",
       "Yarrowwing",
-      "Yarrow Sovereign"
+      "Yarrovore"
     ],
     "description": "A rooted carnivorous yarrow plant with white clustered lures, red tooth-lined flower cups, barbed hornlike stems and dark infernal roots; botanically textured and predatory.",
     "proceduralArt": false,
@@ -2525,18 +3312,111 @@
     "forms": [
       "Zephyrlet",
       "Zephyrfang",
-      "Zephyr Sovereign"
+      "Zephyrwarg"
     ],
-    "description": "A rooted undead plant with a wind-worn wolf skull, bleached thorn fangs, dead reed fronds, skeletal root legs and pale green spectral sap.",
+    "description": "A wind-worn wolf skull animates dry reeds and skeletal roots, progressing from a curled seedpod to a stilt-root spirit and a broad wind-swept fan filled with pale green spectral sap.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/zephyrfang-v4.webp",
-    "artRevision": 6,
+    "atlas": "./assets/roster/zephyrfang-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
-      "Small rooted wolf-skull sprout with short dry reed fringe",
-      "Long arching grave plant with a wind-worn wolf skull held forward and skeletal root legs",
-      "Wide bowed spectral reed beast-plant with an elongated bone-fanged wolf trap, dense dead reed mane and exposed root scaffolding"
-    ]
+      "Zephyrlet: Differentiate Zephyrfang through curled seedpod, narrow stilt-root reed spirit and broad wind-swept reed fan, with open negative space and pale green sap.",
+      "Zephyrfang: Differentiate Zephyrfang through curled seedpod, narrow stilt-root reed spirit and broad wind-swept reed fan, with open negative space and pale green sap.",
+      "Zephyrwarg: Differentiate Zephyrfang through curled seedpod, narrow stilt-root reed spirit and broad wind-swept reed fan, with open negative space and pale green sap."
+    ],
+    "previousAtlas": "./assets/roster/zephyrfang-v4.webp",
+    "updatedForms": [
+      1,
+      2,
+      3
+    ],
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "rooted",
+        "traits": [
+          "bone",
+          "roots",
+          "spectral"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-16"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "rooted",
+        "traits": [
+          "bone",
+          "roots",
+          "spectral"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-16"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "rooted",
+        "traits": [
+          "bone",
+          "roots",
+          "spectral"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-16"
+      }
+    ],
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "rooted",
+      "traits": [
+        "bone",
+        "roots",
+        "spectral"
+      ],
+      "limbs": {
+        "legs": 0,
+        "arms": 0,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 0,
+      "strength": 1,
+      "scale": "ordinary",
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "evidence": "updated-forms-page-16"
+    },
+    "artNotes": "Differentiate Zephyrfang through curled seedpod, narrow stilt-root reed spirit and broad wind-swept reed fan, with open negative space and pale green sap."
   },
   {
     "index": 76,
@@ -2546,7 +3426,7 @@
     "forms": [
       "Ashenlet",
       "Ashenling",
-      "Ashen Sovereign"
+      "Ashenoclast"
     ],
     "description": "A horrific four-legged ash-gray construct with burnt cedar plates, exposed brass ribs, many coal-like eyes, an asymmetrical split jaw and long cable-like tentacles.",
     "proceduralArt": false,
@@ -2567,7 +3447,7 @@
     "forms": [
       "Beryllet",
       "Berylhorn",
-      "Beryl Sovereign"
+      "Beryllaby"
     ],
     "description": "A thickly muscled wallaby standing on two strong hind legs, warm gray fur, beryl-green branching horns, soft faerie ear fins and sparkling leaf-shaped markings. Clearly an animal.",
     "proceduralArt": false,
@@ -2593,7 +3473,7 @@
     "forms": [
       "Copperlet",
       "Coppershade",
-      "Copper Sovereign"
+      "Cupryphon"
     ],
     "description": "A four-legged copper-plumed celestial griffin with small gold halo rings, an unnaturally split beak, misplaced eyes in its feather mantle and an eerie asymmetric silhouette.",
     "proceduralArt": false,
@@ -2614,7 +3494,7 @@
     "forms": [
       "Driftlet",
       "Driftclaw",
-      "Drift Sovereign"
+      "Driftomaton"
     ],
     "description": "A four-legged driftwood otter automaton with bronze claw joints, pale weathered grain, sea-glass eyes and faerie silk seaweed streamers. Small shell-shaped mechanical accents.",
     "proceduralArt": false,
@@ -2635,19 +3515,19 @@
     "forms": [
       "Elderlet",
       "Eldermoth",
-      "Elder Sovereign"
+      "Elderesin"
     ],
     "description": "An amorphous old-gold resin ooze elemental with flowing moth-wing lobes, soft molten light, suspended ancient leaf patterns and tiny slow droplets. No hard limbs.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/eldermoth-v6.webp",
-    "artRevision": 6,
+    "atlas": "./assets/roster/eldermoth-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small suspended old-gold resin droplet with tiny leaf-patterned lobes",
       "Soft elongated resin moth shape with broad flowing wing fans and a narrow hanging core",
-      "Ancient amber-resin elemental with a wide layered liquid wing mantle, suspended leaf fossils and long trailing droplet lobes; no hard moth skeleton"
+      "Elderesin: Keep the barbed talon tentacles and introduce a functional wind-filled canopy and open central body."
     ],
-    "artNotes": "Tentacles tipped with barbed talons, increasing in number with advancement.",
+    "artNotes": "Keep the barbed talon tentacles and introduce a functional wind-filled canopy and open central body.",
     "formAnatomy": [
       {
         "version": 1,
@@ -2706,8 +3586,9 @@
         "manipulators": 0,
         "strength": 1,
         "scale": "ordinary",
-        "source": "image-analysis",
-        "confidence": 0.92
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-17"
       }
     ],
     "anatomy": {
@@ -2729,7 +3610,11 @@
       "scale": "ordinary",
       "source": "image-analysis",
       "confidence": 0.92
-    }
+    },
+    "previousAtlas": "./assets/roster/eldermoth-v6.webp",
+    "updatedForms": [
+      3
+    ]
   },
   {
     "index": 81,
@@ -2739,7 +3624,7 @@
     "forms": [
       "Flintlet",
       "Flintwyrm",
-      "Flint Sovereign"
+      "Flintdrake"
     ],
     "description": "A four-legged flint-gray faerie drake with a gecko-like face, chipped opaline scales, fanlike leaf ears and a thin radiant gold celestial crown, clearly nonhuman.",
     "proceduralArt": false,
@@ -2760,7 +3645,7 @@
     "forms": [
       "Garnetlet",
       "Garnetglen",
-      "Garnet Sovereign"
+      "Garnetyr"
     ],
     "description": "A colossal bipedal obsidian-skinned fiend giant with garnet-studded horn plates, massive clawed fists, a hooked lower jaw and deep burgundy ritual-like skin markings.",
     "proceduralArt": false,
@@ -2781,7 +3666,7 @@
     "forms": [
       "Hazellet",
       "Hazelbloom",
-      "Hazel Sovereign"
+      "Hazelgrave"
     ],
     "description": "A hulking undead giant with hollow hazel-wood-colored stone flesh, skeletal hands, a crown of dead hazel branches, old burial fabric and pale amber ghostlight.",
     "proceduralArt": false,
@@ -2802,7 +3687,7 @@
     "forms": [
       "Indigolet",
       "Indigospire",
-      "Indigo Sovereign"
+      "Indigotl"
     ],
     "description": "A visibly nonhuman indigo bipedal faerie with an axolotl-like face, frilled ears, long webbed fingers and flowing cobalt water ribbons. No ordinary human face.",
     "proceduralArt": false,
@@ -2827,7 +3712,7 @@
     "forms": [
       "Juniperlet",
       "Junipermaw",
-      "Juniper Sovereign"
+      "Junivora"
     ],
     "description": "An amorphous juniper-blue sap ooze monstrosity with floating berry-like nodules, jagged evergreen-colored fangs, several soft jaws and needle-frond gel tentacles.",
     "proceduralArt": false,
@@ -2848,7 +3733,7 @@
     "forms": [
       "Kestrellet",
       "Kestrelveil",
-      "Kestrel Sovereign"
+      "Kestregel"
     ],
     "description": "An amorphous tawny-and-slate ooze with recognizable kestrel beak and feather-patterned gel fans, muscular beastlike core and flowing winglike pseudopods; no rigid skeleton.",
     "proceduralArt": false,
@@ -2960,7 +3845,7 @@
     "forms": [
       "Lichenlet",
       "Lichenwing",
-      "Lichen Sovereign"
+      "Lichenfer"
     ],
     "description": "A rooted carnivorous lichen colony with tooth-edged trumpet traps, ember-red fruiting cups, leathery black leaf wings and hooked fiend-like thorn horns.",
     "proceduralArt": false,
@@ -3060,18 +3945,107 @@
     "forms": [
       "Marrowlet",
       "Marrowfang",
-      "Marrow Sovereign"
+      "Marrowtrap"
     ],
-    "description": "A rooted undead carnivorous plant formed from tangled pale marrow roots and black sap, with a long wolf-skull trap, bone fangs and tiny dried funeral flowers.",
+    "description": "A wolf-skull carnivorous marrow plant grows from a rib-cage seed into a low creeping clamp and a sprawling open bone-root trap, with black sap, burgundy leaves and dried funeral flowers.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/marrowfang-v4.webp",
-    "artRevision": 4,
+    "atlas": "./assets/roster/marrowfang-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
-      "Small wolf-skull root sprout with short pale marrow roots",
-      "Tall bowed marrow plant with an elongated wolf-skull trap held on a flexible skeletal stalk",
-      "Low sprawling marrow-root predator with a large bone-fanged skull trap beneath a high interwoven bone-root arch and dried funeral flowers"
-    ]
+      "Marrowlet: Differentiate Marrowfang as an ivory marrow-root trap with a low creeping clamp and broad open bone-root cage; remove the repeated tall skull-on-stalk silhouette.",
+      "Marrowfang: Differentiate Marrowfang as an ivory marrow-root trap with a low creeping clamp and broad open bone-root cage; remove the repeated tall skull-on-stalk silhouette.",
+      "Marrowtrap: Differentiate Marrowfang as an ivory marrow-root trap with a low creeping clamp and broad open bone-root cage; remove the repeated tall skull-on-stalk silhouette."
+    ],
+    "previousAtlas": "./assets/roster/marrowfang-v4.webp",
+    "updatedForms": [
+      1,
+      2,
+      3
+    ],
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "rooted",
+        "traits": [
+          "bone",
+          "roots"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-18"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "rooted",
+        "traits": [
+          "bone",
+          "roots"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-18"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "rooted",
+        "traits": [
+          "bone",
+          "roots"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-18"
+      }
+    ],
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "rooted",
+      "traits": [
+        "bone",
+        "roots"
+      ],
+      "limbs": {
+        "legs": 0,
+        "arms": 0,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 0,
+      "strength": 1,
+      "scale": "ordinary",
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "evidence": "updated-forms-page-18"
+    },
+    "artNotes": "Differentiate Marrowfang as an ivory marrow-root trap with a low creeping clamp and broad open bone-root cage; remove the repeated tall skull-on-stalk silhouette."
   },
   {
     "index": 89,
@@ -3081,7 +4055,7 @@
     "forms": [
       "Nimbuslet",
       "Nimbusling",
-      "Nimbus Sovereign"
+      "Nimbuloc"
     ],
     "description": "A horrific four-legged storm-gray construct with bronze rib hoops, a cloudlike fleshy mantle, several staring eyes, exposed gear joints and impossible dangling feelers.",
     "proceduralArt": false,
@@ -3102,7 +4076,7 @@
     "forms": [
       "Opallet",
       "Opalhorn",
-      "Opal Sovereign"
+      "Opalepus"
     ],
     "description": "A recognizable massively muscled cape hare upright on two powerful hind legs, creamy gray fur, opal branching horns and pink-violet faerie ear membranes. No human face.",
     "proceduralArt": false,
@@ -3218,7 +4192,7 @@
     "forms": [
       "Pyrelet",
       "Pyreshade",
-      "Pyre Sovereign"
+      "Pyreleon"
     ],
     "description": "A celestial four-legged lion-like creature of charcoal feathers and pearl-gold fire, a small radiant halo, and disturbing extra eyes and a second mouth in its chest.",
     "proceduralArt": false,
@@ -3239,7 +4213,7 @@
     "forms": [
       "Quartzlet",
       "Quartzclaw",
-      "Quartz Sovereign"
+      "Quartzlynx"
     ],
     "description": "A quadrupedal quartz-and-bronze lynx automaton with segmented translucent claws, warm gray plates, faerie ear tassels and tiny copper leaf charms.",
     "proceduralArt": false,
@@ -3261,19 +4235,19 @@
     "forms": [
       "Rimelet",
       "Rimemoth",
-      "Rime Sovereign"
+      "Rimelique"
     ],
     "description": "An amorphous pale-blue frost elemental mixed with translucent gel, forming delicate moth-wing lobes, suspended icy droplets and softly glowing silver veins.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/rimemoth-v6.webp",
-    "artRevision": 6,
+    "atlas": "./assets/roster/rimemoth-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
-      "Small round icy gel droplet with two short silver-veined lobes",
-      "Elongated frost ooze with wide delicate winglike fans and a hanging frozen core",
-      "Large arched frost-gel mantle with layered translucent liquid ice panels and separated suspended icy droplets; no rigid butterfly anatomy"
+      "Rimelet: Make personhood readable through the frost and separate the final Form's architecture from the middle stage while retaining exactly two large wings per Form.",
+      "Rimemoth: Make personhood readable through the frost and separate the final Form's architecture from the middle stage while retaining exactly two large wings per Form.",
+      "Rimelique: Make personhood readable through the frost and separate the final Form's architecture from the middle stage while retaining exactly two large wings per Form."
     ],
-    "artNotes": "give each form two large wings.",
+    "artNotes": "Make personhood readable through the frost and separate the final Form's architecture from the middle stage while retaining exactly two large wings per Form.",
     "formAnatomy": [
       {
         "version": 1,
@@ -3291,8 +4265,9 @@
         "manipulators": 0,
         "strength": 1,
         "scale": "ordinary",
-        "source": "image-analysis",
-        "confidence": 0.92
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-19"
       },
       {
         "version": 1,
@@ -3310,8 +4285,9 @@
         "manipulators": 0,
         "strength": 1,
         "scale": "ordinary",
-        "source": "image-analysis",
-        "confidence": 0.92
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-19"
       },
       {
         "version": 1,
@@ -3329,8 +4305,9 @@
         "manipulators": 0,
         "strength": 1,
         "scale": "ordinary",
-        "source": "image-analysis",
-        "confidence": 0.92
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-19"
       }
     ],
     "anatomy": {
@@ -3349,9 +4326,16 @@
       "manipulators": 0,
       "strength": 1,
       "scale": "ordinary",
-      "source": "image-analysis",
-      "confidence": 0.92
-    }
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "evidence": "updated-forms-page-19"
+    },
+    "previousAtlas": "./assets/roster/rimemoth-v6.webp",
+    "updatedForms": [
+      1,
+      2,
+      3
+    ]
   },
   {
     "index": 94,
@@ -3361,7 +4345,7 @@
     "forms": [
       "Saffronlet",
       "Saffronwyrm",
-      "Saffron Sovereign"
+      "Saffrolutra"
     ],
     "description": "A long-bodied four-legged faerie creature with an otterlike face, saffron-striped cream fur, fine whiskers, luminous golden celestial tail ribbons and leaf-shaped ears.",
     "proceduralArt": false,
@@ -3382,7 +4366,7 @@
     "forms": [
       "Tundralet",
       "Tundraglen",
-      "Tundra Sovereign"
+      "Tundravor"
     ],
     "description": "A gigantic bipedal horned fiend of black tundra fur and slate hide, with ice-gray tusks, huge clawed hands and weathered iron-like horn ridges.",
     "proceduralArt": false,
@@ -3403,18 +4387,106 @@
     "forms": [
       "Verdantlet",
       "Verdantbloom",
-      "Verdant Sovereign"
+      "Verdantomb"
     ],
     "description": "A bipedal undead bog giant with moss-covered burial wrappings, dark exposed ribs, fern-fringed shoulders, huge stone-bone fists and cold green soul light.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/verdantbloom-v5.webp",
-    "artRevision": 5,
+    "atlas": "./assets/roster/verdantbloom-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small moss-wrapped bog revenant with narrow open ribs and compact stone-bone fists",
-      "Tall stooped bog giant with extended forearms, exposed dark ribs and drooping fern shoulders",
-      "Ancient broad-backed bog titan with a hollow rib chamber, heavily draped moss shroud and immense low stone-bone fists"
-    ]
+      "Verdantbloom: The middle and last Forms were both seated burial giants. Separate a walking revenant from an anchored open-torso guardian.",
+      "Verdantomb: The middle and last Forms were both seated burial giants. Separate a walking revenant from an anchored open-torso guardian."
+    ],
+    "previousAtlas": "./assets/roster/verdantbloom-v5.webp",
+    "updatedForms": [
+      2,
+      3
+    ],
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "bone",
+          "strong"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 2,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-20"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "bone",
+          "strong"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 2,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-20"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "bone",
+          "strong"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 2,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-20"
+      }
+    ],
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "biped",
+      "traits": [
+        "bone",
+        "strong"
+      ],
+      "limbs": {
+        "legs": 2,
+        "arms": 2,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 0,
+      "strength": 2,
+      "scale": "ordinary",
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "evidence": "updated-forms-page-20"
+    },
+    "artNotes": "The middle and last Forms were both seated burial giants. Separate a walking revenant from an anchored open-torso guardian."
   },
   {
     "index": 97,
@@ -3424,7 +4496,7 @@
     "forms": [
       "Wraithlet",
       "Wraithspire",
-      "Wraith Sovereign"
+      "Wraithwail"
     ],
     "description": "A visibly nonhuman twin-headed wind faerie with two hollow moth masks on one shared bipedal body, pale vapor hair, long translucent limbs and violet storm ribbons.",
     "proceduralArt": false,
@@ -3531,7 +4603,7 @@
     "forms": [
       "Yewlet",
       "Yewmaw",
-      "Yew Sovereign"
+      "Yewgullet"
     ],
     "description": "A rooted carnivorous yew monstrosity with a hollow trunk filled with huge hook teeth, poisonous red berry-like eyes, drooping dark green fronds and amber gel sap.",
     "proceduralArt": false,
@@ -3552,7 +4624,7 @@
     "forms": [
       "Zirconlet",
       "Zirconveil",
-      "Zircon Sovereign"
+      "Zirconyx"
     ],
     "description": "A heavy lynx-shaped translucent zircon-blue ooze with broad muscular animal-like mass, gel ear tufts, embedded pale mineral flecks and flowing soft paws.",
     "proceduralArt": false,
@@ -3574,7 +4646,7 @@
     "forms": [
       "Arborling",
       "Arborkin",
-      "Arbor Exarch"
+      "Arboriel"
     ],
     "description": "A four-legged celestial woodland creature with a deerlike face, luminous ivory fur, flowering arbor antlers, faerie leaf wings and delicate golden halo arcs.",
     "proceduralArt": false,
@@ -3595,19 +4667,113 @@
     "forms": [
       "Basilling",
       "Basilgore",
-      "Basil Exarch"
+      "Basilith"
     ],
     "description": "A recognizable enormous muscular monitor lizard transformed into a basilisk-like monstrosity, with exaggerated saber fangs, oversized claws, basil-green ridges and thick heavy limbs.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/basilgore-v6.webp",
-    "artRevision": 6,
+    "atlas": "./assets/roster/basilgore-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small stocky monitor-lizard juvenile with broad feet and short saber fangs",
       "Long low muscular basilisk lizard with thick forelimbs, developed fangs and a raised basil-green spine ridge",
-      "Heavy arch-shouldered monitor monstrosity with a deep predatory skull, enormous foreclaws and broad overlapping dorsal ridges; four legs"
+      "Basilith: Final Form gains a long muscular monitor-lizard torso, strong shoulders, hips and four complete weight-bearing legs while preserving the large head and long tail."
     ],
-    "artNotes": "Triple tail length on every form; double head size on form 3."
+    "artNotes": "Final Form gains a long muscular monitor-lizard torso, strong shoulders, hips and four complete weight-bearing legs while preserving the large head and long tail.",
+    "previousAtlas": "./assets/roster/basilgore-v6.webp",
+    "updatedForms": [
+      3
+    ],
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "scales",
+          "claws",
+          "swim"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "reference": "monitor-lizard",
+        "evidence": "updated-forms-page-21"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "scales",
+          "claws",
+          "swim"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "reference": "monitor-lizard",
+        "evidence": "updated-forms-page-21"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "scales",
+          "claws",
+          "swim"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "reference": "monitor-lizard",
+        "evidence": "updated-forms-page-21"
+      }
+    ],
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "quadruped",
+      "traits": [
+        "scales",
+        "claws",
+        "swim"
+      ],
+      "limbs": {
+        "legs": 4,
+        "arms": 0,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 0,
+      "strength": 1,
+      "scale": "ordinary",
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "reference": "monitor-lizard",
+      "evidence": "updated-forms-page-21"
+    }
   },
   {
     "index": 102,
@@ -3617,7 +4783,7 @@
     "forms": [
       "Cobaltling",
       "Cobaltwisp",
-      "Cobalt Exarch"
+      "Cobalgear"
     ],
     "description": "An amorphous cobalt-blue gel construct containing articulated silver cogwheels, floating porcelain joint pieces, a soft metal-mask core and fluid pseudopods.",
     "proceduralArt": false,
@@ -3638,7 +4804,7 @@
     "forms": [
       "Dappleling",
       "Dapplejaw",
-      "Dapple Exarch"
+      "Dapplivore"
     ],
     "description": "An amorphous dappled burgundy-and-gold fiend ooze with curved dark horns, tooth-lined gel maws, oily highlights and floating thorn-like shards.",
     "proceduralArt": false,
@@ -3659,7 +4825,7 @@
     "forms": [
       "Ebonling",
       "Ebonflare",
-      "Ebon Exarch"
+      "Ebonpyre"
     ],
     "description": "A four-legged elemental panther made of living black fire and luminous ivory embers, with fine gold celestial halo arcs and flowing plume-like flame tails.",
     "proceduralArt": false,
@@ -3680,7 +4846,7 @@
     "forms": [
       "Fableling",
       "Fableroot",
-      "Fable Exarch"
+      "Fablewither"
     ],
     "description": "A rooted undead carnivorous willow with scroll-like peeling bark, dead flower traps, bone twigs, hollow eye knots and pale parchment-colored spirit sap.",
     "proceduralArt": false,
@@ -3780,7 +4946,7 @@
     "forms": [
       "Glacierling",
       "Glaciershard",
-      "Glacier Exarch"
+      "Glacervan"
     ],
     "description": "A towering visibly nonhuman bipedal glacier faerie giant with pale blue fur, enormous feathered ears, broad powerful hands and a crown of natural icy antlers.",
     "proceduralArt": false,
@@ -3801,7 +4967,7 @@
     "forms": [
       "Harborling",
       "Harborgaze",
-      "Harbor Exarch"
+      "Harborwight"
     ],
     "description": "A reanimated four-legged harbor mastiff skeleton with tarnished bronze rib braces, sea-worn armor joints, porthole-like eyes and dark salt-stained burial cloth.",
     "proceduralArt": false,
@@ -3823,7 +4989,7 @@
     "forms": [
       "Ichorling",
       "Ichorfang",
-      "Ichor Exarch"
+      "Ichorhowl"
     ],
     "description": "A four-legged skeletal fiend hound with dark blood-red hide remnants, exposed luminous marrow ribs, curled black horns and long ivory fangs. Eerie, without gore.",
     "proceduralArt": false,
@@ -3844,7 +5010,7 @@
     "forms": [
       "Jasperling",
       "Jasperplume",
-      "Jasper Exarch"
+      "Jaspermor"
     ],
     "description": "A horrific nonhuman bipedal faerie aberration with jasper-red feather filaments, a split mothlike mask, multiple small mouths in the torso and long asymmetrical grasping arms.",
     "proceduralArt": false,
@@ -3869,7 +5035,7 @@
     "forms": [
       "Kindleling",
       "Kindlekin",
-      "Kindle Exarch"
+      "Kindletan"
     ],
     "description": "A colossal bipedal ember giant with brick-gray craggy skin, a living coal beard, massive broad hands and volcanic orange seams; unmistakably a nonhuman giant.",
     "proceduralArt": false,
@@ -3890,7 +5056,7 @@
     "forms": [
       "Lotusling",
       "Lotusgore",
-      "Lotus Exarch"
+      "Lotopotamus"
     ],
     "description": "A recognizable enormously muscular hippopotamus aberration with horrific extra eyes, multiple impossible jaws and lotus-petal eye stalks emerging from its broad back.",
     "proceduralArt": false,
@@ -4002,7 +5168,7 @@
     "forms": [
       "Mistralling",
       "Mistralwisp",
-      "Mistral Exarch"
+      "Mistraptor"
     ],
     "description": "A visibly nonhuman four-armed raptor-like faerie with a long narrow insect mask, enormous hooked talons, elongated predatory fangs and silver wind-fringed plumage.",
     "proceduralArt": false,
@@ -4114,7 +5280,7 @@
     "forms": [
       "Nettleling",
       "Nettlejaw",
-      "Nettle Exarch"
+      "Nettelume"
     ],
     "description": "A four-legged celestial faerie weasel with ivory fur, delicate gold nettle-shaped antlers, tiny leaf wings and warm turquoise nectar-like light markings.",
     "proceduralArt": false,
@@ -4135,19 +5301,113 @@
     "forms": [
       "Onyxling",
       "Onyxflare",
-      "Onyx Exarch"
+      "Onyxodon"
     ],
     "description": "A massively muscular black lion-crocodile monstrosity with oversized saber teeth, heavy reptilian shoulder plates, huge claws and pale gold spine ridges. Four sturdy legs.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/onyxflare-v6.webp",
-    "artRevision": 6,
+    "atlas": "./assets/roster/onyxflare-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small stocky lion-crocodile cub with short saber teeth and a low plated back",
       "Long stalking lion-crocodile predator with heavy shoulder plates, extended fangs and strong foreclaws",
-      "Massive low broad-chested lion-crocodile monstrosity with a high armored shoulder ridge, deep long skull and enormous claws; four legs"
+      "Onyxodon: Final Form gains an elongated broad-chested lion-crocodile body with powerful hips and four sturdy legs; retain the large saber-toothed head and long tail."
     ],
-    "artNotes": "Triple tail length on every form; double head size on form 3."
+    "artNotes": "Final Form gains an elongated broad-chested lion-crocodile body with powerful hips and four sturdy legs; retain the large saber-toothed head and long tail.",
+    "previousAtlas": "./assets/roster/onyxflare-v6.webp",
+    "updatedForms": [
+      3
+    ],
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "fur",
+          "claws",
+          "strong"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 2,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "reference": "lion",
+        "evidence": "updated-forms-page-22"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "fur",
+          "claws",
+          "strong"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 2,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "reference": "lion",
+        "evidence": "updated-forms-page-22"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "fur",
+          "claws",
+          "strong"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 2,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "reference": "lion",
+        "evidence": "updated-forms-page-22"
+      }
+    ],
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "quadruped",
+      "traits": [
+        "fur",
+        "claws",
+        "strong"
+      ],
+      "limbs": {
+        "legs": 4,
+        "arms": 0,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 0,
+      "strength": 2,
+      "scale": "ordinary",
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "reference": "lion",
+      "evidence": "updated-forms-page-22"
+    }
   },
   {
     "index": 115,
@@ -4157,7 +5417,7 @@
     "forms": [
       "Petalling",
       "Petalroot",
-      "Petal Exarch"
+      "Petalith"
     ],
     "description": "An amorphous pale-pink ooze construct with floating white porcelain petal plates, small bronze joint rings and a soft glowing seed-shaped core.",
     "proceduralArt": false,
@@ -4257,7 +5517,7 @@
     "forms": [
       "Quasarling",
       "Quasarshard",
-      "Quasar Exarch"
+      "Quasarmire"
     ],
     "description": "An amorphous deep-violet fiend ooze with dark obsidian horns, star-like glowing inner gel, serrated floating fragments and a low predatory mouth.",
     "proceduralArt": false,
@@ -4290,7 +5550,7 @@
     "forms": [
       "Ravenling",
       "Ravengaze",
-      "Raven Exarch"
+      "Raventempest"
     ],
     "description": "A recognizable raven whose body and one pair of wings are made of living storm wind and dark feathered plasma, with a white-gold celestial halo and two taloned feet.",
     "proceduralArt": false,
@@ -4311,7 +5571,7 @@
     "forms": [
       "Solaceling",
       "Solacefang",
-      "Solace Exarch"
+      "Solacrypt"
     ],
     "description": "A rooted undead carnivorous white funeral plant with large bone-fanged flytraps, bleached leaves, skeletal root fingers and gentle pale blue spirit light.",
     "proceduralArt": false,
@@ -4332,7 +5592,7 @@
     "forms": [
       "Talonling",
       "Talonplume",
-      "Talon Exarch"
+      "Talonarch"
     ],
     "description": "A towering nonhuman bipedal faerie giant with an avian head, huge feather-fringed forearms, hooked talons and a long cream-and-amber plumage mantle.",
     "proceduralArt": false,
@@ -4440,7 +5700,7 @@
     "forms": [
       "Ulmarling",
       "Ulmarkin",
-      "Ulmar Exarch"
+      "Ulmarillo"
     ],
     "description": "A reanimated four-legged armadillo skeleton with articulated dark steel shell bands, bronze spinal hinges, visible pale ribs and ghostly green eyes.",
     "proceduralArt": false,
@@ -4461,7 +5721,7 @@
     "forms": [
       "Velvetling",
       "Velvetgore",
-      "Velvet Exarch"
+      "Velvetrage"
     ],
     "description": "A four-legged fiend deer with deep crimson velvet hide, curved black antlers, exposed ivory skeletal ribs, a long predatory muzzle and cold violet eyes.",
     "proceduralArt": false,
@@ -4482,7 +5742,7 @@
     "forms": [
       "Whisperling",
       "Whisperwisp",
-      "Whisper Exarch"
+      "Whispermaw"
     ],
     "description": "A horrific nonhuman bipedal whispering faerie aberration with an eyeless split mask, many tiny mouths along its torso, long ear-like appendages and tattered lavender silk.",
     "proceduralArt": false,
@@ -4507,19 +5767,19 @@
     "forms": [
       "Xanthling",
       "Xanthjaw",
-      "Xanth Exarch"
+      "Xanthunder"
     ],
     "description": "A colossal bipedal citrine-yellow elemental giant with lightning-filled jaws, angular stone brows, massive gold-gray limbs and branching electric fractures.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/xanthjaw-v6.webp",
-    "artRevision": 6,
+    "atlas": "./assets/roster/xanthjaw-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Compact yellow stone giant with a short angular jaw and small lightning seams",
       "Tall long-armed citrine giant with a deep illuminated jaw and separated jagged shoulder plates",
-      "Broad hunched lightning titan with a high craggy back, a deep wide glowing jaw and immense gold-gray forearms; two arms and legs"
+      "Xanthunder: Final Form gains an elongated powerful giant torso, broad chest, muscular hips and longer hind legs; preserve two arms, two legs, the large lightning-filled head and long tail."
     ],
-    "artNotes": "two arms per form, tripled tail length, and a doubled head on form 3.",
+    "artNotes": "Final Form gains an elongated powerful giant torso, broad chest, muscular hips and longer hind legs; preserve two arms, two legs, the large lightning-filled head and long tail.",
     "formAnatomy": [
       {
         "version": 1,
@@ -4578,8 +5838,9 @@
         "manipulators": 2,
         "strength": 3,
         "scale": "colossal",
-        "source": "image-analysis",
-        "confidence": 0.92
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-23"
       }
     ],
     "anatomy": {
@@ -4601,7 +5862,11 @@
       "scale": "colossal",
       "source": "image-analysis",
       "confidence": 0.92
-    }
+    },
+    "previousAtlas": "./assets/roster/xanthjaw-v6.webp",
+    "updatedForms": [
+      3
+    ]
   },
   {
     "index": 124,
@@ -4611,7 +5876,7 @@
     "forms": [
       "Yonderling",
       "Yonderflare",
-      "Yonder Exarch"
+      "Yondergnath"
     ],
     "description": "A recognizable enormously muscular saber-toothed cat aberration with eye stalks along its back, extra impossible jaws, and a long tentacle-like tail.",
     "proceduralArt": false,
@@ -4632,7 +5897,7 @@
     "forms": [
       "Zinnialing",
       "Zinniaroot",
-      "Zinnia Exarch"
+      "Zinniantis"
     ],
     "description": "A visibly nonhuman bipedal flower faerie monstrosity with a zinnia-petal mask, hooked mantis-like forearms, sharp taloned feet and exaggerated predatory fangs.",
     "proceduralArt": false,
@@ -4657,7 +5922,7 @@
     "forms": [
       "Aurumling",
       "Aurumshard",
-      "Aurum Exarch"
+      "Aurumbex"
     ],
     "description": "A four-legged radiant celestial ibex with creamy opaline fur, golden shard antlers, faerie leaflike ear fins and small floating sun rings.",
     "proceduralArt": false,
@@ -4678,7 +5943,7 @@
     "forms": [
       "Brackenling",
       "Brackengaze",
-      "Bracken Exarch"
+      "Brackentusk"
     ],
     "description": "A heavily muscled boar-tiger monstrosity with massive forward tusks, huge claws, dark bracken-colored fur, armored ridges and a predatory low quadruped stance.",
     "proceduralArt": false,
@@ -4700,19 +5965,101 @@
     "forms": [
       "Coralling",
       "Coralfang",
-      "Coral Exarch"
+      "Coralloy"
     ],
     "description": "An amorphous coral-pink ooze construct with floating carved coral-like porcelain jaws, small bronze gears, teal gel joints and fluid soft tentacles.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/coralfang-v6.webp",
-    "artRevision": 6,
+    "atlas": "./assets/roster/coralfang-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small coral jelly with one floating porcelain jaw and short bronze joint fragments",
       "Arched coral ooze construct with separated paired jaw plates and long flowing gel support limbs",
-      "Wide overhanging coral automaton with a deep segmented porcelain maw, floating carved coral plates and broad teal tentacle supports; no rigid humanoid skeleton"
+      "Coralloy: The last stage repeated the middle jaw-on-gel-neck structure. Reorganize the porcelain jaws into a suspended arch, without restoring rejected cogs."
     ],
-    "artNotes": "Remove the cogs from every form."
+    "artNotes": "The last stage repeated the middle jaw-on-gel-neck structure. Reorganize the porcelain jaws into a suspended arch, without restoring rejected cogs.",
+    "previousAtlas": "./assets/roster/coralfang-v6.webp",
+    "updatedForms": [
+      3
+    ],
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "amorphous",
+        "traits": [
+          "tentacles"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 6
+        },
+        "manipulators": 6,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-24"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "amorphous",
+        "traits": [
+          "tentacles"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 6
+        },
+        "manipulators": 6,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-24"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "amorphous",
+        "traits": [
+          "tentacles"
+        ],
+        "limbs": {
+          "legs": 0,
+          "arms": 0,
+          "wings": 0,
+          "tentacles": 6
+        },
+        "manipulators": 6,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-24"
+      }
+    ],
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "amorphous",
+      "traits": [
+        "tentacles"
+      ],
+      "limbs": {
+        "legs": 0,
+        "arms": 0,
+        "wings": 0,
+        "tentacles": 6
+      },
+      "manipulators": 6,
+      "strength": 1,
+      "scale": "ordinary",
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "evidence": "updated-forms-page-24"
+    }
   },
   {
     "index": 129,
@@ -4722,7 +6069,7 @@
     "forms": [
       "Daggerling",
       "Daggerplume",
-      "Dagger Exarch"
+      "Daggerflux"
     ],
     "description": "An amorphous burgundy fiend ooze with dagger-shaped horn fins, tooth-edged liquid wing lobes and a charcoal core, no rigid skeleton.",
     "proceduralArt": false,
@@ -4743,7 +6090,7 @@
     "forms": [
       "Eclipseling",
       "Eclipsekin",
-      "Eclipse Exarch"
+      "Eclipstag"
     ],
     "description": "A four-legged celestial elemental stag made of black-and-white luminous plasma, with a fine eclipsed sun halo and flowing silver-gold flame antlers.",
     "proceduralArt": false,
@@ -4764,7 +6111,7 @@
     "forms": [
       "Fennelling",
       "Fennelgore",
-      "Fennel Exarch"
+      "Fennelwraith"
     ],
     "description": "A rooted undead carnivorous fennel plant with bone-white hollow stems, toothed seedpod traps, dead feathery fronds and black ghostly sap.",
     "proceduralArt": false,
@@ -4785,19 +6132,19 @@
     "forms": [
       "Gossamerling",
       "Gossamerwisp",
-      "Gossamer Exarch"
+      "Gossarach"
     ],
-    "description": "A towering visibly nonhuman bipedal moth faerie giant with silver antennae, pale fur, broad powerful limbs and a billowing gossamer wing mantle.",
+    "description": "A pale-furred moth faerie giant with silver antennae and a flowing gossamer mantle; its final Form develops four powerful arms and paired spider fangs.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/gossamerwisp-v6.webp",
-    "artRevision": 6,
+    "atlas": "./assets/roster/gossamerwisp-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Compact pale moth faerie juvenile with short antennae and close-folded gossamer mantle",
       "Tall long-armed moth giant with broad fur shoulders and opened layered wing mantle",
-      "Hunched ancient moth titan with an enormous arched gossamer shoulder canopy, long silver antennae and heavy low-reaching hands; two arms, two legs"
+      "Gossarach: Gossamer Exarch now has four distinct complete arms, two legs and a visible pair of spider fangs while preserving its moth identity and gossamer mantle."
     ],
-    "artNotes": "two distinct arms on every form.",
+    "artNotes": "Gossamer Exarch now has four distinct complete arms, two legs and a visible pair of spider fangs while preserving its moth identity and gossamer mantle.",
     "formAnatomy": [
       {
         "version": 1,
@@ -4845,6 +6192,7 @@
         "version": 1,
         "bodyPlan": "biped",
         "traits": [
+          "fangs",
           "hands",
           "large",
           "strong",
@@ -4852,15 +6200,16 @@
         ],
         "limbs": {
           "legs": 2,
-          "arms": 2,
+          "arms": 4,
           "wings": 2,
           "tentacles": 0
         },
-        "manipulators": 2,
+        "manipulators": 4,
         "strength": 3,
         "scale": "colossal",
-        "source": "image-analysis",
-        "confidence": 0.92
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-25"
       }
     ],
     "anatomy": {
@@ -4883,7 +6232,11 @@
       "scale": "colossal",
       "source": "image-analysis",
       "confidence": 0.92
-    }
+    },
+    "previousAtlas": "./assets/roster/gossamerwisp-v6.webp",
+    "updatedForms": [
+      3
+    ]
   },
   {
     "index": 133,
@@ -4893,7 +6246,7 @@
     "forms": [
       "Hearthling",
       "Hearthjaw",
-      "Hearth Exarch"
+      "Hearthgeist"
     ],
     "description": "A reanimated four-legged badger skeleton with dark red brick-and-bronze joint armor, exposed ash-white ribs and a faint coal glow behind its skull jaw.",
     "proceduralArt": false,
@@ -4914,7 +6267,7 @@
     "forms": [
       "Isletling",
       "Isletflare",
-      "Islet Exarch"
+      "Isledraug"
     ],
     "description": "A four-legged skeletal devil crocodile with algae-dark hide, pale driftbone armor, hooked fiend horns and spectral sea-green light, without a living animal appearance.",
     "proceduralArt": false,
@@ -4936,7 +6289,7 @@
     "forms": [
       "Jubilling",
       "Jubilroot",
-      "Jubil Exarch"
+      "Jubilgrim"
     ],
     "description": "A horrific nonhuman bipedal root-and-faerie aberration with a split laughing mask, multiple small mouths, too many staring eyes and twisted vine-like arms.",
     "proceduralArt": false,
@@ -4961,19 +6314,107 @@
     "forms": [
       "Kryptonling",
       "Kryptonshard",
-      "Krypton Exarch"
+      "Kryptolith"
     ],
     "description": "A colossal bipedal green elemental stone giant with natural luminescent mineral shards, enormous craggy fists and dark charcoal skin fractured by emerald light.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/kryptonshard-v6.webp",
-    "artRevision": 6,
+    "atlas": "./assets/roster/kryptonshard-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
-      "Compact green stone giant with few short mineral shards and small heavy fists",
-      "Tall angular mineral giant with separated shoulder crystals, long thick forearms and exposed emerald fractures",
-      "Deeply hunched broad-backed stone titan with a high natural mineral ridge, huge craggy forearms and deep emerald fissures; no extra arms or faces"
+      "Kryptonling: The dark mineral head loses its face at sprite scale. Give each Form a clear paired-eye mineral mask while retaining the approved floating green crystals.",
+      "Kryptonshard: The dark mineral head loses its face at sprite scale. Give each Form a clear paired-eye mineral mask while retaining the approved floating green crystals.",
+      "Kryptolith: The dark mineral head loses its face at sprite scale. Give each Form a clear paired-eye mineral mask while retaining the approved floating green crystals."
     ],
-    "artNotes": "Floating green crystals on every form, increasing with advancement."
+    "artNotes": "The dark mineral head loses its face at sprite scale. Give each Form a clear paired-eye mineral mask while retaining the approved floating green crystals.",
+    "previousAtlas": "./assets/roster/kryptonshard-v6.webp",
+    "updatedForms": [
+      1,
+      2,
+      3
+    ],
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "strong",
+          "large"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-26"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "strong",
+          "large"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-26"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "biped",
+        "traits": [
+          "strong",
+          "large"
+        ],
+        "limbs": {
+          "legs": 2,
+          "arms": 2,
+          "wings": 0,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 3,
+        "scale": "colossal",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-26"
+      }
+    ],
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "biped",
+      "traits": [
+        "strong",
+        "large"
+      ],
+      "limbs": {
+        "legs": 2,
+        "arms": 2,
+        "wings": 0,
+        "tentacles": 0
+      },
+      "manipulators": 0,
+      "strength": 3,
+      "scale": "colossal",
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "evidence": "updated-forms-page-26"
+    }
   },
   {
     "index": 137,
@@ -4983,7 +6424,7 @@
     "forms": [
       "Larchling",
       "Larchgaze",
-      "Larch Exarch"
+      "Larchoceros"
     ],
     "description": "A recognizable massively muscled elk aberration with horrific staring eyes embedded in bark-textured antlers, extra tentacle jaws and thick shaggy fur.",
     "proceduralArt": false,
@@ -5004,7 +6445,7 @@
     "forms": [
       "Mirageling",
       "Miragefang",
-      "Mirage Exarch"
+      "Miragnath"
     ],
     "description": "A visibly nonhuman bipedal jackal-headed faerie monstrosity with oversized fangs, long hooked claws and a silver-violet mirage-shard mantle.",
     "proceduralArt": false,
@@ -5108,7 +6549,7 @@
     "forms": [
       "Nectarling",
       "Nectarplume",
-      "Nectar Exarch"
+      "Nectarostrum"
     ],
     "description": "A four-legged celestial faerie creature with an anteater-like long muzzle, cream feathers, gold nectar filaments, tiny flower-shaped lights and delicate halo rings.",
     "proceduralArt": false,
@@ -5129,19 +6570,19 @@
     "forms": [
       "Oracleling",
       "Oraclekin",
-      "Oracle Exarch"
+      "Strigursa"
     ],
     "description": "A huge muscular owl-bear monstrosity with oversized hooked beak fangs, massive bear claws, ochre feather ridges and a solid powerful quadrupedal body.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/oraclekin-v6.webp",
-    "artRevision": 6,
+    "atlas": "./assets/roster/oraclekin-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Round owl-bear cub with short hooked beak and broad soft paws",
       "Long-backed stalking owl-bear with developed bear shoulders, large beak fangs and layered ochre neck feathers",
-      "Massive high-shouldered owl-bear with a deep feather collar, immense hooked beak, heavy muscular forelimbs and large bear claws; four legs"
+      "Strigursa: Oracle Exarch gains a deep broad chest, high muscular shoulders and four longer powerful legs; preserve its elongated owl-bear body and large feathered wings."
     ],
-    "artNotes": "Triple torso length on every form; large bird wings and a doubled head on form 3. First-form extra legs removed.",
+    "artNotes": "Oracle Exarch gains a deep broad chest, high muscular shoulders and four longer powerful legs; preserve its elongated owl-bear body and large feathered wings.",
     "formAnatomy": [
       {
         "version": 1,
@@ -5203,8 +6644,9 @@
         "manipulators": 0,
         "strength": 2,
         "scale": "ordinary",
-        "source": "image-analysis",
-        "confidence": 0.92
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-27"
       }
     ],
     "anatomy": {
@@ -5227,7 +6669,11 @@
       "scale": "ordinary",
       "source": "image-analysis",
       "confidence": 0.92
-    }
+    },
+    "previousAtlas": "./assets/roster/oraclekin-v6.webp",
+    "updatedForms": [
+      3
+    ]
   },
   {
     "index": 141,
@@ -5237,7 +6683,7 @@
     "forms": [
       "Pewterling",
       "Pewtergore",
-      "Pewter Exarch"
+      "Pewtermelt"
     ],
     "description": "An amorphous smoke-gray ooze construct with floating ornate pewter armor pieces, articulated bronze cogs, black gel joints and a broad tusked mask core.",
     "proceduralArt": false,
@@ -5259,7 +6705,7 @@
     "forms": [
       "Quiverling",
       "Quiverwisp",
-      "Quiver Exarch"
+      "Quiverbarb"
     ],
     "description": "An amorphous purple fiend ooze with curved obsidian horns, suspended arrowlike barbs, quivering liquid tendrils and a dark toothed mouth.",
     "proceduralArt": false,
@@ -5280,19 +6726,101 @@
     "forms": [
       "Rippleling",
       "Ripplejaw",
-      "Ripple Exarch"
+      "Ripplastron"
     ],
     "description": "A four-legged elemental turtle-like creature made of flowing turquoise water, with a white foam shell, gold gill fronds and a delicate radiant celestial halo.",
     "proceduralArt": false,
-    "atlas": "./assets/roster/ripplejaw-v6.webp",
-    "artRevision": 6,
+    "atlas": "./assets/roster/ripplejaw-v7.webp",
+    "artRevision": 7,
     "evolutionRevision": 1,
     "formDescriptions": [
       "Small round water turtle with a low foam dome and tiny gold gill buds",
       "Longer four-legged current turtle with a layered wave shell, broad water feet and flared gold gills",
-      "Broad ancient water tortoise with a high flowing foam shell, deep current neck mantle and strong turquoise tidal legs; four legs, one head"
+      "Ripplastron: Final Form gains an elongated powerful current-turtle body and shell, deep shoulders, substantial hips and four strong legs while retaining its large snapping-turtle head."
     ],
-    "artNotes": "snapping-turtle head and face, with a doubled head on form 3."
+    "artNotes": "Final Form gains an elongated powerful current-turtle body and shell, deep shoulders, substantial hips and four strong legs while retaining its large snapping-turtle head.",
+    "previousAtlas": "./assets/roster/ripplejaw-v6.webp",
+    "updatedForms": [
+      3
+    ],
+    "formAnatomy": [
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "wings"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 2,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-28"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "wings"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 2,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-28"
+      },
+      {
+        "version": 1,
+        "bodyPlan": "quadruped",
+        "traits": [
+          "wings"
+        ],
+        "limbs": {
+          "legs": 4,
+          "arms": 0,
+          "wings": 2,
+          "tentacles": 0
+        },
+        "manipulators": 0,
+        "strength": 1,
+        "scale": "ordinary",
+        "source": "reviewed-pdf",
+        "confidence": 0.95,
+        "evidence": "updated-forms-page-28"
+      }
+    ],
+    "anatomy": {
+      "version": 1,
+      "bodyPlan": "quadruped",
+      "traits": [
+        "wings"
+      ],
+      "limbs": {
+        "legs": 4,
+        "arms": 0,
+        "wings": 2,
+        "tentacles": 0
+      },
+      "manipulators": 0,
+      "strength": 1,
+      "scale": "ordinary",
+      "source": "reviewed-pdf",
+      "confidence": 0.95,
+      "evidence": "updated-forms-page-28"
+    }
   },
   {
     "index": 144,
@@ -5302,7 +6830,7 @@
     "forms": [
       "Starlingling",
       "Starlingflare",
-      "Starling Exarch"
+      "Astercrypt"
     ],
     "description": "A rooted undead carnivorous starflower with black petals, bone-white pitcher traps shaped like tiny beaks, skeletal root fingers and pale violet soul light.",
     "proceduralArt": false,
@@ -5323,7 +6851,7 @@
     "forms": [
       "Truffleling",
       "Truffleroot",
-      "Truffle Exarch"
+      "Truffletan"
     ],
     "description": "A towering nonhuman bipedal woodland faerie giant with a truffle-like textured crown, a broad piglike muzzle, mushroom ears, enormous strong limbs and mossy fur.",
     "proceduralArt": false,
@@ -5345,7 +6873,7 @@
     "forms": [
       "Uplandling",
       "Uplandshard",
-      "Upland Exarch"
+      "Uplandrelic"
     ],
     "description": "A reanimated four-legged bighorn skeleton with rugged natural stone armor plates, brass ankle hinges, ivory horns and faint ghostly upland mist.",
     "proceduralArt": false,
@@ -5366,7 +6894,7 @@
     "forms": [
       "Violetling",
       "Violetgaze",
-      "Violet Exarch"
+      "Violetfang"
     ],
     "description": "A four-legged undead fiend panther with dark violet hide remnants, exposed pale ribs, curved black brow horns and several luminous violet eye-like markings.",
     "proceduralArt": false,
@@ -5387,7 +6915,7 @@
     "forms": [
       "Wardenling",
       "Wardenfang",
-      "Warden Exarch"
+      "Wardenoculus"
     ],
     "description": "A horrific nonhuman bipedal faerie guardian aberration with an eye-stacked mask, mismatched fanged jaws, very long twisted arms and dark emerald silk fronds.",
     "proceduralArt": false,
@@ -5412,7 +6940,7 @@
     "forms": [
       "Zodiacling",
       "Zodiacplume",
-      "Zodiac Exarch"
+      "Zodiarch"
     ],
     "description": "A colossal nonhuman bipedal storm giant with dark blue craggy skin, huge hands, feather-like flame and cloud plumes, and glowing gold circular star motifs without lettering.",
     "proceduralArt": false,

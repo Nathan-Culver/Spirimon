@@ -11,9 +11,16 @@ export function battleBackSource(species,form=0){
  const single=species.battleBackSprites?.[form];
  if(single)return {source:single,atlas:false,form:0};
  const id=String(species.id||'').replace(/^roster-/,'');
- if(!species.battleBackAtlas&&species.atlas!==rearReferenceAtlas(id))return null;
+ const index=Math.max(0,Math.min(2,Math.trunc(Number(form)||0)));
+ if(!species.battleBackAtlas&&species.atlas!==rearReferenceAtlas(id)){
+  const row=ROSTER.find(r=>r.id===id);
+  if(species.atlas!==row?.atlas||!Array.isArray(row?.updatedForms))return null;
+  // The approved PDF supplies front views only. Use those exact illustrations
+  // for changed forms instead of showing a rear from a rejected body design.
+  if(row.updatedForms?.includes(index+1))return {source:row.atlas,atlas:true,form:index,frame:[index*256,0,256,256]};
+ }
  const source=species.battleBackAtlas||BATTLE_BACK_ART[id];
  if(!source)return null;
- const index=Math.max(0,Math.min(2,Math.trunc(Number(form)||0))),frame=species.battleBackFrames?.[index]||(source===BATTLE_BACK_ART[id]?BATTLE_BACK_FRAMES[id]?.[index]:null);
+ const frame=species.battleBackFrames?.[index]||(source===BATTLE_BACK_ART[id]?BATTLE_BACK_FRAMES[id]?.[index]:null);
  return {source,atlas:true,form:index,...(frame?{frame}:{} )};
 }

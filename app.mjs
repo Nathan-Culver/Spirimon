@@ -1144,11 +1144,12 @@ document.addEventListener('pointerup',releaseTouch);document.addEventListener('p
 function installRoster(){
  s.tutorial??={battleStarted:s.spirits.length>0,battleComplete:s.spirits.length>0};restoreDomainRegistry(s);E.applyWorldDifficulty(s,s.settings?.difficulty||'normal');
  E.useRegionHistory(s.seed,s.regions??={});
- s.rosterRevision=6;
+ s.rosterRevision=7;
  for(const originalRow of ROSTER){const reference=GENERATION_REFERENCES.find(r=>r.id===originalRow.id),row=reference?{...originalRow,description:reference.description}:originalRow;const id='roster-'+row.id,old=s.species[id]||library[id];let sp;
   if(old)sp=E.migrateSpecies(old);
   else{sp={...E.makeSpecies(id,row.base,row.alter,row.domains),id,name:row.forms[1],forms:row.forms,description:row.description,body:row.description,anatomy:row.anatomy,legacyTypes:row.legacyTypes,atlas:row.atlas,proceduralArt:!!row.proceduralArt,source:'original-roster'};delete sp.design;sp.learnset=[];sp.moveRevision=0;syncCapabilities(sp);}
-  // Refresh shared artwork for existing journeys without replacing progression.
+  // Refresh shared form names and artwork without replacing individual progress.
+  sp.name=row.forms[1];sp.forms=[...row.forms];
   if(row.atlas){sp.atlas=row.atlas;sp.artRevision=row.artRevision||1;sp.proceduralArt=false;sp.description=row.description;sp.body=row.description;delete sp.sprites;}
   if(row.formAnatomy){sp.formAnatomy=structuredClone(row.formAnatomy);sp.anatomy=sp.formAnatomy[0];syncCapabilities(sp);}
   if(row.formData)sp.formData=structuredClone(row.formData);
@@ -1158,6 +1159,7 @@ function installRoster(){
  }
  for(const sp of Object.values(s.species)){
   E.migrateSpecies(sp);const stored=library[sp.id];
+  if(sp.legendary){const profile=LEGENDS.find(p=>p.key===sp.legendaryProfile||p.legacyName===sp.name||p.name===sp.name);if(profile){sp.name=profile.name;sp.forms=[...profile.forms];}}
   if(!hasFinishedArtwork(sp)&&hasFinishedArtwork(stored)&&sp.base===stored.base&&sp.alter===stored.alter){for(const key of ['atlas','sprites','proceduralArt','visualValidation','artRevision','formAnatomy'])if(stored[key]!==undefined)sp[key]=structuredClone(stored[key]);}
   if(!sp.atlas&&sp.sprites?.length!==3)sp.proceduralArt=true;register(sp);
  }
@@ -1760,7 +1762,7 @@ function dungeonInteract(){
 function legendarySpecies(id){
  const key='legendary-'+id,point=id.match(/legend-(-?\d+),(-?\d+)/),presence=point&&A.legendAt(s.seed,Number(point[1]),Number(point[2]),true,'rain'),profile=legendProfile(presence?.title),existing=s.species[key];
  const sp=existing||E.makeSpecies(s.seed+'|'+id,profile.base,profile.alter,profile.domains);sp.id=key;
- if(sp.artRevision!==1||sp.atlas!==profile.front){applyLegendArtwork(sp,profile);E.migrateSpecies(sp);syncCapabilities(sp);}
+ if(sp.artRevision!==1||sp.atlas!==profile.front||sp.name!==profile.name){applyLegendArtwork(sp,profile);E.migrateSpecies(sp);syncCapabilities(sp);}
  return register(sp);
 }
 

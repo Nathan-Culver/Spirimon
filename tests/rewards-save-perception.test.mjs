@@ -61,7 +61,7 @@ test('practice offers show real cooldowns and omit the retired Speed property',(
 test('perception reveals a regional legendary presence without any shrine',()=>{
  const seed='SP-461998',cx=-7,cy=-4,point=regionalLegendSite(seed,cx,cy),sealer=newSealer();sealer.senses={perception:true};
  const h=vm.createContext({s:{seed,player:point,sealer,roamers:{},drops:[]},E,A,SE,SW:{shrinesForRegion:()=>[]},legendSite:(x,y)=>regionalLegendSite(seed,x,y),isNight:()=>true,mapWeather:()=>({kind:'rain'}),townNPCs:()=>[],npcWander:new Map(),challengerApproach:null});
- vm.runInContext(extract('spiritualDiscoveries'),h);const discoveries=h.spiritualDiscoveries();assert.ok(discoveries.some(d=>d.kind==='rare'&&d.label.includes('The Last Dawn')));
+ vm.runInContext(extract('spiritualDiscoveries'),h);const discoveries=h.spiritualDiscoveries();assert.ok(discoveries.some(d=>d.kind==='rare'&&d.label.includes('Ultirora')));
 });
 
 test('actual browser startup selects the linked file without reading a conflicting browser journey',async()=>{

@@ -17,7 +17,8 @@ test('release inventory includes every current front and rear atlas and excludes
  assert.ok(!files.has('./assets/roster/kilnscale.webp'),'Obsolete revisions must not inflate releases');
  const art=built.assets.filter(a=>EFFECT_ATLASES.includes(a.path)),other=built.assets.filter(a=>!EFFECT_ATLASES.includes(a.path));
  assert.equal(art.length,17);assert.ok(art.reduce((sum,a)=>sum+a.bytes,0)<8*1024*1024,'Keep all 1046 illustrations within 8 MiB');
- assert.ok(other.reduce((sum,a)=>sum+a.bytes,0)<40*1024*1024,'Preserve the existing core artwork budget');
+ // Revised PDF atlases are lossless so all unchanged form cells retain their exact pixels.
+ assert.ok(other.reduce((sum,a)=>sum+a.bytes,0)<43*1024*1024,'Keep the reviewed lossless artwork within its 43 MiB budget');
 });
 test('packaged file URLs resolve artwork locally while downloaded HTML retains its hosted fallback',async()=>{
  const built=await buildPage(undefined,{standalone:false}),expression=built.pageScript.match(/const __moduleURL=([^;]+);/)[1];
@@ -46,7 +47,7 @@ test('installer output contains one copy of current assets and replaces stale ge
  }finally{await rm(output,{recursive:true,force:true});}
 });
 test('web releases retain a fully embedded download within its size budget',async()=>{
- const built=await buildPage();assert.ok(Buffer.byteLength(built.standaloneHtml)<66*1024*1024,'Complete catalog artwork must remain embedded within its expanded download budget');
+ const built=await buildPage();assert.ok(Buffer.byteLength(built.standaloneHtml)<69*1024*1024,'Complete catalog artwork must remain embedded within its reviewed-art download budget');
  for(const rear of Object.values(BATTLE_BACK_ART))assert.ok(built.offlineArt[rear]?.startsWith('data:image/webp;base64,'),rear);
  for(const atlas of EFFECT_ATLASES)assert.equal(Buffer.from(built.offlineArt[atlas].split(',')[1],'base64').compare(await readFile(new URL('../'+atlas.slice(2),import.meta.url))),0,atlas);
  assert.doesNotMatch(built.html,/__spirimonPackaged=true/);

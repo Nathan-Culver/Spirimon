@@ -15,7 +15,7 @@ export function clanForRegion(cx,cy){if(cx===0&&cy===0)return CLANS[0];const d=M
 export function nextClan(crests=[]){return CLANS.find(c=>!crests.includes(c.id))||null;}
 export function eligibleForChampionship(crests=[]){return CLANS.every(c=>crests.includes(c.id));}
 export function equipmentMultiplier(item,stat){const charm=CHARMS.find(c=>c.id===item);return charm?.bonus===stat?1+charm.amount/100:1;}
-export function legendAt(seed,cx,cy,night,weather){const n=Math.abs(cx)+Math.abs(cy);if(n<3)return null;const h=(cx*73856093^cy*19349663^String(seed).length*83492791)>>>0;if(h%11!==0)return null;return {id:'legend-'+cx+','+cy,title:['The Starved Star','The Sleeping Crown','The Last Dawn','The Deep Listener'][h%4],requiresNight:h%2===0,requiresWeather:h%3===0?'rain':null,level:Math.min(85,35+n*3),available:(h%2!==0||night)&&(h%3!==0||weather==='rain')};}
+export function legendAt(seed,cx,cy,night,weather){const n=Math.abs(cx)+Math.abs(cy);if(n<3)return null;const h=(cx*73856093^cy*19349663^String(seed).length*83492791)>>>0;if(h%11!==0)return null;return {id:'legend-'+cx+','+cy,title:['Astravore','Somnarch','Ultirora','Bathyecho'][h%4],requiresNight:h%2===0,requiresWeather:h%3===0?'rain':null,level:Math.min(85,35+n*3),available:(h%2!==0||night)&&(h%3!==0||weather==='rain')};}
 export function playerLooks(){return {colors:['#7f4a36','#d4a57a','#e9c8a3','#655047'],outfits:['#406e78','#954b55','#6c5b91','#477354'],hair:['#322723','#ac743b','#e2c779','#272b36']};}
 
 
