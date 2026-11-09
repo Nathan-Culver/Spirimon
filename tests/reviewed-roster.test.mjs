@@ -25,18 +25,33 @@ test('approved names reach every current roster and generation reference',()=>{
  }
 });
 
-test('all 47 approved forms use their PDF artwork; unchanged forms keep matching rear art',()=>{
+test('all 47 approved forms retain PDF fronts and select matching authored rear art',()=>{
  assert.equal(review.lineages.length,26);let changed=0;
  for(const entry of review.lineages){
   const row=ROSTER.find(r=>r.id===entry.id),bytes=readFileSync(new URL('../'+entry.atlas,import.meta.url));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),entry.atlasSha256);
   for(let form=0;form<3;form++){
    const view=battleBackSource({...row,id:'roster-'+row.id},form);
-   assert.equal(view.source,entry.forms.includes(form+1)?row.atlas:BATTLE_BACK_ART[row.id]);
-   if(entry.forms.includes(form+1)){changed++;assert.deepEqual(view.frame,[form*256,0,256,256]);}
+   assert.equal(view.source,BATTLE_BACK_ART[row.id]);
+   assert.ok(view.frame,'Every Form uses its audited rear rectangle');
+   if(entry.forms.includes(form+1))changed++;
   }
  }
  assert.equal(changed,47);
  const gossamer=ROSTER.find(r=>r.id==='gossamerwisp');assert.equal(companionRig(gossamer,2).arms,4);
  assert.equal(companionRig(ROSTER.find(r=>r.id==='seralotus'),2).kind,'quadruped');
+});
+
+test('authored rear coverage matches all reviewed changes and the exact approved front designs',()=>{
+ const rear=read('reviewed-rear-art-v7.json');
+ assert.equal(rear.forms,47);assert.equal(rear.lineages.length,26);
+ for(const entry of review.lineages){
+  const replacement=rear.lineages.find(r=>r.id===entry.id);
+  assert.deepEqual(replacement.forms,entry.forms);
+  assert.equal(replacement.frontAtlas,entry.atlas);
+  assert.equal(replacement.frontSha256,entry.atlasSha256);
+  assert.deepEqual(replacement.unchangedFormsVerified,entry.unchangedCellsVerified);
+  const bytes=readFileSync(new URL('../'+replacement.rearAtlas,import.meta.url));
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),replacement.rearSha256);
+ }
 });

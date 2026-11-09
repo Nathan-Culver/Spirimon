@@ -4,7 +4,7 @@
   "padding": 4,
   "atlases": 150,
   "forms": 450,
-  "atlases_crossing_equal_thirds": 43,
+  "atlases_crossing_equal_thirds": 52,
   "records": [
     {
       "id": "aetherling",
@@ -388,7 +388,7 @@
     },
     {
       "id": "aurelattice",
-      "sha256": "c7ac11d86351f7d9d6564e43556ae91f89bd02f0387d6aa424c2f4851bc50307",
+      "sha256": "ec86605b61a5f593b51ea40baa3fa2df6436add81b9332fa2349bf0a4d9fda3f",
       "size": [
         768,
         256
@@ -403,11 +403,11 @@
           484
         ],
         [
-          513,
-          750
+          506,
+          760
         ]
       ],
-      "crossed_equal_thirds": false,
+      "crossed_equal_thirds": true,
       "forms": [
         {
           "form": 0,
@@ -446,25 +446,25 @@
         {
           "form": 2,
           "bounds": [
-            513,
-            20,
-            750,
-            231
+            506,
+            18,
+            760,
+            246
           ],
           "frame": [
-            509,
-            16,
-            245,
-            219
+            502,
+            14,
+            262,
+            236
           ],
-          "visible_pixels": 28381,
-          "captured_pixels": 28381
+          "visible_pixels": 27160,
+          "captured_pixels": 27160
         }
       ]
     },
     {
       "id": "auroriel",
-      "sha256": "649821f45a9f7abc1697393cd99e37de552ea9fa0690d76f360b85a8082bb82d",
+      "sha256": "0f6e1359570e75b4e9a075700e0cfcd0f29dea992e0b6c071c1bb9add6c05a1e",
       "size": [
         768,
         256
@@ -479,8 +479,8 @@
           477
         ],
         [
-          500,
-          760
+          503,
+          752
         ]
       ],
       "crossed_equal_thirds": true,
@@ -522,19 +522,19 @@
         {
           "form": 2,
           "bounds": [
-            500,
-            3,
-            760,
-            234
+            503,
+            14,
+            752,
+            246
           ],
           "frame": [
-            496,
-            0,
-            268,
-            238
+            499,
+            10,
+            257,
+            240
           ],
-          "visible_pixels": 36663,
-          "captured_pixels": 36663
+          "visible_pixels": 24592,
+          "captured_pixels": 24592
         }
       ]
     },
@@ -692,7 +692,7 @@
     },
     {
       "id": "basilgore",
-      "sha256": "ea19c8853e22ff1c3fd519afedb82cf88621e02fb2a67ad80aadd918c5bc0c36",
+      "sha256": "80881a50b2394c3f5de9e055108d3b49cf35cfbb2bec0b35cb46a6159be399d8",
       "size": [
         768,
         256
@@ -707,8 +707,8 @@
           458
         ],
         [
-          501,
-          738
+          487,
+          760
         ]
       ],
       "crossed_equal_thirds": true,
@@ -750,19 +750,19 @@
         {
           "form": 2,
           "bounds": [
-            501,
-            15,
-            738,
-            240
+            487,
+            111,
+            760,
+            246
           ],
           "frame": [
-            497,
-            11,
-            245,
-            233
+            483,
+            107,
+            281,
+            143
           ],
-          "visible_pixels": 28128,
-          "captured_pixels": 28128
+          "visible_pixels": 19126,
+          "captured_pixels": 19126
         }
       ]
     },
@@ -848,23 +848,23 @@
     },
     {
       "id": "bonsaitor",
-      "sha256": "3e50a81e60e2a0801e30dde363924cbecc8aec1a10fe665eabce1643c43d925a",
+      "sha256": "ef53ef03c363bb65ad2a90e9b95ddb3421565f5f3aae2a31d1b494dcd05c8059",
       "size": [
         768,
         256
       ],
       "alpha_runs": [
         [
-          80,
-          201
+          66,
+          187
         ],
         [
-          307,
-          466
+          294,
+          461
         ],
         [
-          537,
-          746
+          534,
+          735
         ]
       ],
       "crossed_equal_thirds": false,
@@ -872,53 +872,53 @@
         {
           "form": 0,
           "bounds": [
-            80,
-            108,
-            201,
-            233
+            66,
+            106,
+            187,
+            246
           ],
           "frame": [
-            76,
-            104,
+            62,
+            102,
             129,
-            133
+            148
           ],
-          "visible_pixels": 8635,
-          "captured_pixels": 8635
+          "visible_pixels": 11317,
+          "captured_pixels": 11317
         },
         {
           "form": 1,
           "bounds": [
-            307,
-            75,
-            466,
-            234
+            294,
+            14,
+            461,
+            246
           ],
           "frame": [
-            303,
-            71,
-            167,
-            167
+            290,
+            10,
+            175,
+            240
           ],
-          "visible_pixels": 16299,
-          "captured_pixels": 16299
+          "visible_pixels": 18547,
+          "captured_pixels": 18547
         },
         {
           "form": 2,
           "bounds": [
-            537,
-            54,
-            746,
-            239
+            534,
+            114,
+            735,
+            246
           ],
           "frame": [
-            533,
-            50,
-            217,
-            193
+            530,
+            110,
+            209,
+            140
           ],
-          "visible_pixels": 27223,
-          "captured_pixels": 27223
+          "visible_pixels": 15351,
+          "captured_pixels": 15351
         }
       ]
     },
@@ -1228,7 +1228,7 @@
     },
     {
       "id": "chainhorn",
-      "sha256": "61fbf3cc4a7c2484767db7af1340a330c07ae8c8ff8481b2d5355bdbf358d5f1",
+      "sha256": "dd8c84f729c837f3a2dd2a43f0f38c41e17ed15df59fffd88096b8bf18c8b7c6",
       "size": [
         768,
         256
@@ -1243,11 +1243,11 @@
           457
         ],
         [
-          522,
-          739
+          497,
+          760
         ]
       ],
-      "crossed_equal_thirds": false,
+      "crossed_equal_thirds": true,
       "forms": [
         {
           "form": 0,
@@ -1286,19 +1286,19 @@
         {
           "form": 2,
           "bounds": [
-            522,
-            47,
-            739,
-            236
+            497,
+            73,
+            760,
+            246
           ],
           "frame": [
-            518,
-            43,
-            225,
-            197
+            493,
+            69,
+            271,
+            181
           ],
-          "visible_pixels": 26026,
-          "captured_pixels": 26026
+          "visible_pixels": 25125,
+          "captured_pixels": 25125
         }
       ]
     },
@@ -1684,7 +1684,7 @@
     },
     {
       "id": "coralfang",
-      "sha256": "4bf2dce72877eee9f213f2dcfde20da3b62ca5d27422ade4576978a711797839",
+      "sha256": "ecc4d87e45dce1e8e167ce6057d37efdfbb7dc82bdbc40c286a6c708cc74aec1",
       "size": [
         768,
         256
@@ -1699,11 +1699,11 @@
           450
         ],
         [
-          519,
-          737
+          492,
+          760
         ]
       ],
-      "crossed_equal_thirds": false,
+      "crossed_equal_thirds": true,
       "forms": [
         {
           "form": 0,
@@ -1742,19 +1742,19 @@
         {
           "form": 2,
           "bounds": [
-            519,
-            16,
-            737,
-            224
+            492,
+            46,
+            760,
+            246
           ],
           "frame": [
-            515,
-            12,
-            226,
-            216
+            488,
+            42,
+            276,
+            208
           ],
-          "visible_pixels": 27616,
-          "captured_pixels": 27616
+          "visible_pixels": 29611,
+          "captured_pixels": 29611
         }
       ]
     },
@@ -2444,7 +2444,7 @@
     },
     {
       "id": "eldermoth",
-      "sha256": "86e0b1c6fd98e2be8956c7a651f4a25c057c1e9c2568acae4dc97ed9245a89b2",
+      "sha256": "af8b1847dd84176e2c3309db25be78ab5b3c8d191bf1865f1b96b5b8fdf03355",
       "size": [
         768,
         256
@@ -2459,11 +2459,11 @@
           460
         ],
         [
-          514,
-          747
+          496,
+          759
         ]
       ],
-      "crossed_equal_thirds": false,
+      "crossed_equal_thirds": true,
       "forms": [
         {
           "form": 0,
@@ -2502,45 +2502,41 @@
         {
           "form": 2,
           "bounds": [
-            514,
-            15,
-            747,
-            243
+            496,
+            14,
+            759,
+            246
           ],
           "frame": [
-            510,
-            11,
-            241,
-            236
+            492,
+            10,
+            271,
+            240
           ],
-          "visible_pixels": 29633,
-          "captured_pixels": 29633
+          "visible_pixels": 29574,
+          "captured_pixels": 29574
         }
       ]
     },
     {
       "id": "embermoth",
-      "sha256": "e02d4ce2ea7889b4702eebaaa9e987aa124188c8833c13c9536c58988f229439",
+      "sha256": "a5a89b6f70510e01df94b99f7d41bd94d185ab8a2a3a6930b5b9c6f1f9f49711",
       "size": [
         768,
         256
       ],
       "alpha_runs": [
         [
-          54,
+          31,
           190
         ],
         [
-          254,
-          256
+          242,
+          452
         ],
         [
-          266,
-          439
-        ],
-        [
-          507,
-          733
+          509,
+          732
         ]
       ],
       "crossed_equal_thirds": true,
@@ -2548,53 +2544,53 @@
         {
           "form": 0,
           "bounds": [
-            54,
-            102,
+            31,
+            76,
             190,
-            232
+            246
           ],
           "frame": [
-            50,
-            98,
-            144,
-            138
+            27,
+            72,
+            167,
+            178
           ],
-          "visible_pixels": 8708,
-          "captured_pixels": 8708
+          "visible_pixels": 13591,
+          "captured_pixels": 13591
         },
         {
           "form": 1,
           "bounds": [
-            254,
-            55,
-            439,
-            236
+            242,
+            43,
+            452,
+            246
           ],
           "frame": [
-            250,
-            51,
-            193,
-            189
+            238,
+            39,
+            218,
+            211
           ],
-          "visible_pixels": 17796,
-          "captured_pixels": 17796
+          "visible_pixels": 21108,
+          "captured_pixels": 21108
         },
         {
           "form": 2,
           "bounds": [
-            507,
-            12,
-            733,
-            242
+            509,
+            14,
+            732,
+            246
           ],
           "frame": [
-            503,
-            8,
-            234,
-            238
+            505,
+            10,
+            231,
+            240
           ],
-          "visible_pixels": 31956,
-          "captured_pixels": 31956
+          "visible_pixels": 30684,
+          "captured_pixels": 30684
         }
       ]
     },
@@ -3436,7 +3432,7 @@
     },
     {
       "id": "gossamerwisp",
-      "sha256": "32b32c043c9bfce38c173384cde3c1e828c0150c04f1dd116cae6d5ccd9ffb9f",
+      "sha256": "1b1773c221510a38ae45f2c4fc3bf17f294702d6d6fbf947470375036f9d5715",
       "size": [
         768,
         256
@@ -3451,8 +3447,8 @@
           469
         ],
         [
-          516,
-          745
+          513,
+          747
         ]
       ],
       "crossed_equal_thirds": false,
@@ -3494,19 +3490,19 @@
         {
           "form": 2,
           "bounds": [
-            516,
-            48,
-            745,
-            234
+            513,
+            14,
+            747,
+            246
           ],
           "frame": [
-            512,
-            44,
-            237,
-            194
+            509,
+            10,
+            242,
+            240
           ],
-          "visible_pixels": 26941,
-          "captured_pixels": 26941
+          "visible_pixels": 27599,
+          "captured_pixels": 27599
         }
       ]
     },
@@ -4960,23 +4956,23 @@
     },
     {
       "id": "kilnwarden",
-      "sha256": "bc9c324e49d8a2546648706ca23df86f04c4f711df8a1c253d9f8bf97a123bc1",
+      "sha256": "3318b403a3ee8e54f768a3de544038f7d8bfdfdfa68aa932b32e024967940492",
       "size": [
         768,
         256
       ],
       "alpha_runs": [
         [
-          72,
-          171
+          57,
+          178
         ],
         [
-          301,
-          459
+          284,
+          455
         ],
         [
-          547,
-          731
+          521,
+          750
         ]
       ],
       "crossed_equal_thirds": false,
@@ -4984,53 +4980,53 @@
         {
           "form": 0,
           "bounds": [
-            72,
-            88,
-            171,
-            234
+            57,
+            79,
+            178,
+            246
           ],
           "frame": [
-            68,
-            84,
-            107,
-            154
+            53,
+            75,
+            129,
+            175
           ],
-          "visible_pixels": 8138,
-          "captured_pixels": 8138
+          "visible_pixels": 12481,
+          "captured_pixels": 12481
         },
         {
           "form": 1,
           "bounds": [
-            301,
-            11,
-            459,
-            236
+            284,
+            14,
+            455,
+            246
           ],
           "frame": [
-            297,
-            7,
-            166,
-            233
+            280,
+            10,
+            179,
+            240
           ],
-          "visible_pixels": 20595,
-          "captured_pixels": 20595
+          "visible_pixels": 21367,
+          "captured_pixels": 21367
         },
         {
           "form": 2,
           "bounds": [
-            547,
-            5,
-            731,
-            237
+            521,
+            59,
+            750,
+            246
           ],
           "frame": [
-            543,
-            1,
-            192,
-            240
+            517,
+            55,
+            237,
+            195
           ],
-          "visible_pixels": 27084,
-          "captured_pixels": 27084
+          "visible_pixels": 26072,
+          "captured_pixels": 26072
         }
       ]
     },
@@ -5112,23 +5108,23 @@
     },
     {
       "id": "kryptonshard",
-      "sha256": "788215404cd448d84c3bd74430f05c82ec6d0591c93fd26bbe8c7e022e30097b",
+      "sha256": "3efc2cbac2cf072e256354be5fbf205b358bd2b93707f2a41000f5188921e379",
       "size": [
         768,
         256
       ],
       "alpha_runs": [
         [
-          86,
+          54,
           176
         ],
         [
-          284,
-          442
+          268,
+          444
         ],
         [
-          525,
-          744
+          519,
+          732
         ]
       ],
       "crossed_equal_thirds": false,
@@ -5136,75 +5132,75 @@
         {
           "form": 0,
           "bounds": [
-            86,
-            103,
+            54,
+            75,
             176,
-            224
+            246
           ],
           "frame": [
-            82,
-            99,
-            98,
-            129
+            50,
+            71,
+            130,
+            179
           ],
-          "visible_pixels": 5228,
-          "captured_pixels": 5228
+          "visible_pixels": 12319,
+          "captured_pixels": 12319
         },
         {
           "form": 1,
           "bounds": [
-            284,
-            36,
-            442,
-            225
+            268,
+            14,
+            444,
+            246
           ],
           "frame": [
-            280,
-            32,
-            166,
-            197
+            264,
+            10,
+            184,
+            240
           ],
-          "visible_pixels": 13721,
-          "captured_pixels": 13721
+          "visible_pixels": 22181,
+          "captured_pixels": 22181
         },
         {
           "form": 2,
           "bounds": [
-            525,
-            12,
-            744,
-            227
+            519,
+            43,
+            732,
+            246
           ],
           "frame": [
-            521,
-            8,
-            227,
-            223
+            515,
+            39,
+            221,
+            211
           ],
-          "visible_pixels": 24982,
-          "captured_pixels": 24982
+          "visible_pixels": 27896,
+          "captured_pixels": 27896
         }
       ]
     },
     {
       "id": "lacquertor",
-      "sha256": "0e1b71e9ff126f9246494e7b9961aa8d13702362dd16bae08d9009b659762bc8",
+      "sha256": "670ff7ab4a33ed9750bb3c84a46899955fcc5274080ce535ad3bd6433e4fc03d",
       "size": [
         768,
         256
       ],
       "alpha_runs": [
         [
-          58,
-          200
+          23,
+          218
         ],
         [
-          283,
-          462
+          272,
+          453
         ],
         [
-          506,
-          744
+          492,
+          760
         ]
       ],
       "crossed_equal_thirds": true,
@@ -5212,53 +5208,53 @@
         {
           "form": 0,
           "bounds": [
-            58,
-            105,
-            200,
-            236
+            23,
+            73,
+            218,
+            246
           ],
           "frame": [
-            54,
-            101,
-            150,
-            139
+            19,
+            69,
+            203,
+            181
           ],
-          "visible_pixels": 11422,
-          "captured_pixels": 11422
+          "visible_pixels": 23372,
+          "captured_pixels": 23372
         },
         {
           "form": 1,
           "bounds": [
-            283,
-            67,
-            462,
-            238
+            272,
+            37,
+            453,
+            246
           ],
           "frame": [
-            279,
-            63,
-            187,
-            179
+            268,
+            33,
+            189,
+            217
           ],
-          "visible_pixels": 20587,
-          "captured_pixels": 20587
+          "visible_pixels": 14789,
+          "captured_pixels": 14789
         },
         {
           "form": 2,
           "bounds": [
-            506,
-            40,
-            744,
-            240
+            492,
+            69,
+            760,
+            246
           ],
           "frame": [
-            502,
-            36,
-            246,
-            208
+            488,
+            65,
+            276,
+            185
           ],
-          "visible_pixels": 33019,
-          "captured_pixels": 33019
+          "visible_pixels": 27312,
+          "captured_pixels": 27312
         }
       ]
     },
@@ -5644,23 +5640,23 @@
     },
     {
       "id": "marrowfang",
-      "sha256": "6c207e5bf549439699bba368a5b568c85e60b039d9455084cd7640be5a34cd43",
+      "sha256": "502fa57579462b127a1726e9043b75a78cc6bda5dcc6aebd7e6c6a35603f5af2",
       "size": [
         768,
         256
       ],
       "alpha_runs": [
         [
-          79,
-          178
+          58,
+          181
         ],
         [
-          302,
-          433
+          248,
+          464
         ],
         [
-          511,
-          736
+          501,
+          738
         ]
       ],
       "crossed_equal_thirds": true,
@@ -5668,53 +5664,53 @@
         {
           "form": 0,
           "bounds": [
-            79,
-            122,
-            178,
-            221
+            58,
+            101,
+            181,
+            246
           ],
           "frame": [
-            75,
-            118,
-            107,
-            107
+            54,
+            97,
+            131,
+            153
           ],
-          "visible_pixels": 4912,
-          "captured_pixels": 4912
+          "visible_pixels": 10861,
+          "captured_pixels": 10861
         },
         {
           "form": 1,
           "bounds": [
-            302,
-            54,
-            433,
-            224
+            248,
+            121,
+            464,
+            246
           ],
           "frame": [
-            298,
-            50,
-            139,
-            178
+            244,
+            117,
+            224,
+            133
           ],
-          "visible_pixels": 10936,
-          "captured_pixels": 10936
+          "visible_pixels": 15448,
+          "captured_pixels": 15448
         },
         {
           "form": 2,
           "bounds": [
-            511,
-            36,
-            736,
-            224
+            501,
+            100,
+            738,
+            246
           ],
           "frame": [
-            507,
-            32,
-            233,
-            196
+            497,
+            96,
+            245,
+            154
           ],
-          "visible_pixels": 25750,
-          "captured_pixels": 25750
+          "visible_pixels": 20530,
+          "captured_pixels": 20530
         }
       ]
     },
@@ -6024,23 +6020,23 @@
     },
     {
       "id": "morrowfang",
-      "sha256": "f8386cccfedd9053f97749091de9645c037a9a6bc2657da9908b7bc81a387b9c",
+      "sha256": "5da64d32a8b4f90d3ce6c674bcbf3b72e35f5bfc3ed807cc7973f4f8019b1695",
       "size": [
         768,
         256
       ],
       "alpha_runs": [
         [
-          83,
-          173
+          69,
+          169
         ],
         [
-          305,
-          439
+          270,
+          441
         ],
         [
-          508,
-          740
+          509,
+          733
         ]
       ],
       "crossed_equal_thirds": true,
@@ -6048,53 +6044,53 @@
         {
           "form": 0,
           "bounds": [
-            83,
-            138,
-            173,
-            226
+            69,
+            109,
+            169,
+            246
           ],
           "frame": [
-            79,
-            134,
-            98,
-            96
+            65,
+            105,
+            108,
+            145
           ],
-          "visible_pixels": 4081,
-          "captured_pixels": 4081
+          "visible_pixels": 7975,
+          "captured_pixels": 7975
         },
         {
           "form": 1,
           "bounds": [
-            305,
-            56,
-            439,
-            231
+            270,
+            14,
+            441,
+            246
           ],
           "frame": [
-            301,
-            52,
-            142,
-            183
+            266,
+            10,
+            179,
+            240
           ],
-          "visible_pixels": 11874,
-          "captured_pixels": 11874
+          "visible_pixels": 17437,
+          "captured_pixels": 17437
         },
         {
           "form": 2,
           "bounds": [
-            508,
-            43,
-            740,
-            235
+            509,
+            50,
+            733,
+            246
           ],
           "frame": [
-            504,
-            39,
-            240,
-            200
+            505,
+            46,
+            232,
+            204
           ],
-          "visible_pixels": 22720,
-          "captured_pixels": 22720
+          "visible_pixels": 27362,
+          "captured_pixels": 27362
         }
       ]
     },
@@ -6784,7 +6780,7 @@
     },
     {
       "id": "onyxflare",
-      "sha256": "8890602b330132f7110ca363ce22c90422e06e9104f39d6f933b51e2069a53bb",
+      "sha256": "e69d2e5773b2c9ce7b2e6137721b9aeecd3cddf45fb7711a7b850edcacd9d067",
       "size": [
         768,
         256
@@ -6799,8 +6795,8 @@
           455
         ],
         [
-          492,
-          725
+          481,
+          760
         ]
       ],
       "crossed_equal_thirds": true,
@@ -6842,19 +6838,19 @@
         {
           "form": 2,
           "bounds": [
-            492,
-            10,
-            725,
+            481,
+            78,
+            760,
             246
           ],
           "frame": [
-            488,
-            6,
-            241,
-            244
+            477,
+            74,
+            287,
+            176
           ],
-          "visible_pixels": 31875,
-          "captured_pixels": 31875
+          "visible_pixels": 24803,
+          "captured_pixels": 24803
         }
       ]
     },
@@ -6936,7 +6932,7 @@
     },
     {
       "id": "oraclekin",
-      "sha256": "1eed691619bf292e7a55823245ee9bbb7b9f0eac37aca450d00100eab6651e4d",
+      "sha256": "f9d0f2eccbb42236a2055a6471cbfb3c0db03b8447bf514527efac5ae462a9c5",
       "size": [
         768,
         256
@@ -6951,8 +6947,8 @@
           471
         ],
         [
-          505,
-          733
+          496,
+          760
         ]
       ],
       "crossed_equal_thirds": true,
@@ -6994,19 +6990,19 @@
         {
           "form": 2,
           "bounds": [
-            505,
-            21,
-            733,
-            234
+            496,
+            32,
+            760,
+            246
           ],
           "frame": [
-            501,
-            17,
-            236,
-            221
+            492,
+            28,
+            272,
+            222
           ],
-          "visible_pixels": 31554,
-          "captured_pixels": 31554
+          "visible_pixels": 36161,
+          "captured_pixels": 36161
         }
       ]
     },
@@ -8076,7 +8072,7 @@
     },
     {
       "id": "resonara",
-      "sha256": "0d12e0c32d868f3267042234b6a8b4aad27ba00562c66c826e7071f5f3431733",
+      "sha256": "cf16ef51b6d9586255a54140fd0cef547ed23d9ce7402feb5bb203e9dea80c2a",
       "size": [
         768,
         256
@@ -8091,11 +8087,11 @@
           486
         ],
         [
-          516,
-          755
+          509,
+          760
         ]
       ],
-      "crossed_equal_thirds": false,
+      "crossed_equal_thirds": true,
       "forms": [
         {
           "form": 0,
@@ -8134,101 +8130,101 @@
         {
           "form": 2,
           "bounds": [
-            516,
-            13,
-            755,
-            228
+            509,
+            34,
+            760,
+            246
           ],
           "frame": [
-            512,
-            9,
-            247,
-            223
+            505,
+            30,
+            259,
+            220
           ],
-          "visible_pixels": 24433,
-          "captured_pixels": 24433
+          "visible_pixels": 28565,
+          "captured_pixels": 28565
         }
       ]
     },
     {
       "id": "rimemoth",
-      "sha256": "829c95e527c6e805610621ae8f56ce50f05e0067d381956003488b5d1c092b5d",
+      "sha256": "5719d6778bf21e7633ace533ee7b4e44c3b7377da18c6702a19c1d3da6dc1ac0",
       "size": [
         768,
         256
       ],
       "alpha_runs": [
         [
-          34,
-          204
+          8,
+          222
         ],
         [
-          257,
-          490
+          252,
+          480
         ],
         [
-          515,
-          757
+          511,
+          759
         ]
       ],
-      "crossed_equal_thirds": false,
+      "crossed_equal_thirds": true,
       "forms": [
         {
           "form": 0,
           "bounds": [
-            34,
-            90,
-            204,
-            209
+            8,
+            95,
+            222,
+            246
           ],
           "frame": [
-            30,
-            86,
-            178,
-            127
+            4,
+            91,
+            222,
+            159
           ],
-          "visible_pixels": 7870,
-          "captured_pixels": 7870
+          "visible_pixels": 12911,
+          "captured_pixels": 12911
         },
         {
           "form": 1,
           "bounds": [
-            257,
-            50,
-            490,
-            214
+            252,
+            35,
+            480,
+            246
           ],
           "frame": [
-            253,
-            46,
-            241,
-            172
+            248,
+            31,
+            236,
+            219
           ],
-          "visible_pixels": 20071,
-          "captured_pixels": 20071
+          "visible_pixels": 22165,
+          "captured_pixels": 22165
         },
         {
           "form": 2,
           "bounds": [
-            515,
-            23,
-            757,
-            221
+            511,
+            35,
+            759,
+            246
           ],
           "frame": [
-            511,
-            19,
-            250,
-            206
+            507,
+            31,
+            256,
+            219
           ],
-          "visible_pixels": 31833,
-          "captured_pixels": 31833
+          "visible_pixels": 31324,
+          "captured_pixels": 31324
         }
       ]
     },
     {
       "id": "ripplejaw",
-      "sha256": "7ad4fc7933e2aa4809dda412470fa65d1bbff0d57c121f4c796e51f9b2c74421",
+      "sha256": "0083a63ea2439b3f0a4c42b38e10941375f6884e1f2c5939aa8074f905c6e903",
       "size": [
         768,
         256
@@ -8243,8 +8239,8 @@
           443
         ],
         [
-          508,
-          732
+          483,
+          760
         ]
       ],
       "crossed_equal_thirds": true,
@@ -8286,41 +8282,41 @@
         {
           "form": 2,
           "bounds": [
-            508,
-            12,
-            732,
-            221
+            483,
+            61,
+            760,
+            246
           ],
           "frame": [
-            504,
-            8,
-            232,
-            217
+            479,
+            57,
+            285,
+            193
           ],
-          "visible_pixels": 28716,
-          "captured_pixels": 28716
+          "visible_pixels": 25836,
+          "captured_pixels": 25836
         }
       ]
     },
     {
       "id": "runemoth",
-      "sha256": "a7143a2642822fb0b0ad034e188d344b5deb50f62b609d60e341a752ab5f463d",
+      "sha256": "b7b6b5e8750536cdbaf0d9d4305e943c94eb449881ec9c02a687810771959d46",
       "size": [
         768,
         256
       ],
       "alpha_runs": [
         [
-          94,
-          181
+          27,
+          211
         ],
         [
-          297,
-          462
+          269,
+          463
         ],
         [
-          524,
-          750
+          533,
+          728
         ]
       ],
       "crossed_equal_thirds": false,
@@ -8328,53 +8324,53 @@
         {
           "form": 0,
           "bounds": [
-            94,
-            127,
-            181,
-            214
+            27,
+            51,
+            211,
+            246
           ],
           "frame": [
-            90,
-            123,
-            95,
-            95
+            23,
+            47,
+            192,
+            203
           ],
-          "visible_pixels": 2900,
-          "captured_pixels": 2900
+          "visible_pixels": 14359,
+          "captured_pixels": 14359
         },
         {
           "form": 1,
           "bounds": [
-            297,
-            30,
-            462,
-            223
+            269,
+            14,
+            463,
+            246
           ],
           "frame": [
-            293,
-            26,
-            173,
-            201
+            265,
+            10,
+            202,
+            240
           ],
-          "visible_pixels": 10802,
-          "captured_pixels": 10802
+          "visible_pixels": 18022,
+          "captured_pixels": 18022
         },
         {
           "form": 2,
           "bounds": [
-            524,
-            1,
-            750,
-            228
+            533,
+            95,
+            728,
+            246
           ],
           "frame": [
-            520,
-            0,
-            234,
-            232
+            529,
+            91,
+            203,
+            159
           ],
-          "visible_pixels": 26473,
-          "captured_pixels": 26473
+          "visible_pixels": 13551,
+          "captured_pixels": 13551
         }
       ]
     },
@@ -8532,7 +8528,7 @@
     },
     {
       "id": "seralotus",
-      "sha256": "64a739bfdd20036016452dfa42587e46790a74c5d4f0499da327923b488e4a59",
+      "sha256": "b7501ad43c18933143a9cbb633d0b8d03d799bc90a52384b6c04bbf0c6187484",
       "size": [
         768,
         256
@@ -8547,8 +8543,8 @@
           443
         ],
         [
-          508,
-          746
+          503,
+          740
         ]
       ],
       "crossed_equal_thirds": true,
@@ -8590,19 +8586,19 @@
         {
           "form": 2,
           "bounds": [
-            508,
-            5,
-            746,
-            237
+            503,
+            14,
+            740,
+            246
           ],
           "frame": [
-            504,
-            1,
-            246,
+            499,
+            10,
+            245,
             240
           ],
-          "visible_pixels": 29498,
-          "captured_pixels": 29498
+          "visible_pixels": 26514,
+          "captured_pixels": 26514
         }
       ]
     },
@@ -9672,7 +9668,7 @@
     },
     {
       "id": "veilstripe",
-      "sha256": "d3abb3e6f82e86c89a2d3b319afc81628063692c903ca96961131b1ee5b91883",
+      "sha256": "3c35e65d5b26d1508e48584f52882c976edf98e34c2484fb053f6373cb6bef9b",
       "size": [
         768,
         256
@@ -9687,11 +9683,11 @@
           468
         ],
         [
-          522,
-          736
+          503,
+          760
         ]
       ],
-      "crossed_equal_thirds": false,
+      "crossed_equal_thirds": true,
       "forms": [
         {
           "form": 0,
@@ -9730,19 +9726,19 @@
         {
           "form": 2,
           "bounds": [
-            522,
-            41,
-            736,
-            233
+            503,
+            40,
+            760,
+            246
           ],
           "frame": [
-            518,
-            37,
-            222,
-            200
+            499,
+            36,
+            265,
+            214
           ],
-          "visible_pixels": 19117,
-          "captured_pixels": 19117
+          "visible_pixels": 23626,
+          "captured_pixels": 23626
         }
       ]
     },
@@ -9900,7 +9896,7 @@
     },
     {
       "id": "verdantbloom",
-      "sha256": "f06364f1c8d95903e2b658ce3a9c8fb397db5c0f8f39275a3eb3371f232e79b0",
+      "sha256": "8fe7fea0525d77cb6f346818e85776ff79825622ef1870d1d8c09d8eb088ff4b",
       "size": [
         768,
         256
@@ -9911,15 +9907,15 @@
           204
         ],
         [
-          273,
-          476
+          293,
+          439
         ],
         [
-          513,
-          763
+          502,
+          760
         ]
       ],
-      "crossed_equal_thirds": false,
+      "crossed_equal_thirds": true,
       "forms": [
         {
           "form": 0,
@@ -9941,36 +9937,36 @@
         {
           "form": 1,
           "bounds": [
-            273,
-            37,
-            476,
-            243
+            293,
+            15,
+            439,
+            246
           ],
           "frame": [
-            269,
-            33,
-            211,
-            214
+            289,
+            11,
+            154,
+            239
           ],
-          "visible_pixels": 25117,
-          "captured_pixels": 25117
+          "visible_pixels": 18886,
+          "captured_pixels": 18886
         },
         {
           "form": 2,
           "bounds": [
-            513,
-            9,
-            763,
-            247
-          ],
-          "frame": [
-            509,
-            5,
-            258,
+            502,
+            44,
+            760,
             246
           ],
-          "visible_pixels": 38628,
-          "captured_pixels": 38628
+          "frame": [
+            498,
+            40,
+            266,
+            210
+          ],
+          "visible_pixels": 32224,
+          "captured_pixels": 32224
         }
       ]
     },
@@ -10280,7 +10276,7 @@
     },
     {
       "id": "whiskerfey",
-      "sha256": "b268daf39a3f76aef37f5c1469c6119c9d093f423b3a9e44c349c908b987c80d",
+      "sha256": "e1b2a7bcd04641ebd6355a94b71ee941d2e5b375e9c31132134f591e03a5bd22",
       "size": [
         768,
         256
@@ -10295,8 +10291,8 @@
           460
         ],
         [
-          505,
-          729
+          494,
+          755
         ]
       ],
       "crossed_equal_thirds": true,
@@ -10338,19 +10334,19 @@
         {
           "form": 2,
           "bounds": [
-            505,
-            31,
-            729,
-            224
+            494,
+            14,
+            755,
+            246
           ],
           "frame": [
-            501,
-            27,
-            232,
-            201
+            490,
+            10,
+            269,
+            240
           ],
-          "visible_pixels": 27221,
-          "captured_pixels": 27221
+          "visible_pixels": 37405,
+          "captured_pixels": 37405
         }
       ]
     },
@@ -10660,7 +10656,7 @@
     },
     {
       "id": "xanthjaw",
-      "sha256": "2a689a0e09fd1bc86cf54464c4882cc3c649caf78dba01034594a8688e80b0db",
+      "sha256": "281e7c8fbed3697e9c0c325eb4a6f937803e29ec6ec0536f604dd1b7a7adbb00",
       "size": [
         768,
         256
@@ -10675,8 +10671,8 @@
           439
         ],
         [
-          483,
-          739
+          469,
+          760
         ]
       ],
       "crossed_equal_thirds": true,
@@ -10718,19 +10714,19 @@
         {
           "form": 2,
           "bounds": [
-            483,
-            33,
-            739,
-            212
+            469,
+            27,
+            760,
+            246
           ],
           "frame": [
-            479,
-            29,
-            264,
-            187
+            465,
+            23,
+            299,
+            227
           ],
-          "visible_pixels": 24038,
-          "captured_pixels": 24038
+          "visible_pixels": 27829,
+          "captured_pixels": 27829
         }
       ]
     },
@@ -11040,77 +11036,77 @@
     },
     {
       "id": "zephyrfang",
-      "sha256": "a751287980ab645d1842022161bbd77ea1458f3396467dde8e8fcd4fda73987b",
+      "sha256": "f28340ccaff2cb6ac671a8ba0f0e456ecdee1b03951b3717090339382347d047",
       "size": [
         768,
         256
       ],
       "alpha_runs": [
         [
-          94,
-          182
+          45,
+          189
         ],
         [
-          288,
-          456
+          245,
+          475
         ],
         [
-          514,
-          740
+          493,
+          760
         ]
       ],
-      "crossed_equal_thirds": false,
+      "crossed_equal_thirds": true,
       "forms": [
         {
           "form": 0,
           "bounds": [
-            94,
-            126,
-            182,
-            216
+            45,
+            53,
+            189,
+            246
           ],
           "frame": [
-            90,
-            122,
-            96,
-            98
+            41,
+            49,
+            152,
+            201
           ],
-          "visible_pixels": 4039,
-          "captured_pixels": 4039
+          "visible_pixels": 10046,
+          "captured_pixels": 10046
         },
         {
           "form": 1,
           "bounds": [
-            288,
-            65,
-            456,
-            216
+            245,
+            36,
+            475,
+            246
           ],
           "frame": [
-            284,
-            61,
-            176,
-            159
+            241,
+            32,
+            238,
+            218
           ],
-          "visible_pixels": 12463,
-          "captured_pixels": 12463
+          "visible_pixels": 16110,
+          "captured_pixels": 16110
         },
         {
           "form": 2,
           "bounds": [
-            514,
-            36,
-            740,
-            221
+            493,
+            41,
+            760,
+            246
           ],
           "frame": [
-            510,
-            32,
-            234,
-            193
+            489,
+            37,
+            275,
+            213
           ],
-          "visible_pixels": 22269,
-          "captured_pixels": 22269
+          "visible_pixels": 28764,
+          "captured_pixels": 28764
         }
       ]
     },

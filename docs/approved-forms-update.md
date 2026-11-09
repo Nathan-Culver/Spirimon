@@ -12,11 +12,14 @@ all cells that the PDF does not replace, verified before writing the report.
 The atlases use lossless WebP; the complete offline download consequently has
 a 69 MiB budget and the core art a 43 MiB budget.
 
-The PDF contains front illustrations only. Changed Forms use these approved
-illustrations for ally battles and northward companion rendering until matching
-rear art is authored. Unchanged Forms continue to use their existing audited
-rear views. Updated anatomy drives companion motion, including Gossarach's four
-arms and Lotoseraph's quadrupedal body.
+The PDF contains front illustrations only. All 47 changed Forms now have matching
+authored rear views for ally battles and northward companion rendering.
+`reviewed-rear-art-v7.json` records their source hashes, prompts, reference front
+hashes and runtime atlas hashes. Every unchanged rear silhouette is preserved
+pixel for pixel. All 150 rear atlases / 450 source rectangles are audited again
+after packing to retain complete silhouettes without neighboring fragments.
+Updated anatomy drives companion motion, including Gossarach's four arms and
+Lotoseraph's quadrupedal body.
 
 `approved-form-names.json` records all 150 General Form 3 renames and all 12
 legendary form renames. General Forms 1 and 2 keep their names. Legendary

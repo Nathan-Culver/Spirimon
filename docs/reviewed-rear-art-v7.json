@@ -1,0 +1,747 @@
+{
+  "revision": 7,
+  "generator": "OpenAI image_gen",
+  "forms": 47,
+  "lineages": [
+    {
+      "id": "veilstripe",
+      "forms": [
+        3
+      ],
+      "frontAtlas": "./assets/roster/veilstripe-v7.webp",
+      "frontSha256": "7e7e5b18945ef9f32490618afa150b61712ee344a29d42d4f98ae5aefc3c2544",
+      "rearAtlas": "./assets/battle-back/veilstripe.webp",
+      "rearSha256": "3c35e65d5b26d1508e48584f52882c976edf98e34c2484fb053f6373cb6bef9b",
+      "sourceSha256": "4a2c1deed304554bfe55d000b7d82be233c6b2546ada967e36afed7fbfba1fa0",
+      "sourceBoxes": [
+        [
+          223,
+          21,
+          1300,
+          884
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Rear three-quarter Veilacine, preserving the approved corrected wolf anatomy, lavender spectral mane, ribs and four complete skeletal legs and paws. Match the final approved front form. Transparent background; full body facing away to upper right.",
+      "unchangedFormsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "aurelattice",
+      "forms": [
+        3
+      ],
+      "frontAtlas": "./assets/roster/aurelattice-v7.webp",
+      "frontSha256": "4a9a2e7ace932a0cce02c967b693abd33806566e47efa9116768f66f5c1d5fa6",
+      "rearAtlas": "./assets/battle-back/aurelattice.webp",
+      "rearSha256": "ec86605b61a5f593b51ea40baa3fa2df6436add81b9332fa2349bf0a4d9fda3f",
+      "sourceSha256": "a5762aecc69d5fcc0e68417d3969a08b8a1906ee205e502b77ec70e2a3226304",
+      "sourceBoxes": [
+        [
+          338,
+          51,
+          1328,
+          941
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon RPG rear-facing battle sprite single. Reference image is the APPROVED FRONT design, with Forms 1, 2, 3 from left to right. Render ONLY Form 3 as genuinely NEW REAR THREE-QUARTER views facing away toward upper right, backs and rear of heads visible, front faces mostly hidden. Exactly one isolated full-body sprite; no other forms. Match identity, colors, materials, proportions and detailed hand-painted fantasy game illustration of the corresponding reference form exactly. Keep: long neck, white lion-griffin quadruped body and eye-feather lion mane; gold bands, cyan wing panels, four legs and two wings. Preserve limb count, corrected anatomy and all floating details. Do not copy or mirror front-facing pose. Actual transparent background. No text, labels, ground, platform, shadows, ambient haze or glow cloud. Entire silhouette and all appendages fit comfortably within the image with transparent margins.",
+      "unchangedFormsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "seralotus",
+      "forms": [
+        3
+      ],
+      "frontAtlas": "./assets/roster/seralotus-v7.webp",
+      "frontSha256": "ae9a1b5664e61ec48f0806b2113e5c1a13146ebc00db4ae6b4100701d56beee2",
+      "rearAtlas": "./assets/battle-back/seralotus.webp",
+      "rearSha256": "b7501ad43c18933143a9cbb633d0b8d03d799bc90a52384b6c04bbf0c6187484",
+      "sourceSha256": "df68b2416461128c92b08517cd9ad60090748966e939dbd7fae6530ec74dcecf",
+      "sourceBoxes": [
+        [
+          306,
+          74,
+          1192,
+          941
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon RPG rear-facing battle sprite single. Reference image is the APPROVED FRONT design, with Forms 1, 2, 3 from left to right. Render ONLY Form 3 as genuinely NEW REAR THREE-QUARTER views facing away toward upper right, backs and rear of heads visible, front faces mostly hidden. Exactly one isolated full-body sprite; no other forms. Match identity, colors, materials, proportions and detailed hand-painted fantasy game illustration of the corresponding reference form exactly. Keep: long neck, white quadruped body and floral petal lion mane; green vines, lotus tail, ivory petals and golden halo. Preserve limb count, corrected anatomy and all floating details. Do not copy or mirror front-facing pose. Actual transparent background. No text, labels, ground, platform, shadows, ambient haze or glow cloud. Entire silhouette and all appendages fit comfortably within the image with transparent margins. Follow-up: Edit this rear-facing Spirimon sprite only to fit its complete golden halo and all petals comfortably within the image. Keep the same creature, pose, four legs, neck, body, green vines, white petals, golden halo, colors and style. Slightly reduce the whole sprite scale to leave at least 10% fully transparent empty margin on ALL four edges, including ABOVE the golden halo tip. Entire halo must be intact. Remove any background haze, light rays or glow clouds; actual transparent background, crisp cutout. Do not add or redesign anything.",
+      "unchangedFormsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "auroriel",
+      "forms": [
+        3
+      ],
+      "frontAtlas": "./assets/roster/auroriel-v7.webp",
+      "frontSha256": "7e7dcbfc0dfc797adcfa6aa21980aa5992e654790706fed253cfe6de6d01e56e",
+      "rearAtlas": "./assets/battle-back/auroriel.webp",
+      "rearSha256": "0f6e1359570e75b4e9a075700e0cfcd0f29dea992e0b6c071c1bb9add6c05a1e",
+      "sourceSha256": "604aa314295ebe5dc382aa670a7b31a9c9e5a87933ba031dfef66746149225ae",
+      "sourceBoxes": [
+        [
+          62,
+          21,
+          1249,
+          1126
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon RPG rear-facing battle sprite single. Reference image is the APPROVED FRONT design, with Forms 1, 2, 3 from left to right. Render ONLY Form 3 as genuinely NEW REAR THREE-QUARTER views facing away toward upper right, backs and rear of heads visible, front faces mostly hidden. Exactly one isolated full-body sprite; no other forms. Match identity, colors, materials, proportions and detailed hand-painted fantasy game illustration of the corresponding reference form exactly. Keep: elongated Chinese-dragon neck and long flowing torso and hips, pearly pastel feathers, pink-gold-cyan ribbons, golden circular halo. Preserve limb count, corrected anatomy and all floating details. Do not copy or mirror front-facing pose. Actual transparent background. No text, labels, ground, platform, shadows, ambient haze or glow cloud. Entire silhouette and all appendages fit comfortably within the image with transparent margins.",
+      "unchangedFormsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "kilnwarden",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "frontAtlas": "./assets/roster/kilnwarden-v7.webp",
+      "frontSha256": "f40d8f85e4b8b64b8752603b96bef3d64001b72eb279c7d016aa094c2bfe77fe",
+      "rearAtlas": "./assets/battle-back/kilnwarden.webp",
+      "rearSha256": "3318b403a3ee8e54f768a3de544038f7d8bfdfdfa68aa932b32e024967940492",
+      "sourceSha256": "7353f93fe29aae964b9b11799947119e13110213443e5fc5f22c6700ec286c0a",
+      "sourceBoxes": [
+        [
+          239,
+          219,
+          535,
+          628
+        ],
+        [
+          853,
+          65,
+          1271,
+          632
+        ],
+        [
+          1500,
+          181,
+          2060,
+          637
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon RPG rear-facing battle sprite atlas. Reference image is the APPROVED FRONT design, with Forms 1, 2, 3 from left to right. Render ONLY Forms 1, 2, 3 as genuinely NEW REAR THREE-QUARTER views facing away toward upper right, backs and rear of heads visible, front faces mostly hidden. Exactly three isolated sprites in one horizontal row left to right for Forms 1, 2, 3, each centered inside its own equal-width third. Large clear transparent gutters; no crossing into neighboring thirds. Match identity, colors, materials, proportions and detailed hand-painted fantasy game illustration of the corresponding reference form exactly. Keep: three distinct magma-rock bodies with increasing natural metal deposits; small round first form, taller muscular second form, broad low metal-dominant third form; enormous fiery eye is on FRONT and should be mostly hidden from this rear view; no machinery. Preserve limb count, corrected anatomy and all floating details. Do not copy or mirror front-facing pose. Actual transparent background. No text, labels, ground, platform, shadows, ambient haze or glow cloud. Entire silhouette and all appendages fit comfortably within the image with transparent margins.",
+      "unchangedFormsVerified": []
+    },
+    {
+      "id": "resonara",
+      "forms": [
+        3
+      ],
+      "frontAtlas": "./assets/roster/resonara-v7.webp",
+      "frontSha256": "5dce72f993d89dc4e06c232cc70e56c99ad07ff28f133b2caecc49a6e42b540a",
+      "rearAtlas": "./assets/battle-back/resonara.webp",
+      "rearSha256": "cf16ef51b6d9586255a54140fd0cef547ed23d9ce7402feb5bb203e9dea80c2a",
+      "sourceSha256": "d6b66b6393f9d51278cc8eee93f021b921989f413dc59df0b1a8c2de0259a939",
+      "sourceBoxes": [
+        [
+          189,
+          24,
+          1325,
+          985
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon RPG rear-facing battle sprite single. Reference image is the APPROVED FRONT design, with Forms 1, 2, 3 from left to right. Render ONLY Form 3 as genuinely NEW REAR THREE-QUARTER views facing away toward upper right, backs and rear of heads visible, front faces mostly hidden. Exactly one isolated full-body sprite; no other forms. Match identity, colors, materials, proportions and detailed hand-painted fantasy game illustration of the corresponding reference form exactly. Keep: floating golden circle, white feather wings, blue bells and six orbiting blue vertical-pupil eyes; central blue eye belongs on FRONT so the rear of its golden housing should face the viewer. Preserve limb count, corrected anatomy and all floating details. Do not copy or mirror front-facing pose. Actual transparent background. No text, labels, ground, platform, shadows, ambient haze or glow cloud. Entire silhouette and all appendages fit comfortably within the image with transparent margins.",
+      "unchangedFormsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "whiskerfey",
+      "forms": [
+        3
+      ],
+      "frontAtlas": "./assets/roster/whiskerfey-v7.webp",
+      "frontSha256": "aa622d59346ea350c8876171b1f0d36f71cc668e6db2c7d05ce1ed9df73de02d",
+      "rearAtlas": "./assets/battle-back/whiskerfey.webp",
+      "rearSha256": "e1b2a7bcd04641ebd6355a94b71ee941d2e5b375e9c31132134f591e03a5bd22",
+      "sourceSha256": "80cf89182fb740a76c01779adb0be31308d3066e2e03aef9ce0a22a2ba47ba08",
+      "sourceBoxes": [
+        [
+          121,
+          55,
+          1232,
+          1044
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite single. Input is the approved FRONT atlas with Forms 1, 2, 3 left to right. Render ONLY Form 3. Exactly one full-body isolated sprite. TRUE REAR three-quarter view looking away toward upper right; backs and back of heads face viewer. Match the reference identity, palette, anatomy, proportions and finely painted fantasy game illustration. cream feline quadruped, burgundy butterfly wings, huge fluffy cream-and-burgundy tail; four complete articulated legs and paws. Preserve every limb and appendage. No front-view duplication or mirroring, no text, ground, shadow, ambient haze or background glow. GENUINELY TRANSPARENT background and generous clear margins including ABOVE all halos, feathers and horns. All bodies and floating elements fully inside canvas.",
+      "unchangedFormsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "chainhorn",
+      "forms": [
+        3
+      ],
+      "frontAtlas": "./assets/roster/chainhorn-v7.webp",
+      "frontSha256": "d991440e39633c4a692332d434747bd603e7fd8dae65c48e9e057f9710457684",
+      "rearAtlas": "./assets/battle-back/chainhorn.webp",
+      "rearSha256": "dd8c84f729c837f3a2dd2a43f0f38c41e17ed15df59fffd88096b8bf18c8b7c6",
+      "sourceSha256": "caf9b54c34742c49fbd99ea9450f9681f5c42468f85f874687511b2367c2ad78",
+      "sourceBoxes": [
+        [
+          140,
+          104,
+          1435,
+          954
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite single. Input is the approved FRONT atlas with Forms 1, 2, 3 left to right. Render ONLY Form 3. Exactly one full-body isolated sprite. TRUE REAR three-quarter view looking away toward upper right; backs and back of heads face viewer. Match the reference identity, palette, anatomy, proportions and finely painted fantasy game illustration. red-black horned fiend, massive paired bat wings, gold chains and armor, two complete matching horns, massive hands; wings attach to the back. Preserve every limb and appendage. No front-view duplication or mirroring, no text, ground, shadow, ambient haze or background glow. GENUINELY TRANSPARENT background and generous clear margins including ABOVE all halos, feathers and horns. All bodies and floating elements fully inside canvas.",
+      "unchangedFormsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "bonsaitor",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "frontAtlas": "./assets/roster/bonsaitor-v7.webp",
+      "frontSha256": "dcef86cc41573f0010fdeb8ee49f6b56bcfc2fe7fc39fa5f40d60fbe94f60673",
+      "rearAtlas": "./assets/battle-back/bonsaitor.webp",
+      "rearSha256": "ef53ef03c363bb65ad2a90e9b95ddb3421565f5f3aae2a31d1b494dcd05c8059",
+      "sourceSha256": "8bd287e5cf03e9e309757cb545c5be0ed992477aff3dbb10dc866dc9cae73db4",
+      "sourceBoxes": [
+        [
+          226,
+          298,
+          520,
+          637
+        ],
+        [
+          864,
+          76,
+          1268,
+          638
+        ],
+        [
+          1528,
+          322,
+          2015,
+          642
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite atlas. Input is the approved FRONT atlas with Forms 1, 2, 3 left to right. Render ONLY Forms 1, 2, 3. Exactly three isolated sprites in ONE horizontal row left to right, each entirely inside its own equal-width third, wide empty transparent gutters. TRUE REAR three-quarter view looking away toward upper right; backs and back of heads face viewer. Match the reference identity, palette, anatomy, proportions and finely painted fantasy game illustration. elephant-faced bonsai root spirits: compact seated sapling, tall walking grove giant, broad root-arched terrace guardian. Preserve three different silhouettes, tiered bonsai crowns and root anatomy. Preserve every limb and appendage. No front-view duplication or mirroring, no text, ground, shadow, ambient haze or background glow. GENUINELY TRANSPARENT background and generous clear margins including ABOVE all halos, feathers and horns. All bodies and floating elements fully inside canvas.",
+      "unchangedFormsVerified": []
+    },
+    {
+      "id": "lacquertor",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "frontAtlas": "./assets/roster/lacquertor-v7.webp",
+      "frontSha256": "43fa86a0f21d44d165ffb158729008ee757a9ef6516b18964ba07f8f74811849",
+      "rearAtlas": "./assets/battle-back/lacquertor.webp",
+      "rearSha256": "670ff7ab4a33ed9750bb3c84a46899955fcc5274080ce535ad3bd6433e4fc03d",
+      "sourceSha256": "527c87c15996dbce579bd454c052c8627e152c99f16d494776bd854c23776af1",
+      "sourceBoxes": [
+        [
+          164,
+          264,
+          593,
+          644
+        ],
+        [
+          882,
+          185,
+          1279,
+          645
+        ],
+        [
+          1504,
+          262,
+          2093,
+          650
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite atlas. Input is the approved FRONT atlas with Forms 1, 2, 3 left to right. Render ONLY Forms 1, 2, 3. Exactly three isolated sprites in ONE horizontal row left to right, each entirely inside its own equal-width third, wide empty transparent gutters. TRUE REAR three-quarter view looking away toward upper right; backs and back of heads face viewer. Match the reference identity, palette, anatomy, proportions and finely painted fantasy game illustration. stone spirits with FOUR arms each, bronze-red lacquer bands: seated round compact first; slender upright second with circular torso opening; broad architectural final with four stone supporting arms. Preserve every limb and appendage. No front-view duplication or mirroring, no text, ground, shadow, ambient haze or background glow. GENUINELY TRANSPARENT background and generous clear margins including ABOVE all halos, feathers and horns. All bodies and floating elements fully inside canvas.",
+      "unchangedFormsVerified": []
+    },
+    {
+      "id": "embermoth",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "frontAtlas": "./assets/roster/embermoth-v7.webp",
+      "frontSha256": "be8b0baad45ae533d147243cd96908ae79d57f52695046d1bab259df09c14930",
+      "rearAtlas": "./assets/battle-back/embermoth.webp",
+      "rearSha256": "a5a89b6f70510e01df94b99f7d41bd94d185ab8a2a3a6930b5b9c6f1f9f49711",
+      "sourceSha256": "751140374fc702a027560a86230f3461e6270cfd5997113b5a0d5894f7f8a728",
+      "sourceBoxes": [
+        [
+          192,
+          271,
+          510,
+          610
+        ],
+        [
+          850,
+          236,
+          1270,
+          642
+        ],
+        [
+          1571,
+          212,
+          2017,
+          675
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite atlas. Input is the approved FRONT atlas with Forms 1, 2, 3 left to right. Render ONLY Forms 1, 2, 3. Exactly three isolated sprites in ONE horizontal row left to right, each entirely inside its own equal-width third, wide empty transparent gutters. TRUE REAR three-quarter view looking away toward upper right; backs and back of heads face viewer. Match the reference identity, palette, anatomy, proportions and finely painted fantasy game illustration. orange-red molten moth spirits: small rounded winged first; swept flowing mantle second; hollow suspended molten mantle final. Retain exactly reference wing shapes and orange tendrils. Facial eyes are on front. Preserve every limb and appendage. No front-view duplication or mirroring, no text, ground, shadow, ambient haze or background glow. GENUINELY TRANSPARENT background and generous clear margins including ABOVE all halos, feathers and horns. All bodies and floating elements fully inside canvas.",
+      "unchangedFormsVerified": []
+    },
+    {
+      "id": "morrowfang",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "frontAtlas": "./assets/roster/morrowfang-v7.webp",
+      "frontSha256": "5cb1c5ffe5bae815f3842bde304061b5a72ae9dcba8a47c25e21b2d131d6396d",
+      "rearAtlas": "./assets/battle-back/morrowfang.webp",
+      "rearSha256": "5da64d32a8b4f90d3ce6c674bcbf3b72e35f5bfc3ed807cc7973f4f8019b1695",
+      "sourceSha256": "4539520f207170291faecc5123d3e42b298fbac1fbd41ac874ed58b8e3dba831",
+      "sourceBoxes": [
+        [
+          276,
+          291,
+          502,
+          600
+        ],
+        [
+          897,
+          76,
+          1283,
+          601
+        ],
+        [
+          1518,
+          159,
+          2027,
+          602
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite atlas. Input is the approved FRONT atlas with Forms 1,2,3 left to right. Render ONLY Forms 1, 2, 3. Exactly three isolated sprites in ONE horizontal row left to right, each entirely inside its own equal-width third, wide clear transparent gutters. Genuine REAR three-quarter view facing away to upper right; backs and back of heads toward viewer, front masks/faces mostly concealed by body. Match reference identity, colors, materials, exact anatomical features, distinct proportions and hand-painted fantasy game style. lavender graveflower root spirits: round closed graveflower seedpod, narrow tall walking grave-tree with dangling lavender blooms, broad weeping grave-tree with large root base. Retain wolf-skull plant identity, gray bark and lavender flowers. Full silhouette including every floating detail inside generous clear margins. GENUINELY TRANSPARENT background. No text, ground, shadows, haze, background, glows outside body or front-view mirroring.",
+      "unchangedFormsVerified": []
+    },
+    {
+      "id": "runemoth",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "frontAtlas": "./assets/roster/runemoth-v7.webp",
+      "frontSha256": "24735f8ec43f593104d8c1c762b48a4bc7c6b5565237772b4f5e1e091a7249f1",
+      "rearAtlas": "./assets/battle-back/runemoth.webp",
+      "rearSha256": "b7b6b5e8750536cdbaf0d9d4305e943c94eb449881ec9c02a687810771959d46",
+      "sourceSha256": "ef4ca0ee1bdcb715f3d0412cc96b2596a1a779336561a1bd493c2cbae9aa3560",
+      "sourceBoxes": [
+        [
+          140,
+          127,
+          599,
+          612
+        ],
+        [
+          835,
+          58,
+          1318,
+          636
+        ],
+        [
+          1546,
+          165,
+          2031,
+          541
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite atlas. Input is the approved FRONT atlas with Forms 1,2,3 left to right. Render ONLY Forms 1, 2, 3. Exactly three isolated sprites in ONE horizontal row left to right, each entirely inside its own equal-width third, wide clear transparent gutters. Genuine REAR three-quarter view facing away to upper right; backs and back of heads toward viewer, front masks/faces mostly concealed by body. Match reference identity, colors, materials, exact anatomical features, distinct proportions and hand-painted fantasy game style. violet rune moth spirits with wings and tentacles; single large eye has an octopus HORIZONTAL slit pupil and is on FRONT, hidden or partly occluded from back; third form hollow ring and swept purple mantle architecture. Full silhouette including every floating detail inside generous clear margins. GENUINELY TRANSPARENT background. No text, ground, shadows, haze, background, glows outside body or front-view mirroring.",
+      "unchangedFormsVerified": []
+    },
+    {
+      "id": "zephyrfang",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "frontAtlas": "./assets/roster/zephyrfang-v7.webp",
+      "frontSha256": "d9af130796e395e18961500503e2245f76e85ccb1a238ad880b000c225b4d089",
+      "rearAtlas": "./assets/battle-back/zephyrfang.webp",
+      "rearSha256": "f28340ccaff2cb6ac671a8ba0f0e456ecdee1b03951b3717090339382347d047",
+      "sourceSha256": "11ff2e3492b57855ec1b1468e7bd5a22e90aed0fbdf71e5218de2e42e9c96d10",
+      "sourceBoxes": [
+        [
+          249,
+          203,
+          520,
+          565
+        ],
+        [
+          865,
+          180,
+          1297,
+          576
+        ],
+        [
+          1576,
+          187,
+          2077,
+          574
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite atlas. Input is the approved FRONT atlas with Forms 1,2,3 left to right. Render ONLY Forms 1, 2, 3. Exactly three isolated sprites in ONE horizontal row left to right, each entirely inside its own equal-width third, wide clear transparent gutters. Genuine REAR three-quarter view facing away to upper right; backs and back of heads toward viewer, front masks/faces mostly concealed by body. Match reference identity, colors, materials, exact anatomical features, distinct proportions and hand-painted fantasy game style. pale brown wolf-skull reed spirits with pale green sap: curled seedpod first, narrow stilt-root walking reed second, broad windswept reed-fan final, open negative spaces between roots. Full silhouette including every floating detail inside generous clear margins. GENUINELY TRANSPARENT background. No text, ground, shadows, haze, background, glows outside body or front-view mirroring.",
+      "unchangedFormsVerified": []
+    },
+    {
+      "id": "eldermoth",
+      "forms": [
+        3
+      ],
+      "frontAtlas": "./assets/roster/eldermoth-v7.webp",
+      "frontSha256": "791889817b1a9d63e2d5ace92cd6cb181844e229a042a35fa4e241e21ca304de",
+      "rearAtlas": "./assets/battle-back/eldermoth.webp",
+      "rearSha256": "af8b1847dd84176e2c3309db25be78ab5b3c8d191bf1865f1b96b5b8fdf03355",
+      "sourceSha256": "142bfe42d0bf555ba338c6af4b66350550effc07c98797083ce2abe4d6971f38",
+      "sourceBoxes": [
+        [
+          202,
+          15,
+          1325,
+          1005
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite single. Input is the approved FRONT atlas with Forms 1,2,3 left to right. Render ONLY Form 3. Exactly one isolated full-body sprite. Genuine REAR three-quarter view facing away to upper right; backs and back of heads toward viewer, front masks/faces mostly concealed by body. Match reference identity, colors, materials, exact anatomical features, distinct proportions and hand-painted fantasy game style. amber-gold tentacled moth spirit: final form wind-filled canopy with hollow open central body and many barbed talon tentacles. Retain broad orange canopy and flowing yellow tentacles. Full silhouette including every floating detail inside generous clear margins. GENUINELY TRANSPARENT background. No text, ground, shadows, haze, background, glows outside body or front-view mirroring.",
+      "unchangedFormsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "marrowfang",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "frontAtlas": "./assets/roster/marrowfang-v7.webp",
+      "frontSha256": "ca8ee6e3198fa08a498b2bdd4ff6c2c26d394b54eb94417b522afbf8409fd77b",
+      "rearAtlas": "./assets/battle-back/marrowfang.webp",
+      "rearSha256": "502fa57579462b127a1726e9043b75a78cc6bda5dcc6aebd7e6c6a35603f5af2",
+      "sourceSha256": "8ffee6ecbd45458c2f3fe122aa477c46c9a59056b9f8aa0f2c5b8a34525f373a",
+      "sourceBoxes": [
+        [
+          249,
+          244,
+          523,
+          568
+        ],
+        [
+          802,
+          290,
+          1285,
+          569
+        ],
+        [
+          1495,
+          262,
+          2024,
+          589
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite atlas. Input is the approved FRONT atlas with Forms 1,2,3 left to right. Render ONLY Forms 1, 2, 3. Exactly three isolated sprites in ONE horizontal row left to right, each entirely inside its own equal-width third, wide clear transparent gutters. Genuine REAR three-quarter view facing away to upper right; backs and back of heads toward viewer, front masks/faces mostly concealed by body. Match reference identity, colors, materials, exact anatomical features, distinct proportions and hand-painted fantasy game style. ivory bone-root wolf trap plant spirits with burgundy leaves: round marrow-root trap first, low creeping skull-jaw clamp second, broad open bone-root cage final. Preserve each distinct silhouette. Full silhouette including every floating detail inside generous clear margins. GENUINELY TRANSPARENT background. No text, ground, shadows, haze, background, glows outside body or front-view mirroring.",
+      "unchangedFormsVerified": []
+    },
+    {
+      "id": "rimemoth",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "frontAtlas": "./assets/roster/rimemoth-v7.webp",
+      "frontSha256": "8b12ccf7909d6d9aad1743b2eb7d26981dadaf42a4f1e95778e496ae4fe18cf9",
+      "rearAtlas": "./assets/battle-back/rimemoth.webp",
+      "rearSha256": "5719d6778bf21e7633ace533ee7b4e44c3b7377da18c6702a19c1d3da6dc1ac0",
+      "sourceSha256": "8043c6795ca4db35075ad3b7823454214e7d7633e829011369386b18cb23771f",
+      "sourceBoxes": [
+        [
+          158,
+          205,
+          582,
+          505
+        ],
+        [
+          818,
+          147,
+          1270,
+          565
+        ],
+        [
+          1536,
+          161,
+          2027,
+          579
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite atlas. Input is APPROVED FRONT atlas, Forms 1,2,3 left to right. Render ONLY Forms 1, 2, 3. Exactly 3 isolated sprites in ONE horizontal row in the requested form order, each centered inside its own equal-width section, wide transparent gutters. Genuine REAR THREE-QUARTER view facing away toward upper right; back, shoulders, haunches and backs of heads visible; front face mostly concealed. Preserve reference style, palette, materials, identity, silhouette and limb counts. icy blue frost moth spirits, exactly TWO large wings per form; round tiny first, swept flowing second, suspended hollow architectural third. Keep frosted filigree, droplet tips and visible negative space. Finely hand-painted fantasy game sprite art. Fully transparent background, NO text, ground, shadows, haze or background color. Keep every appendage and floating detail within generous clear margins on ALL sides; never clip a tail, wing, horn or halo.",
+      "unchangedFormsVerified": []
+    },
+    {
+      "id": "verdantbloom",
+      "forms": [
+        2,
+        3
+      ],
+      "frontAtlas": "./assets/roster/verdantbloom-v7.webp",
+      "frontSha256": "dbbff392b72f08b831ab84117cb869b85bd2f656050d328b0040447e20081d9f",
+      "rearAtlas": "./assets/battle-back/verdantbloom.webp",
+      "rearSha256": "8fe7fea0525d77cb6f346818e85776ff79825622ef1870d1d8c09d8eb088ff4b",
+      "sourceSha256": "cfe90171f11159ea57e8ab6bd3c074c8ba5f466659490b551afa677ff99d505f",
+      "sourceBoxes": [
+        [
+          493,
+          50,
+          884,
+          669
+        ],
+        [
+          1227,
+          108,
+          1917,
+          649
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite atlas. Input is APPROVED FRONT atlas, Forms 1,2,3 left to right. Render ONLY Forms 2, 3. Exactly 2 isolated sprites in ONE horizontal row in the requested form order, each centered inside its own equal-width section, wide transparent gutters. Genuine REAR THREE-QUARTER view facing away toward upper right; back, shoulders, haunches and backs of heads visible; front face mostly concealed. Preserve reference style, palette, materials, identity, silhouette and limb counts. moss-covered skeletal burial giants: middle form is a tall walking revenant; last is broad anchored open-torso guardian. Skull face and rib opening belong on FRONT; rear shows bark, hanging root hair, leaf cape and mossy shoulders. First form NOT requested. Finely hand-painted fantasy game sprite art. Fully transparent background, NO text, ground, shadows, haze or background color. Keep every appendage and floating detail within generous clear margins on ALL sides; never clip a tail, wing, horn or halo.",
+      "unchangedFormsVerified": [
+        1
+      ]
+    },
+    {
+      "id": "basilgore",
+      "forms": [
+        3
+      ],
+      "frontAtlas": "./assets/roster/basilgore-v7.webp",
+      "frontSha256": "84fd4eff74ac1e1d77100cd2e1fa2e9d80675b4462546064a2c603593e07d0e5",
+      "rearAtlas": "./assets/battle-back/basilgore.webp",
+      "rearSha256": "80881a50b2394c3f5de9e055108d3b49cf35cfbb2bec0b35cb46a6159be399d8",
+      "sourceSha256": "aeba951b7b02b1376a914027447a987d8aab34cb72060a20aa726edc5afff7e6",
+      "sourceBoxes": [
+        [
+          214,
+          134,
+          1547,
+          793
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite single. Input is APPROVED FRONT atlas, Forms 1,2,3 left to right. Render ONLY Form 3. Exactly one isolated full-body sprite. Genuine REAR THREE-QUARTER view facing away toward upper right; back, shoulders, haunches and backs of heads visible; front face mostly concealed. Preserve reference style, palette, materials, identity, silhouette and limb counts. leaf-backed olive-green monitor lizard titan with LARGE toothy head but long powerful torso, broad shoulders, muscular hips, FOUR complete sturdy legs, long tapering curled tail. Finely hand-painted fantasy game sprite art. Fully transparent background, NO text, ground, shadows, haze or background color. Keep every appendage and floating detail within generous clear margins on ALL sides; never clip a tail, wing, horn or halo.",
+      "unchangedFormsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "onyxflare",
+      "forms": [
+        3
+      ],
+      "frontAtlas": "./assets/roster/onyxflare-v7.webp",
+      "frontSha256": "105ba83b8958090cc69ef184ce0132f8bd2a18df19fe5c414044780d0b60dbfd",
+      "rearAtlas": "./assets/battle-back/onyxflare.webp",
+      "rearSha256": "e69d2e5773b2c9ce7b2e6137721b9aeecd3cddf45fb7711a7b850edcacd9d067",
+      "sourceSha256": "80b259d0cf140aee7a9cf7f4de938b5cf66ee9c537ddc5379a241b136b6fdd51",
+      "sourceBoxes": [
+        [
+          237,
+          107,
+          1418,
+          817
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite single. Input is APPROVED FRONT atlas, Forms 1,2,3 left to right. Render ONLY Form 3. Exactly one isolated full-body sprite. Genuine REAR THREE-QUARTER view facing away toward upper right; back, shoulders, haunches and backs of heads visible; front face mostly concealed. Preserve reference style, palette, materials, identity, silhouette and limb counts. dark charcoal lion-crocodile with big saber-toothed head, long muscular broad-chested body, strong hips, FOUR sturdy legs, long curled tail and beige spine ridges. Finely hand-painted fantasy game sprite art. Fully transparent background, NO text, ground, shadows, haze or background color. Keep every appendage and floating detail within generous clear margins on ALL sides; never clip a tail, wing, horn or halo.",
+      "unchangedFormsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "xanthjaw",
+      "forms": [
+        3
+      ],
+      "frontAtlas": "./assets/roster/xanthjaw-v7.webp",
+      "frontSha256": "82bdc73f52c5ffe68c7b156d7620c2a8ab7e816898277311855c25784572642a",
+      "rearAtlas": "./assets/battle-back/xanthjaw.webp",
+      "rearSha256": "281e7c8fbed3697e9c0c325eb4a6f937803e29ec6ec0536f604dd1b7a7adbb00",
+      "sourceSha256": "313779d0f6e1c2ba4c536f5a9d460a4166842486a2aa0c4dc148198f361b1516",
+      "sourceBoxes": [
+        [
+          164,
+          47,
+          1371,
+          957
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite single. Input is APPROVED FRONT atlas, Forms 1,2,3 left to right. Render ONLY Form 3. Exactly one isolated full-body sprite. Genuine REAR THREE-QUARTER view facing away toward upper right; back, shoulders, haunches and backs of heads visible; front face mostly concealed. Preserve reference style, palette, materials, identity, silhouette and limb counts. gold brown lightning-tailed giant: TWO arms and TWO legs, large lightning-filled head, elongated powerful torso, broad chest, muscular hips, longer hind legs and long electric tail. Finely hand-painted fantasy game sprite art. Fully transparent background, NO text, ground, shadows, haze or background color. Keep every appendage and floating detail within generous clear margins on ALL sides; never clip a tail, wing, horn or halo.",
+      "unchangedFormsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "coralfang",
+      "forms": [
+        3
+      ],
+      "frontAtlas": "./assets/roster/coralfang-v7.webp",
+      "frontSha256": "86d4d2b8c75db6ad2e36d46dcf7266b24ec379b171b680c1eb5589e9e67ab2a0",
+      "rearAtlas": "./assets/battle-back/coralfang.webp",
+      "rearSha256": "ecc4d87e45dce1e8e167ce6057d37efdfbb7dc82bdbc40c286a6c708cc74aec1",
+      "sourceSha256": "50f315127cd66844cc71a4e83af67c23b966ac78ed4d339e7ff1f7915ce2cf1a",
+      "sourceBoxes": [
+        [
+          208,
+          75,
+          1327,
+          912
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite single. Reference is APPROVED FRONT atlas with Forms 1,2,3 left to right. Render ONLY Form 3. Exactly one isolated full-body sprite. TRUE REAR THREE-QUARTER battle view, facing away toward upper right, back and back of head toward viewer, front face mostly hidden. Preserve exact identity, palette, materials, corrected anatomy and distinct proportions of reference. pink coral and ivory porcelain jaw spirit with turquoise gel necks: final form is a suspended arch of porcelain jaws, dark open negative space under arch, pink curling base tendrils. No cogs. Match finely hand-painted fantasy game illustration. Entire silhouette, tail and every appendage fit within generous empty margins. Actual transparent background. No text, labels, ground, shadow, haze, ambient glow or additional subjects. Do not mirror or repeat the front view.",
+      "unchangedFormsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "gossamerwisp",
+      "forms": [
+        3
+      ],
+      "frontAtlas": "./assets/roster/gossamerwisp-v7.webp",
+      "frontSha256": "8ef7b8eb6c2ea22afee8b6a9dc0beb1a799595fa263cb4b137f114431a1fb2a4",
+      "rearAtlas": "./assets/battle-back/gossamerwisp.webp",
+      "rearSha256": "1b1773c221510a38ae45f2c4fc3bf17f294702d6d6fbf947470375036f9d5715",
+      "sourceSha256": "8bacaf59be419d47b91d912279c94d1b7480fe37086ab2c7ab1c3f61888629a8",
+      "sourceBoxes": [
+        [
+          127,
+          39,
+          1188,
+          1090
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite single. Reference is APPROVED FRONT atlas with Forms 1,2,3 left to right. Render ONLY Form 3. Exactly one isolated full-body sprite. TRUE REAR THREE-QUARTER battle view, facing away toward upper right, back and back of head toward viewer, front face mostly hidden. Preserve exact identity, palette, materials, corrected anatomy and distinct proportions of reference. pale lavender moth humanoid with EXACTLY FOUR complete arms, TWO legs, spider fangs on front mouth, long antennae, gossamer iridescent wing mantle. Make both pairs of arms readable from rear, no missing or extra limbs. Match finely hand-painted fantasy game illustration. Entire silhouette, tail and every appendage fit within generous empty margins. Actual transparent background. No text, labels, ground, shadow, haze, ambient glow or additional subjects. Do not mirror or repeat the front view.",
+      "unchangedFormsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "kryptonshard",
+      "forms": [
+        1,
+        2,
+        3
+      ],
+      "frontAtlas": "./assets/roster/kryptonshard-v7.webp",
+      "frontSha256": "8d79e8f1512054067881f1e982dbd18107d9160bddfbd06b701c067680b58638",
+      "rearAtlas": "./assets/battle-back/kryptonshard.webp",
+      "rearSha256": "3efc2cbac2cf072e256354be5fbf205b358bd2b93707f2a41000f5188921e379",
+      "sourceSha256": "bdbde925d6a8b968acba8024e06f623497e06534b697fb2c57cc4b53ebf42c6c",
+      "sourceBoxes": [
+        [
+          243,
+          239,
+          524,
+          635
+        ],
+        [
+          870,
+          97,
+          1276,
+          633
+        ],
+        [
+          1512,
+          168,
+          2004,
+          636
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite atlas. Reference is APPROVED FRONT atlas with Forms 1,2,3 left to right. Render ONLY Forms 1, 2, 3. Exactly three isolated sprites in ONE horizontal row left to right; each sprite inside its own equal-width third, generous transparent gutters. TRUE REAR THREE-QUARTER battle view, facing away toward upper right, back and back of head toward viewer, front face mostly hidden. Preserve exact identity, palette, materials, corrected anatomy and distinct proportions of reference. three gray-black mineral golems with green fissures and floating green diamond crystals: compact seated first, upright muscular second, broad low stone-arch third. Paired-eye masks are on FRONT so show rear of head rather than moving eyes onto back. Match finely hand-painted fantasy game illustration. Entire silhouette, tail and every appendage fit within generous empty margins. Actual transparent background. No text, labels, ground, shadow, haze, ambient glow or additional subjects. Do not mirror or repeat the front view.",
+      "unchangedFormsVerified": []
+    },
+    {
+      "id": "oraclekin",
+      "forms": [
+        3
+      ],
+      "frontAtlas": "./assets/roster/oraclekin-v7.webp",
+      "frontSha256": "19f3c8028b8885a1992333de9e4f111873a8cc385ce6a7966e43576639e24723",
+      "rearAtlas": "./assets/battle-back/oraclekin.webp",
+      "rearSha256": "f9d0f2eccbb42236a2055a6471cbfb3c0db03b8447bf514527efac5ae462a9c5",
+      "sourceSha256": "ad96a2d4cadffe267f27734a1d013fa2db07dba707aa8adc23e4f965d081f819",
+      "sourceBoxes": [
+        [
+          233,
+          76,
+          1309,
+          947
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite single. Reference is APPROVED FRONT atlas with Forms 1,2,3 left to right. Render ONLY Form 3. Exactly one isolated full-body sprite. TRUE REAR THREE-QUARTER battle view, facing away toward upper right, back and back of head toward viewer, front face mostly hidden. Preserve exact identity, palette, materials, corrected anatomy and distinct proportions of reference. gold brown winged owl-bear, elongated powerful body, deep broad chest, high muscular shoulders, FOUR longer powerful legs and TWO large feathered wings, feathered tail. Preserve owl head identity and bear limbs. Match finely hand-painted fantasy game illustration. Entire silhouette, tail and every appendage fit within generous empty margins. Actual transparent background. No text, labels, ground, shadow, haze, ambient glow or additional subjects. Do not mirror or repeat the front view.",
+      "unchangedFormsVerified": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "ripplejaw",
+      "forms": [
+        3
+      ],
+      "frontAtlas": "./assets/roster/ripplejaw-v7.webp",
+      "frontSha256": "4dcdfc6b802cbe4059858034c1270c6eba962f87093b730def18689354930172",
+      "rearAtlas": "./assets/battle-back/ripplejaw.webp",
+      "rearSha256": "0083a63ea2439b3f0a4c42b38e10941375f6884e1f2c5939aa8074f905c6e903",
+      "sourceSha256": "d4975425b16ea6be93c1e61129537d4024c3e6d50a48c2e50c1e763b8d6a2a3e",
+      "sourceBoxes": [
+        [
+          149,
+          117,
+          1334,
+          909
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: Spirimon rear-facing battle sprite single. Reference is APPROVED FRONT atlas with Forms 1,2,3 left to right. Render ONLY Form 3. Exactly one isolated full-body sprite. TRUE REAR THREE-QUARTER battle view, facing away toward upper right, back and back of head toward viewer, front face mostly hidden. Preserve exact identity, palette, materials, corrected anatomy and distinct proportions of reference. turquoise current-turtle spirit: huge snapping-turtle head, elongated powerful shell and body, deep shoulders, substantial hips, FOUR strong clawed legs, frothing wave-like white shell ridges and curling water tail, small gold halo. Match finely hand-painted fantasy game illustration. Entire silhouette, tail and every appendage fit within generous empty margins. Actual transparent background. No text, labels, ground, shadow, haze, ambient glow or additional subjects. Do not mirror or repeat the front view.",
+      "unchangedFormsVerified": [
+        1,
+        2
+      ]
+    }
+  ]
+}
