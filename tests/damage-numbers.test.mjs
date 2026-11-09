@@ -16,7 +16,7 @@ function fixture(move=hit,count=1){
 const sum=(f,id)=>f.state.damageEvents?.filter(e=>e.target===id).reduce((n,e)=>n+e.amount,0)||0;
 test('display events contain final HP lost after shields, damage sharing, multi-hits and overkill',()=>{
  for(const protection of ['partial','full','link','overkill']){
-  const f=fixture({...hit,effect:'multiHit'},2),[b,partner]=f.b,before=b.hp,partnerHP=partner.hp;
+  const f=fixture({...hit,power:12,effect:'multiHit'},2),[b,partner]=f.b,before=b.hp,partnerHP=partner.hp;
   if(protection==='partial')b.spiritualShields=[{hp:7,until:10000}];
   if(protection==='full')b.spiritualShields=[{hp:100000,until:10000}];
   if(protection==='link')b.spiritualLinks=[{partner:partner.id,amount:.5,until:10000}];
@@ -67,8 +67,8 @@ test('collection pins a knockout number to the damaged enemy, survives compactio
 });
 test('a final hit finishes its animation with combat frozen before awarding victory once',()=>{
  const f=fixture(),enemy=f.b[0];enemy.hp=0;f.state.elapsedMs=100;
- const battle={rt:f.state,multi:{allies:[f.a.id],enemies:[enemy]},damageNumbers:[{amount:1,at:100}],damageEnding:null};let wins=0,draws=0;
- const h=vm.createContext({battleClosingDialogue:()=>false,cloneScene:()=>null,queueBattleIntroduction(){},requestStartupFullscreen(){},sceneFadeUntil:0,performance,battle,RT,DAMAGE_NUMBER_MS,document:{hidden:false},realTimeContext:()=>f.context,applyRealTimeContext(ctx){battle.multi.allies=ctx.active.a.map(u=>u.id);battle.multi.enemies=ctx.active.b;},drawBattle(){draws++;},drawRealTimeEffects(){},winBattle(){wins++;h.battle=null;},drawnBattle(){},render(){},save(){}});
+ const battle={log:[],rt:f.state,multi:{allies:[f.a.id],enemies:[enemy]},damageNumbers:[{amount:1,at:100}],damageEnding:null};let wins=0,draws=0;
+ const h=vm.createContext({battleClosingDialogue:()=>false,cloneScene:()=>null,queueBattleIntroduction(){},requestStartupFullscreen(){},sceneFadeUntil:0,performance,E,s:{spirits:[]},spOf:()=>null,battle,RT,DAMAGE_NUMBER_MS,document:{hidden:false},realTimeContext:()=>f.context,applyRealTimeContext(ctx){battle.multi.allies=ctx.active.a.map(u=>u.id);battle.multi.enemies=ctx.active.b;},drawBattle(){draws++;},drawRealTimeEffects(){},winBattle(){wins++;h.battle=null;},drawnBattle(){},render(){},save(){}});
  vm.runInContext(extract('finishRealTimeEncounter')+'\n'+extract('advanceRealTimeBattle'),h);vm.runInContext('finishRealTimeEncounter()',h);
  assert.equal(wins,0);assert.equal(battle.rt.paused,true);assert.equal(battle.damageEnding,2700);
  vm.runInContext('advanceRealTimeBattle(1300,0)',h);assert.equal(wins,0);assert.equal(battle.rt.elapsedMs,100);assert.ok(draws>0);

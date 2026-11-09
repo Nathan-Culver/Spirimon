@@ -25,17 +25,17 @@ test('battle level-up dialog includes teammates even when the lead does not leve
  for(const n of [1,2]){assert.match(dialog.html,new RegExp(t.species[n].forms[0]));assert.equal(t.units[n].level,5);}assert.match(dialog.html,/Level 4 → 5/);assert.equal(t.units[0].level,20);assert.match(dialog.html,/120 total experience/);assert.match(dialog.html,/Continue exploring/);assert.equal(t.h.battle,null);
 });
 test('training shows a persistent level-up dialog instead of only a toast',()=>{
- const t=harness(),coins=t.state.inventory.coins;t.eval("training('ally-0')");const dialog=t.dialogs.at(-1);
+ const t=harness(),coins=t.state.inventory.coins;t.h.battle=null;t.eval("training('ally-0')");const dialog=t.dialogs.at(-1);
  assert.equal(dialog.title,'Level up!');assert.equal(dialog.options.kind,'level-up');assert.match(dialog.html,/Level 4 → 5/);assert.match(dialog.html,/data-action="detail" data-value="ally-0"/);assert.equal(t.toasts.length,0);assert.equal(t.state.inventory.coins,coins-25);assert.equal(t.saves(),1);
 });
 test('multiple levels, transformations and learned Techniques appear in the same advancement card',()=>{
  const t=harness(),ind=t.units[0],sp=t.species[0];ind.level=15;ind.xp=269;ind.bond=80;sp.learnset.push({...sp.moves[0],id:'new-dialog-move',name:'Dawn <Lance>',learnLevel:16});
- t.eval("training('ally-0')");const dialog=t.dialogs.at(-1);assert.equal(dialog.title,'Level up!');assert.match(dialog.html,/Level 15 → 16/);assert.match(dialog.html,/Transformed:/);assert.ok(dialog.html.includes(sp.forms[0])&&dialog.html.includes(sp.forms[1]));assert.match(dialog.html,/Dawn &lt;Lance&gt;/);assert.equal(ind.form,1);assert.equal(t.transforms.length,1);
+ t.h.battle=null;t.eval("training('ally-0')");const dialog=t.dialogs.at(-1);assert.equal(dialog.title,'Level up!');assert.match(dialog.html,/Level 15 → 16/);assert.match(dialog.html,/Transformed:/);assert.ok(dialog.html.includes(sp.forms[0])&&dialog.html.includes(sp.forms[1]));assert.match(dialog.html,/Dawn &lt;Lance&gt;/);assert.equal(ind.form,1);assert.equal(t.transforms.length,1);
  const fresh=harness();fresh.h.amount=4*18+5*18+6*18+1;fresh.units[0].xp=0;const change=fresh.eval('gainSpirimonXP(s.spirits[0],spOf(s.spirits[0]),amount)');fresh.h.change=change;assert.equal(change.levels,3);assert.match(fresh.eval('levelUpHTML([change])'),/Level 4 → 7/);
 });
 test('ordinary XP gains keep normal results and never announce a false level-up',()=>{
  const t=harness();for(const unit of t.units){unit.level=20;unit.form=unit.appearance=1;unit.xp=0;}t.eval('winBattle()');assert.equal(t.dialogs.at(-1).title,'A bond grows stronger.');assert.doesNotMatch(t.dialogs.at(-1).html,/level-up-card/);
- const train=harness();train.units[0].xp=0;train.eval("training('ally-0')");assert.equal(train.dialogs.length,0);assert.deepEqual(train.details,['ally-0']);assert.equal(train.toasts.length,1);
+ const train=harness();train.units[0].xp=0;train.h.battle=null;train.eval("training('ally-0')");assert.equal(train.dialogs.length,0);assert.deepEqual(train.details,['ally-0']);assert.equal(train.toasts.length,1);
 });
 test('a bond transformation also shows its new form without claiming a level was gained',()=>{
  const t=harness(),ind=t.units[0],sp=t.species[0];t.h.battle=null;sp.evolution='bond';ind.level=16;ind.xp=0;ind.bond=55;t.eval("shareOffering('ally-0')");assert.equal(t.dialogs.at(-1).title,'A new form awakens.');assert.match(t.dialogs.at(-1).html,/Transformed:/);assert.doesNotMatch(t.dialogs.at(-1).html,/Level 16 → 16/);assert.equal(ind.level,16);
@@ -69,4 +69,11 @@ test('hostile agent victory completes an accepted quest immediately without coun
 test('rival journal shows Rowan progress rather than unrelated total wins and retains earned legacy completion',()=>{
  const t=harness();t.state.wins=57;t.h.challengerState=()=>t.state.challengers??={};vm.runInContext(extract('journalHTML'),t.h);
  assert.match(t.eval('journalHTML()'),/0 Rowan victories/);assert.doesNotMatch(t.eval('journalHTML()'),/57 victories/);t.state.quests.rival=true;assert.match(t.eval('journalHTML()'),/quest-complete[^]*A friendly rivalry[^]*Completed/);
+});
+test('targeted training awards the chosen EVs, stops at either cap and cannot spend Coin in battle',()=>{
+ const t=harness(),u=t.units[0];t.h.battle=null;u.xp=0;
+ for(const key of E.STAT_KEYS){t.state.inventory.coins=100;t.eval("training('ally-0','"+key+"')");assert.equal(u.evs[key],8);assert.equal(t.state.inventory.coins,75);}
+ u.evs.might=251;t.state.inventory.coins=100;t.eval("training('ally-0','might')");assert.equal(u.evs.might,252);const coins=t.state.inventory.coins;t.eval("training('ally-0','might')");assert.equal(t.state.inventory.coins,coins);
+ u.evs={hp:252,might:252,defense:0,power:0,resistance:0,speed:5};t.eval("training('ally-0','speed')");assert.equal(u.evs.speed,6);assert.equal(E.geneticProfile(u).total,510);const capped=t.state.inventory.coins;t.eval("training('ally-0','power')");assert.equal(t.state.inventory.coins,capped);
+ t.h.battle={};u.evs.power=0;t.eval("training('ally-0','power')");assert.equal(u.evs.power,0);assert.equal(t.state.inventory.coins,capped);
 });

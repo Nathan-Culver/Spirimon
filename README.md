@@ -129,3 +129,5 @@ Normal restores classic Shrine density (two per town, two or three per route). H
 ### Battle and menu layout correction
 
 The main menu fits the current viewport: four columns in landscape, two in portrait, with compact save status and all sixteen choices visible. The battle dock displays all available Techniques, Support, Items and utilities together in one fixed grid. There are no category tabs, pages or scroll areas. Every possible action reserves a cell for the encounter; cooldowns and resource changes hide unavailable actions without shifting the others. Actor replacement reuses its cells, including held items and cooperative actions. Resizing or rotating adapts the grid to the viewport.
+
+Individual battle stats now use Physical Attack (PA), Physical Defense (PD), Spiritual Attack (SA), Spiritual Defense (SD), and Speed. Level-scaled IV/EV/Nature formulas, capped battle EV rewards, targeted EV training and existing-save conversion are documented in [Individual battle stats](docs/individual-stats.md).

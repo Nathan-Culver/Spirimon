@@ -25,7 +25,7 @@ export function moveTiming(move,actor={},sp={},style='normal'){
  if(effect==='unburdened')work+=rawPower*.35;if(effect==='struggle')work=70;
  const actual=stats({...actor,level:actor.level||1,form:actor.form||0},{...sp,health:sp.health||50,power:sp.power||50,speed:sp.speed||40,moves:sp.moves||[]});
  const speed=Math.max(1,actual.speed),equipment=heldEquipment(actor,sp);
- let haste=clamp(1+Math.log2(speed/80)*.17,.7,1.8);
+ let haste=clamp(Math.pow((speed+40)/120,.25),.5,1.8);
  if(itemHasHook(equipment,'firstWind')&&actor.hp>=actual.hp)haste*=1.1;if(actor.aspect==='Swift'&&actor.entryAction)haste*=1.1;
  const speedStage=clamp(actor.stages?.speed||0,-6,6);haste*=clamp(1+speedStage*.08,.6,1.5);
  if(actor.status==='paralysis')haste*=.75;if(actor.conditions?.slow)haste*=.8;

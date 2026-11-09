@@ -67,7 +67,7 @@ test('battle wipeout blacks out immediately, while a conscious reserve keeps dep
  for(const mode of ['wipeout','reserve','draw']){
   let losses=0,draws=0;const team=[{id:'a',hp:0},...(mode==='reserve'?[{id:'reserve',hp:2}]:[])],enemy={id:'enemy',hp:mode==='draw'?0:3};
   const ctx={active:{a:[],b:enemy.hp?[enemy]:[]},teams:{a:team,b:[enemy]}};
-  const h=vm.createContext({battleClosingDialogue:()=>false,cloneScene:()=>null,queueBattleIntroduction(){},requestStartupFullscreen(){},sceneFadeUntil:0,performance,encounterAftermath:()=>'',battle:{rt:{elapsedMs:1,undefendeda:0},multi:{allies:[],enemies:[enemy]},damageNumbers:[]},realTimeContext:()=>ctx,applyRealTimeContext(){},loseBattle:()=>losses++,drawnBattle:()=>draws++,winBattle(){throw Error('Unexpected victory');},save(){},render(){},DAMAGE_NUMBER_MS:1000});
+  const h=vm.createContext({battleClosingDialogue:()=>false,cloneScene:()=>null,queueBattleIntroduction(){},requestStartupFullscreen(){},sceneFadeUntil:0,performance,encounterAftermath:()=>'',E,s:{spirits:[]},spOf:()=>null,battle:{rt:{elapsedMs:1,undefendeda:0},multi:{allies:[],enemies:[enemy]},damageNumbers:[]},realTimeContext:()=>ctx,applyRealTimeContext(){},loseBattle:()=>losses++,drawnBattle:()=>draws++,winBattle(){throw Error('Unexpected victory');},save(){},render(){},DAMAGE_NUMBER_MS:1000});
   vm.runInContext(extract('finishRealTimeEncounter'),h);h.finishRealTimeEncounter();assert.equal(losses,mode==='wipeout'?1:0);assert.equal(draws,mode==='draw'?1:0);if(mode==='reserve')assert.equal(h.battleMode,'deploy');
  }
 });

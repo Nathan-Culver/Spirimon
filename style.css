@@ -581,3 +581,13 @@ body.battling .command-deck[data-compact="true"] .unified-action b{font:9px/1.05
 body.battling .command-deck[data-compact="true"] .unified-action small{display:none}
 body.battling .battle-command-header{min-height:18px}
 body.battling .battle-command-header .target-feedback{margin:0;min-height:0}
+
+/* All six growth stats receive equal-size cards and visible names. */
+.modal .battle-stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.modal .battle-stat-grid>div{min-width:0;padding:10px 4px;text-align:center}
+.modal .battle-stat-grid small{display:block;white-space:normal;overflow-wrap:anywhere;line-height:1.3;min-height:2.6em;font-size:12px}
+.genetics-panel{margin:14px 0}
+.genetics-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:12px}
+.genetics-table :is(th,td){padding:7px 4px;border-bottom:1px solid #a4aa8b;text-align:center}
+.genetics-table th:first-child{text-align:left;width:46%}
+@media(max-width:420px){.modal .battle-stat-grid{gap:4px}.modal .battle-stat-grid small{font-size:11px}.genetics-table{font-size:11px}}

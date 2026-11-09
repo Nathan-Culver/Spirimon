@@ -1,12 +1,13 @@
+import {STAT_LABELS} from './stat-system.mjs';
 import {DOMAINS,canonicalDomain,canonicalDomains,normalizeMoveDomains} from './domains.mjs';
 import {individualSpecies} from './anatomy.mjs';
 // Shared definitions: saved equipment IDs and aspects remain compatible with older worlds.
 export const CHARMS=[
  {id:'oak-heart',name:'Oak Heart',cost:80,bonus:'hp',amount:12,desc:'Maximum HP +12%.'},
- {id:'keen-eye',name:'Keen Eye',cost:100,bonus:'power',amount:10,desc:'Energy power +10%.'},
+ {id:'keen-eye',name:'Keen Eye',cost:100,bonus:'power',amount:10,desc:'Spiritual Attack (SA) +10%.'},
  {id:'swift-feather',name:'Swift Feather',cost:100,bonus:'speed',amount:12,desc:'Speed +12%.'},
- {id:'iron-shell',name:'Iron Shell',cost:110,bonus:'defense',amount:12,desc:'Defense +12%.'},
- {id:'spirit-lens',name:'Spirimon Lens',cost:130,bonus:'resistance',amount:12,desc:'Resistance +12%.'},
+ {id:'iron-shell',name:'Iron Shell',cost:110,bonus:'defense',amount:12,desc:'Physical Defense (PD) +12%.'},
+ {id:'spirit-lens',name:'Spirimon Lens',cost:130,bonus:'resistance',amount:12,desc:'Spiritual Defense (SD) +12%.'},
  {id:'oracle-lens',name:'Oracle Lens',cost:180,hook:'accuracy',desc:'Improves move accuracy by 10 percentage points.'},
  {id:'thorn-mail',name:'Thorn Mail',cost:200,hook:'thorns',desc:'Physical attackers lose 1/10 of their maximum HP after landing a hit.'},
  {id:'drain-fang',name:'Drain Fang',cost:220,hook:'drain',desc:'Recovers HP equal to 1/8 of direct damage dealt.'},
@@ -25,12 +26,12 @@ export const CHARMS=[
 ];
 export const ASPECTS={
  Natural:{cost:0,bond:0,level:1,stats:[],desc:'The lineage’s natural balance.'},
- Primal:{cost:150,bond:40,level:16,stats:[['might',1.15],['resistance',.95]],desc:'Might +15%, resistance −5%; Physical attacks gain 15% damage below half HP.'},
- Astral:{cost:150,bond:40,level:16,stats:[['power',1.15],['defense',.95]],desc:'Power +15%, defense −5%; once per battle, cleanses a major status on entry.'},
+ Primal:{cost:150,bond:40,level:16,stats:[['might',1.15],['resistance',.95]],desc:'Physical Attack (PA) +15%, Spiritual Defense (SD) −5%; Physical attacks gain 15% damage below half HP.'},
+ Astral:{cost:150,bond:40,level:16,stats:[['power',1.15],['defense',.95]],desc:'Spiritual Attack (SA) +15%, Physical Defense (PD) −5%; once per battle, cleanses a major status on entry.'},
  Titan:{cost:150,bond:40,level:16,stats:[['hp',1.18],['speed',.9]],desc:'HP +18%, speed −10%; resists forced switching.'},
  Swift:{cost:150,bond:40,level:16,stats:[['speed',1.18],['hp',.94]],desc:'Speed +18%, HP −6%; avoids Sticky Web and gains priority on its first action after entry.'},
- Verdant:{cost:220,bond:55,level:25,stats:[['resistance',1.1]],desc:'Resistance +10%; restores 1/16 maximum HP each round on grassy terrain.'},
- Umbral:{cost:220,bond:55,level:25,stats:[['might',1.08],['power',1.08]],desc:'Might and power +8%; attacks against afflicted foes gain 15% damage.'},
+ Verdant:{cost:220,bond:55,level:25,stats:[['resistance',1.1]],desc:'Spiritual Defense (SD) +10%; restores 1/16 maximum HP each round on grassy terrain.'},
+ Umbral:{cost:220,bond:55,level:25,stats:[['might',1.08],['power',1.08]],desc:'Physical Attack (PA) and Spiritual Attack (SA) +8%; attacks against afflicted foes gain 15% damage.'},
  Stormbound:{cost:250,bond:60,level:30,stats:[['speed',1.1]],desc:'Speed +10%; weather causes no chip damage and storm attacks gain 15% damage during rain or snow.'}
 };
 export const equipment=id=>CHARMS.find(c=>c.id===id)||null;
@@ -125,11 +126,11 @@ export function markItemUsed(ind,hook){if(ind.heldItem){ind.itemFlags??={};ind.i
 export function consumeHeldItem(ind){const item=heldEquipment(ind);if(!item)return null;ind.consumedCharm=item.id;delete ind.heldItem;delete ind.heldCharm;return item;}
 export function heldItemDescription(item){
  if(!item)return 'No Held Item.';if(!item.generatorVersion)return item.desc;
- const hooks={healBerry:'Consumed at one-third HP to restore '+Math.round((item.recovery||1/3)*100)+'% maximum HP',resourceBerry:'Consumed when pools are low to restore '+(item.resourceRecovery||10)+' to each pool',physicalEdge:'Physical damage +15%',energyGuard:'Energy damage received −15%',critical:'Critical-hit chance +12.5 percentage points',domainBoost:item.domain+' damage +20%',choiceLock:'First selected move is locked until switching',leftovers:'Recover 1/16 HP at round end',resourceSustain:'Restore 1 Stanima and 1 Willpower every six seconds',pinchWard:'Consumed below one-third HP to raise a ward',pinchMight:'Consumed below one-third HP to raise Might by '+(item.stageRecovery||1)+' stage(s)',pinchPower:'Consumed below one-third HP to gather focus'};
- const parts=Object.entries(item.stats||{}).map(([stat,value])=>stat+' '+(value>0?'+':'')+value+'%');
+ const hooks={healBerry:'Consumed at one-third HP to restore '+Math.round((item.recovery||1/3)*100)+'% maximum HP',resourceBerry:'Consumed when pools are low to restore '+(item.resourceRecovery||10)+' to each pool',physicalEdge:'Physical damage +15%',energyGuard:'Energy damage received −15%',critical:'Critical-hit chance +12.5 percentage points',domainBoost:item.domain+' damage +20%',choiceLock:'First selected move is locked until switching',leftovers:'Recover 1/16 HP at round end',resourceSustain:'Restore 1 Stanima and 1 Willpower every six seconds',pinchWard:'Consumed below one-third HP to raise a ward',pinchMight:'Consumed below one-third HP to raise Physical Attack (PA) by '+(item.stageRecovery||1)+' stage(s)',pinchPower:'Consumed below one-third HP to gather focus'};
+ const parts=Object.entries(item.stats||{}).map(([stat,value])=>(STAT_LABELS[stat]||stat)+' '+(value>0?'+':'')+value+'%');
  for(const hook of item.hooks||[])parts.push(hooks[hook]||CHARMS.find(c=>c.hook===hook)?.desc||hook);
  if(item.active)parts.push('Bag: '+item.active.name+(item.active.effect==='heal'?' · restores '+Math.round((item.recovery||.25)*100)+'% HP':'')+(item.active.power?' · Power '+item.active.power:'')+' · '+(item.consumable?'consumed permanently':'uses normal move resources; '+(item.cooldown*2)+'-second cooldown'));
- const activeEffects={breakWard:'breaks wards and defensive screens',slow:'may slow its targets',burn:'may burn its target',ward:'blocks the next attack',reflect:'protects the whole side from Physical damage',lightscreen:'protects the whole side from Energy damage',cleanse:'cleanses major and volatile afflictions',clearHazards:'clears your side’s entry hazards',focus:'empowers the next damaging attack',regenerate:'restores vitality over subsequent rounds',batonPass:'switches freely between rounds and transfers combat stages',boostMight:'raises Might',itemResources:'restores '+(item.resourceRecovery||10)+' to each shared pool',weatherRain:'summons rain',weatherSun:'summons sunlight',weatherSand:'summons sand',weatherSnow:'summons snow'};if(item.active){parts.push('Ability: '+item.active.category+'; '+({self:'self',ally:'one ally',opponent:'one opponent',allOpponents:'both opponents',allAllies:'all allies',field:'battlefield'}[item.active.target]||'target'));if(activeEffects[item.active.effect])parts.push(activeEffects[item.active.effect]);}
+ const activeEffects={breakWard:'breaks wards and defensive screens',slow:'may slow its targets',burn:'may burn its target',ward:'blocks the next attack',reflect:'protects the whole side from Physical damage',lightscreen:'protects the whole side from Energy damage',cleanse:'cleanses major and volatile afflictions',clearHazards:'clears your side’s entry hazards',focus:'empowers the next damaging attack',regenerate:'restores vitality over subsequent rounds',batonPass:'switches freely between rounds and transfers combat stages',boostMight:'raises Physical Attack (PA)',itemResources:'restores '+(item.resourceRecovery||10)+' to each shared pool',weatherRain:'summons rain',weatherSun:'summons sunlight',weatherSand:'summons sand',weatherSnow:'summons snow'};if(item.active){parts.push('Ability: '+item.active.category+'; '+({self:'self',ally:'one ally',opponent:'one opponent',allOpponents:'both opponents',allAllies:'all allies',field:'battlefield'}[item.active.target]||'target'));if(activeEffects[item.active.effect])parts.push(activeEffects[item.active.effect]);}
  return parts.map(part=>String(part).replace(/[.\s]+$/,'')).filter(Boolean).join('. ')+'.';
 }
 export function heldItemActivation(ind,sp){

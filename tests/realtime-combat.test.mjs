@@ -27,7 +27,7 @@ test('pause freezes casts, cooldowns and afflictions without a resume burst',()=
  const f=fixture();f.b[0].status='poison';f.schedule(f.a[0],hit);const before=structuredClone(f.state),hp=f.b[0].hp;f.state.paused=true;f.step(20000);assert.equal(f.state.elapsedMs,before.elapsedMs);assert.equal(f.b[0].hp,hp);f.state.paused=false;f.step(1000);assert.ok(f.b[0].hp<hp);
 });
 test('real-time state round trips preserve remaining cooldowns and casts',()=>{
- const f=fixture();f.schedule(f.a[0],heavy);f.step(200);const saved=JSON.parse(JSON.stringify(f.state));assert.deepEqual(saved,f.state);const result=RT.advanceRealTime(saved,1000,f.context,()=>.5);assert.equal(result.events.length,1);assert.equal(RT.actionAvailability(saved,f.a[0],f.sp,{move:heavy}).ok,false);
+ const f=fixture();f.schedule(f.a[0],heavy);f.step(200);const saved=JSON.parse(JSON.stringify(f.state));assert.deepEqual(saved,f.state);const result=RT.advanceRealTime(saved,RT.unitClock(saved,f.a[0]).pending.resolveAt-saved.elapsedMs,f.context,()=>.5);assert.equal(result.events.length,1);assert.equal(RT.actionAvailability(saved,f.a[0],f.sp,{move:heavy}).ok,false);
 });
 test('sleep blocks action initiation and ends at an absolute deadline without input',()=>{
  const f=fixture();f.schedule(f.a[0],sleep);f.step(500);assert.equal(f.b[0].status,'sleep');assert.equal(f.schedule(f.b[0],hit).ok,false);const until=RT.unitClock(f.state,f.b[0]).status.until;f.step(until-f.state.elapsedMs+100);assert.equal(f.b[0].status,null);assert.ok(f.schedule(f.b[0],hit).ok);

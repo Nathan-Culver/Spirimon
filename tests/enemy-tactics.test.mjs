@@ -62,7 +62,7 @@ test('unnecessary healing is skipped; disabled support, insufficient Energy, cha
 });
 test('Sealers preserve enough Energy for a sealed reserve unless urgent healing can prevent a knockout',()=>{
  const f=fixture(2);f.context.active.b=[f.team[0]];f.context.rules.maxActive=1;const cost=SE.manifestationCost(f.q,f.team[1],f.sp);f.q.energy=cost;teach(f,'shield');assert.equal(chooseEnemySupport(f.state,f.context),null);
- f.team[0].hp=1;const heal=teach(f,'heal',{energyCost:1});assert.equal(chooseEnemySupport(f.state,f.context).techniqueId,heal.id);
+ f.team[0].hp=1;const heal=teach(f,'heal',{energyCost:1});f.q.energy=cost+SE.supportQuote(f.q,heal,f.team[0]).cost-1;assert.equal(chooseEnemySupport(f.state,f.context).techniqueId,heal.id);
 });
 test('Synergy coordinates actual cooperative actions, but urgent recovery takes precedence',()=>{
  const f=fixture(2);f.q.philosophy='Synergy';teach(f,'heal');const before=f.q.energy,coordinated=runEnemyTactics(f.state,f.context);assert.equal(coordinated.kind,'cooperative');assert.ok(f.q.energy<before);assert.ok(f.team.every(u=>RT.unitClock(f.state,u).pending));
