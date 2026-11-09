@@ -1,3 +1,4 @@
+import {applyTechniqueBalance} from './technique-balance.mjs';
 import {ROSTER} from './roster.mjs';
 import {LINEAGE_TECHNIQUE_DATA} from './lineage-techniques.mjs';
 import {canonicalDomain,DOMAIN_DEFINITIONS} from './domains.mjs';
@@ -100,7 +101,7 @@ function trio(scope,key,data,type,domain){
   const effect=n===0?null:n===1?utilityEffect:finalEffect,physical=n!==1&&kind==='physical',support=n===1;
   const power=support?0:n===0?36:finalEffect==='multiHit'?22:finalEffect==='doubleHit'?34:finalEffect==='drain'?65:78;
   const motion=MOTIONS[effect]||(physical?'The Spirimon follows the image with a precise forward sweep, then returns along its own fading trail.':'The image gathers into a narrow stream and darts toward the opponent before scattering into dim motes.');
-  return {id:'themed-'+scope+'-'+slug(key)+'-'+n,name,type,...(domain?{domain}:{}),power,accuracy:support?1:n===0?1:.95,kind:support?'status':physical?'physical':'spiritual',category:support?'Status':physical?'Physical':'Energy',effect,target:support&&FRIENDLY.has(effect)?'self':'opponent',timing:n===1?'lcd':'gcd',cooldownMs:n===1?22000:n===2?14000:6000,castMs:n===1?0:n===2?1100:250,learnLevel:scope==='lineage'?[6,18,36][n]:scope==='type'?[5,13,25][n]:[8,20,32][n],learnForm:scope==='lineage'?n:0,techniqueSource:{scope,key},visual:domain||type,desc:'In '+name+', a fleeting image of '+material+' takes shape around the Spirimon. '+motion};
+  return applyTechniqueBalance({id:'themed-'+scope+'-'+slug(key)+'-'+n,name,type,...(domain?{domain}:{}),power,accuracy:support?1:n===0?1:.95,kind:support?'status':physical?'physical':'spiritual',category:support?'Status':physical?'Physical':'Energy',effect,target:support&&FRIENDLY.has(effect)?'self':'opponent',timing:n===1?'lcd':'gcd',cooldownMs:n===1?22000:n===2?14000:6000,castMs:n===1?0:n===2?1100:250,learnLevel:scope==='lineage'?[6,18,36][n]:scope==='type'?[5,13,25][n]:[8,20,32][n],learnForm:scope==='lineage'?n:0,techniqueSource:{scope,key},visual:domain||type,desc:'In '+name+', a fleeting image of '+material+' takes shape around the Spirimon. '+motion});
  });
 }
 export function typeSignatureMoves(type){const data=TYPE_TECHNIQUE_DATA[type];return data?trio('type',type,data,type):[];}

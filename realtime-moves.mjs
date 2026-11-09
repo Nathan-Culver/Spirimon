@@ -1,3 +1,4 @@
+import {balancedTechnique,expectedTechniqueHits,secondaryEffectWork,TECHNIQUE_HEALING} from './technique-balance.mjs';
 import {passiveEffects} from './classification-passives.mjs';
 import {heldEquipment,itemHasHook} from './equipment.mjs';
 import {stats} from './engine.mjs';
@@ -18,11 +19,12 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export function moveLevelTier(level=1){return Math.max(0,MOVE_LEVEL_THRESHOLDS.filter(n=>n<=level).length-1);}
 export function effectWork(effect){if(!effect)return 0;if(effect in EFFECT_WORK)return EFFECT_WORK[effect];if(/^(boost|lower)/.test(effect))return 70;if(/^weather|^terrain/.test(effect))return 140;return 0;}
 export function moveTiming(move,actor={},sp={},style='normal'){
- const tier=moveLevelTier(actor.level),rawPower=Math.max(0,Number(move.realTimeBasePower??move.power)||0),hits=move.effect==='multiHit'?3.5:move.effect==='doubleHit'?2:1;
- const accuracy=clamp(Number(move.accuracy??.9),.05,1),effect=move.effect||null,scale=1+tier*.05,statusOnly=rawPower===0;
- let work=20+rawPower*hits*accuracy+effectWork(effect)*(statusOnly?1:.30);
+ move=balancedTechnique(move);
+ const tier=0,rawPower=move.power,hits=expectedTechniqueHits(move),totalPower=rawPower*hits;
+ const accuracy=clamp(Number(move.accuracy??.9),.05,1),effect=move.effect||null,statusOnly=rawPower===0;
+ let work=20+totalPower*accuracy+(statusOnly?effectWork(effect):secondaryEffectWork(effect));
  if(move.target==='allOpponents'||move.target==='allAllies')work*=1.8;
- if(effect==='unburdened')work+=rawPower*.35;if(effect==='struggle')work=70;
+ if(effect==='unburdened')work+=totalPower*.15;if(effect==='struggle')work=70;
  const actual=stats({...actor,level:actor.level||1,form:actor.form||0},{...sp,health:sp.health||50,power:sp.power||50,speed:sp.speed||40,moves:sp.moves||[]});
  const speed=Math.max(1,actual.speed),equipment=heldEquipment(actor,sp);
  let haste=clamp(Math.pow((speed+40)/120,.25),.5,1.8);
@@ -35,18 +37,21 @@ export function moveTiming(move,actor={},sp={},style='normal'){
  // Baseline attacks remain repeatable GCDs. Reactions, utility, spread bursts,
  // and large finishers are independent actions that can be woven between them.
  const reactions=['priority','protect','ward','cleanse','clearHazards','safeguard','counter','mirrorCoat','focus'];
- const timing=move.timing==='lcd'||move.timing==='gcd'?move.timing:reactions.includes(effect)||rawPower>=100&&!['twoTurn','chargeSun'].includes(effect)||move.target==='allOpponents'&&rawPower>=50?'lcd':'gcd';
- const burstWeight=rawPower>=140?4:rawPower>=110?2:1;
- const budgetSeconds=timing==='lcd'?clamp(work*.20*burstWeight,8,180):clamp(work/24,1.5,25);
- const localBase=move.cooldownMs??Math.round(budgetSeconds*1000);
+ const timing=move.timing==='lcd'||move.timing==='gcd'?move.timing:reactions.includes(effect)||(move.unbalancedPower??totalPower)>=100&&!['twoTurn','chargeSun'].includes(effect)||move.target==='allOpponents'&&totalPower>=35?'lcd':'gcd';
+ const burstWeight=statusOnly?1:1.15;
+ const budgetSeconds=timing==='lcd'?clamp(work*.12*burstWeight,6,90):clamp(work/24,1.5,25);
+ const healingMinimum=effect==='heal'?22000:effect==='teamHeal'?28000:effect==='fullheal'?45000:effect==='rest'?40000:effect==='regenerate'?24000:0;
+ const effectMinimum=effect==='perish'?60000:effect==='destinyBond'?30000:effect==='bellyDrum'?30000:0;
+ const localBase=Math.max(healingMinimum,effectMinimum,move.cooldownMs??Math.round(budgetSeconds*1000));
  const cooldownMs=timing==='lcd'?Math.max(2000,Math.round(localBase/haste*styleTime*penalty)):gcdMs;
  const traits=passiveEffects(sp,actor,{maxHp:actual.hp,move,weather:actor.battlefield?.weather});
  const charge=['twoTurn','chargeSun'].includes(effect)?1700:0;
- const baseCast=move.castMs??(timing==='lcd'?0:Math.round(clamp((rawPower-35)*17+charge,0,3000)));
+ const baseCast=move.castMs??Math.round(clamp((totalPower-48)*24+charge,0,3000));
  const castMs=Math.round(baseCast/haste*styleTime*penalty/(1+(traits.castSpeed||0))),animationLockMs=move.animationLockMs??(timing==='lcd'?550:450);
- const recoveryMs=animationLockMs,power=Math.round(rawPower*scale),healingFraction=effect==='teamHeal'?.18+tier*.01:effect==='heal'?.22+tier*.012:effect==='fullheal'?.65+tier*.01:effect==='rest'?.8+tier*.01:1;
+ const recoveryMs=animationLockMs,power=rawPower,healingFraction=TECHNIQUE_HEALING[effect]??1;
  // Heavy GCDs need longer casts and/or their own recast to pay for burst strength.
- const localCooldownMs=timing==='gcd'?(move.cooldownMs!=null?Math.max(0,Math.round(move.cooldownMs/haste*styleTime*penalty)):work>65?Math.round(work*125/haste*styleTime*penalty):0):cooldownMs;
- return {tier,threshold:MOVE_LEVEL_THRESHOLDS[tier],nextThreshold:MOVE_LEVEL_THRESHOLDS[tier+1]||null,timing,power,basePower:rawPower,gcdMs,cooldownMs:timing==='lcd'?Math.max(2000,Math.round(cooldownMs*(1-(traits.recastReduction||0)))):cooldownMs,localCooldownMs:timing==='lcd'?Math.max(2000,Math.round(localCooldownMs*(1-(traits.recastReduction||0)))):Math.round(localCooldownMs*(1-(traits.recastReduction||0))),castMs,animationLockMs,recoveryMs,work:Math.round(work*10)/10,accuracy,effect,healingFraction,durationScale:(1+tier*.035)*(1-exhaustion(actor))};
+ const gcdRecast= Math.max(healingMinimum,effectMinimum,move.cooldownMs??(statusOnly?work*110:work>60?3500*work/65:0));
+ const localCooldownMs=timing==='gcd'?Math.round(gcdRecast/haste*styleTime*penalty):cooldownMs;
+ return {tier,threshold:MOVE_LEVEL_THRESHOLDS[tier],nextThreshold:null,timing,power,basePower:rawPower,gcdMs,cooldownMs:timing==='lcd'?Math.max(2000,Math.round(cooldownMs*(1-(traits.recastReduction||0)))):cooldownMs,localCooldownMs:timing==='lcd'?Math.max(2000,Math.round(localCooldownMs*(1-(traits.recastReduction||0)))):Math.round(localCooldownMs*(1-(traits.recastReduction||0))),castMs,animationLockMs,recoveryMs,work:Math.round(work*10)/10,accuracy,effect,healingFraction,durationScale:1-exhaustion(actor)};
 }
-export function scaledMove(move,actor,sp,style='normal'){const profile=moveTiming(move,actor,sp,style);return {...move,power:profile.power,realTimeBasePower:profile.basePower,realTimeProfile:profile};}
+export function scaledMove(move,actor,sp,style='normal'){move=balancedTechnique(move);const profile=moveTiming(move,actor,sp,style);return {...move,power:profile.power,realTimeBasePower:profile.basePower,realTimeProfile:profile};}

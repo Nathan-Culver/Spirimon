@@ -8,7 +8,7 @@ import {supportFits,fieldSupport,clearConditions,supportDescription} from './sup
 import {heldEquipment,heldItemActivation,hasHook} from './equipment.mjs';
 import {moveTiming,scaledMove,STATUS_RULES} from './realtime-moves.mjs';
 import {passiveEffects} from './classification-passives.mjs';
-import {statusDuration,periodicDamage,rebaseStatusTimer} from './classification-status.mjs';
+import {statusDuration,accruedPeriodicDamage,rebaseStatusTimer} from './classification-status.mjs';
 export {moveTiming,STATUS_RULES};
 export const EFFECT_PULSE_MS=2000;
 const timedFields={ward:6000,reflect:10000,lightscreen:10000,safeguard:10000,focused:8000};
@@ -161,7 +161,7 @@ export function scheduleAction(state,context,actor,choice){
 function expireTimers(state,context,log){
  const now=state.elapsedMs,field=context.active.a[0]?.battlefield||context.active.b[0]?.battlefield;
  for(const u of allUnits(context)){const c=unitClock(state,u);if(c.status&&c.status.until<=now){if(u.status===c.status.effect){log.push(name(u,context.speciesOf(u))+' recovers from '+c.status.effect+'.');u.status=null;u.statusTurns=0;}c.status=null;}
- for(const [effect,until]of Object.entries(c.conditions))if(until<=now){if(effect==='perish'&&u.conditions?.perish){u.hp=0;log.push(name(u,context.speciesOf(u))+' falls to the doom omen.');}else if(u.conditions?.[effect])log.push(name(u,context.speciesOf(u))+' recovers from '+effect+'.');delete u.conditions?.[effect];delete c.conditions[effect];delete c.conditionMeta?.[effect];}
+ for(const [effect,until]of Object.entries(c.conditions))if(until<=now){if(effect==='perish'&&u.conditions?.perish){const amount=E.resolveDoom(u,context.speciesOf(u),{onDamage:(unit,options)=>reportDamage(state,context,unit,options)});log.push(name(u,context.speciesOf(u))+' suffers '+amount+' damage from the doom omen.');}else if(u.conditions?.[effect])log.push(name(u,context.speciesOf(u))+' recovers from '+effect+'.');delete u.conditions?.[effect];delete c.conditions[effect];delete c.conditionMeta?.[effect];}
  for(const [key,until]of Object.entries(c.buffs))if(until<=now){u[key]=false;delete c.buffs[key];}
  u.realtimeNow=now;syncCastHaste(state,u);
  if(c.delayedAt&&c.delayedAt<=now){log.push(...E.resolveDelayedDamage(u,context.speciesOf(u),{activeUnits:activeUnits(context),onDamage:(unit,options)=>reportDamage(state,context,unit,options)}));delete c.delayedAt;}
@@ -173,13 +173,13 @@ function pulseEffects(state,context,log){
  const live=activeUnits(context);
  for(const u of live){const sp=context.speciesOf(u),max=E.stats(u,sp).hp,c=u.conditions||{},field=u.battlefield||{};let loss=0;
  const suffer=amount=>{if(amount<=0||u.hp<=0)return;const hp=u.hp;u.hp=Math.max(0,u.hp-amount);loss+=hp-u.hp;reportDamage(state,context,u,{amount:hp-u.hp,periodic:true});};
- if(['poison','burn','frostbite'].includes(u.status))suffer(periodicDamage(max/32,u.status,sp,u));
- if(u.status==='toxic'){u.toxicTurns=(u.toxicTurns||0)+1;suffer(periodicDamage(max*Math.min(6,u.toxicTurns)/96,'toxic',sp,u));}
- if(c.leechSeed){const amount=periodicDamage(max/32,'leechSeed',sp,u),hp=u.hp;suffer(amount);const source=live.find(a=>a.id===u.conditionSources?.leechSeed);if(source)E.healHP(source,context.speciesOf(source),Math.min(amount,hp));}
- if(c.curse)suffer(periodicDamage(max/48,'curse',sp,u));if(c.trap)suffer(periodicDamage(max/48,'trap',sp,u));if(c.nightmare&&u.status==='sleep')suffer(periodicDamage(max/24,'nightmare',sp,u));
- const domains=E.activeDomains(sp,u);if(u.aspect!=='Stormbound'&&(field.weather==='snow'&&!fieldAffinities(sp,u).includes('ice')||field.weather==='sand'&&![sp.base,sp.alter].some(t=>['Construct','Giant','Elemental'].includes(t))&&!fieldAffinities(sp,u).some(e=>['earth','metal'].includes(e))))suffer(Math.max(1,Math.floor(max/32)));
+ if(['poison','burn','frostbite'].includes(u.status))suffer(accruedPeriodicDamage(max/32,u.status,sp,u));
+ if(u.status==='toxic'){u.toxicTurns=(u.toxicTurns||0)+1;suffer(accruedPeriodicDamage(max*Math.min(6,u.toxicTurns)/96,'toxic',sp,u));}
+ if(c.leechSeed){const amount=accruedPeriodicDamage(max/32,'leechSeed',sp,u),hp=u.hp;suffer(amount);const source=live.find(a=>a.id===u.conditionSources?.leechSeed);if(source)E.healHP(source,context.speciesOf(source),Math.min(amount,hp));}
+ if(c.curse)suffer(accruedPeriodicDamage(max/48,'curse',sp,u));if(c.trap)suffer(accruedPeriodicDamage(max/48,'trap',sp,u));if(c.nightmare&&u.status==='sleep')suffer(accruedPeriodicDamage(max/24,'nightmare',sp,u));
+ const domains=E.activeDomains(sp,u);if(u.aspect!=='Stormbound'&&(field.weather==='snow'&&!fieldAffinities(sp,u).includes('ice')||field.weather==='sand'&&![sp.base,sp.alter].some(t=>['Construct','Giant','Elemental'].includes(t))&&!fieldAffinities(sp,u).some(e=>['earth','metal'].includes(e))))suffer(accruedPeriodicDamage(max/32,'weather',sp,u));
  if(loss)log.push(name(u,sp)+' suffers '+loss+' ongoing damage.');
- if(u.hp>0){const healing=(passiveEffects(sp,u,{maxHp:max,weather:field.weather}).regeneration||0)+(c.regenerate?(1-(u.spiritualEnergyEmpty?.value||0))/20:0)+(field.terrain==='grass'?1/48:0)+(u.aspect==='Verdant'&&field.terrain==='grass'?1/32:0)+(hasHook(u,'leftovers',sp)?1/32:0);if(healing)E.healHP(u,sp,Math.max(1,Math.floor(max*healing)));
+ if(u.hp>0){const healing=(passiveEffects(sp,u,{maxHp:max,weather:field.weather}).regeneration||0)+(c.regenerate?(1-(u.spiritualEnergyEmpty?.value||0))/20:0)+(field.terrain==='grass'?1/48:0)+(u.aspect==='Verdant'&&field.terrain==='grass'?1/32:0)+(hasHook(u,'leftovers',sp)?1/32:0);if(healing)E.healHP(u,sp,max*healing,true);
  u.itemRounds=(u.itemRounds||0)+1;if(hasHook(u,'resourceSustain',sp)&&u.itemRounds%3===0){const caps=E.resourceMaximums(u,sp);u.pp=Math.min(caps.pp,(u.pp||0)+1);u.willpower=Math.min(caps.willpower,(u.willpower||0)+1);}
  if(sp.ability==='Second Wind'&&!u.secondWindUsed&&u.hp<max*.3){E.healHP(u,sp,Math.floor(max*.15));u.secondWindUsed=true;}
  E.refreshCombatEquipment(u,sp,log);
@@ -387,25 +387,25 @@ export function preserveAfflictions(state,ind){
 }
 export function advanceExplorationAfflictions(ind,sp,deltaMs){
  if(!ind||ind.hp<=0||!Number.isFinite(deltaMs)||deltaMs<=0)return {damage:0,expired:[]};
- const data=ind.afflictions??={status:null,conditions:{},pulseMs:0},expired=[],delta=Math.min(1000,deltaMs);data.conditions??={};
+ const data=ind.afflictions??={status:null,conditions:{},pulseMs:0},expired=[],delta=Math.min(1000,deltaMs);let damage=0;data.conditions??={};
  ind.maxHp=E.stats(ind,sp).hp;
  if(ind.status&&data.status?.effect!==ind.status)data.status={effect:ind.status,elapsedMs:0,baseDuration:STATUS_RULES[ind.status]?.duration||12000,durationFactor:1};
  if(!ind.status)data.status=null;
  for(const effect of PERSISTENT_CONDITIONS)if(ind.conditions?.[effect]&&!data.conditions[effect])data.conditions[effect]={effect,elapsedMs:0,baseDuration:STATUS_RULES[effect].duration,durationFactor:1};
  const advance=(timer,effect)=>{timer.elapsedMs+=delta;return timer.elapsedMs>=statusDuration(timer.baseDuration,effect,sp,ind)*(timer.durationFactor??1);};
  if(data.status&&advance(data.status,ind.status)){expired.push(ind.status);ind.status=null;ind.statusTurns=0;data.status=null;}
- for(const [effect,timer]of Object.entries(data.conditions)){if(!ind.conditions?.[effect]||advance(timer,effect)){if(effect==='perish'&&ind.conditions?.perish)ind.hp=0;delete ind.conditions?.[effect];delete data.conditions[effect];expired.push(effect);}}
- data.pulseMs=(data.pulseMs||0)+delta;let damage=0;
+ for(const [effect,timer]of Object.entries(data.conditions)){if(!ind.conditions?.[effect]||advance(timer,effect)){if(effect==='perish'&&ind.conditions?.perish)damage+=E.resolveDoom(ind,sp);delete ind.conditions?.[effect];delete data.conditions[effect];expired.push(effect);}}
+ data.pulseMs=(data.pulseMs||0)+delta;
  while(data.pulseMs>=EFFECT_PULSE_MS&&ind.hp>0){
-  data.pulseMs-=EFFECT_PULSE_MS;const max=E.stats(ind,sp).hp;
+  data.pulseMs-=EFFECT_PULSE_MS;const max=E.stats(ind,sp).hp;let pulseDamage=0;
   for(const effect of [ind.status,...Object.keys(ind.conditions||{}).filter(k=>ind.conditions[k])]){
    if(effect==='nightmare'&&ind.status!=='sleep')continue;
    const rates={burn:1/32,poison:1/32,frostbite:1/32,leechSeed:1/32,curse:1/48,trap:1/48,nightmare:1/24};
    const rate=effect==='toxic'?Math.min(6,ind.toxicTurns=(ind.toxicTurns||0)+1)/96:rates[effect];
-   if(rate)damage+=periodicDamage(max*rate,effect,sp,ind);
+   if(rate)pulseDamage+=accruedPeriodicDamage(max*rate,effect,sp,ind);
   }
   const regen=passiveEffects(sp,ind,{maxHp:max,weather:ind.battlefield?.weather}).regeneration||0;
-  ind.hp=Math.min(max,Math.max(0,ind.hp-damage)+(ind.hp>damage?Math.floor(max*regen):0));
+  const before=ind.hp;ind.hp=Math.max(0,ind.hp-pulseDamage);damage+=before-ind.hp;if(ind.hp>0&&regen)E.healHP(ind,sp,max*regen,true);
  }
  return {damage,expired};
 }

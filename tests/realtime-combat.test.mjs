@@ -64,8 +64,8 @@ test('AI filters cooling Techniques instead of using Struggle while funded Techn
  const f=fixture();const decision=chooseBattleAction(f.b[0],{realTime:true,speciesOf:()=>f.sp,opponents:[f.a[0]],allies:[f.b[0]],team:[f.b[0]],canUse:()=>false},()=>.5);assert.equal(decision,null);
  const ready=chooseBattleAction(f.b[0],{realTime:true,speciesOf:()=>f.sp,opponents:[f.a[0]],allies:[f.b[0]],team:[f.b[0]],canUse:c=>c.move?.id==='fast'},()=>.5);assert.equal(ready.move.id,'fast');assert.equal(ready.borrow,0);
 });
-test('all catalog Techniques have bounded cooldowns and scale at each level threshold',()=>{
- const all=allMoveTemplates();assert.ok(all.length>400);for(const m of all){let previous=-1;for(const level of MOVE_LEVEL_THRESHOLDS){const p=moveTiming(m,{level},{speed:40});assert.ok(p.cooldownMs>=1000&&p.cooldownMs<=180000,m.name);assert.ok(p.castMs>=0&&p.castMs<6000,m.name);assert.ok(p.power>=previous,m.name);previous=p.power;}if(m.power>0)assert.ok(moveTiming(m,{level:100},{speed:40}).power>moveTiming(m,{level:1},{speed:40}).power,m.name);}
+test('all catalog Techniques have bounded cooldowns and stable potency at the sampled levels',()=>{
+ const all=allMoveTemplates();assert.ok(all.length>400);for(const m of all){let previous=-1;for(const level of MOVE_LEVEL_THRESHOLDS){const p=moveTiming(m,{level},{speed:40});assert.ok(p.cooldownMs>=1000&&p.cooldownMs<=180000,m.name);assert.ok(p.castMs>=0&&p.castMs<6000,m.name);assert.ok(p.power>=previous,m.name);previous=p.power;}if(m.power>0)assert.equal(moveTiming(m,{level:100},{speed:40}).power,moveTiming(m,{level:1},{speed:40}).power,m.name);}
 });
 test('major afflictions all have actual catalog Techniques and appropriate early learnset access',()=>{
  const all=allMoveTemplates();for(const effect of ['confusion','sleep','freeze','burn','poison','toxic','paralysis','frostbite'])assert.ok(all.some(m=>m.effect===effect),effect);
@@ -76,7 +76,7 @@ test('real-time controls expose cooldown timers and readiness without turn or bo
 });
 
 test('re-evaluating a locked or charged Technique never compounds its level-scaled power',()=>{
- const base={...hit,effect:'rampage'},u={level:100},sp={speed:40};const first=scaledMove(base,u,sp),second=scaledMove(first,u,sp),third=scaledMove(second,u,sp);assert.equal(first.power,50);assert.equal(second.power,first.power);assert.equal(third.power,first.power);assert.equal(moveTiming(third,u,sp).cooldownMs,moveTiming(base,u,sp).cooldownMs);
+ const base={...hit,effect:'rampage'},u={level:100},sp={speed:40};const first=scaledMove(base,u,sp),second=scaledMove(first,u,sp),third=scaledMove(second,u,sp);assert.equal(first.power,44);assert.equal(second.power,first.power);assert.equal(third.power,first.power);assert.equal(moveTiming(third,u,sp).cooldownMs,moveTiming(base,u,sp).cooldownMs);
 });
 test('every catalog Technique executes through the live scheduler without an unsupported-effect failure',()=>{
  for(const m of allMoveTemplates()){const f=fixture();f.sp.moves=[m];f.sp.learnset=[m];f.a[0].hp=Math.floor(E.stats(f.a[0],f.sp).hp*.6);f.a[0].lastHit={amount:20,category:m.effect==='mirrorCoat'?'Energy':'Physical',source:f.b[0].id,at:0};f.b[0].lastMove='hit';

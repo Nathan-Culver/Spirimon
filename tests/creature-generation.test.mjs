@@ -47,7 +47,7 @@ test('visual observations must match ordered types, body plan, transformation, r
 });
 test('AI can change supported mechanics but cannot exceed budgets or add unsupported behavior',()=>{
  const sp=E.makeSpecies('moves','Construct','Plant');const proposals=sp.moves.map(()=>({name:'Resonant Pulse',power:50,speed:5,accuracy:.9,kind:'spiritual',effect:'slow',target:'opponent'}));
- const accepted=validateGeneratedMoves(proposals,sp);assert.ok(accepted.moves.every(m=>m.speed===undefined));assert.ok(accepted.report.every(r=>r.status==='accepted'));assert.ok(accepted.moves.every(m=>m.power===50&&m.baseUses>0&&generatedMoveBudget(m)<=120));
+ const accepted=validateGeneratedMoves(proposals,sp);assert.ok(accepted.moves.every(m=>m.speed===undefined));assert.ok(accepted.report.every(r=>r.status==='accepted'));assert.ok(accepted.moves.every(m=>m.unbalancedPower===50&&m.power===42&&m.baseUses>0&&generatedMoveBudget(m)<=120));
  const validated=E.validateSpecies({forms:['First','Second','Third'],description:'A distinct creature.',moves:proposals},sp);assert.equal(validated.power,sp.power);assert.equal(validated.base,sp.base);for(const m of validated.moves)assert.deepEqual(validated.learnset.find(p=>p.id===m.id),m);
  for(const change of [{power:100,effect:'doubleHit'},{effect:'executeCode'},{power:0,effect:'heal',target:'opponent'},{accuracy:NaN}]){const bad=validateGeneratedMoves([{...proposals[0],...change}],sp);assert.equal(bad.report[0].status,'fallback');assert.deepEqual(bad.moves[0],sp.moves[0]);}
  assert.throws(()=>E.validateSpecies({forms:['Same','Same','Third'],description:'test'},sp));

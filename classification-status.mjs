@@ -1,3 +1,4 @@
+import {accumulateTechniqueFraction} from './technique-balance.mjs';
 import {activeTypes,domainSources,canonicalDomain} from './classifications.mjs';
 import {heldEquipment} from './equipment.mjs';
 import {passiveEffects} from './classification-passives.mjs';
@@ -64,6 +65,9 @@ export function statusDuration(base,effect,sp,ind){
 }
 export function periodicDamage(base,effect,sp,ind){
  return Math.max(0,Math.round(base*(1+statusModifier(effect,sp,ind,'periodic'))));
+}
+export function accruedPeriodicDamage(base,effect,sp,ind){
+ return accumulateTechniqueFraction(ind,'damage:'+effect,Math.max(0,base*(1+statusModifier(effect,sp,ind,'periodic'))));
 }
 export function rebaseStatusTimer(timer,now,effect,sp,ind){
  const original=timer.baseDuration??Math.max(0,timer.until-(timer.appliedAt??now));

@@ -1,3 +1,4 @@
+import {applyTechniqueBalance,TECHNIQUE_HEALING} from './technique-balance.mjs';
 import {typeSignatureMoves,domainSignatureMoves,lineageSignatureMoves,allThemedTemplates} from './themed-techniques.mjs';
 import {DOMAINS,DOMAIN_ALIASES,canonicalDomain,canonicalDomains,normalizeMoveDomains,elementOf} from './domains.mjs';
 import {CREATURE_TYPES} from './creature-catalog.mjs';
@@ -6,7 +7,7 @@ export function moveBaseValue(move){
  if(move.id==='struggle')return 0;
  const explicit=Number(move.baseUses);
  if(Number.isFinite(explicit)&&explicit>0)return Math.max(1,Math.min(40,Math.floor(explicit)));
- const power=Math.max(0,Number(move.power)||0);
+ const power=Math.max(0,Number(move.unbalancedPower??move.power)||0);
  if(!power){
   if(['fullheal','rest','perish','destinyBond'].includes(move.effect))return 5;
   if(['heal','protect','ward','regenerate','auroraVeil','reflect','lightscreen','safeguard'].includes(move.effect))return 10;
@@ -20,7 +21,7 @@ export function moveCooldownDisruption(move={}){
  if(move.name==='Fatebreaker')return {gcdMs:300,moveId:'lastUsed',lcdMs:500};
  return move.cooldownDisruption||null;
 }
-const withBase=move=>{const out={...move,cooldownDisruption:moveCooldownDisruption(move),baseUses:moveBaseValue(move),desc:moveLore(move).description};delete out.speed;return out;};
+const withBase=move=>{const out=applyTechniqueBalance({...move,cooldownDisruption:moveCooldownDisruption(move),baseUses:moveBaseValue(move),desc:moveLore(move).description});delete out.speed;return out;};
 const NAMES={"Aberration":["Aperture Jab","Mind Knot","Folded Veil","Paradox Crush","Disquieting Gaze","Tendril Flick","Spatial Shell","Recursive Rend"],"Beast":["Raking Claw","Hamstring Bite","Den Instinct","Antler Charge","Venom Fang","Pouncing Snap","Thick Hide","Stampeding Rush"],"Celestial":["Feather Lance","Halo Bind","Dawn Benediction","Judgment Ray","Lulling Hymn","Star Dart","Radiant Aegis","Comet Descent"],"Construct":["Rivet Shot","Gear Snare","Field Repair","Iron Piledriver","Corrosive Bolt","Spring Hammer","Porcelain Guard","Furnace Impact"],"Elemental":["Spark Lash","Quicksand Grip","Renewing Current","Tempest Break","Cinder Mark","Gale Needle","Stone Mantle","Torrent Crash"],"Fey":["Briar Pin","Silken Tether","Nectar Blessing","Glamour Burst","Pollen Dream","Pixie Feint","Petal Shroud","Moonlit Prank"],"Fiend":["Barbed Hook","Chain Drag","Cinder Feast","Infernal Cleave","Malice Murmur","Ember Talon","Obsidian Hide","Hellfire Rush"],"Giant":["Knuckle Sweep","Ground Quake","Mountain Breath","Colossal Slam","Dazing Roar","Boulder Flick","Granite Guard","Avalanche Step"],"Monstrosity":["Horn Pierce","Coiling Grasp","Mythic Renewal","Chimeric Roar","Basilisk Haze","Wing Shear","Scaled Bastion","Legendary Onrush"],"Ooze":["Gel Whip","Viscous Grasp","Reconstitute","Pressure Flood","Caustic Drip","Droplet Shot","Jelly Barrier","Amorphous Surge"],"Plant":["Thorn Prick","Strangler Vine","Root Renewal","Pitcher Crush","Sundew Toxin","Seed Needle","Bark Mantle","Bramble Rush"],"Undead":["Bone Shard","Grave Bind","Soul Reassembly","Tomb Collapse","Restless Lull","Spectral Scratch","Shroud Guard","Revenant Charge"]};
 const SPECS=[[32,16,'physical',null],[25,3,'physical','slow'],[0,-12,'spiritual','heal'],[68,-20,'physical',null],[18,-5,'spiritual','poison'],[40,9,'spiritual',null],[0,13,'spiritual','ward'],[54,18,'physical','recoil']];
 export const TYPE_MOVES=Object.fromEntries(Object.entries(NAMES).map(([type,names])=>[type,names.map((name,i)=>{const[power,,kind,baseEffect]=SPECS[i],effect=i===4?(['Aberration','Celestial','Fey','Humanoid','Undead'].includes(type)?'sleep':type==='Giant'?'slow':baseEffect):baseEffect;return{id:type.toLowerCase()+'-'+i,name,type,power,kind,effect,visual:type==='Plant'?'leaf':type==='Ooze'?'water':type==='Elemental'?'fire':'spirit',desc:effect==='heal'?'Recover a quarter of maximum health.':effect==='ward'?'Soften the next incoming hit.':effect==='slow'?'Hinder the target’s next action.':effect==='poison'?'May leave lingering poison.':effect==='recoil'?'A swift impact with recoil.':'A '+type.toLowerCase()+' technique.'};})]));
@@ -99,14 +100,14 @@ export function buildLearnset(base,alter,domains=[],anatomy=null){
  const extras=[...ADVANCED_MOVES,...ENVIRONMENT_MOVES,...EXTRA_MOVES].filter((m,i)=>(i%CREATURE_TYPES.length===CREATURE_TYPES.indexOf(base)||i%CREATURE_TYPES.length===CREATURE_TYPES.indexOf(alter)||m.id.startsWith('team-'))&&(!m.domain||domains.map(canonicalDomain).includes(canonicalDomain(m.domain)))&&moveFitsAnatomy(m,anatomy)).map(m=>({...m,type:alter}));
  const statusMoves=CORE_STATUS_MOVES.filter(m=>m.eligibleTypes.includes(base)||m.eligibleTypes.includes(alter)||m.eligibleDomains.some(d=>domains.map(canonicalDomain).includes(canonicalDomain(d)))).map(m=>({...m,type:base}));
  const natural=anatomy?ANATOMICAL_MOVES.filter(m=>moveFitsAnatomy(m,anatomy)).map(m=>withBase({...m,type:base})):[];
- return [...typeMoves,...domains.flatMap(d=>domainMoves(d,alter)),...statusMoves,...natural,...extras].map(m=>{const out=normalizeMoveDomains({...m});delete out.speed;return out;});
+ return [...typeMoves,...domains.flatMap(d=>domainMoves(d,alter)),...statusMoves,...natural,...extras].map(m=>{const out=applyTechniqueBalance(normalizeMoveDomains({...m}));delete out.speed;return out;});
 }
 export function startingMoves(base,alter,domains=[],seed=0,anatomy=null){
  const a=TYPE_MOVES[base],b=TYPE_MOVES[alter];if(!a||!b)throw Error('Unsupported move type.');
  const d=domains.length?domainMoves(domains[0],alter):null;
  const candidates=[a[seed%2===0?0:5],b[3],a[seed%3===0?2:6],d?d[0]:b[seed%2===0?1:4]];
  const fallback=[...a,...b].filter(m=>moveFitsAnatomy(m,anatomy));const used=new Set();
- return candidates.map(m=>{if(!moveFitsAnatomy(m,anatomy)||used.has(m.id))m=fallback.find(x=>!used.has(x.id));used.add(m.id);const out=normalizeMoveDomains({...m});delete out.speed;return out;});
+ return candidates.map(m=>{if(!moveFitsAnatomy(m,anatomy)||used.has(m.id))m=fallback.find(x=>!used.has(x.id));used.add(m.id);const out=applyTechniqueBalance(normalizeMoveDomains({...m}));delete out.speed;return out;});
 }
 const GENERATED_EFFECTS=new Set([null,'slow','poison','burn','freeze','paralysis','sleep','confusion','flinch','frostbite','trap','heal','ward','boostMight','boostPower','boostDefense','boostResistance','boostSpeed','lowerMight','lowerPower','lowerDefense','lowerResistance','lowerSpeed','breakWard','doubleHit','drain','recoil','critical','priority','protect','cleanse']);
 export function generatedMoveBudget(move){const support=move.power===0?42:0,effect=move.effect?(['sleep','freeze','protect','doubleHit','drain'].includes(move.effect)?30:18):0;return (move.power||0)*(move.effect==='doubleHit'?2:1)*(move.accuracy??1)+effect+support+(move.target==='allOpponents'?25:0);}
@@ -121,13 +122,13 @@ export function validateGeneratedMoves(proposals,sp){
   if(m.power>0&&['self','ally'].includes(m.target)||m.power===0&&['heal','ward','boostMight','boostPower','boostDefense','boostResistance','boostSpeed','protect','cleanse'].includes(m.effect)&&!['self','ally'].includes(m.target))return bad('Incompatible target and effect');
   if(!moveFitsAnatomy(m,sp.anatomy))return bad('Anatomical requirements not met');
   if(generatedMoveBudget(m)>120)return bad('Technique exceeds balance budget');
-  m.baseUses=moveBaseValue(m);m.desc=moveLore(m).description;report.push({slot:n,status:'accepted',budget:generatedMoveBudget(m)});return m;
+  m.baseUses=moveBaseValue(m);applyTechniqueBalance(m);m.desc=moveLore(m).description;report.push({slot:n,status:'accepted',budget:generatedMoveBudget(m)});return m;
  });return {moves,report};
 }
 
 
 
-for(const moves of [...Object.values(TYPE_MOVES),EXTRA_MOVES,ENVIRONMENT_MOVES,ADVANCED_MOVES,CORE_STATUS_MOVES,ANATOMICAL_MOVES])for(const move of moves){delete move.speed;move.baseUses=moveBaseValue(move);}
+for(const moves of [...Object.values(TYPE_MOVES),EXTRA_MOVES,ENVIRONMENT_MOVES,ADVANCED_MOVES,CORE_STATUS_MOVES,ANATOMICAL_MOVES])for(const move of moves){delete move.speed;move.baseUses=moveBaseValue(move);applyTechniqueBalance(move);}
 
 // Narrative copy is kept separate from the combat rules and numerical move data.
 const TYPE_NARRATIVES={
@@ -456,12 +457,13 @@ export function moveLore(move={}){
  const disruption=moveCooldownDisruption(move);
  let disruptionText='';
  if(disruption){disruptionText='On damaging hits, delays the target’s running GCD by '+(disruption.gcdMs/1000)+' seconds'+(disruption.lcdMs?' and its last-used Technique’s running LCD by '+(disruption.lcdMs/1000)+' seconds':'')+'. The target resists further explicit cooldown disruption for 2 seconds. Ordinary hits and explicit disruption share an allowance of 15% of each cooldown’s starting duration, up to 0.5 seconds. Ordinary damage delays still apply.';}
- return {description,context,disruptionText};
+ const balanceText=TECHNIQUE_HEALING[effect]!=null?'Restores '+Math.round(TECHNIQUE_HEALING[effect]*100)+'% of maximum Health before healing modifiers.':effect==='regenerate'?'Restores 5% of maximum Health every 2 seconds for 10 seconds.':effect==='perish'?'After the doom countdown, deals 35% of the target’s maximum Health.':effect==='destinyBond'?'If defeated while the bond is active, returns up to 50% of the smaller maximum Health as damage.':effect==='counter'||effect==='mirrorCoat'?'Returns twice the recent matching hit, limited to 40% of the user’s maximum Health.':move.power>0?'Damage scales continuously with level and Physical or Spiritual battle stats. Split hits share one potency budget.':'';
+ return {description,context,disruptionText,balanceText};
 }
 for(const move of [...Object.values(TYPE_MOVES).flat(),...EXTRA_MOVES,...ENVIRONMENT_MOVES,...ADVANCED_MOVES,...CORE_STATUS_MOVES]){normalizeMoveDomains(move);if(moveCooldownDisruption(move))move.cooldownDisruption=moveCooldownDisruption(move);move.desc=moveLore(move).description;}
 
 // Includes original, Domain, anatomy, environmental, team and legacy template Techniques.
-export function allMoveTemplates(){const byId=new Map();for(const m of [...Object.values(TYPE_MOVES).flat(),...[...DOMAINS,...Object.keys(DOMAIN_ALIASES).filter(d=>!['Time','Space','Mind','Plant'].includes(d))].flatMap(d=>domainMoves(d,'Elemental')),...ANATOMICAL_MOVES,...CORE_STATUS_MOVES,...ADVANCED_MOVES,...ENVIRONMENT_MOVES,...EXTRA_MOVES,...allThemedTemplates()])byId.set(m.id,{...m,domain:m.domain==='Plant'?'Nature':m.domain});return [...byId.values()].map(m=>{const out=normalizeMoveDomains({...m});delete out.speed;return out;});}
+export function allMoveTemplates(){const byId=new Map();for(const m of [...Object.values(TYPE_MOVES).flat(),...[...DOMAINS,...Object.keys(DOMAIN_ALIASES).filter(d=>!['Time','Space','Mind','Plant'].includes(d))].flatMap(d=>domainMoves(d,'Elemental')),...ANATOMICAL_MOVES,...CORE_STATUS_MOVES,...ADVANCED_MOVES,...ENVIRONMENT_MOVES,...EXTRA_MOVES,...allThemedTemplates()])byId.set(m.id,{...m,domain:m.domain==='Plant'?'Nature':m.domain});return [...byId.values()].map(m=>{const out=applyTechniqueBalance(normalizeMoveDomains({...m}));delete out.speed;return out;});}
 
 export function lineageMoves(sp){return lineageSignatureMoves(sp).map(withBase);}
 

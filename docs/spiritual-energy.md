@@ -46,7 +46,7 @@ A casting GCD Technique starts the shared timer immediately. Cast and GCD overla
 
 There is no action queue or allied AI automation. A pressed unavailable Technique is rejected rather than saved for later. Select an ally tab, a foe/ally target, and a ready Technique. Other creatures' timers continue normally. Status, HP/resource readouts, shields and cooldown labels update during selection. Pause freezes execution and prevents issuing actions.
 
-GCD/LCD Technique profiles retain level thresholds 1, 16, 36, 60, 85 and 100. The Technique audit includes timing class, shared GCD, local recast, casts, resources, effects, and power at all six thresholds. Precise competitive balance still benefits from extended human playtesting.
+Technique damage scales continuously with level and battle stats, without extra potency tiers. The Technique audit includes before/after potency, timing, effects and reference damage from level 1 to 1000; see [Technique balance](technique-balance.md). Precise competitive balance still benefits from extended human playtesting.
 
 ## Procedural support and preparation
 

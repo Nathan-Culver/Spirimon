@@ -12,7 +12,7 @@ Player support uses Spiritual Energy and separately assigned techniques. It neve
 
 ## Scaling and effects
 
-Power scales at levels 1, 16, 36, 60, 85 and 100. All catalogue Technique timings are audited in [move-balance-audit.csv](move-balance-audit.csv), including accuracy, multi-hit/spread workload, effects, resource contribution, GCD/LCD classification and local recasts.
+Damage scales continuously through attacker level and battle stats, without extra potency tiers or a level-100 ceiling. See [Technique balance](technique-balance.md). All catalogue Technique timings are audited in [move-balance-audit.csv](move-balance-audit.csv), including accuracy, multi-hit/spread workload, effects, resource contribution, GCD/LCD classification and local recasts.
 
 Sleep, freeze and stagger stop creature commands and interrupt creature casts. Hard-control protection prevents immediate repeated immobilization. Confusion, burns, poison, toxic poison, paralysis, frostbite, infatuation, binding, leeching, curses, nightmares, disable, silence, regeneration and doom have timed simulation effects and visible badges. Afflictions and damage-over-time progress without player input. Shields, buffs, healing, screens, hazards, weather and terrain use the same timeline.
 

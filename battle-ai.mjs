@@ -10,12 +10,12 @@ const ratio=(u,sp)=>u.hp/Math.max(1,E.stats(u,sp).hp);
 const choices=(u,sp)=>u.pendingMove?[u.pendingMove]:u.lockedMove?[u.lockedMove]:E.equippedMoves(u,sp).filter(m=>E.canUseMove(u,sp,m));
 export function expectedDamage(actor,asp,target,tsp,move,style='normal',commit=.55){
  if(!move?.power)return 0;
- const copy={...actor,commit},hits=move.effect==='multiHit'?3:move.effect==='doubleHit'?2:1;
- let damage=E.damage(copy,asp,target,tsp,move,style,()=>.5)*hits;
+ const copy={...actor,commit},hits=move.effect==='multiHit'?3.5:move.effect==='doubleHit'?2:1;
+ let damage=E.damage(copy,asp,target,tsp,move,style,()=>.5,true)*hits;
  const f=actor.battlefield||{};if(f.weather==='rain'&&elementOf(move)==='water'||f.weather==='sun'&&elementOf(move)==='fire')damage*=1.5;if(f.weather==='rain'&&elementOf(move)==='fire'||f.weather==='sun'&&elementOf(move)==='water')damage*=.5;
  if(move.effect==='hexStrike'&&target.status||move.effect==='venomStrike'&&['poison','toxic'].includes(target.status))damage*=1.5;
  if(move.effect==='sleepStrike'&&target.status!=='sleep')return 0;
- if(move.effect==='counter'||move.effect==='mirrorCoat')damage=E.counterDamage(actor,target,move);
+ if(move.effect==='counter'||move.effect==='mirrorCoat')damage=E.counterDamage(actor,target,move,{maxHp:E.stats(actor,asp).hp});
  if(target.ward&&!['breakWard','struggle'].includes(move.effect)){if((target.wardStrength??1)>=1)return 0;damage*=1-(target.wardStrength??1);}
  return damage*E.hitChance(actor,target,move,style,asp,tsp);
 }
