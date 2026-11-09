@@ -10,12 +10,12 @@ function harness({enabled=true,route={type:'companion',status:{imageReady:true,m
  const ind=E.makeIndividual(sp,7);ind.xp=19;ind.bond=62;ind.heldItem={id:'keepsake'};
  const state={species:{[sp.id]:sp},spirits:[ind],settings:{aiEnabled:enabled},generationPlans:{},seed:'artwork'};
  let calls=0,accepted=0,chosen=0;const messages=[],requests=[];
- const h=vm.createContext({E,s:state,battle:null,library:{[sp.id]:sp},queue:[],busy:false,activeGenerationId:null,aiSessionKey:'',COMPANION:'http://127.0.0.1:4317',structuredClone,AbortSignal,AbortController,artworkAbort:null,Date,console,modal:null,globalThis:{},document:{querySelectorAll:()=>[]},esc:String,
- save:()=>calls++,note:text=>messages.push(text),toast:text=>messages.push(text),AI:{choose:async()=>{chosen++;return route;}},
+ const h=vm.createContext({E,s:state,battle:null,library:{[sp.id]:sp},queue:[],busy:false,activeGenerationId:null,aiSessionKey:'',aiCompanionToken:'',COMPANION:'http://127.0.0.1:4317',structuredClone,AbortSignal,AbortController,artworkAbort:null,Date,console,modal:null,globalThis:{},document:{querySelectorAll:()=>[]},esc:String,
+ currentCompanionToken:()=>'',save:()=>calls++,note:text=>messages.push(text),toast:text=>messages.push(text),AI:{choose:async()=>{chosen++;return route;},companionRequest:async(_settings,_path,options)=>{requests.push(options.body);return data;}},
  fetch:async(_url,options)=>{requests.push(JSON.parse(options.body));return {ok:true,json:async()=>data};},
  acceptGeneratedArtwork:async(target,result,existing)=>{accepted++;assert.ok(existing.every(p=>p.id!==target.id));target.sprites=[...result.sprites];target.proceduralArt=false;target.visualValidation=result.visualValidation;},
  register:next=>{state.species[next.id]=next;h.library[next.id]=next;return next;}});
- vm.runInContext(['hasFinishedArtwork','artworkStatusText','artworkStatusHTML','refreshArtworkStatus','queueOwnedArtwork','queueFresh','cancelArtworkGeneration','processQueue'].map(extract).join('\n'),h);
+ vm.runInContext(['hasFinishedArtwork','artworkStatusText','artworkStatusHTML','refreshArtworkStatus','queueOwnedArtwork','queueFresh','cancelArtworkGeneration','resumeArtworkGeneration','processQueue'].map(extract).join('\n'),h);
  return {h,sp,ind,state,requests,messages,run:()=>vm.runInContext('processQueue()',h),eval:code=>vm.runInContext(code,h),accepted:()=>accepted,chosen:()=>chosen};
 }
 test('a missing-art prototype queues its own species ID and design, without inventing another lineage',()=>{
@@ -64,4 +64,21 @@ test('unseen future designs remain queued for artwork after a text-only fallback
 });
 test('referenced artwork repairs cannot be starved by a full queue of future designs',()=>{
  const t=harness();t.h.queue.push('future-a','future-b','future-c');const sp=E.makeSpecies('battle-pending','Plant','Fey');t.state.species[sp.id]=sp;t.h.library[sp.id]=sp;t.h.battle={enemy:{species:sp.id}};t.eval('queueOwnedArtwork()');assert.equal(t.h.queue[0],t.sp.id);assert.equal(t.h.queue[1],sp.id);
+});
+
+test('OpenAI repairs use the same identity-preserving artwork path as the local companion',async()=>{
+ const t=harness({route:{type:'openai',status:{imageReady:true,models:['text'],visionModels:['vision']}}}),before=structuredClone(t.ind);await t.run();assert.equal(t.accepted(),1);assert.equal(t.requests[0].repair,true);assert.equal(t.requests[0].species.id,t.sp.id);assert.deepEqual(t.ind,before);
+});
+test('paid API failures stay paused until an explicit retry, instead of spending again every minute',async()=>{
+ const t=harness({route:{type:'openai',status:{imageReady:true,models:['text'],visionModels:['vision']}}});let attempts=0;t.h.AI.companionRequest=async()=>{attempts++;throw Object.assign(Error('API quota exhausted'),{retryable:false});};await t.run();assert.equal(t.sp.artworkJob.paused,true);t.sp.artworkJob.retryAfter=0;await t.run();assert.equal(attempts,1);assert.match(t.sp.artworkJob.message,/quota/);
+});
+
+test('a fresh OpenAI lineage uses the full image provider rather than the text-only adapter',async()=>{
+ const t=harness({route:{type:'openai',status:{imageReady:true,models:['text'],visionModels:['vision']}}});t.state.spirits=[];delete t.state.species[t.sp.id];delete t.h.library[t.sp.id];t.state.generationPlans[t.sp.id]=t.sp;t.h.queue.push(t.sp.id);await t.run();assert.equal(t.requests.length,1);assert.equal(t.accepted(),1);assert.ok(t.messages.some(message=>/complete lineage is ready/.test(message)));
+});
+test('explicit retry clears paused flags across saved and library references before retrying',async()=>{
+ const t=harness({route:{type:'openai',status:{imageReady:true,models:['text'],visionModels:['vision']}}});t.sp.artworkJob={paused:true,retryAfter:Date.now()+60000};t.state.generationPlans[t.sp.id]=structuredClone(t.sp);t.h.queue.push(t.sp.id);await t.eval('resumeArtworkGeneration()');assert.equal(t.requests.length,1);assert.equal(t.accepted(),1);
+});
+test('disabling generation preserves the pending job and discards a late response',async()=>{
+ const t=harness();let resolve;t.h.AI.choose=()=>new Promise(r=>resolve=r);const pending=t.run();t.eval('cancelArtworkGeneration({requeue:true})');assert.deepEqual(Array.from(t.h.queue),[t.sp.id]);resolve({type:'openai',status:{imageReady:true,models:['text'],visionModels:['vision']}});await pending;assert.equal(t.requests.length,0);assert.equal(t.accepted(),0);
 });

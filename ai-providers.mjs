@@ -1,15 +1,27 @@
 // AI provider discovery and connection checks. Keys are session-only and never stored in game saves.
 const timeout=(ms=6500)=>AbortSignal.timeout(ms);
-const json=async(url,options={})=>{const r=await fetch(url,{...options,signal:options.signal||timeout()});if(!r.ok)throw Error('HTTP '+r.status);return r.json();};
-export const PROVIDERS=['companion','ollama','device','gemini','procedural'];
-export const LABELS={companion:'Spirimon companion (text + images)',ollama:'Windows Ollama (text)',device:'Android browser AI (WebGPU)',gemini:'Gemini cloud (text)',procedural:'Procedural (offline)'};
+const json=async(url,options={})=>{const r=await fetch(url,{...options,signal:options.signal||timeout()});const data=await r.json();if(!r.ok){const error=Error(data.error||'HTTP '+r.status);error.code=data.code;error.retryable=data.retryable;throw error;}return data;};
+export const PROVIDERS=['companion','openai','ollama','device','gemini','procedural'];
+export const LABELS={companion:'Spirimon companion (text + images)',openai:'OpenAI (design + images + inspection)',ollama:'Windows Ollama (text)',device:'Android browser AI (WebGPU)',gemini:'Gemini cloud (text)',procedural:'Procedural (offline)'};
+export function companionURL(settings={}){
+ const value=(settings.companionUrl||'http://127.0.0.1:4317').trim(),url=new URL(value);
+ if(url.username||url.password||url.search||url.hash||url.pathname!=='/'||!['https:','http:'].includes(url.protocol))throw Error('Use a companion HTTPS origin without a path or credentials.');
+ if(url.protocol!=='https:'&&!['localhost','127.0.0.1','[::1]'].includes(url.hostname))throw Error('A remote companion must use HTTPS.');
+ return url.origin;
+}
+export function companionHeaders(secret='') {return {'Content-Type':'application/json',...(secret?{Authorization:'Bearer '+secret}:{})};}
+export async function companionRequest(settings,path,{token='',body,signal,timeoutMs=900000}={}){
+ if(!/^\/api\/(?:status|generate|analyze|openai\/(?:status|generate|analyze|connect))$/.test(path))throw Error('Unknown companion operation.');
+ return json(companionURL(settings)+path,{method:body?'POST':'GET',headers:companionHeaders(token),...(body?{body:JSON.stringify(body)}:{}),signal:signal?AbortSignal.any([signal,timeout(timeoutMs)]):timeout(timeoutMs)});
+}
 let browserEngine=null,browserModel='';
 export async function probe(type,settings={},secret=''){
  if(type==='procedural')return{models:['built-in'],message:'Ready offline'};
- if(type==='companion'){const r=await json('http://127.0.0.1:4317/api/status');return{models:r.models||[],imageReady:!!r.imageReady,visionModels:r.visionModels||[],message:r.imageReady?'Text and image companion available':'Companion found; image service unavailable'};}
+ if(type==='companion'){const r=await companionRequest(settings,'/api/status',{token:typeof secret==='object'?secret.companionToken:'',timeoutMs:15000});return{models:r.models||[],imageReady:!!r.imageReady,visionModels:r.visionModels||[],message:r.imageReady?'Text and image companion available':'Companion found; image service unavailable'};}
+ if(type==='openai')return companionRequest(settings,'/api/openai/status',{token:typeof secret==='object'?secret.companionToken:'',timeoutMs:20000});
  if(type==='ollama'){const base=(settings.ollamaUrl||'http://localhost:11434').replace(/\/$/,'');if(location.protocol==='https:'&&base.startsWith('http:')&&!['localhost','127.0.0.1'].includes(new URL(base).hostname))throw Error('HTTPS game cannot access insecure remote HTTP. Configure a private HTTPS relay.');const r=await json(base+'/api/tags');return{models:(r.models||[]).map(m=>m.name),message:'Ollama responding; text generation available'};}
  if(type==='device'){if(!navigator.gpu)throw Error('WebGPU unavailable in this browser');return{models:['SmolLM2-135M-Instruct-q0f16-MLC','Qwen2.5-0.5B-Instruct-q4f16_1-MLC'],message:'WebGPU available. First model load downloads model files.'};}
- if(type==='gemini'){if(!secret)throw Error('Enter a Gemini API key for this session');const r=await json('https://generativelanguage.googleapis.com/v1beta/models?key='+encodeURIComponent(secret));return{models:(r.models||[]).filter(m=>m.supportedGenerationMethods?.includes('generateContent')).map(m=>m.name.replace('models/','')),message:'Cloud API connected'};}
+ if(type==='gemini'){const key=typeof secret==='object'?secret.gemini:secret;if(!key)throw Error('Enter a Gemini API key for this session');const r=await json('https://generativelanguage.googleapis.com/v1beta/models?key='+encodeURIComponent(key));return{models:(r.models||[]).filter(m=>m.supportedGenerationMethods?.includes('generateContent')).map(m=>m.name.replace('models/','')),message:'Cloud API connected'};}
  throw Error('Unknown provider');
 }
 export async function choose(settings={},secret=''){

@@ -4,6 +4,9 @@ desktop/game/
 dist/
 /android/
 node_modules/
+.env
+.env.*
+!.env.example
 game-*.js
 style-*.css
 Spirimon.html

@@ -88,6 +88,8 @@ This remains a playable alpha. Production balance, procedural narrative depth, i
 
 ## Optional local generation
 
+**OpenAI generation is also available** alongside all existing providers. It creates creature designs, three form images and visual inspections through the companion, keeping the API key on the service. Phones can connect to a paired HTTPS companion address. See [OpenAI setup](docs/openai-generation.md) for local and phone configuration, model access, paid-request limits and paused-job recovery.
+
 The built-in roster and legendary content work without AI. To create additional lineages, run a local Ollama text/vision model and a compatible Stable Diffusion WebUI API, start the companion, choose your installed model in Options, then enable generation. No model is bundled or downloaded automatically. A new lineage becomes encounterable only after three complete, validated form images. Existing discovered individuals retain their identity.
 
 Default endpoints are `http://127.0.0.1:11434` (Ollama), `http://127.0.0.1:7860` (image API) and `http://127.0.0.1:4317` (companion). Custom loopback endpoints use `SPIRIMON_OLLAMA` and `SPIRIMON_IMAGE`; trusted browser origins use `SPIRIMON_ORIGINS`. See [creature generation](docs/creature-generation.md) and [reference anatomy catalog](docs/creature-catalog.md). Generation quality and latency depend on the installed models and hardware.
