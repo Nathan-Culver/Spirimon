@@ -1,3 +1,4 @@
+import {applyGeneratedGameplay,validateGenerationPlan} from './generation-policy.mjs';
 import {STAT_KEYS,STAT_LABELS,STAT_SHORT,STAT_REVISION,geneticProfile,normalizeGenetics,speciesBaseStats,formulaStats,addEffort,effortYield} from './stat-system.mjs';
 export {STAT_KEYS,STAT_LABELS,STAT_SHORT,geneticProfile,speciesBaseStats,effortYield};
 import {difficultyFactor,bindDifficulty,difficultyKey,setWorldDifficulty,currentDifficulty} from './difficulty.mjs';
@@ -12,7 +13,7 @@ import {statusChance} from './classification-status.mjs';
 import {equipment,hasHook,ASPECTS,heldEquipment,itemHasHook,itemOnceUsed,markItemUsed,consumeHeldItem,heldItemActivation} from './equipment.mjs';
 import {townLayout,townFeatures,townPath,townGround} from './towns.mjs';
 import {sceneryBaseRow} from './scenery.mjs';
-import {lineageMoves,buildLearnset,startingMoves,validateGeneratedMoves,moveBaseValue as baseMoveValue,moveLore as narrativeLore,moveCooldownDisruption} from './moves.mjs';
+import {lineageMoves,buildLearnset,startingMoves,generatedLearnset,validateGeneratedMoves,moveBaseValue as baseMoveValue,moveLore as narrativeLore,moveCooldownDisruption} from './moves.mjs';
 export function moveBaseValue(move){return baseMoveValue(move);}
 export function moveLore(move){return narrativeLore(move);}
 export const VERSION=1;
@@ -41,7 +42,7 @@ export function makeSpecies(seed,base,alter,domains){
  if(!TYPES.includes(base)||!TYPES.includes(alter)||base===alter)throw Error('Two distinct valid types required.');
  const design=buildDesign(seed,base,alter),anatomy=design.anatomy;
  const sp={id:'sp-'+hash(seed,base,alter).toString(36),seed,base,alter,domains:domains||[],name:design.name,forms:design.forms,description:design.description,body:design.reference.name,identity:hash(seed,'identity'),design,anatomy,power:45+Math.floor(r()*18)+anatomy.strength*3,health:43+Math.floor(r()*18)+(anatomy.strength-1)*5,speed:30+Math.floor(r()*35)-(anatomy.strength-1)*3,physicalRes:r()<.4?.85:1,spiritualRes:r()<.4?.85:1,ability:pick(['Steadfast','Wildheart','Second Wind','Soulweave','Pressure'],r),temperament:pick(['Watchful','Curious','Proud','Gentle','Restless'],r),evolution:r()<.18?'bond':'level',moveRevision:3,source:'procedural',proceduralArt:true,sprites:[],taxonomyRevision:2};
- assignDomains(sp,r);ensurePassives(sp);syncCapabilities(sp);sp.learnset=[...buildLearnset(base,alter,sp.domains,anatomy),...lineageMoves(sp)];sp.moves=startingMoves(base,alter,sp.domains,hash(seed),anatomy);return sp;
+ assignDomains(sp,r);applyGeneratedGameplay(sp);ensurePassives(sp);syncCapabilities(sp);sp.moves=startingMoves(base,alter,sp.domains,hash(seed),anatomy);sp.learnset=generatedLearnset(sp);return sp;
 }
 export {migrateSpecies};
 export function migrateSaveCreatures(save){
@@ -100,7 +101,14 @@ function genetics(ind,key){return Math.max(0,Math.min(31,ind.ivs?.[key]??ind.pot
 function effort(ind,key){return Math.max(0,Math.min(252,ind.evs?.[key]??0));}
 function natureFactor(ind,key){const pair=NATURES[ind.nature]||NATURES.Hardy;return pair[0]===key?1.1:pair[1]===key?.9:1;}
 export function makeIndividual(species,level=5,form=0,r=Math.random){const ivs=Object.fromEntries(['hp','might','defense','power','resistance','speed'].map(k=>[k,Math.floor(r()*32)]));return{id:'i-'+Math.floor(r()*1e12).toString(36),species:species.id,level,form,appearance:form,xp:0,bond:10,potential:ivs.might,nature:pick(Object.keys(NATURES),r),trained:0,statRevision:STAT_REVISION,ivs,evs:{hp:0,might:0,defense:0,power:0,resistance:0,speed:0},personalityValue:Math.floor(r()*4294967296),rareVariant:r()<1/128,catchRate:species.catchRate??Math.max(35,Math.min(245,210-Math.floor((species.power||50)/2))),hp:0,status:null,commit:.5,ward:false,omegaUsed:false};}
-export function applyUnitDifficulty(ind,sp,mode,side,{legacy=false}={}){if(!ind||!sp)return ind;const hp=ind.hp;if(legacy&&!ind.difficulty)bindDifficulty(ind,'hard',side);const before=stats(ind,sp).hp;bindDifficulty(ind,mode,side);const after=stats(ind,sp).hp;ind.hp=hp<=0?0:Math.min(after,Math.max(1,Math.round(hp/Math.max(1,before)*after)));ind.lastMaxHp=after;return ind;}
+const difficultyHealthFractions=new WeakMap();
+export function applyUnitDifficulty(ind,sp,mode,side,{legacy=false}={}){
+ if(!ind||!sp)return ind;const hp=ind.hp;if(legacy&&!ind.difficulty)bindDifficulty(ind,'hard',side);const before=stats(ind,sp).hp;
+ const prior=difficultyHealthFractions.get(ind),ratio=prior?.hp===hp&&prior.max===before?prior.ratio:hp/Math.max(1,before);
+ bindDifficulty(ind,mode,side);const after=stats(ind,sp).hp;ind.hp=hp<=0?0:Math.min(after,Math.max(1,Math.round(ratio*after)));
+ ind.lastMaxHp=after;difficultyHealthFractions.set(ind,{hp:ind.hp,max:after,ratio:hp<=0?0:Math.min(1,ratio)});return ind;
+}
+
 export function applyWorldDifficulty(save,mode,{legacy=false,activate=true}={}){mode=difficultyKey(mode);save.settings??={};const owned=new Set((save.spirits||[]).map(u=>u.id)),battle=save.battle,units=[...(save.spirits||[]),...Object.values(save.roamers||{}).flat().map(r=>r.ind),...(battle?.enemyRoster||[]),battle?.enemy,...(battle?.multi?.enemies||[]),...(battle?.multi?.reserves||[]),...(save.challengers?.pending?.team||[]),save.trade?.incoming];const seen=new Set();for(const u of units){if(!u||seen.has(u))continue;seen.add(u);applyUnitDifficulty(u,save.species?.[u.species],mode,owned.has(u.id)?'player':'enemy',{legacy});}save.settings.difficulty=mode;if(activate)setWorldDifficulty(mode);return save;}
 export function stats(ind,sp,{legacy=false}={}){const f=1+ind.form*.25,lv=ind.level;const baseMight=sp.might??sp.power??50,basePower=sp.energyPower??sp.power??50;const calc=(base,key,growth)=>Math.floor((base+lv*growth+genetics(ind,key)+Math.floor(effort(ind,key)/4)+(key==='might'?(ind.trained||0):0))*f*natureFactor(ind,key));const might=legacy?calc(baseMight,'might',3):0;const item=heldEquipment(ind,sp),bonus=item?.bonus?[item.bonus,1+item.amount/100]:null;const result=legacy?{hp:Math.floor((sp.health+lv*5+genetics(ind,'hp')+Math.floor(effort(ind,'hp')/4))*f*difficultyFactor(ind,'health')),might,defense:calc(sp.defense??baseMight,'defense',3),power:calc(basePower,'power',3),resistance:calc(sp.resistance??basePower,'resistance',3),...resourceMaximums(ind,sp),speed:Math.floor((sp.speed+lv*2+genetics(ind,'speed')+Math.floor(effort(ind,'speed')/4))*natureFactor(ind,'speed'))}:{...formulaStats(ind,sp,NATURES[ind.nature]||NATURES.Hardy),...resourceMaximums(ind,sp)};if(!legacy)result.hp=Math.max(1,Math.floor(result.hp*difficultyFactor(ind,'health')));if(bonus)result[bonus[0]]=Math.floor(result[bonus[0]]*bonus[1]);for(const [stat,percent]of Object.entries(item?.stats||{}))if(Number.isFinite(percent)&&stat in result&&stat!=='pp'&&stat!=='willpower')result[stat]=Math.floor(result[stat]*(1+clamp(percent,-30,35)/100));const focus={Guardian:['defense','resistance'],Striker:['might','power'],Mystic:['power'],Sprinter:['speed','speed']}[ind.specialty];if(focus)for(const stat of new Set(focus))result[stat]=Math.floor(result[stat]*1.1);if(ind.rareVariant)result.hp=Math.floor(result.hp*1.04);for(const [stat,multiplier]of ASPECTS[ind.aspect]?.stats||[])result[stat]=Math.floor(result[stat]*multiplier);const vitality=passiveEffects(sp,ind,{maxHp:result.hp,weather:ind.battlefield?.weather});result.hp=Math.floor(result.hp*(1+Math.min(.5,vitality.maxHp||0)));const mobility=passiveEffects(sp,ind,{maxHp:result.hp,weather:ind.battlefield?.weather});result.speed=Math.max(1,Math.floor(result.speed*(1+Math.min(.5,mobility.speed||0))));return result;}
 export function migrateIndividualStats(ind,sp){
@@ -526,7 +534,7 @@ export function validateSpecies(raw,original){
  const forms=Array.isArray(raw.forms)?raw.forms.map(s=>clean(s,45)):[];
  if(forms.length!==3||forms.some(s=>!s)||new Set(forms.map(s=>s.toLowerCase())).size!==3)throw Error('A lineage must have three distinct named forms.');
  const description=clean(raw.description,700);if(!description)throw Error('Missing Spirimon description.');
- const next={...original,name:forms[1],forms,description,source:'local-llm'};
+ const next={...original,...(original.design?{design:structuredClone(original.design)}:{}),name:forms[1],forms,description,source:'local-llm'};validateGenerationPlan(next,raw);
  if(Array.isArray(raw.visualPrompts)&&raw.visualPrompts.length===3)next.visualPrompts=raw.visualPrompts.map(p=>clean(p,1400));
  const checked=validateGeneratedMoves(raw.moves,original);next.moves=checked.moves.map((m,i)=>({...m,name:clean(raw.moveNames?.[i],40)||m.name}));next.moveValidation=checked.report;
  const overrides=new Map(next.moves.map(m=>[m.id,m]));next.learnset=(original.learnset||[]).map(m=>overrides.has(m.id)?{...overrides.get(m.id)}:{...m});
@@ -620,7 +628,7 @@ export function refreshTechniques(sp){
  for(const key of ['name','description','body'])sp[key]=rename(sp[key]);if(sp.forms)sp.forms=sp.forms.map(rename);
  if(![2,3,4,5,6,7].includes(sp.moveRevision))sp.moves=startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id),sp.anatomy);
  const techniqueKey=JSON.stringify([sp.id,sp.base,sp.alter,sp.domains]);
- if(sp.moveRevision!==7||sp.techniqueKey!==techniqueKey){const current=[...buildLearnset(sp.base,sp.alter,sp.domains||[],sp.anatomy),...lineageMoves(sp)],old=[...(sp.learnset||[]),...(sp.moves||[]).filter(m=>!(sp.learnset||[]).some(known=>known.id===m.id))],seen=new Set(old.map(m=>m.id));sp.learnset=[...old,...current.filter(m=>!seen.has(m.id))];sp.moves??=startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id),sp.anatomy);sp.moveRevision=7;sp.techniqueKey=techniqueKey;}
+ if(sp.moveRevision!==7||sp.techniqueKey!==techniqueKey){const current=sp.generationRevision===2?generatedLearnset(sp):[...buildLearnset(sp.base,sp.alter,sp.domains||[],sp.anatomy),...lineageMoves(sp)],old=[...(sp.learnset||[]),...(sp.moves||[]).filter(m=>!(sp.learnset||[]).some(known=>known.id===m.id))],seen=new Set(old.map(m=>m.id));sp.learnset=[...old,...current.filter(m=>!seen.has(m.id))];sp.moves??=startingMoves(sp.base,sp.alter,sp.domains||[],hash(sp.seed||sp.id),sp.anatomy);sp.moveRevision=7;sp.techniqueKey=techniqueKey;}
  for(const move of [...(sp.moves||[]),...(sp.learnset||[])]){delete move.speed;move.name=rename(move.name);if(move.domain)move.domain=canonicalDomain(move.domain);if(moveCooldownDisruption(move))move.cooldownDisruption=moveCooldownDisruption(move);move.desc=moveLore(move).description;move.baseUses=moveBaseValue(move);}return sp;
 }
 

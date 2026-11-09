@@ -591,3 +591,6 @@ body.battling .battle-command-header .target-feedback{margin:0;min-height:0}
 .genetics-table :is(th,td){padding:7px 4px;border-bottom:1px solid #a4aa8b;text-align:center}
 .genetics-table th:first-child{text-align:left;width:46%}
 @media(max-width:420px){.modal .battle-stat-grid{gap:4px}.modal .battle-stat-grid small{font-size:11px}.genetics-table{font-size:11px}}
+.generation-review-card{margin:18px 0;padding:12px;border:1px solid #8b9873;border-radius:8px;min-width:0}
+.generation-review-card img{display:block;width:100%;height:auto;background:#ced8b3;border-radius:6px;object-fit:contain}
+.generation-review-card ol{padding-left:20px;font-size:12px}

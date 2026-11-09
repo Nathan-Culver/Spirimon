@@ -1,9 +1,10 @@
+import {assertLineageReview,assertNovelGeneration,validateGenerationPlan} from './generation-policy.mjs';
 import {renderCreaturePixels,validateLineageImages,certifyRenderedAnatomy} from './creature-visuals.mjs';
 import {applyVisualObservation,applyLineageObservations} from './anatomy.mjs';
 function pngData(image){const canvas=document.createElement('canvas');canvas.width=image.width;canvas.height=image.height;const ctx=canvas.getContext('2d'),pixels=ctx.createImageData(image.width,image.height);pixels.data.set(image.data);ctx.putImageData(pixels,0,0);return canvas.toDataURL('image/png');}
 export function completeProceduralSpecies(sp,existing=[]){
  if(existing.some(p=>p.id!==sp.id&&p.forms?.every((name,n)=>name.toLowerCase()===sp.forms[n]?.toLowerCase())))throw Error('This lineage duplicates existing names.');
- const checked=validateLineageImages([0,1,2].map(n=>renderCreaturePixels(sp,n)),{existing});
+ const checked=validateLineageImages([0,1,2].map(n=>renderCreaturePixels(sp,n)),{existing,plannedChanges:sp.generationRevision===2});
  certifyRenderedAnatomy(sp);sp.sprites=checked.images.map(pngData);sp.atlas=null;sp.proceduralArt=true;sp.visualValidation={...checked.report,status:'procedural-verified',semanticSource:'renderer-geometry'};return sp;
 }
 async function readPNG(url){
@@ -14,11 +15,15 @@ export async function acceptGeneratedArtwork(sp,data,existing=[]){
  if(data.visualValidation?.status==='procedural-verified')return completeProceduralSpecies(sp,existing);
  const observations=data.visualValidation?.observations;
  if(data.visualValidation?.status!=='vision-verified'||!Array.isArray(observations)||observations.length!==3)throw Error('External artwork requires three independently checked image observations.');
- for(const observation of observations)applyVisualObservation({...sp},observation);
- const checked=validateLineageImages(await Promise.all(data.sprites.map(readPNG)),{existing});
- applyLineageObservations(sp,observations);
- sp.sprites=checked.images.map(pngData);sp.atlas=null;sp.proceduralArt=false;sp.visualValidation={...data.visualValidation,...checked.report,status:'vision-verified'};return sp;
+ const candidate=structuredClone(sp);assertNovelGeneration(candidate,existing);
+ if(data.visualValidation.policyRevision===2){candidate.design=structuredClone(data.design||candidate.design);candidate.generationRevision=2;}
+ if(candidate.generationRevision===2){if(data.visualValidation.policyRevision!==2)throw Error('Artwork was checked by an outdated generation policy.');validateGenerationPlan(candidate,data);assertLineageReview(data.visualValidation.lineageReview);}
+ observations.forEach((observation,n)=>applyVisualObservation({...candidate},observation,n));
+ const checked=validateLineageImages(await Promise.all(data.sprites.map(readPNG)),{existing,plannedChanges:candidate.generationRevision===2});
+ applyLineageObservations(candidate,observations);
+ Object.assign(sp,{anatomy:candidate.anatomy,formAnatomy:candidate.formAnatomy,capabilities:candidate.capabilities,...(candidate.design?{design:candidate.design,generationRevision:candidate.generationRevision}:{}),sprites:checked.images.map(pngData),atlas:null,proceduralArt:false,visualValidation:{...data.visualValidation,...checked.report,status:'vision-verified'}});return sp;
 }
+
 export async function atlasSprites(sp){
  if(sp.sprites?.length===3)return sp.sprites;
  if(!sp.atlas)throw Error('This lineage has no external artwork to inspect.');

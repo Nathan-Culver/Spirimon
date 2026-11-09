@@ -2,6 +2,22 @@
 
 The public taxonomy contains twelve ordered types. Humanoid is retained only as legacy save nomenclature and as a hidden, visually inferred body-plan flag. It grants no type matchups and no automatic stat multiplier.
 
+## Generation policy revision 2
+
+New lineages use the current 150-lineage General roster as curated references, including matching approved revision corrections. `generation-references.mjs` is compiled by `tools/build-generation-references.mjs`; it never uses an older rejected atlas to override current anatomy. Conflicting language such as Mistralwisp's former four-arm description is corrected in the reference material and roster installation.
+
+Each design has one coherent identity, materials, personhood trait and restrained spirit motif. Three explicit Form plans describe structure, proportions, posture, spiritual manifestation, anatomy, intentional surrealism and estimated dimensions. Adjacent Forms must change at least two meaningful structural axes. Size, ornament and texture alone do not qualify. Planned anatomy can change between Forms; inspection checks the appropriate permanent Form rather than requiring all three to have identical body plans.
+
+New species have explicit Health, Physical Attack, Physical Defense, Spiritual Attack, Spiritual Defense and Speed bases. Seeded role profiles distribute a 306–336 base-stat budget across all six stats. The model cannot alter these bases, Types, assigned Domains, IVs, EVs or Natures. Classification learnset buckets have equal quotas, count each Technique toward one source, retain lineage signatures and starting moves, and apply a small role preference within the eligible choices. Existing saved species are not rerolled or rebalanced.
+
+The companion validates the text/structural plan before requesting images. The default image settings are 768×768, 28 steps and guidance 6, with bounded provider overrides. Later Forms reference the immediately preceding accepted image. Each Form receives framing and independent semantic inspection for anatomy, nonhuman identity, Type/Domain integration, readable personhood, planned surrealism, material clarity, style and readability at game scale. A separate three-image review checks family continuity, structural progression and originality. Renaming a copied concept does not bypass novelty checks.
+
+Only a failing Form is retried, with its precise validation error; accepted Forms remain intact. After the initial images, one bounded family repair pass can target the reported Form indices. Exhausted repairs return explicitly labeled internal geometry and an unavailability reason, never finished-art certification. The browser independently rechecks the policy revision, Form plans, image observations, family review and pixels before installing external art. Installation is transactional and retains the species' gameplay state. Missing vision/image services keep designs pending outside normal encounters.
+
+Companion, other text providers, device AI and offline planning share the same code-authored design rules. Smaller device models receive a compact brief and retain the complete deterministic Form plans. The text-only and offline routes cannot claim finished artwork.
+
+The six-lineage, eighteen-Form example batch is available through Options → Review new generation designs. It covers Beast, Plant, Construct, Ooze, Monstrosity and Aberration concepts. Examples are review material and are not added to encounter pools or represented as having passed a local runtime vision model. Source prompts and packing provenance are recorded in `generation-review-plans.json` and `generation-review-art.json`.
+
 ## Species creation
 
 1. Select a biome-weighted base type and a different modifier type.
@@ -24,9 +40,9 @@ When image generation is enabled, owned unfinished lineages take priority in the
 
 External image-model artwork must pass both pixel checks and a vision-capable inspection model. The existing local path uses Ollama; the optional OpenAI path uses a configured OpenAI vision model and never claims a procedural fallback is completed model artwork. Without a local vision model, the local companion uses the offline renderer. Image checking never silently converts an unknown image into a successful semantic classification. See [OpenAI setup](openai-generation.md) for service configuration and phone access.
 
-Pixel checks cover dimensions, foreground occupancy, margins, edge clipping, bounding-box-normalized silhouettes, palette overlap, pixel fingerprints and near-duplicate appearance signatures. Border-connected near-white pixels are removed; enclosed white markings remain. Three evolution images must differ and retain sufficient silhouette and palette continuity. The browser also compares new artwork against the metrics of the species already present in its library.
+Pixel checks cover dimensions, foreground occupancy, margins, edge clipping, bounding-box-normalized silhouettes, palette overlap, pixel fingerprints and near-duplicate appearance signatures. Border-connected near-white pixels are removed; enclosed white markings remain. Three evolution images must differ and retain palette and family continuity; planned structural changes use a relaxed silhouette floor plus an independent family review. The browser also compares new artwork against the metrics of the species already present in its library.
 
-The vision model independently reports ordered types, body plan, visible traits, manipulators, nonhuman status, and confidence in the anatomical reference. Each form requires confidence of at least 0.8 and must visibly contain a modifier feature. Incorrect types, different body plans, missing modifiers, low reference confidence, and human subjects are rejected. Image generation retries once with the validation error, then uses a procedural fallback. Model confidence is evidence, not a guarantee of recognition accuracy; ambiguous images remain unverified.
+The vision model independently reports ordered types, body plan, visible traits, manipulators, nonhuman status, and confidence in the anatomical reference. Each form requires confidence of at least 0.8 and must visibly contain a modifier feature. Incorrect types, different body plans, missing modifiers, low reference confidence, and human subjects are rejected. Image generation retries the failing Form once with its validation error, then uses a bounded targeted family repair pass or an explicitly internal procedural fallback. Model confidence is evidence, not a guarantee of recognition accuracy; ambiguous images remain unverified.
 
 Original atlas species keep their artwork. Settings → Inspect collection anatomy checks owned original lineages through the companion. With AI enabled and a detected vision model, inspection also runs at startup. Each form receives its own anatomy record. Specialized equipment eligibility uses the actual permanent form; cosmetic form switching cannot change it. Existing equipment is grandfathered during migration until the owner replaces it.
 
@@ -38,7 +54,7 @@ New specialized equipment benefits require verified grasping appendages. Upright
 
 ## AI mechanics
 
-AI may propose four starting moves and change their supported mechanics. Each move retains its slot identity and assigned type/Domain. Values are bounded: power 0–100, accuracy 0.65–1, speed −30–25, supported Physical/Energy/Status categories, targeting and effects. Expected damage, extra hits, positive speed, status effects and spread targeting share a 120-point budget. Resource contribution is recalculated by code, never accepted from the model. Unsupported or anatomically impossible proposals fall back per slot without discarding the valid species design. Accepted changes are also written into its learnset so equipping a move by ID retains those mechanics.
+AI may propose four starting moves and change their supported mechanics. Each move retains its slot identity and assigned type/Domain. Values are bounded: power 0–100, accuracy 0.65–1, explicit cooldowns, supported Physical/Energy/Status categories, targeting and effects. Expected damage, extra hits, cooldown timing, status effects and spread targeting share a 120-point budget. Resource contribution is recalculated by code, never accepted from the model. Unsupported or anatomically impossible proposals fall back per slot without discarding the valid species design. Accepted changes are also written into its learnset so equipping a move by ID retains those mechanics.
 
 ## Saves
 

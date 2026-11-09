@@ -1,3 +1,4 @@
+import {assertGenerationObservation,plannedFormAnatomy} from './generation-policy.mjs';
 import {ANATOMY_CATALOG,MODIFIER_CATALOG,NAME_FRAGMENTS,CREATURE_TYPES,CREATURE_DOMAINS} from './creature-catalog.mjs';
 import {canSteed} from './steed.mjs';
 import {canonicalDomain,canonicalDomains,normalizeSpeciesDomains,fieldAffinities} from './domains.mjs';
@@ -86,15 +87,16 @@ export function fieldCapabilityAvailable(sp,capability,ind=null){
  const eligible=capability==='steed'?canSteed({...sp,anatomy},ind?.form||0):result[capability]?.available;return !!eligible&&!suppressed.has(capability)&&!blocked.has(capability);
 }
 // Interpret independent image observations, never the requested prompt, as visual evidence.
-export function applyVisualObservation(sp,observation){
+export function applyVisualObservation(sp,observation,form=0){
  if(!observation||!Number.isFinite(observation.confidence)||observation.confidence<.8||!CREATURE_TYPES.includes(observation.base)||!CREATURE_TYPES.includes(observation.alter)||observation.base!==sp.base||observation.alter!==sp.alter)throw Error('Image anatomy or ordered type accuracy is unverified.');
  const allowedPlans=new Set(['biped','quadruped','winged','aquatic','serpentine','tentacled','radial','rooted','amorphous','many-legged']);
  if(!allowedPlans.has(observation.bodyPlan)||!Array.isArray(observation.traits)||observation.traits.length>30||observation.traits.some(t=>typeof t!=='string'||t.length>40))throw Error('Invalid image anatomy observations.');
- const expected=sp.design?.anatomy||sp.anatomy;
+ const expected=plannedFormAnatomy(sp,form);
  if(expected?.bodyPlan&&expected.bodyPlan!==observation.bodyPlan)throw Error('Image body plan does not match the lineage reference.');
  const required=sp.design?.modifier?.traits||[];if(required.length&&!required.some(t=>observation.traits.includes(t)))throw Error('Second-type transformation is missing from the image.');
  if(typeof observation.nonhuman!=='boolean'||!observation.nonhuman)throw Error('Image must depict a nonhuman creature.');
  if(sp.design?.reference?.name&&(!Number.isFinite(observation.referenceConfidence)||observation.referenceConfidence<.8))throw Error('Image does not clearly match the anatomical reference.');
+ assertGenerationObservation(sp,observation,form);
  const anatomy=anatomyRecord(observation.bodyPlan,observation.traits,{source:'image-analysis',confidence:observation.confidence,reference:sp.design?.reference?.id});
  if(observation.limbs!=null){const counts={};for(const key of ['legs','arms','wings','tentacles']){const value=observation.limbs[key];if(!Number.isInteger(value)||value<0||value>24)throw Error('Invalid visible limb count.');counts[key]=value;}anatomy.limbs=counts;}
  else if(!observation.traits.includes('hands'))anatomy.limbs.arms=0;
@@ -104,7 +106,7 @@ export function applyVisualObservation(sp,observation){
 }
 export function applyLineageObservations(sp,observations){
  if(!Array.isArray(observations)||observations.length!==3)throw Error('Three image observations are required.');
- sp.formAnatomy=observations.map(o=>applyVisualObservation({...sp},o).anatomy);
+ sp.formAnatomy=observations.map((o,n)=>applyVisualObservation({...sp},o,n).anatomy);
  sp.anatomy=sp.formAnatomy[0];return syncCapabilities(sp);
 }
 export function individualSpecies(sp,ind){

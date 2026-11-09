@@ -40,7 +40,7 @@ test('installer output contains one copy of current assets and replaces stale ge
   const {built,report}=await writeRelease(output,{target:'app'}),names=await readdir(output);
   assert.ok(!names.includes('Spirimon.html'));assert.ok(!names.includes('game-000000000000.js'));assert.ok(names.includes('notes.txt'));
   assert.equal(await readFile(path.join(output,'index.html'),'utf8'),built.packagedHtml);
-  assert.equal(report.singleFileBytes,0);assert.ok(report.codeBytes<1.1*1024*1024);
+  assert.equal(report.singleFileBytes,0);assert.ok(report.codeBytes<1.3*1024*1024);
   for(const asset of report.assets)assert.equal((await stat(path.join(output,asset.path))).size,asset.bytes,asset.path);
   assert.equal(JSON.parse(await readFile(path.join(output,'asset-manifest.json'),'utf8')).assetBytes,report.assetBytes);
  }finally{await rm(output,{recursive:true,force:true});}

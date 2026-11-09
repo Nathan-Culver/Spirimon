@@ -1,6 +1,7 @@
+import {imageFormPrompt,assertNovelGeneration,assertLineageReview} from './generation-policy.mjs';
 // Server-only adapter. Never import this module into the browser bundle.
 import {TYPES,validateSpecies} from './engine.mjs';
-import {lineageDesign,observationPrompt} from './generation-prompts.mjs';
+import {lineageDesign,observationPrompt,lineageReviewPrompt,prepareLineageDesign} from './generation-prompts.mjs';
 import {applyVisualObservation,applyLineageObservations,migrateSpecies} from './anatomy.mjs';
 import {decodePNG,encodePNG} from './creature-png.mjs';
 import {validateLineageImages} from './creature-visuals.mjs';
@@ -8,8 +9,11 @@ import {validateLineageImages} from './creature-visuals.mjs';
 export const OPENAI_DEFAULTS={textModel:'gpt-4.1-mini',visionModel:'gpt-4.1-mini',imageModel:'gpt-image-1.5'};
 const object=properties=>({type:'object',properties,required:Object.keys(properties),additionalProperties:false});
 const string={type:'string'},integer={type:'integer',minimum:0,maximum:24};
-const moveSchema=object({name:string,power:{type:'integer',minimum:0,maximum:100},speed:{type:'number',minimum:-30,maximum:25},accuracy:{type:'number',minimum:.65,maximum:1},kind:{enum:['physical','spiritual','status'],type:'string'},effect:{type:['string','null']},target:{type:'string',enum:['opponent','self','ally','allOpponents']}});
-const observationSchema=object({base:{type:'string',enum:TYPES},alter:{type:'string',enum:TYPES},bodyPlan:{type:'string',enum:['biped','quadruped','winged','aquatic','serpentine','tentacled','radial','rooted','amorphous','many-legged']},traits:{type:'array',items:string},limbs:object({legs:integer,arms:integer,wings:integer,tentacles:integer}),manipulators:{type:'integer',minimum:0,maximum:16},nonhuman:{type:'boolean'},confidence:{type:'number',minimum:0,maximum:1},referenceConfidence:{type:'number',minimum:0,maximum:1}});
+const moveSchema=object({name:string,power:{type:'integer',minimum:0,maximum:100},accuracy:{type:'number',minimum:.65,maximum:1},kind:{enum:['physical','spiritual','status'],type:'string'},effect:{type:['string','null']},target:{type:'string',enum:['opponent','self','ally','allOpponents']}});
+const observationSchema=object({base:{type:'string',enum:TYPES},alter:{type:'string',enum:TYPES},bodyPlan:{type:'string',enum:['biped','quadruped','winged','aquatic','serpentine','tentacled','radial','rooted','amorphous','many-legged']},traits:{type:'array',items:string},limbs:object({legs:integer,arms:integer,wings:integer,tentacles:integer}),manipulators:{type:'integer',minimum:0,maximum:16},nonhuman:{type:'boolean'},confidence:{type:'number',minimum:0,maximum:1},referenceConfidence:{type:'number',minimum:0,maximum:1},personhoodVisible:{type:'boolean'},anatomySound:{type:'boolean'},plannedSurrealism:{type:'boolean'},typeIntegration:{type:'boolean'},domainIntegration:{type:'boolean'},quality:object({style:{type:'number',minimum:0,maximum:1},readability:{type:'number',minimum:0,maximum:1},materialClarity:{type:'number',minimum:0,maximum:1}})});
+
+const reviewSchema=object({confidence:{type:'number',minimum:0,maximum:1},familyContinuity:{type:'boolean'},structuralProgression:{type:'boolean'},originalIdentity:{type:'boolean'},repairForms:{type:'array',items:{type:'integer',minimum:0,maximum:2}},issues:{type:'array',items:string}});
+const planSchema=object({bodyPlan:string,personhood:string,structure:string,proportions:string,posture:string,manifestation:string,description:string,intentionalSurrealism:{type:'array',items:string}});
 
 export class OpenAIError extends Error{
  constructor(message,{status=502,code='openai_error',retryable=false}={}){super(message);this.status=status;this.code=code;this.retryable=retryable;}
@@ -60,35 +64,51 @@ export function createOpenAIProvider({apiKey=process.env.OPENAI_API_KEY||process
   if(missing.length)throw new OpenAIError('Configured OpenAI models are not available to this key: '+missing.join(', '),{status:400,code:'openai_model_unavailable'});
   return {models:[textModel],visionModels:[visionModel],imageModel,imageReady:true,message:'OpenAI connected. Model access found; image generation uses paid API requests. A successful generation verifies image access.'};
  }
+ async function inspectForm(sp,sprite,form,signal){
+  const observation=await structured(visionModel,observationPrompt(sp,form),observationSchema,[sprite],signal);applyVisualObservation({...sp},observation,form);return observation;
+ }
+ async function inspectFamily(sp,sprites,existing,signal){return assertLineageReview(await structured(visionModel,lineageReviewPrompt(sp,existing),reviewSchema,sprites,signal));}
  async function analyze({species,sprites,signal}={}){
-  const sp=migrateSpecies(structuredClone(species)),checked=validateLineageImages(boundedSprites(sprites),{allowExactFamily:true}),cleaned=checked.images.map(image=>'data:image/png;base64,'+encodePNG(image).toString('base64')),observations=[];
-  for(const sprite of cleaned){const observation=await structured(visionModel,observationPrompt(sp),observationSchema,[sprite],signal);applyVisualObservation({...sp},observation);observations.push(observation);}
-  if(observations.some(o=>o.bodyPlan!==observations[0].bodyPlan))throw new Error('The three images have inconsistent body plans.');
-  applyLineageObservations(sp,observations);
-  return {anatomy:sp.anatomy,formAnatomy:sp.formAnatomy,capabilities:sp.capabilities,visualValidation:{...checked.report,status:'vision-verified',semanticSource:'openai-vision-model',model:visionModel,observations}};
+  const sp=migrateSpecies(structuredClone(species)),checked=validateLineageImages(boundedSprites(sprites),{allowExactFamily:true,plannedChanges:sp.generationRevision===2}),cleaned=checked.images.map(image=>'data:image/png;base64,'+encodePNG(image).toString('base64')),observations=[];
+  for(let form=0;form<3;form++)observations.push(await inspectForm(sp,cleaned[form],form,signal));
+  const lineageReview=sp.generationRevision===2?await inspectFamily(sp,cleaned,[],signal):null;applyLineageObservations(sp,observations);
+  return {anatomy:sp.anatomy,formAnatomy:sp.formAnatomy,capabilities:sp.capabilities,visualValidation:{...checked.report,status:'vision-verified',...(lineageReview?{policyRevision:2,lineageReview}:{}),semanticSource:'openai-vision-model',model:visionModel,observations}};
  }
  async function generate({species,existing=[],repair=false,signal}={}){
   if(!species||!TYPES.includes(species.base)||!TYPES.includes(species.alter)||species.base===species.alter)throw new OpenAIError('Invalid ordered creature types.',{status:400});
-  const {schema,prompt}=lineageDesign(species,existing);
-  schema.properties.moves={anyOf:[{type:'null'},{type:'array',items:moveSchema,minItems:4,maxItems:4}]};schema.required=Object.keys(schema.properties);
-  const raw=await structured(textModel,prompt+(repair?' Repair only the artwork. Preserve these exact existing form names and description: '+JSON.stringify({forms:species.forms,description:species.description}):'')+' Include moves, or null to retain the supplied moves.',schema,[],signal),validated=validateSpecies(raw,species);
+  const prepared=prepareLineageDesign(species),{schema,prompt}=lineageDesign(prepared,existing);
+  schema.properties.moves={anyOf:[{type:'null'},{type:'array',items:moveSchema,minItems:4,maxItems:4}]};
+  schema.properties.formPlans={anyOf:[{type:'null'},{type:'array',items:planSchema,minItems:3,maxItems:3}]};schema.required=Object.keys(schema.properties);
+  const raw=await structured(textModel,prompt+(repair?' Repair only the artwork. Preserve these exact existing form names and description: '+JSON.stringify({forms:species.forms,description:species.description}):'')+' Include moves and formPlans, or null to retain the supplied code-authored values.',schema,[],signal);
+  if(raw.formPlans===null)delete raw.formPlans;if(repair){raw.forms=[...species.forms];raw.description=species.description;}
+  const validated=validateSpecies(raw,prepared);if(!repair)assertNovelGeneration(validated,existing);
   if(!Array.isArray(raw.visualPrompts)||raw.visualPrompts.length!==3)throw new OpenAIError('OpenAI did not return three visual briefs.');
-  let lastError;
-  for(let attempt=0;attempt<2;attempt++){
-   try{
-    const sprites=[];
-    for(let n=0;n<3;n++){
-     const fields={model:imageModel,prompt:'Production fantasy pixel-art RPG sprite. One complete nonhuman creature, facing left, centered, fully transparent background, wide clear margins, crisp clustered shading, no words, grids or scenery. Give it a readable face, eye, mouth or face mask. Form '+(n+1)+' of three: '+raw.visualPrompts[n]+'. Exact anatomy and modifier: '+JSON.stringify(species.design||species.anatomy)+'. All forms share the same color palette, anatomical family and signature motif. Later forms must develop distinct structures, never just enlarge the first form.'+(n?' Use the attached first-form image as the lineage reference.':'')+(lastError?' Correct this validation issue: '+lastError.message:''),n:1,size:'1024x1024',quality:'medium',background:'transparent',output_format:'png'};
-     let body=fields;
-     if(n){body=new FormData();for(const [key,value]of Object.entries(fields))body.set(key,String(value));body.set('image',new Blob([Buffer.from(sprites[0].split(',')[1],'base64')],{type:'image/png'}),'first-form.png');}
-     const image=await request(n?'images/edits':'images/generations',body,{signal,timeout:600000});sprites.push(spritePNG(image.data?.[0]?.b64_json));
-    }
-    const checked=validateLineageImages(sprites.map(decodePNG),{existing}),cleaned=checked.images.map(image=>'data:image/png;base64,'+encodePNG(image).toString('base64'));
-    const inspected=await analyze({species:validated,sprites:cleaned,signal});
-    return {...raw,...inspected,sprites:cleaned,visualValidation:{...inspected.visualValidation,...checked.report,status:'vision-verified'}};
-   }catch(error){if(error instanceof OpenAIError||signal?.aborted)throw error;lastError=error;}
+  const sprites=[],observations=[],repairs=[];let imageRequests=0;
+  async function renderForm(form,correction=''){
+   if(imageRequests>=6)throw new OpenAIError('The six-image request limit was reached. Generation is paused; review the reported issue before retrying.',{code:'openai_artwork_invalid'});
+   imageRequests++;const reference=form?sprites[form-1]:sprites[0];
+   const fields={model:imageModel,prompt:imageFormPrompt(validated,form,correction)+(reference?' Use the attached preceding accepted Form as the lineage reference.':''),n:1,size:'1024x1024',quality:'medium',background:'transparent',output_format:'png'};
+   let body=fields;if(reference){body=new FormData();for(const [key,value]of Object.entries(fields))body.set(key,String(value));body.set('image',new Blob([Buffer.from(reference.split(',')[1],'base64')],{type:'image/png'}),'lineage-reference.png');}
+   const image=await request(reference?'images/edits':'images/generations',body,{signal,timeout:600000});sprites[form]=spritePNG(image.data?.[0]?.b64_json);
   }
-  throw new OpenAIError('Artwork validation failed after two attempts: '+lastError.message+'. Generation is paused; retry when ready.',{code:'openai_artwork_invalid'});
+  try{
+   for(let form=0;form<3;form++)await renderForm(form);
+   // Reject duplicate/cropped images before spending on semantic inspection.
+   validateLineageImages(sprites.map(decodePNG),{existing,plannedChanges:true});
+   for(let form=0;form<3;form++){
+    try{observations[form]=await inspectForm(validated,sprites[form],form,signal);}catch(error){if(error instanceof OpenAIError||signal?.aborted)throw error;repairs.push({form,reason:error.message});await renderForm(form,error.message);validateLineageImages(sprites.map(decodePNG),{existing,plannedChanges:true});observations[form]=await inspectForm(validated,sprites[form],form,signal);}
+   }
+   let lineageReview;
+   try{lineageReview=await inspectFamily(validated,sprites,existing,signal);}catch(error){
+    if(error instanceof OpenAIError||signal?.aborted)throw error;
+    const forms=error.repairForms?.length?error.repairForms:[1,2];
+    for(const form of new Set(forms)){repairs.push({form,reason:error.message});await renderForm(form,error.message);observations[form]=await inspectForm(validated,sprites[form],form,signal);}
+    lineageReview=await inspectFamily(validated,sprites,existing,signal);
+   }
+   const checked=validateLineageImages(sprites.map(decodePNG),{existing,plannedChanges:true});applyLineageObservations(validated,observations);
+   return {...validated,formPlans:validated.design.formPlans,sprites,visualValidation:{...checked.report,status:'vision-verified',policyRevision:2,semanticSource:'openai-vision-model',model:visionModel,observations,lineageReview,repairs,imageRequests}};
+  }catch(error){if(error instanceof OpenAIError||signal?.aborted)throw error;throw new OpenAIError('Artwork validation failed after bounded repairs: '+error.message+'. Generation is paused; retry when ready.',{code:'openai_artwork_invalid'});}
  }
+
  return {configured,status,generate,analyze};
 }

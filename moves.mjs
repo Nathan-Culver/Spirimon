@@ -464,3 +464,18 @@ for(const move of [...Object.values(TYPE_MOVES).flat(),...EXTRA_MOVES,...ENVIRON
 export function allMoveTemplates(){const byId=new Map();for(const m of [...Object.values(TYPE_MOVES).flat(),...[...DOMAINS,...Object.keys(DOMAIN_ALIASES).filter(d=>!['Time','Space','Mind','Plant'].includes(d))].flatMap(d=>domainMoves(d,'Elemental')),...ANATOMICAL_MOVES,...CORE_STATUS_MOVES,...ADVANCED_MOVES,...ENVIRONMENT_MOVES,...EXTRA_MOVES,...allThemedTemplates()])byId.set(m.id,{...m,domain:m.domain==='Plant'?'Nature':m.domain});return [...byId.values()].map(m=>{const out=normalizeMoveDomains({...m});delete out.speed;return out;});}
 
 export function lineageMoves(sp){return lineageSignatureMoves(sp).map(withBase);}
+
+// New generation only: one source per Technique, equal classification buckets,
+// with a small preference for the lineage role inside each eligible bucket.
+export function generatedLearnset(sp){
+ const pool=[...buildLearnset(sp.base,sp.alter,sp.domains||[],sp.anatomy),...lineageMoves(sp)],unique=[...new Map(pool.map(m=>[m.id,m])).values()];
+ const categories=['type:'+sp.base,'type:'+sp.alter,...(sp.domains||[]).map(d=>'domain:'+canonicalDomain(d))],buckets=new Map(categories.map(c=>[c,[]])),signatures=[];
+ const source=m=>m.domain&&(sp.domains||[]).map(canonicalDomain).includes(canonicalDomain(m.domain))?'domain:'+canonicalDomain(m.domain):'type:'+(m.type===sp.alter?sp.alter:sp.base);
+ for(const m of unique){if(m.techniqueSource?.scope==='lineage'){signatures.push(m);continue;}buckets.get(source(m)).push(m);}
+ const mandatory=new Set((sp.moves||[]).map(m=>m.id)),role=sp.generationProfile?.role;
+ const favored=m=>role==='Striker'?m.kind==='physical':role==='Mystic'?m.kind==='spiritual'&&m.power>0:role==='Guardian'||role==='Support'?m.power===0:role==='Skirmisher'?m.power>0&&m.power<=50:false;
+ const count=Math.min(8,...[...buckets.values()].map(v=>v.length));if(!count)return unique;
+ const quota=Math.max(count,...[...buckets.values()].map(v=>v.filter(m=>mandatory.has(m.id)).length));
+ const out=[];for(const [category,rows]of buckets){rows.sort((a,b)=>a.id.localeCompare(b.id));const required=rows.filter(m=>mandatory.has(m.id)),specialized=rows.filter(m=>!mandatory.has(m.id)&&favored(m)).slice(0,Math.max(1,Math.round(quota*.1))),picked=[...required,...specialized];for(const move of rows)if(picked.length<quota&&!picked.some(m=>m.id===move.id))picked.push(move);out.push(...picked.slice(0,quota).map(m=>({...m,learningSource:category})));}
+ return [...out,...signatures];
+}

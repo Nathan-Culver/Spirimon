@@ -1,0 +1,168 @@
+{
+  "generator": "OpenAI image_gen",
+  "status": "Review examples only; no runtime model-validation claim",
+  "lineages": [
+    {
+      "id": "rimewake",
+      "sourceFilename": "exec-1c37d2a5-c1a2-405b-8947-721e86deda2b.png",
+      "sourceSha256": "025c4a32cbf20f6736156b931ea0e807e198217cf806b4d876bfdc3cae1ffe91",
+      "atlas": "./assets/generation-review/rimewake.webp",
+      "atlasSha256": "c4d88abfa218668032f7d9ddb5bb1d992ede51a89d29f4df053e28f1b6a75829",
+      "boxes": [
+        [
+          31,
+          295,
+          537,
+          663
+        ],
+        [
+          601,
+          152,
+          1374,
+          649
+        ],
+        [
+          1407,
+          9,
+          2154,
+          664
+        ]
+      ]
+    },
+    {
+      "id": "nectarveil",
+      "sourceFilename": "exec-7ba2bd28-8129-4292-bb7c-8bd5dfd1383f.png",
+      "sourceSha256": "e9b3819aba6751ef07fb9274c92b00e79dba3ff80fe8b25eac40bdfbfeb3be1a",
+      "atlas": "./assets/generation-review/nectarveil.webp",
+      "atlasSha256": "63376c3d4d41a8ee4b1cbb125f8ea6a508710f768a644394b07db7cbd1f7e14b",
+      "boxes": [
+        [
+          34,
+          126,
+          530,
+          690
+        ],
+        [
+          675,
+          10,
+          1298,
+          696
+        ],
+        [
+          1368,
+          11,
+          2154,
+          700
+        ]
+      ]
+    },
+    {
+      "id": "knellkeeper",
+      "sourceFilename": "exec-1e7c8baf-fdac-4083-8ad2-1677a80c207d.png",
+      "sourceSha256": "126df405e97b28910426ab5db9dcc4a6d38a3819882acf9c9e2377aca19c7edd",
+      "atlas": "./assets/generation-review/knellkeeper.webp",
+      "atlasSha256": "efbbf75d1a6801829ee3ded4020c13ac01978d6280573a2982427ba11e588a42",
+      "boxes": [
+        [
+          125,
+          112,
+          539,
+          644
+        ],
+        [
+          723,
+          33,
+          1296,
+          704
+        ],
+        [
+          1385,
+          6,
+          2130,
+          712
+        ]
+      ]
+    },
+    {
+      "id": "vespergel",
+      "sourceFilename": "exec-9b2cf419-0dcb-4eab-8764-a09c6fa50a8b.png",
+      "sourceSha256": "d3946531fc43f83a4b77ee3a6a66c4dc75dba5638c32fedffa3c777fdfa2e518",
+      "atlas": "./assets/generation-review/vespergel.webp",
+      "atlasSha256": "3f7c8527af17c1b8189470cf10f2e7f2c828c72c3bb122a4279142636e6e9fad",
+      "boxes": [
+        [
+          24,
+          264,
+          572,
+          693
+        ],
+        [
+          621,
+          49,
+          1317,
+          695
+        ],
+        [
+          1346,
+          7,
+          2163,
+          702
+        ]
+      ]
+    },
+    {
+      "id": "briarcrest",
+      "sourceFilename": "exec-fbe88046-1f53-44d1-8e6d-43e97518bc00.png",
+      "sourceSha256": "a07404318b5cc71cbaff781c5f0c7da85755f6b2bcc4bdbbecb35e4057a03861",
+      "atlas": "./assets/generation-review/briarcrest.webp",
+      "atlasSha256": "d09de4dbd2bcce3488b87cf8a2abcf344e8b48a8b409e11d00f93b92f2750ea9",
+      "boxes": [
+        [
+          38,
+          320,
+          517,
+          638
+        ],
+        [
+          596,
+          205,
+          1382,
+          640
+        ],
+        [
+          1427,
+          32,
+          2134,
+          647
+        ]
+      ]
+    },
+    {
+      "id": "foldwitness",
+      "sourceFilename": "exec-15e759f4-37dc-4402-9e9d-dbffb7132796.png",
+      "sourceSha256": "bbde87c12a3a1c07a457b1800cb5353817a9c0b48aa1a962175c26bcf2375aac",
+      "atlas": "./assets/generation-review/foldwitness.webp",
+      "atlasSha256": "b88c856d6b07465c3f90ed6a9af9094d78c91cbf277825bdfc61425301ac08ba",
+      "boxes": [
+        [
+          35,
+          119,
+          500,
+          648
+        ],
+        [
+          568,
+          18,
+          1295,
+          703
+        ],
+        [
+          1350,
+          14,
+          2139,
+          708
+        ]
+      ]
+    }
+  ]
+}

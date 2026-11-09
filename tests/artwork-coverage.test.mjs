@@ -1,3 +1,4 @@
+import {GENERATION_REFERENCES} from '../generation-references.mjs';
 import * as TUTORIAL from '../tutorials.mjs';
 import {restoreDomainRegistry,discoverCustomDomain} from '../domains.mjs';
 import {enemySpeech} from '../npc-dialogue.mjs';
@@ -11,7 +12,7 @@ const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
 const extract=name=>{const start=source.search(new RegExp('(?:async )?function '+name+'\\(')),end=source.slice(start+1).search(/\n(?:async )?function /);assert.ok(start>=0,name);return source.slice(start,end<0?source.length:start+1+end);};
 function harness(){
  const state=E.newGame('artwork-coverage'),library=Object.fromEntries(ROSTER.map(row=>{const sp={...E.makeSpecies(row.id,row.base,row.alter,row.domains),...row,id:'roster-'+row.id,proceduralArt:false};return [sp.id,sp];}));state.species={...library};
- const h=vm.createContext({TUTORIAL,restoreDomainRegistry,discoverCustomDomain,enemySpeech,encounterAftermath:()=>'',E,ROSTER,s:state,library,structuredClone,battle:null,queue:[],queued:[],buildingSpriteBlocked:()=>false,equipWildItem:u=>u,save(){},register:sp=>{state.species[sp.id]=sp;return sp;},queueFresh:(_reg,_r,_force,sp)=>h.queued.push(sp?.id||'future'),syncCapabilities(){},certifyRenderedAnatomy(){}});
+ const h=vm.createContext({GENERATION_REFERENCES,TUTORIAL,restoreDomainRegistry,discoverCustomDomain,enemySpeech,encounterAftermath:()=>'',E,ROSTER,s:state,library,structuredClone,battle:null,queue:[],queued:[],buildingSpriteBlocked:()=>false,equipWildItem:u=>u,save(){},register:sp=>{state.species[sp.id]=sp;return sp;},queueFresh:(_reg,_r,_force,sp)=>h.queued.push(sp?.id||'future'),syncCapabilities(){},certifyRenderedAnatomy(){}});
  vm.runInContext(['hasFinishedArtwork','speciesFor','roamerArtworkReady','normalizeWildPopulation','installRoster'].map(extract).join('\n'),h);
  return {h,state,library,eval:code=>vm.runInContext(code,h)};
 }

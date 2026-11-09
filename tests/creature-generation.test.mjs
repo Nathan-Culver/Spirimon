@@ -41,7 +41,7 @@ test('structured capabilities support natural and supernatural alternatives with
  const psychic=capabilitiesFromAnatomy(anatomyRecord('amorphous',['gel'],{source:'procedural-render',confidence:1}),['Psionic']);assert.equal(psychic.push.method,'telekinesis');assert.equal(psychic.crush.available,true);assert.equal(psychic.teleport.available,true);
 });
 test('visual observations must match ordered types, body plan, transformation, reference and nonhuman status',()=>{
- const sp=E.makeSpecies('observed','Construct','Plant'),observation={base:sp.base,alter:sp.alter,bodyPlan:sp.anatomy.bodyPlan,traits:sp.anatomy.traits,manipulators:sp.anatomy.manipulators,confidence:.95,referenceConfidence:.95,nonhuman:true};
+ const sp=E.makeSpecies('observed','Construct','Plant'),observation={base:sp.base,alter:sp.alter,bodyPlan:sp.anatomy.bodyPlan,traits:sp.anatomy.traits,manipulators:sp.anatomy.manipulators,confidence:.95,referenceConfidence:.95,nonhuman:true,personhoodVisible:true,anatomySound:true,plannedSurrealism:true,typeIntegration:true,domainIntegration:true,quality:{style:.95,readability:.95,materialClarity:.95}};
  applyVisualObservation(sp,observation);assert.equal(sp.anatomy.source,'image-analysis');assert.equal(sp.capabilities.verified,true);
  for(const bad of [{confidence:.5},{base:'Beast'},{bodyPlan:'aquatic'},{nonhuman:false},{referenceConfidence:.5},{traits:['fur']}])assert.throws(()=>applyVisualObservation(sp,{...observation,...bad}));
 });
@@ -80,7 +80,7 @@ test('legacy Humanoid migration preserves owned and wild individuals, equipment,
 
 test('verified per-form anatomy grants equipment benefits only to the appropriate permanent form',()=>{
  const sp=E.makeSpecies('per-form','Construct','Plant'),traits=[...new Set([...sp.anatomy.traits,'hands'])];
- const observed={base:sp.base,alter:sp.alter,bodyPlan:sp.anatomy.bodyPlan,traits,limbs:{...sp.anatomy.limbs,arms:2},manipulators:2,confidence:.95,referenceConfidence:.95,nonhuman:true};
+ const observed={base:sp.base,alter:sp.alter,bodyPlan:sp.anatomy.bodyPlan,traits,limbs:{...sp.anatomy.limbs,arms:2},manipulators:2,confidence:.95,referenceConfidence:.95,nonhuman:true,personhoodVisible:true,anatomySound:true,plannedSurrealism:true,typeIntegration:true,domainIntegration:true,quality:{style:.95,readability:.95,materialClarity:.95}};
  const juvenile={...observed,traits:traits.filter(t=>t!=='hands'&&t!=='grasp'&&t!=='tentacles'),limbs:{...observed.limbs,arms:0},manipulators:0};
  applyLineageObservations(sp,[juvenile,observed,observed]);
  assert.equal(individualSpecies(sp,{form:0,appearance:2}).capabilities.equipment.available,false);

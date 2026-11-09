@@ -3,7 +3,7 @@ const palette={Aberration:[131,81,174],Beast:[170,119,67],Celestial:[231,195,98]
 // The same declarative geometry is used for rendering and the offline anatomy record.
 // This proves what our renderer drew; it is not a classifier for arbitrary images.
 export function renderCreaturePixels(sp,form=0,size=128){
- const a=sp.design?.anatomy||sp.anatomy;if(!a)throw Error('A structured anatomy is required to render a creature.');
+ const a=sp.design?.formPlans?.[form]?.anatomy||sp.formAnatomy?.[form]||sp.design?.anatomy||sp.anatomy;if(!a)throw Error('A structured anatomy is required to render a creature.');
  const width=size,height=size,data=new Uint8ClampedArray(size*size*4),scale=size/96,seed=designHash(sp.id,sp.seed),traits=new Set(a.traits||[]);
  const main=palette[sp.base]||palette.Beast,accent=palette[sp.alter]||palette.Fey,outline=main.map(x=>Math.max(12,x-68));
  const shades=new Map();
@@ -75,10 +75,13 @@ export function compareVisuals(a,b){
  let overlap=0;for(const c of a.palette){const rgb=c.color.split(',').map(Number);const d=b.palette.find(p=>p.color.split(',').map(Number).every((v,n)=>Math.abs(v-rgb[n])<=1));if(d)overlap+=Math.min(c.weight,d.weight);}
  const texture=a.appearance&&b.appearance?a.appearance.filter((v,n)=>v!==b.appearance[n]).length/256:1;return {texture,silhouette:intersection/Math.max(1,union),palette:overlap,exact:a.fingerprint===b.fingerprint&&a.width===b.width&&a.height===b.height};
 }
-export function validateLineageImages(images,{existing=[],allowExactFamily=false}={}){
+export function validateCreatureImage(image){
+ const cleaned=removeWhiteBackground(image),m=visualMetrics(cleaned);if(m.occupancy<.025||m.occupancy>.87)throw Error('Creature image is empty or its framing is too tight.');if(m.edgeRatio>.002||m.bounds[0]<2||m.bounds[1]<2||m.bounds[2]>m.width-3||m.bounds[3]>m.height-3)throw Error('Creature image is cropped at its edge.');return {image:cleaned,metrics:m};
+}
+export function validateLineageImages(images,{existing=[],allowExactFamily=false,plannedChanges=false}={}){
  if(!Array.isArray(images)||images.length!==3)throw Error('Three complete form images are required.');
  const cleaned=images.map(removeWhiteBackground),metrics=cleaned.map(visualMetrics);
- for(let n=0;n<3;n++){const m=metrics[n];if(m.occupancy<.025||m.occupancy>.87)throw Error('Creature image is empty or its framing is too tight.');if(m.edgeRatio>.002||m.bounds[0]<2||m.bounds[1]<2||m.bounds[2]>m.width-3||m.bounds[3]>m.height-3)throw Error('Creature image is cropped at its edge.');if(n){const c=compareVisuals(metrics[0],m);if(c.exact&&!allowExactFamily)throw Error('Evolution images must be distinct.');if(c.silhouette<.24||c.palette<.20)throw Error('Evolution images have inconsistent silhouettes or palettes.');}}
+ for(let n=0;n<3;n++){const m=metrics[n];if(m.occupancy<.025||m.occupancy>.87)throw Error('Creature image is empty or its framing is too tight.');if(m.edgeRatio>.002||m.bounds[0]<2||m.bounds[1]<2||m.bounds[2]>m.width-3||m.bounds[3]>m.height-3)throw Error('Creature image is cropped at its edge.');if(n){const c=compareVisuals(metrics[0],m);if(c.exact&&!allowExactFamily)throw Error('Evolution images must be distinct.');if(c.silhouette<(plannedChanges?.08:.24)||c.palette<.20)throw Error('Evolution images have inconsistent silhouettes or palettes.');}}
  for(const other of existing){const refs=other.visualValidation?.metrics||other.metrics||[];if(refs.length&&metrics.every((m,n)=>refs[n]&&((c)=>c.exact||c.silhouette>.985&&c.palette>.98&&c.texture<.015)(compareVisuals(m,refs[n]))))throw Error('This artwork duplicates an existing lineage.');}
  return {images:cleaned,report:{version:1,status:'geometry-verified',backgroundRemoved:cleaned.some(x=>x.backgroundRemoved),metrics}};
 }
