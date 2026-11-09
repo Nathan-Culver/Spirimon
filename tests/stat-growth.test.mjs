@@ -48,3 +48,5 @@ test('all stat cards and growth fields have equal markup and both tutorials expl
  const html=vm.runInContext('battleStatsHTML(u,sp)+geneticsHTML(u,sp)',ctx);for(const key of G.STAT_KEYS)assert.ok(html.includes(G.STAT_LABELS[key]));assert.equal((html.match(/<strong>/g)||[]).length,6);assert.match(html,/IV \/ 31/);assert.match(html,/EV \/ 252/);assert.match(html,/0 \/ 510/);
  assert.match(T.TUTORIAL_TABS.find(t=>t[0]==='stats')[2],/Physical Attack \(PA\)/);assert.ok(T.BATTLE_LESSON.some(t=>t.text.includes('Spiritual Defense (SD)')));assert.ok(T.BATTLE_LESSON.some(t=>t.text.includes('510')));
 });
+
+test('updated lessons preserve the practice index used by saved first battles',()=>{assert.equal(T.BATTLE_LESSON[5].practice,true);assert.equal(T.BATTLE_LESSON[5].title,'Try a Technique');});
