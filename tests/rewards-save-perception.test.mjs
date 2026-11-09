@@ -21,11 +21,11 @@ function handle(data,{permission='granted',failWrite=false}={}){
  return {file,text:()=>text,writes:()=>writes,aborts:()=>aborts};
 }
 test('one, three and six level-20 enemies award proportional trainer XP and Coin',()=>{
- for(const n of [1,3,6]){const r=battleRewards({trainer:true,enemyRoster:Array.from({length:n},(_,i)=>({id:'foe'+i,level:20,hp:0}))},1);assert.equal(r.xp,175*n);assert.equal(r.sealerXP,110*n);assert.equal(r.coins,47*n);}
+ for(const n of [1,3,6]){const r=battleRewards({trainer:true,enemyRoster:Array.from({length:n},(_,i)=>({id:'foe'+i,level:20,hp:0}))},1);assert.equal(r.xp,350*n);assert.equal(r.sealerXP,110*n);assert.equal(r.coins,47*n);}
 });
 test('surviving reserves and duplicate references never inflate rewards; wild Coin remains zero',()=>{
  const defeated={id:'down',level:10,hp:0},alive={id:'reserve',level:90,hp:10};
- assert.deepEqual(battleRewards({enemyRoster:[defeated,defeated,alive]}),{xp:60,sealerXP:70,coins:0,defeated:1});
+ assert.deepEqual(battleRewards({enemyRoster:[defeated,defeated,alive]}),{xp:120,sealerXP:70,coins:0,defeated:1});
  assert.equal(battleRewards({trainer:true,enemyRoster:[alive]}).xp,0);
 });
 test('linked files are authoritative even when browser recovery contains a different journey',async()=>{

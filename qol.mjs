@@ -1,11 +1,8 @@
 import * as E from './engine.mjs';
 import * as SE from './spiritual-energy.mjs';
-export const SUPPLIES={seals:['Seal catalyst',12],offerings:['Offering',8],tonics:['Tonic',10],ethers:['Soul draught',16],spiritDraughts:['Spiritual draught',20],herbs:['Herbs',5],incense:['Incense',8],ore:['Ore',6],quality:['Improve seals',100]};
-export function itemPreview(unit,species,kind){
- const max=E.stats(unit,species),pools=kind==='tonic'?['hp']:['pp','willpower'];
- const changes=pools.map(pool=>{const before=unit[pool]??max[pool],after=kind==='tonic'?before+E.healHP({...structuredClone(unit)},species,Math.ceil(max.hp*.5)):Math.min(max[pool],before+Math.ceil(max[pool]*.6));return {pool,before,after,max:max[pool],gain:after-before};});
- return {ok:unit.hp>0&&changes.some(c=>c.gain>0),changes};
-}
+export const SUPPLIES={seals:['Seal catalyst',12],offerings:['Offering',8],tonics:['Tonic',10],ethers:['Soul draught',16],purifiers:['Purifying salve',14],revivalDraughts:['Revival draught',30],spiritDraughts:['Spiritual draught',20],herbs:['Herbs',5],incense:['Incense',8],ore:['Ore',6],quality:['Improve seals',100]};
+import {itemPreview,applyItem,ITEM_KEYS,itemSealQuote} from './consumables.mjs';
+export {itemPreview,applyItem,ITEM_KEYS,itemSealQuote};
 export function purchaseQuote(inventory,key,quantity=1){const price=SUPPLIES[key]?.[1],count=key==='quality'?1:Math.max(1,Math.min(999,Math.floor(Number(quantity)||1))),total=(price||0)*count;return {count,total,ok:!!price&&inventory.coins>=total&&(key!=='quality'||inventory.quality<3)};}
 export function shrineRenewal(save){const phase=SE.calendarPhase(save.playTime),elapsed=(save.playTime||0)%3600000;return (phase.night?3600000:2100000)-elapsed;}
 export function stableActionPosition(slots,key,columns){if(!slots.includes(key))slots.push(key);const index=slots.indexOf(key);return {row:Math.floor(index/columns)+1,column:index%columns+1};}

@@ -57,9 +57,9 @@ test('bonding rewards cannot be repeatedly farmed in the same day/night period',
 test('Sealer levels, unique training, rituals, and individual bonds increase capacity without repeat-event farming',()=>{
  const f=fixture(),q=f.s.sealer,base=q.maxEnergy;SE.gainSealerXP(f.s,300,'discovery');const lv=q.level;assert.ok(lv>1);SE.gainSealerXP(f.s,300,'discovery');assert.equal(q.level,lv);SE.trainSealer(f.s,'lesson');const training=q.training;SE.trainSealer(f.s,'lesson');assert.equal(q.training,training);SE.trainSealer(f.s,'ritual',{ritual:true});assert.ok(q.maxEnergy>base);const before=q.maxEnergy;f.a[0].bond=100;SE.ensureSealer(f.s);assert.ok(q.maxEnergy>before);
 });
-test('choose three of nine starting techniques; six assignments cover the traveling team and floating is distinct',()=>{
- const f=fixture(),q=f.s.sealer;for(const t of q.startingChoices.slice(0,3))assert.ok(SE.chooseStartingSupport(f.s,t.id).ok);assert.equal(Object.keys(q.known).length,3);assert.equal(SE.chooseStartingSupport(f.s,q.startingChoices[3].id).ok,false);assert.equal(Object.values(q.assignments).flat().length,6);assert.ok(f.s.party.every(id=>q.assignments[id].length>=1));assert.ok(!Object.values(q.assignments).flat().includes(q.floating));assert.equal(SE.assignSupport(f.s,f.a[0].id,q.floating).ok,false);assert.equal(SE.assignSupport(f.s,f.a[0].id,q.assignments[f.a[0].id][0],{remove:true}).ok,false);
- const replacement=Object.keys(q.known).find(id=>id!==q.floating&&!q.assignments[f.a[0].id].includes(id));assert.ok(SE.assignSupport(f.s,f.a[0].id,replacement,{replaceId:q.assignments[f.a[0].id][0]}).ok);
+test('choose two starting techniques; six assignments cover the traveling team and floating is distinct',()=>{
+ const f=fixture(),q=f.s.sealer;for(const t of q.startingChoices.slice(0,2))assert.ok(SE.chooseStartingSupport(f.s,t.id).ok);assert.equal(Object.keys(q.known).length,2);assert.equal(SE.chooseStartingSupport(f.s,q.startingChoices[3].id).ok,false);assert.equal(Object.values(q.assignments).flat().length,6);assert.ok(f.s.party.every(id=>q.assignments[id].length>=1));assert.ok(!Object.values(q.assignments).flat().includes(q.floating));assert.equal(SE.assignSupport(f.s,f.a[0].id,q.floating).ok,false);assert.equal(SE.assignSupport(f.s,f.a[0].id,q.assignments[f.a[0].id][0],{remove:true}).ok,false);
+ const third=ST.generateSupport('replacement',{primary:'guard',basic:true});q.known[third.id]=third;const replacement=Object.keys(q.known).find(id=>id!==q.floating&&!q.assignments[f.a[0].id].includes(id));assert.ok(SE.assignSupport(f.s,f.a[0].id,replacement,{replaceId:q.assignments[f.a[0].id][0]}).ok);
 });
 test('procedural support generation is reproducible, validates every family and admits compatible multi-effect techniques only',()=>{
  const coverage=new Set(),requirements=new Set();let multi=0,team=0,sacrifice=0;for(let n=0;n<1500;n++){const t=ST.generateSupport('coverage-'+n,{level:n%100});assert.ok(ST.validateSupport(t),JSON.stringify(t));assert.deepEqual(ST.generateSupport('coverage-'+n,{level:n%100}),t);coverage.add(t.effects[0].kind);if(t.requires)requirements.add(Object.keys(t.requires)[0]);if(t.effects.length>1)multi++;if(t.target==='team')team++;if(t.sacrifice)sacrifice++;}assert.equal(coverage.size,Object.keys(ST.SUPPORT_EFFECTS).length);assert.equal(requirements.size,4);assert.ok(multi>100&&team>50&&sacrifice>50);assert.equal(ST.validateSupport({effects:[{kind:'executeCode',amount:1}]}),false);
@@ -96,7 +96,7 @@ test('physical cleansing, shielding, interruption resistance and damage sharing 
  const link=learn(f,'link');RT.usePlayerSupport(f.state,f.context,'a',link.id,u.id);const before=v.hp;E.executeAction(enemy,f.sp,u,f.sp,{...hit,power:200},'normal',.5,()=>.5,1,{realTime:true,activeUnits:[...f.a,enemy]});assert.ok(v.hp<before);
 });
 test('fixed seal costs and diminishing extra investment spend everything on failure',()=>{
- const f=fixture(),q=f.s.sealer,u=f.b[0];q.attributes.output=20;const a=SE.sealInvestment(q,u,f.sp,1,0),b=SE.sealInvestment(q,u,f.sp,1,10),c=SE.sealInvestment(q,u,f.sp,1,20);assert.ok(b.chance>a.chance&&c.chance>b.chance);assert.ok(b.chance-a.chance>c.chance-b.chance);const before=q.energy,r=SE.commitSeal(q,u,f.sp,1,10,()=>1);assert.ok(r.ok&&!r.success);assert.equal(q.energy,before-r.cost);
+ const f=fixture(),q=f.s.sealer,u=f.b[0];learn(f,'seal');q.attributes.output=20;const a=SE.sealInvestment(q,u,f.sp,1,0),b=SE.sealInvestment(q,u,f.sp,1,10),c=SE.sealInvestment(q,u,f.sp,1,20);assert.ok(b.chance>a.chance&&c.chance>b.chance);assert.ok(b.chance-a.chance>c.chance-b.chance);const before=q.energy,r=SE.commitSeal(q,u,f.sp,1,10,()=>1);assert.ok(r.ok&&!r.success);assert.equal(q.energy,before-r.cost);
 });
 test('cooperative recognition uses equipped Techniques and Domains and commits participants with Energy',()=>{
  const f=fixture(2),plans=CO.cooperativePlans(f.context.active.a,()=>f.sp,f.s.sealer),plan=plans.find(p=>p.id.startsWith('pack:'));assert.ok(plan);const before=f.s.sealer.energy,r=CO.commitCooperative(plan,f.state,f.context,'a',RT.actionAvailability,RT.scheduleAction);assert.ok(r.ok);assert.equal(f.s.sealer.energy,before-plan.cost);assert.ok(f.a.slice(0,2).every(u=>RT.unitClock(f.state,u).pending));assert.equal(CO.commitCooperative(plan,f.state,f.context,'a',RT.actionAvailability,RT.scheduleAction).ok,false);
@@ -143,20 +143,6 @@ test('a funded rampage blocks unrelated Techniques, but exhausted locked Techniq
 });
 test('exhausted wards allow a weakened portion of damage through instead of blocking it fully',()=>{
  const f=fixture(),u=f.a[0],enemy=f.b[0],ward={...hit,id:'ward',power:0,effect:'ward',target:'self'};u.hp=E.stats(u,f.sp).hp;E.executeAction(u,f.sp,u,f.sp,ward,'normal',.5,()=>.5,1,{realTime:true});const full=u.hp;E.executeAction(enemy,f.sp,u,f.sp,hit,'normal',.5,()=>.5,1,{realTime:true});assert.equal(u.hp,full);f.s.sealer.energy=0;setExhaustion(u,f.s.sealer);E.executeAction(u,f.sp,u,f.sp,ward,'normal',.5,()=>.5,1,{realTime:true});E.executeAction(enemy,f.sp,u,f.sp,hit,'normal',.5,()=>.5,1,{realTime:true});assert.ok(u.hp<full);
-});
-
-test('direct restoration spends quoted Energy on only the selected missing resources',()=>{
- const f=fixture(),u=f.a[0],q=f.s.sealer,caps=E.stats(u,f.sp);q.maxEnergy=q.energy=100;
- u.hp=caps.hp-1;u.pp=0;u.willpower=0;u.status='poison';u.moveCooldowns={strike:9000};
- const quote=SE.restorationQuote(q,u,f.sp,'hp',1),result=SE.restoreSpirimon(q,u,f.sp,'hp',1);
- assert.equal(result.ok,true);assert.equal(q.energy,100-quote.cost);assert.equal(u.hp,caps.hp);assert.equal(u.pp,0);assert.equal(u.willpower,0);assert.equal(u.status,'poison');assert.equal(u.moveCooldowns.strike,9000);
- const before=q.energy,r=SE.restoreSpirimon(q,u,f.sp,'all',1);assert.ok(r.ok);assert.equal(r.cost,60);assert.equal(q.energy,before-60);assert.equal(u.pp,caps.pp);assert.equal(u.willpower,caps.willpower);
- const energy=q.energy;assert.equal(SE.restoreSpirimon(q,u,f.sp,'all',1).ok,false);assert.equal(q.energy,energy);
-});
-test('restoration rejects defeated targets, invalid selections and insufficient Energy without mutation',()=>{
- const f=fixture(),u=f.a[0],q=f.s.sealer;u.hp=1;u.pp=0;q.energy=0;
- for(const [pool,amount]of [['all',1],['bad',.25],['hp',-1],['hp',NaN]]){const before=JSON.stringify(u);assert.equal(SE.restoreSpirimon(q,u,f.sp,pool,amount).ok,false);assert.equal(JSON.stringify(u),before);assert.equal(q.energy,0);}
- q.energy=q.maxEnergy;u.hp=0;const energy=q.energy;assert.equal(SE.restoreSpirimon(q,u,f.sp,'hp',1).ok,false);assert.equal(u.hp,0);assert.equal(q.energy,energy);
 });
 
 test('a knocked-out Lead passes to the first conscious traveling member and stays replaced after revival and reload',()=>{

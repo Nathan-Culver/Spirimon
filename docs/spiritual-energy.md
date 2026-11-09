@@ -50,7 +50,7 @@ GCD/LCD Technique profiles retain level thresholds 1, 16, 36, 60, 85 and 100. Th
 
 ## Procedural support and preparation
 
-Start by choosing three of nine generated instructions. Other techniques are learned through trainers, spiritual training, shrine/ritual discoveries, and encounter discoveries. They are not automatically granted merely for reaching a Sealer level.
+Start by choosing two of twelve generated instructions. Other techniques are learned through trainers, spiritual training, shrine/ritual discoveries, and encounter discoveries. They are not automatically granted merely for reaching a Sealer level.
 
 There are six assigned selections across the active traveling party, at least one per member, and one additional free-floating selection. Duplicate assignments are allowed across different members. The floating selection must differ from every assigned technique. Unfilled slots remain available while the early collection is small. Preparation can change outside battle, and an occupied slot can be replaced without leaving a member unassigned.
 
@@ -61,10 +61,12 @@ Copies of the exact same generated technique share a Sealer-wide cooldown. Mecha
 | Ward | HP-based shield, with a total active shield cap |
 | Mend | Percentage HP restoration |
 | Concord | Shortens sleep, confusion and other mental disruption |
+| Invigoration | Percentage Stamina restoration |
+| Spirit Sealing | Seals wild Spirimon with Energy, without consuming a catalyst |
 | Conduit | Percentage Willpower restoration |
 | Resonance | Temporary offensive/defensive empowerment |
 | Recall | Protected withdrawal; binding can prevent it; an existing cast finishes before withdrawal |
-| Purification | Removes physical afflictions |
+| Purification | Removes one physical, mental or binding Condition; empowerment removes more |
 | Sanctuary | Prevents new statuses/interruption |
 | Quickening | Accelerates subsequent casting and Technique cooldown profiles |
 | Reprise | Reduces remaining Technique GCDs/LCDs, never player support timers |
@@ -78,9 +80,13 @@ Support never cancels the recipient's ongoing cast. GCD-classified support requi
 
 Revival may be repeated whenever Energy and cooldowns allow. It restores HP within the seal, with a separate manifestation payment to return to battle; the designated lead retains its free-release exception. Neither revival nor recall resets creature Technique timers. With no manifested defender, a six-second emergency window permits items, revival, release or escape before rescue/defeat.
 
+Learned recovery works outside battle from **Menu → Use Support**, including for stored Spirimon. Health, Stamina, Willpower, Condition removal and revival each require the matching learned technique. Field use spends the same quoted Energy and starts the same saved cooldown as battle use. No unconditional Energy restoration action remains. Players choose two starting techniques; existing saves retain prior instruction. Merchants offer Tonics (75% Health), Soul draughts (85% Stamina and Willpower), Purifying salves (all Conditions), and Revival draughts (75% Health); none uses Energy or requires learning.
+
+Spirimon XP uses half the original rate, rounded up for each defeated enemy or training reward. Encounter XP is divided across unique recorded participants with integer remainders assigned in participant order; the distributed sum equals the encounter reward. Sealer XP is unchanged.
+
 ## Sealing, cooperation and enemies
 
-Sealing requires a fixed strength-based base payment plus optional extra Energy. Extra investment improves success with diminishing returns. Health/status, creature stats, trust and seal quality contribute to success. Both the base and extra are lost on failure, along with the catalyst. Peaceful offering seals also need Energy after the first-bond tutorial exception.
+Spirit Sealing must be learned, like all other Sealer support. Its learned base cost plus optional extra Energy is spent on the attempt, with diminishing returns from empowerment. It consumes no catalyst and shares its technique cooldown between field and battle use. Seal catalysts are a separate, stronger consumable item: they require no learning or Spiritual Energy. Both routes work during battle and when approaching a nearby wild Spirimon. Cooperative offerings consume their supplies without a sealing Energy charge; failed trials retain their normal penalties.
 
 Basic coordinated physical attacks, shared-Domain attacks, Water/Lightning combinations, and restorative combinations are recognized from equipped Techniques and actual active Domains. Advanced United and Triune Releases are learned from spiritual instruction. Cooperation requires every participant's selected action to be ready and fundable; it commits Energy and each creature's action/resources. Dedicated cooperative cooldowns persist.
 

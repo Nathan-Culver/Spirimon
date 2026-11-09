@@ -14,7 +14,7 @@ import * as SW from '../spiritual-world.mjs';
 import * as EP from '../environment-puzzles.mjs';
 import {ROSTER} from '../roster.mjs';
 import {individualSpecies} from '../anatomy.mjs';
-import {battleRewards} from '../battle-rewards.mjs';
+import {battleRewards,participantRewards} from '../battle-rewards.mjs';
 import {decodeSavePayload} from '../save-files.mjs';
 import {fileURLToPath} from 'node:url';
 import {writeFile} from 'node:fs/promises';
@@ -100,7 +100,7 @@ export function simulateProgression(seed='progression-1',{expanded=false,difficu
   q.clockMs=state.elapsedMs;save.playTime+=state.elapsedMs-start;SE.endSealerBattle(q);if(foe)SE.endSealerBattle(foe);
   for(const u of [...party(),...enemies])RT.preserveAfflictions(state,u);
   if(!victory){const items={};for(const key of ['seals','offerings','tonics','ethers','spiritDraughts']){items[key]=Math.floor((save.inventory[key]||0)/3);save.inventory[key]=(save.inventory[key]||0)-items[key];}save.drops.push({x:save.player.x,y:save.player.y,items});save.inventory.coins-=Math.min(save.inventory.coins,20+save.rank*5);record.log=log;matches.push(record);return false;}
-  const rewards=battleRewards({trainer,enemyRoster:enemies},save.rank);for(const u of party())if(participants.has(u.id)){E.gainXP(u,speciesOf(u),rewards.xp);u.bond=Math.min(100,u.bond+4);}SE.gainSealerXP(save,rewards.sealerXP);save.inventory.coins+=rewards.coins;save.wins++;if(kind){SE.trainSealer(save,'victory:'+kind+':'+eventId,{ritual:true});SE.learnSupport(save,'victory:'+kind+':'+eventId,'Encounter discovery');}save.rankXP+=trainer?45:12;while(save.rank<6&&save.rankXP>=save.rank*100){save.rankXP-=save.rank*100;save.rank++;}
+  const rewards=battleRewards({trainer,enemyRoster:enemies},save.rank);for(const share of participantRewards({participants:[...participants]},party(),rewards.xp)){const u=party().find(u=>u.id===share.id);E.gainXP(u,speciesOf(u),share.xp);u.bond=Math.min(100,u.bond+4);}SE.gainSealerXP(save,rewards.sealerXP);save.inventory.coins+=rewards.coins;save.wins++;if(kind){SE.trainSealer(save,'victory:'+kind+':'+eventId,{ritual:true});SE.learnSupport(save,'victory:'+kind+':'+eventId,'Encounter discovery');}save.rankXP+=trainer?45:12;while(save.rank<6&&save.rankXP>=save.rank*100){save.rankXP-=save.rank*100;save.rank++;}
   matches.push(record);return true;
  }
  function train(target){let attempts=0;while(level()<target){if(attempts++>180)throw Error('Training did not advance to '+target);if(!battle({name:'Preparation',enemyLevel:Math.max(1,level()-1),count:1,trainer:true})){restore('training defeat');if(attempts>6)return false;}}return true;}

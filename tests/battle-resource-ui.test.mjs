@@ -60,10 +60,6 @@ test('guided practice keeps time paused while exposing a real Technique command,
 
 test('hostile sight challenges cannot be bypassed using the friendly Concede action',()=>{const t=harness();t.battle.trainer=true;assert.match(t.actions(),/Concede/);t.battle.encounterNPC={id:'watcher-1,0'};assert.doesNotMatch(t.actions(),/Concede/);delete t.battle.encounterNPC;t.battle.challenger='villain';assert.doesNotMatch(t.actions(),/Concede/);delete t.battle.challenger;t.battle.adventure={kind:'faction-guard'};assert.doesNotMatch(t.actions(),/Concede/);});
 
-test('Energy restoration appears only when affordable, damaged, permitted and utility-ready',()=>{
- const t=harness();assert.doesNotMatch(t.actions(),/data-action="energy-restore-menu"/);
- t.allies[0].hp--;assert.match(t.actions(),/data-action="energy-restore-menu"/);
- t.s.sealer.energy=0;assert.doesNotMatch(t.actions(),/data-action="energy-restore-menu"/);
- t.s.sealer.energy=t.s.sealer.maxEnergy;t.battle.rules.noSupport=true;assert.doesNotMatch(t.actions(),/data-action="energy-restore-menu"/);
- t.battle.rules.noSupport=false;t.battle.utilityReadyAt=3500;assert.doesNotMatch(t.actions(),/data-action="energy-restore-menu"/);
+test('battle never exposes unconditional Energy restoration',()=>{
+ const t=harness();t.allies[0].hp--;assert.doesNotMatch(t.actions(),/data-action="energy-restore-menu"/);
 });

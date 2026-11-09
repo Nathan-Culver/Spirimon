@@ -1,7 +1,7 @@
 import * as TUTORIAL from '../tutorials.mjs';
 import {restoreDomainRegistry,discoverCustomDomain} from '../domains.mjs';
 import {enemySpeech} from '../npc-dialogue.mjs';
-import {battleRewards} from '../battle-rewards.mjs';
+import {battleRewards,participantRewards} from '../battle-rewards.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
@@ -15,14 +15,14 @@ function harness(){
  const units=species.map((sp,n)=>({...E.heal(E.makeIndividual(sp,4,0,E.rng(n)),sp),id:'ally-'+n,xp:71}));state.spirits=units;state.party=units.map(u=>u.id);
  const dialogs=[],toasts=[],details=[],transforms=[];let saves=0;
  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- const h=vm.createContext({battleClosingDialogue:()=>false,cloneScene:()=>null,queueBattleIntroduction(){},requestStartupFullscreen(){},sceneFadeUntil:0,performance,requestsHTML:()=>'',TUTORIAL,restoreDomainRegistry,discoverCustomDomain,enemySpeech,encounterAftermath:()=>'',E,battleRewards,s:state,battle:{ally:units[0].id,enemy:{level:10},participants:units.map(u=>u.id),trainer:false},SE:{gainSealerXP(){},bondRecovery(){}},esc,spOf:ind=>state.species[ind.species],sprite:(sp,form)=>'<canvas data-species="'+sp.id+'" data-form="'+form+'"></canvas>',action:(type,text,value='')=>'<button data-action="'+type+'" data-value="'+value+'">'+text+'</button>',safe:()=>true,showModal:(title,html,options)=>dialogs.push({title,html,options}),toast:text=>toasts.push(text),detail:id=>details.push(id),transformSpirit:(...args)=>transforms.push(args),save:()=>saves++,render(){},endCombatState(){},questState:()=>({}),renown(){},awardBattleEquipment(){},removeRoamer(){},ensurePlayerOnPath(){},note(){}});
+ const h=vm.createContext({battleClosingDialogue:()=>false,cloneScene:()=>null,queueBattleIntroduction(){},requestStartupFullscreen(){},sceneFadeUntil:0,performance,requestsHTML:()=>'',TUTORIAL,restoreDomainRegistry,discoverCustomDomain,enemySpeech,encounterAftermath:()=>'',E,battleRewards,participantRewards,s:state,battle:{ally:units[0].id,enemy:{level:10},participants:units.map(u=>u.id),trainer:false},SE:{gainSealerXP(){},bondRecovery(){}},esc,spOf:ind=>state.species[ind.species],sprite:(sp,form)=>'<canvas data-species="'+sp.id+'" data-form="'+form+'"></canvas>',action:(type,text,value='')=>'<button data-action="'+type+'" data-value="'+value+'">'+text+'</button>',safe:()=>true,showModal:(title,html,options)=>dialogs.push({title,html,options}),toast:text=>toasts.push(text),detail:id=>details.push(id),transformSpirit:(...args)=>transforms.push(args),save:()=>saves++,render(){},endCombatState(){},questState:()=>({}),renown(){},awardBattleEquipment(){},removeRoamer(){},ensurePlayerOnPath(){},note(){}});
  vm.runInContext(['gainSpirimonXP','levelUpHTML','showTrainingAdvancement','training','shareOffering','recordBattleQuestProgress','winBattle'].map(extract).join('\n'),h);
  return {h,state,species,units,dialogs,toasts,details,transforms,saves:()=>saves,eval:code=>vm.runInContext(code,h)};
 }
 test('battle level-up dialog includes teammates even when the lead does not level',()=>{
  const t=harness();t.units[0].level=20;t.units[0].form=t.units[0].appearance=1;t.units[0].xp=0;t.eval('winBattle()');
  const dialog=t.dialogs.at(-1);assert.equal(dialog.title,'Level up!');assert.equal((dialog.html.match(/class="level-up-card"/g)||[]).length,2);
- for(const n of [1,2]){assert.match(dialog.html,new RegExp(t.species[n].forms[0]));assert.equal(t.units[n].level,5);}assert.match(dialog.html,/Level 4 → 5/);assert.equal(t.units[0].level,20);assert.match(dialog.html,/60 experience/);assert.match(dialog.html,/Continue exploring/);assert.equal(t.h.battle,null);
+ for(const n of [1,2]){assert.match(dialog.html,new RegExp(t.species[n].forms[0]));assert.equal(t.units[n].level,5);}assert.match(dialog.html,/Level 4 → 5/);assert.equal(t.units[0].level,20);assert.match(dialog.html,/120 total experience/);assert.match(dialog.html,/Continue exploring/);assert.equal(t.h.battle,null);
 });
 test('training shows a persistent level-up dialog instead of only a toast',()=>{
  const t=harness(),coins=t.state.inventory.coins;t.eval("training('ally-0')");const dialog=t.dialogs.at(-1);
@@ -41,11 +41,11 @@ test('a bond transformation also shows its new form without claiming a level was
  const t=harness(),ind=t.units[0],sp=t.species[0];t.h.battle=null;sp.evolution='bond';ind.level=16;ind.xp=0;ind.bond=55;t.eval("shareOffering('ally-0')");assert.equal(t.dialogs.at(-1).title,'A new form awakens.');assert.match(t.dialogs.at(-1).html,/Transformed:/);assert.doesNotMatch(t.dialogs.at(-1).html,/Level 16 → 16/);assert.equal(ind.level,16);
 });
 
-test('actual victory grants every participant the full defeated-team XP total and reports it in the dialog',()=>{
+test('actual victory divides defeated-team XP among participants and reports it in the dialog',()=>{
  const t=harness();for(const u of t.units){u.level=20;u.form=u.appearance=1;u.xp=0;}
  const foes=[10,20,30].map((level,n)=>({id:'defeated-'+n,level,hp:0}));t.h.battle.trainer=true;t.h.battle.enemyRoster=foes;t.h.battle.enemy=foes[2];
- const reward=battleRewards(t.h.battle,t.state.rank),expected=t.units.map((u,n)=>{const copy=structuredClone(u);E.gainXP(copy,t.species[n],reward.xp);return copy;}),coins=t.state.inventory.coins;let sealerXP=0;t.h.SE.gainSealerXP=(_s,xp)=>sealerXP=xp;
- t.eval('winBattle()');for(const [n,u]of t.units.entries()){assert.equal(u.level,expected[n].level);assert.equal(u.xp,expected[n].xp);}assert.equal(t.state.inventory.coins,coins+reward.coins);assert.equal(sealerXP,330);assert.match(t.dialogs.at(-1).html,/524 experience/);
+ const reward=battleRewards(t.h.battle,t.state.rank),expected=t.units.map((u,n)=>{const copy=structuredClone(u);E.gainXP(copy,t.species[n],reward.xp/3);return copy;}),coins=t.state.inventory.coins;let sealerXP=0;t.h.SE.gainSealerXP=(_s,xp)=>sealerXP=xp;
+ t.eval('winBattle()');for(const [n,u]of t.units.entries()){assert.equal(u.level,expected[n].level);assert.equal(u.xp,expected[n].xp);}assert.equal(t.state.inventory.coins,coins+reward.coins);assert.equal(sealerXP,330);assert.match(t.dialogs.at(-1).html,/1050 total experience/);
 });
 
 test('unrelated trainer wins cannot complete Rowan’s quest or award his friendship',()=>{

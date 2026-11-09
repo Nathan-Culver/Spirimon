@@ -4,6 +4,7 @@ import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
 import * as E from '../engine.mjs';
 import * as SE from '../spiritual-energy.mjs';
+import {generateSupport} from '../support-techniques.mjs';
 import {newSealer} from '../spiritual-core.mjs';
 import {sealingGestureChoice} from '../sealing-gesture.mjs';
 const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
@@ -11,10 +12,11 @@ function extract(name){const start=source.indexOf('function '+name+'('),next=sou
 function harness(){
  const sp=E.makeSpecies('seal-gesture','Beast','Fey',[]),target=E.heal(E.makeIndividual(sp,15),sp);target.id='wild';
  const other={...target,id:'other'},q=newSealer('lead'),s={sealer:q,inventory:{seals:3,quality:1}};
+ const learned=generateSupport('gesture-seal',{primary:'seal',basic:true});q.known[learned.id]=learned;
  const battle={multi:{enemies:[target,other]},enemy:target,rt:{paused:false,elapsedMs:0},utilityReadyAt:0,log:[]};
  const lines=[],handlers={},label={textContent:''},quote={textContent:''},button={dataset:{unifiedSeal:target.id},innerHTML:'Original',disabled:false,style:{setProperty(){},removeProperty(){}},querySelector:s=>s==='b'?label:quote,setPointerCapture(){},hasPointerCapture:()=>false};
  let count=0,claims=0;const errors=[];
- const h=vm.createContext({s,battle,SE:{...SE,commitSeal(...args){count++;return SE.commitSeal(...args,()=>1);}},RT:{synchronizeTimers(){}},spOf:()=>sp,sealingGestureChoice,esc:String,unifiedGesture:null,unifiedSuppressClick:false,unifiedTap:null,button,clearTimeout,
+ const h=vm.createContext({s,battle,SE:{...SE,commitSeal(...args){count++;args[5]=()=>1;return SE.commitSeal(...args);}},RT:{synchronizeTimers(){}},spOf:()=>sp,sealingGestureChoice,esc:String,unifiedGesture:null,unifiedSuppressClick:false,unifiedTap:null,button,clearTimeout,
   document:{hidden:false,body:{append:node=>lines.push(node)},createElement:()=>({style:{},setAttribute(){},remove(){const i=lines.indexOf(this);if(i>=0)lines.splice(i,1);}}),addEventListener:(name,fn)=>{(handlers[name]??=[]).push(fn);}},window:{addEventListener:(name,fn)=>{(handlers[name]??=[]).push(fn);}},
   toast:x=>errors.push(x),save(){},render(){},realTimeContext:()=>({}),claimRealTimeUtility(ms){if(battle.utilityReadyAt>battle.rt.elapsedMs)return false;battle.utilityReadyAt=battle.rt.elapsedMs+ms;claims++;return true;}
  });
@@ -31,7 +33,7 @@ test('sealing slide maps rightward travel to bounded extra Energy and has an upw
  assert.equal(sealingGestureChoice(128,-55,90).cancelled,true);assert.equal(sealingGestureChoice(-40,0,90).cancelled,true);
 });
 test('a seal tap commits base Energy immediately and its synthesized click cannot spend twice',()=>{
- const f=harness();f.emit('pointerdown');f.emit('pointerup');f.click();assert.equal(f.count(),1);assert.equal(f.s.sealer.energy,100-f.base);assert.equal(f.s.inventory.seals,2);assert.equal(f.claims(),1);
+ const f=harness();f.emit('pointerdown');f.emit('pointerup');f.click();assert.equal(f.count(),1);assert.equal(f.s.sealer.energy,100-f.base);assert.equal(f.s.inventory.seals,3);assert.equal(f.claims(),1);
 });
 test('sliding previews total cost and chance without spending, then release commits the preview',()=>{
  const f=harness();f.emit('pointerdown');f.emit('pointermove',{clientX:73});assert.match(f.quote.textContent,/SE · \d+%/);assert.equal(f.count(),0);assert.equal(f.s.sealer.energy,100);
@@ -51,7 +53,7 @@ test('sealing retains the original gesture target and rejects a target defeated 
  const f=harness();f.emit('pointerdown');f.battle.enemyTargetSelection=1;f.target.hp=0;f.emit('pointerup');assert.equal(f.count(),0);assert.equal(f.claims(),0);assert.equal(f.s.inventory.seals,3);
 });
 test('Energy spent by other actions during the gesture cannot cause an overspend or a cheaper surprise attempt',()=>{
- const f=harness();f.emit('pointerdown');f.emit('pointermove',{clientX:128});f.s.sealer.energy=f.base;f.emit('pointerup',{clientX:128});assert.equal(f.count(),0);assert.equal(f.claims(),0);assert.equal(f.s.inventory.seals,3);assert.match(f.errors[0],/costs/);
+ const f=harness();f.emit('pointerdown');f.emit('pointermove',{clientX:128});f.s.sealer.energy=f.base;f.emit('pointerup',{clientX:128});assert.equal(f.count(),0);assert.equal(f.claims(),0);assert.equal(f.s.inventory.seals,3);assert.match(f.errors[0],/Spiritual Energy/);
 });
 test('keyboard arrows adjust investment and Enter click remains usable after a cancelled touch',()=>{
  const f=harness();f.emit('pointerdown');f.emit('pointercancel');f.emit('keydown',{key:'ArrowRight',shiftKey:true});assert.equal(f.battle.sealExtra,5);f.click(0);assert.equal(f.count(),1);assert.equal(f.s.sealer.energy,100-f.base-5);

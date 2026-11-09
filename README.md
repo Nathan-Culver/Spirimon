@@ -31,6 +31,10 @@ Each Shrine permits **one action total**—Restore, Meditate or Commune—until 
 
 Reserve sets Energy capacity, Control improves efficiency, and Output limits optional empowerment. Level points and distinct spiritual milestones develop these attributes. Retraining and changing a voluntary vow require a safe place. Perception and concealment are paid toggles with combined drain; both turn off at battle entry. Perception pinpoints detectable discoveries, including legendary disturbances, while leaving their interactions and solutions to the player.
 
+Choose **two starting Support Techniques**, then learn more through instruction, rituals and discoveries. Health, Stamina and Willpower recovery, Condition removal, revival and Spirit Sealing all require learned techniques and Spiritual Energy. Learned recovery and sealing also work outside battle, sharing their normal cooldowns. Tonics restore 75% Health; Soul draughts restore 85% Stamina and Willpower; Purifying salves remove all Conditions; Revival draughts revive at 75% Health. Items need no Spiritual Energy or instruction. Seal catalysts improve capture chances and require no Energy; learned Spirit Sealing uses no catalyst.
+
+Spirimon XP rewards are **half the original rate, rounded up**. Each encounter reward is divided among unique recorded participants; leftover points go to the earliest recorded participants. Training also uses half its original XP rate, rounded up. Sealer XP is unchanged.
+
 Prepare six assigned Sealer support Techniques plus one distinct floating Technique. Tap for ordinary strength or drag for a preview of optional expenditure and diminishing returns. Costs and timing tradeoffs appear before commitment. No Overdraw is available. At zero Energy, active Spirimon remain with the specified mild penalties; the designated lead is still free to manifest.
 
 See [Spiritual Energy](docs/spiritual-energy.md) and [Spiritual Arts](docs/sealer-spiritual-arts.md) for formulas, vows, training and recovery details.
@@ -44,10 +48,10 @@ The base global cooldown is **3.5 seconds**, with a **1-second minimum**. Speed 
 | Gesture | Style | Commitment | Extra Technique uses |
 | --- | --- | --- | --- |
 | Tap | Normal | Equal attack / defense (50% / 50%) | None |
-| Up / down | Strong / Agile | Defensive (0% attack / 100% defense) | None |
+| Up / down | Strong / Agile | Equal attack / defense (50% / 50%) | None |
 | Left / right | Agile / Strong | Increases with drag distance | None |
 | Up-left / up-right | Agile / Strong | Increases with drag distance | One or two |
-| Down-left / down-right | Agile / Strong | Defensive (0% attack / 100% defense) | One or two |
+| Down-left / down-right | Agile / Strong | Equal attack / defense (50% / 50%) | One or two |
 | Double tap | Saved preset | Saved allocation, balanced if unset | Saved choice |
 
 Agile deals **85% of Normal damage** and improves accuracy, evasiveness and critical chance. Strong raises ordinary damage and adds **15 percentage points to critical damage**, keeping the ordinary critical chance. Extra uses pay resources and expose the actor to successive enemy retaliations. Normal is the default and uses the original Health and damage formulas. Hard halves Health and multiplies damage by 1.25 for both sides. Easy gives owned Spirimon double Health and 1.25× damage; enemies have half Health and 0.75× damage. Difficulty does not change manifestation Energy costs. Switch outside battle without restoring Health percentages or cooldowns.
@@ -124,4 +128,4 @@ Normal restores classic Shrine density (two per town, two or three per route). H
 
 ### Battle and menu layout correction
 
-The main menu fits the current viewport: four columns in landscape, two in portrait, with compact save status and all sixteen choices visible. The battle dock uses bounded Technique, Support and Item panels, discrete pages for large support lists, and a fixed five-position utility row. All twelve Techniques from three active Spirimon fit in two landscape rows on phones at least 640 CSS pixels wide. Cooldowns hide actions without shifting the other buttons; recalling a Spirimon reuses its cells instead of growing the command grid. Battle commands and HUDs never scroll. Resizing or rotating recomputes the battle layout.
+The main menu fits the current viewport: four columns in landscape, two in portrait, with compact save status and all sixteen choices visible. The battle dock displays all available Techniques, Support, Items and utilities together in one fixed grid. There are no category tabs, pages or scroll areas. Every possible action reserves a cell for the encounter; cooldowns and resource changes hide unavailable actions without shifting the others. Actor replacement reuses its cells, including held items and cooperative actions. Resizing or rotating adapts the grid to the viewport.

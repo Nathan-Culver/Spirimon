@@ -75,9 +75,9 @@ test('guided practice releases only the initial deployment animation and preserv
 
 test('a resumed early-release practice save recovers its manifestation lock without replaying the lesson',()=>{const f=fixture(),b={rt:RT.createRealTimeState(),multi:{allies:[f.a.id]},lesson:{stage:5,practice:true}};const c=RT.unitClock(b.rt,f.a);c.readyAt=650;c.cooldowns.kept=50000;b.rt.paused=true;T.prepareBattlePractice(f.s,b);assert.equal(c.readyAt,0);assert.equal(c.cooldowns.kept,50000);assert.equal(b.lesson.stage,5);assert.equal(b.rt.paused,true);});
 
-test('the first battle teaches Energy restoration before resuming, without spending Energy',()=>{
+test('the first battle teaches learned recovery before resuming, without spending Energy',()=>{
  const f=fixture(),battle={rt:RT.createRealTimeState()};f.s.sealer={energy:75};T.beginBattleLesson(f.s,battle);const energy=f.s.sealer.energy;let restoration=false;
- while(battle.lesson){const step=T.BATTLE_LESSON[battle.lesson.stage];if(step.title==='Restore with Energy'){restoration=true;assert.equal(battle.rt.paused,true);assert.equal(step.selector,'[data-sealer-meter="a"]');assert.match(step.text,/Health, Stamina, Willpower, or all three/);assert.match(step.text,/3.5-second/);assert.match(step.text,/cannot revive/);}T.advanceBattleLesson(f.s,battle,{action:!!step.practice});}
+ while(battle.lesson){const step=T.BATTLE_LESSON[battle.lesson.stage];if(step.title==='Learned recovery'){restoration=true;assert.equal(battle.rt.paused,true);assert.equal(step.selector,'[data-sealer-meter="a"]');assert.match(step.text,/Mend, Invigoration and Conduit/);assert.match(step.text,/Reawakening revives/);assert.match(step.text,/shared cooldown/);}T.advanceBattleLesson(f.s,battle,{action:!!step.practice});}
  assert.equal(restoration,true);assert.equal(f.s.sealer.energy,energy);assert.equal(battle.rt.paused,false);
- const page=T.TUTORIAL_TABS.find(t=>t[0]==='restoration');assert.ok(page);assert.match(page[2],/25%, 50%, and 100%/);assert.match(page[2],/40%/);assert.match(page[2],/30%/);assert.match(page[2],/rounded up/);
+ const page=T.TUTORIAL_TABS.find(t=>t[0]==='restoration');assert.ok(page);assert.match(page[2],/Learn each separately/);assert.match(page[2],/Costs, percentages and cooldowns/);assert.match(page[2],/Items need no learning or Spiritual Energy/);
 });

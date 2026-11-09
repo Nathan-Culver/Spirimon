@@ -15,9 +15,9 @@ function harness(){
 }
 const directions=[
  ['left',-60,0,'←','agile',60/110,0,'ATK 55%'],['right',60,0,'→','strong',60/110,0,'ATK 55%'],
- ['up',0,-60,'↑','strong',0,0,'No commitment'],['down',0,60,'↓','agile',0,0,'No commitment'],
+ ['up',0,-60,'↑','strong',.5,0,'ATK 50%'],['down',0,60,'↓','agile',.5,0,'ATK 50%'],
  ['up-left',-60,-60,'↖','agile',Math.hypot(60,60)/110,1,'+1 extra Technique · ATK 77%'],['up-right',60,-60,'↗','strong',Math.hypot(60,60)/110,1,'+1 extra Technique · ATK 77%'],
- ['down-left',-60,60,'↙','agile',0,1,'+1 extra Technique · No commitment'],['down-right',60,60,'↘','strong',0,1,'+1 extra Technique · No commitment']
+ ['down-left',-60,60,'↙','agile',.5,1,'+1 extra Technique · ATK 50%'],['down-right',60,60,'↘','strong',.5,1,'+1 extra Technique · ATK 50%']
 ];
 for(const [name,dx,dy,arrow,style,commit,extra,detail] of directions)test(name+' previews and submits the same gesture',()=>{
  const f=harness();f.emit('pointerdown');f.emit('pointermove',{clientX:dx,clientY:dy});
@@ -60,3 +60,5 @@ test('other pointers cannot move or remove the active touch line',()=>{
  f.emit('pointerup',{pointerId:2});assert.equal(f.lines.length,1);assert.equal(f.calls.length,0);
  f.emit('pointercancel');assert.equal(f.lines.length,0);
 });
+
+for(const [dx,dy,style] of [[-125,125,'agile'],[125,125,'strong']])test('long lower diagonal stays balanced with two extra uses '+style,()=>{const f=harness();f.emit('pointerdown');f.emit('pointermove',{clientX:dx,clientY:dy});assert.match(f.button.dataset.gesturePreview,/ATK 50% \/ DEF 50%/);f.emit('pointerup',{clientX:dx,clientY:dy});assert.deepEqual(f.calls,[['ally|0',style,.5,2]]);});

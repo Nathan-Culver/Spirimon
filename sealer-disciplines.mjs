@@ -48,7 +48,7 @@ export function supportQuote(q,t,recipient,extra=0){
  const e=empowerment(q,extra),v=activeVow(q),protective=t.effects.some(e=>['heal','shield','guard','immunity','revive'].includes(e.kind)),offensive=t.effects.some(e=>['empower','haste','cooldown'].includes(e.kind));
  const base=Math.max(t.target==='team'||t.effects.some(e=>e.kind==='revive')?10:3,t.energyCost)*(1+Math.max(0,q.level-1)*.02),cost=Math.ceil(energyCost(q,base+e.extra,{kind:'support',bond:1-clamp((recipient.bond||0)/100,0,1)*.15}));
  // Each family explicitly selects its timing tradeoff. All ordinary taps stay instant.
- const primary=t.effects[0]?.kind,castFamily=['heal','willpower','revive'].includes(primary),castMs=e.extra&&castFamily?Math.round(1500*e.bonus):0,cooldownMs=Math.round(t.cooldownMs*(e.extra&&!castFamily?1+e.bonus*.5:1));
+ const primary=t.effects[0]?.kind,castFamily=['heal','stamina','willpower','revive'].includes(primary),castMs=e.extra&&castFamily?Math.round(1500*e.bonus):0,cooldownMs=Math.round(t.cooldownMs*(e.extra&&!castFamily?1+e.bonus*.5:1));
  const multiplier=1+e.bonus+(protective?(v?.power||0):0);
  return {...e,cost,castMs,cooldownMs,offensive,technique:{...t,empowermentExtra:e.extra,castMs,cooldownMs,effects:t.effects.map(effect=>({...effect,amount:effect.amount*multiplier}))}};
 }

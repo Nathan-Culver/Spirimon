@@ -1,9 +1,10 @@
+import {applyItem} from './consumables.mjs';
 import {transformTempleCombatant} from './temple-philosophies.mjs';
 import {fieldAffinities} from './domains.mjs';
 import * as E from './engine.mjs';
 import * as SE from './spiritual-energy.mjs';
 import {bondEfficiency,clamp,spiritualBonus,spiritualMultiplier} from './spiritual-core.mjs';
-import {supportFits,supportDescription} from './support-techniques.mjs';
+import {supportFits,fieldSupport,clearConditions,supportDescription} from './support-techniques.mjs';
 import {heldEquipment,heldItemActivation,hasHook} from './equipment.mjs';
 import {moveTiming,scaledMove,STATUS_RULES} from './realtime-moves.mjs';
 import {passiveEffects} from './classification-passives.mjs';
@@ -200,7 +201,7 @@ function resolvePending(state,context,actor,clock,log,events,r){
   const q=context.sealers?.[side],cost=q?SE.manifestationCost(q,incoming,context.speciesOf(incoming)):0;if(q&&q.energy<cost){log.push('Insufficient Spiritual Energy to complete the release.');return;}const result=E.switchUnits(actor,incoming,context.speciesOf(incoming),{outSpecies:sp,forced:choice.forced,onDamage:ctx.onDamage});if(result.ok&&q)SE.spendEnergy(q,cost);log.push(...result.log);if(result.ok){allies[index]=incoming;const entry=unitClock(state,incoming);entry.readyAt=Math.max(entry.readyAt,state.elapsedMs+1800);entry.pending=null;}
  }else if(choice.type==='item'){
   const key=choice.item==='tonic'?'tonics':'ethers',inventory=context.inventory?.[side];if(!inventory?.[key]){log.push('No supplies remaining.');return;}
-  const caps=E.stats(target,context.speciesOf(target));if(choice.item==='tonic'){if(target.hp>=caps.hp)return;E.healHP(target,context.speciesOf(target),Math.ceil(caps.hp/2));}else{if(target.pp>=caps.pp&&target.willpower>=caps.willpower)return;target.pp=Math.min(caps.pp,(target.pp||0)+Math.ceil(caps.pp*.6));target.willpower=Math.min(caps.willpower,(target.willpower||0)+Math.ceil(caps.willpower*.6));}
+  if(!applyItem(target,context.speciesOf(target),choice.item,unitClock(state,target)).ok)return;
   inventory[key]--;log.push(name(actor,sp)+' uses '+(key==='tonics'?'a tonic.':'a soul draught.'));
  }else if(choice.type==='support'){actor.ward=true;actor.wardTurns=3;log.push('The Sealer raises a ward.');}
  else{
@@ -306,11 +307,14 @@ export function supportAvailability(state,context,side,techniqueId,recipientId,{
  if(context.rules?.noSupport)return {ok:false,reason:'Support is restricted in this challenge'};
  const q=context.sealers?.[side],t=q?.known[techniqueId],u=context.teams[side].find(u=>u.id===recipientId);
  if(state.paused)return {ok:false,reason:'Battle paused'};if((state.supportCasts||[]).some(p=>p.side===side))return {ok:false,reason:'Sealer is channeling support'};if(!t||!u)return {ok:false,reason:'Select a learned technique and a team member'};
- if(!(q.assignments[u.id]||[]).includes(t.id)&&q.floating!==t.id)return {ok:false,reason:'Technique is not assigned to this Spirimon'};
+ if(t.effects.some(e=>e.kind==='seal'))return {ok:false,reason:'Use Spirit Sealing on a wild Spirimon'};
+ if(!context.field&&!(q.assignments[u.id]||[]).includes(t.id)&&q.floating!==t.id)return {ok:false,reason:'Technique is not assigned to this Spirimon'};
  if(!supportFits(t,u,context.speciesOf(u),E.activeDomains(context.speciesOf(u),u)))return {ok:false,reason:'This Spirimon is not compatible'};
+ if(context.field&&!fieldSupport(t))return {ok:false,reason:'This support technique needs a battle'};
  const revive=t.effects.some(e=>e.kind==='revive');if(revive?u.hp>0:u.hp<=0||!context.active[side].includes(u))return {ok:false,reason:revive?'Choose a defeated team member':'The recipient must be manifested'};
  if((q.supportCooldowns[t.id]||0)>state.elapsedMs)return {ok:false,reason:'Shared technique cooldown',remainingMs:q.supportCooldowns[t.id]-state.elapsedMs};
  const targets=t.target==='team'?context.active[side].filter(u=>u.hp>0):[u];
+ if(context.field&&!targets.some(v=>t.effects.some(e=>{const max=E.stats(v,context.speciesOf(v));return e.kind==='revive'?v.hp<=0:e.kind==='cleanse'?!!v.status||Object.keys(v.conditions||{}).length>0:e.kind==='heal'?v.hp<max.hp:e.kind==='stamina'?(v.pp??max.pp)<max.pp:e.kind==='willpower'?(v.willpower??max.willpower)<max.willpower:false;})))return {ok:false,reason:'This Spirimon does not need that recovery technique'};
  if(t.timing==='gcd'){const waiting=targets.reduce((m,v)=>Math.max(m,unitClock(state,v).gcdReadyAt-state.elapsedMs),0);if(waiting>0)return {ok:false,reason:'Every recipient GCD must be ready',remainingMs:waiting};}
  if(t.effects.some(e=>e.kind==='link')&&!context.active[side].some(v=>v!==u&&v.hp>0))return {ok:false,reason:'Damage sharing needs another manifested ally'};
  if(t.effects.some(e=>e.kind==='recall')&&u.conditions?.trap)return {ok:false,reason:'This binding prevents protected recall'};
@@ -322,10 +326,10 @@ export function supportAvailability(state,context,side,techniqueId,recipientId,{
 }
 export function usePlayerSupport(state,context,side,techniqueId,recipientId,options={}){
  const result=supportAvailability(state,context,side,techniqueId,recipientId,options);if(!result.ok)return result;
- const q=context.sealers[side],t=result.technique;if(options.breakVow)SE.breakVow(q,true);
+ const q=context.sealers[side],t=result.technique;if(options.breakVow)SE.breakVow(q,!context.field);
  if(!SE.spendEnergy(q,result.cost))return {ok:false,reason:'Not enough Spiritual Energy'};
  q.vowFormationClosed=true;q.supportCooldowns[t.id]=state.elapsedMs+t.cooldownMs;
- if(t.castMs>0){
+ if(t.castMs>0&&!context.field){
   for(const u of result.targets)if(t.timing==='gcd'){const c=unitClock(state,u);c.gcdReadyAt=state.elapsedMs+moveTiming({id:'support-gcd',timing:'gcd',power:0},u,context.speciesOf(u)).gcdMs;u.gcdReadyAt=c.gcdReadyAt;resetDamageBudget(c,'gcd',c.gcdReadyAt-state.elapsedMs,false);}
   state.supportCasts??=[];state.supportCasts.push({side,technique:t,targets:result.targets.map(u=>u.id),recipient:result.recipient.id,cost:result.cost,resolveAt:state.elapsedMs+t.castMs});
   return {ok:true,cost:result.cost,log:[(side==='a'?'Your Sealer':'Enemy Sealer')+' channels '+t.name+' for '+(t.castMs/1000).toFixed(2)+'s ('+result.cost+' Energy).'],targets:result.targets.map(u=>u.id)};
@@ -345,10 +349,10 @@ function applySupportEffects(state,context,side,result){
   if(t.sacrifice?.kind==='defense'){u.spiritualBuffs??=[];u.spiritualBuffs.push({kind:'guard',amount:-t.sacrifice.amount,until});}
   for(const effect of t.effects){const amount=effect.amount*efficiency;
    if(effect.kind==='heal')u.hp=Math.min(max.hp,u.hp+Math.ceil(max.hp*amount*(1+(passiveEffects(sp,u,{maxHp:max.hp,weather:u.battlefield?.weather}).healingReceived||0))));
+   if(effect.kind==='stamina')u.pp=Math.min(max.pp,(u.pp||0)+Math.max(1,Math.ceil(max.pp*amount)));
    if(effect.kind==='willpower')u.willpower=Math.min(max.willpower,(u.willpower||0)+Math.max(1,Math.ceil(max.willpower*amount)));
    if(effect.kind==='shield'){u.spiritualShields??=[];const existing=u.spiritualShields.filter(s=>s.until>now).reduce((n,s)=>n+s.hp,0);u.spiritualShields.push({hp:Math.max(0,Math.min(Math.ceil(max.hp*amount),Math.ceil(max.hp*.45)-existing)),until});}
-   if(effect.kind==='cleanse'&&['poison','toxic','burn','freeze','frostbite','paralysis'].includes(u.status)){u.status=null;u.statusTurns=0;clock.status=null;}
-   if(effect.kind==='cleanse'&&t.empowermentExtra>=5){const keys=Object.keys(clock.conditions).filter(k=>['confusion','infatuation','nightmare','taunt','disable','slow','trap'].includes(k));for(const key of keys.slice(0,Math.floor(t.empowermentExtra/5))){delete clock.conditions[key];delete clock.conditionMeta?.[key];delete u.conditions?.[key];}}
+   if(effect.kind==='cleanse')clearConditions(u,1+Math.floor((t.empowermentExtra||0)/5),clock);
    if(effect.kind==='calm'){
     u.spiritualBuffs??=[];u.spiritualBuffs.push({kind:'concentration',amount:.5,until});
     if(clock.status?.effect==='sleep')shortenAffliction(clock.status,now,.4);
@@ -357,7 +361,7 @@ function applySupportEffects(state,context,side,result){
    if(['empower','haste','immunity','guard'].includes(effect.kind)){syncCastHaste(state,u);u.spiritualBuffs??=[];u.spiritualBuffs.push({kind:effect.kind,amount:Math.min(.3,amount),until,domain:effect.domain,category:effect.category});if(effect.kind==='haste')syncCastHaste(state,u);}
    if(effect.kind==='cooldown'){clock.gcdReadyAt=now+Math.max(0,clock.gcdReadyAt-now)*(1-Math.min(.5,amount));for(const key of Object.keys(clock.cooldowns))clock.cooldowns[key]=now+Math.max(0,clock.cooldowns[key]-now)*(1-Math.min(.5,amount));u.gcdReadyAt=clock.gcdReadyAt;}
    if(effect.kind==='link'){const partner=context.active[side].filter(v=>v!==u&&v.hp>0).sort((a,b)=>b.hp-a.hp)[0];if(partner){u.spiritualLinks??=[];u.spiritualLinks.push({partner:partner.id,amount:Math.min(.4,amount),until});}}
-   if(effect.kind==='revive'){E.resetCombat(u);u.hp=Math.max(1,Math.floor(max.hp*amount));u.status=null;u.conditions={};delete u.afflictions;clock.pending=null;clock.status=null;clock.conditions={};log.push(name(u,sp)+' revives within its seal. Release it separately to fight.');}
+   if(effect.kind==='revive'){E.resetCombat(u);u.hp=Math.max(1,Math.floor(max.hp*amount));u.status=null;u.conditions={};delete u.afflictions;clock.pending=null;clock.status=null;clock.conditions={};clock.conditionMeta={};log.push(name(u,sp)+' revives within its seal. Release it separately to fight.');}
    if(effect.kind==='recall'){
     if(clock.pending)u.recallAfterCast=true;
     else context.active[side]=context.active[side].filter(v=>v!==u);
@@ -412,4 +416,11 @@ function pauseSealedAfflictions(state,context,step){
   if(c.status){c.status.appliedAt+=step;c.status.until+=step;}
   for(const [effect,timer]of Object.entries(c.conditionMeta||{})){timer.appliedAt+=step;timer.until+=step;c.conditions[effect]=timer.until;}
  }
+}
+
+export function useFieldSupport(save,techniqueId,recipientId,options={}){
+ const q=SE.ensureSealer(save),state=createRealTimeState(q.clockMs),context={field:true,teams:{a:save.spirits,b:[]},active:{a:save.spirits.filter(u=>u.hp>0),b:[]},sealers:{a:q},speciesOf:u=>save.species[u.species]};
+ synchronizeTimers(state,context);
+ const result=usePlayerSupport(state,context,'a',techniqueId,recipientId,options);
+ if(result.ok)SE.setExhaustion(context.teams.a.find(u=>u.id===recipientId),q);return result;
 }
