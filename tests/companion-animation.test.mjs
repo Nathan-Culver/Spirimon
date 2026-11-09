@@ -5,7 +5,7 @@ import {readFileSync} from 'node:fs';
 import {ROSTER} from '../roster.mjs';
 import {battleBackSource} from '../battle-art.mjs';
 import {AUTHORED_COMPANIONS} from '../companion-rigs.mjs';
-import {companionRig,companionFrame,rigPoint} from '../companion-animation.mjs';
+import {companionRig,companionFrame,rigPoint,followingCompanionFacing,drawRigFrame} from '../companion-animation.mjs';
 import {LEGENDS,applyLegendArtwork} from '../legendary-roster.mjs';
 const source=readFileSync(new URL('../sprites.mjs',import.meta.url),'utf8').replace(/^import .*;\s*$/gm,'').replace(/\bexport\s+(?=(?:function|const|let|class)\b)/g,'');
 function harness(){
@@ -37,4 +37,14 @@ test('walking atlas cache evicts old forms at 24 canvases and rebakes revised ar
  const t=harness();for(const sp of ROSTER.slice(0,27)){t.images.set(sp.atlas,{width:768,height:256});t.images.set(battleBackSource(sp,0).source,{width:768,height:256});t.h.drawCompanion(t.ctx,sp,0,0,0);}
  assert.equal(t.h.companionCacheSize(),24);assert.equal(t.made(),27);t.h.drawCompanion(t.ctx,ROSTER[26],0,0,0);assert.equal(t.made(),27);t.h.drawCompanion(t.ctx,ROSTER[0],0,0,0);assert.equal(t.made(),28);
  t.h.drawCompanion(t.ctx,{...ROSTER[0],artRevision:999},0,0,0);assert.equal(t.made(),29);assert.equal(t.h.companionCacheSize(),24);
+});
+test('vertical following alternates left and right every full second, independent of tile progress',()=>{
+ for(const face of ['up','down'])for(const [time,expected]of [[0,'left'],[500,'left'],[999,'left'],[1000,'right'],[1500,'right'],[1999,'right'],[2000,'left'],[2999,'left'],[3000,'right']])assert.equal(followingCompanionFacing(face,true,time),expected,face+' at '+time);
+ for(const face of ['up','down','left','right'])for(const time of [0,1000,2000]){assert.equal(followingCompanionFacing(face,false,time),face,'idle');if(face==='left'||face==='right')assert.equal(followingCompanionFacing(face,true,time),face,'horizontal travel');}
+});
+test('the left and right companion poses use the same source image with a horizontal mirror',()=>{
+ const image={id:'front'},rect=[0,0,256,256],rig=companionRig(ROSTER[0],0),flips=[],draws=[];
+ const ctx={save(){},restore(){},translate:(...args)=>flips.push(['translate',...args]),scale:(...args)=>flips.push(['scale',...args]),drawImage:(...args)=>draws.push(args)};
+ drawRigFrame(ctx,image,rect,rig,0,2);assert.deepEqual(flips,[]);
+ drawRigFrame(ctx,image,rect,rig,0,3);assert.deepEqual(flips,[['translate',64,0],['scale',-1,1]]);assert.deepEqual(draws[0],draws[1]);
 });
