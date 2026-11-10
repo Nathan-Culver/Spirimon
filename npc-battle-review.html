@@ -1,20 +1,20 @@
 <!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Spirimon · 40 NPC Battle Sprites</title><style>
 *{box-sizing:border-box}body{margin:0;background:#12241f;color:#ede8d2;font:16px system-ui,sans-serif}main{max-width:1500px;margin:auto;padding:30px}h1{font:36px Georgia;margin:8px 0}h2{font:30px Georgia;margin:32px 0 12px}h3{font:20px Georgia;margin:0;padding:14px 16px;border-bottom:1px solid #47614c}p{color:#b6c7b1;line-height:1.5}.tag{color:#d6c28d;font-size:12px;letter-spacing:3px}.poses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.pose{border:1px solid #47614c;border-radius:10px;background:#1c3229;overflow:hidden}.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}article{padding:12px;min-width:0}article+article{border-left:1px solid #47614c}.npc-battle-portrait{background:radial-gradient(ellipse at 50% 75%,#82985b40,transparent 70%)}canvas{display:block;width:100%;height:330px;object-fit:contain;image-rendering:pixelated}small{display:block;color:#a7b89f;font-size:11px;line-height:1.6}b{display:block;margin:8px 0}button{background:#d6c28d;color:#152820;border:0;border-radius:5px;padding:12px;font:inherit;margin:12px 8px 20px 0;cursor:pointer}button:disabled{opacity:.4;cursor:wait}a{color:#d6c28d}.dialogue{margin:24px 0;padding:18px;border:1px solid #47614c;display:grid;grid-template-columns:1fr 220px;align-items:start;gap:20px}.dialogue canvas{height:260px}.dialogue .copy{grid-column:1;grid-row:1}.dialogue .npc-battle-portrait{grid-column:2;grid-row:1}.dialogue button{margin-bottom:0}@media(max-width:800px){main{padding:16px}.poses{grid-template-columns:1fr}.dialogue{grid-template-columns:1fr 120px}.dialogue canvas{height:190px}canvas{height:280px}}
-</style><main><div class="tag">SPIRIMON / NPC WARDROBE REVIEW 02</div><h1>Twenty poses. Forty challengers.</h1><p>Ancient Asian fantasy · Japanese influence foremost, with Chinese, Bharat, Korean and steppe accents. Large expressive trainer battle sprites.</p><p>Ten male poses and ten female poses, with two generated NPCs per pose. Every sprite faces left.<br>Head, hat, shirt, gloves, held item, trousers and boots are separate parts. Hat, shirt, gloves and boots can be absent; women retain an opaque chest underwrap.</p><p id="status" role="status">Loading artwork…</p><button data-export="male" disabled>Save 20 male examples as PNG</button><button data-export="female" disabled>Save 20 female examples as PNG</button><div id="groups"></div><section id="dialogue" class="dialogue"></section><p><a href="./index.html">Return to Spirimon</a></p></main><script type="module">
+</style><main><div class="tag">SPIRIMON / NPC WARDROBE REVIEW 03</div><h1>Twenty poses. Forty challengers.</h1><p>Ancient Asian fantasy · Japanese influence foremost, with Chinese, Bharat, Korean and steppe accents. Large expressive trainer battle sprites.</p><p>Ten male poses and ten female poses, with two generated NPCs per pose. Every sprite faces left.<br>Complete painted figures with pose-matched clothing, headwear and equipment layers. Hat, shirt, gloves and boots can be absent; women retain an opaque chest underwrap.</p><p id="status" role="status">Loading artwork…</p><button data-export="male" disabled>Save 20 male examples as PNG</button><button data-export="female" disabled>Save 20 female examples as PNG</button><div id="groups"></div><section id="dialogue" class="dialogue"></section><p><a href="./index.html">Return to Spirimon</a></p></main><script type="module">
 const npcImages=new Map();function readyImage(path){return npcImages.get(path)||null;}queueMicrotask(()=>{for(const path of Object.values(NPC_BATTLE_ASSETS)){const image=new Image();image.onload=()=>{npcImages.set(path,image);globalThis.spirimonArtLoaded?.();};image.src=path;}});
 
-const NPC_BATTLE_ASSETS={anatomy:'./assets/npc-battle/anatomy-ancient.webp',clothing:'./assets/npc-battle/clothing-ancient.webp',equipment:'./assets/npc-battle/equipment-ancient.webp'};
+const NPC_BATTLE_ASSETS={maleBase:'./assets/npc-battle/male-natural-base.webp',maleDressed:'./assets/npc-battle/male-natural-dressed.webp',femaleBase:'./assets/npc-battle/female-natural-base.webp',femaleDressed:'./assets/npc-battle/female-natural-dressed.webp',equipment:'./assets/npc-battle/equipment-ancient.webp'};
 const NPC_BATTLE_PARTS=['hat','head','shirt','gloves','item','pants','boots'];
 const NPC_OPTIONAL_PARTS=['hat','shirt','gloves','boots'];
 const NPC_ITEM_NAMES=['Staff','Katana','Book','Talisman','Lantern','Fan','Spear','Orb','Scroll','Wand','Dagger','Ritual brush'];
-const NPC_POSE_NAMES=['Watchful guard','Casting reach','Reading the signs','Staff bearer','High guard','Forward lunge','Kneeling ward','Raised invocation','Quick advance','Quiet resolve'];
+const NPC_POSE_NAMES=['Watchful guard','Casting reach','Reading the signs','Staff bearer','High guard','Low ward','Kneeling ward','Raised invocation','Traveling step','Quiet resolve'];
 const counts={hat:4,head:4,shirt:2,gloves:2,item:12,pants:2,boots:2};
 function hash(value){let n=2166136261;for(const ch of String(value))n=Math.imul(n^ch.charCodeAt(0),16777619);n^=n>>>16;n=Math.imul(n,2246822507);return (n^(n>>>13))>>>0;}
-function color(n){const h=(n%360)/60,s=.28+((n>>>12)%32)/100,l=.23+((n>>>20)%31)/100,c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs(h%2-1)),m=l-c/2,rgb=h<1?[c,x,0]:h<2?[x,c,0]:h<3?[0,c,x]:h<4?[0,x,c]:h<5?[x,0,c]:[c,0,x];return '#'+rgb.map(v=>Math.round((v+m)*255).toString(16).padStart(2,'0')).join('');}
+function toneColor(hue,s,l){const h=hue/60,c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs(h%2-1)),m=l-c/2,rgb=h<1?[c,x,0]:h<2?[x,c,0]:h<3?[0,c,x]:h<4?[0,x,c]:h<5?[x,0,c]:[c,0,x];return '#'+rgb.map(v=>Math.round((v+m)*255).toString(16).padStart(2,'0')).join('');}
 function npcBattleAppearance(seed,identity={}){
  const key=String(identity.id||identity.name||'opposing-sealer'),fixed=identity.battleAppearance||{},roll=part=>hash(seed+'|'+key+'|npc-v2|'+part);
  const gender=['male','female'].includes(fixed.gender)?fixed.gender:['male','female'].includes(identity.gender)?identity.gender:roll('gender')%2?'female':'male';
- const appearance={version:2,facing:'left',gender,pose:roll('pose')%10,colors:{}};
+ const appearance={version:3,facing:'left',gender,pose:roll('pose')%10,colors:{}};
  if(Number.isInteger(fixed.pose)&&fixed.pose>=0&&fixed.pose<10)appearance.pose=fixed.pose;
  for(const part of NPC_BATTLE_PARTS){
   appearance[part]=roll(part)%counts[part];
@@ -22,96 +22,175 @@ function npcBattleAppearance(seed,identity={}){
   if(part==='item'&&roll('empty-hand')%12===0)appearance.item=-1;
   const v=fixed[part]??(part==='pants'?fixed.trousers:undefined);
   if(Number.isInteger(v)&&v>=((NPC_OPTIONAL_PARTS.includes(part)||part==='item')?-1:0)&&v<counts[part])appearance[part]=v;
-  const selected=fixed.colors?.[part];appearance.colors[part]=typeof selected==='string'&&/^#[0-9a-f]{6}$/i.test(selected)?selected:color(roll(part+'-color'));
+  const selected=fixed.colors?.[part],hue=roll('wardrobe-hue')%360,offset=part==='pants'?170:part==='hat'?8:part==='gloves'?-12:part==='boots'?25:0,tone=(hue+offset+360)%360;appearance.colors[part]=typeof selected==='string'&&/^#[0-9a-f]{6}$/i.test(selected)?selected:toneColor(part==='boots'?24+roll('leather')%16:tone,part==='shirt'?.37:part==='item'?.35:part==='boots'?.24:.23,part==='shirt'?.35+(roll('shirt-light')%9)/100:part==='pants'?.25:part==='boots'?.28:part==='hat'?.30:.29);
  }
+ if(!NPC_POSE_ITEMS[appearance.pose].includes(appearance.item))appearance.item=NPC_POSE_ITEMS[appearance.pose][0];
  return appearance;
 }
-const rig=(shoulder,hip,nearElbow,nearHand,farElbow,farHand,nearKnee,nearAnkle,farKnee,farAnkle,itemAngle=0)=>({shoulder,hip,nearElbow,nearHand,farElbow,farHand,nearKnee,nearAnkle,farKnee,farAnkle,itemAngle});
-const MALE_RIGS=[
- rig([132,109],[137,181],[94,147],[78,189],[174,145],[184,184],[115,234],[97,282],[158,232],[172,282],-8),
- rig([140,111],[145,183],[98,112],[57,95],[177,144],[162,179],[116,230],[99,282],[171,230],[185,282],-28),
- rig([135,110],[139,183],[99,150],[110,135],[171,148],[137,134],[122,232],[112,282],[157,234],[169,282],-12),
- rig([142,108],[146,180],[102,143],[72,135],[178,144],[184,187],[126,231],[114,282],[160,231],[179,282],0),
- rig([145,115],[150,187],[104,151],[80,121],[179,147],[117,126],[117,235],[96,282],[174,231],[195,282],-35),
- rig([146,128],[160,198],[106,145],[62,165],[183,157],[195,190],[105,235],[64,282],[185,230],[215,279],-55),
- rig([143,153],[154,222],[108,187],[83,172],[181,186],[182,218],[104,257],[65,282],[193,276],[165,289],-10),
- rig([135,116],[140,188],[93,81],[86,41],[172,151],[182,190],[121,238],[105,284],[162,238],[179,284],-12),
- rig([139,113],[155,183],[101,136],[78,168],[174,143],[187,106],[106,222],[100,282],[193,229],[216,269],-35),
- rig([136,111],[141,183],[104,147],[104,188],[172,149],[153,189],[127,234],[116,283],[155,234],[168,283],8)
+// These anchors place accessories on complete painted figures. They never
+// determine or transform a limb: every body is a single authored raster frame.
+const anchors=(head,hand,other,waist,feet,grip='closed')=>({head,hand,other,waist,feet,grip});
+const MALE_ANCHORS=[
+ anchors([225,53],[158,228],[256,180],165,[[165,351],[274,359]]),
+ anchors([243,77],[106,136],[305,185],185,[[130,352],[308,345]],'palm'),
+ anchors([231,49],[125,127],[225,137],158,[[191,354],[268,354]],'palm'),
+ anchors([234,48],[133,109],[293,174],181,[[125,352],[284,354]]),
+ anchors([219,75],[231,199],[258,188],203,[[128,352],[333,350]]),
+ anchors([225,91],[74,143],[246,168],219,[[110,370],[302,362]],'palm'),
+ anchors([249,129],[112,215],[278,300],264,[[294,361]],'palm'),
+ anchors([234,72],[106,51],[281,172],184,[[194,369],[270,369]],'palm'),
+ anchors([216,54],[126,189],[301,206],175,[[150,370],[315,340]]),
+ anchors([250,57],[207,117],[237,135],151,[[174,365],[282,365]],'folded')
 ];
-// Separate female rigs adjust balance, elbows, hands and stance, not just scale.
-const FEMALE_RIGS=MALE_RIGS.map((r,n)=>({...r,shoulder:[r.shoulder[0]-2,r.shoulder[1]+3],hip:[r.hip[0]+2,r.hip[1]],nearElbow:[r.nearElbow[0]+(n%2?-3:4),r.nearElbow[1]+2],nearHand:[r.nearHand[0]+(n%2?-4:3),r.nearHand[1]-3],farElbow:[r.farElbow[0]-4,r.farElbow[1]+3],farHand:[r.farHand[0]-5,r.farHand[1]+2],nearKnee:[r.nearKnee[0]+4,r.nearKnee[1]],nearAnkle:[r.nearAnkle[0]+5,r.nearAnkle[1]],farKnee:[r.farKnee[0]-3,r.farKnee[1]+2],farAnkle:[r.farAnkle[0]-4,r.farAnkle[1]]}));
-const NPC_BATTLE_POSES=['male','female'].flatMap(gender=>(gender==='male'?MALE_RIGS:FEMALE_RIGS).map((joints,index)=>({id:gender+'-'+(index+1),gender,index,name:NPC_POSE_NAMES[index],...joints})));
-function npcBattlePose(appearance){return NPC_BATTLE_POSES[(appearance.gender==='female'?10:0)+(Number.isInteger(appearance.pose)&&appearance.pose>=0&&appearance.pose<10?appearance.pose:0)];}
-function npcBattleLayers(appearance){return ['pants','boots','shirt','head','hat','item','gloves'].filter(part=>appearance[part]!==-1).map(part=>({part,variant:appearance[part],color:appearance.colors?.[part]}));}
-
-const rawParts=new WeakMap(),imageKeys=new WeakMap(),tintedParts=new Map(),composites=new Map();let nextImageKey=0;
-const canvasOf=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};
-function cachePut(cache,key,value,max){cache.set(key,value);while(cache.size>max)cache.delete(cache.keys().next().value);return value;}
-function partImage(image,index,tint,mode='all',half=null){
- let map=rawParts.get(image);if(!map){map=new Map();rawParts.set(image,map);}const partKey=index+'|'+half;let part=map.get(partKey);
- if(!part){
-  const side=image.width/4,sh=image.height/4,scan=canvasOf(Math.ceil(side),Math.ceil(sh)),c=scan.getContext('2d');c.drawImage(image,index%4*side,Math.floor(index/4)*sh,side,sh,0,0,scan.width,scan.height);
-  const pixels=c.getImageData(0,0,scan.width,scan.height);let left=scan.width,top=scan.height,right=0,bottom=0;
-  for(let y=0;y<scan.height;y++)for(let x=0;x<scan.width;x++){const p=(y*scan.width+x)*4;if(pixels.data[p+3]<64){pixels.data[p+3]=0;continue;}left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);}
-  c.putImageData(pixels,0,0);if(left>right)return null;
-  let w=right-left+1;const h=bottom-top+1;if(half!==null){const split=Math.floor(w/2);if(half)left+=split;w=half?w-split:split;}const scale=Math.min(1,160/Math.max(w,h));part=canvasOf(Math.ceil(w*scale),Math.ceil(h*scale));part.getContext('2d').drawImage(scan,left,top,w,h,0,0,part.width,part.height);map.set(partKey,part);
+const FEMALE_ANCHORS=[
+ anchors([223,52],[156,231],[250,172],166,[[178,361],[271,365]]),
+ anchors([245,61],[86,113],[275,184],176,[[128,362],[283,365]],'palm'),
+ anchors([231,56],[118,116],[218,134],175,[[195,365],[270,363]],'palm'),
+ anchors([226,48],[128,111],[292,235],180,[[163,366],[279,365]]),
+ anchors([220,77],[200,214],[301,205],209,[[129,371],[309,371]]),
+ anchors([213,83],[67,139],[254,160],223,[[103,371],[305,361]],'palm'),
+ anchors([242,135],[108,201],[258,301],269,[[286,351]],'palm'),
+ anchors([234,73],[103,38],[278,173],196,[[199,370],[269,370]],'palm'),
+ anchors([219,54],[120,179],[303,204],180,[[145,370],[314,344]]),
+ anchors([246,57],[206,127],[242,132],159,[[174,369],[283,370]],'folded')
+];
+const NPC_POSE_ITEMS=[[0,10,4,6,-1],[7,3,5,-1],[2,8,7,-1],[0,6,4,-1],[1,9,10,-1],[3,7,-1],[4,11,2,8,-1],[7,5,3,-1],[6,4,0,-1],[-1]];
+const NPC_BATTLE_POSES=['male','female'].flatMap(gender=>(gender==='male'?MALE_ANCHORS:FEMALE_ANCHORS).map((anchor,index)=>({id:gender+'-'+(index+1),gender,index,name:NPC_POSE_NAMES[index],...anchor})));
+// Accessory attachments placed directly on the authored figure drawings.
+const PAINTED_ATTACHMENTS={"male-1":{"head":[223,58],"hand":[160,223]},"male-2":{"head":[225,79],"hand":[103,131]},"male-3":{"head":[201,55],"hand":[103,120]},"male-4":{"head":[191,52],"hand":[99,98]},"male-5":{"head":[164,78],"hand":[191,191]},"male-6":{"head":[221,92],"hand":[68,131]},"male-7":{"head":[220,104],"hand":[93,210]},"male-8":{"head":[211,39],"hand":[73,34]},"male-9":{"head":[171,35],"hand":[93,188]},"male-10":{"head":[189,31],"hand":[156,95]},"female-1":{"head":[207,58],"hand":[149,223]},"female-2":{"head":[212,70],"hand":[83,108]},"female-3":{"head":[197,59],"hand":[107,110]},"female-4":{"head":[172,46],"hand":[88,108]},"female-5":{"head":[181,86],"hand":[148,202]},"female-6":{"head":[209,92],"hand":[40,127]},"female-7":{"head":[199,118],"hand":[107,190]},"female-8":{"head":[195,47],"hand":[88,22]},"female-9":{"head":[176,42],"hand":[88,191]},"female-10":{"head":[168,50],"hand":[137,127]}};
+for(const pose of NPC_BATTLE_POSES)Object.assign(pose,PAINTED_ATTACHMENTS[pose.id]);
+function npcBattlePose(a){return NPC_BATTLE_POSES[(a.gender==='female'?10:0)+(Number.isInteger(a.pose)&&a.pose>=0&&a.pose<10?a.pose:0)];}
+function npcPoseSourceRect(image,index){return [index%5*image.width/5,Math.floor(index/5)*image.height/2,image.width/5,image.height/2];}
+function npcBattleLayers(a){return ['pants','boots','shirt','head','hat','item','gloves'].filter(p=>a[p]!==-1).map(part=>({part,variant:a[part],color:a.colors?.[part]}));}
+const canvasOf=(w=400,h=400)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};
+const frames=new WeakMap(),parts=new WeakMap(),composites=new Map();
+function remember(map,key,value,max=24){map.set(key,value);while(map.size>max)map.delete(map.keys().next().value);return value;}
+function rgbInfo(r,g,b){r/=255;g/=255;b/=255;const hi=Math.max(r,g,b),lo=Math.min(r,g,b),d=hi-lo;let h=!d?0:hi===r?((g-b)/d+6)%6:hi===g?(b-r)/d+2:(r-g)/d+4;return {h:h*60,s:hi?d/hi:0,v:hi,l:(hi+lo)/2};}
+function near(point,x,y,rx=39,ry=43){return Math.abs(point[0]-x)<rx&&Math.abs(point[1]-y)<ry;}
+function npcMaterialLabels(pixels,width,height,pose,{dressed=true}={}){
+ const labels=new Uint8Array(width*height),distance=new Uint8Array(width*height),queue=new Int32Array(width*height);let tail=0;
+ for(let y=0;y<height;y++)for(let x=0;x<width;x++){
+  const n=y*width+x,p=n*4;if(pixels[p+3]<64)continue;const {h,s,v}=rgbInfo(pixels[p],pixels[p+1],pixels[p+2]);let label=0;
+  if(s>.18&&h>202&&h<275&&y>pose.waist-12)label=2;
+  if(dressed){
+   if(s>.27&&(h<12||h>340)&&v>.13)label=1;
+   if(s>.20&&h>66&&h<170&&(near(pose.hand,x,y,65,55)||near(pose.other,x,y,65,55))&&!(y<pose.head[1]+40&&Math.abs(x-pose.head[0])<65))label=3;
+   if(s>.27&&h>29&&h<67&&y>(pose.index===6?330:296))label=4;
+  }
+  if(label){labels[n]=label;distance[n]=1;queue[tail++]=n;}
  }
- if(!tint)return part;
- if(!imageKeys.has(image))imageKeys.set(image,++nextImageKey);const key=imageKeys.get(image)+'|'+index+'|'+tint+'|'+mode+'|'+half;
- if(tintedParts.has(key))return tintedParts.get(key);
- const out=canvasOf(part.width,part.height),c=out.getContext('2d');c.drawImage(part,0,0);const pixels=c.getImageData(0,0,out.width,out.height),rgb=[1,3,5].map(n=>parseInt(tint.slice(n,n+2),16));
- for(let n=0;n<pixels.data.length;n+=4){if(!pixels.data[n+3])continue;const l=.2126*pixels.data[n]+.7152*pixels.data[n+1]+.0722*pixels.data[n+2];if(l<42)continue;if(mode==='accent'){const rr=pixels.data[n],gg=pixels.data[n+1],bb=pixels.data[n+2],chroma=Math.max(rr,gg,bb)-Math.min(rr,gg,bb);if(!(gg>rr*1.1&&bb>rr*1.1||chroma<20&&l>60&&l<175))continue;}for(let k=0;k<3;k++)pixels.data[n+k]=Math.min(255,Math.round(rgb[k]*(l/155)+(l>200?(l-200)*.65:0)));}
- c.putImageData(pixels,0,0);return cachePut(tintedParts,key,out,96);
+ // Carry garment outlines, ivory collars and rope ties along with their cloth.
+ // Exposed skin is a barrier, and expansion is bounded to avoid swallowing hair.
+ for(let head=0;head<tail;head++){
+  const n=queue[head];if(distance[n]>=11)continue;const x=n%width,y=Math.floor(n/width);
+  for(const p of [x>0?n-1:-1,x+1<width?n+1:-1,y>0?n-width:-1,y+1<height?n+width:-1]){
+   if(p<0||labels[p]||pixels[p*4+3]<64)continue;
+   const xx=p%width,yy=Math.floor(p/width),{h,s,v}=rgbInfo(pixels[p*4],pixels[p*4+1],pixels[p*4+2]);
+   if(yy<pose.head[1]+46&&Math.abs(xx-pose.head[0])<70)continue;
+   if(s>.23&&h>=12&&h<55&&v>.28)continue;
+   if(s>.25&&v>.24)continue;
+   labels[p]=labels[n];distance[p]=distance[n]+1;queue[tail++]=p;
+  }
+ }
+ return labels;
 }
-const PROPS=[{height:181,grip:[.5,.73]},{height:132,grip:[.5,.82]},{height:56,grip:[.5,.7]},{height:64,grip:[.5,.12]},{height:78,grip:[.5,.08]},{height:67,grip:[.5,.86]},{height:191,grip:[.5,.68]},{height:57,grip:[.5,.88]},{height:61,grip:[.5,.65]},{height:95,grip:[.5,.78]},{height:82,grip:[.5,.8]},{height:92,grip:[.5,.8]}];
-function drawNPCBattleSprite(ctx,images,appearance,{x=0,y=0,width=320,height=400}={}){
- const key=JSON.stringify(appearance);let sprite=composites.get(key);
- if(!sprite){
-  const stage=canvasOf(512,640),c=stage.getContext('2d'),r=npcBattlePose(appearance),female=appearance.gender==='female',colors=appearance.colors||{};c.imageSmoothingEnabled=false;c.translate(120,150);
-  const asset=(sheet,index,tint,mode,half)=>partImage(images[sheet],index,tint,mode,half),draw=(sheet,index,tint,x,y,w,h,half=null)=>{const p=asset(sheet,index,tint,'all',half);if(p)c.drawImage(p,x,y,w,h);};
-  const bone=(sheet,index,tint,a,b,w,half=null)=>{const dx=b[0]-a[0],dy=b[1]-a[1],length=Math.hypot(dx,dy);c.save();c.translate(...a);c.rotate(Math.atan2(dy,dx)-Math.PI/2);draw(sheet,index,tint,-w/2,-4,w,length+8,half);c.restore();};
-  const shoulders={near:[r.shoulder[0]-22,r.shoulder[1]+9],far:[r.shoulder[0]+20,r.shoulder[1]+8]},hips={near:[r.hip[0]-13,r.hip[1]],far:[r.hip[0]+13,r.hip[1]]};
-  const hand=(point,fore)=>{c.save();c.translate(...point);c.rotate(Math.atan2(point[1]-fore[1],point[0]-fore[0])-Math.PI/2);draw('anatomy',14,null,-9,-3,18,24);if(appearance.gloves>=0)draw('clothing',6+appearance.gloves,colors.gloves,-11,-6,22,29);c.restore();};
-  const arm=(side)=>{const elbow=r[side+'Elbow'],wrist=r[side+'Hand'];bone('anatomy',12,null,shoulders[side],elbow,female?16:19);bone('anatomy',13,null,elbow,wrist,female?13:16);if(appearance.shirt>=0){const end=appearance.shirt===0?shoulders[side].map((v,n)=>v+(elbow[n]-v)*.55):elbow;bone('clothing',appearance.shirt===0?4:5,colors.shirt,shoulders[side],end,female?21:24);if(appearance.shirt===1)bone('clothing',14,colors.shirt,elbow,wrist,female?17:20);}};
-  const leg=side=>{const knee=r[side+'Knee'],ankle=r[side+'Ankle'];bone('clothing',8+appearance.pants,colors.pants,hips[side],knee,appearance.pants===0?(female?34:38):(female?29:32),side==='near'?0:1);bone('clothing',10+appearance.pants,colors.pants,knee,ankle,female?23:26,side==='near'?0:1);if(appearance.boots<0)draw('anatomy',11,null,ankle[0]-21,ankle[1]-4,32,19);else draw('clothing',12+appearance.boots,colors.boots,ankle[0]-23,ankle[1]-28,38,48);};
-  arm('far');hand(r.farHand,r.farElbow);leg('far');leg('near');draw('anatomy',10,colors.pants,r.hip[0]-29,r.hip[1]-9,58,31);
-  bone('anatomy',female?9:8,null,r.shoulder,r.hip,female?52:61);
-  if(appearance.shirt>=0)bone('clothing',(female?2:0)+appearance.shirt,colors.shirt,r.shoulder,[r.hip[0],r.hip[1]+10],female?60:68);
-  draw('clothing',15,colors.pants,r.hip[0]-32,r.hip[1]-6,64,27);
-  const headX=r.shoulder[0]-37,headY=r.shoulder[1]-53;
-  const hat=()=>{const type=appearance.hat,hood=type===3,w=type===0?90:type===1?73:76,h=type===0?56:type===1?47:hood?75:64;draw('equipment',type,colors.hat,headX-(w-65)/2,headY-(hood?5:type===1?6:type===2?8:13),w,h);};
-  if(appearance.hat>=0)hat();
-  draw('anatomy',(female?4:0)+appearance.head,null,headX,headY,65,62);
-  // Layer the crown over hair while keeping eyes and face in front of hoods.
-  if(appearance.hat>=0){c.save();c.beginPath();c.rect(headX-30,headY-50,130,67);c.clip();hat();c.restore();}
-  arm('near');
-  if(appearance.item>=0){const prop=asset('equipment',4+appearance.item,colors.item,'accent'),spec=PROPS[appearance.item],h=spec.height,w=h*prop.width/prop.height;c.save();c.translate(r.nearHand[0],r.nearHand[1]+10);c.rotate(r.itemAngle*Math.PI/180);c.drawImage(prop,-w*spec.grip[0],-h*spec.grip[1],w,h);c.restore();}
-  hand(r.nearHand,r.nearElbow);
-  // Fit the whole equipped silhouette; raised staffs and wide blades never crop.
-  c.setTransform(1,0,0,1,0,0);const data=c.getImageData(0,0,stage.width,stage.height).data;let l=512,t=640,rr=0,bb=0;
-  for(let yy=0;yy<640;yy++)for(let xx=0;xx<512;xx++)if(data[(yy*512+xx)*4+3]>32){l=Math.min(l,xx);t=Math.min(t,yy);rr=Math.max(rr,xx);bb=Math.max(bb,yy);}
-  const sw=rr-l+5,sh=bb-t+5,scale=Math.min(1,320/sw,400/sh),baked=canvasOf(Math.ceil(sw*scale),Math.ceil(sh*scale)),b=baked.getContext('2d');b.imageSmoothingEnabled=false;b.drawImage(stage,Math.max(0,l-2),Math.max(0,t-2),sw,sh,0,0,baked.width,baked.height);sprite={canvas:baked,frame:[0,0,baked.width,baked.height]};cachePut(composites,key,sprite,32);
+function rawFrame(image,index,pose,dressed){
+ let map=frames.get(image);if(!map){map=new Map();frames.set(image,map);}if(map.has(index))return map.get(index);
+ const canvas=canvasOf(),c=canvas.getContext('2d');c.imageSmoothingEnabled=false;c.drawImage(image,...npcPoseSourceRect(image,index),0,0,400,400);
+ const data=c.getImageData(0,0,400,400);for(let n=3;n<data.data.length;n+=4)if(data.data[n]<64)data.data[n]=0;c.putImageData(data,0,0);
+ const seen=new Uint8Array(160000),stack=[];for(let n=0;n<160000;n++){if(seen[n]||data.data[n*4+3]<64)continue;const component=[];stack.push(n);seen[n]=1;while(stack.length){const p=stack.pop();component.push(p);const x=p%400,y=Math.floor(p/400);for(const k of [x?p-1:-1,x<399?p+1:-1,y?p-400:-1,y<399?p+400:-1])if(k>=0&&!seen[k]&&data.data[k*4+3]>=64){seen[k]=1;stack.push(k);}}if(component.length<20)for(const p of component)data.data[p*4+3]=0;}c.putImageData(data,0,0);
+ const frame={canvas,pixels:data.data,labels:npcMaterialLabels(data.data,400,400,pose,{dressed})};remember(map,index,frame,6);return frame;
+}
+function tintPixel(pixels,n,hex,{accent=false}={}){
+ const r=pixels[n],g=pixels[n+1],b=pixels[n+2],l=.2126*r+.7152*g+.0722*b;if(l<40)return;
+ if(accent&&!(g>r*1.08&&b>r*1.08||Math.max(r,g,b)-Math.min(r,g,b)<23&&l<180))return;
+ const target=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)),max=Math.max(...target),scale=(.25+.75*Math.max(r,g,b)/205)*Math.min(1.2,180/Math.max(70,max));
+ for(let k=0;k<3;k++)pixels[n+k]=Math.min(255,target[k]*scale+(l>210?(l-210)*.9:0));
+}
+function paintFrame(frame,a,{base=false}={}){
+ const canvas=canvasOf(),c=canvas.getContext('2d'),data=c.createImageData(400,400);data.data.set(frame.pixels);const names={1:'shirt',2:'pants',3:'gloves',4:'boots'};
+ for(let i=0;i<frame.labels.length;i++){
+  const n=i*4,label=frame.labels[i],name=names[label];
+  if(base){if(label===2&&a.colors?.pants)tintPixel(data.data,n,a.colors.pants);continue;}
+  if(!name||label===2||a[name]<0){data.data[n+3]=0;continue;}
+  // Keep ivory decoration and outlines; recolor the dyed material itself.
+  const {s}=rgbInfo(data.data[n],data.data[n+1],data.data[n+2]);if(s>.2&&a.colors?.[name])tintPixel(data.data,n,a.colors[name]);
  }
- const [sx,sy,sw,sh]=sprite.frame,scale=Math.min((width-8)/sw,(height-8)/sh),dw=sw*scale,dh=sh*scale;
- ctx.save();ctx.imageSmoothingEnabled=false;ctx.drawImage(sprite.canvas,sx,sy,sw,sh,x+(width-dw)/2,y+height-dh-4,dw,dh);ctx.restore();
+ c.putImageData(data,0,0);return canvas;
+}
+function paintedBody(base,dressed,a,pose){
+ const canvas=canvasOf(),c=canvas.getContext('2d'),data=c.createImageData(400,400),source=a.shirt>=0?dressed:base;data.data.set(source.pixels);
+ const names={1:'shirt',2:'pants',3:'gloves',4:'boots'};
+ for(let i=0;i<source.labels.length;i++){const name=names[source.labels[i]],n=i*4;if(!name||!a.colors?.[name])continue;const {s}=rgbInfo(data.data[n],data.data[n+1],data.data[n+2]);if(s>.2)tintPixel(data.data,n,a.colors[name]);}
+ c.putImageData(data,0,0);
+ if(a.shirt>=0){
+  const under=paintFrame(base,a,{base:true}).getContext('2d').getImageData(0,0,400,400).data,mask=new Uint8Array(160000);
+  for(let n=0;n<mask.length;n++)if(a.gloves<0&&dressed.labels[n]===3||a.boots<0&&dressed.labels[n]===4){const x=n%400,y=Math.floor(n/400);for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++)if(x+dx>=0&&x+dx<400&&y+dy>=0&&y+dy<400)mask[n+dy*400+dx]=1;}
+  for(let n=0;n<mask.length;n++)if(mask[n])data.data.set(under.subarray(n*4,n*4+4),n*4);c.putImageData(data,0,0);
+ }else c.drawImage(paintFrame(dressed,{...a,shirt:-1}),0,0);
+ return canvas;
+}
+function equipmentPart(image,index,hex,{accent=false}={}){
+ let map=parts.get(image);if(!map){map=new Map();parts.set(image,map);}const key=index+'|'+hex+'|'+accent;if(map.has(key))return map.get(key);
+ const size=image.width/4,c=canvasOf(Math.ceil(size),Math.ceil(image.height/4)),g=c.getContext('2d');g.drawImage(image,index%4*size,Math.floor(index/4)*image.height/4,size,image.height/4,0,0,c.width,c.height);
+ const d=g.getImageData(0,0,c.width,c.height);let x1=c.width,y1=c.height,x2=0,y2=0;
+ for(let y=0;y<c.height;y++)for(let x=0;x<c.width;x++){const n=(y*c.width+x)*4;if(d.data[n+3]<64){d.data[n+3]=0;continue;}x1=Math.min(x1,x);x2=Math.max(x2,x);y1=Math.min(y1,y);y2=Math.max(y2,y);if(hex)tintPixel(d.data,n,hex,{accent});}
+ g.putImageData(d,0,0);const out=canvasOf(x2-x1+1,y2-y1+1);out.getContext('2d').drawImage(c,x1,y1,out.width,out.height,0,0,out.width,out.height);return remember(map,key,out,24);
+}
+const ITEM_SPECS=[{h:350,grip:[.5,.65]},{h:146,grip:[.5,.83]},{h:65,grip:[.5,.96]},{h:70,grip:[.5,.1]},{h:91,grip:[.5,.08]},{h:81,grip:[.5,.86]},{h:360,grip:[.5,.67]},{h:63,grip:[.5,.96]},{h:72,grip:[.5,.75]},{h:96,grip:[.5,.8]},{h:82,grip:[.5,.8]},{h:109,grip:[.5,.8]}];
+function drawNPCBattleSprite(ctx,images,a,{x=0,y=0,width=320,height=400}={}){
+ const key=JSON.stringify(a);let sprite=composites.get(key);
+ if(!sprite){
+  const pose=npcBattlePose(a),base=rawFrame(images[a.gender+'Base'],a.pose,pose,false),dressed=rawFrame(images[a.gender+'Dressed'],a.pose,pose,true),stage=canvasOf(520,520),c=stage.getContext('2d'),colors=a.colors||{};c.translate(60,65);c.imageSmoothingEnabled=false;
+  let hat;const [hx,hy]=pose.head;
+  const drawHat=(front=false)=>{if(!hat)return;const w=a.hat===0?109:a.hat===1?90:97,h=w*hat.height/hat.width,f=[.72,.62,.50,.42][a.hat],top=hy-11-h*f;if(front)c.drawImage(hat,0,0,hat.width,hat.height*f,hx-w*.5,top,w,h*f);else c.drawImage(hat,hx-w*.5,top,w,h);};
+  if(a.hat>=0){hat=equipmentPart(images.equipment,a.hat,colors.hat);drawHat();}
+  const body=paintedBody(base,dressed,a,pose);c.drawImage(body,0,0);
+  // Alter existing hair color without cutting or replacing the painted head.
+  if(a.head>0){const hair=canvasOf(),g=hair.getContext('2d'),d=g.createImageData(400,400);d.data.set(base.pixels);const hairColors=['#292729','#614236','#363c59','#73645a'];
+   for(let yy=0;yy<400;yy++)for(let xx=0;xx<400;xx++){const n=(yy*400+xx)*4,{h,s,v}=rgbInfo(d.data[n],d.data[n+1],d.data[n+2]);if(!(Math.abs(xx-hx)<68&&yy>hy-65&&yy<hy+32&&v>.1&&v<.35&&(s<.32||h>200)))d.data[n+3]=0;else tintPixel(d.data,n,hairColors[a.head]);}
+   g.putImageData(d,0,0);c.drawImage(hair,0,0);
+  }
+  if(hat)drawHat(true);
+  if(a.item>=0&&NPC_POSE_ITEMS[a.pose].includes(a.item)){
+   const part=equipmentPart(images.equipment,4+a.item,colors.item,{accent:true}),spec=ITEM_SPECS[a.item],hand=pose.hand,h=spec.h,w=h*part.width/part.height*(a.item===0?.48:a.item===6?.8:1);let grip=[...spec.grip],angle=0;
+   if(a.item===0||a.item===6){const bottom=pose.feet[0][1]+8;grip[1]=(pose.hand[1]-(bottom-h))/h;if(a.item===0){grip[0]=.29;angle=-.20;}}
+   if(a.item===1||a.item===10)angle=a.pose===4?-.35:-.1;
+   if(a.item===11&&pose.grip==='palm')angle=-1.15;
+   if(a.item===0){
+    // A continuous shaft can be held at any height without moving the hand.
+    const ground=pose.feet[0][1]+8,top=Math.min(pose.head[1]-62,hand[1]-90),scan=part.getContext('2d').getImageData(0,Math.floor(part.height*.82),part.width,1).data;let left=part.width,right=0;
+    for(let x=0;x<part.width;x++)if(scan[x*4+3]>128){left=Math.min(left,x);right=Math.max(right,x);}
+    c.drawImage(part,left,part.height*.65,Math.max(1,right-left+1),part.height*.30,hand[0]-4,top+25,8,ground-top-25);
+    const headHeight=83,headWidth=headHeight*part.width/(part.height*.55);c.drawImage(part,0,0,part.width,part.height*.55,hand[0]-headWidth*.26,top-25,headWidth,headHeight);
+   }else{c.save();c.translate(...hand);c.rotate(angle);c.drawImage(part,-w*grip[0],-h*grip[1],w,h);c.restore();}
+   // Real painted fingers sit in front of the held object at the grip.
+   const front=canvasOf(),g=front.getContext('2d');g.save();g.beginPath();g.ellipse(hand[0],hand[1],16,13,0,0,Math.PI*2);g.clip();g.drawImage(body,0,0);g.restore();c.drawImage(front,0,0);
+  }
+  c.setTransform(1,0,0,1,0,0);const d=c.getImageData(0,0,520,520).data;let l=520,t=520,r=0,b=0;for(let yy=0;yy<520;yy++)for(let xx=0;xx<520;xx++)if(d[(yy*520+xx)*4+3]>64){l=Math.min(l,xx);r=Math.max(r,xx);t=Math.min(t,yy);b=Math.max(b,yy);}
+  const sw=r-l+5,sh=b-t+5,scale=Math.min(1,340/sw,430/sh),baked=canvasOf(Math.ceil(sw*scale),Math.ceil(sh*scale));baked.getContext('2d').drawImage(stage,l-2,t-2,sw,sh,0,0,baked.width,baked.height);sprite=remember(composites,key,baked,28);
+ }
+ const scale=Math.min((width-8)/sprite.width,(height-8)/sprite.height),w=sprite.width*scale,h=sprite.height*scale;ctx.save();ctx.imageSmoothingEnabled=false;ctx.drawImage(sprite,x+(width-w)/2,y+height-h-4,w,h);ctx.restore();
 }
 function renderNPCBattleSprites(root=document){
- const canvases=root.querySelectorAll('canvas[data-npc-battle]');if(!canvases.length)return;
- const images=Object.fromEntries(Object.entries(NPC_BATTLE_ASSETS).map(([key,path])=>[key,readyImage(path)]));if(Object.values(images).some(image=>!image))return;
- for(const canvas of canvases){let a;try{a=JSON.parse(canvas.dataset.npcBattle);}catch{continue;}if(a.version!==2)continue;const c=canvas.getContext('2d');c.clearRect(0,0,canvas.width,canvas.height);drawNPCBattleSprite(c,images,a,{width:canvas.width,height:canvas.height});canvas.dataset.npcReady='true';}
+ const entries=[];for(const canvas of root.querySelectorAll('canvas[data-npc-battle]')){try{const a=JSON.parse(canvas.dataset.npcBattle);if(a.version===3)entries.push({canvas,a});}catch{}}
+ if(!entries.length)return;const keys=new Set(['equipment']);for(const {a} of entries){keys.add(a.gender+'Base');keys.add(a.gender+'Dressed');}
+ const images=Object.fromEntries([...keys].map(key=>[key,readyImage(NPC_BATTLE_ASSETS[key])]));if(Object.values(images).some(i=>!i))return;
+ for(const {canvas,a} of entries){const c=canvas.getContext('2d');c.clearRect(0,0,canvas.width,canvas.height);drawNPCBattleSprite(c,images,a,{width:canvas.width,height:canvas.height});canvas.dataset.npcReady='true';}
 }
+
 function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function npcBattleSpriteHTML(seed,identity={},escape=escapeHTML){const a=npcBattleAppearance(seed,identity),name=identity.name||'Opposing Sealer';return '<div class="npc-battle-portrait"><canvas width="320" height="400" data-npc-battle="'+escape(JSON.stringify(a))+'" role="img" aria-label="'+escape(name+' · '+a.gender+' pose '+(a.pose+1)+' · facing left')+'"></canvas></div>';}
-const NPC_REVIEW_IDENTITIES=['male','female'].flatMap(gender=>NPC_POSE_NAMES.flatMap((name,pose)=>[0,1].map(variant=>({id:'npc-v2-review-'+gender+'-'+pose+'-'+variant,name:(gender==='male'?'M':'F')+String(pose+1).padStart(2,'0')+' · '+(variant?'B':'A'),battleAppearance:{gender,pose,head:(pose+variant)%4,hat:variant&&pose%2?-1:(pose+variant)%4,shirt:variant&&pose%5===0?-1:(pose+variant)%2,gloves:variant&&pose%3===0?-1:(pose+variant)%2,boots:variant&&pose%4===0?-1:(pose+variant)%2,item:(pose+variant*5)%12}}))));
-const seed='wardrobe-review-02';
+const REVIEW_ITEMS=[[0,10],[7,3],[2,8],[0,6],[1,9],[3,7],[4,11],[7,5],[6,4],[-1,-1]];
+const NPC_REVIEW_IDENTITIES=['male','female'].flatMap(gender=>NPC_POSE_NAMES.flatMap((name,pose)=>[0,1].map(variant=>({id:'natural-review-'+gender+'-'+pose+'-'+variant,name:(gender==='male'?'M':'F')+String(pose+1).padStart(2,'0')+' · '+(variant?'B':'A'),battleAppearance:{gender,pose,head:variant,hat:variant&&pose%2?-1:(pose+variant)%4,shirt:variant&&pose%5===0?-1:(pose+variant)%2,gloves:variant&&pose%3===0?-1:(pose+variant)%2,boots:variant&&pose%4===0?-1:(pose+variant)%2,item:REVIEW_ITEMS[pose][variant]}}))));
+const seed='wardrobe-review-03';
 function details(a){const absent=['hat','shirt','gloves','boots'].filter(p=>a[p]===-1);return (a.item===-1?'Empty hand':NPC_ITEM_NAMES[a.item])+' · '+(absent.length?'No '+absent.join(', '):'Full attire');}
 document.querySelector('#groups').innerHTML=['male','female'].map(gender=>'<section><h2>'+ (gender==='male'?'Male':'Female')+' · 10 poses / 20 NPCs</h2><div class="poses">'+NPC_POSE_NAMES.map((name,pose)=>'<section class="pose"><h3>'+String(pose+1).padStart(2,'0')+' · '+name+'</h3><div class="pair">'+NPC_REVIEW_IDENTITIES.filter(n=>n.battleAppearance.gender===gender&&n.battleAppearance.pose===pose).map(n=>{const a=npcBattleAppearance(seed,n);return '<article data-gender="'+gender+'">'+npcBattleSpriteHTML(seed,n)+'<b>'+n.name+'</b><small>'+details(a)+'</small></article>';}).join('')+'</div></section>').join('')+'</div></section>').join('');
-let closing=false;function dialogue(){document.querySelector('#dialogue').innerHTML=npcBattleSpriteHTML(seed,NPC_REVIEW_IDENTITIES[3])+'<div class="copy"><div class="tag">'+(closing?'THE BATTLE ENDS':'BEFORE THE CHALLENGE')+'</div><h2>Enemy Sealer · right side / facing left</h2><p>'+(closing?'Your bond is strong. I’ll remember this lesson.':'Let’s see how your Spirimon and mine work together.')+'</p><button id="phase">'+(closing?'Show opening dialogue':'Show closing dialogue')+'</button></div>';document.querySelector('#phase').onclick=()=>{closing=!closing;dialogue();};renderNPCBattleSprites();}
+let closing=false;function dialogue(){document.querySelector('#dialogue').innerHTML=npcBattleSpriteHTML(seed,NPC_REVIEW_IDENTITIES[3])+'<div class="copy"><div class="tag">'+(closing?'THE BATTLE ENDS':'BEFORE THE CHALLENGE')+'</div><h2>Enemy Sealer · right side / facing left</h2><p>'+(closing?'Your bond is strong. I’ll remember this lesson.':'Let’s see how your Spirimon and mine work together.')+'</p><button id="phase">'+(closing?'Show opening dialogue':'Show closing dialogue')+'</button></div>';document.querySelector('#phase').onclick=()=>{closing=!closing;dialogue();};renderNPCBattleSprites(document.querySelector('#dialogue'));}
 function ready(){renderNPCBattleSprites();const done=[...document.querySelectorAll('#groups canvas')].every(c=>c.dataset.npcReady==='true');document.querySelectorAll('[data-export]').forEach(b=>b.disabled=!done);document.querySelector('#status').textContent=done?'40 / 40 sprites ready · two versions of every pose':'Loading the three modular artwork atlases…';}
 globalThis.spirimonArtLoaded=ready;dialogue();ready();
 for(const button of document.querySelectorAll('[data-export]'))button.onclick=()=>{
- const gender=button.dataset.export,canvas=document.createElement('canvas');canvas.width=1800;canvas.height=2600;const c=canvas.getContext('2d');c.fillStyle='#12241f';c.fillRect(0,0,1800,2600);c.fillStyle='#d6c28d';c.font='22px sans-serif';c.fillText('SPIRIMON / MODULAR NPC BATTLE SPRITES / REVIEW 02',40,45);c.fillStyle='#ede8d2';c.font='42px Georgia';c.fillText((gender==='male'?'Male':'Female')+' · ten poses, two NPCs per pose',40,105);c.fillStyle='#b6c7b1';c.font='20px sans-serif';c.fillText('Independent attire and equipment · optional hat, shirt, gloves and boots · all facing left',40,145);
+ const gender=button.dataset.export,canvas=document.createElement('canvas');canvas.width=1800;canvas.height=2600;const c=canvas.getContext('2d');c.fillStyle='#12241f';c.fillRect(0,0,1800,2600);c.fillStyle='#d6c28d';c.font='22px sans-serif';c.fillText('SPIRIMON / MODULAR NPC BATTLE SPRITES / REVIEW 03',40,45);c.fillStyle='#ede8d2';c.font='42px Georgia';c.fillText((gender==='male'?'Male':'Female')+' · ten poses, two NPCs per pose',40,105);c.fillStyle='#b6c7b1';c.font='20px sans-serif';c.fillText('Independent attire and equipment · optional hat, shirt, gloves and boots · all facing left',40,145);
  document.querySelectorAll('article[data-gender="'+gender+'"]').forEach((card,i)=>{const x=30+(i%4)*442,y=185+Math.floor(i/4)*475;c.fillStyle='#1c3229';c.fillRect(x,y,423,457);c.strokeStyle='#47614c';c.strokeRect(x,y,423,457);c.imageSmoothingEnabled=false;c.drawImage(card.querySelector('canvas'),x+47,y+8,330,350);c.fillStyle='#ede8d2';c.font='24px Georgia';c.fillText(card.querySelector('b').textContent+' · '+NPC_POSE_NAMES[Math.floor(i/2)],x+12,y+388,400);c.fillStyle='#b6c7b1';c.font='15px sans-serif';c.fillText(card.querySelector('small').textContent,x+12,y+424,400);});
  canvas.toBlob(blob=>{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Spirimon_'+(gender==='male'?'Male':'Female')+'_20_NPC_Pose_Review.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);});
 };

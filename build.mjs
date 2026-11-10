@@ -89,7 +89,7 @@ export async function buildPage(directory=root,{standalone=true}={}){
  if(html.includes('<!-- SPIRIMON_GAME -->'))throw Error('Game template placeholder is missing.');
  const packagedHtml=html.replace(bundleName,packagedBundleName).replace('window.spirimonLoadGame(', 'window.__spirimonPackaged=true;window.spirimonLoadGame(');
  // The optional wardrobe review uses exactly the production mixer and renderer,
- // bundled alone so viewing five NPCs never boots a new game or a save.
+ // bundled alone so the NPC review never boots a new game or a save.
  const npcModule=sources.get('npc-battle-sprites.mjs');
  const npcReviewTemplate=await readFile(path.join(directory,'npc-battle-review.template.html'),'utf8');
  const npcReviewCode=npcModule.replace(/^import .*?;\n/gm,'').replace(/^export /gm,'');
