@@ -5,12 +5,12 @@ import {readFileSync} from 'node:fs';
 import {ROSTER} from '../roster.mjs';
 import {battleBackSource} from '../battle-art.mjs';
 import {AUTHORED_COMPANIONS} from '../companion-rigs.mjs';
-import {companionRig,companionFrame,rigPoint,followingCompanionFacing,drawRigFrame} from '../companion-animation.mjs';
+import {companionRig,companionFrame,rigPoint,followingCompanionFacing,followingCompanionFlip,drawRigFrame} from '../companion-animation.mjs';
 import {LEGENDS,applyLegendArtwork} from '../legendary-roster.mjs';
 const source=readFileSync(new URL('../sprites.mjs',import.meta.url),'utf8').replace(/^import .*;\s*$/gm,'').replace(/\bexport\s+(?=(?:function|const|let|class)\b)/g,'');
 function harness(){
- const images=new Map(),poses=[],draws=[];let made=0;const ctx={save(){},restore(){},translate(){},beginPath(){},rect(){},clip(){},drawImage:(...args)=>draws.push(args)};
- const h=vm.createContext({companionRig,companionFrame,battleBackSource,readyImage:path=>images.get(path),drawRigFrame:(g,image,rect,rig,frame,direction)=>poses.push({image,rect,rig,frame,direction}),document:{createElement(){made++;return {width:0,height:0,getContext:()=>ctx};}}});vm.runInContext(source,h);return {h,images,poses,draws,ctx,made:()=>made};
+ const images=new Map(),poses=[],draws=[],transforms=[];let made=0;const ctx={save(){},restore(){},translate:(...args)=>transforms.push(['translate',...args]),scale:(...args)=>transforms.push(['scale',...args]),beginPath(){},rect(){},clip(){},drawImage:(...args)=>draws.push(args)};
+ const h=vm.createContext({companionRig,companionFrame,battleBackSource,readyImage:path=>images.get(path),drawRigFrame:(g,image,rect,rig,frame,direction)=>poses.push({image,rect,rig,frame,direction}),document:{createElement(){made++;return {width:0,height:0,getContext:()=>ctx};}}});vm.runInContext(source,h);return {h,images,poses,draws,transforms,ctx,made:()=>made};
 }
 test('all 450 roster forms and twelve legendary forms have assigned rigs and real north-facing sources',()=>{
  assert.equal(Object.keys(AUTHORED_COMPANIONS).length,150);let count=0;
@@ -38,14 +38,19 @@ test('walking atlas cache evicts old forms at 24 canvases and rebakes revised ar
  assert.equal(t.h.companionCacheSize(),24);assert.equal(t.made(),27);t.h.drawCompanion(t.ctx,ROSTER[26],0,0,0);assert.equal(t.made(),27);t.h.drawCompanion(t.ctx,ROSTER[0],0,0,0);assert.equal(t.made(),28);
  t.h.drawCompanion(t.ctx,{...ROSTER[0],artRevision:999},0,0,0);assert.equal(t.made(),29);assert.equal(t.h.companionCacheSize(),24);
 });
-test('northward following stays rear-facing while southward walking alternates every full second',()=>{
+test('northward following mirrors rear art while southward walking alternates every full second',()=>{
  for(const face of ['down'])for(const [time,expected]of [[0,'left'],[500,'left'],[999,'left'],[1000,'right'],[1500,'right'],[1999,'right'],[2000,'left'],[2999,'left'],[3000,'right']])assert.equal(followingCompanionFacing(face,true,time),expected,face+' at '+time);
- for(const time of [0,500,999,1000,1500,1999,2000,2999,3000])assert.equal(followingCompanionFacing('up',true,time),'up','Rear-facing at '+time);
- for(const face of ['up','down','left','right'])for(const time of [0,1000,2000]){assert.equal(followingCompanionFacing(face,false,time),face,'idle');if(face==='left'||face==='right')assert.equal(followingCompanionFacing(face,true,time),face,'horizontal travel');}
+ for(const time of [0,500,999,1000,1500,1999,2000,2999,3000]){assert.equal(followingCompanionFacing('up',true,time),'up','Rear-facing at '+time);assert.equal(followingCompanionFlip('up',true,time),Math.floor(time/1000)%2===1,'Rear mirror at '+time);}
+ for(const face of ['up','down','left','right'])for(const time of [0,1000,2000]){assert.equal(followingCompanionFacing(face,false,time),face,'idle');assert.equal(followingCompanionFlip(face,false,time),false,'idle mirror');if(face!=='up')assert.equal(followingCompanionFlip(face,true,time),false,'only mirror rear');if(face==='left'||face==='right')assert.equal(followingCompanionFacing(face,true,time),face,'horizontal travel');}
 });
 test('the left and right companion poses use the same source image with a horizontal mirror',()=>{
  const image={id:'front'},rect=[0,0,256,256],rig=companionRig(ROSTER[0],0),flips=[],draws=[];
  const ctx={save(){},restore(){},translate:(...args)=>flips.push(['translate',...args]),scale:(...args)=>flips.push(['scale',...args]),drawImage:(...args)=>draws.push(args)};
  drawRigFrame(ctx,image,rect,rig,0,2);assert.deepEqual(flips,[]);
  drawRigFrame(ctx,image,rect,rig,0,3);assert.deepEqual(flips,[['translate',64,0],['scale',-1,1]]);assert.deepEqual(draws[0],draws[1]);
+});
+
+test('rear mirroring keeps the rear row and flips around the sprite center without shifting its bounds',()=>{
+ const t=harness(),sp={id:'authored',companionSheets:['walk']};t.images.set('walk',{width:256,height:256});
+ for(const time of [0,999,1000,1999,2000]){t.transforms.length=0;t.h.drawCompanion(t.ctx,sp,0,12,20,72,followingCompanionFacing('up',true,time),true,.25,followingCompanionFlip('up',true,time));assert.deepEqual(t.transforms,Math.floor(time/1000)%2?[['translate',96,0],['scale',-1,1]]:[]);assert.deepEqual(t.draws.at(-1).slice(1),[64,0,64,64,12,20,72,72]);}
 });

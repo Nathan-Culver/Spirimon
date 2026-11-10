@@ -41,10 +41,12 @@ function generatedCompanionSheet(sp,form){
  companionSheets.set(key,canvas);if(companionSheets.size>COMPANION_CACHE_LIMIT)companionSheets.delete(companionSheets.keys().next().value);
  return canvas;
 }
-export function drawCompanion(ctx,sp,form,x,y,size=36,face='down',moving=false,progress=0){
+export function drawCompanion(ctx,sp,form,x,y,size=36,face='down',moving=false,progress=0,flip=false){
  if(!sp)return;const {row,frame}=companionFrame(face,moving,progress),authored=sp.companionSheets?.[form],sheet=authored?readyImage(authored):generatedCompanionSheet(sp,form);
- if(sheet){const sw=sheet.width/4,sh=sheet.height/4;ctx.save();ctx.imageSmoothingEnabled=false;ctx.drawImage(sheet,frame*sw,row*sh,sw,sh,x,y,size,size);ctx.restore();return;}
- drawMysteryPlaceholder(ctx,x,y,size,{face,moving,progress});
+ ctx.save();if(flip){ctx.translate(x*2+size,0);ctx.scale(-1,1);}
+ if(sheet){const sw=sheet.width/4,sh=sheet.height/4;ctx.imageSmoothingEnabled=false;ctx.drawImage(sheet,frame*sw,row*sh,sw,sh,x,y,size,size);}
+ else drawMysteryPlaceholder(ctx,x,y,size,{face,moving,progress});
+ ctx.restore();
 }
 // Atlas rows are up, down, left, right; each contains one looping four-frame walk.
 export function mysteryFrame(face='down',moving=false,progress=0){

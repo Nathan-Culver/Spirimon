@@ -6,7 +6,7 @@ import {GENERATION_REFERENCES} from './generation-references.mjs';
 import * as QOL from './qol.mjs';
 import {techniqueMotion,encounterMusic} from './battle-presentation.mjs';
 import {battlePose,BATTLE_EFFECT_MS} from './battle-sprite-animation.mjs';
-import {followingCompanionFacing} from './companion-animation.mjs';
+import {followingCompanionFacing,followingCompanionFlip} from './companion-animation.mjs';
 import {screenEffects,drawIllustratedEffect,drawEmitter,drawBattleFlash,prepareBattleEvents,warmTechniqueArtwork} from './battle-effects.mjs';
 import * as TUTORIAL from './tutorials.mjs';
 import {npcOpening,enemySpeech,lineOfSight,guardPosition} from './npc-dialogue.mjs';
@@ -394,7 +394,7 @@ function drawCave(canvas,time){
   if(from&&to){const fx=from.x+(to.x-from.x)*(moving?progress:1),fy=from.y+(to.y-from.y)*(moving?progress:1);
    const face=to.x<from.x?'left':to.x>from.x?'right':to.y<from.y?'up':'down';
    const sp=spOf(follower),sz=companionSize(sp,follower.appearance).size*2;
-   queue.push({z:oy+fy*size+30,draw:()=>{drawAspectAura(ctx,follower,ox+fx*size+16-sz/2,oy+fy*size+30-sz,sz);drawCompanion(ctx,sp,follower.appearance,ox+fx*size+16-sz/2,oy+fy*size+30-sz,sz,followingCompanionFacing(face,moving,time),moving,progress);}});
+   queue.push({z:oy+fy*size+30,draw:()=>{drawAspectAura(ctx,follower,ox+fx*size+16-sz/2,oy+fy*size+30-sz,sz);drawCompanion(ctx,sp,follower.appearance,ox+fx*size+16-sz/2,oy+fy*size+30-sz,sz,followingCompanionFacing(face,moving,time),moving,progress,followingCompanionFlip(face,moving,time));}});
   }
  }
  queue.push({z:oy+vy*size+30,draw:()=>drawPerson(ctx,ox+vx*size,oy+vy*size-5,'player',time,s.player.face,moving,adventureState().appearance)});
@@ -927,7 +927,7 @@ function drawWorld(time){
  }}
 
  for(const n of people){if(n.id===challengerApproach?.npcId)continue;const w=n.walk,progress=w?Math.min(1,(time-w.start)/w.duration):1,nx=w&&progress<1?w.x+(n.x-w.x)*progress:n.x,ny=w&&progress<1?w.y+(n.y-w.y)*progress:n.y;if(!visible(px(nx)-24,py(ny)-48,80,96))continue;actors.push({y:ny,draw:()=>{const x=px(nx),y=py(ny);drawPerson(c,x,y-5,n.role,time,n.face||'down',progress<1);if(Math.abs(n.x-s.player.x)+Math.abs(n.y-s.player.y)<=2){c.fillStyle='#fff5bd';c.strokeStyle='#4f4430';c.font='bold 10px monospace';c.textAlign='center';c.strokeText('!',x+16,y-8);c.fillText('!',x+16,y-8);}}});}
- if(!s.mountedSteed&&!swimmingAt(vx,vy)&&s.party.length&&s.spirits.length){const companion=lead(),step=companionTrail.length-3;if(companion&&step>=0){const from=companionTrail[step],to=companionTrail[step+1]||from;if(from&&to){const fx=from.x+(to.x-from.x)*(moving?elapsed:1),fy=from.y+(to.y-from.y)*(moving?elapsed:1),face=to.x<from.x?'left':to.x>from.x?'right':to.y<from.y?'up':'down';const size=companionSize(spOf(companion),companion.appearance).size*2;if(visible(px(fx)+16-size/2,py(fy)+30-size,size,size))actors.push({y:fy,draw:()=>{drawAspectAura(c,companion,px(fx)+16-size/2,py(fy)+30-size,size);drawCompanion(c,spOf(companion),companion.appearance,px(fx)+16-size/2,py(fy)+30-size,size,followingCompanionFacing(face,moving,time),moving,elapsed);}});}}}
+ if(!s.mountedSteed&&!swimmingAt(vx,vy)&&s.party.length&&s.spirits.length){const companion=lead(),step=companionTrail.length-3;if(companion&&step>=0){const from=companionTrail[step],to=companionTrail[step+1]||from;if(from&&to){const fx=from.x+(to.x-from.x)*(moving?elapsed:1),fy=from.y+(to.y-from.y)*(moving?elapsed:1),face=to.x<from.x?'left':to.x>from.x?'right':to.y<from.y?'up':'down';const size=companionSize(spOf(companion),companion.appearance).size*2;if(visible(px(fx)+16-size/2,py(fy)+30-size,size,size))actors.push({y:fy,draw:()=>{drawAspectAura(c,companion,px(fx)+16-size/2,py(fy)+30-size,size);drawCompanion(c,spOf(companion),companion.appearance,px(fx)+16-size/2,py(fy)+30-size,size,followingCompanionFacing(face,moving,time),moving,elapsed,followingCompanionFlip(face,moving,time));}});}}}
  for(let cy=pc.cy-1;cy<=pc.cy+1;cy++)for(let cx=pc.cx-1;cx<=pc.cx+1;cx++)for(const r of s.roamers[cx+','+cy]||[]){if(!roamerArtworkReady(r))continue;const a=r.wanderFrom,t=a?Math.min(1,(time-a.start)/a.duration):1,rx=a&&t<1?a.x+(r.x-a.x)*t:r.x,ry=a&&t<1?a.y+(r.y-a.y)*t:r.y,x=px(rx),y=py(ry);if(x<-70||x>width+50||y<-70||y>height+50)continue;actors.push({y:ry,draw:()=>{c.save();try{const sp=spOf(r.ind);drawSpirit(c,sp,r.ind.appearance,x-13,y-29+(t<1?-Math.abs(Math.sin(t*Math.PI))*4:0),58,r.face==='left',{face:r.face||'down',moving:t<1,progress:t});}catch(e){console.warn('Wild Spirimon drawing failed',r.id,e);}finally{c.restore();}}});}
  if(challengerApproach){const a=challengerApproach;actors.push({y:a.y,draw:()=>{drawPerson(c,px(a.x),py(a.y)-5,a.kind==='rival'?'rival':'villain',time,a.face,true);c.fillStyle='#fff5bd';c.font='bold 11px monospace';c.textAlign='center';c.fillText('!',px(a.x)+15,py(a.y)-15);}});}
  actors.push({y:vy,draw:()=>{const steed=s.mountedSteed&&validSteed(),water=swimmingAt(vx,vy)||swimmingAt(s.player.x,s.player.y),swimmer=water&&leadSwimmer();if(water&&swimmer)drawWaterMount(c,drawMounted,drawCompanion,drawPerson,spOf(swimmer),swimmer.appearance,px(vx),py(vy)-5,s.player.face,moving,elapsed,time,adventureState().appearance);else if(water)drawSwimming(c,drawPerson,px(vx),py(vy)-5,s.player.face,moving,time,adventureState().appearance);else if(steed)drawMounted(c,drawCompanion,drawPerson,spOf(steed),steed.appearance,px(vx),py(vy)-5,s.player.face,moving,elapsed,time,adventureState().appearance);else drawPerson(c,px(vx),py(vy)-5,'player',moving?elapsed*1000:0,s.player.face,moving,adventureState().appearance);}});
@@ -1322,7 +1322,7 @@ function drawInterior(canvas,time){
   const fx=from.x+(next.x-from.x)*(walking?progress:1),fy=from.y+(next.y-from.y)*(walking?progress:1);
   const dx=next.x-from.x,dy=next.y-from.y,travelFace=dx<0?'left':dx>0?'right':dy<0?'up':dy>0?'down':room.face;
   const face=followingCompanionFacing(travelFace,walking,time);
-  actors.push({z:fy+1,draw:()=>{const size=companionSize(spOf(follower),follower.appearance).size*2;drawAspectAura(c,follower,ox+fx*unit+16-size/2,oy+fy*unit+30-size,size);drawCompanion(c,spOf(follower),follower.appearance,ox+fx*unit+16-size/2,oy+fy*unit+30-size,size,face,walking,progress);}});
+  actors.push({z:fy+1,draw:()=>{const size=companionSize(spOf(follower),follower.appearance).size*2;drawAspectAura(c,follower,ox+fx*unit+16-size/2,oy+fy*unit+30-size,size);drawCompanion(c,spOf(follower),follower.appearance,ox+fx*unit+16-size/2,oy+fy*unit+30-size,size,face,walking,progress,followingCompanionFlip(travelFace,walking,time));}});
  }
  actors.push({z:py+1,draw:()=>drawPerson(c,ox+px*unit,oy+py*unit,'player',time,room.face,walking,adventureState().appearance)});
  drawInteriorScene(c,room,ox,oy,time,actors);drawSpiritualPerception(c,x=>ox+x*32,y=>oy+y*32);

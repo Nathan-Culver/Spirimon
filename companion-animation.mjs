@@ -26,10 +26,13 @@ export function companionFrame(face='down',moving=false,progress=0){
 }
 export function followingCompanionFacing(face='down',moving=false,time=0){
  if(!moving||face!=='down')return face;
- // Northward followers use the rear-art row. Only southward walking alternates.
+ // Keep northward travel on the rear-art row; mirror that row separately.
  // Use the frame clock, not per-tile walk progress, so stepping and running
  // cannot restart or accelerate the once-per-second horizontal alternation.
  return Math.floor(Math.max(0,Number.isFinite(time)?time:0)/1000)%2?'right':'left';
+}
+export function followingCompanionFlip(face='down',moving=false,time=0){
+ return face==='up'&&moving&&Math.floor(Math.max(0,Number.isFinite(time)?time:0)/1000)%2===1;
 }
 export function rigPoint(rig,u,v,frame,direction){
  const phase=frame*Math.PI/2,beat=Math.sin(phase),side=u<.5?-1:1,lateral=direction>=2;
