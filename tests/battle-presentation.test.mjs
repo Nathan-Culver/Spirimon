@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
 import {techniqueMotion,encounterMusic} from '../battle-presentation.mjs';
+import {npcBattleSpriteHTML} from '../npc-battle-sprites.mjs';
 import {enemySpeech} from '../npc-dialogue.mjs';
 const source=readFileSync(new URL('../app.mjs',import.meta.url),'utf8');
 const extract=name=>{const start=source.indexOf('function '+name+'('),next=source.slice(start+1).search(/\n(?:async )?function /);return source.slice(start,next<0?source.length:start+1+next);};
@@ -31,7 +32,7 @@ test('dialogue arcs preserve player answers, faction identity and rematch memori
 });
 function dialogueHarness(trainer=true){
  const dialogs=[],nodes=[],battle={trainer,dialogueIdentity:{id:'test',name:'Ari'}},s={tutorial:{battleStarted:true}};
- const h=vm.createContext({battle,s,battleDialogue:null,queueMicrotask:fn=>fn(),enemySpeech,sceneFadeUntil:0,performance:{now:()=>0},document:{querySelector:()=>({}),body:{appendChild:n=>nodes.push(n)},addEventListener(){}},showModal:(title,body)=>dialogs.push({title,body}),closeModal(){},save(){},render(){},esc:String,action:(op,text,value)=>`<button data-value="${value}">${text}</button>`,finishSceneFade:n=>{if(n)nodes.push('fade');}});
+ const h=vm.createContext({npcBattleSpriteHTML,renderNPCBattleSprites(){},$:()=>null,battle,s,battleDialogue:null,queueMicrotask:fn=>fn(),enemySpeech,sceneFadeUntil:0,performance:{now:()=>0},document:{querySelector:()=>({}),body:{appendChild:n=>nodes.push(n)},addEventListener(){}},showModal:(title,body)=>dialogs.push({title,body}),closeModal(){},save(){},render(){},esc:String,action:(op,text,value)=>`<button data-value="${value}">${text}</button>`,finishSceneFade:n=>{if(n)nodes.push('fade');}});
  vm.runInContext(['queueBattleIntroduction','showBattleDialogue','advanceBattleDialogue','battleClosingDialogue'].map(extract).join('\n'),h);
  return {h,battle,s,dialogs,nodes};
 }
@@ -45,6 +46,18 @@ test('ending speech and the first-battle Menu guide finish before rewards or a r
  const t=dialogueHarness(false);let ended=0;
  assert.equal(t.h.battleClosingDialogue('won',()=>ended++),true);assert.equal(ended,0);assert.match(t.dialogs[0].body,/MENU.*TUTORIAL/);
  t.h.advanceBattleDialogue('');assert.equal(ended,1);assert.equal(t.battle.endingDialogueDone,true);assert.equal(t.s.tutorial.menuExplained,true);
+});
+test('opening and closing conversations show the same named NPC sprite before releasing combat',()=>{
+ const t=dialogueHarness();t.s.seed='npc-world';
+ t.h.queueBattleIntroduction(t.battle,null);
+ const opening=t.dialogs[0].body.match(/data-npc-battle="([^"]*)"/)[1];
+ assert.match(t.dialogs[0].body,/Ari battle sprite/);
+ t.h.advanceBattleDialogue('resolve');t.h.advanceBattleDialogue('');
+ assert.equal(t.battle.dialogueGate,undefined);
+ let finished=false;t.h.battleClosingDialogue('lost',()=>finished=true);
+ const closing=t.dialogs.at(-1).body.match(/data-npc-battle="([^"]*)"/)[1];
+ assert.equal(closing,opening);assert.equal(t.battle.dialogueGate,true);assert.equal(finished,false);
+ t.h.advanceBattleDialogue('');assert.equal(finished,true);
 });
 test('fullscreen attempts startup and retries on the first user gesture',async()=>{
  const events={};let requests=0;const h=vm.createContext({document:{documentElement:{requestFullscreen(){requests++;return Promise.reject(Error('gesture required'));}},addEventListener:(name,fn)=>events[name]=fn}});

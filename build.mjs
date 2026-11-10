@@ -88,7 +88,14 @@ export async function buildPage(directory=root,{standalone=true}={}){
   .replace('<!-- SPIRIMON_GAME -->',()=>moduleMeta+'\n<script>window.spirimonLoadGame("./'+bundleName+'");</script>');
  if(html.includes('<!-- SPIRIMON_GAME -->'))throw Error('Game template placeholder is missing.');
  const packagedHtml=html.replace(bundleName,packagedBundleName).replace('window.spirimonLoadGame(', 'window.__spirimonPackaged=true;window.spirimonLoadGame(');
- return {html,packagedHtml,script,pageScript,packagedScript,standaloneHtml,css,bundleName,packagedBundleName,styleName,offlineArt,assets,modules:ordered};
+ // The optional wardrobe review uses exactly the production mixer and renderer,
+ // bundled alone so viewing five NPCs never boots a new game or a save.
+ const npcModule=sources.get('npc-battle-sprites.mjs');
+ const npcReviewTemplate=await readFile(path.join(directory,'npc-battle-review.html'),'utf8');
+ const npcReviewCode=npcModule.replace(/^import .*?;\n/gm,'').replace(/^export /gm,'');
+ const npcReviewLoader="const npcImage=new Image();let npcImageReady=false;function readyImage(){return npcImageReady?npcImage:null;}npcImage.onload=()=>{npcImageReady=true;renderNPCBattleSprites();};npcImage.src='./assets/npc-battle/wardrobe-v1.webp';\n";
+ const npcReviewHtml=npcReviewTemplate.replace(/^import .*?from '\.\/npc-battle-sprites\.mjs';/m,()=>npcReviewLoader+npcReviewCode);
+ return {html,packagedHtml,script,pageScript,packagedScript,standaloneHtml,npcReviewHtml,css,bundleName,packagedBundleName,styleName,offlineArt,assets,modules:ordered};
 }
 
 export async function writeRelease(output,{target='web',directory=root}={}){
@@ -103,6 +110,7 @@ export async function writeRelease(output,{target='web',directory=root}={}){
  }
  const app=target==='app',files={'index.html':app?built.packagedHtml:built.html,[app?built.packagedBundleName:built.bundleName]:app?built.packagedScript:built.pageScript,[built.styleName]:built.css};
  if(built.standaloneHtml)files['Spirimon.html']=built.standaloneHtml;
+ if(!app)files['npc-battle-review.html']=built.npcReviewHtml;
  for(const [name,value]of Object.entries(files))await writeFile(path.join(output,name),value);
  if(path.resolve(output)!==path.resolve(directory)){
   for(const asset of built.assets){const dest=path.join(output,asset.path);await mkdir(path.dirname(dest),{recursive:true});await cp(path.join(directory,asset.path),dest);}

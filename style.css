@@ -615,3 +615,11 @@ body.battling .unified-battle .compact-secondary select{min-width:0;max-width:10
 
 /* Home-server guidance is a settings dialog, outside the compact battle/menu layouts. */
 .home-server-steps{display:grid;gap:18px;min-width:0}.home-server-steps section{min-width:0;border:1px solid #a1ad86;padding:14px}.home-server-steps pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:10px;background:#e8edcc;color:#314b35;font:13px/1.5 monospace}.home-server-steps code,.home-server-steps a{overflow-wrap:anywhere}.home-server-steps input:not([type=checkbox]):not([type=file]){width:100%;min-width:0}.home-server-steps .home-remember{display:flex;align-items:center;gap:8px}.home-server-steps .home-remember input{width:auto}.home-server-steps .btn-row{flex-wrap:wrap}.home-server-steps .settings-status{overflow-wrap:anywhere}
+
+/* Trainer portraits share the opening and closing dialogue gate. */
+.npc-battle-dialogue{display:grid;grid-template-columns:minmax(100px,200px) minmax(0,1fr);gap:24px;align-items:center}
+.npc-battle-portrait{display:flex;justify-content:center;align-items:flex-end;background:radial-gradient(ellipse at 50% 85%,#b5c58c24,transparent 66%);min-width:0}
+.npc-battle-portrait canvas{display:block;width:auto;height:min(47vh,360px);max-width:100%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 6px 0 #07171055)}
+.npc-battle-speech{min-width:0}.npc-battle-speech p+p{margin-top:12px}.npc-battle-speech .btn-row{margin-top:18px;display:flex;flex-wrap:wrap}
+@media(max-width:540px){.npc-battle-dialogue{grid-template-columns:100px minmax(0,1fr);gap:12px}.npc-battle-portrait canvas{height:220px}.npc-battle-speech .btn-row{gap:6px}.npc-battle-speech button{white-space:normal}}
+@media(max-height:500px){.npc-battle-dialogue{grid-template-columns:100px minmax(0,1fr);gap:16px}.npc-battle-portrait canvas{height:210px}.npc-battle-speech p+p{margin-top:6px}.npc-battle-speech .btn-row{margin-top:10px}}
