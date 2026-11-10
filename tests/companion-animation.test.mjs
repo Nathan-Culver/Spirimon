@@ -29,7 +29,7 @@ test('leg poses alternate independently of the anchored torso; wings and flowing
 });
 test('baking uses audited rear rectangles only for north and preserves distinct front artwork for other facings',()=>{
  const t=harness(),sp=ROSTER[0],rear=battleBackSource(sp,1),front={width:768,height:256,id:'front'},back={width:768,height:256,id:'rear'};t.images.set(sp.atlas,front);t.images.set(rear.source,back);
- t.h.drawCompanion(t.ctx,sp,1,0,0,36,'up',true,.25);assert.equal(t.poses.length,16);assert.ok(t.poses.filter(p=>p.direction===0).every(p=>p.image===back&&p.rect.join(',')===rear.frame.join(',')));assert.ok(t.poses.filter(p=>p.direction>0).every(p=>p.image===front));
+ t.h.drawCompanion(t.ctx,sp,1,0,0,36,followingCompanionFacing('up',true,1250),true,.25);assert.equal(t.poses.length,16);assert.ok(t.poses.filter(p=>p.direction===0).every(p=>p.image===back&&p.rect.join(',')===rear.frame.join(',')));assert.ok(t.poses.filter(p=>p.direction>0).every(p=>p.image===front));
  for(const [row,face] of ['up','down','left','right'].entries()){t.h.drawCompanion(t.ctx,sp,1,0,0,36,face,true,1.25);assert.equal(t.draws.at(-1)[1],64);assert.equal(t.draws.at(-1)[2],row*64);}assert.equal(t.made(),1);
 });
 test('walking atlas cache evicts old forms at 24 canvases and rebakes revised artwork',()=>{
@@ -38,8 +38,9 @@ test('walking atlas cache evicts old forms at 24 canvases and rebakes revised ar
  assert.equal(t.h.companionCacheSize(),24);assert.equal(t.made(),27);t.h.drawCompanion(t.ctx,ROSTER[26],0,0,0);assert.equal(t.made(),27);t.h.drawCompanion(t.ctx,ROSTER[0],0,0,0);assert.equal(t.made(),28);
  t.h.drawCompanion(t.ctx,{...ROSTER[0],artRevision:999},0,0,0);assert.equal(t.made(),29);assert.equal(t.h.companionCacheSize(),24);
 });
-test('vertical following alternates left and right every full second, independent of tile progress',()=>{
- for(const face of ['up','down'])for(const [time,expected]of [[0,'left'],[500,'left'],[999,'left'],[1000,'right'],[1500,'right'],[1999,'right'],[2000,'left'],[2999,'left'],[3000,'right']])assert.equal(followingCompanionFacing(face,true,time),expected,face+' at '+time);
+test('northward following stays rear-facing while southward walking alternates every full second',()=>{
+ for(const face of ['down'])for(const [time,expected]of [[0,'left'],[500,'left'],[999,'left'],[1000,'right'],[1500,'right'],[1999,'right'],[2000,'left'],[2999,'left'],[3000,'right']])assert.equal(followingCompanionFacing(face,true,time),expected,face+' at '+time);
+ for(const time of [0,500,999,1000,1500,1999,2000,2999,3000])assert.equal(followingCompanionFacing('up',true,time),'up','Rear-facing at '+time);
  for(const face of ['up','down','left','right'])for(const time of [0,1000,2000]){assert.equal(followingCompanionFacing(face,false,time),face,'idle');if(face==='left'||face==='right')assert.equal(followingCompanionFacing(face,true,time),face,'horizontal travel');}
 });
 test('the left and right companion poses use the same source image with a horizontal mirror',()=>{

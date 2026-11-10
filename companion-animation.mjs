@@ -25,7 +25,8 @@ export function companionFrame(face='down',moving=false,progress=0){
  return {row:({up:0,down:1,left:2,right:3})[face]??1,frame:moving?Math.floor(phase*4):0};
 }
 export function followingCompanionFacing(face='down',moving=false,time=0){
- if(!moving||!['up','down'].includes(face))return face;
+ if(!moving||face!=='down')return face;
+ // Northward followers use the rear-art row. Only southward walking alternates.
  // Use the frame clock, not per-tile walk progress, so stepping and running
  // cannot restart or accelerate the once-per-second horizontal alternation.
  return Math.floor(Math.max(0,Number.isFinite(time)?time:0)/1000)%2?'right':'left';

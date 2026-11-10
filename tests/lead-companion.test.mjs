@@ -44,7 +44,7 @@ for(const scene of ['world','cave','interior'])test(scene+' draws the promoted L
  for(const [direction,face]of [[-1,'up'],[1,'down']]){
   const vertical=Array.from({length:4},(_,n)=>({x:s.player.x,y:s.player.y+(n-3)*direction,face}));h.companionTrail=vertical;h.walkAnim={x:s.player.x,y:s.player.y-direction,start:0,duration:10000};
   if(s.interior)Object.assign(s.interior,{trail:vertical,face,walkStart:0,walkDuration:10000});
-  for(const [time,expected]of [[0,'left'],[999,'left'],[1000,'right'],[1999,'right'],[2000,'left']]){facings.length=0;render(time);assert.deepEqual(facings,[expected],scene+' '+face+' at '+time);}
+  for(const [time,expected]of [[0,'left'],[999,'left'],[1000,'right'],[1999,'right'],[2000,'left']]){facings.length=0;render(time);assert.deepEqual(facings,[face==='up'?'up':expected],scene+' '+face+' at '+time);}
   h.walkAnim=null;if(s.interior)delete s.interior.walkStart;facings.length=0;render(3000);assert.deepEqual(facings,[face],scene+' idle');
  }
  for(const u of s.spirits)u.hp=0;drawn.length=0;render();assert.deepEqual(drawn,[]);
