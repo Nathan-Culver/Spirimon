@@ -151,8 +151,8 @@ export function drawNPCBattleSprite(ctx,images,a,{x=0,y=0,width=320,height=400}=
   if(hat)drawHat(true);
   if(a.item>=0&&NPC_POSE_ITEMS[a.pose].includes(a.item)){
    const part=equipmentPart(images.equipment,4+a.item,colors.item,{accent:true}),spec=ITEM_SPECS[a.item],hand=pose.hand,h=spec.h,w=h*part.width/part.height*(a.item===0?.48:a.item===6?.8:1);let grip=[...spec.grip],angle=0;
-   if(a.item===0||a.item===6){const bottom=pose.feet[0][1]+8;grip[1]=(pose.hand[1]-(bottom-h))/h;if(a.item===0){grip[0]=.29;angle=-.20;}}
-   if(a.item===1||a.item===10)angle=a.pose===4?-.35:-.1;
+   if(a.item===0||a.item===6){const bottom=pose.feet[0][1]+8;grip[1]=(pose.hand[1]-(bottom-h))/h;if(a.item===6)grip[0]=.25;if(a.item===0){grip[0]=.29;angle=-.20;}}
+   if(a.item===1||a.item===10)angle=a.pose===4?-.65:-.1;
    if(a.item===11&&pose.grip==='palm')angle=-1.15;
    if(a.item===0){
     // A continuous shaft can be held at any height without moving the hand.
