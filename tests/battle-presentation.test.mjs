@@ -51,7 +51,7 @@ test('opening and closing conversations show the same named NPC sprite before re
  const t=dialogueHarness();t.s.seed='npc-world';
  t.h.queueBattleIntroduction(t.battle,null);
  const opening=t.dialogs[0].body.match(/data-npc-battle="([^"]*)"/)[1];
- assert.match(t.dialogs[0].body,/Ari battle sprite/);
+ assert.match(t.dialogs[0].body,/Ari · .*facing left/);
  t.h.advanceBattleDialogue('resolve');t.h.advanceBattleDialogue('');
  assert.equal(t.battle.dialogueGate,undefined);
  let finished=false;t.h.battleClosingDialogue('lost',()=>finished=true);

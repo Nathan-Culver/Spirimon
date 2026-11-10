@@ -91,9 +91,9 @@ export async function buildPage(directory=root,{standalone=true}={}){
  // The optional wardrobe review uses exactly the production mixer and renderer,
  // bundled alone so viewing five NPCs never boots a new game or a save.
  const npcModule=sources.get('npc-battle-sprites.mjs');
- const npcReviewTemplate=await readFile(path.join(directory,'npc-battle-review.html'),'utf8');
+ const npcReviewTemplate=await readFile(path.join(directory,'npc-battle-review.template.html'),'utf8');
  const npcReviewCode=npcModule.replace(/^import .*?;\n/gm,'').replace(/^export /gm,'');
- const npcReviewLoader="const npcImage=new Image();let npcImageReady=false;function readyImage(){return npcImageReady?npcImage:null;}npcImage.onload=()=>{npcImageReady=true;renderNPCBattleSprites();};npcImage.src='./assets/npc-battle/wardrobe-v1.webp';\n";
+ const npcReviewLoader="const npcImages=new Map();function readyImage(path){return npcImages.get(path)||null;}queueMicrotask(()=>{for(const path of Object.values(NPC_BATTLE_ASSETS)){const image=new Image();image.onload=()=>{npcImages.set(path,image);globalThis.spirimonArtLoaded?.();};image.src=path;}});\n";
  const npcReviewHtml=npcReviewTemplate.replace(/^import .*?from '\.\/npc-battle-sprites\.mjs';/m,()=>npcReviewLoader+npcReviewCode);
  return {html,packagedHtml,script,pageScript,packagedScript,standaloneHtml,npcReviewHtml,css,bundleName,packagedBundleName,styleName,offlineArt,assets,modules:ordered};
 }

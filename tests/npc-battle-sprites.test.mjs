@@ -1,38 +1,46 @@
 import test from 'node:test';
+import vm from 'node:vm';
+import {buildPage} from '../build.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {npcBattleAppearance,npcBattleLayers,drawNPCBattleSprite,npcBattleSpriteHTML,NPC_BATTLE_ATLAS,NPC_REVIEW_IDENTITIES} from '../npc-battle-sprites.mjs';
-test('NPC appearance survives dialogue, movement, rematches and save reloads',()=>{
- const identity={id:'rival:rowan',name:'Rowan',x:1,y:2};
- const expected=npcBattleAppearance('world-one',identity);
- assert.deepEqual(npcBattleAppearance('world-one',JSON.parse(JSON.stringify({...identity,x:95,y:-5,battles:12}))),expected);
- assert.notDeepEqual(npcBattleAppearance('world-two',identity),expected);
+import {npcBattleAppearance,npcBattleLayers,npcBattlePose,npcBattleSpriteHTML,NPC_BATTLE_ASSETS,NPC_BATTLE_POSES,NPC_OPTIONAL_PARTS,NPC_REVIEW_IDENTITIES} from '../npc-battle-sprites.mjs';
+test('NPC identity, gender, pose, outfit and colors survive movement, rematches and save reloads',()=>{
+ const n={id:'rival:rowan',name:'Rowan',x:1,y:2},a=npcBattleAppearance('world-one',n);
+ assert.deepEqual(npcBattleAppearance('world-one',JSON.parse(JSON.stringify({...n,x:95,y:-5,battles:12}))),a);
+ assert.notDeepEqual(npcBattleAppearance('world-two',n),a);assert.equal(a.facing,'left');
 });
-test('every wardrobe part varies independently and explicit authored choices are bounded',()=>{
- const sets=Object.fromEntries(['head','hat','shirt','trousers'].map(p=>[p,new Set()]));const combinations=new Set();
- for(let n=0;n<1000;n++){const a=npcBattleAppearance('world',{id:'npc-'+n});combinations.add(JSON.stringify(a));for(const p in sets){assert.ok(a[p]>=0&&a[p]<5);sets[p].add(a[p]);}}
- for(const set of Object.values(sets))assert.equal(set.size,5);
- assert.ok(combinations.size>300);
- const a=npcBattleAppearance('world',{id:'fixed',battleAppearance:{head:4,hat:1,shirt:-1,trousers:100}});
- assert.equal(a.head,4);assert.equal(a.hat,1);assert.ok(a.shirt>=0&&a.shirt<5);assert.ok(a.trousers>=0&&a.trousers<5);
+test('all twenty pose rigs are distinct and each gender has ten actual articulated poses',()=>{
+ assert.equal(NPC_BATTLE_POSES.length,20);
+ for(const gender of ['male','female']){const poses=NPC_BATTLE_POSES.filter(p=>p.gender===gender);assert.equal(poses.length,10);assert.equal(new Set(poses.map(p=>JSON.stringify([p.shoulder,p.hip,p.nearHand,p.farHand,p.nearKnee,p.farKnee]))).size,10);for(const p of poses)assert.equal(npcBattlePose({gender,pose:p.index}).id,p.id);}
+ assert.equal(npcBattlePose({gender:'male',pose:100}).index,0);
 });
-test('renderer composes all selected parts and masks hems, faces and wardrobe overlap',()=>{
- const a={trousers:0,shirt:1,head:2,hat:3},calls=[],clips=[];
- const ctx={save(){},restore(){},translate(){},scale(){},beginPath(){},moveTo(){},lineTo(){},closePath(){},rect(){},clip(){clips.push(true);},drawImage(...args){calls.push(args);}};
- drawNPCBattleSprite(ctx,{width:1983,height:793},a,{x:10,y:20,width:200,height:400});
- assert.equal(calls.length,4);assert.equal(clips.length,2);
- for(const [n,part] of [[0,'trousers'],[1,'shirt'],[2,'hat'],[3,'head']])assert.ok(Math.abs(calls[n][1]-a[part]*1983/5)<1e-9);
- assert.equal(ctx.imageSmoothingEnabled,false);
+test('random wardrobes include every required omission while pants and heads remain present',()=>{
+ const seen=Object.fromEntries(NPC_OPTIONAL_PARTS.map(p=>[p,new Set()])),genders=new Set(),poses=new Set(),colors=new Set(),items=new Set();
+ for(let n=0;n<2000;n++){const a=npcBattleAppearance('world',{id:'npc-'+n});genders.add(a.gender);poses.add(a.gender+':'+a.pose);items.add(a.item);for(const p in seen)seen[p].add(a[p]);assert.ok(a.head>=0&&a.head<4);assert.ok(a.pants>=0&&a.pants<2);for(const color of Object.values(a.colors)){assert.match(color,/^#[0-9a-f]{6}$/i);colors.add(color);}}
+ assert.equal(genders.size,2);assert.equal(poses.size,20);assert.equal(items.size,13);for(const s of Object.values(seen)){assert.ok(s.has(-1));assert.ok(s.has(0));}assert.ok(colors.size>1000,'Colors must not be restricted to a short palette');
 });
-test('five review NPCs are real deterministic mixer results and the atlas has alpha',()=>{
- assert.equal(NPC_REVIEW_IDENTITIES.length,5);
- const choices=NPC_REVIEW_IDENTITIES.map(n=>npcBattleAppearance('wardrobe-review-01',n));
- assert.equal(new Set(choices.map(JSON.stringify)).size,5);
- assert.ok(choices.every(a=>new Set(Object.values(a).slice(1)).size>1));
- const bytes=readFileSync(new URL('../'+NPC_BATTLE_ATLAS,import.meta.url));assert.equal(bytes.toString('ascii',8,12),'WEBP');assert.ok(bytes.length<700000,'Atlas must fit offline release budget');
+test('authored gender, pose, attire omissions, items and any RGB color are respected and bounded',()=>{
+ const a=npcBattleAppearance('world',{id:'fixed',battleAppearance:{gender:'female',pose:9,head:3,hat:-1,shirt:-1,gloves:-1,boots:-1,item:11,pants:1,colors:{shirt:'#ff00bb',boots:'#123456',hat:'url(evil)'}}});
+ assert.equal(a.gender,'female');assert.equal(a.pose,9);assert.equal(a.item,11);assert.equal(a.pants,1);for(const p of NPC_OPTIONAL_PARTS)assert.equal(a[p],-1);assert.equal(a.colors.shirt,'#ff00bb');assert.equal(a.colors.boots,'#123456');assert.match(a.colors.hat,/^#[0-9a-f]{6}$/i);
+ const b=npcBattleAppearance('world',{id:'fixed',battleAppearance:{pose:20,pants:-1,head:99,item:30}});assert.ok(b.pose<10);assert.ok(b.pants>=0);assert.ok(b.head<4);assert.ok(b.item<12);
 });
-test('sprite HTML uses the supplied name and escapes save-controlled values',()=>{
- const escape=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;');
- const html=npcBattleSpriteHTML('world',{id:'npc',name:'<Ari "the sealer">'},escape);
- assert.match(html,/data-npc-battle="\{&quot;version/);assert.match(html,/aria-label="&lt;Ari &quot;the sealer&quot;/);assert.doesNotMatch(html,/<Ari/);
+test('absent garments are omitted from the wardrobe layers rather than recolored or painted over',()=>{
+ const a=npcBattleAppearance('world',{id:'bare',battleAppearance:{hat:-1,shirt:-1,gloves:-1,boots:-1,item:-1}}),parts=npcBattleLayers(a).map(p=>p.part);
+ assert.deepEqual(parts,['pants','head']);
+});
+test('the inspection set contains two different complete NPCs for every male and female pose',()=>{
+ assert.equal(NPC_REVIEW_IDENTITIES.length,40);const choices=NPC_REVIEW_IDENTITIES.map(n=>npcBattleAppearance('wardrobe-review-02',n));assert.equal(new Set(choices.map(JSON.stringify)).size,40);
+ for(const gender of ['male','female'])for(let pose=0;pose<10;pose++){const pair=choices.filter(a=>a.gender===gender&&a.pose===pose);assert.equal(pair.length,2);assert.notDeepEqual(pair[0],pair[1]);}
+ for(const p of NPC_OPTIONAL_PARTS)assert.ok(choices.some(a=>a[p]===-1),p);
+});
+test('all modular artwork is included as compact WebP source assets',()=>{
+ let total=0;for(const file of Object.values(NPC_BATTLE_ASSETS)){const bytes=readFileSync(new URL('../'+file,import.meta.url));assert.equal(bytes.toString('ascii',8,12),'WEBP');total+=bytes.length;}assert.ok(total<1700000);
+});
+test('sprite HTML announces left-facing gender and pose and escapes save-controlled names',()=>{
+ const html=npcBattleSpriteHTML('world',{id:'npc',name:'<Ari "the sealer">',battleAppearance:{gender:'female',pose:4}});
+ assert.match(html,/data-npc-battle="\{&quot;version/);assert.match(html,/&lt;Ari &quot;the sealer&quot;&gt;/);assert.match(html,/female pose 5 · facing left/);assert.doesNotMatch(html,/<Ari/);
+});
+
+test('the shipped review bundles the actual renderer without browser module dependencies or duplicate names',async()=>{
+ const built=await buildPage(),scripts=[...built.npcReviewHtml.matchAll(/<script(?: type="module")?>([\s\S]*?)<\/script>/g)];assert.ok(scripts.length);for(const script of scripts){assert.doesNotMatch(script[1],/^import /m);assert.doesNotThrow(()=>new vm.Script(script[1]));}for(const path of Object.values(NPC_BATTLE_ASSETS)){assert.ok(built.assets.some(a=>a.path===path));assert.ok(built.npcReviewHtml.includes(path),'Review must use current production assets');}
 });
