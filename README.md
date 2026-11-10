@@ -135,3 +135,7 @@ The main menu fits the current viewport: four columns in landscape, two in portr
 Individual battle stats now use Physical Attack (PA), Physical Defense (PD), Spiritual Attack (SA), Spiritual Defense (SD), and Speed. Level-scaled IV/EV/Nature formulas, capped battle EV rewards, targeted EV training and existing-save conversion are documented in [Individual battle stats](docs/individual-stats.md).
 
 New-lineage generation follows the current approved General roster, explicit structural Form plans, balanced six-stat roles, classification-balanced learnsets, semantic quality gates and targeted Form repairs. Options → Review new generation designs shows six example lineages (18 Forms), separate from encounter pools. See [Creature generation](docs/creature-generation.md).
+
+### Use your computer as an AI server
+
+Open **Options → Set up / connect home AI server**. Run `npm run server:setup` once on the computer, then `npm run server:home`, and import its private pairing file on desktop/mobile. The OpenAI key stays in the computer’s private user folder or server environment; optional remembered device pairing is excluded from game backups. Keep the computer awake and its HTTPS tunnel running. See [the home-server guide](docs/home-server.md).

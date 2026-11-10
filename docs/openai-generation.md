@@ -2,6 +2,10 @@
 
 OpenAI is an additional, opt-in provider for creature design, three form images, and independent visual inspection. Ollama, Stable Diffusion, browser WebGPU, Gemini text generation, offline designs, and the built-in roster remain available. Automatic selection keeps its existing free/local-first order; it does not add OpenAI unless explicitly selected as primary or fallback.
 
+## Guided home-computer setup
+
+Use **Options → Set up / connect home AI server** for the in-game guide, connection checks, private pairing-file import/export and optional remembered pairing on each device. On the host, `npm run server:setup` configures a private user-folder key and pairing token; `npm run server:home` starts it using those settings. See [Home server setup](home-server.md) for desktop, mobile, tunnels, restart behavior and key storage. The original environment-variable setup below remains available.
+
 ## On the computer running the companion
 
 Use Node.js 20 or later. In the Spirimon source folder, set your **OpenAI API key** on the server and run the companion. Do not put the key in GitHub, a game save, or the Gemini key field.
@@ -37,9 +41,9 @@ export SPIRIMON_TOKEN='your-random-pairing-token-at-least-24-characters'
 node companion.mjs
 ```
 
-Generate a token with `node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"`. Configure the proxy/tunnel to forward to `http://127.0.0.1:4317`, preserve the public Host header or use the loopback Host, and allow requests to run for up to 15 minutes. A tunnel to the local computer works with the default loopback bind. If a container host needs a public listening interface, also set `SPIRIMON_BIND=0.0.0.0`; this is refused without the HTTPS public URL and pairing token. Set `SPIRIMON_PORT` if the host requires another port. Use a single Node process, which permits one generation operation at a time.
+Generate a token with `node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"`. Configure the proxy/tunnel to forward to `http://127.0.0.1:4317`, preserve the public Host header or use the loopback Host, and allow short API requests and their responses. Updated clients and companions use submitted jobs and short polling requests for OpenAI artwork; older clients need the original long-request allowance (up to 15 minutes). A tunnel to the local computer works with the default loopback bind. If a container host needs a public listening interface, also set `SPIRIMON_BIND=0.0.0.0`; this is refused without the HTTPS public URL and pairing token. Set `SPIRIMON_PORT` if the host requires another port. Use a single Node process, which permits one generation operation at a time.
 
-On the phone, open the normal game and enter the public HTTPS address in **Companion service address**, enter **Companion pairing token**, select **OpenAI**, and test it. The address is saved; the token stays only in that browser session and is scoped to that service address. Re-enter the token after reloading. The API key remains on your service. The remote service can also expose its existing local-model capabilities when hosted on your computer.
+On the phone, open the normal game and enter the public HTTPS address in **Companion service address**, enter **Companion pairing token**, select **OpenAI**, and test it. The address is saved; the token stays only in that browser session and is scoped to that service address. The advanced field is session-only; use the home-server guide’s optional **Remember pairing on this private device** to retain pairing across reloads without putting it in a game backup. The API key remains on your service. The remote service can also expose its existing local-model capabilities when hosted on your computer.
 
 If you did not set `OPENAI_API_KEY` on the remote service, you can instead use **Connect OpenAI key** from the phone after pairing. The key is sent once over HTTPS to your own service; it is never included in game saves, provider-status responses, or public game assets. Only connect to a service you control.
 

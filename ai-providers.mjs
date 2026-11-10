@@ -1,6 +1,6 @@
 // AI provider discovery and connection checks. Keys are session-only and never stored in game saves.
 const timeout=(ms=6500)=>AbortSignal.timeout(ms);
-const json=async(url,options={})=>{const r=await fetch(url,{...options,signal:options.signal||timeout()});const data=await r.json();if(!r.ok){const error=Error(data.error||'HTTP '+r.status);error.code=data.code;error.retryable=data.retryable;throw error;}return data;};
+const json=async(url,options={})=>{const r=await fetch(url,{...options,signal:options.signal||timeout()});const data=await r.json();if(!r.ok){const error=Error(data.error||'HTTP '+r.status);error.code=data.code;error.retryable=data.retryable;error.status=r.status;throw error;}return data;};
 export const PROVIDERS=['companion','openai','ollama','device','gemini','procedural'];
 export const LABELS={companion:'Spirimon companion (text + images)',openai:'OpenAI (design + images + inspection)',ollama:'Windows Ollama (text)',device:'Android browser AI (WebGPU)',gemini:'Gemini cloud (text)',procedural:'Procedural (offline)'};
 export function companionURL(settings={}){
@@ -10,9 +10,34 @@ export function companionURL(settings={}){
  return url.origin;
 }
 export function companionHeaders(secret='') {return {'Content-Type':'application/json',...(secret?{Authorization:'Bearer '+secret}:{})};}
+const jobServers=new Set();
+const waitForPoll=(ms,signal)=>new Promise((resolve,reject)=>{
+ if(signal.aborted)return reject(signal.reason);const done=()=>{clearTimeout(timer);signal.removeEventListener('abort',cancel);resolve();},cancel=()=>{clearTimeout(timer);signal.removeEventListener('abort',cancel);reject(signal.reason);};const timer=setTimeout(done,ms);signal.addEventListener('abort',cancel,{once:true});
+});
+export async function companionJob(settings,path,{token='',body,signal,timeoutMs=900000,pollMs=1500}={}){
+ const base=companionURL(settings),headers=companionHeaders(token),operation=path.slice(5),id=crypto.randomUUID(),deadline=AbortSignal.timeout(timeoutMs),combined=signal?AbortSignal.any([signal,deadline]):deadline;
+ const cancel=()=>{void fetch(base+'/api/jobs/'+id,{method:'DELETE',headers,signal:timeout(5000)}).catch(()=>{});};combined.addEventListener('abort',cancel,{once:true});
+ try{
+  if(combined.aborted)throw combined.reason;
+  const payload=JSON.stringify({id,operation,body});let state;
+  // Same ID on a lost submission response cannot create a second paid job.
+  for(let attempt=0;attempt<2;attempt++)try{state=await json(base+'/api/jobs',{method:'POST',headers,body:payload,signal:AbortSignal.any([combined,timeout(15000)])});break;}catch(error){if(attempt||combined.aborted||error.code||!['TypeError','TimeoutError'].includes(error.name))throw error;}
+  let failures=0;
+  while(state?.status==='running'){
+   await waitForPoll(pollMs,combined);
+   try{state=await json(base+'/api/jobs/'+id,{headers,signal:AbortSignal.any([combined,timeout(15000)])});failures=0;}
+   catch(error){if(combined.aborted||error.code||++failures>=3)throw error;}
+  }
+  if(state?.status==='completed')return state.result;
+  const detail=state?.error||{};throw Object.assign(Error(detail.message||'Generation did not finish. Check the server before retrying.'),{code:detail.code||'generation_failed',retryable:false,status:detail.status});
+ }catch(error){cancel();throw error;}finally{combined.removeEventListener('abort',cancel);}
+}
 export async function companionRequest(settings,path,{token='',body,signal,timeoutMs=900000}={}){
- if(!/^\/api\/(?:status|generate|analyze|openai\/(?:status|generate|analyze|connect))$/.test(path))throw Error('Unknown companion operation.');
- return json(companionURL(settings)+path,{method:body?'POST':'GET',headers:companionHeaders(token),...(body?{body:JSON.stringify(body)}:{}),signal:signal?AbortSignal.any([signal,timeout(timeoutMs)]):timeout(timeoutMs)});
+ if(!/^\/api\/(?:health|status|generate|analyze|openai\/(?:status|generate|analyze|connect))$/.test(path))throw Error('Unknown companion operation.');
+ const base=companionURL(settings);
+ if(body&&/^\/api\/openai\/(generate|analyze)$/.test(path)&&jobServers.has(base))return companionJob(settings,path,{token,body,signal,timeoutMs});
+ const result=await json(base+path,{method:body?'POST':'GET',headers:companionHeaders(token),...(body?{body:JSON.stringify(body)}:{}),signal:signal?AbortSignal.any([signal,timeout(timeoutMs)]):timeout(timeoutMs)});
+ if(result.supportsJobs)jobServers.add(base);return result;
 }
 let browserEngine=null,browserModel='';
 export async function probe(type,settings={},secret=''){

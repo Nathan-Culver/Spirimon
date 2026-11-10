@@ -1,3 +1,4 @@
+import {createCompanionJobs} from './companion-jobs.mjs';
 import {completeGenerationDesign,plannedFormAnatomy,generationPrompt,imageFormPrompt,imageGenerationParameters,assertLineageReview,assertNovelGeneration,GENERATION_RULES} from './generation-policy.mjs';
 import {createOpenAIProvider} from './openai-generation.mjs';
 import {timingSafeEqual} from 'node:crypto';
@@ -30,7 +31,7 @@ for(let n=0;n<browserModules.length;n++){
 }
 function respond(res,status,data){res.writeHead(status,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify(data));}
 async function jsonRequest(url,body,timeout=3000){const response=await fetch(url,{...(body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(timeout)});if(!response.ok)throw Error('Local model returned HTTP '+response.status);return response.json();}
-async function readJSON(req){let raw='';for await(const chunk of req){raw+=chunk;if(raw.length>24000000)throw Error('Request is too large.');}return JSON.parse(raw);}
+async function readJSON(req){let raw='';for await(const chunk of req){raw+=chunk;if(raw.length>24000000)throw Error('Request is too large.');}try{return JSON.parse(raw);}catch{throw Object.assign(Error('Invalid JSON request.'),{status:400});}}
 async function visionModels(models){const checks=await Promise.allSettled(models.slice(0,30).map(async model=>{const info=await jsonRequest(OLLAMA+'/api/show',{model},2000);return info.capabilities?.includes('vision')?model:null;}));return checks.filter(r=>r.status==='fulfilled'&&r.value).map(r=>r.value);}
 export async function observeCreatureImage(sprite,sp,model,form=0){
  if(typeof model!=='string'||!model||model.length>160)throw Error('A local vision model is required to inspect external artwork.');
@@ -90,25 +91,39 @@ export function createServer({openai=createOpenAIProvider(),openaiFactory=create
  const publicOrigin=publicUrl?new URL(publicUrl):null;
  if(publicOrigin&&(publicOrigin.protocol!=='https:'||publicOrigin.username||publicOrigin.password||publicOrigin.pathname!=='/'||publicOrigin.search||publicOrigin.hash||token.length<24))throw Error('Remote access requires an HTTPS origin and SPIRIMON_TOKEN of at least 24 characters.');
  let generating=false;
- return http.createServer(async(req,res)=>{const origin=req.headers.origin,host=req.headers.host;
- const localHosts=['127.0.0.1:'+req.socket.localPort,'localhost:'+req.socket.localPort];
+ const jobs=createCompanionJobs({busy:()=>generating,setBusy:value=>generating=value});
+ const server=http.createServer(async(req,res)=>{const origin=req.headers.origin,host=req.headers.host;
+ const localHosts=['127.0.0.1:'+req.socket.localPort,'localhost:'+req.socket.localPort,'[::1]:'+req.socket.localPort];
  if(!localHosts.includes(host)&&host!==publicOrigin?.host)return respond(res,403,{error:'Unexpected host.'});
- if(origin&&!ALLOWED.has(origin)&&origin!==publicOrigin?.origin)return respond(res,403,{error:'This origin is not paired with Spirimon.'});
+ const nativeOrigin=token.length>=24&&['null','https://localhost','http://localhost','capacitor://localhost'].includes(origin);
+ if(origin&&!nativeOrigin&&!ALLOWED.has(origin)&&origin!==publicOrigin?.origin)return respond(res,403,{error:'This origin is not paired with Spirimon.'});
  if(origin){res.setHeader('Access-Control-Allow-Origin',origin);res.setHeader('Vary','Origin');res.setHeader('Access-Control-Allow-Methods','GET, POST, OPTIONS');res.setHeader('Access-Control-Allow-Headers','Content-Type, Authorization');res.setHeader('Access-Control-Allow-Private-Network','true');}
 if(req.method==='OPTIONS'){res.writeHead(204);res.end();return;}
 const url=new URL(req.url,'http://127.0.0.1:'+PORT);
  if(url.pathname.startsWith('/api/')&&token){const supplied=Buffer.from(req.headers.authorization||''),expected=Buffer.from('Bearer '+token);if(supplied.length!==expected.length||!timingSafeEqual(supplied,expected))return respond(res,401,{error:'Enter the companion pairing token for this session.'});}
+ let sameOriginBrowser=false;
+ if(!origin&&req.headers['sec-fetch-site']==='same-origin'&&req.headers.referer)try{const referring=new URL(req.headers.referer).origin;sameOriginBrowser=referring===publicOrigin?.origin||localHosts.includes(host)&&referring==='http://'+host;}catch{}
  const controller=new AbortController();res.on('close',()=>{if(!res.writableEnded)controller.abort();});
  try{
+ if(url.pathname==='/api/health'&&req.method==='GET')return respond(res,200,{name:'Spirimon home companion',version:'0.3.0',supportsJobs:true,instanceId:jobs.instanceId,remoteEnabled:!!publicOrigin,openaiConfigured:!!openai.configured,generationBusy:generating});
+ if(url.pathname==='/api/jobs' || /^\/api\/jobs\/[a-zA-Z0-9_-]{16,80}$/.test(url.pathname)){
+  if(!origin&&!sameOriginBrowser)return respond(res,403,{error:'A paired browser origin is required.'});
+  if(url.pathname==='/api/jobs'&&req.method==='POST'){
+   const data=await readJSON(req);if(!['openai/generate','openai/analyze'].includes(data.operation))return respond(res,400,{error:'Unsupported generation operation.'});
+   return respond(res,202,jobs.start(data.id,signal=>openai[data.operation.endsWith('/generate')?'generate':'analyze']({...data.body,signal})));
+  }
+  const id=url.pathname.split('/').at(-1),result=req.method==='GET'?jobs.get(id):req.method==='DELETE'?jobs.cancel(id):null;
+  return respond(res,result?200:404,result||{error:'This job is no longer on the server. It may have restarted. Check before retrying; an accepted API request may still be billed.',code:'job_missing',retryable:false});
+ }
  if(url.pathname.startsWith('/api/openai/')){
-  if(!origin)return respond(res,403,{error:'A paired browser origin is required.'});
+  if(!origin&&!sameOriginBrowser)return respond(res,403,{error:'A paired browser origin is required.'});
   if(url.pathname==='/api/openai/connect'&&req.method==='POST'){
    if(token.length<24)return respond(res,403,{error:'Set a companion pairing token of at least 24 characters before entering an API key from the game.',retryable:false});
    if(generating)return respond(res,409,{error:'Wait for the current generation to finish before changing the API key.'});
    const data=await readJSON(req);if(typeof data.apiKey!=='string'||data.apiKey.length<16||data.apiKey.length>512||/\s/.test(data.apiKey))return respond(res,400,{error:'Enter a valid OpenAI API key.',retryable:false});
    const candidate=openaiFactory({apiKey:data.apiKey}),status=await candidate.status({signal:controller.signal});openai=candidate;return respond(res,200,{...status,message:status.message+' Key connected for this companion process; never saved to disk.'});
   }
-  if(url.pathname==='/api/openai/status'&&req.method==='GET')return respond(res,200,await openai.status({signal:controller.signal}));
+  if(url.pathname==='/api/openai/status'&&req.method==='GET')return respond(res,200,{...await openai.status({signal:controller.signal}),supportsJobs:true});
   if(['/api/openai/generate','/api/openai/analyze'].includes(url.pathname)&&req.method==='POST'){
    if(generating)return respond(res,409,{error:'A lineage is already being generated. Please wait.'});
    generating=true;
@@ -118,9 +133,9 @@ const url=new URL(req.url,'http://127.0.0.1:'+PORT);
  }
 
 if(url.pathname==='/api/status'&&req.method==='GET'){const [text,image]=await Promise.allSettled([jsonRequest(OLLAMA+'/api/tags'),jsonRequest(IMAGE+'/sdapi/v1/sd-models')]);const models=text.status==='fulfilled'?(text.value.models||[]).map(m=>m.name):[];respond(res,200,{name:'Spirimon local companion',version:'0.2.0',models,visionModels:await visionModels(models),imageReady:image.status==='fulfilled',generationBusy:generating});return;}
-if(url.pathname==='/api/analyze'&&req.method==='POST'){if(!origin)return respond(res,403,{error:'A paired browser origin is required.'});const data=await readJSON(req);if(!Array.isArray(data.sprites)||data.sprites.length!==3)return respond(res,400,{error:'Three PNG images required.'});const sp=migrateSpecies(data.species),checked=validateLineageImages(data.sprites.map(decodePNG),{allowExactFamily:true}),observations=await observeCreatureImages(data.sprites,sp,data.visionModel);applyLineageObservations(sp,observations);respond(res,200,{anatomy:sp.anatomy,formAnatomy:sp.formAnatomy,capabilities:sp.capabilities,visualValidation:{...checked.report,status:'vision-verified',semanticSource:'local-vision-model',observations}});return;}
-if(url.pathname==='/api/generate'&&req.method==='POST'){if(!origin)return respond(res,403,{error:'A paired browser origin is required.'});if(generating)return respond(res,409,{error:'A lineage is already being generated. Please wait.'});generating=true;try{const data=await readJSON(req);respond(res,200,await generateLineage(data));}finally{generating=false;}return;}
+if(url.pathname==='/api/analyze'&&req.method==='POST'){if(!origin&&!sameOriginBrowser)return respond(res,403,{error:'A paired browser origin is required.'});const data=await readJSON(req);if(!Array.isArray(data.sprites)||data.sprites.length!==3)return respond(res,400,{error:'Three PNG images required.'});const sp=migrateSpecies(data.species),checked=validateLineageImages(data.sprites.map(decodePNG),{allowExactFamily:true}),observations=await observeCreatureImages(data.sprites,sp,data.visionModel);applyLineageObservations(sp,observations);respond(res,200,{anatomy:sp.anatomy,formAnatomy:sp.formAnatomy,capabilities:sp.capabilities,visualValidation:{...checked.report,status:'vision-verified',semanticSource:'local-vision-model',observations}});return;}
+if(url.pathname==='/api/generate'&&req.method==='POST'){if(!origin&&!sameOriginBrowser)return respond(res,403,{error:'A paired browser origin is required.'});if(generating)return respond(res,409,{error:'A lineage is already being generated. Please wait.'});generating=true;try{const data=await readJSON(req);respond(res,200,await generateLineage(data));}finally{generating=false;}return;}
 if(req.method!=='GET')return respond(res,405,{error:'Method not allowed.'});const asset=/^\/assets\/(?:shrine-atlas|cave-entrance-atlas)\.png$/.test(url.pathname)?url.pathname.slice(1):/^\/assets\/interiors\/[a-z-]+\.svg$/.test(url.pathname)?url.pathname.slice(1):url.pathname==='/assets/spirimon-pixel.ttf'?'assets/spirimon-pixel.ttf':/^\/assets\/(?:(?:roster|placeholder|companions|battle-back|generation-review)\/)?[a-z0-9-]+\.webp$/.test(url.pathname)?url.pathname.slice(1):null;const generated=/^\/(?:game-[a-f0-9]{12}\.js|style-[a-f0-9]{12}\.css|Spirimon\.html)$/.test(url.pathname)?url.pathname.slice(1):null;const file=FILES[url.pathname]||asset||generated;if(!file)return respond(res,404,{error:'Not found.'});const body=await readFile(path.join(ROOT,file));const type=file.endsWith('.png')?'image/png':file.endsWith('.svg')?'image/svg+xml':file.endsWith('.ttf')?'font/ttf':file.endsWith('.webp')?'image/webp':file.endsWith('.html')?'text/html; charset=utf-8':file.endsWith('.css')?'text/css; charset=utf-8':'text/javascript; charset=utf-8';res.writeHead(200,{'Content-Type':type,'Cache-Control':'no-cache','X-Content-Type-Options':'nosniff','Referrer-Policy':'same-origin'});res.end(body);
-}catch(e){if(!res.destroyed)respond(res,e.status||500,{error:e.message,code:e.code,retryable:e.retryable});}});}
+}catch(e){if(!res.destroyed)respond(res,e.status||500,{error:e.message,code:e.code,retryable:e.retryable});}});server.on('close',()=>jobs.close());return server;}
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){const server=createServer();server.requestTimeout=0;const bind=process.env.SPIRIMON_BIND||'127.0.0.1';if(bind!=='127.0.0.1'&&!process.env.SPIRIMON_PUBLIC_URL)throw Error('Set SPIRIMON_PUBLIC_URL and SPIRIMON_TOKEN before enabling remote access.');server.listen(PORT,bind,()=>console.log('Spirimon is ready: http://127.0.0.1:'+PORT+'\nKeep this window open while playing. Press Ctrl+C to stop.\nLocal AI remains optional. OpenAI is opt-in and uses paid API requests when selected.'));server.on('error',e=>{console.error(e.code==='EADDRINUSE'?'Spirimon is already running, or port '+PORT+' is in use.':e);process.exitCode=1;});}
 

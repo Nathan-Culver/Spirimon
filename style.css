@@ -612,3 +612,6 @@ body.battling .unified-battle .compact-secondary select{min-width:0;max-width:10
 .generation-review-card{margin:18px 0;padding:12px;border:1px solid #8b9873;border-radius:8px;min-width:0}
 .generation-review-card img{display:block;width:100%;height:auto;background:#ced8b3;border-radius:6px;object-fit:contain}
 .generation-review-card ol{padding-left:20px;font-size:12px}
+
+/* Home-server guidance is a settings dialog, outside the compact battle/menu layouts. */
+.home-server-steps{display:grid;gap:18px;min-width:0}.home-server-steps section{min-width:0;border:1px solid #a1ad86;padding:14px}.home-server-steps pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:10px;background:#e8edcc;color:#314b35;font:13px/1.5 monospace}.home-server-steps code,.home-server-steps a{overflow-wrap:anywhere}.home-server-steps input:not([type=checkbox]):not([type=file]){width:100%;min-width:0}.home-server-steps .home-remember{display:flex;align-items:center;gap:8px}.home-server-steps .home-remember input{width:auto}.home-server-steps .btn-row{flex-wrap:wrap}.home-server-steps .settings-status{overflow-wrap:anywhere}

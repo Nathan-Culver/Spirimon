@@ -11,7 +11,9 @@
     "build:font": "node tools/build-font.cjs",
     "audit:moves": "node tools/audit-real-time-moves.mjs",
     "audit:progression": "node tools/audit-progression.mjs --expanded progression-1",
-    "audit:energy": "node tools/audit-spiritual-economy.mjs"
+    "audit:energy": "node tools/audit-spiritual-economy.mjs",
+    "server:setup": "node tools/home-server.mjs --setup",
+    "server:home": "node tools/home-server.mjs"
   },
   "engines": {
     "node": ">=20"
