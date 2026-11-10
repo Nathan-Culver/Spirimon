@@ -633,3 +633,40 @@ body.battling .unified-battle .compact-secondary select{min-width:0;max-width:10
 .npc-battle-dialogue .npc-battle-portrait canvas{width:100%;height:min(48vh,390px);object-fit:contain}
 @media(max-width:540px){.npc-battle-dialogue{grid-template-columns:minmax(0,1fr) 120px;gap:10px}.npc-battle-dialogue .npc-battle-portrait canvas{height:220px}}
 @media(max-height:500px){.npc-battle-dialogue{grid-template-columns:minmax(0,1fr) 150px;gap:12px}.npc-battle-dialogue .npc-battle-portrait canvas{height:205px}}
+
+/* Dialogue stays twice the standard 15px modal copy at every text scale. */
+body .modal .npc-battle-speech p{font-size:calc(30px * var(--textScale,1));line-height:1.35}
+.npc-battle-speech .npc-dialogue-name{font-weight:700;font-synthesis:weight}
+
+/* Dialogue uses pages on small screens; its text never shrinks to make room. */
+body .modal:has(.npc-battle-dialogue){display:flex;flex-direction:column;overflow:hidden}
+.npc-battle-dialogue{min-height:0;grid-template-rows:minmax(0,1fr) auto;row-gap:12px;align-items:stretch}
+.npc-battle-dialogue>.npc-battle-speech{display:flex;flex-direction:column;align-self:end;min-height:0;padding-bottom:0}
+.npc-dialogue-lines{min-height:0;overflow:hidden;margin-top:12px}
+.npc-battle-speech .npc-dialogue-speaker{flex:none;margin:0}
+.npc-dialogue-actions{grid-column:1/-1;grid-row:2;min-width:0;display:grid;grid-template-columns:minmax(0,1fr);align-items:end;gap:8px}
+.npc-dialogue-actions.is-paged{grid-template-columns:44px minmax(0,1fr)}
+.npc-dialogue-action-main{min-width:0}
+.npc-dialogue-actions [hidden]{display:none!important}
+.npc-dialogue-actions .btn-row{margin:0;gap:8px;display:flex;flex-wrap:wrap}
+.npc-dialogue-actions .btn{min-height:44px}
+.npc-dialogue-actions .npc-dialogue-back{padding:4px;width:44px;align-self:end}
+.npc-battle-dialogue .npc-battle-portrait canvas{max-height:100%;height:min(48vh,390px)}
+@media(max-height:500px){
+ body .modal:has(.npc-battle-dialogue){padding:10px}
+ .modal:has(.npc-battle-dialogue) h2{font-size:20px;line-height:1.2;margin-bottom:8px}
+ body .modal .npc-battle-speech p{line-height:1.2}
+ .npc-dialogue-lines{margin-top:6px}
+ .npc-dialogue-actions .npc-dialogue-responses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+ .npc-dialogue-responses>.btn:only-child{grid-column:1/-1;justify-self:start}
+ body .modal .npc-dialogue-actions .btn{padding:6px 8px;font-size:calc(12px * var(--textScale,1));line-height:1.2}
+ .npc-battle-dialogue .npc-battle-portrait canvas{height:205px}
+}
+@media(max-height:340px){body .modal:has(.npc-battle-dialogue){padding:8px}.modal:has(.npc-battle-dialogue) h2{font-size:18px;margin-bottom:6px}.modal:has(.npc-battle-dialogue)>.eyebrow{font-size:10px;line-height:1.2;margin-bottom:4px}}
+.npc-battle-dialogue>.npc-battle-portrait{height:100%;min-height:0;max-height:100%;align-self:stretch;overflow:hidden}
+
+.modal.npc-dialogue-tight>.eyebrow,.modal.npc-dialogue-tight>h2{display:none}
+
+.npc-dialogue-text-only .npc-battle-dialogue{grid-template-columns:minmax(0,1fr)}
+.npc-dialogue-text-only .npc-battle-portrait{display:none}
+@media(max-height:340px){.npc-battle-dialogue{row-gap:8px}.npc-dialogue-lines{margin-top:4px}}

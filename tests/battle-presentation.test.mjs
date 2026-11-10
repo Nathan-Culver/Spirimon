@@ -32,7 +32,7 @@ test('dialogue arcs preserve player answers, faction identity and rematch memori
 });
 function dialogueHarness(trainer=true){
  const dialogs=[],nodes=[],battle={trainer,dialogueIdentity:{id:'test',name:'Ari'}},s={tutorial:{battleStarted:true}};
- const h=vm.createContext({npcBattleSpriteHTML,renderNPCBattleSprites(){},$:()=>null,battle,s,battleDialogue:null,queueMicrotask:fn=>fn(),enemySpeech,sceneFadeUntil:0,performance:{now:()=>0},document:{querySelector:()=>({}),body:{appendChild:n=>nodes.push(n)},addEventListener(){}},showModal:(title,body)=>dialogs.push({title,body}),closeModal(){},save(){},render(){},esc:String,action:(op,text,value)=>`<button data-value="${value}">${text}</button>`,finishSceneFade:n=>{if(n)nodes.push('fade');}});
+ const h=vm.createContext({fitBattleDialogue(){},npcBattleSpriteHTML,renderNPCBattleSprites(){},$:()=>null,battle,s,battleDialogue:null,queueMicrotask:fn=>fn(),enemySpeech,sceneFadeUntil:0,performance:{now:()=>0},document:{querySelector:()=>({}),body:{appendChild:n=>nodes.push(n)},addEventListener(){}},showModal:(title,body)=>dialogs.push({title,body}),closeModal(){},save(){},render(){},esc:String,action:(op,text,value)=>`<button data-value="${value}">${text}</button>`,finishSceneFade:n=>{if(n)nodes.push('fade');}});
  vm.runInContext(['queueBattleIntroduction','showBattleDialogue','advanceBattleDialogue','battleClosingDialogue'].map(extract).join('\n'),h);
  return {h,battle,s,dialogs,nodes};
 }

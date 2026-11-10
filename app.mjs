@@ -1,3 +1,4 @@
+import {fitDialoguePages,paintDialoguePage} from './dialogue-pages.mjs';
 import {npcBattleSpriteHTML,renderNPCBattleSprites} from './npc-battle-sprites.mjs';
 import * as HOME from './home-server-ui.mjs';
 import {GENERATION_REVIEW} from './generation-review.mjs';
@@ -986,6 +987,7 @@ case'lesson-next':advanceBattleTutorial();break;
 case'lesson-skip':advanceBattleTutorial(true);break;
 case'game-menu':gameMenu();break;
 case'save-now':await persist();closeModal();toast(deviceSaveHandle||nativeSaveLinked?'Save requested. Check file permission if browser recovery is shown.':'Saved to browser recovery. Use Save file / Export backup for a device file.');break;
+case'battle-dialogue-page':turnBattleDialoguePage(Number(v));break;
 case'battle-dialogue-next':advanceBattleDialogue(v);break;
 case'fullscreen':await enterFullscreen();break;
 case'portrait-play':s.settings.portraitAllowed=true;applyLayout();save();break;
@@ -1943,7 +1945,17 @@ function queueBattleIntroduction(encounter,map){
  showBattleDialogue('Before the challenge',enemySpeech(s,identity,'before'),true);
  });
 }
-function showBattleDialogue(title,lines,choices=false){showModal(title,'<div class="npc-battle-dialogue">'+npcBattleSpriteHTML(s.seed,battleDialogue.identity,esc)+'<div class="npc-battle-speech"><p><b>'+esc(battleDialogue.identity?.name||'Opposing Sealer')+'</b></p>'+lines.map(l=>'<p>'+esc(l)+'</p>').join('')+'<div class="btn-row">'+(choices?['resolve','curiosity','respect'].map((v,n)=>action('battle-dialogue-next',['“I’m ready.”','“What are you testing?”','“Let’s learn together.”'][n],v)).join(''):action('battle-dialogue-next','Continue','','btn primary'))+'</div></div></div>',{lock:true,kind:'battle-dialogue',wide:true});renderNPCBattleSprites($('#modal-root'));}
+let battleDialoguePages=null;
+function showBattleDialogue(title,lines,choices=false){
+ battleDialoguePages={lines:[...lines],pages:[lines],index:0};
+ showModal(title,'<div class="npc-battle-dialogue">'+npcBattleSpriteHTML(s.seed,battleDialogue.identity,esc)+'<div class="npc-battle-speech"><p class="npc-dialogue-speaker"><strong class="npc-dialogue-name">'+esc(battleDialogue.identity?.name||'Opposing Sealer')+'</strong></p><div class="npc-dialogue-lines" aria-live="polite">'+lines.map(l=>'<p>'+esc(l)+'</p>').join('')+'</div></div><div class="npc-dialogue-actions">'+action('battle-dialogue-page','←','-1','btn npc-dialogue-back')+'<div class="npc-dialogue-action-main">'+action('battle-dialogue-page','Continue','1','btn primary npc-dialogue-more')+'<div class="btn-row npc-dialogue-responses">'+(choices?['resolve','curiosity','respect'].map((v,n)=>action('battle-dialogue-next',['“I’m ready.”','“What are you testing?”','“Let’s learn together.”'][n],v)).join(''):action('battle-dialogue-next','Continue','','btn primary'))+'</div></div></div></div>',{lock:true,kind:'battle-dialogue',wide:true});
+ renderNPCBattleSprites($('#modal-root'));fitBattleDialogue();
+ const presentation=battleDialoguePages;document.fonts?.ready?.then(()=>{if(battleDialoguePages===presentation&&modal==='battle-dialogue')fitBattleDialogue();});
+}
+function fitBattleDialogue(){const root=$('#modal-root .npc-battle-dialogue');if(!root||!battleDialoguePages)return;Object.assign(battleDialoguePages,fitDialoguePages(root,battleDialoguePages.lines,battleDialoguePages));}
+function turnBattleDialoguePage(direction){const root=$('#modal-root .npc-battle-dialogue');if(!root||!battleDialoguePages)return;const p=battleDialoguePages;p.index=paintDialoguePage(root,p.pages,p.index+direction);root.querySelector(p.index===p.pages.length-1?'.npc-dialogue-responses button':'.npc-dialogue-more')?.focus({preventScroll:true});}
+window.addEventListener('resize',()=>{if(modal==='battle-dialogue')requestAnimationFrame(fitBattleDialogue);});
+window.visualViewport?.addEventListener('resize',()=>{if(modal==='battle-dialogue')requestAnimationFrame(fitBattleDialogue);});
 function advanceBattleDialogue(branch){
  const d=battleDialogue;if(!d||battle!==d.encounter)return;
  if(d.phase==='before'){const record=s.enemyConversations?.[d.identity.id];if(record)record.branch=branch;d.map?.remove();d.phase='start';finishSceneFade(d.map);showBattleDialogue('The battle begins',enemySpeech(s,d.identity,'start'));return;}
@@ -1960,7 +1972,7 @@ function battleClosingDialogue(outcome,finish){
  showBattleDialogue(tutorialOutro?'Your next steps · Menu and Tutorial':'The battle ends',lines);return true;
 }
 
-document.addEventListener('click',event=>{if(battle?.dialogueGate&&!event.target.closest?.('[data-action="battle-dialogue-next"]')){event.preventDefault();event.stopImmediatePropagation();}},true);
+document.addEventListener('click',event=>{if(battle?.dialogueGate&&!event.target.closest?.('[data-action="battle-dialogue-next"],[data-action="battle-dialogue-page"]')){event.preventDefault();event.stopImmediatePropagation();}},true);
 
 
 // Quality of life controls share the live game rules and save data.
